@@ -14,3 +14,36 @@ body {
   background-color: #050b14;
   color: #ffffff;
 }
+
+/* AgriOrbit field marker: lime pin with a subtle glow. */
+.agriorbit-field-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #b8ff3d;
+  border: 3px solid #050b14;
+  box-shadow:
+    0 0 0 3px rgba(184, 255, 61, 0.35),
+    0 0 16px rgba(184, 255, 61, 0.6);
+  cursor: pointer;
+}
+
+/* MapLibre chrome tuned to the dark AgriOrbit UI. */
+.maplibregl-ctrl-attrib {
+  background: rgba(5, 11, 20, 0.8) !important;
+  color: #8fa3b8 !important;
+  font-size: 10px;
+}
+.maplibregl-ctrl-attrib a {
+  color: #00e5ff !important;
+}
+.maplibregl-ctrl-group {
+  background: #0b1626 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+}
+.maplibregl-ctrl-group button {
+  background-color: #0b1626 !important;
+}
+.maplibregl-ctrl-group button span {
+  filter: invert(0.8);
+}

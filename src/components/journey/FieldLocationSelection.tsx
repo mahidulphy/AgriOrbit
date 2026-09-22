@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { Crosshair, MapPin, ArrowLeft, AlertCircle, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import * as maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { Crosshair, MapPin, ArrowLeft, AlertCircle, Check, Globe } from 'lucide-react';
+import type * as GeoJSON from 'geojson';
 import { DistrictId, Language } from '../../types';
 import { DISTRICTS } from '../../data/agriData';
 
 interface FieldLocationSelectionProps {
   selectedDistrict: DistrictId;
+  selectedUpazila: string;
   fieldLat: number;
   fieldLng: number;
   onUpdateCoordinates: (lat: number, lng: number) => void;
@@ -13,8 +17,39 @@ interface FieldLocationSelectionProps {
   onBack: () => void;
 }
 
+// Bangladesh overview camera: recognizable country view on load.
+const BANGLADESH_CENTER: [number, number] = [90.3563, 23.685];
+const BANGLADESH_ZOOM = 6.2;
+const FIELD_ZOOM = 12;
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+
+// Approx half-size of a ~9 km NASA SMAP context cell around the pin.
+const CELL_HALF_DEG_LAT = 0.04;
+
+function contextCell(lng: number, lat: number): GeoJSON.Feature {
+  const halfLat = CELL_HALF_DEG_LAT;
+  const halfLng = CELL_HALF_DEG_LAT / Math.max(0.3, Math.cos((lat * Math.PI) / 180));
+  return {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'Polygon',
+      coordinates: [
+        [
+          [lng - halfLng, lat - halfLat],
+          [lng + halfLng, lat - halfLat],
+          [lng + halfLng, lat + halfLat],
+          [lng - halfLng, lat + halfLat],
+          [lng - halfLng, lat - halfLat],
+        ],
+      ],
+    },
+  };
+}
+
 export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
   selectedDistrict,
+  selectedUpazila,
   fieldLat,
   fieldLng,
   onUpdateCoordinates,
@@ -23,37 +58,126 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
   onBack,
 }) => {
   const district = DISTRICTS[selectedDistrict];
-  const [markerOffset, setMarkerOffset] = useState({ x: 50, y: 50 }); // percentage
+  const upazilaObj =
+    district.upazilas.find((u) => u.id === selectedUpazila) || district.upazilas[0];
 
-  // Preset farm plot options in the upazila
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<maplibregl.Map | null>(null);
+  const markerRef = useRef<maplibregl.Marker | null>(null);
+  const initialFieldRef = useRef({ lat: fieldLat, lng: fieldLng });
+  const [tilesAvailable, setTilesAvailable] = useState(true);
+
+  // Latest coordinate callback without re-creating the map.
+  const updateRef = useRef(onUpdateCoordinates);
+  updateRef.current = onUpdateCoordinates;
+
+  // Preset farm plot options in the district (offsets from district center).
   const plotPresets = [
-    { name: 'North Paddy Field #1', dLat: 0.008, dLng: 0.006, x: 58, y: 42 },
-    { name: 'South Alluvial Basin #4', dLat: -0.012, dLng: 0.004, x: 54, y: 64 },
-    { name: 'Riverbank Silt Plot #9', dLat: -0.004, dLng: -0.011, x: 38, y: 54 },
-    { name: 'Village Uplands #14 (Default)', dLat: 0.0, dLng: 0.0, x: 50, y: 50 },
+    { name: 'North Paddy Field #1', dLat: 0.008, dLng: 0.006 },
+    { name: 'South Alluvial Basin #4', dLat: -0.012, dLng: 0.004 },
+    { name: 'Riverbank Silt Plot #9', dLat: -0.004, dLng: -0.011 },
+    { name: 'Village Uplands #14 (Default)', dLat: 0.0, dLng: 0.0 },
   ];
 
-  const handleSelectPreset = (preset: typeof plotPresets[0]) => {
-    onUpdateCoordinates(
-      Number((district.lat + preset.dLat).toFixed(4)),
-      Number((district.lng + preset.dLng).toFixed(4))
-    );
-    setMarkerOffset({ x: preset.x, y: preset.y });
+  const syncMarkerAndCell = (lng: number, lat: number) => {
+    const map = mapRef.current;
+    if (!map) return;
+    markerRef.current?.setLngLat([lng, lat]);
+    const source = map.getSource('nasa-context-cell') as maplibregl.GeoJSONSource | undefined;
+    source?.setData(contextCell(lng, lat));
   };
 
-  const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const xPct = Math.round(((e.clientX - rect.left) / rect.width) * 100);
-    const yPct = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+  const placeField = (lat: number, lng: number, flyZoom?: number) => {
+    const roundedLat = Number(lat.toFixed(4));
+    const roundedLng = Number(lng.toFixed(4));
+    updateRef.current(roundedLat, roundedLng);
+    syncMarkerAndCell(roundedLng, roundedLat);
+    if (flyZoom !== undefined) {
+      mapRef.current?.flyTo({ center: [roundedLng, roundedLat], zoom: flyZoom, speed: 1.6 });
+    }
+  };
 
-    const latDelta = ((50 - yPct) / 100) * 0.04;
-    const lngDelta = ((xPct - 50) / 100) * 0.04;
+  // Initialize the real Bangladesh map once.
+  useEffect(() => {
+    if (!mapContainerRef.current || mapRef.current) return;
 
-    setMarkerOffset({ x: xPct, y: yPct });
-    onUpdateCoordinates(
-      Number((district.lat + latDelta).toFixed(4)),
-      Number((district.lng + lngDelta).toFixed(4))
-    );
+    const map = new maplibregl.Map({
+      container: mapContainerRef.current,
+      style: MAP_STYLE,
+      center: BANGLADESH_CENTER,
+      zoom: BANGLADESH_ZOOM,
+      attributionControl: { compact: true },
+    });
+    mapRef.current = map;
+
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
+
+    map.on('error', () => setTilesAvailable(false));
+
+    map.on('load', () => {
+      const { lat, lng } = initialFieldRef.current;
+
+      map.addSource('nasa-context-cell', {
+        type: 'geojson',
+        data: contextCell(lng, lat),
+      });
+      map.addLayer({
+        id: 'nasa-context-fill',
+        type: 'fill',
+        source: 'nasa-context-cell',
+        paint: { 'fill-color': '#00E5FF', 'fill-opacity': 0.08 },
+      });
+      map.addLayer({
+        id: 'nasa-context-line',
+        type: 'line',
+        source: 'nasa-context-cell',
+        paint: { 'line-color': '#00E5FF', 'line-opacity': 0.55, 'line-width': 1.5 },
+      });
+
+      const el = document.createElement('div');
+      el.className = 'agriorbit-field-marker';
+      el.title = 'Selected field';
+      const marker = new maplibregl.Marker({ element: el, draggable: true })
+        .setLngLat([lng, lat])
+        .addTo(map);
+      marker.on('dragend', () => {
+        const pos = marker.getLngLat();
+        placeField(pos.lat, pos.lng);
+      });
+      markerRef.current = marker;
+
+      map.on('click', (e) => placeField(e.lngLat.lat, e.lngLat.lng));
+    });
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+      markerRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Fly to the district when it changes (e.g. user picked another district).
+  const firstDistrictRef = useRef(selectedDistrict);
+  useEffect(() => {
+    if (selectedDistrict === firstDistrictRef.current) return;
+    firstDistrictRef.current = selectedDistrict;
+    const target = DISTRICTS[selectedDistrict];
+    mapRef.current?.flyTo({ center: [target.lng, target.lat], zoom: 9, speed: 1.4 });
+  }, [selectedDistrict]);
+
+  // Keep marker + context cell in sync with external coordinate changes (presets).
+  useEffect(() => {
+    syncMarkerAndCell(fieldLng, fieldLat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fieldLat, fieldLng]);
+
+  const handleSelectPreset = (preset: (typeof plotPresets)[number]) => {
+    placeField(district.lat + preset.dLat, district.lng + preset.dLng, FIELD_ZOOM);
+  };
+
+  const handleResetView = () => {
+    mapRef.current?.flyTo({ center: BANGLADESH_CENTER, zoom: BANGLADESH_ZOOM, speed: 1.4 });
   };
 
   return (
@@ -116,61 +240,35 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
           </div>
         </div>
 
-        {/* Interactive Map Visual Stage */}
-        <div
-          onClick={handleMapClick}
-          className="relative h-64 sm:h-80 w-full rounded-2xl bg-[#050B14] border-2 border-white/10 overflow-hidden cursor-crosshair shadow-inner group mb-4"
-        >
-          {/* Gridded Earth Observation overlay */}
-          <div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage: `linear-gradient(#00E5FF 1px, transparent 1px), linear-gradient(90deg, #00E5FF 1px, transparent 1px)`,
-              backgroundSize: '36px 36px',
-            }}
-          />
+        {/* Real Interactive Bangladesh Map */}
+        <div className="relative h-80 sm:h-[440px] w-full rounded-2xl overflow-hidden border-2 border-white/10 shadow-inner mb-4">
+          <div ref={mapContainerRef} className="absolute inset-0" />
 
-          {/* Simulated satellite regional heatmap & field contours */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none">
-            <svg className="w-full h-full" viewBox="0 0 400 240" fill="none">
-              <path
-                d="M 40,80 Q 120,40 220,100 T 360,140"
-                stroke="#00E5FF"
-                strokeWidth="2"
-                strokeDasharray="4 4"
-              />
-              <path
-                d="M 60,160 Q 180,120 280,180 T 380,110"
-                stroke="#B8FF3D"
-                strokeWidth="2"
-                strokeDasharray="4 4"
-              />
-              <rect x="130" y="70" width="140" height="90" rx="8" fill="#00E5FF" fillOpacity="0.12" stroke="#00E5FF" strokeWidth="1.5" />
-            </svg>
+          {/* NASA context chip (subtle data overlay, not a replacement for geography) */}
+          <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm border border-[#00E5FF]/30 text-[10px] font-mono text-[#00E5FF] pointer-events-none">
+            NASA context cell · ~9 km around pin
           </div>
 
-          {/* NASA Footprint Cell Label */}
-          <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm border border-[#00E5FF]/30 text-[10px] font-mono text-[#00E5FF]">
-            NASA Observation Grid Cell #248 (Coverage ~9km)
-          </div>
-
-          {/* Interactive Marker Pin */}
-          <div
-            className="absolute transform -translate-x-1/2 -translate-y-full transition-all duration-300 pointer-events-none"
-            style={{ left: `${markerOffset.x}%`, top: `${markerOffset.y}%` }}
-          >
-            <div className="flex flex-col items-center">
-              <div className="px-2.5 py-1 rounded-full bg-[#B8FF3D] text-[#050B14] font-black text-[11px] shadow-lg flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5" />
-                <span>Selected Plot</span>
-              </div>
-              <div className="w-2.5 h-2.5 bg-[#B8FF3D] rotate-45 -mt-1 shadow-md" />
-              <div className="w-3 h-3 rounded-full bg-[#B8FF3D]/40 animate-ping mt-1" />
+          {!tilesAvailable && (
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 text-[11px] text-[#FF5C5C] border border-[#FF5C5C]/40 pointer-events-none">
+              {language === 'en'
+                ? 'Map tiles unavailable — check connection'
+                : 'মানচিত্র লোড হচ্ছে না — ইন্টারনেট দেখুন'}
             </div>
-          </div>
+          )}
+
+          {/* Reset to Bangladesh overview */}
+          <button
+            type="button"
+            onClick={handleResetView}
+            className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm text-[11px] text-white border border-white/10 hover:border-[#00E5FF]/50 hover:text-[#00E5FF] transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>{language === 'en' ? 'Bangladesh overview' : 'বাংলাদেশ মানচিত্র'}</span>
+          </button>
 
           {/* Helper hint */}
-          <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-[11px] text-[#8FA3B8] border border-white/10 pointer-events-none">
+          <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-[11px] text-[#8FA3B8] border border-white/10 pointer-events-none hidden sm:block">
             {language === 'en' ? 'Click anywhere on map to reposition field pin' : 'পিন পরিবর্তন করতে মানচিত্রে ক্লিক করুন'}
           </div>
         </div>
@@ -189,22 +287,28 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
             </div>
           </div>
 
-          <div className="text-[11px] text-[#8FA3B8]">
-            {language === 'en' ? 'Anchor: ' : 'প্লট: '}
-            <strong className="text-white">{district.defaultFieldTag}</strong>
+          <div className="text-[11px] text-[#8FA3B8] sm:text-right">
+            <strong className="text-white flex items-center gap-1 sm:justify-end">
+              <MapPin className="w-3.5 h-3.5 text-[#B8FF3D]" />
+              <span>
+                {language === 'en' ? district.nameEn : district.nameBn} ·{' '}
+                {language === 'en' ? upazilaObj.nameEn : upazilaObj.nameBn} · Bangladesh
+              </span>
+            </strong>
+            <span className="block mt-0.5">{district.defaultFieldTag}</span>
           </div>
         </div>
 
-        {/* IMPORTANT: Scientific Transparency Notice (Explicit User Requirement) */}
+        {/* Scientific honesty notice: pin vs satellite resolution */}
         <div className="p-4 rounded-xl bg-[#00E5FF]/5 border border-[#00E5FF]/30 flex items-start gap-3 text-xs leading-relaxed text-[#8FA3B8] mb-6">
           <AlertCircle className="w-5 h-5 text-[#00E5FF] shrink-0 mt-0.5" />
           <div>
             <strong className="text-white block mb-0.5">
-              {language === 'en' ? 'Scientific Spatial Resolution Notice:' : 'উপগ্রহ তথ্যের পরিসর সংক্রান্ত ব্যাখ্যা:'}
+              {language === 'en' ? 'What this map means:' : 'উপগ্রহ তথ্যের পরিসর সংক্রান্ত ব্যাখ্যা:'}
             </strong>
             {language === 'en'
-              ? 'NASA datasets provide gridded regional observations (SMAP soil moisture ~9km, POWER rainfall ~50km, MODIS vegetation 250m). They do not measure sub-meter field rows directly. Your field pin anchors the localized soil profile and BARI crop calendar rules.'
-              : 'নাসার উপগ্রহগুলো আঞ্চলিক গ্রিড পরিসরে তথ্য প্রদান করে (স্ম্যাপ ~৯ কিমি, পাওয়ার ~৫০ কিমি, মডিস ২৫০ মি)। আপনার নির্ধারিত ফিল্ড পিনের মাধ্যমে স্থানীয় মাটির ধরন ও বিএআরআই কৃষি ক্যালেন্ডারের সঠিক সমন্বয় ঘটে।'}
+              ? 'The pin marks your exact field location. NASA observations (SMAP ~9 km, POWER ~50 km, MODIS 250 m) describe the surrounding grid cell, not individual field rows. Your pin anchors local soil profile and BARI crop calendar rules.'
+              : 'পিনটি আপনার নির্দিষ্ট জমির অবস্থান চিহ্নিত করে। নাসার উপগ্রহ তথ্য (স্ম্যাপ ~৯ কিমি, পাওয়ার ~৫০ কিমি, মডিস ২৫০ মি) আশপাশের গ্রিড এলাকার পরিবেশ বোঝায়। আপনার পিন স্থানীয় মাটির ধরন ও বিএআরআই কৃষি ক্যালেন্ডারের সমন্বয় ঘটায়।'}
           </div>
         </div>
 

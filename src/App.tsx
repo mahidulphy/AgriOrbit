@@ -101,6 +101,7 @@ export default function App() {
       {journeyStage === 'field_selection' && (
         <FieldLocationSelection
           selectedDistrict={selectedDistrict}
+          selectedUpazila={selectedUpazila}
           fieldLat={fieldLat}
           fieldLng={fieldLng}
           onUpdateCoordinates={handleUpdateCoordinates}
