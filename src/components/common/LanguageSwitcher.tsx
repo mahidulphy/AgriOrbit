@@ -10,12 +10,12 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   language,
   onLanguageChange,
 }) => (
-  <div className="flex items-center bg-[#3B0764] rounded-lg p-0.5 border border-[#6D28D9]/50">
+  <div className="flex items-center bg-white/5 rounded-lg p-0.5 border border-white/10">
     <button
       type="button"
       onClick={() => onLanguageChange('en')}
       className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${
-        language === 'en' ? 'bg-[#A855F7] text-white shadow-sm' : 'text-[#E9D5FF]/70 hover:text-white'
+        language === 'en' ? 'bg-[#B8FF3D] text-[#050B14] shadow-sm' : 'text-[#8FA3B8] hover:text-white'
       }`}
     >
       EN
@@ -24,7 +24,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
       type="button"
       onClick={() => onLanguageChange('bn')}
       className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${
-        language === 'bn' ? 'bg-[#A855F7] text-white shadow-sm' : 'text-[#E9D5FF]/70 hover:text-white'
+        language === 'bn' ? 'bg-[#B8FF3D] text-[#050B14] shadow-sm' : 'text-[#8FA3B8] hover:text-white'
       }`}
     >
       বাংলা

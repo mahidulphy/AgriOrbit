@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --color-orbit-bg: #050b14;
+  --color-orbit-surface: #0b1626;
+  --color-orbit-cyan: #00e5ff;
+  --color-orbit-lime: #b8ff3d;
+  --color-orbit-muted: #8fa3b8;
+  --color-orbit-danger: #ff5c5c;
+}
+
+html,
+body {
+  background-color: #050b14;
+  color: #ffffff;
+}

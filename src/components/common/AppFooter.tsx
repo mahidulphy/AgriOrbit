@@ -16,7 +16,7 @@ export const AppFooter: React.FC<AppFooterProps> = ({
   onOpenHowItWorks,
   onOpenLogin,
 }) => (
-  <footer className="mt-auto border-t border-[#6D28D9]/40 bg-[#1E0A45] py-8 px-4 sm:px-6 text-xs text-[#E9D5FF]/70">
+  <footer className="mt-auto border-t border-white/10 bg-[#050B14] py-8 px-4 sm:px-6 text-xs text-[#8FA3B8]">
     <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div className="flex flex-wrap items-center justify-center gap-2">
         <span className="font-extrabold text-white text-sm">AGRIORBIT</span>
