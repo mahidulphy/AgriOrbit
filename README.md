@@ -33,6 +33,9 @@ Prerequisites: Node.js 18+
 - `src/lib/cropSuitability.ts` — deterministic priority-based suitability engine
 - `src/components/common/` — shared brand, language, and footer UI
 - `src/components/journey/` — one screen per product step
+- `src/components/journey/FieldLocationSelection.tsx` — real MapLibre Bangladesh map
+- `public/vendor/` — vendored MapLibre web worker (required: the worker URL
+  Vite dev rewrites does not exist, so `setWorkerUrl` points here; do not delete)
 - `src/components/CropRecommendation.tsx` — crop suitability grid
 - `src/components/SeasonRotation.tsx` — 3-season plan + final advisory
 - `src/components/ExplainWhyModal.tsx` — transparent rule audit

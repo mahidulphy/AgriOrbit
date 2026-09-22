@@ -19,9 +19,17 @@ interface FieldLocationSelectionProps {
 
 // Bangladesh overview camera: recognizable country view on load.
 const BANGLADESH_CENTER: [number, number] = [90.3563, 23.685];
-const BANGLADESH_ZOOM = 6.2;
+const BANGLADESH_ZOOM = 5.5;
 const FIELD_ZOOM = 12;
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+
+// MapLibre resolves its web worker relative to import.meta.url, which Vite
+// dev rewrites to a pre-bundled path where the worker file does not exist.
+// Point it at the vendored worker (public/vendor) so tiles parse in dev
+// and in the production build.
+if (!maplibregl.getWorkerUrl()) {
+  maplibregl.setWorkerUrl('/vendor/maplibre-gl-worker.mjs');
+}
 
 // Approx half-size of a ~9 km NASA SMAP context cell around the pin.
 const CELL_HALF_DEG_LAT = 0.04;
@@ -112,9 +120,20 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
 
-    map.on('error', () => setTilesAvailable(false));
+    map.on('error', (event) => {
+      console.error('MapLibre error:', event.error);
+      const message = event.error?.message ?? String(event.error ?? '');
+      if (/worker|fetch|failed|404|network|offline/i.test(message)) {
+        setTilesAvailable(false);
+      }
+    });
+
+    const handleResize = () => map.resize();
+    window.addEventListener('resize', handleResize);
 
     map.on('load', () => {
+      // Re-sync canvas size in case layout settled after construction.
+      map.resize();
       const { lat, lng } = initialFieldRef.current;
 
       map.addSource('nasa-context-cell', {
@@ -150,6 +169,7 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
     });
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       map.remove();
       mapRef.current = null;
       markerRef.current = null;
@@ -241,7 +261,7 @@ export const FieldLocationSelection: React.FC<FieldLocationSelectionProps> = ({
         </div>
 
         {/* Real Interactive Bangladesh Map */}
-        <div className="relative h-80 sm:h-[440px] w-full rounded-2xl overflow-hidden border-2 border-white/10 shadow-inner mb-4">
+        <div className="agriorbit-map-container relative w-full rounded-2xl overflow-hidden border-2 border-white/10 shadow-inner mb-4">
           <div ref={mapContainerRef} className="absolute inset-0" />
 
           {/* NASA context chip (subtle data overlay, not a replacement for geography) */}
