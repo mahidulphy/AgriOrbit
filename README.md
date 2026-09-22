@@ -38,9 +38,9 @@ Prerequisites: Node.js 18+
 - `src/components/ExplainWhyModal.tsx` — transparent rule audit
 - `src/components/HowItWorksModal.tsx` — NASA → AgriOrbit → Farmer explainer
 
-## Theme
+## Theme (SPACE × EARTH × AGRICULTURE)
 
-`#2E1065` `#6D28D9` `#A855F7` `#E9D5FF`
+Background `#050B14` • Surface `#0B1626` • Electric Cyan `#00E5FF` (NASA / satellite / data) • Electric Lime `#B8FF3D` (agriculture / positive / primary CTA) • Text `#FFFFFF` / `#8FA3B8` • Danger `#FF5C5C` (warnings only)
 
 ## Notes
 

@@ -24,7 +24,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A855F7] mb-1">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B8FF3D] mb-1">
               <Sparkles className="w-4 h-4" />
               <span>Step 4 • {language === 'en' ? 'Crop Suitability Evaluation' : 'ফসল উপযোগিতা মূল্যায়ন'}</span>
             </div>
@@ -34,8 +34,8 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
           </div>
 
           {/* Season Filter Chips */}
-          <div className="flex items-center gap-1.5 bg-[#3B0764] p-1 rounded-xl border border-[#6D28D9]/40 text-xs">
-            <span className="text-[#E9D5FF]/60 px-2 flex items-center gap-1">
+          <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/10 text-xs">
+            <span className="text-[#8FA3B8] px-2 flex items-center gap-1">
               <Filter className="w-3 h-3" />
               <span className="hidden sm:inline">{language === 'en' ? 'Season:' : 'মৌসুম:'}</span>
             </span>
@@ -45,8 +45,8 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                 onClick={() => setFilterSeason(s)}
                 className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
                   filterSeason === s
-                    ? 'bg-[#A855F7] text-white shadow'
-                    : 'text-[#E9D5FF]/70 hover:text-white'
+                    ? 'bg-[#B8FF3D] text-[#050B14] shadow'
+                    : 'text-[#8FA3B8] hover:text-white'
                 }`}
               >
                 {s === 'All' && (language === 'en' ? 'All (10)' : 'সকল')}
@@ -69,10 +69,10 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                 key={crop.id}
                 className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
                   isHigh
-                    ? 'bg-[#3B0764]/80 border-emerald-500/50 shadow-lg shadow-emerald-950/20'
+                    ? 'bg-[#0B1626] border-[#B8FF3D]/50 shadow-lg shadow-black/40'
                     : isMod
-                    ? 'bg-[#3B0764]/60 border-amber-500/40'
-                    : 'bg-[#2E1065]/60 border-slate-700/50 opacity-80'
+                    ? 'bg-[#0B1626] border-[#00E5FF]/30'
+                    : 'bg-[#050B14] border-white/10 opacity-80'
                 }`}
               >
                 <div>
@@ -83,11 +83,11 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                         <h3 className="text-lg font-black text-white">
                           {language === 'en' ? crop.nameEn : crop.nameBn}
                         </h3>
-                        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-[#6D28D9]/70 text-[#E9D5FF] border border-[#A855F7]/30">
+                        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-white/5 text-[#8FA3B8] border border-white/10">
                           {language === 'en' ? crop.seasonEn : crop.seasonBn}
                         </span>
                       </div>
-                      <p className="text-[11px] text-[#E9D5FF]/60 italic font-serif">
+                      <p className="text-[11px] text-[#8FA3B8] italic font-serif">
                         {crop.scientificName}
                       </p>
                     </div>
@@ -95,15 +95,15 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                     <div className="text-right shrink-0">
                       <div className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-black shadow-sm ${
                         isHigh
-                          ? 'bg-emerald-500 text-slate-950'
+                          ? 'bg-[#B8FF3D] text-[#050B14]'
                           : isMod
-                          ? 'bg-amber-400 text-slate-950'
-                          : 'bg-slate-700 text-slate-300'
+                          ? 'bg-[#00E5FF] text-[#050B14]'
+                          : 'bg-white/10 text-[#8FA3B8]'
                       }`}>
                         {isHigh && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                         <span>{crop.suitabilityScore}% Match</span>
                       </div>
-                      <span className="block text-[10px] text-[#E9D5FF]/70 mt-0.5 font-medium">
+                      <span className="block text-[10px] text-[#8FA3B8] mt-0.5 font-medium">
                         {isHigh
                           ? (language === 'en' ? 'Highly Suitable' : 'উচ্চ উপযোগী')
                           : isMod
@@ -114,7 +114,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                   </div>
 
                   {/* Why it is suitable (Explicit User Requirement) */}
-                  <div className="p-3 rounded-xl bg-[#2E1065]/90 border border-[#6D28D9]/30 mb-3 text-xs leading-relaxed text-[#E9D5FF]/90">
+                  <div className="p-3 rounded-xl bg-[#050B14] border border-white/10 mb-3 text-xs leading-relaxed text-[#8FA3B8]">
                     <strong className="text-white block mb-0.5">
                       {language === 'en' ? 'Why Suitable:' : 'উপযোগিতার কারণ:'}
                     </strong>
@@ -123,10 +123,10 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
 
                   {/* Compact Metrics Pill Row */}
                   <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                    <div className="flex items-center gap-2 p-2 rounded-lg bg-[#3B0764] border border-[#6D28D9]/20 text-[#E9D5FF]/80">
-                      <Droplets className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/10 text-[#8FA3B8]">
+                      <Droplets className="w-3.5 h-3.5 text-[#00E5FF] shrink-0" />
                       <div>
-                        <span className="text-[10px] text-[#E9D5FF]/60 block leading-tight">
+                        <span className="text-[10px] text-[#8FA3B8] block leading-tight">
                           {language === 'en' ? 'Water Requirement' : 'পানির চাহিদা'}
                         </span>
                         <span className="font-semibold text-white">
@@ -135,10 +135,10 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 p-2 rounded-lg bg-[#3B0764] border border-[#6D28D9]/20 text-[#E9D5FF]/80">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/10 text-[#8FA3B8]">
+                      <Calendar className="w-3.5 h-3.5 text-[#B8FF3D] shrink-0" />
                       <div>
-                        <span className="text-[10px] text-[#E9D5FF]/60 block leading-tight">
+                        <span className="text-[10px] text-[#8FA3B8] block leading-tight">
                           {language === 'en' ? 'Crop Duration' : 'জীবনকাল'}
                         </span>
                         <span className="font-semibold text-white">
@@ -152,9 +152,9 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                 {/* "Explain Why" Button (Transparent Rule Breakdown Trigger) */}
                 <button
                   onClick={() => onExplainCrop(crop)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#6D28D9]/50 hover:bg-[#6D28D9] border border-[#A855F7]/40 text-[#E9D5FF] hover:text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-[#00E5FF]/30 text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
-                  <HelpCircle className="w-3.5 h-3.5 text-[#A855F7]" />
+                  <HelpCircle className="w-3.5 h-3.5 text-[#00E5FF]" />
                   <span>
                     {language === 'en'
                       ? `Explain Why: ${crop.nameEn.split(' ')[0]} →`

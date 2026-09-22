@@ -17,11 +17,11 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#2E1065] border-2 border-[#A855F7]/70 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl text-white relative p-6">
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#6D28D9]/40">
+      <div className="bg-[#0B1626] border-2 border-[#00E5FF]/30 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl text-white relative p-6">
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#6D28D9] flex items-center justify-center">
-              <Satellite className="w-4 h-4 text-[#E9D5FF]" />
+            <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center">
+              <Satellite className="w-4 h-4 text-[#00E5FF]" />
             </div>
             <h3 className="text-xl font-black text-white">
               {language === 'en' ? 'How AgriOrbit Works' : 'এগ্রিঅরবিট কীভাবে কাজ করে'}
@@ -29,15 +29,15 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#3B0764] hover:bg-[#6D28D9] flex items-center justify-center text-[#E9D5FF] transition cursor-pointer"
+            className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-[#8FA3B8] hover:text-white transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="space-y-4 text-xs sm:text-sm text-[#E9D5FF]/90">
-          <div className="p-4 rounded-xl bg-[#3B0764]/70 border border-[#6D28D9]/40 flex gap-3">
-            <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0 font-bold">
+        <div className="space-y-4 text-xs sm:text-sm text-[#8FA3B8]">
+          <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 flex gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 flex items-center justify-center shrink-0 font-bold">
               1
             </div>
             <div>
@@ -52,8 +52,8 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#3B0764]/70 border border-[#6D28D9]/40 flex gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#A855F7]/20 text-[#A855F7] flex items-center justify-center shrink-0 font-bold">
+          <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 flex gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 flex items-center justify-center shrink-0 font-bold">
               2
             </div>
             <div>
@@ -68,8 +68,8 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#3B0764]/70 border border-[#6D28D9]/40 flex gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 font-bold">
+          <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 flex gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30 flex items-center justify-center shrink-0 font-bold">
               3
             </div>
             <div>
@@ -85,10 +85,10 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-[#6D28D9]/40 flex justify-end">
+        <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl bg-[#A855F7] hover:bg-[#9333EA] text-white font-bold text-xs shadow-md transition cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-bold text-xs shadow-md transition cursor-pointer"
           >
             {language === 'en' ? 'Got It' : 'বুঝেছি'}
           </button>
