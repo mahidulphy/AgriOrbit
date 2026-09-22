@@ -2,7 +2,7 @@ import React from 'react';
 import { Satellite } from 'lucide-react';
 
 interface BrandLogoProps {
-  badge: string;
+  badge?: string;
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({ badge }) => (
@@ -15,9 +15,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ badge }) => (
     <div>
       <div className="flex items-center gap-2">
         <span className="font-black tracking-tight text-xl text-white">AGRIORBIT</span>
-        <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30">
-          {badge}
-        </span>
+        {badge && (
+          <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30">
+            {badge}
+          </span>
+        )}
       </div>
       <p className="text-[11px] text-[#8FA3B8] font-medium">Team: Bay of Orbits</p>
     </div>

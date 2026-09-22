@@ -38,8 +38,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* 1. Public Landing Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#050B14]/95 backdrop-blur-md border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
-          {/* Logo & Space Apps Badge */}
-          <BrandLogo badge="NASA Space Apps" />
+          {/* Logo */}
+          <BrandLogo />
 
           {/* Navigation Links Before Login */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[#8FA3B8]">
