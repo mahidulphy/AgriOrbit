@@ -17,7 +17,13 @@ export interface SelectedLocation {
   source: LocationSource;
 }
 
-export type FarmerPriorityId = 'save_water' | 'improve_soil' | 'lower_cost' | 'reduce_risk';
+export type FarmerPriorityId =
+  | 'save_water'
+  | 'improve_soil'
+  | 'maximize_profit'
+  | 'maximize_yield'
+  | 'lower_cost'
+  | 'reduce_risk';
 
 export type Language = 'en' | 'bn';
 

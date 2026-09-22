@@ -209,6 +209,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 <span className="text-white underline decoration-[#B8FF3D]">
                   {selectedPriority === 'save_water' && 'পানি সাশ্রয়'}
                   {selectedPriority === 'improve_soil' && 'মাটির উর্বরতা বৃদ্ধি'}
+                  {selectedPriority === 'maximize_profit' && 'সর্বোচ্চ লাভ'}
+                  {selectedPriority === 'maximize_yield' && 'সর্বোচ্চ ফলন'}
                   {selectedPriority === 'lower_cost' && 'কম খরচ'}
                   {selectedPriority === 'reduce_risk' && 'জলবায়ু ঝুঁকি হ্রাস'}
                 </span>{' '}

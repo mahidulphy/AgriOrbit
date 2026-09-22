@@ -52,6 +52,26 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
       ruleImpactBn: 'রাইজোবিয়াম নাইট্রোজেন সংবন্ধনকারী মুগডাল ও পাটকে অগ্রাধিকার দেয়।',
     },
     {
+      id: 'maximize_profit',
+      icon: <span className="text-2xl">💰</span>,
+      titleEn: 'Maximize Profit',
+      titleBn: 'সর্বোচ্চ লাভ',
+      descEn: 'Profit-oriented: favors crops combining strong local suitability with modest input cost. Indicative only — not a market price forecast.',
+      descBn: 'লাভ-ভিত্তিক: ভালো উপযোগিতা ও সাশ্রয়ী খরচের ফসলকে প্রাধান্য দেয়। এটি নির্দেশক মাত্র, বাজারদরের পূর্বাভাস নয়।',
+      ruleImpactEn: 'Boosts proven low-cost performers (Mustard, Lentil); penalizes marginal high-input options.',
+      ruleImpactBn: 'প্রমাণিত সাশ্রয়ী ফসলকে এগিয়ে রাখে; ব্যয়বহুল প্রান্তিক ফসলকে পিছিয়ে দেয়।',
+    },
+    {
+      id: 'maximize_yield',
+      icon: <span className="text-2xl">🌾</span>,
+      titleEn: 'Maximize Yield',
+      titleBn: 'সর্বোচ্চ ফলন',
+      descEn: 'Yield-oriented: favors proven high performers matched to your field climate and season. Suitability, not guaranteed harvest.',
+      descBn: 'ফলন-ভিত্তিক: আপনার জমির উপযোগী প্রমাণিত উচ্চফলনশীল ফসলকে প্রাধান্য দেয়। সম্ভাবনা নির্দেশ করে, নিশ্চিত ফলন নয়।',
+      ruleImpactEn: 'Boosts 85%+ suitability crops; penalizes marginal crops needing ideal conditions.',
+      ruleImpactBn: '৮৫%+ উপযোগী ফসলকে এগিয়ে রাখে; আদর্শ পরিবেশ নির্ভর প্রান্তিক ফসলকে পিছিয়ে দেয়।',
+    },
+    {
       id: 'lower_cost',
       icon: <span className="text-2xl">৳</span>,
       titleEn: 'Lower Cost',
@@ -97,7 +117,7 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#B8FF3D]/5 blur-[120px] pointer-events-none rounded-full" />
 
       {/* Main Container */}
-      <div className="w-full max-w-2xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
+      <div className="w-full max-w-4xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
         {/* Progress Header */}
         <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
           <button
@@ -132,8 +152,8 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
           </p>
         </div>
 
-        {/* 4 Large Visual Choice Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+        {/* 6 Visual Choice Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
           {priorities.map((item) => {
             const isPrimary = selectedPriority === item.id;
             const isSecondary = secondaryPriority === item.id;

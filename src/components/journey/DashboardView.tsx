@@ -506,6 +506,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* SECTION 4: CROP SUITABILITY (10 Crops rule-based evaluation) */}
         <CropRecommendation
           selectedPriority={selectedPriority}
+          secondaryPriority={secondaryPriority}
           language={language}
           onExplainCrop={(crop) => setExplainCrop(crop)}
         />
@@ -522,6 +523,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* 4. Explain Why Modal */}
       <ExplainWhyModal
         crop={explainCrop}
+        selectedPriority={selectedPriority}
+        secondaryPriority={secondaryPriority}
         language={language}
         onClose={() => setExplainCrop(null)}
       />

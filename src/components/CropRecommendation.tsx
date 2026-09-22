@@ -5,18 +5,20 @@ import { getRankedCrops, SeasonFilter } from '../lib/cropSuitability';
 
 interface CropRecommendationProps {
   selectedPriority: FarmerPriorityId;
+  secondaryPriority?: FarmerPriorityId | null;
   language: Language;
   onExplainCrop: (crop: CropData) => void;
 }
 
 export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   selectedPriority,
+  secondaryPriority = null,
   language,
   onExplainCrop,
 }) => {
   const [filterSeason, setFilterSeason] = useState<SeasonFilter>('All');
 
-  const displayedCrops = getRankedCrops(selectedPriority, filterSeason);
+  const displayedCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason);
 
   return (
     <section id="crops-section" className="py-10 px-4 sm:px-6">

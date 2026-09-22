@@ -1,15 +1,20 @@
 import React from 'react';
 import { X, Check, Database, ShieldCheck, Droplet, Layers, Cpu, Compass } from 'lucide-react';
-import { CropData, Language } from '../types';
+import { CropData, FarmerPriorityId, Language } from '../types';
+import { priorityInfluenceText } from '../lib/cropSuitability';
 
 interface ExplainWhyModalProps {
   crop: CropData | null;
+  selectedPriority: FarmerPriorityId;
+  secondaryPriority?: FarmerPriorityId | null;
   language: Language;
   onClose: () => void;
 }
 
 export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
   crop,
+  selectedPriority,
+  secondaryPriority = null,
   language,
   onClose,
 }) => {
@@ -81,6 +86,12 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   : crop.explanation.priorityAlignmentBn}
               </p>
             </div>
+            <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[#8FA3B8] border-t border-white/10 pt-2.5">
+              <strong className="text-white">
+                {language === 'en' ? 'Active priority effect: ' : 'সক্রিয় অগ্রাধিকারের প্রভাব: '}
+              </strong>
+              {priorityInfluenceText(selectedPriority, secondaryPriority, language)}
+            </p>
           </div>
 
           {/* Section 3: Agronomic Rules Triggered */}
