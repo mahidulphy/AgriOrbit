@@ -93,25 +93,25 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#2E1065] text-[#E9D5FF] flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-[#A855F7] selection:text-white relative">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#6D28D9]/25 blur-[120px] pointer-events-none rounded-full" />
+    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-[#B8FF3D] selection:text-[#050B14] relative">
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#B8FF3D]/5 blur-[120px] pointer-events-none rounded-full" />
 
       {/* Main Container */}
-      <div className="w-full max-w-2xl bg-[#3B0764]/80 border border-[#6D28D9]/70 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-md relative z-10">
+      <div className="w-full max-w-2xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
         {/* Progress Header */}
-        <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#6D28D9]/40">
+        <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
           <button
             onClick={onBack}
-            className="text-xs text-[#E9D5FF]/70 hover:text-white flex items-center gap-1 cursor-pointer transition"
+            className="text-xs text-[#8FA3B8] hover:text-white flex items-center gap-1 cursor-pointer transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{language === 'en' ? 'Back' : 'পূর্ববর্তী'}</span>
           </button>
 
-          <div className="flex items-center gap-1.5 font-mono text-xs text-[#A855F7]">
-            <span className="font-bold text-white bg-[#A855F7] px-2 py-0.5 rounded text-[11px]">03</span>
-            <span className="text-[#E9D5FF]/40">/ 04</span>
-            <span className="font-sans font-semibold text-[#E9D5FF]/80 ml-1">
+          <div className="flex items-center gap-1.5 font-mono text-xs text-[#B8FF3D]">
+            <span className="font-bold text-[#050B14] bg-[#B8FF3D] px-2 py-0.5 rounded text-[11px]">03</span>
+            <span className="text-[#8FA3B8]">/ 04</span>
+            <span className="font-sans font-semibold text-[#8FA3B8] ml-1">
               {language === 'en' ? 'Farmer Priority' : 'কৃষকের অগ্রাধিকার'}
             </span>
           </div>
@@ -119,13 +119,13 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
 
         {/* Heading */}
         <div className="mb-6">
-          <div className="w-10 h-10 rounded-xl bg-[#6D28D9] flex items-center justify-center text-white mb-2 shadow-md">
-            <Sliders className="w-5 h-5 text-emerald-300" />
+          <div className="w-10 h-10 rounded-xl bg-[#B8FF3D]/10 border border-[#B8FF3D]/30 flex items-center justify-center mb-2 shadow-md">
+            <Sliders className="w-5 h-5 text-[#B8FF3D]" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-white">
             {language === 'en' ? 'What matters most to you?' : 'আপনার প্রধান লক্ষ্য বা অগ্রাধিকার কী?'}
           </h2>
-          <p className="text-xs sm:text-sm text-[#E9D5FF]/80 mt-1">
+          <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1">
             {language === 'en'
               ? 'Select your primary goal for this season. Your choice directly programs the deterministic suitability engine.'
               : 'এই মৌসুমের প্রধান লক্ষ্য নির্বাচন করুন। এটি সরাসরি শস্য নির্বাচন নিয়মে প্রভাব ফেলবে।'}
@@ -144,33 +144,33 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
                 onClick={() => handlePriorityClick(item.id)}
                 className={`p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
                   isPrimary
-                    ? 'bg-gradient-to-br from-[#6D28D9] to-[#7C3AED] border-[#A855F7] shadow-lg shadow-[#6D28D9]/40 ring-2 ring-[#E9D5FF]/70 text-white'
+                    ? 'bg-[#B8FF3D]/10 border-[#B8FF3D] shadow-lg shadow-black/40 ring-1 ring-[#B8FF3D]/50 text-white'
                     : isSecondary
-                    ? 'bg-[#3B0764] border-cyan-400/70 text-[#E9D5FF] ring-1 ring-cyan-400/50'
-                    : 'bg-[#2E1065]/90 border-[#6D28D9]/50 hover:bg-[#3B0764] text-[#E9D5FF] hover:border-[#A855F7]/40'
+                    ? 'bg-[#0B1626] border-[#00E5FF]/60 text-white ring-1 ring-[#00E5FF]/40'
+                    : 'bg-[#050B14] border-white/10 hover:bg-white/5 text-white hover:border-white/20'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-2.5">
-                    <div className="w-10 h-10 rounded-xl bg-[#2E1065] flex items-center justify-center border border-[#6D28D9]/40">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
                       {item.icon}
                     </div>
 
                     <div className="flex items-center gap-1.5">
                       {isPrimary ? (
-                        <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E9D5FF] text-[#2E1065] font-extrabold text-[11px] shadow-sm">
+                        <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#B8FF3D] text-[#050B14] font-extrabold text-[11px] shadow-sm">
                           <Check className="w-3 h-3 stroke-[3]" />
                           <span>{language === 'en' ? 'Primary' : 'প্রধান'}</span>
                         </span>
                       ) : isSecondary ? (
-                        <span className="px-2 py-0.5 rounded-full bg-cyan-400 text-slate-950 font-bold text-[10px]">
+                        <span className="px-2 py-0.5 rounded-full bg-[#00E5FF] text-[#050B14] font-bold text-[10px]">
                           {language === 'en' ? 'Secondary' : 'সহায়ক'}
                         </span>
                       ) : (
                         <button
                           type="button"
                           onClick={(e) => handleSecondaryToggle(item.id, e)}
-                          className="text-[10px] px-2 py-0.5 rounded bg-[#3B0764] hover:bg-[#6D28D9] text-[#E9D5FF]/70 hover:text-white border border-[#6D28D9]/40"
+                          className="text-[10px] px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[#8FA3B8] hover:text-white border border-white/10"
                         >
                           {language === 'en' ? '+ Add Secondary' : '+ সহায়ক করুন'}
                         </button>
@@ -181,12 +181,12 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
                   <h3 className="text-base font-bold text-white mb-1">
                     {language === 'en' ? item.titleEn : item.titleBn}
                   </h3>
-                  <p className="text-xs text-[#E9D5FF]/80 leading-relaxed mb-3">
+                  <p className="text-xs text-[#8FA3B8] leading-relaxed mb-3">
                     {language === 'en' ? item.descEn : item.descBn}
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-[#E9D5FF]/15 text-[10px] font-mono text-[#E9D5FF]/80">
+                <div className="pt-2 border-t border-white/10 text-[10px] font-mono text-[#8FA3B8]">
                   ⚡ {language === 'en' ? item.ruleImpactEn : item.ruleImpactBn}
                 </div>
               </div>
@@ -197,7 +197,7 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
         {/* Continue Button */}
         <button
           onClick={onContinue}
-          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#A855F7] hover:from-[#6D28D9] hover:to-[#9333EA] text-white font-black text-sm shadow-lg shadow-[#7C3AED]/40 transition cursor-pointer flex items-center justify-center gap-2"
+          className="w-full py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-black text-sm shadow-lg shadow-black/40 transition cursor-pointer flex items-center justify-center gap-2"
         >
           <span>{language === 'en' ? 'Continue' : 'পরবর্তী ধাপে যান'}</span>
           <ArrowRight className="w-4 h-4" />

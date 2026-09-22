@@ -28,28 +28,28 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#2E1065] text-[#E9D5FF] flex flex-col justify-center items-center p-4 sm:p-6 relative selection:bg-[#A855F7] selection:text-white">
+    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 relative selection:bg-[#B8FF3D] selection:text-[#050B14]">
       {/* Background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-[#6D28D9]/20 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-[#00E5FF]/10 blur-[120px] pointer-events-none rounded-full" />
 
       {/* Back button */}
       <button
         onClick={onBackToLanding}
-        className="absolute top-6 left-6 text-xs sm:text-sm text-[#E9D5FF]/80 hover:text-white flex items-center gap-1.5 transition cursor-pointer"
+        className="absolute top-6 left-6 text-xs sm:text-sm text-[#8FA3B8] hover:text-white flex items-center gap-1.5 transition cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>{language === 'en' ? 'Back to Landing' : 'মূল পাতায় ফিরে যান'}</span>
       </button>
 
       {/* Auth Card Container */}
-      <div className="w-full max-w-md bg-[#3B0764]/80 border border-[#6D28D9]/70 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-md relative z-10">
+      <div className="w-full max-w-md bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
         {/* Brand Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-[#6D28D9] mx-auto flex items-center justify-center shadow-lg shadow-[#6D28D9]/40 mb-3 border border-[#A855F7]/30">
-            <Satellite className="w-6 h-6 text-white" />
+          <div className="w-12 h-12 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 mx-auto flex items-center justify-center shadow-lg shadow-black/40 mb-3">
+            <Satellite className="w-6 h-6 text-[#00E5FF]" />
           </div>
           <h2 className="text-2xl font-black text-white tracking-tight">AGRIORBIT</h2>
-          <p className="text-xs text-[#E9D5FF]/70 mt-1">
+          <p className="text-xs text-[#8FA3B8] mt-1">
             {language === 'en'
               ? 'Access your farm field analysis & rotation engine'
               : 'আপনার জমির উপগ্রহ তথ্য ও শস্য পরিকল্পনা ব্যবস্থা'}
@@ -57,14 +57,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         </div>
 
         {/* Tab Toggle: Login vs Create Account */}
-        <div className="grid grid-cols-2 p-1 bg-[#2E1065] rounded-xl border border-[#6D28D9]/50 mb-6">
+        <div className="grid grid-cols-2 p-1 bg-[#050B14] rounded-xl border border-white/10 mb-6">
           <button
             type="button"
             onClick={() => setIsSignUp(false)}
             className={`py-2 text-xs font-extrabold rounded-lg transition cursor-pointer ${
               !isSignUp
-                ? 'bg-[#A855F7] text-white shadow-md'
-                : 'text-[#E9D5FF]/70 hover:text-white'
+                ? 'bg-[#B8FF3D] text-[#050B14] shadow-md'
+                : 'text-[#8FA3B8] hover:text-white'
             }`}
           >
             {language === 'en' ? 'Login' : 'লগইন'}
@@ -74,8 +74,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             onClick={() => setIsSignUp(true)}
             className={`py-2 text-xs font-extrabold rounded-lg transition cursor-pointer ${
               isSignUp
-                ? 'bg-[#A855F7] text-white shadow-md'
-                : 'text-[#E9D5FF]/70 hover:text-white'
+                ? 'bg-[#B8FF3D] text-[#050B14] shadow-md'
+                : 'text-[#8FA3B8] hover:text-white'
             }`}
           >
             {language === 'en' ? 'Create Account' : 'নতুন অ্যাকাউন্ট'}
@@ -90,14 +90,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 {language === 'en' ? 'Farmer / User Name' : 'কৃষক / ব্যবহারকারীর নাম'}
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-[#A855F7] absolute left-3 top-3.5" />
+                <User className="w-4 h-4 text-[#00E5FF] absolute left-3 top-3.5" />
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Md. Rafiqul Islam"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#2E1065] border border-[#6D28D9]/60 text-white text-sm focus:outline-none focus:border-[#A855F7]"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00E5FF]/60"
                 />
               </div>
             </div>
@@ -108,14 +108,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               {language === 'en' ? 'Email or Mobile Number' : 'ইমেইল অথবা মোবাইল নম্বর'}
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[#A855F7] absolute left-3 top-3.5" />
-              <input
-                type="text"
-                required
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="017XXXXXXXX or email@domain.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#2E1065] border border-[#6D28D9]/60 text-white text-sm focus:outline-none focus:border-[#A855F7]"
+                <Mail className="w-4 h-4 text-[#00E5FF] absolute left-3 top-3.5" />
+                <input
+                  type="text"
+                  required
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  placeholder="017XXXXXXXX or email@domain.com"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00E5FF]/60"
               />
             </div>
           </div>
@@ -125,21 +125,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               {language === 'en' ? 'Password' : 'পাসওয়ার্ড'}
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-[#A855F7] absolute left-3 top-3.5" />
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#2E1065] border border-[#6D28D9]/60 text-white text-sm focus:outline-none focus:border-[#A855F7]"
+                <Lock className="w-4 h-4 text-[#00E5FF] absolute left-3 top-3.5" />
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00E5FF]/60"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#A855F7] hover:from-[#6D28D9] hover:to-[#9333EA] text-white font-black text-sm shadow-lg shadow-[#7C3AED]/40 transition cursor-pointer"
+            className="w-full py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-black text-sm shadow-lg shadow-black/40 transition cursor-pointer"
           >
             {isSignUp
               ? language === 'en'
@@ -152,16 +152,16 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         </form>
 
         {/* Quick Demo Access for Space Apps Reviewers */}
-        <div className="mt-6 pt-5 border-t border-[#6D28D9]/40 text-center">
-          <p className="text-[11px] text-[#E9D5FF]/70 mb-2.5">
+        <div className="mt-6 pt-5 border-t border-white/10 text-center">
+          <p className="text-[11px] text-[#8FA3B8] mb-2.5">
             {language === 'en' ? 'For Space Apps Challenge Reviewers:' : 'স্পেস অ্যাপস পরীক্ষকদের জন্য:'}
           </p>
           <button
             type="button"
             onClick={handleQuickDemo}
-            className="w-full py-2.5 px-3 rounded-xl bg-[#2E1065] hover:bg-[#6D28D9]/50 border border-[#A855F7]/40 text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-[#00E5FF]/30 text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <Sparkles className="w-3.5 h-3.5 text-[#B8FF3D]" />
             <span>
               {language === 'en'
                 ? '1-Click Demo Login as Farmer Rafiqul'
