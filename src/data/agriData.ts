@@ -1,6 +1,6 @@
 import { CropData, DistrictId, DistrictInfo, FarmerPriorityId, ModisData, NasaPowerData, RiskAlert, RotationPlan, SmapData } from '../types';
 
-export const DISTRICTS: Record<DistrictId, DistrictInfo> = {
+export const DISTRICTS: Partial<Record<DistrictId, DistrictInfo>> = {
   rangpur: {
     id: 'rangpur',
     nameEn: 'Rangpur (Demo Focus)',
@@ -84,14 +84,14 @@ export const DISTRICTS: Record<DistrictId, DistrictInfo> = {
   },
 };
 
-export const DISTRICT_NASA_DATA: Record<DistrictId, {
+export const DISTRICT_NASA_DATA: Partial<Record<DistrictId, {
   power: NasaPowerData;
   smap: SmapData;
   modis: ModisData;
   alerts: RiskAlert[];
   climateShiftInsightEn: string;
   climateShiftInsightBn: string;
-}> = {
+}>> = {
   rangpur: {
     power: {
       rainfallMm: 14.2,

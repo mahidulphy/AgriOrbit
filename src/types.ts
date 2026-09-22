@@ -1,4 +1,21 @@
-export type DistrictId = 'rangpur' | 'rajshahi' | 'khulna' | 'dhaka';
+import type { DistrictId } from './data/bdAdmin';
+
+export type { DistrictId };
+
+export type LocationSource =
+  | 'init'
+  | 'district-selector'
+  | 'upazila-selector'
+  | 'map-click'
+  | 'preset';
+
+export interface SelectedLocation {
+  latitude: number;
+  longitude: number;
+  district: DistrictId;
+  upazila: string;
+  source: LocationSource;
+}
 
 export type FarmerPriorityId = 'save_water' | 'improve_soil' | 'lower_cost' | 'reduce_risk';
 
@@ -9,7 +26,6 @@ export type UserJourneyStage =
   | 'auth'
   | 'welcome'
   | 'farm_location'
-  | 'field_selection'
   | 'farmer_priority'
   | 'analyze_transition'
   | 'dashboard';
