@@ -314,8 +314,8 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 {nasaSourceLabel(nasa, names.district, language)}{' '}
                 <span className="text-[#8FA3B8]/70">
                   {language === 'en'
-                    ? '· Pin is exact; satellite data is surrounding grid-cell context.'
-                    : '· পিন সঠিক; উপগ্রহ তথ্য আশপাশের গ্রিড প্রেক্ষাপট।'}
+                    ? '· 5 km analysis context around your pin; satellite native resolutions vary.'
+                    : '· পিনের চারপাশে ৫ কিমি বিশ্লেষণ প্রেক্ষাপট; উপগ্রহের প্রকৃত রেজোলিউশন ভিন্ন হতে পারে।'}
                 </span>
               </p>
             </div>
@@ -338,8 +338,8 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
               onSelect={handleMapSelect}
               flyTarget={flyTarget}
             >
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm border border-[#00E5FF]/30 text-[10px] font-mono text-[#00E5FF] pointer-events-none">
-                NASA context cell · ~9 km around pin
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm border border-[#B8FF3D]/30 text-[10px] font-mono text-[#B8FF3D] pointer-events-none">
+                NASA observation context · 5 km radius
               </div>
               <button
                 type="button"

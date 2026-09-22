@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import circle from '@turf/circle';
 import type * as GeoJSON from 'geojson';
 
 export interface MapFlyTarget {
@@ -22,31 +23,17 @@ interface BangladeshMapProps {
 export const BANGLADESH_CENTER: [number, number] = [90.3563, 23.685];
 export const BANGLADESH_ZOOM = 5.5;
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
-const CELL_HALF_DEG_LAT = 0.04;
+
+// 5 km analysis context around the field pin. Turf computes a true
+// geographic circle (longitude corrected for latitude), 64 steps.
+export const CONTEXT_RADIUS_KM = 5;
+
+function contextCircle(lng: number, lat: number): GeoJSON.Feature {
+  return circle([lng, lat], CONTEXT_RADIUS_KM, { units: 'kilometers', steps: 64 });
+}
 
 if (!maplibregl.getWorkerUrl()) {
   maplibregl.setWorkerUrl('/vendor/maplibre-gl-worker.mjs');
-}
-
-function contextCell(lng: number, lat: number): GeoJSON.Feature {
-  const halfLat = CELL_HALF_DEG_LAT;
-  const halfLng = CELL_HALF_DEG_LAT / Math.max(0.3, Math.cos((lat * Math.PI) / 180));
-  return {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'Polygon',
-      coordinates: [
-        [
-          [lng - halfLng, lat - halfLat],
-          [lng + halfLng, lat - halfLat],
-          [lng + halfLng, lat + halfLat],
-          [lng - halfLng, lat + halfLat],
-          [lng - halfLng, lat - halfLat],
-        ],
-      ],
-    },
-  };
 }
 
 export const BangladeshMap: React.FC<BangladeshMapProps> = ({
@@ -67,12 +54,12 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
   const selectRef = useRef(onSelect);
   selectRef.current = onSelect;
 
-  const syncMarkerAndCell = (lng: number, lat: number) => {
+  const syncMarkerAndContext = (lng: number, lat: number) => {
     const map = mapRef.current;
     if (!map) return;
     markerRef.current?.setLngLat([lng, lat]);
-    const source = map.getSource('nasa-context-cell') as maplibregl.GeoJSONSource | undefined;
-    source?.setData(contextCell(lng, lat));
+    const source = map.getSource('nasa-context') as maplibregl.GeoJSONSource | undefined;
+    source?.setData(contextCircle(lng, lat));
   };
 
   useEffect(() => {
@@ -97,19 +84,22 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
 
     map.on('load', () => {
       map.resize();
+      if (import.meta.env.DEV) {
+        (window as unknown as { __agriorbitMap?: maplibregl.Map }).__agriorbitMap = map;
+      }
       const { lat, lng } = initialRef.current;
-      map.addSource('nasa-context-cell', { type: 'geojson', data: contextCell(lng, lat) });
+      map.addSource('nasa-context', { type: 'geojson', data: contextCircle(lng, lat) });
       map.addLayer({
         id: 'nasa-context-fill',
         type: 'fill',
-        source: 'nasa-context-cell',
-        paint: { 'fill-color': '#00E5FF', 'fill-opacity': 0.08 },
+        source: 'nasa-context',
+        paint: { 'fill-color': '#B8FF3D', 'fill-opacity': 0.08 },
       });
       map.addLayer({
         id: 'nasa-context-line',
         type: 'line',
-        source: 'nasa-context-cell',
-        paint: { 'line-color': '#00E5FF', 'line-opacity': 0.55, 'line-width': 1.5 },
+        source: 'nasa-context',
+        paint: { 'line-color': '#B8FF3D', 'line-opacity': 0.8, 'line-width': 2 },
       });
 
       const el = document.createElement('div');
@@ -141,7 +131,7 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
 
   // Parent-driven pin position (dropdowns, presets, external updates).
   useEffect(() => {
-    syncMarkerAndCell(longitude, latitude);
+    syncMarkerAndContext(longitude, latitude);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latitude, longitude]);
 
