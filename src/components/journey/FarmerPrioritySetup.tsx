@@ -109,8 +109,8 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
           </button>
 
           <div className="flex items-center gap-1.5 font-mono text-xs text-[#B8FF3D]">
-            <span className="font-bold text-[#050B14] bg-[#B8FF3D] px-2 py-0.5 rounded text-[11px]">03</span>
-            <span className="text-[#8FA3B8]">/ 04</span>
+            <span className="font-bold text-[#050B14] bg-[#B8FF3D] px-2 py-0.5 rounded text-[11px]">02</span>
+            <span className="text-[#8FA3B8]">/ 03</span>
             <span className="font-sans font-semibold text-[#8FA3B8] ml-1">
               {language === 'en' ? 'Farmer Priority' : 'কৃষকের অগ্রাধিকার'}
             </span>

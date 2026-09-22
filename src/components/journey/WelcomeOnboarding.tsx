@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, MapPin, Crosshair, Sliders, LineChart, Sparkles } from 'lucide-react';
+import { ArrowRight, MapPin, Sliders, LineChart, Sparkles } from 'lucide-react';
 import { Language } from '../../types';
 
 interface WelcomeOnboardingProps {
@@ -16,22 +16,14 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
   const steps = [
     {
       num: '01',
-      titleEn: 'Location',
-      titleBn: 'অবস্থান',
-      descEn: 'Select District & Upazila',
-      descBn: 'জেলা ও উপজেলা নির্বাচন',
+      titleEn: 'Farm Location',
+      titleBn: 'খামারের অবস্থান',
+      descEn: 'District, Upazila & Map Pin',
+      descBn: 'জেলা, উপজেলা ও মানচিত্র পিন',
       icon: <MapPin className="w-5 h-5 text-[#00E5FF]" />,
     },
     {
       num: '02',
-      titleEn: 'Field',
-      titleBn: 'জমি',
-      descEn: 'Pin Your Agricultural Plot',
-      descBn: 'মানচিত্রে নির্দিষ্ট জমি চিহ্নিত করুন',
-      icon: <Crosshair className="w-5 h-5 text-[#B8FF3D]" />,
-    },
-    {
-      num: '03',
       titleEn: 'Priority',
       titleBn: 'লক্ষ্য',
       descEn: 'Set Water, Soil, or Cost Goal',
@@ -39,7 +31,7 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
       icon: <Sliders className="w-5 h-5 text-[#B8FF3D]" />,
     },
     {
-      num: '04',
+      num: '03',
       titleEn: 'Analysis',
       titleBn: 'বিশ্লেষণ',
       descEn: 'Run NASA Observation Engine',
@@ -70,7 +62,7 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
         </p>
 
         {/* 4-Step Progress Indicator */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-10 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-10 text-left">
           {steps.map((step) => (
             <div
               key={step.num}
