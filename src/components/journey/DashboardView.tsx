@@ -8,7 +8,9 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language, RiskAlert } from '../../types';
-import { DISTRICTS, DISTRICT_NASA_DATA, ROTATION_PLANS } from '../../data/agriData';
+import { ROTATION_PLANS } from '../../data/agriData';
+import { getDistrictProfile, getUpazilaName } from '../../lib/location';
+import { getNasaContext, nasaSourceLabel } from '../../lib/nasaContext';
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
 import { ExplainWhyModal } from '../ExplainWhyModal';
@@ -48,16 +50,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [activeTab, setActiveTab] = useState<'overview' | 'conditions' | 'crops' | 'rotation'>('overview');
   const [explainCrop, setExplainCrop] = useState<CropData | null>(null);
 
-  const district = DISTRICTS[selectedDistrict];
-  const nasaData = DISTRICT_NASA_DATA[selectedDistrict];
+  const district = getDistrictProfile(selectedDistrict);
+  const nasaData = getNasaContext(selectedDistrict);
   const power = nasaData.power;
   const smap = nasaData.smap;
   const modis = nasaData.modis;
   const alerts: RiskAlert[] = nasaData.alerts;
   const rotationPlan = ROTATION_PLANS[selectedPriority];
 
-  const upazilaObj = district.upazilas.find((u) => u.id === selectedUpazila) || district.upazilas[0];
-  const upazilaName = language === 'en' ? upazilaObj.nameEn : upazilaObj.nameBn;
+  const upazilaName = getUpazilaName(selectedDistrict, selectedUpazila, language);
 
   return (
     <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-sans selection:bg-[#B8FF3D] selection:text-[#050B14]">
@@ -155,6 +156,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#B8FF3D]">
                 AEZ: {language === 'en' ? district.agroZoneEn : district.agroZoneBn}
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF]">
+                NASA: {nasaSourceLabel(nasaData, language === 'en' ? district.nameEn : district.nameBn, language)}
               </span>
             </div>
           </div>

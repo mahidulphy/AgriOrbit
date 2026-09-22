@@ -8,7 +8,7 @@ Team: Bay of Orbits
 
 ## Product flow
 
-Landing Page → Login / Sign Up → Welcome / Onboarding → Farm Location → Field Location → Farmer Priority → Analyze My Field → Field Analysis Dashboard → Crop Suitability → 3-Season Rotation → Explain Why → Final Advisory
+Landing Page → Login / Sign Up → Welcome / Onboarding → Select Your Farm Location (district + upazila + real map, two-way synced) → Farmer Priority → Analyze My Field → Field Analysis Dashboard → Crop Suitability → 3-Season Rotation → Explain Why → Final Advisory
 
 The dashboard is never the first screen; it appears only after the full journey.
 
@@ -27,10 +27,15 @@ Prerequisites: Node.js 18+
 
 ## Project structure
 
-- `src/App.tsx` — journey state machine (landing → auth → … → dashboard)
-- `src/types.ts` — shared domain types (districts, NASA data, crops, rotation)
+- `src/App.tsx` — journey state machine + the single canonical `SelectedLocation`
+- `src/types.ts` — shared domain types (location model, NASA data, crops, rotation)
+- `src/data/bdAdmin.ts` — all 64 Bangladesh districts by division (map + geocode base)
 - `src/data/agriData.ts` — curated district observations, crop database, rotation plans
+- `src/lib/location.ts` — canonical location helpers and district-profile resolvers
+- `src/lib/geocode.ts` — Nominatim reverse geocoding with geometric fallback
+- `src/lib/nasaContext.ts` — NASA context resolver (exact coverage or labeled approximation)
 - `src/lib/cropSuitability.ts` — deterministic priority-based suitability engine
+- `src/components/map/BangladeshMap.tsx` — reusable real MapLibre Bangladesh map
 - `src/components/common/` — shared brand, language, and footer UI
 - `src/components/journey/` — one screen per product step
 - `src/components/journey/FieldLocationSelection.tsx` — real MapLibre Bangladesh map
@@ -47,5 +52,7 @@ Background `#050B14` • Surface `#0B1626` • Electric Cyan `#00E5FF` (NASA / s
 
 ## Notes
 
-- No live NASA APIs, auth backend, database, or ML in this cleanup phase.
-- Data is intentionally curated for Rangpur (demo focus), Rajshahi, Khulna, and Dhaka.
+- No live NASA APIs, auth backend, database, or ML in this phase.
+- Map clicks reverse-geocode via OSM Nominatim with a local geometric fallback.
+- Curated agronomy profiles cover Rangpur, Rajshahi, Khulna, and Dhaka;
+  other districts use labeled regional approximations until curated.

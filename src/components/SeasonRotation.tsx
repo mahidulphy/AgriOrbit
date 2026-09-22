@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArrowDown, HelpCircle, Droplet, Sparkles, CheckCircle2, ShieldCheck, Printer, Share2, Compass } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../types';
-import { DISTRICTS, ROTATION_PLANS } from '../data/agriData';
+import { ROTATION_PLANS } from '../data/agriData';
+import { getDistrictAdmin } from '../data/bdAdmin';
 
 interface SeasonRotationProps {
   selectedDistrict: DistrictId;
@@ -16,7 +17,10 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
   language,
   onExplainCrop,
 }) => {
-  const district = DISTRICTS[selectedDistrict];
+  const district = getDistrictAdmin(selectedDistrict) ?? {
+    nameEn: selectedDistrict,
+    nameBn: selectedDistrict,
+  };
   const rotationPlan = ROTATION_PLANS[selectedPriority];
 
   const handlePrint = () => {

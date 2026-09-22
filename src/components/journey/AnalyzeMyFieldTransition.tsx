@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Satellite, ArrowRight, Orbit, ShieldCheck } from 'lucide-react';
 import { DistrictId, FarmerPriorityId, Language } from '../../types';
-import { DISTRICTS } from '../../data/agriData';
+import { getDistrictAdmin } from '../../data/bdAdmin';
 import { AGRIORBIT_TAGLINE } from '../common/AppFooter';
 
 interface AnalyzeMyFieldTransitionProps {
@@ -21,7 +21,10 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
   language,
   onViewDashboard,
 }) => {
-  const district = DISTRICTS[selectedDistrict];
+  const district = getDistrictAdmin(selectedDistrict) ?? {
+    nameEn: selectedDistrict,
+    nameBn: selectedDistrict,
+  };
   const [activeStep, setActiveStep] = useState(0);
 
   const streams = [
