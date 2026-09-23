@@ -16,7 +16,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ badge }) => (
     <img
       src="/assets/agriorbit-logo.png"
       alt="AgriOrbit"
-      className="h-10 w-auto object-contain mix-blend-screen shrink-0"
+      className="w-[90px] h-auto object-contain mix-blend-screen shrink-0"
       draggable={false}
     />
     <div>
