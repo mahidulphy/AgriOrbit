@@ -93,7 +93,7 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
         id: 'nasa-context-fill',
         type: 'fill',
         source: 'nasa-context',
-        paint: { 'fill-color': '#B8FF3D', 'fill-opacity': 0.08 },
+        paint: { 'fill-color': '#B8FF3D', 'fill-opacity': 0.1 },
       });
       map.addLayer({
         id: 'nasa-context-line',
