@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Satellite } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Language } from '../types';
 
 interface HowItWorksModalProps {
@@ -20,9 +20,12 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
       <div className="bg-[#0B1626] border-2 border-[#00E5FF]/30 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl text-white relative p-6">
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center">
-              <Satellite className="w-4 h-4 text-[#00E5FF]" />
-            </div>
+            <img
+              src="/assets/agriorbit-logo.png"
+              alt="AgriOrbit"
+              className="h-8 w-auto object-contain mix-blend-screen shrink-0"
+              draggable={false}
+            />
             <h3 className="text-xl font-black text-white">
               {language === 'en' ? 'How AgriOrbit Works' : 'এগ্রিঅরবিট কীভাবে কাজ করে'}
             </h3>

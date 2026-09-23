@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Satellite, ArrowLeft, Mail, Lock, User, Sparkles } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, Sparkles } from 'lucide-react';
 import { Language } from '../../types';
 
 interface AuthScreenProps {
@@ -45,10 +45,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
       <div className="w-full max-w-md bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
         {/* Brand Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 mx-auto flex items-center justify-center shadow-lg shadow-black/40 mb-3">
-            <Satellite className="w-6 h-6 text-[#00E5FF]" />
-          </div>
-          <h2 className="text-2xl font-black text-white tracking-tight">AGRIORBIT</h2>
+          <img
+            src="/assets/agriorbit-logo.png"
+            alt="AgriOrbit"
+            className="h-16 w-auto object-contain mix-blend-screen mx-auto mb-2"
+            draggable={false}
+          />
           <p className="text-xs text-[#8FA3B8] mt-1">
             {language === 'en'
               ? 'Access your farm field analysis & rotation engine'
