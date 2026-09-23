@@ -64,7 +64,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-sans selection:bg-[#B8FF3D] selection:text-[#050B14]">
       {/* 1. Logged-in App Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#050B14]/95 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo & Field Engine Tag */}
           <BrandLogo badge="Field Engine" />
 
@@ -72,7 +72,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 text-xs font-bold">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === 'overview' ? 'bg-[#B8FF3D] text-[#050B14] shadow' : 'text-[#8FA3B8] hover:text-white'
               }`}
             >
@@ -80,7 +80,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('conditions')}
-              className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === 'conditions' ? 'bg-[#B8FF3D] text-[#050B14] shadow' : 'text-[#8FA3B8] hover:text-white'
               }`}
             >
@@ -88,7 +88,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('crops')}
-              className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === 'crops' ? 'bg-[#B8FF3D] text-[#050B14] shadow' : 'text-[#8FA3B8] hover:text-white'
               }`}
             >
@@ -96,7 +96,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('rotation')}
-              className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === 'rotation' ? 'bg-[#B8FF3D] text-[#050B14] shadow' : 'text-[#8FA3B8] hover:text-white'
               }`}
             >

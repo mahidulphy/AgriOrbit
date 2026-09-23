@@ -13,6 +13,12 @@ html,
 body {
   background-color: #050b14;
   color: #ffffff;
+  font-family:
+    "Noto Sans Bengali",
+    "Noto Sans",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
 }
 
 /* Real Bangladesh map canvas: explicit responsive height so the map

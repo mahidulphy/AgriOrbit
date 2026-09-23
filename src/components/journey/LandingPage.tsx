@@ -37,50 +37,50 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-sans selection:bg-[#B8FF3D] selection:text-[#050B14]">
       {/* 1. Public Landing Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#050B14]/95 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo */}
           <BrandLogo />
 
           {/* Navigation Links Before Login */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[#8FA3B8]">
-            <a href="#about" className="hover:text-white transition">
+          <nav className="hidden xl:flex items-center gap-6 text-sm font-semibold text-[#8FA3B8] whitespace-nowrap">
+            <a href="#about" className="hover:text-white transition whitespace-nowrap shrink-0">
               {language === 'en' ? 'What is AgriOrbit?' : 'এগ্রিঅরবিট কী?'}
             </a>
             <button
               onClick={onOpenHowItWorks}
-              className="hover:text-white transition cursor-pointer"
+              className="hover:text-white transition cursor-pointer whitespace-nowrap shrink-0"
             >
               {language === 'en' ? 'How It Works' : 'এটি কীভাবে কাজ করে'}
             </button>
-            <a href="#nasa-data" className="hover:text-white transition">
+            <a href="#nasa-data" className="hover:text-white transition whitespace-nowrap shrink-0">
               {language === 'en' ? 'Earth Observations' : 'নাসা উপগ্রহ পর্যবেক্ষণ'}
             </a>
-            <a href="#rotation" className="hover:text-white transition">
+            <a href="#rotation" className="hover:text-white transition whitespace-nowrap shrink-0">
               {language === 'en' ? 'Crop Rotation' : 'শস্য পরিক্রমা'}
             </a>
           </nav>
 
           {/* Auth & Language Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Language Switcher */}
             <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
 
             {/* Login CTA */}
             <button
               onClick={onOpenLogin}
-              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs sm:text-sm transition flex items-center gap-1.5 cursor-pointer shadow-sm"
+              className="px-3 sm:px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs sm:text-sm transition flex items-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap shrink-0"
             >
-              <LogIn className="w-3.5 h-3.5" />
-              <span>{language === 'en' ? 'Login' : 'লগইন'}</span>
+              <LogIn className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">{language === 'en' ? 'Login' : 'লগইন'}</span>
             </button>
 
             {/* Primary Action Button */}
             <button
               onClick={onStartAnalysis}
-              className="hidden sm:flex px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-bold text-xs sm:text-sm shadow-md shadow-black/40 transition items-center gap-1.5 cursor-pointer"
+              className="hidden sm:flex px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-bold text-xs sm:text-sm shadow-md shadow-black/40 transition items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0"
             >
-              <span>{language === 'en' ? 'Analyze My Field' : 'জমি বিশ্লেষণ করুন'}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span className="whitespace-nowrap">{language === 'en' ? 'Analyze My Field' : 'জমি বিশ্লেষণ করুন'}</span>
+              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </button>
           </div>
         </div>

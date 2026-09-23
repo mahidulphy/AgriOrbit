@@ -10,7 +10,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   language,
   onLanguageChange,
 }) => (
-  <div className="flex items-center bg-white/5 rounded-lg p-0.5 border border-white/10">
+  <div className="flex items-center bg-white/5 rounded-lg p-0.5 border border-white/10 shrink-0">
     <button
       type="button"
       onClick={() => onLanguageChange('en')}
