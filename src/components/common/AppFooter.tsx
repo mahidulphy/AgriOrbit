@@ -16,28 +16,26 @@ export const AppFooter: React.FC<AppFooterProps> = ({
   onOpenHowItWorks,
   onOpenLogin,
 }) => (
-  <footer className="mt-auto border-t border-white/10 bg-[#050B14] py-8 px-4 sm:px-6 text-xs text-[#8FA3B8]">
-    <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <span className="font-extrabold text-white text-sm">AGRIORBIT</span>
-        <span>• NASA Space Apps Challenge Project</span>
-        <span>• Team: Bay of Orbits</span>
-      </div>
+  <footer className="border-t border-white/10 py-6 px-4 sm:px-6 text-xs text-[#8FA3B8]">
+    <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+      <p className="leading-relaxed max-w-xl">
+        <strong className="text-white font-bold">AgriOrbit</strong>
+        <span> · {AGRIORBIT_TAGLINE}</span>
+        <span className="block sm:inline"> · Team Bay of Orbits, NASA Space Apps Challenge</span>
+      </p>
       {userName ? (
-        <div className="flex items-center gap-2 text-[11px]">
-          <span>
-            {language === 'en' ? 'Active Farmer:' : 'সক্রিয় কৃষক:'} {userName}
-          </span>
-        </div>
+        <p className="text-[11px] whitespace-nowrap">
+          {language === 'en' ? 'Signed in as' : 'লগইনকৃত'} {userName}
+        </p>
       ) : (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5 shrink-0">
           {onOpenHowItWorks && (
-            <button onClick={onOpenHowItWorks} className="hover:text-white transition cursor-pointer">
+            <button onClick={onOpenHowItWorks} className="hover:text-white transition cursor-pointer whitespace-nowrap">
               {language === 'en' ? 'How It Works' : 'এটি কীভাবে কাজ করে'}
             </button>
           )}
           {onOpenLogin && (
-            <button onClick={onOpenLogin} className="hover:text-white transition cursor-pointer">
+            <button onClick={onOpenLogin} className="hover:text-white transition cursor-pointer whitespace-nowrap">
               {language === 'en' ? 'Login' : 'লগইন'}
             </button>
           )}

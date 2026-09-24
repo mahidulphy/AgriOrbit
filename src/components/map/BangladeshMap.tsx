@@ -81,6 +81,11 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
 
     const handleResize = () => map.resize();
     window.addEventListener('resize', handleResize);
+    let ro: ResizeObserver | null = null;
+    if (containerRef.current) {
+      ro = new ResizeObserver(() => map.resize());
+      ro.observe(containerRef.current);
+    }
 
     map.on('load', () => {
       map.resize();
@@ -122,6 +127,7 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      ro?.disconnect();
       map.remove();
       mapRef.current = null;
       markerRef.current = null;

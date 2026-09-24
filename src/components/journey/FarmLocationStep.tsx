@@ -1,14 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Crosshair,
-  Globe,
-  Layers,
-  MapPin,
-  Satellite,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, Crosshair, Globe, MapPin, Satellite } from 'lucide-react';
 import { BD_DISTRICTS, BD_DIVISIONS, getDistrictAdmin, type DistrictId } from '../../data/bdAdmin';
 import type { Language, SelectedLocation } from '../../types';
 import { getNasaContext, nasaSourceLabel } from '../../lib/nasaContext';
@@ -21,6 +12,7 @@ import {
 } from '../../lib/location';
 import { matchUpazila, reverseGeocode } from '../../lib/geocode';
 import { BangladeshMap, type MapFlyTarget } from '../map/BangladeshMap';
+import { Eyebrow, KV, PrimaryButton, Rule } from '../ui';
 
 interface FarmLocationStepProps {
   location: SelectedLocation;
@@ -45,6 +37,10 @@ const SOURCE_LABEL: Record<SelectedLocation['source'], { en: string; bn: string 
   preset: { en: 'Plot preset', bn: 'প্লট নির্বাচন' },
 };
 
+const BANGLADESH_CENTER_LAT = 23.685;
+const BANGLADESH_CENTER_LNG = 90.3563;
+const BANGLADESH_OVERVIEW_ZOOM = 5.5;
+
 export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
   location,
   onChangeLocation,
@@ -61,6 +57,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
   const names = formatLocation(location, language);
   const upazilas = getUpazilasFor(location.district);
   const nasa = getNasaContext(location.district);
+  const profile = getDistrictProfile(location.district);
   const sourceLabel = SOURCE_LABEL[location.source];
 
   const flyTo = (lng: number, lat: number, zoom: number) => {
@@ -69,8 +66,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
   };
 
   const handleDistrictChange = (districtId: DistrictId) => {
-    const next = locationFromDistrict(districtId, undefined, 'district-selector');
-    onChangeLocation(next);
+    onChangeLocation(locationFromDistrict(districtId, undefined, 'district-selector'));
     setOutsideMessage(false);
     const admin = getDistrictAdmin(districtId);
     if (admin) flyTo(admin.lng, admin.lat, 9);
@@ -85,11 +81,10 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
     setResolving(true);
     setOutsideMessage(false);
     const geo = await reverseGeocode(lat, lng);
-    if (seq !== requestSeq.current) return; // superseded by a newer selection
+    if (seq !== requestSeq.current) return;
     setResolving(false);
 
     if (geo.outsideBangladesh) {
-      // Keep the exact pin, but do not touch the Bangladesh selectors.
       onChangeLocation({ ...location, latitude: lat, longitude: lng, source: 'map-click' });
       setOutsideMessage(true);
       return;
@@ -124,278 +119,219 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
     flyTo(lng, lat, 12);
   };
 
-  return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-[#B8FF3D] selection:text-[#050B14] relative">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#00E5FF]/10 blur-[120px] pointer-events-none rounded-full" />
+  const selectClass =
+    'w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-white/10 text-white text-sm font-medium focus:outline-none focus:border-[#00E5FF]/60 cursor-pointer appearance-none';
 
-      <div className="w-full max-w-6xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
-        {/* Progress Header */}
-        <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+  return (
+    <div className="min-h-screen bg-[#050B14] text-white px-4 sm:px-6 py-8 selection:bg-[#B8FF3D] selection:text-[#050B14]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between gap-4">
           <button
             onClick={onBack}
-            className="text-xs text-[#8FA3B8] hover:text-white flex items-center gap-1 cursor-pointer transition"
+            className="text-xs text-[#8FA3B8] hover:text-white flex items-center gap-1.5 cursor-pointer transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{language === 'en' ? 'Back' : 'পূর্ববর্তী'}</span>
           </button>
-
-          <div className="flex items-center gap-1.5 font-mono text-xs text-[#00E5FF]">
-            <span className="font-bold text-[#050B14] bg-[#00E5FF] px-2 py-0.5 rounded text-[11px]">01</span>
-            <span className="text-[#8FA3B8]">/ 03</span>
-            <span className="font-sans font-semibold text-[#8FA3B8] ml-1">
-              {language === 'en' ? 'Farm Location' : 'খামারের অবস্থান'}
-            </span>
-          </div>
-        </div>
-
-        {/* Title */}
-        <div className="mb-6">
-          <div className="w-10 h-10 rounded-xl bg-[#B8FF3D]/10 border border-[#B8FF3D]/30 flex items-center justify-center mb-2 shadow-md">
-            <MapPin className="w-5 h-5 text-[#B8FF3D]" />
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">
-            {language === 'en' ? 'Select Your Farm Location' : 'আপনার খামারের অবস্থান নির্বাচন করুন'}
-          </h2>
-          <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1">
-            {language === 'en'
-              ? 'Choose your district and upazila, or click your field directly on the map — both stay in sync.'
-              : 'জেলা ও উপজেলা নির্বাচন করুন অথবা মানচিত্রে সরাসরি জমিতে ক্লিক করুন — উভয়ই সমন্বিত থাকবে।'}
+          <p className="tnum text-xs text-[#8FA3B8]">
+            <span className="text-[#00E5FF] font-semibold">01</span> / 03 ·{' '}
+            {language === 'en' ? 'Farm Location' : 'খামারের অবস্থান'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* LEFT: selectors + location summary */}
-          <div className="space-y-4">
-            {/* District Dropdown */}
-            <div>
-              <label className="block text-xs font-bold text-white mb-1.5 uppercase tracking-wider">
-                {language === 'en' ? 'District / জেলা' : 'জেলা'}
-              </label>
-              <div className="relative">
-                <select
-                  value={location.district}
-                  onChange={(e) => handleDistrictChange(e.target.value as DistrictId)}
-                  className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#00E5FF]/60 cursor-pointer appearance-none"
-                >
-                  {BD_DIVISIONS.map((div) => (
-                    <optgroup
-                      key={div.nameEn}
-                      label={language === 'en' ? `${div.nameEn} Division` : `${div.nameBn} বিভাগ`}
-                    >
-                      {(BD_DISTRICTS as readonly { id: string; nameEn: string; nameBn: string; division: string }[])
-                        .filter((d) => d.division === div.nameEn)
-                        .map((d) => (
-                          <option key={d.id} value={d.id} className="bg-[#050B14] text-white">
-                            {language === 'en' ? d.nameEn : d.nameBn}
-                          </option>
-                        ))}
-                    </optgroup>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute right-4 top-3.5 text-[#00E5FF]">▼</div>
-              </div>
-              <p className="text-[11px] text-[#8FA3B8] mt-1">
-                {language === 'en'
-                  ? 'All 64 districts of Bangladesh, grouped by division.'
-                  : 'বিভাগ অনুযায়ী বাংলাদেশের সকল ৬৪টি জেলা।'}
-              </p>
-            </div>
+        <div className="mt-6 mb-8 max-w-2xl">
+          <Eyebrow tone="lime">{language === 'en' ? 'Step 01 — Location' : 'ধাপ ০১ — অবস্থান'}</Eyebrow>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-2">
+            {language === 'en' ? 'Select your farm location' : 'খামারের অবস্থান নির্বাচন করুন'}
+          </h1>
+          <p className="text-sm sm:text-base text-[#8FA3B8] mt-2 leading-relaxed">
+            {language === 'en'
+              ? 'Pick a district and upazila, or click the field itself. Both update the same location.'
+              : 'জেলা ও উপজেলা বাছুন, অথবা জমিতেই ক্লিক করুন। দুটোই একই অবস্থান হালনাগাদ করে।'}
+          </p>
+        </div>
 
-            {/* Upazila Dropdown */}
-            <div>
-              <label className="block text-xs font-bold text-white mb-1.5 uppercase tracking-wider">
-                {language === 'en' ? 'Upazila / উপজেলা' : 'উপজেলা'}
-              </label>
-              <div className="relative">
-                <select
-                  value={location.upazila}
-                  onChange={(e) => handleUpazilaChange(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#00E5FF]/60 cursor-pointer appearance-none"
-                >
-                  {upazilas.length > 0 ? (
-                    upazilas.map((upz) => (
-                      <option key={upz.id} value={upz.id} className="bg-[#050B14] text-white">
-                        {language === 'en' ? upz.nameEn : upz.nameBn}
-                      </option>
-                    ))
-                  ) : (
-                    <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#050B14] text-white">
-                      {language === 'en' ? 'District-wide (upazila list coming soon)' : 'সমগ্র জেলা (উপজেলা তালিকা শীঘ্রই)'}
-                    </option>
-                  )}
-                </select>
-                <div className="pointer-events-none absolute right-4 top-3.5 text-[#00E5FF]">▼</div>
-              </div>
-            </div>
-
-            {/* Selected Location Card */}
-            <div className="p-4 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/30 space-y-2">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2 text-xs font-bold text-white">
-                  <Layers className="w-4 h-4 text-[#B8FF3D]" />
-                  <span>{language === 'en' ? 'Selected Location' : 'নির্বাচিত অবস্থান'}</span>
-                </div>
-                <span className="text-[10px] font-mono text-[#8FA3B8]">
-                  {language === 'en' ? sourceLabel.en : sourceLabel.bn}
-                </span>
-              </div>
-              <p className="text-sm font-bold text-white">
-                {names.district} · {names.upazila}
-                {names.upazila !== (language === 'en' ? 'District-wide' : 'সমগ্র জেলা') &&
-                  (language === 'en' ? ' Upazila' : ' উপজেলা')}{' '}
-                · Bangladesh
-              </p>
-              <div className="flex items-center gap-4 font-mono text-xs text-[#8FA3B8]">
-                <span>
-                  LAT <strong className="text-white text-sm">{location.latitude}° N</strong>
-                </span>
-                <span>
-                  LNG <strong className="text-white text-sm">{location.longitude}° E</strong>
-                </span>
-                {resolving && <span className="text-[#00E5FF] animate-pulse">…</span>}
-              </div>
-              {outsideMessage && (
-                <p className="text-xs text-[#FF5C5C] font-semibold">
-                  {language === 'en'
-                    ? 'Please select a field within Bangladesh.'
-                    : 'অনুগ্রহ করে বাংলাদেশের ভেতরে জমি নির্বাচন করুন।'}
-                </p>
-              )}
-            </div>
-
-            {/* Quick Plot Presets */}
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8FF3D] block mb-2">
-                {language === 'en' ? 'Quick Plot Presets:' : 'দ্রুত প্লট নির্বাচন:'}
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {PRESETS.map((preset) => (
-                  <button
-                    key={preset.name}
-                    onClick={() => handlePreset(preset)}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-[#8FA3B8] hover:text-white font-medium transition cursor-pointer"
+        <div className="grid lg:grid-cols-[380px_1fr] gap-8 lg:gap-10 items-start">
+          {/* LEFT: controls */}
+          <div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              <div>
+                <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#8FA3B8] mb-1.5">
+                  {language === 'en' ? 'District' : 'জেলা'}
+                </label>
+                <div className="relative">
+                  <select
+                    value={location.district}
+                    onChange={(e) => handleDistrictChange(e.target.value as DistrictId)}
+                    className={selectClass}
                   >
-                    📍 {preset.name}
-                  </button>
-                ))}
+                    {BD_DIVISIONS.map((div) => (
+                      <optgroup
+                        key={div.nameEn}
+                        label={language === 'en' ? `${div.nameEn} Division` : `${div.nameBn} বিভাগ`}
+                      >
+                        {(BD_DISTRICTS as readonly { id: string; nameEn: string; nameBn: string; division: string }[])
+                          .filter((d) => d.division === div.nameEn)
+                          .map((d) => (
+                            <option key={d.id} value={d.id} className="bg-[#050B14] text-white">
+                              {language === 'en' ? d.nameEn : d.nameBn}
+                            </option>
+                          ))}
+                      </optgroup>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute right-3.5 top-3 text-[#00E5FF] text-xs">▼</div>
+                </div>
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#8FA3B8] mb-1.5">
+                  {language === 'en' ? 'Upazila' : 'উপজেলা'}
+                </label>
+                <div className="relative">
+                  <select
+                    value={location.upazila}
+                    onChange={(e) => handleUpazilaChange(e.target.value)}
+                    className={selectClass}
+                  >
+                    {upazilas.length > 0 ? (
+                      upazilas.map((upz) => (
+                        <option key={upz.id} value={upz.id} className="bg-[#050B14] text-white">
+                          {language === 'en' ? upz.nameEn : upz.nameBn}
+                        </option>
+                      ))
+                    ) : (
+                      <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#050B14] text-white">
+                        {language === 'en' ? 'District-wide' : 'সমগ্র জেলা'}
+                      </option>
+                    )}
+                  </select>
+                  <div className="pointer-events-none absolute right-3.5 top-3 text-[#00E5FF] text-xs">▼</div>
+                </div>
               </div>
             </div>
 
-            {/* NASA context status */}
-            <div className="p-4 rounded-2xl bg-[#050B14] border border-[#00E5FF]/30 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-white">
-                <Satellite className="w-4 h-4 text-[#00E5FF]" />
-                <span>{language === 'en' ? 'NASA Observation Context' : 'নাসা পর্যবেক্ষণ প্রেক্ষাপট'}</span>
+            {/* Selected location readout */}
+            <dl className="mt-6 border-t border-white/10">
+              <div className="flex items-baseline justify-between gap-4 py-2.5 border-b border-white/10">
+                <dt className="text-[11px] uppercase tracking-wider text-[#8FA3B8]">
+                  {language === 'en' ? 'Selected field' : 'নির্বাচিত জমি'}
+                </dt>
+                <dd className="text-sm font-semibold text-white text-right">
+                  {names.district} · {names.upazila}
+                </dd>
               </div>
-              <div className="grid grid-cols-3 gap-2 font-mono text-center">
-                <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                  <span className="block text-[10px] text-[#8FA3B8]">
-                    {language === 'en' ? 'Rainfall' : 'বৃষ্টি'}
-                  </span>
-                  <strong className="text-white text-sm">{nasa.power.rainfallMm}mm</strong>
-                  <span className={`block text-[10px] font-bold ${nasa.power.rainfallAnomalyPct < 0 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
-                    {nasa.power.rainfallAnomalyPct}%
-                  </span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                  <span className="block text-[10px] text-[#8FA3B8]">
-                    {language === 'en' ? 'Soil H₂O' : 'মাটির রস'}
-                  </span>
-                  <strong className="text-white text-sm">{nasa.smap.surfaceMoisture}</strong>
-                  <span className="block text-[10px] text-[#8FA3B8]">m³/m³</span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                  <span className="block text-[10px] text-[#8FA3B8]">NDVI</span>
-                  <strong className="text-white text-sm">{nasa.modis.ndvi}</strong>
-                  <span className="block text-[10px] text-[#B8FF3D]">/ 1.0</span>
-                </div>
+              <div className="flex items-baseline justify-between gap-4 py-2.5 border-b border-white/10">
+                <dt className="text-[11px] uppercase tracking-wider text-[#8FA3B8]">
+                  {language === 'en' ? 'Coordinates' : 'স্থানাঙ্ক'}
+                </dt>
+                <dd className="text-sm text-white tnum">
+                  {location.latitude}° N, {location.longitude}° E
+                  {resolving && <span className="text-[#00E5FF] animate-pulse"> …</span>}
+                </dd>
               </div>
-              <p className="text-[11px] text-[#8FA3B8]">
-                {nasaSourceLabel(nasa, names.district, language)}{' '}
-                <span className="text-[#8FA3B8]/70">
-                  {language === 'en'
-                    ? '· 5 km analysis context around your pin; satellite native resolutions vary.'
-                    : '· পিনের চারপাশে ৫ কিমি বিশ্লেষণ প্রেক্ষাপট; উপগ্রহের প্রকৃত রেজোলিউশন ভিন্ন হতে পারে।'}
-                </span>
+              <div className="flex items-baseline justify-between gap-4 py-2.5 border-b border-white/10">
+                <dt className="text-[11px] uppercase tracking-wider text-[#8FA3B8]">
+                  {language === 'en' ? 'Set via' : 'নির্ধারণ মাধ্যম'}
+                </dt>
+                <dd className="text-xs text-[#8FA3B8]">
+                  {language === 'en' ? sourceLabel.en : sourceLabel.bn}
+                </dd>
+              </div>
+            </dl>
+            {outsideMessage && (
+              <p className="text-xs text-[#FF5C5C] font-semibold mt-3">
+                {language === 'en'
+                  ? 'Please select a field within Bangladesh.'
+                  : 'অনুগ্রহ করে বাংলাদেশের ভেতরে জমি নির্বাচন করুন।'}
+              </p>
+            )}
+
+            {/* Presets */}
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-[#8FA3B8] mt-6 mb-2">
+              {language === 'en' ? 'Saved plots' : 'সংরক্ষিত প্লট'}
+            </p>
+            <div className="border-t border-white/10">
+              {PRESETS.map((preset) => (
+                <button
+                  key={preset.name}
+                  onClick={() => handlePreset(preset)}
+                  className="w-full flex items-center gap-2.5 py-2.5 border-b border-white/10 text-sm text-[#8FA3B8] hover:text-white transition cursor-pointer text-left"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#B8FF3D] shrink-0" />
+                  <span className="truncate">{preset.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* NASA context */}
+            <div className="mt-6">
+              <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#8FA3B8] mb-1">
+                <Satellite className="w-3.5 h-3.5 text-[#00E5FF]" />
+                <span>{language === 'en' ? 'NASA context here' : 'এখানে নাসা প্রেক্ষাপট'}</span>
+              </p>
+              <dl className="border-t border-white/10">
+                <KV label={language === 'en' ? 'Rainfall (30-day)' : 'বৃষ্টিপাত (৩০ দিন)'}>
+                  <span className="tnum font-semibold">
+                    {nasa.power.rainfallMm} mm · {nasa.power.rainfallAnomalyPct}%
+                  </span>
+                </KV>
+                <KV label={language === 'en' ? 'Soil moisture' : 'মাটির আর্দ্রতা'}>
+                  <span className="tnum font-semibold">{nasa.smap.surfaceMoisture} m³/m³</span>
+                </KV>
+                <KV label={language === 'en' ? 'Vegetation (NDVI)' : 'উদ্ভিদ (এনডিভিআই)'}>
+                  <span className="tnum font-semibold">{nasa.modis.ndvi} / 1.0</span>
+                </KV>
+              </dl>
+              <p className="text-[11px] text-[#8FA3B8]/80 mt-2 leading-relaxed">
+                {nasaSourceLabel(nasa, names.district, language)}
+                {language === 'en'
+                  ? ' · 5 km analysis context; satellite native resolutions vary.'
+                  : ' · ৫ কিমি বিশ্লেষণ প্রেক্ষাপট; প্রকৃত রেজোলিউশন ভিন্ন।'}
               </p>
             </div>
 
-            {/* CTA */}
-            <button
-              onClick={onContinue}
-              className="w-full py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-black text-sm shadow-lg shadow-black/40 transition cursor-pointer flex items-center justify-center gap-2"
-            >
+            <PrimaryButton onClick={onContinue} className="w-full py-3.5 text-base mt-6">
               <span>{language === 'en' ? 'Continue to Analyze My Field' : 'জমি বিশ্লেষণে এগিয়ে যান'}</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </PrimaryButton>
           </div>
 
-          {/* RIGHT: real interactive map */}
-          <div className="flex flex-col">
+          {/* RIGHT: map */}
+          <div className="min-w-0">
             <BangladeshMap
               latitude={location.latitude}
               longitude={location.longitude}
               onSelect={handleMapSelect}
               flyTarget={flyTarget}
             >
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm border border-[#B8FF3D]/30 text-[10px] font-mono text-[#B8FF3D] pointer-events-none">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-sm border border-[#B8FF3D]/30 text-[10px] font-mono text-[#B8FF3D] pointer-events-none">
                 NASA observation context · 5 km radius
               </div>
               <button
                 type="button"
-                onClick={() =>
-                  flyTo(BANGLADESH_CENTER_LNG, BANGLADESH_CENTER_LAT, BANGLADESH_OVERVIEW_ZOOM)
-                }
-                className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm text-[11px] text-white border border-white/10 hover:border-[#00E5FF]/50 hover:text-[#00E5FF] transition flex items-center gap-1.5 cursor-pointer"
+                onClick={() => flyTo(BANGLADESH_CENTER_LNG, BANGLADESH_CENTER_LAT, BANGLADESH_OVERVIEW_ZOOM)}
+                className="absolute bottom-3 left-3 px-3 py-1.5 rounded-md bg-black/70 backdrop-blur-sm text-[11px] text-white border border-white/10 hover:border-[#00E5FF]/50 hover:text-[#00E5FF] transition flex items-center gap-1.5 cursor-pointer"
               >
                 <Globe className="w-3.5 h-3.5" />
                 <span>{language === 'en' ? 'Bangladesh overview' : 'বাংলাদেশ মানচিত্র'}</span>
               </button>
-              <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-[11px] text-[#8FA3B8] border border-white/10 pointer-events-none hidden sm:flex items-center gap-1">
+              <div className="absolute bottom-3 right-3 px-3 py-1 rounded-md bg-black/70 backdrop-blur-sm text-[11px] text-[#8FA3B8] border border-white/10 pointer-events-none hidden sm:flex items-center gap-1">
                 <Crosshair className="w-3 h-3" />
-                <span>
-                  {language === 'en' ? 'Click map to move pin' : 'পিন সরাতে মানচিত্রে ক্লিক করুন'}
-                </span>
+                <span>{language === 'en' ? 'Click map to move pin' : 'পিন সরাতে মানচিত্রে ক্লিক করুন'}</span>
               </div>
             </BangladeshMap>
 
-            {/* Agro-ecological context */}
-            <div className="mt-4 p-4 rounded-2xl bg-[#050B14] border border-white/10 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-white">
-                <Check className="w-4 h-4 text-[#B8FF3D]" />
-                <span>{language === 'en' ? 'Agro-Ecological Profile' : 'কৃষি-বাস্তুসংস্থান বিবরণ'}</span>
-              </div>
-              <AgroProfile location={location} language={language} />
-            </div>
+            <dl className="mt-4 border-t border-white/10 sm:grid sm:grid-cols-2 sm:gap-x-8">
+              <KV label="Agro-Ecological Zone">
+                {language === 'en' ? profile.agroZoneEn : profile.agroZoneBn}
+              </KV>
+              <KV label={language === 'en' ? 'Dominant soil' : 'প্রধান মাটি'}>
+                {language === 'en' ? profile.soilTypeEn : profile.soilTypeBn}
+              </KV>
+            </dl>
+            <Rule className="mt-1" />
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const BANGLADESH_CENTER_LAT = 23.685;
-const BANGLADESH_CENTER_LNG = 90.3563;
-const BANGLADESH_OVERVIEW_ZOOM = 5.5;
-
-const AgroProfile: React.FC<{ location: SelectedLocation; language: Language }> = ({
-  location,
-  language,
-}) => {
-  const profile = getDistrictProfile(location.district);
-  return (
-    <div className="grid grid-cols-2 gap-3 text-xs pt-1">
-      <div>
-        <span className="text-[10px] text-[#8FA3B8] block">Agro-Ecological Zone (AEZ)</span>
-        <span className="font-semibold text-white">
-          {language === 'en' ? profile.agroZoneEn : profile.agroZoneBn}
-        </span>
-      </div>
-      <div>
-        <span className="text-[10px] text-[#8FA3B8] block">Dominant Soil Type</span>
-        <span className="font-semibold text-white">
-          {language === 'en' ? profile.soilTypeEn : profile.soilTypeBn}
-        </span>
       </div>
     </div>
   );

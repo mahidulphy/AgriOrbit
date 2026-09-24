@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowRight, MapPin, Sliders, LineChart, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Language } from '../../types';
+import { Eyebrow, PrimaryButton } from '../ui';
 
 interface WelcomeOnboardingProps {
   userName: string;
@@ -16,84 +17,55 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
   const steps = [
     {
       num: '01',
-      titleEn: 'Farm Location',
-      titleBn: 'খামারের অবস্থান',
-      descEn: 'District, Upazila & Map Pin',
-      descBn: 'জেলা, উপজেলা ও মানচিত্র পিন',
-      icon: <MapPin className="w-5 h-5 text-[#00E5FF]" />,
+      titleEn: 'Locate your farm',
+      titleBn: 'খামার চিহ্নিত করুন',
+      descEn: 'District, upazila, and an exact pin on the real map.',
+      descBn: 'জেলা, উপজেলা এবং আসল মানচিত্রে সঠিক পিন।',
     },
     {
       num: '02',
-      titleEn: 'Priority',
-      titleBn: 'লক্ষ্য',
-      descEn: 'Set Water, Soil, or Cost Goal',
-      descBn: 'পানি, মাটি বা ব্যয়ের অগ্রাধিকার',
-      icon: <Sliders className="w-5 h-5 text-[#B8FF3D]" />,
+      titleEn: 'Set your priority',
+      titleBn: 'অগ্রাধিকার দিন',
+      descEn: 'Water, soil, profit, yield, cost, or climate risk.',
+      descBn: 'পানি, মাটি, লাভ, ফলন, খরচ বা জলবায়ু ঝুঁকি।',
     },
     {
       num: '03',
-      titleEn: 'Analysis',
-      titleBn: 'বিশ্লেষণ',
-      descEn: 'Run NASA Observation Engine',
-      descBn: 'নাসার উপগ্রহ বিশ্লেষণ চালু করুন',
-      icon: <LineChart className="w-5 h-5 text-[#00E5FF]" />,
+      titleEn: 'Get your rotation',
+      titleBn: 'পরিক্রমা নিন',
+      descEn: 'Three seasons of crops, every rule explained.',
+      descBn: 'তিন মৌসুমের ফসল, প্রতিটি নিয়ম ব্যাখ্যাসহ।',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-[#B8FF3D] selection:text-[#050B14] relative">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#00E5FF]/10 blur-[120px] pointer-events-none rounded-full" />
-
-      <div className="w-full max-w-2xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative z-10 text-center">
-        {/* Welcome Header */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#050B14] border border-[#B8FF3D]/30 text-[#8FA3B8] text-xs font-semibold mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-[#B8FF3D]" />
-          <span>{language === 'en' ? `Welcome, ${userName}` : `স্বাগতম, ${userName}`}</span>
-        </div>
-
-        <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">
-          {language === 'en' ? 'Welcome to AgriOrbit' : 'এগ্রিঅরবিটে আপনাকে স্বাগতম'}
+    <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center px-4 sm:px-6 py-10 selection:bg-[#B8FF3D] selection:text-[#050B14]">
+      <div className="w-full max-w-2xl mt-6 sm:mt-14">
+        <Eyebrow tone="lime">{language === 'en' ? `Welcome, ${userName}` : `স্বাগতম, ${userName}`}</Eyebrow>
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-3">
+          {language === 'en' ? 'Three steps to your crop plan.' : 'ফসল পরিকল্পনার তিনটি ধাপ।'}
         </h1>
 
-        <p className="text-base sm:text-lg text-[#8FA3B8] max-w-lg mx-auto mb-10 leading-relaxed">
-          {language === 'en'
-            ? "Let's understand your field before creating a crop plan."
-            : 'ফসল পরিক্রমা তৈরির পূর্বে আসুন আপনার জমির অবস্থা বিশ্লেষণ করি।'}
-        </p>
-
-        {/* 4-Step Progress Indicator */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-10 text-left">
+        <ol className="mt-10 border-t border-white/10">
           {steps.map((step) => (
-            <div
-              key={step.num}
-              className="p-4 rounded-2xl bg-[#050B14] border border-white/10 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-xs font-black text-[#00E5FF] bg-white/5 px-2 py-0.5 rounded border border-white/10">
-                  {step.num}
-                </span>
-                {step.icon}
-              </div>
+            <li key={step.num} className="flex gap-5 py-5 border-b border-white/10">
+              <span className="tnum text-sm font-semibold text-[#B8FF3D] pt-0.5">{step.num}</span>
               <div>
-                <h4 className="font-bold text-white text-sm">
+                <h2 className="font-bold text-white">
                   {language === 'en' ? step.titleEn : step.titleBn}
-                </h4>
-                <p className="text-[11px] text-[#8FA3B8] mt-0.5 leading-tight">
+                </h2>
+                <p className="text-sm text-[#8FA3B8] mt-0.5">
                   {language === 'en' ? step.descEn : step.descBn}
                 </p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
-        {/* Action Button */}
-        <button
-          onClick={onGetStarted}
-          className="w-full sm:w-auto px-10 py-4 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-extrabold text-base shadow-xl shadow-black/50 transition transform hover:-translate-y-0.5 cursor-pointer inline-flex items-center justify-center gap-2"
-        >
+        <PrimaryButton onClick={onGetStarted} className="w-full sm:w-auto px-10 py-3.5 text-base mt-8">
           <span>{language === 'en' ? 'Get Started' : 'শুরু করুন'}</span>
-          <ArrowRight className="w-5 h-5" />
-        </button>
+          <ArrowRight className="w-4 h-4" />
+        </PrimaryButton>
       </div>
     </div>
   );

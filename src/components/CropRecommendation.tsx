@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { HelpCircle, Check, Droplets, Calendar, Sparkles, Filter } from 'lucide-react';
+import { ArrowRight, Calendar, Droplets } from 'lucide-react';
 import { CropData, FarmerPriorityId, Language } from '../types';
 import { getRankedCrops, SeasonFilter } from '../lib/cropSuitability';
+import { Eyebrow, Meter, TierBadge } from './ui';
 
 interface CropRecommendationProps {
   selectedPriority: FarmerPriorityId;
@@ -9,6 +10,8 @@ interface CropRecommendationProps {
   language: Language;
   onExplainCrop: (crop: CropData) => void;
 }
+
+const SEASONS: SeasonFilter[] = ['All', 'Rabi', 'Kharif-1', 'Kharif-2'];
 
 export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   selectedPriority,
@@ -21,153 +24,82 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   const displayedCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason);
 
   return (
-    <section id="crops-section" className="py-10 px-4 sm:px-6">
-      <div className="max-w-5xl mx-auto">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B8FF3D] mb-1">
-              <Sparkles className="w-4 h-4" />
-              <span>Step 4 • {language === 'en' ? 'Crop Suitability Evaluation' : 'ফসল উপযোগিতা মূল্যায়ন'}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              {language === 'en' ? 'Rule-Based Crop Compatibility' : '১০টি প্রধান ফসলের উপযোগিতা তালিকা'}
-            </h2>
-          </div>
-
-          {/* Season Filter Chips */}
-          <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/10 text-xs">
-            <span className="text-[#8FA3B8] px-2 flex items-center gap-1">
-              <Filter className="w-3 h-3" />
-              <span className="hidden sm:inline">{language === 'en' ? 'Season:' : 'মৌসুম:'}</span>
-            </span>
-            {(['All', 'Rabi', 'Kharif-1', 'Kharif-2'] as const).map((s) => (
-              <button
-                key={s}
-                onClick={() => setFilterSeason(s)}
-                className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
-                  filterSeason === s
-                    ? 'bg-[#B8FF3D] text-[#050B14] shadow'
-                    : 'text-[#8FA3B8] hover:text-white'
-                }`}
-              >
-                {s === 'All' && (language === 'en' ? 'All (10)' : 'সকল')}
-                {s === 'Rabi' && (language === 'en' ? 'Rabi (রবি)' : 'রবি')}
-                {s === 'Kharif-1' && (language === 'en' ? 'Kharif-1 (খ-১)' : 'খরিফ-১')}
-                {s === 'Kharif-2' && (language === 'en' ? 'Kharif-2 (খ-২)' : 'খরিফ-২')}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Crops Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {displayedCrops.map((crop) => {
-            const isHigh = crop.suitabilityTier === 'high';
-            const isMod = crop.suitabilityTier === 'moderate';
-
-            return (
-              <div
-                key={crop.id}
-                className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-                  isHigh
-                    ? 'bg-[#0B1626] border-[#B8FF3D]/50 shadow-lg shadow-black/40'
-                    : isMod
-                    ? 'bg-[#0B1626] border-[#00E5FF]/30'
-                    : 'bg-[#050B14] border-white/10 opacity-80'
-                }`}
-              >
-                <div>
-                  {/* Top Bar: Name & Suitability Badge */}
-                  <div className="flex items-start justify-between gap-3 mb-2.5">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-black text-white">
-                          {language === 'en' ? crop.nameEn : crop.nameBn}
-                        </h3>
-                        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-white/5 text-[#8FA3B8] border border-white/10">
-                          {language === 'en' ? crop.seasonEn : crop.seasonBn}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-[#8FA3B8] italic font-serif">
-                        {crop.scientificName}
-                      </p>
-                    </div>
-
-                    <div className="text-right shrink-0">
-                      <div className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-black shadow-sm ${
-                        isHigh
-                          ? 'bg-[#B8FF3D] text-[#050B14]'
-                          : isMod
-                          ? 'bg-[#00E5FF] text-[#050B14]'
-                          : 'bg-white/10 text-[#8FA3B8]'
-                      }`}>
-                        {isHigh && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        <span>{crop.suitabilityScore}% Match</span>
-                      </div>
-                      <span className="block text-[10px] text-[#8FA3B8] mt-0.5 font-medium">
-                        {isHigh
-                          ? (language === 'en' ? 'Highly Suitable' : 'উচ্চ উপযোগী')
-                          : isMod
-                          ? (language === 'en' ? 'Moderately Suitable' : 'মাঝারি উপযোগী')
-                          : (language === 'en' ? 'Marginal / High Input' : 'কম উপযোগী / বাড়তি খরচ')}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Why it is suitable (Explicit User Requirement) */}
-                  <div className="p-3 rounded-xl bg-[#050B14] border border-white/10 mb-3 text-xs leading-relaxed text-[#8FA3B8]">
-                    <strong className="text-white block mb-0.5">
-                      {language === 'en' ? 'Why Suitable:' : 'উপযোগিতার কারণ:'}
-                    </strong>
-                    {language === 'en' ? crop.shortWhyEn : crop.shortWhyBn}
-                  </div>
-
-                  {/* Compact Metrics Pill Row */}
-                  <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                    <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/10 text-[#8FA3B8]">
-                      <Droplets className="w-3.5 h-3.5 text-[#00E5FF] shrink-0" />
-                      <div>
-                        <span className="text-[10px] text-[#8FA3B8] block leading-tight">
-                          {language === 'en' ? 'Water Requirement' : 'পানির চাহিদা'}
-                        </span>
-                        <span className="font-semibold text-white">
-                          {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/10 text-[#8FA3B8]">
-                      <Calendar className="w-3.5 h-3.5 text-[#B8FF3D] shrink-0" />
-                      <div>
-                        <span className="text-[10px] text-[#8FA3B8] block leading-tight">
-                          {language === 'en' ? 'Crop Duration' : 'জীবনকাল'}
-                        </span>
-                        <span className="font-semibold text-white">
-                          {crop.durationDays} {language === 'en' ? 'Days' : 'দিন'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* "Explain Why" Button (Transparent Rule Breakdown Trigger) */}
-                <button
-                  onClick={() => onExplainCrop(crop)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-[#00E5FF]/30 text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                >
-                  <HelpCircle className="w-3.5 h-3.5 text-[#00E5FF]" />
-                  <span>
-                    {language === 'en'
-                      ? `Explain Why: ${crop.nameEn.split(' ')[0]} →`
-                      : `কেন এই ফসল? যৌক্তিক বিশ্লেষণ →`}
-                  </span>
-                </button>
-              </div>
-            );
-          })}
+    <section id="crops-section">
+      <Eyebrow tone="lime">
+        Step 4 · {language === 'en' ? 'Crop suitability' : 'ফসল উপযোগিতা'}
+      </Eyebrow>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mt-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+          {language === 'en' ? 'What suits this field, ranked' : 'এই জমিতে কী মানানসই, ক্রমানুসারে'}
+        </h2>
+        <div className="flex gap-4 text-sm font-medium border-b border-white/10 self-start" role="tablist">
+          {SEASONS.map((s) => (
+            <button
+              key={s}
+              role="tab"
+              aria-selected={filterSeason === s}
+              onClick={() => setFilterSeason(s)}
+              className={`pb-2 transition cursor-pointer whitespace-nowrap border-b-2 -mb-px ${
+                filterSeason === s
+                  ? 'border-[#B8FF3D] text-white font-semibold'
+                  : 'border-transparent text-[#8FA3B8] hover:text-white'
+              }`}
+            >
+              {s === 'All' ? (language === 'en' ? 'All (10)' : 'সকল') : s === 'Rabi' ? (language === 'en' ? 'Rabi' : 'রবি') : s}
+            </button>
+          ))}
         </div>
       </div>
+
+      <ol className="mt-6 border-t border-white/10">
+        {displayedCrops.map((crop, rank) => (
+          <li key={crop.id} className="grid sm:grid-cols-[auto_1fr_auto] gap-x-6 gap-y-3 py-5 border-b border-white/10">
+            <span className="tnum text-sm font-semibold text-[#8FA3B8] pt-1 hidden sm:block">
+              {String(rank + 1).padStart(2, '0')}
+            </span>
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <h3 className="font-bold text-white">
+                  {language === 'en' ? crop.nameEn : crop.nameBn}
+                </h3>
+                <TierBadge tier={crop.suitabilityTier} language={language} />
+                <span className="text-[11px] uppercase tracking-wider text-[#8FA3B8]">
+                  {language === 'en' ? crop.seasonEn : crop.seasonBn}
+                </span>
+              </div>
+              <p className="text-sm text-[#8FA3B8] mt-1 leading-relaxed max-w-2xl">
+                {language === 'en' ? crop.shortWhyEn : crop.shortWhyBn}
+              </p>
+              <p className="tnum flex flex-wrap gap-x-4 gap-y-0.5 mt-2 text-xs text-[#8FA3B8]">
+                <span className="inline-flex items-center gap-1">
+                  <Droplets className="w-3 h-3 text-[#00E5FF]" />
+                  {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn} ·{' '}
+                  {language === 'en' ? crop.waterDetailEn : crop.waterDetailBn}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Calendar className="w-3 h-3 text-[#8FA3B8]" />
+                  {crop.durationDays} {language === 'en' ? 'days' : 'দিন'}
+                </span>
+                <span className="italic">{crop.scientificName}</span>
+              </p>
+            </div>
+            <div className="sm:w-36 sm:text-right shrink-0">
+              <p className="tnum text-2xl font-bold tracking-tight">
+                {crop.suitabilityScore}
+                <span className="text-xs font-medium text-[#8FA3B8]">%</span>
+              </p>
+              <Meter value={crop.suitabilityScore} tone={crop.suitabilityTier === 'moderate' ? 'cyan' : 'lime'} className="mt-1.5 sm:ml-auto sm:max-w-28" />
+              <button
+                onClick={() => onExplainCrop(crop)}
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#00E5FF] hover:text-white transition cursor-pointer"
+              >
+                {language === 'en' ? 'Explain why' : 'কেন দেখুন'}
+                <ArrowRight className="w-3 h-3" />
+              </button>
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 };

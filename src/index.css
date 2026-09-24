@@ -21,6 +21,17 @@ body {
     sans-serif;
 }
 
+/* Consistent visible keyboard focus across the product. */
+:where(a, button, input, select):focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+/* Tabular figures for data readouts. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
 /* Real Bangladesh map canvas: explicit responsive height so the map
    never depends on an undefined parent height. */
 .agriorbit-map-container {

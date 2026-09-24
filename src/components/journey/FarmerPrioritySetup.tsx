@@ -1,6 +1,17 @@
 import React from 'react';
-import { ArrowRight, ArrowLeft, Check, Sliders } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Banknote,
+  Check,
+  Coins,
+  Droplet,
+  ShieldAlert,
+  Sprout,
+  Wheat,
+} from 'lucide-react';
 import { FarmerPriorityId, Language } from '../../types';
+import { Eyebrow, PrimaryButton, Rule } from '../ui';
 
 interface FarmerPrioritySetupProps {
   selectedPriority: FarmerPriorityId;
@@ -33,68 +44,68 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
   }[] = [
     {
       id: 'save_water',
-      icon: <span className="text-2xl">💧</span>,
+      icon: <Droplet className="w-4 h-4 text-[#00E5FF]" />,
       titleEn: 'Save Water',
       titleBn: 'পানি সাশ্রয়',
-      descEn: 'Prioritizes drought-tolerant legumes and pulses requiring 1-2 irrigations instead of continuous groundwater pumping.',
-      descBn: 'গভীর সেচের পরিবর্তে কম পানির ডাল ও তেলবীজকে প্রাধান্য দেয়, ফলে ভূগর্ভস্থ পানির অপচয় রোধ হয়।',
-      ruleImpactEn: 'Penalizes water-heavy winter Boro rice; boosts Lentil & Mustard match scores.',
-      ruleImpactBn: 'অতিরিক্ত সেচের বোরো ধান কমিয়ে মসুর ও সরিষার গ্রহণযোগ্যতা বাড়ায়।',
+      descEn: 'Drought-tolerant legumes and pulses needing 1–2 irrigations instead of continuous pumping.',
+      descBn: 'ক্রমাগত সেচের বদলে ১–২ সেচের ডাল ও তেলবীজকে প্রাধান্য দেয়।',
+      ruleImpactEn: 'Penalizes water-heavy Boro rice; boosts Lentil and Mustard scores.',
+      ruleImpactBn: 'বোরো ধানকে পিছিয়ে দেয়; মসুর ও সরিষাকে এগিয়ে দেয়।',
     },
     {
       id: 'improve_soil',
-      icon: <span className="text-2xl">🌱</span>,
+      icon: <Sprout className="w-4 h-4 text-[#B8FF3D]" />,
       titleEn: 'Improve Soil Health',
       titleBn: 'মাটির উর্বরতা বৃদ্ধি',
-      descEn: 'Selects nitrogen-fixing pulses and organic biomass crops to naturally regenerate degraded plow layers.',
-      descBn: 'মাটিতে প্রাকৃতিক নাইট্রোজেন ও জৈব পদার্থ বৃদ্ধিকারী ফসল নির্বাচন করে জমির উর্বরতা বাড়ায়।',
-      ruleImpactEn: 'Boosts Mungbean & Jute for biological Rhizobium nitrogen fixation.',
-      ruleImpactBn: 'রাইজোবিয়াম নাইট্রোজেন সংবন্ধনকারী মুগডাল ও পাটকে অগ্রাধিকার দেয়।',
+      descEn: 'Nitrogen-fixing pulses and biomass crops that regenerate degraded layers.',
+      descBn: 'নাইট্রোজেনবর্ধক ডাল ও জৈব ফসল মাটির উর্বরতা ফেরায়।',
+      ruleImpactEn: 'Boosts Mungbean and Jute for biological nitrogen fixation.',
+      ruleImpactBn: 'মুগ ও পাটকে প্রাধান্য দেয়।',
     },
     {
       id: 'maximize_profit',
-      icon: <span className="text-2xl">💰</span>,
+      icon: <Banknote className="w-4 h-4 text-[#B8FF3D]" />,
       titleEn: 'Maximize Profit',
       titleBn: 'সর্বোচ্চ লাভ',
-      descEn: 'Profit-oriented: favors crops combining strong local suitability with modest input cost. Indicative only — not a market price forecast.',
-      descBn: 'লাভ-ভিত্তিক: ভালো উপযোগিতা ও সাশ্রয়ী খরচের ফসলকে প্রাধান্য দেয়। এটি নির্দেশক মাত্র, বাজারদরের পূর্বাভাস নয়।',
-      ruleImpactEn: 'Boosts proven low-cost performers (Mustard, Lentil); penalizes marginal high-input options.',
-      ruleImpactBn: 'প্রমাণিত সাশ্রয়ী ফসলকে এগিয়ে রাখে; ব্যয়বহুল প্রান্তিক ফসলকে পিছিয়ে দেয়।',
+      descEn: 'Profit-oriented: strong local suitability with modest input cost. Indicative, not a price forecast.',
+      descBn: 'লাভ-ভিত্তিক: ভালো উপযোগিতা ও সাশ্রয়ী খরচ। নির্দেশক মাত্র।',
+      ruleImpactEn: 'Boosts proven low-cost performers; penalizes marginal high-input options.',
+      ruleImpactBn: 'প্রমাণিত সাশ্রয়ী ফসল এগিয়ে; ব্যয়বহুল প্রান্তিক ফসল পিছিয়ে।',
     },
     {
       id: 'maximize_yield',
-      icon: <span className="text-2xl">🌾</span>,
+      icon: <Wheat className="w-4 h-4 text-[#B8FF3D]" />,
       titleEn: 'Maximize Yield',
       titleBn: 'সর্বোচ্চ ফলন',
-      descEn: 'Yield-oriented: favors proven high performers matched to your field climate and season. Suitability, not guaranteed harvest.',
-      descBn: 'ফলন-ভিত্তিক: আপনার জমির উপযোগী প্রমাণিত উচ্চফলনশীল ফসলকে প্রাধান্য দেয়। সম্ভাবনা নির্দেশ করে, নিশ্চিত ফলন নয়।',
-      ruleImpactEn: 'Boosts 85%+ suitability crops; penalizes marginal crops needing ideal conditions.',
-      ruleImpactBn: '৮৫%+ উপযোগী ফসলকে এগিয়ে রাখে; আদর্শ পরিবেশ নির্ভর প্রান্তিক ফসলকে পিছিয়ে দেয়।',
+      descEn: 'Yield-oriented: proven high performers for your field climate. Suitability, not guaranteed harvest.',
+      descBn: 'ফলন-ভিত্তিক: জমির উপযোগী প্রমাণিত ফসল। সম্ভাবনা, নিশ্চয়তা নয়।',
+      ruleImpactEn: 'Boosts 85%+ suitability crops; penalizes crops needing ideal conditions.',
+      ruleImpactBn: '৮৫%+ উপযোগী ফসল এগিয়ে; আদর্শ-নির্ভর ফসল পিছিয়ে।',
     },
     {
       id: 'lower_cost',
-      icon: <span className="text-2xl">৳</span>,
+      icon: <Coins className="w-4 h-4 text-[#8FA3B8]" />,
       titleEn: 'Lower Cost',
       titleBn: 'কম খরচ',
-      descEn: 'Minimizes costly diesel pumping and chemical fertilizers; balances high margin cash crops with low input.',
-      descBn: 'সেচের জন্য ডিজেল ও রাসায়নিক সারের বাড়তি খরচ কমিয়ে স্বল্প পুঁজিতে বেশি লাভের সুযোগ তৈরি করে।',
-      ruleImpactEn: 'Favors low-input Mustard & Lentils over high-capex Potato and Boro.',
-      ruleImpactBn: 'ব্যয়বহুল আলুর চেয়ে সাশ্রয়ী সরিষা ও ডালকে এগিয়ে রাখে।',
+      descEn: 'Minimizes diesel pumping and fertilizer bills; balances cash crops with low input.',
+      descBn: 'সেচ-সারের খরচ কমিয়ে স্বল্প পুঁজিতে লাভের সুযোগ।',
+      ruleImpactEn: 'Favors low-input Mustard and Lentils over Potato and Boro.',
+      ruleImpactBn: 'আলু-বোরোর চেয়ে সরিষা-ডাল এগিয়ে।',
     },
     {
       id: 'reduce_risk',
-      icon: <span className="text-2xl">⚠</span>,
+      icon: <ShieldAlert className="w-4 h-4 text-[#FF5C5C]" />,
       titleEn: 'Reduce Climate Risk',
       titleBn: 'জলবায়ু ঝুঁকি হ্রাস',
-      descEn: 'Avoids vulnerable growth windows; picks hardy varieties resilient against sudden dry spells or early flooding.',
-      descBn: 'আকস্মিক খরা বা আগাম বন্যার মতো চরম আবহাওয়ার ক্ষতি এড়াতে নিরাপদ ও সহনশীল ফসল নিশ্চিত করে।',
-      ruleImpactEn: 'Selects short-duration crops (<90 days) to escape pre-monsoon flash floods.',
-      ruleImpactBn: 'আগাম কালবৈশাখী বা বন্যার হাত থেকে বাঁচতে স্বল্পমেয়াদী ফসল বাছাই করে।',
+      descEn: 'Hardy varieties resilient against dry spells or early flooding.',
+      descBn: 'খরা বা আগাম বন্যা সহনশীল নিরাপদ ফসল।',
+      ruleImpactEn: 'Selects short-duration crops (under 90 days).',
+      ruleImpactBn: 'স্বল্পমেয়াদী (৯০ দিনের কম) ফসল বাছাই করে।',
     },
   ];
 
   const handlePriorityClick = (id: FarmerPriorityId) => {
-    if (selectedPriority === id) return; // already primary
+    if (selectedPriority === id) return;
     if (secondaryPriority === id) {
       onSelectSecondaryPriority(null);
     } else {
@@ -105,123 +116,118 @@ export const FarmerPrioritySetup: React.FC<FarmerPrioritySetupProps> = ({
   const handleSecondaryToggle = (id: FarmerPriorityId, e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedPriority === id) return;
-    if (secondaryPriority === id) {
-      onSelectSecondaryPriority(null);
-    } else {
-      onSelectSecondaryPriority(id);
-    }
+    onSelectSecondaryPriority(secondaryPriority === id ? null : id);
   };
 
-  return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-[#B8FF3D] selection:text-[#050B14] relative">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#B8FF3D]/5 blur-[120px] pointer-events-none rounded-full" />
+  const activeRule = priorities.find((p) => p.id === selectedPriority);
 
-      {/* Main Container */}
-      <div className="w-full max-w-4xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10">
-        {/* Progress Header */}
-        <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+  return (
+    <div className="min-h-screen bg-[#050B14] text-white px-4 sm:px-6 py-8 selection:bg-[#B8FF3D] selection:text-[#050B14]">
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-center justify-between gap-4">
           <button
             onClick={onBack}
-            className="text-xs text-[#8FA3B8] hover:text-white flex items-center gap-1 cursor-pointer transition"
+            className="text-xs text-[#8FA3B8] hover:text-white flex items-center gap-1.5 cursor-pointer transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{language === 'en' ? 'Back' : 'পূর্ববর্তী'}</span>
           </button>
-
-          <div className="flex items-center gap-1.5 font-mono text-xs text-[#B8FF3D]">
-            <span className="font-bold text-[#050B14] bg-[#B8FF3D] px-2 py-0.5 rounded text-[11px]">02</span>
-            <span className="text-[#8FA3B8]">/ 03</span>
-            <span className="font-sans font-semibold text-[#8FA3B8] ml-1">
-              {language === 'en' ? 'Farmer Priority' : 'কৃষকের অগ্রাধিকার'}
-            </span>
-          </div>
-        </div>
-
-        {/* Heading */}
-        <div className="mb-6">
-          <div className="w-10 h-10 rounded-xl bg-[#B8FF3D]/10 border border-[#B8FF3D]/30 flex items-center justify-center mb-2 shadow-md">
-            <Sliders className="w-5 h-5 text-[#B8FF3D]" />
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">
-            {language === 'en' ? 'What matters most to you?' : 'আপনার প্রধান লক্ষ্য বা অগ্রাধিকার কী?'}
-          </h2>
-          <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1">
-            {language === 'en'
-              ? 'Select your primary goal for this season. Your choice directly programs the deterministic suitability engine.'
-              : 'এই মৌসুমের প্রধান লক্ষ্য নির্বাচন করুন। এটি সরাসরি শস্য নির্বাচন নিয়মে প্রভাব ফেলবে।'}
+          <p className="tnum text-xs text-[#8FA3B8]">
+            <span className="text-[#B8FF3D] font-semibold">02</span> / 03 ·{' '}
+            {language === 'en' ? 'Farmer Priority' : 'কৃষকের অগ্রাধিকার'}
           </p>
         </div>
 
-        {/* 6 Visual Choice Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
+        <div className="mt-6 mb-2 max-w-2xl">
+          <Eyebrow tone="lime">{language === 'en' ? 'Step 02 — Priority' : 'ধাপ ০২ — অগ্রাধিকার'}</Eyebrow>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-2">
+            {language === 'en' ? 'What matters most this season?' : 'এই মৌসুমে প্রধান লক্ষ্য কী?'}
+          </h1>
+          <p className="text-sm sm:text-base text-[#8FA3B8] mt-2 leading-relaxed">
+            {language === 'en'
+              ? 'Your primary goal programs the recommendation engine. A secondary goal can refine it at half weight.'
+              : 'প্রধান লক্ষ্য সুপারিশ-ইঞ্জিন চালায়। সহায়ক লক্ষ্য অর্ধেক মাত্রায় পরিমার্জন করে।'}
+          </p>
+        </div>
+
+        <div role="radiogroup" aria-label={language === 'en' ? 'Farming priority' : 'কৃষি অগ্রাধিকার'}>
           {priorities.map((item) => {
             const isPrimary = selectedPriority === item.id;
             const isSecondary = secondaryPriority === item.id;
-
             return (
               <div
                 key={item.id}
+                role="radio"
+                aria-checked={isPrimary}
+                tabIndex={0}
                 onClick={() => handlePriorityClick(item.id)}
-                className={`p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
-                  isPrimary
-                    ? 'bg-[#B8FF3D]/10 border-[#B8FF3D] shadow-lg shadow-black/40 ring-1 ring-[#B8FF3D]/50 text-white'
-                    : isSecondary
-                    ? 'bg-[#0B1626] border-[#00E5FF]/60 text-white ring-1 ring-[#00E5FF]/40'
-                    : 'bg-[#050B14] border-white/10 hover:bg-white/5 text-white hover:border-white/20'
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePriorityClick(item.id);
+                  }
+                }}
+                className={`flex gap-4 py-4 border-b border-white/10 cursor-pointer transition first:border-t first:mt-6 ${
+                  isPrimary ? 'border-l-2 border-l-[#B8FF3D] pl-4' : 'pl-[18px]'
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2.5">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                <span
+                  className={`mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${
+                    isPrimary ? 'border-[#B8FF3D] bg-[#B8FF3D]' : 'border-[#8FA3B8]/50'
+                  }`}
+                >
+                  {isPrimary && <Check className="h-2.5 w-2.5 text-[#050B14] stroke-[4]" />}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <h2 className="flex items-center gap-2 font-bold text-white">
                       {item.icon}
-                    </div>
-
-                    <div className="flex items-center gap-1.5">
-                      {isPrimary ? (
-                        <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#B8FF3D] text-[#050B14] font-extrabold text-[11px] shadow-sm">
-                          <Check className="w-3 h-3 stroke-[3]" />
-                          <span>{language === 'en' ? 'Primary' : 'প্রধান'}</span>
-                        </span>
-                      ) : isSecondary ? (
-                        <span className="px-2 py-0.5 rounded-full bg-[#00E5FF] text-[#050B14] font-bold text-[10px]">
-                          {language === 'en' ? 'Secondary' : 'সহায়ক'}
-                        </span>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={(e) => handleSecondaryToggle(item.id, e)}
-                          className="text-[10px] px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[#8FA3B8] hover:text-white border border-white/10"
-                        >
-                          {language === 'en' ? '+ Add Secondary' : '+ সহায়ক করুন'}
-                        </button>
-                      )}
-                    </div>
+                      <span>{language === 'en' ? item.titleEn : item.titleBn}</span>
+                    </h2>
+                    {isPrimary ? (
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8FF3D] shrink-0">
+                        {language === 'en' ? 'Primary' : 'প্রধান'}
+                      </span>
+                    ) : isSecondary ? (
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#00E5FF] shrink-0">
+                        {language === 'en' ? 'Secondary' : 'সহায়ক'}
+                      </span>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={(e) => handleSecondaryToggle(item.id, e)}
+                        className="text-[11px] text-[#8FA3B8] hover:text-white underline underline-offset-2 transition shrink-0 cursor-pointer"
+                      >
+                        {language === 'en' ? '+ Secondary' : '+ সহায়ক'}
+                      </button>
+                    )}
                   </div>
-
-                  <h3 className="text-base font-bold text-white mb-1">
-                    {language === 'en' ? item.titleEn : item.titleBn}
-                  </h3>
-                  <p className="text-xs text-[#8FA3B8] leading-relaxed mb-3">
+                  <p className="text-sm text-[#8FA3B8] mt-1 leading-relaxed">
                     {language === 'en' ? item.descEn : item.descBn}
                   </p>
-                </div>
-
-                <div className="pt-2 border-t border-white/10 text-[10px] font-mono text-[#8FA3B8]">
-                  ⚡ {language === 'en' ? item.ruleImpactEn : item.ruleImpactBn}
+                  <p className="text-[11px] text-[#8FA3B8]/70 mt-1 tnum">
+                    ⚡ {language === 'en' ? item.ruleImpactEn : item.ruleImpactBn}
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Continue Button */}
-        <button
-          onClick={onContinue}
-          className="w-full py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-black text-sm shadow-lg shadow-black/40 transition cursor-pointer flex items-center justify-center gap-2"
-        >
+        {activeRule && (
+          <p className="text-xs text-[#8FA3B8] mt-5 leading-relaxed border-l-2 border-[#00E5FF]/40 pl-3">
+            <strong className="text-white">
+              {language === 'en' ? 'Engine now favors: ' : 'ইঞ্জিন এখন প্রাধান্য দেবে: '}
+            </strong>
+            {language === 'en' ? activeRule.ruleImpactEn : activeRule.ruleImpactBn}
+          </p>
+        )}
+
+        <PrimaryButton onClick={onContinue} className="w-full py-3.5 text-base mt-6">
           <span>{language === 'en' ? 'Continue' : 'পরবর্তী ধাপে যান'}</span>
           <ArrowRight className="w-4 h-4" />
-        </button>
+        </PrimaryButton>
+        <Rule className="mt-8" />
       </div>
     </div>
   );
