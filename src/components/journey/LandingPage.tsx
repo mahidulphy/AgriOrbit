@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import {
   Satellite,
-  Orbit,
   ArrowRight,
   Sprout,
   LogIn,
   Globe,
 } from 'lucide-react';
 import { Language } from '../../types';
+import { getNasaContext } from '../../lib/nasaContext';
 import { BrandLogo } from '../common/BrandLogo';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
-import { AppFooter, AGRIORBIT_TAGLINE } from '../common/AppFooter';
+import { AppFooter } from '../common/AppFooter';
+import { HeroMap } from '../HeroMap';
 
 interface LandingPageProps {
   language: Language;
@@ -28,6 +30,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onOpenHowItWorks,
 }) => {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
+  const demo = getNasaContext('rangpur');
+
+  const heroList: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1 } },
+  };
+  const heroItem: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+  };
 
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
@@ -86,117 +99,171 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </header>
 
-      {/* 2. Hero Section: Product Identity & Core Message */}
-      <section className="relative pt-16 pb-20 px-4 sm:px-6 overflow-hidden">
-        {/* Faint orbital glow */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#00E5FF]/10 blur-[120px] pointer-events-none rounded-full" />
+      {/* 2. Hero: editorial two-column */}
+      <section className="px-4 sm:px-6 pt-14 pb-12 lg:pt-20 lg:pb-16">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          {/* LEFT: message */}
+          <motion.div
+            variants={heroList}
+            initial={reduceMotion ? false : 'hidden'}
+            animate="show"
+          >
+            <motion.div variants={heroItem}>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B1626] border border-[#00E5FF]/30 text-[#8FA3B8] text-xs sm:text-sm font-semibold">
+                <span aria-hidden="true">🌐</span>
+                <span>
+                  {language === 'en'
+                    ? 'NASA observes · AgriOrbit explains · Farmers decide'
+                    : 'নাসা পর্যবেক্ষণ করে · এগ্রিঅরবিট ব্যাখ্যা করে · কৃষক সিদ্ধান্ত নেন'}
+                </span>
+              </div>
+            </motion.div>
 
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          {/* Mission Capsule */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B1626] border border-[#00E5FF]/30 text-[#8FA3B8] text-xs sm:text-sm font-semibold mb-6">
-            <Orbit className="w-4 h-4 text-[#00E5FF]" />
-            <span>
-              {language === 'en'
-                ? AGRIORBIT_TAGLINE
-                : 'নাসা পর্যবেক্ষণ করে → এগ্রিঅরবিট ব্যাখ্যা করে → সিদ্ধান্ত নেন কৃষক'}
-            </span>
-          </div>
-
-          {/* Hero Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-6">
-            AGRIORBIT
-            <span className="block text-2xl sm:text-4xl lg:text-5xl font-extrabold mt-3 text-[#B8FF3D]">
-              {language === 'en'
-                ? 'From Earth observations to smarter farm decisions.'
-                : 'উপগ্রহ পর্যবেক্ষণ থেকে ফসলের সঠিক ও টেকসই সিদ্ধান্ত।'}
-            </span>
-          </h1>
-
-          {/* Supporting Message */}
-          <p className="text-base sm:text-xl text-[#8FA3B8] max-w-3xl mx-auto leading-relaxed mb-10">
-            {language === 'en'
-              ? 'Understand your field, adapt to changing climate, and plan your next crop with explainable insights powered by NASA Earth observations and local Bangladesh agricultural intelligence.'
-              : 'নাসার উপগ্রহ পর্যবেক্ষণ ও বাংলাদেশের কৃষি তথ্যের সাহায্যে আপনার জমির পরিবেশ বুঝুন, পরিবর্তনশীল আবহাওয়ার সাথে খাপ খাইয়ে নিন এবং পরবর্তী ৩টি মৌসুমের শস্য পরিক্রমা যৌক্তিকভাবে নির্ধারণ করুন।'}
-          </p>
-
-          {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-            <button
-              onClick={onStartAnalysis}
-              className="w-full sm:w-auto px-9 py-4 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-extrabold text-lg shadow-xl shadow-black/50 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+            <motion.h1
+              variants={heroItem}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08] mt-6"
             >
-              <span>{language === 'en' ? 'Analyze My Field' : 'আমার জমি বিশ্লেষণ করুন'}</span>
+              {language === 'en'
+                ? 'From space to soil — know what to plant next.'
+                : 'মহাকাশ থেকে মাটি — এরপর কী চাষ করবেন জেনে নিন।'}
+            </motion.h1>
+
+            <motion.p
+              variants={heroItem}
+              className="text-lg sm:text-xl font-semibold text-[#B8FF3D] leading-snug mt-4"
+            >
+              {language === 'en'
+                ? 'Explainable crop-rotation guidance powered by NASA Earth observations and local Bangladesh agronomy.'
+                : 'নাসার পৃথিবী পর্যবেক্ষণ ও স্থানীয় বাংলাদেশি কৃষিবিদ্যায় চালিত ব্যাখ্যাযোগ্য শস্য-আবর্তন নির্দেশনা।'}
+            </motion.p>
+
+            <motion.p
+              variants={heroItem}
+              className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed mt-4 max-w-xl"
+            >
+              {language === 'en'
+                ? 'AgriOrbit reads rainfall, temperature, and soil moisture for your district, then recommends a season-by-season plan — and shows the data and the reason behind every suggestion.'
+                : 'এগ্রিঅরবিট আপনার জেলার বৃষ্টিপাত, তাপমাত্রা ও মাটির আর্দ্রতা পড়ে, তারপর মৌসুম-ভিত্তিক পরিকল্পনা দেয় — প্রতিটি পরামর্শের তথ্য ও কারণসহ।'}
+            </motion.p>
+
+            <motion.div variants={heroItem} className="mt-8">
+              <button
+                onClick={onStartAnalysis}
+                className="w-full sm:w-auto px-9 py-4 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/85 text-[#050B14] font-extrabold text-lg shadow-xl shadow-black/50 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>{language === 'en' ? 'Analyze My Field →' : 'আমার জমি বিশ্লেষণ করুন →'}</span>
+              </button>
+              <p className="text-xs text-[#8FA3B8] mt-3">
+                {language === 'en' ? 'New to AgriOrbit? ' : 'এগ্রিঅরবিটে নতুন? '}
+                <button
+                  onClick={onOpenLogin}
+                  className="text-white underline font-bold hover:text-[#B8FF3D] transition cursor-pointer"
+                >
+                  {language === 'en' ? 'Create an account' : 'অ্যাকাউন্ট তৈরি করুন'}
+                </button>
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT: live Bangladesh visual */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+          >
+            <HeroMap>
+              {/* Floating live-condition card */}
+              <div className="absolute top-3 left-3 w-52 rounded-xl bg-[#050B14]/85 backdrop-blur-sm border border-white/15 p-3 shadow-xl">
+                <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#00E5FF]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D]" />
+                  {language === 'en' ? 'Rangpur · Live' : 'রংপুর · সরাসরি'}
+                </p>
+                <ul className="mt-2 space-y-1.5 text-xs">
+                  <li className="flex items-center gap-1.5">
+                    <span aria-hidden="true">🌧️</span>
+                    <span className="text-[#8FA3B8]">{language === 'en' ? 'Rainfall' : 'বৃষ্টিপাত'}</span>
+                    <span className="ml-auto font-mono font-bold text-white tnum">{demo.power.rainfallMm}mm</span>
+                    <span className="flex items-center gap-1 text-[10px] font-bold text-[#FF5C5C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF5C5C]" />
+                      {language === 'en' ? 'Low' : 'কম'}
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span aria-hidden="true">🌡️</span>
+                    <span className="text-[#8FA3B8]">{language === 'en' ? 'Temp' : 'তাপমাত্রা'}</span>
+                    <span className="ml-auto font-mono font-bold text-white tnum">{demo.power.tempC}°C</span>
+                    <span className="flex items-center gap-1 text-[10px] font-bold text-[#B8FF3D]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D]" />
+                      {language === 'en' ? 'Good' : 'ভালো'}
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span aria-hidden="true">💧</span>
+                    <span className="text-[#8FA3B8]">{language === 'en' ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}</span>
+                    <span className="ml-auto font-mono font-bold text-white tnum">{demo.smap.surfaceMoisture}</span>
+                    <span className="flex items-center gap-1 text-[10px] font-bold text-[#FF5C5C]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF5C5C]" />
+                      {language === 'en' ? 'Low' : 'কম'}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </HeroMap>
+            <p className="text-[11px] text-[#8FA3B8]/70 mt-2">
+              {language === 'en'
+                ? 'Live OpenFreeMap tiles · dots mark monitored districts, lime pin is the Rangpur demo field.'
+                : 'সরাসরি মানচিত্র · বিন্দুগুলো পর্যবেক্ষিত জেলা, সবুজ পিন রংপুর ডেমো জমি।'}
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Trust bar: Orbit → Region → Field */}
+        <div className="max-w-5xl mx-auto mt-10 p-4 rounded-2xl bg-[#0B1626] border border-white/10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center shrink-0">
+                <Satellite className="w-5 h-5 text-[#00E5FF]" />
+              </div>
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#00E5FF] block">
+                  STEP 1 • ORBIT
+                </span>
+                <h4 className="font-extrabold text-white text-sm">NASA Satellites</h4>
+                <p className="text-xs text-[#8FA3B8]">POWER, SMAP & MODIS telemetry</p>
+              </div>
+            </div>
+
+            <div className="hidden md:block text-[#00E5FF]">
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </div>
 
-            <button
-              onClick={onOpenLogin}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold text-base transition flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <LogIn className="w-4 h-4 text-[#00E5FF]" />
-              <span>{language === 'en' ? 'Login' : 'লগইন'}</span>
-            </button>
-          </div>
-
-          {/* Small subtext link */}
-          <p className="text-xs text-[#8FA3B8] mb-12">
-            {language === 'en' ? 'New to AgriOrbit? ' : 'এগ্রিঅরবিটে নতুন? '}
-            <button
-              onClick={onOpenLogin}
-              className="text-white underline font-bold hover:text-[#B8FF3D] transition cursor-pointer"
-            >
-              {language === 'en' ? 'Create an account' : 'অ্যাকাউন্ট তৈরি করুন'}
-            </button>
-          </p>
-
-          {/* Visual Concept: Satellite Orbit → Bangladesh → Field Plot */}
-          <div className="max-w-3xl mx-auto p-6 rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center shrink-0">
-                  <Satellite className="w-7 h-7 text-[#00E5FF]" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#00E5FF] block">
-                    STEP 1 • ORBIT
-                  </span>
-                  <h4 className="font-extrabold text-white text-base">NASA Satellites</h4>
-                  <p className="text-xs text-[#8FA3B8]">POWER, SMAP & MODIS telemetry</p>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center shrink-0">
+                <Globe className="w-5 h-5 text-[#00E5FF]" />
               </div>
-
-              <div className="hidden md:block text-[#00E5FF]">
-                <ArrowRight className="w-6 h-6 animate-pulse" />
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#00E5FF] block">
+                  STEP 2 • REGION
+                </span>
+                <h4 className="font-extrabold text-white text-sm">Bangladesh AEZ</h4>
+                <p className="text-xs text-[#8FA3B8]">Rangpur, Rajshahi, Khulna, Dhaka</p>
               </div>
+            </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center shrink-0">
-                  <Globe className="w-7 h-7 text-[#00E5FF]" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#00E5FF] block">
-                    STEP 2 • REGION
-                  </span>
-                  <h4 className="font-extrabold text-white text-base">Bangladesh AEZ</h4>
-                  <p className="text-xs text-[#8FA3B8]">Rangpur, Rajshahi, Khulna, Dhaka</p>
-                </div>
+            <div className="hidden md:block text-[#B8FF3D]">
+              <ArrowRight className="w-5 h-5" />
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-[#B8FF3D]/10 border border-[#B8FF3D]/30 flex items-center justify-center shrink-0">
+                <Sprout className="w-5 h-5 text-[#B8FF3D]" />
               </div>
-
-              <div className="hidden md:block text-[#B8FF3D]">
-                <ArrowRight className="w-6 h-6 animate-pulse" />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-[#B8FF3D]/10 border border-[#B8FF3D]/30 flex items-center justify-center shrink-0">
-                  <Sprout className="w-7 h-7 text-[#B8FF3D]" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8FF3D] block">
-                    STEP 3 • FIELD
-                  </span>
-                  <h4 className="font-extrabold text-white text-base">Farmer's Plot</h4>
-                  <p className="text-xs text-[#8FA3B8]">3-Season Explainable Plan</p>
-                </div>
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8FF3D] block">
+                  STEP 3 • FIELD
+                </span>
+                <h4 className="font-extrabold text-white text-sm">Farmer's Plot</h4>
+                <p className="text-xs text-[#8FA3B8]">3-Season Explainable Plan</p>
               </div>
             </div>
           </div>

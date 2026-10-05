@@ -44,6 +44,79 @@ body {
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Hero minimap: explicit height, same deterministic sizing. */
+.agriorbit-hero-map {
+  width: 100%;
+  height: 460px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .agriorbit-hero-map {
+    height: 380px;
+  }
+}
+
+.agriorbit-hero-map .maplibregl-map,
+.agriorbit-hero-map .maplibregl-canvas-container,
+.agriorbit-hero-map canvas.maplibregl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Quiet secondary district dots on the hero map. */
+.agriorbit-hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+  position: relative;
+}
+
+.agriorbit-hero-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  animation: agriorbit-ping 2.8s ease-out infinite;
+}
+
+@keyframes agriorbit-ping {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Orbit-to-field arc drawing suggestion. */
+.agriorbit-orbit-arc .orbit-path {
+  stroke: rgba(0, 229, 255, 0.55);
+  stroke-dasharray: 3 4;
+  animation: agriorbit-dash 6s linear infinite;
+}
+
+@keyframes agriorbit-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agriorbit-hero-dot::after,
+  .agriorbit-orbit-arc .orbit-path {
+    animation: none;
+  }
+}
 .agriorbit-field-marker {
   width: 18px;
   height: 18px;
