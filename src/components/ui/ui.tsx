@@ -1,5 +1,6 @@
 import { useLang } from '../../lang.tsx';
 import type { SeasonId } from '../../lib/fieldShift.ts';
+import { LanguageToggle } from '../dashboard/LanguageToggle.tsx';
 
 /** Planet + orbit ring + leaf. Same artwork as public/favicon.svg. */
 export function Logo({ className = 'h-8 w-8' }: { className?: string }) {
@@ -32,20 +33,7 @@ export function Wordmark() {
 
 export function LangToggle() {
   const { lang, setLang } = useLang();
-  return (
-    <div className="flex rounded-full border border-white/10 bg-white/[0.04] p-1 text-xs font-semibold" role="group" aria-label="Language">
-      {(['en', 'bn'] as const).map((l) => (
-        <button
-          key={l}
-          onClick={() => setLang(l)}
-          aria-pressed={lang === l}
-          className={`rounded-full px-3 py-1.5 transition ${lang === l ? 'bg-white text-ink-950' : 'text-slate-300 hover:text-white'}`}
-        >
-          {l === 'en' ? 'EN' : 'বাংলা'}
-        </button>
-      ))}
-    </div>
-  );
+  return <LanguageToggle language={lang} onLanguageChange={setLang} size="sm" showIcon={false} />;
 }
 
 /** One color per season, used consistently in every chart. */

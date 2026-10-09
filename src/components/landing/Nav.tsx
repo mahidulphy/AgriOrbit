@@ -18,6 +18,7 @@ export function Nav() {
 
   const links = [
     { href: '#field-shift', label: t.nav.fieldShift },
+    { href: '#crops', label: t.nav.crops },
     { href: '#how', label: t.nav.how },
     { href: '#data', label: t.nav.data },
     { href: '#rotation', label: t.nav.rotation },

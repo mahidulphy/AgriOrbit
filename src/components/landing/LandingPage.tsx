@@ -6,6 +6,7 @@ import { Nav } from './Nav.tsx';
 import { Hero } from './Hero.tsx';
 import { Steps } from './Steps.tsx';
 import { FieldShiftSection } from './FieldShiftSection.tsx';
+import { EditorialCropAtlas } from './EditorialCropAtlas.tsx';
 import { WhySection } from './WhySection.tsx';
 import { DataSection } from './DataSection.tsx';
 import { RotationSection } from './RotationSection.tsx';
@@ -23,6 +24,7 @@ export function LandingPage() {
         <Hero conditions={conditions} shift={shift} />
         <Steps />
         <FieldShiftSection shift={shift} />
+        <EditorialCropAtlas />
         <WhySection />
         <DataSection />
         <RotationSection />

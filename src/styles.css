@@ -1,16 +1,24 @@
 @import "tailwindcss";
 
 /* ───────────── Design tokens ─────────────
-   Navy "space" base · lime = action/growth · cyan = data · amber = alerts */
+   Deep Navy base #050B14 · Surface #0B1626 · Lime #B8FF3D · Cyan #00E5FF */
 @theme {
-  --font-sans: "Inter", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Noto Sans Bengali", "Inter", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  --color-ink-950: #050913;
-  --color-ink-900: #08101f;
-  --color-ink-800: #0d1830;
-  --color-ink-700: #15233f;
-  --color-line: rgb(255 255 255 / 0.08);
+  --color-ink-950: #050b14;
+  --color-ink-900: #0b1626;
+  --color-ink-800: #101f36;
+  --color-ink-700: #182c4d;
+  --color-line: rgb(255 255 255 / 0.1);
+
+  --color-orbit-bg: #050b14;
+  --color-orbit-surface: #0b1626;
+  --color-orbit-lime: #b8ff3d;
+  --color-orbit-cyan: #00e5ff;
+  --color-orbit-muted: #8fa3b8;
+  --color-orbit-danger: #ff5c5c;
 
   --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   --animate-float: float 7s ease-in-out infinite;
@@ -23,11 +31,11 @@
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 @keyframes pulse-dot {
-  0% { box-shadow: 0 0 0 0 rgb(163 230 53 / 0.6); }
-  100% { box-shadow: 0 0 0 8px rgb(163 230 53 / 0); }
+  0% { box-shadow: 0 0 0 0 rgb(184 255 61 / 0.6); }
+  100% { box-shadow: 0 0 0 8px rgb(184 255 61 / 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -36,19 +44,22 @@
 /* ───────────── Base ───────────── */
 @layer base {
   html {
-    background: var(--color-ink-950);
-    color: #e6edf7;
+    background: #050b14;
+    color: #ffffff;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   body {
     min-height: 100vh;
     font-family: var(--font-sans);
+    background-color: #050b14;
+    color: #ffffff;
   }
-  /* Bengali script needs a little more vertical room. */
+  /* Bengali script typographical spacing */
   html:lang(bn) body { line-height: 1.7; }
   html:lang(bn) h1, html:lang(bn) h2 { line-height: 1.3; letter-spacing: 0; }
-  ::selection { background: rgb(163 230 53 / 0.3); }
+  ::selection { background: rgb(184 255 61 / 0.3); color: #b8ff3d; }
   section[id] { scroll-margin-top: 5rem; }
 }
 
@@ -56,7 +67,7 @@
 @layer components {
   .container-x {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1240px;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -64,16 +75,15 @@
     .container-x { padding-inline: 2rem; }
   }
 
-  /* Frosted card used everywhere */
+  /* Editorial dark surface */
   .glass {
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.065), rgb(255 255 255 / 0.02));
+    background: #0b1626;
     border: 1px solid var(--color-line);
     border-radius: 1.5rem;
-    backdrop-filter: blur(18px);
-    box-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 30px 60px -30px rgb(0 0 0 / 0.6);
+    box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.7);
   }
   .tile {
-    background: rgb(255 255 255 / 0.035);
+    background: #050b14;
     border: 1px solid var(--color-line);
     border-radius: 1rem;
   }
@@ -83,26 +93,33 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: 0.75rem;
     padding: 0.8rem 1.4rem;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: -0.01em;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
     white-space: nowrap;
   }
-  .btn:hover { transform: translateY(-2px); }
+  .btn:hover { transform: translateY(-1.5px); }
   .btn-primary {
-    background: linear-gradient(135deg, #d9f99d, #a3e635 45%, #65a30d);
-    color: #0a1405;
-    box-shadow: 0 12px 32px -12px rgb(163 230 53 / 0.7);
+    background: #b8ff3d;
+    color: #050b14;
+    box-shadow: 0 10px 25px -8px rgb(184 255 61 / 0.4);
   }
-  .btn-primary:hover { box-shadow: 0 16px 40px -12px rgb(163 230 53 / 0.9); }
+  .btn-primary:hover {
+    background: #c7ff5c;
+    box-shadow: 0 14px 30px -8px rgb(184 255 61 / 0.6);
+  }
   .btn-ghost {
-    border: 1px solid rgb(255 255 255 / 0.16);
-    background: rgb(255 255 255 / 0.03);
-    color: #e6edf7;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    background: #0b1626;
+    color: #ffffff;
   }
-  .btn-ghost:hover { border-color: rgb(255 255 255 / 0.35); background: rgb(255 255 255 / 0.07); }
+  .btn-ghost:hover {
+    border-color: rgb(255 255 255 / 0.3);
+    background: #101f36;
+  }
 
   .eyebrow {
     display: inline-flex;
@@ -110,11 +127,12 @@
     gap: 0.5rem;
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #bef264;
+    color: #00e5ff;
   }
-  html:lang(bn) .eyebrow { letter-spacing: 0.04em; font-size: 0.85rem; }
+  html:lang(bn) .eyebrow { letter-spacing: 0.02em; font-size: 0.85rem; }
 
   .chip {
     display: inline-flex;
@@ -123,13 +141,13 @@
     border-radius: 999px;
     padding: 0.3rem 0.75rem;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px solid var(--color-line);
     background: rgb(255 255 255 / 0.04);
   }
 
   .text-gradient {
-    background: linear-gradient(95deg, #ecfccb 0%, #a3e635 45%, #22d3ee 100%);
+    background: linear-gradient(95deg, #ffffff 0%, #b8ff3d 50%, #00e5ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -137,48 +155,190 @@
 
   .section-title {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2rem, 4.2vw, 3.25rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    color: #f8fafc;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #ffffff;
   }
   .section-sub {
-    color: #94a3b8;
-    font-size: 1.075rem;
-    line-height: 1.7;
+    color: #8fa3b8;
+    font-size: 1.05rem;
+    line-height: 1.65;
     max-width: 40rem;
   }
 
-  /* Space backdrop: star field + earth-horizon glow */
-  .stars {
-    background-image:
-      radial-gradient(1px 1px at 20px 30px, rgb(255 255 255 / 0.55), transparent 60%),
-      radial-gradient(1px 1px at 120px 80px, rgb(255 255 255 / 0.35), transparent 60%),
-      radial-gradient(1.5px 1.5px at 200px 150px, rgb(255 255 255 / 0.5), transparent 60%),
-      radial-gradient(1px 1px at 280px 40px, rgb(255 255 255 / 0.3), transparent 60%),
-      radial-gradient(1px 1px at 330px 210px, rgb(255 255 255 / 0.45), transparent 60%),
-      radial-gradient(1.5px 1.5px at 60px 240px, rgb(190 242 100 / 0.35), transparent 60%);
-    background-size: 360px 280px;
+  .font-display {
+    font-family: var(--font-display);
   }
-  .horizon {
-    background:
-      radial-gradient(60% 55% at 50% 100%, rgb(34 211 238 / 0.28), transparent 70%),
-      radial-gradient(90% 60% at 50% 115%, rgb(163 230 53 / 0.18), transparent 70%);
+
+  .font-sans {
+    font-family: var(--font-sans);
   }
-  .grid-fade {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(70% 60% at 50% 40%, black, transparent);
+
+  /* Scrim overlays for authentic imagery */
+  .scrim-hero {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 11, 20, 0.4) 0%,
+      rgba(5, 11, 20, 0.75) 60%,
+      #050b14 100%
+    );
+  }
+
+  .scrim-editorial-card {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(5, 11, 20, 0.6) 40%,
+      rgba(5, 11, 20, 0.95) 100%
+    );
   }
 
   .live-dot {
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 999px;
-    background: #a3e635;
+    background: #b8ff3d;
     animation: var(--animate-pulse-dot);
+  }
+}
+
+/* Real Bangladesh map canvas */
+.agriorbit-map-container {
+  width: 100%;
+  height: 520px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .agriorbit-map-container {
+    height: 400px;
+  }
+}
+
+.agriorbit-map-container .maplibregl-map,
+.agriorbit-map-container .maplibregl-canvas-container,
+.agriorbit-map-container canvas.maplibregl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.agriorbit-field-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #b8ff3d;
+  border: 3px solid #050b14;
+  box-shadow:
+    0 0 0 3px rgba(184, 255, 61, 0.35),
+    0 0 16px rgba(184, 255, 61, 0.6);
+  cursor: pointer;
+}
+
+/* MapLibre chrome tuned to the dark AgriOrbit UI */
+.maplibregl-ctrl-attrib {
+  background: rgba(5, 11, 20, 0.8) !important;
+  color: #8fa3b8 !important;
+  font-size: 10px;
+}
+.maplibregl-ctrl-attrib a {
+  color: #00e5ff !important;
+}
+.maplibregl-ctrl-group {
+  background: #0b1626 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.maplibregl-ctrl-group button {
+  background-color: #0b1626 !important;
+}
+.maplibregl-ctrl-group button span {
+  filter: invert(0.8);
+}
+
+/* Editorial body font (modals, journey screens, advisories) */
+.font-editorial {
+  font-family: var(--font-sans);
+}
+
+/* Horizontal scrim for side-by-side imagery + text */
+.scrim-horizontal {
+  background: linear-gradient(
+    90deg,
+    #050b14 0%,
+    rgba(5, 11, 20, 0.85) 45%,
+    transparent 100%
+  );
+}
+
+/* Hero minimap: explicit height, same deterministic sizing */
+.agriorbit-hero-map {
+  width: 100%;
+  height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 1024px) {
+  .agriorbit-hero-map {
+    height: 380px;
+  }
+}
+.agriorbit-hero-map .maplibregl-map,
+.agriorbit-hero-map .maplibregl-canvas-container,
+.agriorbit-hero-map canvas.maplibregl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Quiet secondary district dots on the hero map */
+.agriorbit-hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+  position: relative;
+}
+.agriorbit-hero-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  animation: agriorbit-ping 2.8s ease-out infinite;
+}
+@keyframes agriorbit-ping {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Orbit-to-field arc drawing */
+.agriorbit-orbit-arc .orbit-path {
+  stroke: rgba(0, 229, 255, 0.55);
+  stroke-dasharray: 3 4;
+  animation: agriorbit-dash 6s linear infinite;
+}
+@keyframes agriorbit-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agriorbit-hero-dot::after,
+  .agriorbit-orbit-arc .orbit-path {
+    animation: none;
   }
 }

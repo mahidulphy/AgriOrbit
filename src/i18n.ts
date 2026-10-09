@@ -7,6 +7,7 @@ import type { SeasonId } from './lib/fieldShift.ts';
 const en = {
   nav: {
     fieldShift: 'Field Shift',
+    crops: 'Crop Atlas',
     how: 'How it works',
     data: 'Data',
     rotation: 'Rotation',
@@ -17,12 +18,13 @@ const en = {
   seasonHint: { rabi: 'dry winter', kharif1: 'hot pre-monsoon', kharif2: 'monsoon' } as Record<SeasonId, string>,
 
   hero: {
-    badge: 'NASA Space Apps 2026 · Bay of Orbits, Dhaka',
-    title1: 'What should I plant',
-    title2: 'this season?',
-    sub: 'AgriOrbit turns NASA satellite data into a clear 3-season crop plan for your field, and shows you exactly why.',
-    cta: 'Analyze my field',
-    cta2: 'See the Field Shift',
+    badge: 'NASA Earth Observations × Bangladesh Agriculture',
+    eyebrow: 'NASA EARTH OBSERVATIONS × BANGLADESH AGRICULTURE',
+    title1: 'Know your field.',
+    title2: 'Plan what comes next.',
+    sub: 'AgriOrbit combines Earth observations, local agricultural information and farmer priorities to help plan better crop decisions for a changing climate.',
+    cta: 'Analyze My Field',
+    cta2: 'Explore How It Works',
     trust: ['Rule-based, no black box', 'Works offline', 'English & বাংলা'],
   },
   heroCard: {
@@ -124,6 +126,45 @@ const en = {
     soonSub: 'Next step: choose a district and priority, then see your conditions, Field Shift, rotation, alerts and Explain Why.',
     back: 'Back to home',
   },
+
+  weatherAdvisory: {
+    badges: {
+      nasa: 'NASA GPM',
+      forecast: 'Open-Meteo',
+      agriorbit: 'AgriOrbit',
+      live: 'LIVE',
+      cached: 'CACHED',
+      snapshot: 'SNAPSHOT',
+    },
+    actions: {
+      avoidIrrigationDrainage: 'Avoid unnecessary irrigation and inspect drainage outlets.',
+      delayPlannedIrrigation: 'Consider delaying planned irrigation until rainfall conditions become clearer.',
+      holdOffIrrigationDelayFertilizer: 'Hold off on supplemental irrigation and delay fertilizer applications.',
+      scheduleLightIrrigationMulch: 'Schedule light supplemental irrigation and apply organic mulching.',
+      proceedRoutineOperations: 'Proceed with planned seasonal agronomic activities and intercultural operations.',
+    },
+    rationales: {
+      saturatedRisk: (forecastMm: number, soilMoisture: string) =>
+        `Open-Meteo forecasts ~${forecastMm} mm of rain while NASA SMAP detects topsoil near saturation (${soilMoisture} m³/m³). Any supplemental water will cause standing waterlogging and root hypoxia.`,
+      naturalRecharge: (forecastMm: number, soilMoisture: string) =>
+        `While topsoil is currently dry (${soilMoisture} m³/m³), the incoming ${forecastMm} mm forecast will naturally replenish root-zone moisture, saving diesel pumping expenses (৳1,200–৳2,500/bigha).`,
+      heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
+        `Open-Meteo forecasts ${forecastMm} mm over the next 7 days (peak ${peakMm} mm on ${peakDate}). Field conditions can quickly become saturated.`,
+      drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>
+        `Forecast indicates only ~${forecastMm} mm over 7 days, compounded by NASA GPM observed deficit (${gpmRecentMm} mm recent). Root-zone soil moisture is ${soilMoisture} m³/m³.`,
+      favorableBalance: (forecastMm: number, soilMoisture: string) =>
+        `Precipitation forecast (~${forecastMm} mm) and NASA SMAP root-zone moisture (${soilMoisture} m³/m³) are within safe agronomic parameters.`,
+    },
+    cropNotes: {
+      amanDelaySeedbeds: 'Consider delaying Aman rice seedbed sowing and seedling transplanting until intense rainfall subsides to prevent young seedling submergence.',
+      amanReinforceBunds: 'Consider delaying Aman rice seedbeds or reinforce nursery bunds against flash runoff.',
+      rabiDelayPotatoPulse: 'Delay potato and winter pulse sowing; saturated seedbeds trigger fungal damping-off and seed decay.',
+      postponeFertilizerSprays: 'Postpone chemical fertilizer (urea) top-dressing and foliar sprays; surface runoff will wash active inputs away.',
+      delayPesticideSprays: 'Delay planned pesticide sprays; rain will dilute active ingredients before pest uptake.',
+      naturalRechargeTilling: 'Take advantage of natural precipitation for land tilling and seedbed preparation once rainfall moderates.',
+      droughtSensitiveMicroIrrigation: 'Prioritize drought-sensitive crops (maize, vegetables, young seedlings) with evening micro-irrigation to prevent evapotranspiration shock.',
+    },
+  },
 };
 
 export type Dict = typeof en;
@@ -131,6 +172,7 @@ export type Dict = typeof en;
 const bn: Dict = {
   nav: {
     fieldShift: 'ফিল্ড শিফট',
+    crops: 'ফসল তথ্যভাণ্ডার',
     how: 'কীভাবে কাজ করে',
     data: 'তথ্যসূত্র',
     rotation: 'শস্য পর্যায়',
@@ -141,12 +183,13 @@ const bn: Dict = {
   seasonHint: { rabi: 'শুষ্ক শীত', kharif1: 'গরম, বর্ষার আগে', kharif2: 'বর্ষাকাল' },
 
   hero: {
-    badge: 'নাসা স্পেস অ্যাপস ২০২৬ · বে অফ অরবিটস, ঢাকা',
-    title1: 'এই মৌসুমে',
-    title2: 'কী চাষ করব?',
-    sub: 'অ্যাগ্রিঅরবিট নাসার স্যাটেলাইট তথ্য দিয়ে আপনার জমির জন্য তিন মৌসুমের পরিষ্কার ফসল পরিকল্পনা দেয়, আর দেখায় ঠিক কেন।',
+    badge: 'নাসা উপগ্রহ পর্যবেক্ষণ × বাংলাদেশ কৃষি',
+    eyebrow: 'নাসা উপগ্রহ পর্যবেক্ষণ × বাংলাদেশ কৃষি',
+    title1: 'আপনার জমিকে জানুন।',
+    title2: 'পরবর্তী পরিকল্পনা তৈরি করুন।',
+    sub: 'নাসার উপগ্রহ পর্যবেক্ষণ, স্থানীয় কৃষি তথ্য ও কৃষকের অগ্রাধিকারের সমন্বয়ে জলবায়ু পরিবর্তনের সাথে খাপ খাইয়ে সঠিক ফসল নির্বাচন করুন।',
     cta: 'আমার জমি বিশ্লেষণ করুন',
-    cta2: 'ফিল্ড শিফট দেখুন',
+    cta2: 'কার্যপ্রণালী জানুন',
     trust: ['নিয়মভিত্তিক, কোনো লুকানো হিসাব নেই', 'অফলাইনেও চলে', 'বাংলা ও English'],
   },
   heroCard: {
@@ -247,6 +290,45 @@ const bn: Dict = {
     soon: 'বিশ্লেষণ পাতা নতুন করে তৈরি হচ্ছে।',
     soonSub: 'পরের ধাপ: জেলা ও অগ্রাধিকার বেছে নিন, তারপর দেখুন বর্তমান অবস্থা, ফিল্ড শিফট, শস্য পর্যায়, সতর্কতা ও কেন এই পরামর্শ।',
     back: 'হোমে ফিরুন',
+  },
+
+  weatherAdvisory: {
+    badges: {
+      nasa: 'নাসা জিপিএম',
+      forecast: 'ওপেন-মেটিও',
+      agriorbit: 'এগ্রিঅরবিট',
+      live: 'লাইভ',
+      cached: 'সংরক্ষিত',
+      snapshot: 'স্ন্যাপশট',
+    },
+    actions: {
+      avoidIrrigationDrainage: 'অপ্রয়োজনীয় সেচ প্রদান অবিলম্বে বন্ধ রাখুন এবং পানি নিষ্কাশনের নালা পরিষ্কার করুন।',
+      delayPlannedIrrigation: 'পরিকল্পিত পাম্প সেচ সাময়িক স্থগিত রাখুন; বৃষ্টির পর মাটির রস পর্যবেক্ষণ করুন।',
+      holdOffIrrigationDelayFertilizer: 'অতিরিক্ত সেচ দেওয়া বন্ধ রাখুন এবং সার প্রয়োগ সাময়িক স্থগিত রাখুন।',
+      scheduleLightIrrigationMulch: 'সময়মতো হালকা সেচ প্রদান করুন অথবা মাটির রস ধরে রাখতে খড়কুটার মালচিং ব্যবহার করুন।',
+      proceedRoutineOperations: 'পরিকল্পিত মৌসুমী কৃষি কাজ, নিড়ানি ও পরিচর্যা যথারীতি চালিয়ে যান।',
+    },
+    rationales: {
+      saturatedRisk: (forecastMm: number, soilMoisture: string) =>
+        `ওপেন-মেটিও আগামী ৭ দিনে প্রায় ${forecastMm} মিমি বৃষ্টির পূর্বাভাস দিচ্ছে এবং নাসা এসএমএপি অনুযায়ী মাটি ইতিমধ্যে স্যাচুরেশনের কাছাকাছি (${soilMoisture} m³/m³)। বাড়তি পানি শিকড় পচনের ঝুঁকি তৈরি করবে।`,
+      naturalRecharge: (forecastMm: number, soilMoisture: string) =>
+        `মাটি বর্তমানে শুষ্ক হলেও (${soilMoisture} m³/m³), পূর্বাভাস অনুযায়ী ${forecastMm} মিমি বৃষ্টি মাটির প্রয়োজনীয় রস প্রাকৃতিকভাবে পূরণ করবে এবং সেচ খরচ বাঁচাবে।`,
+      heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
+        `ওপেন-মেটিও আগামী ৭ দিনে ${forecastMm} মিমি বৃষ্টির পূর্বাভাস দিচ্ছে (সর্বোচ্চ ${peakMm} মিমি ${peakDate}-এ)। মাঠ দ্রুত অতিরিক্ত আর্দ্র হতে পারে।`,
+      drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>
+        `পূর্বাভাসে আগামী ৭ দিনে মাত্র ~${forecastMm} মিমি বৃষ্টি এবং নাসা জিপিএম অনুযায়ী সাম্প্রতিক বৃষ্টিপাতও কম (${gpmRecentMm} মিমি)। মাটির রস ${soilMoisture} m³/m³।`,
+      favorableBalance: (forecastMm: number, soilMoisture: string) =>
+        `বৃষ্টিপাতের পূর্বাভাস (~${forecastMm} মিমি) এবং মাটির আর্দ্রতা (${soilMoisture} m³/m³) স্বাভাবিক সীমার মধ্যে রয়েছে।`,
+    },
+    cropNotes: {
+      amanDelaySeedbeds: 'আমন ধানের বীজতলা তৈরি বা চারা রোপণ সাময়িক পিছিয়ে দিন যাতে চারা পানিতে তলিয়ে নষ্ট না হয়।',
+      amanReinforceBunds: 'আমন ধানের বীজতলা সাময়িক পিছিয়ে দিন অথবা বীজতলার চারপাশের বাঁধ মজবুত করুন।',
+      rabiDelayPotatoPulse: 'আলু ও রবি ডাল বপন স্থগিত রাখুন; অতিরিক্ত রস ও বৃষ্টিতে বীজ পচে যাওয়ার ঝুঁকি রয়েছে।',
+      postponeFertilizerSprays: 'ইউরিয়া সারের উপরিপ্রয়োগ ও স্প্রে স্থগিত রাখুন; বৃষ্টির পানিতে সার ধুয়ে অপচয় হবে।',
+      delayPesticideSprays: 'কীটনাশক স্প্রে পিছিয়ে দিন; বৃষ্টিতে ওষুধের কার্যকারিতা নষ্ট হতে পারে।',
+      naturalRechargeTilling: 'বৃষ্টির পানি ব্যবহার করে জমি চাষ ও বীজতলার প্রস্তুতি নিতে পারেন।',
+      droughtSensitiveMicroIrrigation: 'সংবেদনশীল ফসলে বিকেলে হালকা সেচ দিন যাতে প্রখর রোদে গাছ নেতিয়ে না পড়ে।',
+    },
   },
 };
 

@@ -2,7 +2,7 @@
 
 **NASA observes. AgriOrbit explains. Farmers decide.**
 
-Explainable agricultural decision-support for Bangladesh, powered by NASA Earth observations (POWER, SMAP, MODIS) and local agronomy.
+Explainable agricultural decision-support for Bangladesh, powered by NASA Earth observations (POWER, SMAP, MODIS, GPM) and local agronomy.
 
 Team: Bay of Orbits
 
@@ -20,31 +20,34 @@ Prerequisites: Node.js 18+
    `npm install`
 2. Run the app:
    `npm run dev`
-3. Build for production:
+3. Run the advisory tests:
+   `npm test`
+4. Build for production:
    `npm run build`
-4. Type-check:
+5. Type-check:
    `npm run lint`
 
 ## Project structure
 
-- `src/App.tsx` — journey state machine + the single canonical `SelectedLocation`
+- `src/App.tsx` — hash router: `#/analyze` opens the tool, anything else is the landing page
 - `src/types.ts` — shared domain types (location model, NASA data, crops, rotation)
-- `src/data/bdAdmin.ts` — all 64 Bangladesh districts by division (map + geocode base)
-- `src/data/agriData.ts` — curated district observations, crop database, rotation plans
-- `src/lib/location.ts` — canonical location helpers and district-profile resolvers
-- `src/lib/geocode.ts` — Nominatim reverse geocoding with geometric fallback
-- `src/lib/nasaContext.ts` — NASA context resolver (exact coverage or labeled approximation)
-- `src/lib/cropSuitability.ts` — deterministic priority-based suitability engine
-- `src/components/map/BangladeshMap.tsx` — reusable real MapLibre Bangladesh map
-- `src/components/common/` — shared brand, language, and footer UI
-- `src/components/journey/` — one screen per product step
-- `src/components/journey/FieldLocationSelection.tsx` — real MapLibre Bangladesh map
+- `src/i18n.ts` / `src/lang.tsx` — every user-facing string in EN + বাংলা, one place
+- `src/data/` — `districts.ts` (64 districts by division), `bdAdmin.ts`, `agriData.ts` (curated agronomy), `crops.ts` (crop database), `satellite.ts` (SMAP/MODIS snapshots), `fallback-rangpur.json` (bundled last resort)
+- `src/lib/` — `power.ts` (NASA POWER + Open-Meteo fetch, shared with the Node script), `conditions.ts` (30-day conditions + Hargreaves ET₀), `fieldShift.ts` (decade climate comparison), `engine.ts` (rule-based scoring + rotation), `weatherAdvisory.ts`, `data.ts` (live → cache → bundled loader), `geocode.ts`, `location.ts`, `nasaContext.ts`, `cropSuitability.ts`, `nav.ts`
+- `src/services/` — `gpm.ts` (GPM rainfall metrics), `weatherForecast.ts` (7-day forecast metrics)
+- `src/components/landing/` — one section per landing screen (`Hero`, `HeroCard`, `Steps`, `FieldShiftSection`, `WhySection`, `DataSection`, `RotationSection`, `EditorialCropAtlas`, `FinalCta`)
+- `src/components/journey/` — `AuthScreen`, `WelcomeOnboarding`, `FarmLocationStep`, `FarmerPrioritySetup`, `AnalyzeMyFieldTransition`, `DashboardView`
+- `src/components/map/BangladeshMap.tsx` — reusable real MapLibre Bangladesh map (5 km field context via Turf)
+- `src/components/HeroMap.tsx` — hero minimap with orbit arc + district dots
+- `src/components/dashboard/` — dashboard tiles, SMS advisory button, risk alerts, mini map, feedback loop
+- `src/components/` — `WeatherAdvisory.tsx`, `CropRecommendation.tsx`, `SeasonRotation.tsx`, `ExplainWhyModal.tsx`, `HowItWorksModal.tsx`
+- `src/components/common/` + `src/components/ui/` — shared brand, language, footer, and layout UI
+- `src/components/analyze/AnalyzePage.tsx` — analyze entry screen
 - `public/vendor/` — vendored MapLibre web worker (required: the worker URL
   Vite dev rewrites does not exist, so `setWorkerUrl` points here; do not delete)
-- `src/components/CropRecommendation.tsx` — crop suitability grid
-- `src/components/SeasonRotation.tsx` — 3-season plan + final advisory
-- `src/components/ExplainWhyModal.tsx` — transparent rule audit
-- `src/components/HowItWorksModal.tsx` — NASA → AgriOrbit → Farmer explainer
+- `public/cache/` — offline JSON cache for all 64 districts (refresh: `node scripts/fetch-cache.ts --all`)
+- `scripts/fetch-cache.ts` — refreshes the offline cache and the bundled Rangpur snapshot
+- `src/lib/weatherAdvisory.test.ts` — Node test runner suite (`npm test`)
 
 ## Theme (SPACE × EARTH × AGRICULTURE)
 
@@ -52,7 +55,8 @@ Background `#050B14` • Surface `#0B1626` • Electric Cyan `#00E5FF` (NASA / s
 
 ## Notes
 
-- No live NASA APIs, auth backend, database, or ML in this phase.
+- Data loads with a 3-level safety net: live NASA POWER + Open-Meteo, then `public/cache/<district>.json`, then the bundled Rangpur snapshot — the demo never shows a blank screen.
 - Map clicks reverse-geocode via OSM Nominatim with a local geometric fallback.
 - Curated agronomy profiles cover Rangpur, Rajshahi, Khulna, and Dhaka;
   other districts use labeled regional approximations until curated.
+- Rule-based only: no machine learning, no black box — every score has a written reason.

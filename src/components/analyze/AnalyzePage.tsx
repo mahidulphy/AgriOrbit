@@ -1,32 +1,65 @@
-// Placeholder — the full Analyze screen is built in the next milestone.
-import { ArrowLeft, Wrench } from 'lucide-react';
+import React, { useState } from 'react';
 import { useLang } from '../../lang.tsx';
 import { goHome } from '../../lib/nav.ts';
-import { LangToggle, Wordmark } from '../ui/ui.tsx';
+import { DEMO_LOCATION } from '../../lib/location.ts';
+import type { DistrictId, FarmerPriorityId, Language, SelectedLocation } from '../../types.ts';
+import { FarmLocationStep } from '../journey/FarmLocationStep.tsx';
+import { FarmerPrioritySetup } from '../journey/FarmerPrioritySetup.tsx';
+import { DashboardView } from '../journey/DashboardView.tsx';
+
+type AnalyzeStep = 'location' | 'priority' | 'dashboard';
 
 export function AnalyzePage() {
-  const { t } = useLang();
+  const { lang, setLang } = useLang();
+  const [step, setStep] = useState<AnalyzeStep>('location');
+  const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
+  const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
+  const [secondaryPriority, setSecondaryPriority] = useState<FarmerPriorityId | null>(null);
+
+  const handleLanguageChange = (newLang: Language) => {
+    setLang(newLang);
+  };
+
+  if (step === 'location') {
+    return (
+      <FarmLocationStep
+        location={location}
+        onChangeLocation={setLocation}
+        language={lang}
+        onContinue={() => setStep('priority')}
+        onBack={goHome}
+      />
+    );
+  }
+
+  if (step === 'priority') {
+    return (
+      <FarmerPrioritySetup
+        selectedPriority={primaryPriority}
+        secondaryPriority={secondaryPriority}
+        onSelectPrimaryPriority={setPrimaryPriority}
+        onSelectSecondaryPriority={setSecondaryPriority}
+        language={lang}
+        onContinue={() => setStep('dashboard')}
+        onBack={() => setStep('location')}
+      />
+    );
+  }
+
   return (
-    <div className="relative isolate min-h-screen">
-      <div className="stars absolute inset-0 -z-10 opacity-60" />
-      <div className="horizon absolute inset-x-0 bottom-0 -z-10 h-1/2" />
-      <header className="container-x flex h-20 items-center justify-between">
-        <Wordmark />
-        <LangToggle />
-      </header>
-      <main className="container-x grid min-h-[70vh] place-items-center">
-        <div className="glass max-w-lg p-10 text-center">
-          <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-lime-300/10 text-lime-300">
-            <Wrench className="h-7 w-7" />
-          </div>
-          <h1 className="mt-6 font-display text-2xl font-semibold text-white">{t.analyze.soon}</h1>
-          <p className="mt-3 leading-relaxed text-slate-400">{t.analyze.soonSub}</p>
-          <button onClick={goHome} className="btn btn-ghost mt-8">
-            <ArrowLeft className="h-4 w-4" />
-            {t.analyze.back}
-          </button>
-        </div>
-      </main>
-    </div>
+    <DashboardView
+      userName="Farmer"
+      selectedDistrict={location.district as DistrictId}
+      selectedUpazila={location.upazila}
+      fieldLat={location.latitude}
+      fieldLng={location.longitude}
+      selectedPriority={primaryPriority}
+      secondaryPriority={secondaryPriority}
+      language={lang}
+      onLanguageChange={handleLanguageChange}
+      onChangeFieldLocation={() => setStep('location')}
+      onChangePriority={() => setStep('priority')}
+      onLogout={goHome}
+    />
   );
 }
