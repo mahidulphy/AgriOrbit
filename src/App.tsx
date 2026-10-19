@@ -18,12 +18,12 @@ export function resolveCurrentRoute(): AppRoute {
   if (hash.startsWith('#/auth/callback') || path.startsWith('/auth/callback')) return 'callback';
 
   // Auth pages
-  if (hash.startsWith('#/login') || path === '/login') return 'login';
-  if (hash.startsWith('#/signup') || path === '/signup') return 'signup';
-  if (hash.startsWith('#/forgot-password') || path === '/forgot-password') return 'forgot-password';
+  if (hash.startsWith('#/login') || path === '/login' || path.startsWith('/login')) return 'login';
+  if (hash.startsWith('#/signup') || path === '/signup' || path.startsWith('/signup')) return 'signup';
+  if (hash.startsWith('#/forgot-password') || path === '/forgot-password' || path.startsWith('/forgot-password')) return 'forgot-password';
 
   // Protected workspace routes
-  if (hash.startsWith('#/analyze')) return 'analyze';
+  if (hash.startsWith('#/analyze') || path === '/analyze' || path.startsWith('/analyze')) return 'analyze';
 
   // Public landing page (including in-page anchors: #field-shift, #crops, #data...)
   return 'landing';
