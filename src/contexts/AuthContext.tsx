@@ -14,6 +14,7 @@ export interface AuthContextType {
   setAsGuest: () => void;
   clearGuest: () => void;
   signInWithGoogle: () => Promise<{ error: AuthError | Error | null }>;
+  signInWithGoogleIdToken: (idToken: string) => Promise<{ error: AuthError | Error | null }>;
   signInWithEmail: (email: string, password: string) => Promise<{ error: AuthError | Error | null }>;
   signUpWithEmail: (
     email: string,
@@ -120,6 +121,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           },
         },
       });
+
+      return { error };
+    } catch (err: any) {
+      return { error: err instanceof Error ? err : new Error(String(err)) };
+    }
+  };
+
+  // Google Sign-In with ID Token (Client-Side Google Identity Services flow - keeps branding on agri-orbit.vercel.app)
+  const signInWithGoogleIdToken = async (idToken: string) => {
+    if (!configured) {
+      return {
+        error: new Error(
+          'Supabase credentials are not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment.'
+        ),
+      };
+    }
+
+    try {
+      const { data, error } = await supabase.auth.signInWithIdToken({
+        provider: 'google',
+        token: idToken,
+      });
+
+      if (!error && data.session) {
+        clearGuest();
+        setSession(data.session);
+        setUser(data.user);
+      }
 
       return { error };
     } catch (err: any) {
@@ -275,6 +304,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAsGuest,
     clearGuest,
     signInWithGoogle,
+    signInWithGoogleIdToken,
     signInWithEmail,
     signUpWithEmail,
     resetPassword,
