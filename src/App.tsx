@@ -23,8 +23,18 @@ export function resolveCurrentRoute(): AppRoute {
   if (hash.startsWith('#/privacy') || path === '/privacy' || path.startsWith('/privacy')) return 'privacy';
   if (hash.startsWith('#/terms') || path === '/terms' || path.startsWith('/terms')) return 'terms';
 
-  // Auth callback handler
-  if (hash.startsWith('#/auth/callback') || path.startsWith('/auth/callback')) return 'callback';
+  // Auth callback handler (supports dedicated paths, hash routes, PKCE query code, and implicit hash tokens)
+  const isAuthCallback =
+    hash.startsWith('#/auth/callback') ||
+    path.startsWith('/auth/callback') ||
+    hash.includes('access_token=') ||
+    hash.includes('error_description=') ||
+    (typeof window !== 'undefined' && (
+      window.location.search.includes('code=') ||
+      window.location.search.includes('error=')
+    ));
+
+  if (isAuthCallback) return 'callback';
 
   // Auth pages
   if (hash.startsWith('#/login') || path === '/login' || path.startsWith('/login')) return 'login';

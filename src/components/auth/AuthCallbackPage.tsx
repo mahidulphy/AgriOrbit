@@ -47,6 +47,36 @@ export const AuthCallbackPage: React.FC = () => {
           return;
         }
 
+        // Check for PKCE authorization code in query parameters or hash
+        const urlParams = new URLSearchParams(window.location.search);
+        const hashStr = window.location.hash || '';
+        const hashParams = hashStr.includes('?')
+          ? new URLSearchParams(hashStr.substring(hashStr.indexOf('?')))
+          : hashStr.includes('&') || hashStr.includes('=')
+            ? new URLSearchParams(hashStr.replace(/^#\/?(auth\/callback)?\??/, ''))
+            : new URLSearchParams();
+
+        const code = urlParams.get('code') || hashParams.get('code');
+        if (code) {
+          try {
+            const { data: exchangeData, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+            if (!exchangeError && exchangeData.session) {
+              if (mounted) {
+                setStatus('success');
+                if (window.history && window.history.replaceState) {
+                  window.history.replaceState(null, '', window.location.pathname);
+                }
+                setTimeout(() => {
+                  window.location.hash = '#/analyze/dashboard';
+                }, 1200);
+                return;
+              }
+            }
+          } catch {
+            // If already exchanged or handled by auto-detect, fallback to getSession
+          }
+        }
+
         // Standard OAuth or email verification confirmation
         const { data, error } = await supabase.auth.getSession();
         if (error) throw error;
@@ -54,6 +84,9 @@ export const AuthCallbackPage: React.FC = () => {
         if (data.session) {
           if (mounted) {
             setStatus('success');
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
             setTimeout(() => {
               window.location.hash = '#/analyze/dashboard';
             }, 1200);
@@ -64,6 +97,9 @@ export const AuthCallbackPage: React.FC = () => {
             if (session && mounted) {
               setStatus('success');
               sub.subscription.unsubscribe();
+              if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', window.location.pathname);
+              }
               setTimeout(() => {
                 window.location.hash = '#/analyze/dashboard';
               }, 1200);

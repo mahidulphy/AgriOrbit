@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo, type ReactNode } from 'react';
 import type { User, Session, AuthError } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { getAuthRedirectUrl } from '../lib/authUrl';
 
 export interface AuthContextType {
   user: User | null;
@@ -110,7 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      const redirectUrl = `${window.location.origin}${window.location.pathname}#/auth/callback`;
+      const redirectUrl = getAuthRedirectUrl('/auth/callback');
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -194,7 +195,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      const emailRedirectTo = `${window.location.origin}${window.location.pathname}#/auth/callback`;
+      const emailRedirectTo = getAuthRedirectUrl('/auth/callback');
       const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
         password,
@@ -225,7 +226,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      const redirectTo = `${window.location.origin}${window.location.pathname}#/auth/callback?type=recovery`;
+      const redirectTo = getAuthRedirectUrl('/auth/callback?type=recovery');
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
         redirectTo,
       });
