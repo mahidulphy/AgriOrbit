@@ -43,6 +43,7 @@ import {
   FarmerAdvisoryCard,
   FaqSection,
 } from '../dashboard';
+import { UserMenu } from '../auth/UserMenu';
 import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
@@ -356,8 +357,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
+          <UserMenu compact />
           <button
             onClick={onLogout}
+            title={language === 'en' ? 'Exit to Website' : 'মূল ওয়েবসাইটে প্রস্থান'}
             className="p-1.5 rounded-lg bg-white/5 text-[#8FA3B8] hover:text-white border border-white/10 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
@@ -415,12 +418,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
             </div>
 
-            <button
-              onClick={onLogout}
-              className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-center text-[#FF5C5C]"
-            >
-              {language === 'en' ? 'Exit to Website' : 'মূল সাইটে প্রস্থান'}
-            </button>
+            <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
+              <div className="flex justify-between items-center px-1">
+                <span className="text-xs font-mono text-slate-400">{language === 'en' ? 'Account:' : 'অ্যাকাউন্ট:'}</span>
+                <UserMenu />
+              </div>
+              <button
+                onClick={onLogout}
+                className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-center text-[#FF5C5C]"
+              >
+                {language === 'en' ? 'Exit to Website' : 'মূল সাইটে প্রস্থান'}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -474,6 +483,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D] animate-ping" />
               )}
             </button>
+
+            {/* Authenticated User Menu */}
+            <UserMenu />
           </div>
         </header>
 

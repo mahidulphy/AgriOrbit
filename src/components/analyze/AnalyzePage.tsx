@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLang } from '../../lang.tsx';
+import { useAuth } from '../../contexts/AuthContext.tsx';
 import { goHome } from '../../lib/nav.ts';
 import { DEMO_LOCATION } from '../../lib/location.ts';
 import type { DistrictId, FarmerPriorityId, Language, SelectedLocation } from '../../types.ts';
@@ -19,6 +20,7 @@ function initialStep(): AnalyzeStep {
 
 export function AnalyzePage() {
   const { lang, setLang } = useLang();
+  const { displayName } = useAuth();
   const [step, setStepState] = useState<AnalyzeStep>(initialStep);
   const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
@@ -69,7 +71,7 @@ export function AnalyzePage() {
 
   return (
     <DashboardView
-      userName="Farmer"
+      userName={displayName || (lang === 'en' ? 'Farmer' : 'খামারী')}
       selectedDistrict={location.district as DistrictId}
       selectedUpazila={location.upazila}
       fieldLat={location.latitude}

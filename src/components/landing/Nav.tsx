@@ -3,6 +3,7 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
 import { goAnalyze } from '../../lib/nav.ts';
 import { LangToggle, Wordmark } from '../ui/ui.tsx';
+import { UserMenu } from '../auth/UserMenu.tsx';
 
 export function Nav() {
   const { t } = useLang();
@@ -47,6 +48,7 @@ export function Nav() {
 
         <div className="flex items-center gap-3">
           <LangToggle />
+          <UserMenu />
           <button onClick={goAnalyze} className="btn btn-primary hidden py-2.5! sm:inline-flex">
             {t.nav.analyze}
             <ArrowRight className="h-4 w-4" />
@@ -76,10 +78,13 @@ export function Nav() {
               </li>
             ))}
           </ul>
-          <button onClick={goAnalyze} className="btn btn-primary mt-3 w-full sm:hidden">
-            {t.nav.analyze}
-            <ArrowRight className="h-4 w-4" />
-          </button>
+          <div className="pt-3 border-t border-white/10 mt-3 flex items-center justify-between gap-2">
+            <UserMenu />
+            <button onClick={goAnalyze} className="btn btn-primary py-2! sm:hidden">
+              {t.nav.analyze}
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       )}
     </header>
