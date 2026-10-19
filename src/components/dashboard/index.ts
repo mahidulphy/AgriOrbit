@@ -25,3 +25,6 @@ export type { SmsAdvisoryButtonProps } from './SmsAdvisoryButton';
 
 export { FarmerFeedbackLoop } from './FarmerFeedbackLoop';
 export type { FarmerFeedbackLoopProps } from './FarmerFeedbackLoop';
+
+export { FarmerAdvisoryCard } from './FarmerAdvisoryCard';
+export type { FarmerAdvisoryCardProps } from './FarmerAdvisoryCard';
