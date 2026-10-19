@@ -28,3 +28,7 @@ export type { FarmerFeedbackLoopProps } from './FarmerFeedbackLoop';
 
 export { FarmerAdvisoryCard } from './FarmerAdvisoryCard';
 export type { FarmerAdvisoryCardProps } from './FarmerAdvisoryCard';
+
+export { FaqSection } from './FaqSection';
+export type { FaqSectionProps } from './FaqSection';
+

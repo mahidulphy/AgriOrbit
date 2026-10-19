@@ -41,6 +41,7 @@ import {
   MiniMapThumbnail,
   FarmerFeedbackLoop,
   FarmerAdvisoryCard,
+  FaqSection,
 } from '../dashboard';
 import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
@@ -1380,6 +1381,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <span>{language === 'en' ? 'Open Mathematical Table' : 'গাণিতিক গণনা দেখুন'}</span>
                 </button>
               </div>
+
+              {/* Frequently Asked Questions (FAQ) Section */}
+              <FaqSection language={language} />
             </div>
           )}
 

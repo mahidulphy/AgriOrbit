@@ -165,6 +165,73 @@ const en = {
       droughtSensitiveMicroIrrigation: 'Prioritize drought-sensitive crops (maize, vegetables, young seedlings) with evening micro-irrigation to prevent evapotranspiration shock.',
     },
   },
+  faq: {
+    heading: 'Frequently Asked Questions',
+    subheading: 'Everything you need to know about AgriOrbit.',
+    eyebrow: 'Questions & Answers',
+    items: [
+      {
+        id: 'simulator',
+        question: 'What does the Simulator do?',
+        answer:
+          'It lets you explore hypothetical changes in field conditions and farmer priorities to see how crop recommendations or scores may change. It is a planning tool, not a guarantee of future results.',
+      },
+      {
+        id: 'data-sources',
+        question: 'Where does the data come from?',
+        answer:
+          'AgriOrbit uses NASA Earth observation data, including NASA POWER weather data. Some features use other sources, cached data, or snapshots. The app should clearly label each data source and whether it is live, cached, or a snapshot.',
+      },
+      {
+        id: 'nasa-recommend',
+        question: 'Does NASA recommend these crops?',
+        answer:
+          'No. NASA provides Earth observation data. AgriOrbit combines available data with agricultural rules and farmer priorities to generate explainable suggestions. NASA does not endorse the recommendations.',
+      },
+      {
+        id: 'how-choose',
+        question: 'How does AgriOrbit choose a crop?',
+        answer:
+          'It applies transparent, rule-based logic using available weather and soil information, crop characteristics, agricultural guidelines, and your selected priorities.',
+      },
+      {
+        id: 'explain-why',
+        question: 'What does “Explain Why” mean?',
+        answer:
+          'It shows the rules behind a recommendation and explains how field conditions and priorities affect crop scores.',
+      },
+      {
+        id: 'guaranteed',
+        question: 'Are the recommendations guaranteed to work?',
+        answer:
+          'No. They are decision-support suggestions, not guarantees. Actual results depend on local soil conditions, water availability, pests, farming practices, and other factors. Consult local agricultural experts before making major farming decisions.',
+      },
+      {
+        id: 'live-unavailable',
+        question: 'What if live data is unavailable?',
+        answer:
+          'AgriOrbit may fall back to cached or bundled data where supported. Clearly show the data status and avoid presenting fallback data as live observations.',
+      },
+      {
+        id: 'change-priorities',
+        question: 'Can I change my farming priorities?',
+        answer:
+          'Yes. Select supported priorities such as saving water, improving soil health, maximizing profit or yield, lowering costs, or reducing climate risk. Explain how the selected priority influences the recommendation.',
+      },
+      {
+        id: 'obs-vs-forecast',
+        question: 'What is the difference between observations and forecasts?',
+        answer:
+          'Observations describe measured or estimated past and current conditions. Forecasts estimate future weather. Clearly distinguish NASA observations from separately sourced weather forecasts.',
+      },
+      {
+        id: 'expert-replacement',
+        question: 'Is AgriOrbit a replacement for an agricultural expert?',
+        answer:
+          'No. It helps farmers understand available information and compare options, but local agricultural expertise remains important.',
+      },
+    ],
+  },
 };
 
 export type Dict = typeof en;
@@ -329,6 +396,73 @@ const bn: Dict = {
       naturalRechargeTilling: 'বৃষ্টির পানি ব্যবহার করে জমি চাষ ও বীজতলার প্রস্তুতি নিতে পারেন।',
       droughtSensitiveMicroIrrigation: 'সংবেদনশীল ফসলে বিকেলে হালকা সেচ দিন যাতে প্রখর রোদে গাছ নেতিয়ে না পড়ে।',
     },
+  },
+  faq: {
+    heading: 'সাধারণ জিজ্ঞাসা',
+    subheading: 'এগ্রিঅরবিট সম্পর্কে আপনার প্রয়োজনীয় সব তথ্য।',
+    eyebrow: 'প্রশ্নোত্তর',
+    items: [
+      {
+        id: 'simulator',
+        question: 'সিমুলেটরের কাজ কী?',
+        answer:
+          'এটি মাঠের পরিস্থিতি এবং কৃষকের অগ্রাধিকারের কাল্পনিক পরিবর্তনের মাধ্যমে ফসলের সুপারিশ বা স্কোরে কী প্রভাব পড়ে তা পরীক্ষা করার সুযোগ দেয়। এটি পূর্বপরিকল্পনার একটি সহায়ক মাধ্যম, ভবিষ্যতের চূড়ান্ত ফলাফলের নিশ্চয়তা নয়।',
+      },
+      {
+        id: 'data-sources',
+        question: 'এই উপাত্তগুলো কোথা থেকে আসে?',
+        answer:
+          'এগ্রিঅরবিট নাসার আর্থ অবজারভেশন উপাত্ত (যেমন নাসা পাওয়ার আবহাওয়া উপাত্ত) ব্যবহার করে। কিছু সুবিধায় অন্যান্য উৎস, সংরক্ষিত (ক্যাশড) বা স্ন্যাপশট ডেটা ব্যবহৃত হয়। অ্যাপটিতে প্রতিটি তথ্যের উৎস এবং তা লাইভ, সংরক্ষিত নাকি স্ন্যাপশট তা স্পষ্টভাবে চিহ্নিত থাকে।',
+      },
+      {
+        id: 'nasa-recommend',
+        question: 'নাসা কি এই ফসলগুলো সুপারিশ করে?',
+        answer:
+          'না। নাসা মূলত পৃথিবী পর্যবেক্ষণের উপাত্ত সরবরাহ করে। এগ্রিঅরবিট সেই উপাত্তের সাথে কৃষি নিয়মাবলি ও কৃষকের অগ্রাধিকার যুক্ত করে বোধগম্য পরামর্শ তৈরি করে। নাসা কোনো নির্দিষ্ট সুপারিশ অনুমোদন করে না।',
+      },
+      {
+        id: 'how-choose',
+        question: 'এগ্রিঅরবিট কীভাবে ফসল নির্বাচন করে?',
+        answer:
+          'এটি আবহাওয়া ও মাটির তথ্য, ফসলের বৈশিষ্ট্য, কৃষি গবেষণার নির্দেশিকা এবং আপনার নির্বাচিত অগ্রাধিকারের ভিত্তিতে সম্পূর্ণ স্বচ্ছ ও নিয়ম-ভিত্তিক লজিক প্রয়োগ করে ফসল বাছাই করে।',
+      },
+      {
+        id: 'explain-why',
+        question: '“কারণ দেখুন (Explain Why)” বলতে কী বোঝায়?',
+        answer:
+          'এটি কোনো সুপারিশের পেছনের বৈজ্ঞানিক নিয়মাবলি প্রদর্শন করে এবং মাঠের পরিস্থিতি ও অগ্রাধিকার কীভাবে ফসলের স্কোরকে প্রভাবিত করেছে তা পরিষ্কারভাবে তুলে ধরে।',
+      },
+      {
+        id: 'guaranteed',
+        question: 'সুপারিশগুলো সফল হওয়ার নিশ্চয়তা আছে কি?',
+        answer:
+          'না। এগুলো সিদ্ধান্ত গ্রহণে সহায়তামূলক পরামর্শ, কোনো গ্যারান্টি নয়। বাস্তব ফলন মাটির ধরন, পানির প্রাপ্যতা, বালাই আক্রমণ, চাষের পদ্ধতি ইত্যাদির ওপর নির্ভর করে। বড় কোনো সিদ্ধান্ত নেওয়ার আগে স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন।',
+      },
+      {
+        id: 'live-unavailable',
+        question: 'লাইভ উপাত্ত না পাওয়া গেলে কী হবে?',
+        answer:
+          'এগ্রিঅরবিট তখন সংরক্ষিত (ক্যাশড) বা অফলাইন উপাত্তের সাহায্য নেয়। অ্যাপটি স্পষ্টভাবে তথ্যের স্ট্যাটাস দেখায় এবং সংরক্ষিত ডেটাকে কখনোই লাইভ হিসেবে উপস্থাপন করে না।',
+      },
+      {
+        id: 'change-priorities',
+        question: 'আমি কি আমার অগ্রাধিকার পরিবর্তন করতে পারি?',
+        answer:
+          'হ্যাঁ। আপনি পানি সাশ্রয়, মাটির স্বাস্থ্য উন্নয়ন, লাভ বা ফলন বৃদ্ধি, খরচ কমানো কিংবা জলবায়ু ঝুঁকি হ্রাসের মতো অগ্রাধিকার নির্বাচন করতে পারেন এবং দেখতে পারেন কীভাবে তা সুপারিশকে প্রভাবিত করে।',
+      },
+      {
+        id: 'obs-vs-forecast',
+        question: 'পর্যবেক্ষণ (Observations) এবং পূর্বাভাসের (Forecasts) মধ্যে পার্থক্য কী?',
+        answer:
+          'পর্যবেক্ষণ হলো উপগ্রহ দিয়ে পরিমাপ করা অতীত ও বর্তমানের প্রকৃত অবস্থা। অন্যদিকে পূর্বাভাস হলো আগামী দিনের সম্ভাব্য আবহাওয়ার অনুমান। নাসার পর্যবেক্ষণ ও অন্যান্য উৎসের আবহাওয়া পূর্বাভাসকে সবসময় স্পষ্টভাবে আলাদা রাখা হয়।',
+      },
+      {
+        id: 'expert-replacement',
+        question: 'এগ্রিঅরবিট কি কোনো কৃষি কর্মকর্তার বিকল্প?',
+        answer:
+          'না। এটি কৃষকদের তথ্য বুঝতে ও বিভিন্ন ফসলের তুলনা করতে সাহায্য করে, তবে মাঠপর্যায়ের স্থানীয় কৃষি বিশেষজ্ঞদের পরামর্শ ও অভিজ্ঞতা সবসময়ই গুরুত্বপূর্ণ।',
+      },
+    ],
   },
 };
 
