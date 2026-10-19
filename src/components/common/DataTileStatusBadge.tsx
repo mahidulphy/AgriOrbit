@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Language } from '../../types';
 
-export type TelemetryDataMode = 'live' | 'cached' | 'snapshot';
+export type TelemetryDataMode = 'live' | 'cached' | 'snapshot' | 'simulated';
 
 export interface DataTileStatusBadgeProps {
   sourceName: string; // e.g. "NASA GPM", "NASA SMAP", "NASA POWER"
@@ -52,6 +52,7 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
     live: isEn ? 'LIVE' : 'লাইভ',
     cached: isEn ? 'CACHED' : 'সংরক্ষিত',
     snapshot: isEn ? 'SNAPSHOT' : 'স্ন্যাপশট',
+    simulated: isEn ? 'SIMULATED' : 'সিমুলেশন',
   }[status];
 
   const statusStyles = {
@@ -66,6 +67,10 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
     snapshot: {
       badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
       dot: 'bg-amber-400',
+    },
+    simulated: {
+      badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
+      dot: 'bg-purple-400 animate-pulse',
     },
   }[status];
 

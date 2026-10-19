@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { HelpCircle, Droplets, Calendar, Filter, ArrowUpRight, Check, AlertCircle } from 'lucide-react';
+import { HelpCircle, Droplets, Calendar, Filter, ArrowUpRight, Check, AlertCircle, Sparkles, SunDim } from 'lucide-react';
 import { CropData, FarmerPriorityId, Language } from '../types';
-import { getRankedCrops, SeasonFilter } from '../lib/cropSuitability';
+import { getRankedCrops, SeasonFilter, type TelemetryContext } from '../lib/cropSuitability';
 
 interface CropRecommendationProps {
   selectedPriority: FarmerPriorityId;
   secondaryPriority?: FarmerPriorityId | null;
   language: Language;
   onExplainCrop: (crop: CropData) => void;
+  telemetry?: TelemetryContext;
 }
 
 export const CropRecommendation: React.FC<CropRecommendationProps> = ({
@@ -15,9 +16,14 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   secondaryPriority = null,
   language,
   onExplainCrop,
+  telemetry,
 }) => {
   const [filterSeason, setFilterSeason] = useState<SeasonFilter>('All');
-  const displayedCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason);
+  const displayedCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason, telemetry);
+
+  const isDry = (telemetry?.rainfall30d ?? 38) < 50 && (telemetry?.soilMoisture ?? 0.18) < 0.15;
+  const isOptimalSowing = (telemetry?.soilMoisture ?? 0.18) >= 0.25 && (telemetry?.soilMoisture ?? 0.18) <= 0.30;
+  const isHot = (telemetry?.maxTemp ?? 33) > 35;
 
   return (
     <section id="crops-section" className="py-6 sm:py-10">
@@ -31,12 +37,12 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
               <span>{language === 'en' ? 'CROP COMPATIBILITY EVALUATION' : 'ফসল উপযোগিতা মূল্যায়ন'}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {language === 'en' ? 'Rule-Based Crop Compatibility' : '১০টি প্রধান ফসলের উপযোগিতা মূল্যায়ন'}
+              {language === 'en' ? 'NASA Data-Driven Crop Compatibility' : '১০টি প্রধান ফসলের উপযোগিতা মূল্যায়ন'}
             </h2>
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
               {language === 'en'
-                ? 'Scores computed by deterministic agronomic rules matching current NASA observation levels and your selected priorities.'
-                : 'নাসার উপগ্রহ উপাত্ত এবং আপনার পছন্দের লক্ষ্যের সাথে মিলিয়ে তৈরি করা উপযোগিতা স্কোর।'}
+                ? 'Scores computed by deterministic agronomic rules reacting in real-time to NASA POWER precipitation, SMAP soil moisture, and your priorities.'
+                : 'নাসার উপগ্রহ উপাত্ত এবং আপনার পছন্দের লক্ষ্যের সাথে মিলিয়ে রুল-ভিত্তিক উপযোগিতা মূল্যায়ন।'}
             </p>
           </div>
 
@@ -82,6 +88,12 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
               ? 'bg-[#00E5FF]'
               : 'bg-[#FF5C5C]/80';
 
+            // Contextual NASA Badges
+            const showWaterSaver = isDry && crop.waterRequirementEn === 'Low';
+            const showWaterPenalty = isDry && (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice');
+            const showOptimalSowing = isOptimalSowing && (crop.suitabilityScore >= 80);
+            const showHeatStress = isHot && (crop.id === 'wheat' || crop.id === 'potato');
+
             return (
               <div
                 key={crop.id}
@@ -95,16 +107,46 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
               >
                 {/* Header Row: Title, Season, Score */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                  <div className="flex flex-wrap items-baseline gap-3">
-                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      {language === 'en' ? crop.nameEn : crop.nameBn}
-                    </h3>
-                    <span className="text-xs text-[#8FA3B8] font-mono">
-                      {language === 'en' ? crop.seasonEn : crop.seasonBn}
-                    </span>
-                    <span className="text-xs text-[#8FA3B8] italic font-serif">
-                      ({crop.scientificName})
-                    </span>
+                  <div>
+                    <div className="flex flex-wrap items-baseline gap-3 mb-1.5">
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        {language === 'en' ? crop.nameEn : crop.nameBn}
+                      </h3>
+                      <span className="text-xs text-[#8FA3B8] font-mono">
+                        {language === 'en' ? crop.seasonEn : crop.seasonBn}
+                      </span>
+                      <span className="text-xs text-[#8FA3B8] italic font-serif">
+                        ({crop.scientificName})
+                      </span>
+                    </div>
+
+                    {/* Dynamic Rule Trigger Badges */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      {showWaterSaver && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30">
+                          <Droplets className="w-3 h-3" />
+                          {language === 'en' ? 'Dry-Resilient (+4)' : 'খরা সহনশীল (+৪)'}
+                        </span>
+                      )}
+                      {showWaterPenalty && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#FF5C5C]/15 text-[#FF5C5C] border border-[#FF5C5C]/30">
+                          <AlertCircle className="w-3 h-3" />
+                          {language === 'en' ? 'Water Deficit Penalty (-20)' : 'পানি ঘাটতি কর্তন (-২০)'}
+                        </span>
+                      )}
+                      {showOptimalSowing && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30">
+                          <Sparkles className="w-3 h-3" />
+                          {language === 'en' ? 'Optimal Sowing Moisture' : 'অনুকূল বপন আর্দ্রতা'}
+                        </span>
+                      )}
+                      {showHeatStress && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                          <SunDim className="w-3 h-3" />
+                          {language === 'en' ? 'Heat Sensitive (-10)' : 'তাপ সংবেদনশীল (-১০)'}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-4 shrink-0">

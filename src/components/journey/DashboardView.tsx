@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Satellite,
   MapPin,
@@ -13,6 +13,12 @@ import {
   Layers,
   Sparkles,
   Compass,
+  Sliders,
+  RefreshCw,
+  Sun,
+  ShieldCheck,
+  CheckCircle2,
+  Calendar,
 } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language, RiskAlert } from '../../types';
 import { ROTATION_PLANS } from '../../data/agriData';
@@ -31,6 +37,13 @@ import {
   MiniMapThumbnail,
   FarmerFeedbackLoop,
 } from '../dashboard';
+import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
+import { computeConditions } from '../../lib/conditions';
+import { computeFieldShift } from '../../lib/fieldShift';
+import { runEngine, type Priority } from '../../lib/engine';
+import { SATELLITE_BY_DIVISION } from '../../data/satellite';
+import { FieldShiftPanel } from '../landing/FieldShiftSection';
+import type { TelemetryContext } from '../../lib/cropSuitability';
 
 interface DashboardViewProps {
   userName: string;
@@ -46,6 +59,22 @@ interface DashboardViewProps {
   onChangePriority: () => void;
   onLogout: () => void;
 }
+
+const mapPriority = (p: FarmerPriorityId): Priority => {
+  switch (p) {
+    case 'save_water':
+      return 'water';
+    case 'improve_soil':
+      return 'soil';
+    case 'lower_cost':
+    case 'maximize_profit':
+      return 'cost';
+    case 'reduce_risk':
+    case 'maximize_yield':
+    default:
+      return 'risk';
+  }
+};
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   userName,
@@ -65,18 +94,100 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [explainCrop, setExplainCrop] = useState<CropData | null>(null);
 
   const district = getDistrictProfile(selectedDistrict);
-  const nasaData = getNasaContext(selectedDistrict);
-  const power = nasaData.power;
-  const smap = nasaData.smap;
-  const modis = nasaData.modis;
-  const alerts: RiskAlert[] = nasaData.alerts;
-  const rotationPlan = ROTATION_PLANS[selectedPriority];
-
   const upazilaName = getUpazilaName(selectedDistrict, selectedUpazila, language);
   const districtName = language === 'en' ? district.nameEn : district.nameBn;
 
-  // Determine editorial water stress state based on smap and rainfall
-  const isWaterStressed = smap.surfaceMoisture < 0.22 || power.rainfallAnomalyPct < -20;
+  // NASA POWER & Open-Meteo 3-level safety net (Live -> Cache -> Bundled)
+  const [loaded, setLoaded] = useState<LoadedData>({
+    data: BUNDLED_RANGPUR,
+    mode: 'bundled',
+  });
+  const [isLoadingData, setIsLoadingData] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    setIsLoadingData(true);
+    loadDistrict(selectedDistrict)
+      .then((res) => {
+        if (active) {
+          setLoaded(res);
+          setIsLoadingData(false);
+        }
+      })
+      .catch(() => {
+        if (active) setIsLoadingData(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [selectedDistrict]);
+
+  // Derived baseline conditions & climate shift from real NASA POWER records
+  const conditions = useMemo(
+    () => computeConditions(loaded.data.daily, loaded.data.lat),
+    [loaded.data.daily, loaded.data.lat]
+  );
+
+  const fieldShift = useMemo(
+    () => computeFieldShift(loaded.data.monthly),
+    [loaded.data.monthly]
+  );
+
+  // Satellite division context (SMAP & MODIS)
+  const sat = SATELLITE_BY_DIVISION[district.division] ?? SATELLITE_BY_DIVISION['Rangpur'];
+
+  // What-If Environmental Simulator Controls
+  const [whatIfActive, setWhatIfActive] = useState(false);
+  const [simSoil, setSimSoil] = useState<number>(sat.soil);
+  const [simRain, setSimRain] = useState<number>(Math.round(conditions.rain30));
+  const [simMaxTemp, setSimMaxTemp] = useState<number>(Math.round(conditions.tMax30));
+
+  // Sync simulation sliders when base district data updates (if not actively simulating)
+  useEffect(() => {
+    if (!whatIfActive) {
+      setSimSoil(sat.soil);
+      setSimRain(Math.round(conditions.rain30));
+      setSimMaxTemp(Math.round(conditions.tMax30));
+    }
+  }, [sat.soil, conditions.rain30, conditions.tMax30, whatIfActive]);
+
+  // Active telemetry driving the scoring engine
+  const activeSoil = whatIfActive ? simSoil : sat.soil;
+  const activeRain = whatIfActive ? simRain : conditions.rain30;
+  const activeMaxTemp = whatIfActive ? simMaxTemp : conditions.tMax30;
+  const activeWaterBalance = activeRain - conditions.et0Total;
+
+  const telemetry: TelemetryContext = useMemo(
+    () => ({
+      rainfall30d: activeRain,
+      soilMoisture: activeSoil,
+      maxTemp: activeMaxTemp,
+      waterBalance: activeWaterBalance,
+    }),
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance]
+  );
+
+  // Pure mathematical rule engine execution
+  const engineResult = useMemo(
+    () =>
+      runEngine({
+        conditions: {
+          ...conditions,
+          rain30: activeRain,
+          tMax30: activeMaxTemp,
+          waterBalance: activeWaterBalance,
+        },
+        soil: activeSoil,
+        shift: fieldShift,
+        forecast: loaded.data.forecast,
+        priority: mapPriority(selectedPriority),
+        today: new Date(),
+      }),
+    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data.forecast, selectedPriority]
+  );
+
+  // Water stressed threshold
+  const isWaterStressed = activeSoil < 0.20 || activeRain < 50 || activeWaterBalance < -50;
 
   return (
     <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
@@ -142,7 +253,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         upazilaName={upazilaName}
         lat={fieldLat}
         lng={fieldLng}
-        soilMoisture={smap.surfaceMoisture}
+        soilMoisture={activeSoil}
         priority={selectedPriority}
       />
 
@@ -237,8 +348,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                 <p className="text-xs sm:text-sm text-[#8FA3B8] leading-relaxed">
                   {language === 'en'
-                    ? `Pre-monsoon precipitation is ${power.rainfallAnomalyPct}% vs the 30-year NASA historical average. Root-zone soil moisture is ${smap.surfaceMoisture} m³/m³ (${smap.statusEn}). High-irrigation flood crops face heavy diesel pumping overhead.`
-                    : `নাসার ৩০ বছরের ঐতিহাসিক গড়ের তুলনায় বৃষ্টিপাত ${power.rainfallAnomalyPct}% কম। মাটির মূলস্তরের আর্দ্রতা ${smap.surfaceMoisture} m³/m³ (${smap.statusBn})। অতিরিক্ত সেচের ধান চাষে বাড়তি ব্যয়ের ঝুঁকি রয়েছে।`}
+                    ? `Pre-monsoon 30-day precipitation is ${activeRain.toFixed(0)} mm (${conditions.waterBalance < -50 ? 'deficit' : 'balanced'}). Root-zone soil moisture is ${activeSoil.toFixed(2)} m³/m³ (${activeSoil < 0.20 ? 'Water Deficit' : 'Optimal'}). High-irrigation flood crops face heavy diesel pumping overhead.`
+                    : `৩০ দিনের বৃষ্টিপাত ${activeRain.toFixed(0)} মিমি (${conditions.waterBalance < -50 ? 'পানির ঘাটতি' : 'পরিমিত'})। মাটির মূলস্তরের আর্দ্রতা ${activeSoil.toFixed(2)} m³/m³। অতিরিক্ত সেচের ধান চাষে বাড়তি ব্যয়ের ঝুঁকি রয়েছে।`}
                 </p>
               </div>
 
@@ -251,6 +362,177 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* WHAT-IF ENVIRONMENTAL SIMULATOR */}
+          <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-xl">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-1">
+                  <Sliders className="w-4 h-4 text-[#B8FF3D]" />
+                  <span>{language === 'en' ? 'What-If Environmental Simulator' : 'পরিবেশগত খরা ও বৃষ্টি সিমুলেটর'}</span>
+                  {whatIfActive && (
+                    <span className="px-2 py-0.5 rounded-full bg-[#B8FF3D]/20 text-[#B8FF3D] text-[10px] uppercase font-bold border border-[#B8FF3D]/40">
+                      {language === 'en' ? 'Active' : 'সক্রিয়'}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-[#8FA3B8]">
+                  {language === 'en'
+                    ? 'Adjust NASA environmental variables to observe real-time score penalties, bonuses, and rotation adjustments in the explainable rule engine.'
+                    : 'খরা বা বৃষ্টিপাতের পরিমাণ পরিবর্তন করে দেখুন নিয়ম ইঞ্জিন কীভাবে রিয়েল-টাইমে ফসলের স্কোর ও আবর্তন পরিবর্তন করে।'}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <button
+                  onClick={() => setWhatIfActive(!whatIfActive)}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    whatIfActive
+                      ? 'bg-[#B8FF3D] text-[#050B14] shadow-md shadow-[#B8FF3D]/20'
+                      : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
+                  }`}
+                >
+                  {whatIfActive
+                    ? (language === 'en' ? 'Simulation Active (Click to Exit)' : 'সিমুলেশন চলছে (বন্ধ করুন)')
+                    : (language === 'en' ? 'Enable Simulation Controls' : 'সিমুলেশন চালু করুন')}
+                </button>
+                {whatIfActive && (
+                  <button
+                    onClick={() => {
+                      setWhatIfActive(false);
+                      setSimSoil(sat.soil);
+                      setSimRain(Math.round(conditions.rain30));
+                      setSimMaxTemp(Math.round(conditions.tMax30));
+                    }}
+                    className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#8FA3B8] hover:text-white border border-white/10 transition-colors cursor-pointer"
+                    title={language === 'en' ? 'Reset to NASA observations' : 'নাসার তথ্যে ফেরত যান'}
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Simulation Sliders & Presets */}
+            {whatIfActive && (
+              <div className="pt-6 border-t border-white/10 space-y-6 animate-fadeIn">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Slider 1: Soil Moisture */}
+                  <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10">
+                    <div className="flex items-center justify-between text-xs font-mono mb-2">
+                      <span className="text-[#8FA3B8]">{language === 'en' ? 'SMAP Soil Moisture' : 'মাটির আর্দ্রতা'}</span>
+                      <span className="text-[#00E5FF] font-bold text-sm">{simSoil.toFixed(2)} m³/m³</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0.10"
+                      max="0.35"
+                      step="0.01"
+                      value={simSoil}
+                      onChange={(e) => setSimSoil(parseFloat(e.target.value))}
+                      className="w-full accent-[#00E5FF] cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[10px] text-[#8FA3B8] font-mono mt-1.5">
+                      <span className={simSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Drought (&lt;0.15)</span>
+                      <span className={simSoil >= 0.25 && simSoil <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Optimal (0.25-0.30)</span>
+                      <span>Surplus (&gt;0.32)</span>
+                    </div>
+                  </div>
+
+                  {/* Slider 2: 30-Day Rainfall */}
+                  <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10">
+                    <div className="flex items-center justify-between text-xs font-mono mb-2">
+                      <span className="text-[#8FA3B8]">{language === 'en' ? '30-Day Rainfall' : '৩০ দিনের বৃষ্টি'}</span>
+                      <span className="text-[#B8FF3D] font-bold text-sm">{simRain} mm</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="10"
+                      max="150"
+                      step="5"
+                      value={simRain}
+                      onChange={(e) => setSimRain(parseInt(e.target.value))}
+                      className="w-full accent-[#B8FF3D] cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[10px] text-[#8FA3B8] font-mono mt-1.5">
+                      <span className={simRain < 50 ? 'text-[#FF5C5C] font-bold' : ''}>Low (&lt;50mm)</span>
+                      <span>Normal (50–100mm)</span>
+                      <span>High (&gt;120mm)</span>
+                    </div>
+                  </div>
+
+                  {/* Slider 3: Max Temperature */}
+                  <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10">
+                    <div className="flex items-center justify-between text-xs font-mono mb-2">
+                      <span className="text-[#8FA3B8]">{language === 'en' ? 'Daily Max Temp' : 'সর্বোচ্চ তাপমাত্রা'}</span>
+                      <span className="text-[#FF5C5C] font-bold text-sm">{simMaxTemp.toFixed(1)}°C</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="20"
+                      max="42"
+                      step="0.5"
+                      value={simMaxTemp}
+                      onChange={(e) => setSimMaxTemp(parseFloat(e.target.value))}
+                      className="w-full accent-[#FF5C5C] cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[10px] text-[#8FA3B8] font-mono mt-1.5">
+                      <span>Mild (&lt;28°C)</span>
+                      <span>Standard</span>
+                      <span className={simMaxTemp > 35 ? 'text-[#FF5C5C] font-bold' : ''}>Heat Stress (&gt;35°C)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Preset Buttons */}
+                <div className="flex flex-wrap items-center gap-2 pt-2">
+                  <span className="text-[11px] font-mono text-[#8FA3B8] mr-2">
+                    {language === 'en' ? 'Quick Test Scenarios:' : 'ঝটপট দৃশ্যপট:'}
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSimSoil(0.12);
+                      setSimRain(25);
+                      setSimMaxTemp(34);
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    🏜️ {language === 'en' ? 'Severe Drought' : 'তীব্র খরা (<৫০ মিমি, <০.১৫)'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSimSoil(0.28);
+                      setSimRain(70);
+                      setSimMaxTemp(27);
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    🌱 {language === 'en' ? 'Optimal Sowing Window' : 'অনুকূল বপন (০.২৮ আর্দ্রতা)'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSimSoil(0.16);
+                      setSimRain(35);
+                      setSimMaxTemp(38);
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    🌡️ {language === 'en' ? 'Extreme Heatwave' : 'তীব্র তাপপ্রবাহ (>৩৫° সে.)'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSimSoil(sat.soil);
+                      setSimRain(Math.round(conditions.rain30));
+                      setSimMaxTemp(Math.round(conditions.tMax30));
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-[#B8FF3D] transition-colors cursor-pointer ml-auto"
+                  >
+                    🔄 {language === 'en' ? 'Reset to NASA' : 'নাসার মূল মান'}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -265,7 +547,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#00E5FF] font-mono font-semibold mb-4">
                 <span>OBSERVED TELEMETRY</span>
                 <span aria-hidden="true">·</span>
-                <span>{nasaSourceLabel(nasaData, districtName, language)}</span>
+                <span>
+                  {whatIfActive
+                    ? (language === 'en' ? 'Active What-If Environmental Simulation' : 'সক্রিয় পরিবেশগত সিমুলেশন')
+                    : loaded.mode === 'live'
+                    ? (language === 'en' ? `Live NASA POWER + Open-Meteo for ${districtName}` : `${districtName}-এর লাইভ নাসা ও ওপেন-মেটিও উপাত্ত`)
+                    : (language === 'en' ? `NASA POWER Grid Cache for ${districtName}` : `${districtName}-এর অফলাইন নাসা গ্রিড ক্যাশ`)}
+                </span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -274,30 +562,30 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA POWER"
-                        status="cached"
-                        date="2026-10-06"
+                        sourceName={whatIfActive ? 'What-If Model' : 'NASA POWER'}
+                        status={whatIfActive ? 'simulated' : loaded.mode === 'live' ? 'live' : 'cached'}
+                        date={loaded.data.fetchedAt.split('T')[0]}
                         language={language}
                       />
-                      <span className="font-mono text-xs text-[#FF5C5C] font-semibold">
-                        {power.rainfallAnomalyPct}% vs Normal
+                      <span className={`font-mono text-xs font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
+                        {activeWaterBalance < 0 ? `${Math.round(activeWaterBalance)} mm Net` : `+${Math.round(activeWaterBalance)} mm Net`}
                       </span>
                     </div>
 
                     <div className="font-mono text-3xl sm:text-4xl font-bold text-white mb-1">
-                      {power.rainfallMm} <span className="text-base font-normal text-[#8FA3B8]">mm</span>
+                      {Math.round(activeRain)} <span className="text-base font-normal text-[#8FA3B8]">mm</span>
                     </div>
 
                     <p className="text-xs text-[#8FA3B8] leading-relaxed mt-3">
                       {language === 'en'
-                        ? 'Cumulative pre-monsoon precipitation deficit. Unirrigated topsoil dries within 4–5 days of sun exposure.'
-                        : 'প্রাক-বর্ষা মৌসুমে স্বাভাবিকের চেয়ে কম বৃষ্টি। রোদে মাটির উপরিভাগের রস দ্রুত শুকিয়ে যায়।'}
+                        ? `Cumulative 30-day precipitation. Net balance vs crop ET₀ demand is ${Math.round(activeWaterBalance)} mm.`
+                        : `৩০ দিনের মোট বৃষ্টিপাত। বাষ্পীভবন চাহিদার তুলনায় নিট পানির অবস্থা ${Math.round(activeWaterBalance)} মিমি।`}
                     </p>
                   </div>
 
                   <div className="pt-4 mt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#8FA3B8]">
-                    <span>Solar Radiation</span>
-                    <span className="text-white font-bold">{power.radiationMj} MJ/m²</span>
+                    <span>Hargreaves ET₀ Demand</span>
+                    <span className="text-white font-bold">{Math.round(conditions.et0Total)} mm ({conditions.et0.toFixed(1)} mm/d)</span>
                   </div>
                 </div>
 
@@ -306,43 +594,51 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA SMAP"
-                        status="snapshot"
-                        date="2026-10-06"
+                        sourceName={whatIfActive ? 'Simulated SMAP' : 'NASA SMAP'}
+                        status={whatIfActive ? 'simulated' : 'snapshot'}
+                        date={whatIfActive ? 'Simulated' : sat.date}
                         language={language}
                       />
-                      <span className="font-mono text-xs text-[#00E5FF] font-semibold">
-                        {language === 'en' ? smap.statusEn : smap.statusBn}
+                      <span className={`font-mono text-xs font-semibold ${
+                        activeSoil < 0.15 ? 'text-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'text-[#B8FF3D]' : 'text-[#00E5FF]'
+                      }`}>
+                        {activeSoil < 0.15
+                          ? (language === 'en' ? 'Moisture Deficit' : 'আর্দ্রতা ঘাটতি')
+                          : activeSoil >= 0.25 && activeSoil <= 0.30
+                          ? (language === 'en' ? 'Optimal Sowing' : 'বপন উপযোগী')
+                          : (language === 'en' ? 'Adequate' : 'পর্যাপ্ত')}
                       </span>
                     </div>
 
                     <div className="font-mono text-3xl sm:text-4xl font-bold text-white mb-1">
-                      {smap.surfaceMoisture} <span className="text-base font-normal text-[#8FA3B8]">m³/m³</span>
+                      {activeSoil.toFixed(2)} <span className="text-base font-normal text-[#8FA3B8]">m³/m³</span>
                     </div>
 
                     {/* Gauge Bar */}
                     <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
                       <div
-                        className="bg-[#00E5FF] h-full rounded-full transition-all duration-500"
-                        style={{ width: `${smap.levelPct}%` }}
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          activeSoil < 0.15 ? 'bg-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'bg-[#B8FF3D]' : 'bg-[#00E5FF]'
+                        }`}
+                        style={{ width: `${Math.min(100, Math.max(10, (activeSoil / 0.40) * 100))}%` }}
                       />
                     </div>
                     <div className="flex justify-between text-[10px] text-[#8FA3B8] font-mono mt-1">
-                      <span>Deficit (&lt;0.15)</span>
-                      <span>Target (0.22–0.30)</span>
+                      <span className={activeSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
+                      <span className={activeSoil >= 0.25 && activeSoil <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Target (0.25–0.30)</span>
                       <span>Surplus</span>
                     </div>
 
                     <p className="text-xs text-[#8FA3B8] leading-relaxed mt-3">
                       {language === 'en'
-                        ? '0–5 cm rootzone layer measured by L-band radiometer. Insufficient for continuous standing flood irrigation.'
-                        : '০–৫ সেমি শিকড় স্তরের আর্দ্রতা। গভীর পানির বোরো চাষের জন্য অপ্রতুল, তবে ডাল ফসলের জন্য কার্যকর।'}
+                        ? '0–5 cm rootzone layer measured by L-band radiometer. Evaluates seed germination and shallow vs deep taproot crops.'
+                        : '০–৫ সেমি শিকড় স্তরের আর্দ্রতা। বীজ গজানো ও ফসলের শিকড় প্রসারণের সক্ষমতা নির্দেশ করে।'}
                     </p>
                   </div>
 
                   <div className="pt-4 mt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#8FA3B8]">
-                    <span>Air Humidity</span>
-                    <span className="text-white font-semibold">{power.humidityPct}% RH</span>
+                    <span>Air Humidity (RH2M)</span>
+                    <span className="text-white font-semibold">{Math.round(conditions.rh)}% RH</span>
                   </div>
                 </div>
 
@@ -351,30 +647,32 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA MODIS"
-                        status="snapshot"
-                        date="2026-10-06"
+                        sourceName="NASA MODIS / POWER"
+                        status={whatIfActive ? 'simulated' : 'snapshot'}
+                        date={whatIfActive ? 'Simulated' : sat.date}
                         language={language}
                       />
-                      <span className="font-mono text-xs text-[#B8FF3D] font-semibold">
-                        {language === 'en' ? modis.ndviStatusEn : modis.ndviStatusBn}
+                      <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
+                        {activeMaxTemp > 35
+                          ? (language === 'en' ? 'Heat Stress (>35°C)' : 'তাপপ্রবাহ সতর্কতা (>৩৫° সে.)')
+                          : (language === 'en' ? 'Safe Growth Range' : 'অনুকূল তাপমাত্রা')}
                       </span>
                     </div>
 
                     <div className="font-mono text-3xl sm:text-4xl font-bold text-white mb-1">
-                      {power.tempC}°C <span className="text-base font-normal text-[#8FA3B8]">2m Mean</span>
+                      {activeMaxTemp.toFixed(1)}°C <span className="text-base font-normal text-[#8FA3B8]">Max ({conditions.tMaxAvg.toFixed(1)}° Mean)</span>
                     </div>
 
                     <p className="text-xs text-[#8FA3B8] leading-relaxed mt-3">
                       {language === 'en'
-                        ? `Vegetation index is ${modis.ndvi} NDVI (moderate greenery). Surface thermal reading is ${modis.landSurfaceTempC}°C, within safe photosynthetic limits.`
-                        : `উদ্ভিদ সজীবতা সূচক ${modis.ndvi} NDVI (মাঝারি সবুজ)। ভূপৃষ্ঠের তাপমাত্রা ${modis.landSurfaceTempC}°C, যা ফসলের জন্য সহনীয়।`}
+                        ? `Vegetation index is ${sat.ndvi} NDVI. Daytime thermal reading is ${sat.lst}°C, monitored for flowering heat sensitivity.`
+                        : `উদ্ভিদ সজীবতা সূচক ${sat.ndvi} NDVI। ভূ-পৃষ্ঠের তাপমাত্রা ${sat.lst}°C, ফুল ফোটা ও দানা বাঁধার জন্য পর্যবেক্ষণাধীন।`}
                     </p>
                   </div>
 
                   <div className="pt-4 mt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#8FA3B8]">
-                    <span>Land Surface Temp</span>
-                    <span className="text-white font-semibold">{modis.landSurfaceTempC}°C</span>
+                    <span>MODIS Surface Temp</span>
+                    <span className="text-white font-semibold">{sat.lst}°C</span>
                   </div>
                 </div>
               </div>
@@ -429,51 +727,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     CLIMATE SHIFT IN {districtName.toUpperCase()}
                   </span>
                   <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
-                    {language === 'en' ? 'Long-Term Environmental Trend' : 'দীর্ঘমেয়াদী জলবায়ু রূপান্তর'}
+                    {language === 'en' ? 'Long-Term Decadal Shift (Field Shift)' : 'দীর্ঘমেয়াদী জলবায়ু রূপান্তর (ফিল্ড শিফট)'}
                   </h3>
                 </div>
                 <div className="text-xs text-[#8FA3B8] font-mono">
-                  30-Year NASA POWER Baseline vs 5-Year Recent
+                  {language === 'en' ? 'NASA POWER 2001–2010 vs Latest 10-Year Decadal Shift' : 'নাসা পাওয়ার ২০০১-২০১০ বনাম সাম্প্রতিক ১০ বছরের তুলনা'}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-5 rounded-2xl bg-[#050B14] border border-white/10">
-                  <span className="text-xs text-[#8FA3B8] block mb-1">Pre-Monsoon Rainfall</span>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-mono text-2xl sm:text-3xl font-bold text-[#FF5C5C]">-24%</span>
-                    <TrendingDown className="w-4 h-4 text-[#FF5C5C]" />
-                  </div>
-                  <span className="text-xs text-[#8FA3B8]">Dry spells extended 18 days longer</span>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#050B14] border border-white/10">
-                  <span className="text-xs text-[#8FA3B8] block mb-1">Mean Rabi Temperature</span>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-mono text-2xl sm:text-3xl font-bold text-[#FF5C5C]">+1.2°C</span>
-                    <TrendingUp className="w-4 h-4 text-[#FF5C5C]" />
-                  </div>
-                  <span className="text-xs text-[#8FA3B8]">Warm nights during grain-filling</span>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#050B14] border border-white/10">
-                  <span className="text-xs text-[#8FA3B8] block mb-1">Groundwater Depth</span>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-mono text-2xl sm:text-3xl font-bold text-[#00E5FF]">-3.4 m</span>
-                    <TrendingDown className="w-4 h-4 text-[#00E5FF]" />
-                  </div>
-                  <span className="text-xs text-[#8FA3B8]">Pumping energy cost +32% since 2018</span>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-[#050B14] border border-white/10">
-                  <span className="text-xs text-[#8FA3B8] block mb-1">Soil Organic Matter</span>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="font-mono text-2xl sm:text-3xl font-bold text-[#B8FF3D]">0.82%</span>
-                    <span className="text-xs text-[#8FA3B8] font-mono">(Low)</span>
-                  </div>
-                  <span className="text-xs text-[#8FA3B8]">Pulse rotation required for nitrogen</span>
-                </div>
-              </div>
+              <FieldShiftPanel shift={fieldShift} />
             </section>
           </>
         )}
@@ -485,6 +747,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             secondaryPriority={secondaryPriority}
             language={language}
             onExplainCrop={(crop) => setExplainCrop(crop)}
+            telemetry={telemetry}
           />
         )}
 
@@ -495,6 +758,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             selectedPriority={selectedPriority}
             language={language}
             onExplainCrop={(crop) => setExplainCrop(crop)}
+            engineResult={engineResult}
+            telemetry={telemetry}
           />
         )}
 

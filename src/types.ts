@@ -90,6 +90,17 @@ export interface RiskAlert {
   descBn: string;
 }
 
+export interface ScoreDeltas {
+  base: number;
+  dryPenalty: number;
+  optimalSowingBonus: number;
+  heatPenalty: number;
+  waterDeficitPenalty: number;
+  primaryPriorityDelta: number;
+  secondaryPriorityDelta: number;
+  finalScore: number;
+}
+
 export interface CropData {
   id: string;
   nameEn: string;
@@ -106,6 +117,7 @@ export interface CropData {
   durationDays: number;
   shortWhyEn: string;
   shortWhyBn: string;
+  deltas?: ScoreDeltas;
   explanation: {
     observationsTriggered: string[];
     observationsTriggeredBn: string[];
