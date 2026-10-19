@@ -3,6 +3,8 @@ import { User, LogIn, LogOut, ChevronDown, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { UserProfileModal } from './UserProfileModal';
+import { getFarmerProfile } from '../../data/farmerProfile';
+import { BD_DISTRICTS } from '../../data/districts';
 
 interface UserMenuProps {
   compact?: boolean;
@@ -11,10 +13,16 @@ interface UserMenuProps {
 export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   const { user, isGuest, displayName, avatarUrl, provider, signOut } = useAuth();
   const { lang } = useLang();
+  const isBn = lang === 'bn';
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const profile = getFarmerProfile(user?.id);
+  const farmerName = profile.fullName || displayName || (isBn ? 'খামারী' : 'Farmer');
+  const districtObj = BD_DISTRICTS.find((d) => d.id === profile.districtId);
+  const districtName = districtObj ? (isBn ? districtObj.nameBn : districtObj.nameEn) : null;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -74,8 +82,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
         )}
 
         {!compact && (
-          <span className="text-xs font-medium text-slate-200 max-w-[110px] truncate hidden sm:inline">
-            {displayName || (lang === 'en' ? 'Farmer' : 'খামারী')}
+          <span className="text-xs font-medium text-slate-200 max-w-[120px] truncate hidden sm:inline">
+            {farmerName}
           </span>
         )}
 
@@ -88,19 +96,24 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
 
       {/* Dropdown Menu */}
       {dropdownOpen && (
-        <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-[#0B1626] border border-white/15 shadow-2xl p-2 z-50 text-xs animate-fadeIn backdrop-blur-xl">
+        <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-[#0B1626] border border-white/15 shadow-2xl p-2 z-50 text-xs animate-fadeIn backdrop-blur-xl">
           {/* User info banner */}
           <div className="p-2.5 pb-3 border-b border-white/10">
             <span className="font-display font-bold text-white block truncate text-sm">
-              {displayName}
+              {farmerName}
             </span>
             <span className="text-[11px] font-mono text-slate-400 block truncate mt-0.5">
-              {user?.email || (isGuest ? (lang === 'en' ? 'Guest Mode' : 'গেস্ট মোড') : '')}
+              {user?.email || (isGuest ? (isBn ? 'গেস্ট মোড' : 'Guest Mode') : '')}
             </span>
-            <div className="mt-1.5">
+            <div className="mt-2 flex items-center gap-1.5 flex-wrap">
               <span className="inline-block text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[#00E5FF]">
                 {provider === 'google' ? 'Google OAuth' : provider === 'email' ? 'Email Auth' : 'Guest'}
               </span>
+              {districtName && (
+                <span className="inline-block text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#B8FF3D]/10 border border-[#B8FF3D]/25 text-[#B8FF3D]">
+                  📍 {districtName}
+                </span>
+              )}
             </div>
           </div>
 
