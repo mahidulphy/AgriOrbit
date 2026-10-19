@@ -1,0 +1,475 @@
+import { supabase, isSupabaseConfigured } from './supabase';
+import type { FarmerPriorityId } from '../types';
+import { BD_DISTRICTS } from '../data/districts';
+
+export interface FarmField {
+  id: string;
+  name: string;
+  division: string;
+  district: string;
+  upazila: string;
+  village: string;
+  latitude: number;
+  longitude: number;
+  area: number;
+  unit: 'bigha' | 'acre' | 'decimal' | 'hectare';
+  elevation: 'high' | 'medium_high' | 'medium_low' | 'low';
+  soilType: 'loam' | 'clay_loam' | 'sandy_loam' | 'clay' | 'silt_loam';
+  irrigation: 'deep_tubewell' | 'shallow_tubewell' | 'canal_surface' | 'rainfed';
+  waterSource: 'groundwater' | 'river' | 'pond' | 'rainwater';
+  currentCrop: string;
+  previousCrop: string;
+  plannedNextCrop: string;
+  growingSeason: 'rabi' | 'kharif1' | 'kharif2';
+  isPrimary: boolean;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FarmerProfileData {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  avatarUrl: string;
+  preferredLanguage: 'bn' | 'en';
+  communicationMethod: 'in_app' | 'sms' | 'voice' | 'whatsapp';
+  primaryPriority: FarmerPriorityId;
+  priorities: FarmerPriorityId[];
+  pastDamages: string[];
+  pastDamageNotes: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const COMMUNICATION_METHODS = [
+  { id: 'in_app', en: 'In-App Notifications', bn: 'অ্যাপ নোটিফিকেশন' },
+  { id: 'sms', en: 'SMS Mobile Alert', bn: 'এসএমএস বার্তা' },
+  { id: 'whatsapp', en: 'WhatsApp Alert', bn: 'হোয়াটসঅ্যাপ বার্তা' },
+  { id: 'voice', en: 'Automated Voice Call', bn: 'ভয়েস কল' },
+] as const;
+
+export const DEFAULT_INITIAL_FIELD: FarmField = {
+  id: 'field_primary_default',
+  name: 'প্রধান ধানি জমি (North Plot)',
+  division: 'Rangpur',
+  district: 'dinajpur',
+  upazila: 'Kaharole',
+  village: 'Rasulpur',
+  latitude: 25.6217,
+  longitude: 88.6355,
+  area: 2.5,
+  unit: 'bigha',
+  elevation: 'medium_high',
+  soilType: 'loam',
+  irrigation: 'deep_tubewell',
+  waterSource: 'groundwater',
+  currentCrop: 'aman',
+  previousCrop: 'jute',
+  plannedNextCrop: 'mustard',
+  growingSeason: 'rabi',
+  isPrimary: true,
+  notes: 'উর্বর পলি দোআঁশ মাটি, রবি মৌসুমে সরিষা ও বোরো আবর্তনের জন্য উপযুক্ত।',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
+
+export const DEFAULT_FARMER_PROFILE_DATA: FarmerProfileData = {
+  id: 'guest_user',
+  fullName: 'Mahidul Islam',
+  email: 'farmer@agriorbit.space',
+  phone: '01712-345678',
+  avatarUrl: '',
+  preferredLanguage: 'bn',
+  communicationMethod: 'in_app',
+  primaryPriority: 'save_water',
+  priorities: ['save_water', 'improve_soil'],
+  pastDamages: ['drought'],
+  pastDamageNotes: 'গত বছর খরার কারণে বোরো মৌসুমে সেচ খরচ বেড়েছিল।',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
+
+const PROFILE_CACHE_KEY = 'agriorbit_farmer_profile_v2';
+const FIELDS_CACHE_KEY = 'agriorbit_farmer_fields_v2';
+
+/**
+ * Calculates a profile completeness percentage (0 - 100%)
+ */
+export function calculateProfileCompletion(
+  profile: FarmerProfileData,
+  fields: FarmField[]
+): number {
+  let score = 0;
+  if (profile.fullName && profile.fullName.trim().length > 2) score += 20;
+  if (profile.phone && profile.phone.trim().length >= 8) score += 15;
+  if (profile.avatarUrl && profile.avatarUrl.trim().length > 0) score += 15;
+  if (profile.priorities && profile.priorities.length > 0) score += 20;
+  if (fields && fields.length > 0) {
+    score += 20;
+    // Extra completeness if at least one field has coordinates and soil type
+    if (fields[0].latitude && fields[0].soilType) score += 10;
+  }
+  return Math.min(100, score);
+}
+
+/**
+ * Loads the Farmer Profile and all associated Farm Fields
+ */
+export async function loadFarmerProfile(
+  userId?: string
+): Promise<{ profile: FarmerProfileData; fields: FarmField[] }> {
+  // 1. Check local cache first for instant UI response
+  let cachedProfile: FarmerProfileData | null = null;
+  let cachedFields: FarmField[] = [];
+
+  try {
+    const rawProfile = localStorage.getItem(`${PROFILE_CACHE_KEY}_${userId || 'default'}`);
+    if (rawProfile) cachedProfile = JSON.parse(rawProfile);
+
+    const rawFields = localStorage.getItem(`${FIELDS_CACHE_KEY}_${userId || 'default'}`);
+    if (rawFields) cachedFields = JSON.parse(rawFields);
+  } catch (err) {
+    console.error('Local cache read error:', err);
+  }
+
+  // 2. If Supabase is configured and user is authenticated, query Supabase
+  if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+    try {
+      // Query farmer_profiles table
+      const { data: profileRow, error: profileErr } = await supabase
+        .from('farmer_profiles')
+        .select('*')
+        .eq('id', userId)
+        .maybeSingle();
+
+      // Query farmer_fields table
+      const { data: fieldsRows, error: fieldsErr } = await supabase
+        .from('farmer_fields')
+        .select('*')
+        .eq('user_id', userId)
+        .order('is_primary', { ascending: false });
+
+      if (profileRow && !profileErr) {
+        cachedProfile = {
+          id: profileRow.id,
+          fullName: profileRow.full_name || '',
+          email: '', // populated from auth user
+          phone: profileRow.phone || '',
+          avatarUrl: profileRow.avatar_url || '',
+          preferredLanguage: profileRow.preferred_language || 'bn',
+          communicationMethod: profileRow.communication_method || 'in_app',
+          primaryPriority: (profileRow.primary_priority as FarmerPriorityId) || 'save_water',
+          priorities: (profileRow.priorities as FarmerPriorityId[]) || ['save_water'],
+          pastDamages: profileRow.past_damages || [],
+          pastDamageNotes: profileRow.past_damage_notes || '',
+          createdAt: profileRow.created_at,
+          updatedAt: profileRow.updated_at,
+        };
+      }
+
+      if (fieldsRows && !fieldsErr && fieldsRows.length > 0) {
+        cachedFields = fieldsRows.map((f: any) => ({
+          id: f.id,
+          name: f.name,
+          division: f.division,
+          district: f.district,
+          upazila: f.upazila || '',
+          village: f.village || '',
+          latitude: f.latitude,
+          longitude: f.longitude,
+          area: f.area,
+          unit: f.unit,
+          elevation: f.elevation,
+          soilType: f.soil_type,
+          irrigation: f.irrigation,
+          waterSource: f.water_source,
+          currentCrop: f.current_crop,
+          previousCrop: f.previous_crop,
+          plannedNextCrop: f.planned_next_crop,
+          growingSeason: f.growing_season,
+          isPrimary: f.is_primary,
+          notes: f.notes || '',
+          createdAt: f.created_at,
+          updatedAt: f.updated_at,
+        }));
+      }
+
+      // Also check auth user metadata for fallback
+      const { data: authData } = await supabase.auth.getUser();
+      if (authData?.user) {
+        if (!cachedProfile) {
+          const meta = authData.user.user_metadata || {};
+          cachedProfile = {
+            ...DEFAULT_FARMER_PROFILE_DATA,
+            id: authData.user.id,
+            fullName: meta.full_name || authData.user.email?.split('@')[0] || 'Farmer',
+            email: authData.user.email || '',
+            avatarUrl: meta.avatar_url || '',
+          };
+        } else {
+          cachedProfile.email = authData.user.email || '';
+          if (!cachedProfile.avatarUrl && authData.user.user_metadata?.avatar_url) {
+            cachedProfile.avatarUrl = authData.user.user_metadata.avatar_url;
+          }
+        }
+      }
+    } catch (supaErr) {
+      console.warn('Supabase profile fetch fallback to local:', supaErr);
+    }
+  }
+
+  // 3. Ensure defaults if empty
+  const finalProfile: FarmerProfileData = cachedProfile || {
+    ...DEFAULT_FARMER_PROFILE_DATA,
+    id: userId || 'default_user',
+  };
+
+  const finalFields: FarmField[] = cachedFields.length > 0 ? cachedFields : [DEFAULT_INITIAL_FIELD];
+
+  // Sync to local cache
+  try {
+    localStorage.setItem(
+      `${PROFILE_CACHE_KEY}_${userId || 'default'}`,
+      JSON.stringify(finalProfile)
+    );
+    localStorage.setItem(
+      `${FIELDS_CACHE_KEY}_${userId || 'default'}`,
+      JSON.stringify(finalFields)
+    );
+  } catch (e) {
+    // ignore local storage errors
+  }
+
+  return { profile: finalProfile, fields: finalFields };
+}
+
+/**
+ * Saves the Farmer Profile
+ */
+export async function saveFarmerProfile(
+  profile: Partial<FarmerProfileData>,
+  userId?: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const key = `${PROFILE_CACHE_KEY}_${userId || 'default'}`;
+    const raw = localStorage.getItem(key);
+    const existing = raw ? JSON.parse(raw) : DEFAULT_FARMER_PROFILE_DATA;
+    const updated: FarmerProfileData = {
+      ...existing,
+      ...profile,
+      updatedAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem(key, JSON.stringify(updated));
+
+    // Also sync active priority to legacy keys for recommendation engine cross-compatibility
+    if (updated.primaryPriority) {
+      localStorage.setItem('agriorbit_selected_priority', updated.primaryPriority);
+    }
+
+    // If Supabase is configured and user is authenticated
+    if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      // 1. Update Supabase Auth user metadata
+      try {
+        await supabase.auth.updateUser({
+          data: {
+            full_name: updated.fullName,
+            phone: updated.phone,
+            avatar_url: updated.avatarUrl,
+            preferred_language: updated.preferredLanguage,
+            primary_priority: updated.primaryPriority,
+          },
+        });
+      } catch (authErr) {
+        console.warn('Auth metadata update non-critical warning:', authErr);
+      }
+
+      // 2. Upsert to public.farmer_profiles table
+      try {
+        await supabase.from('farmer_profiles').upsert({
+          id: userId,
+          full_name: updated.fullName,
+          phone: updated.phone,
+          avatar_url: updated.avatarUrl,
+          preferred_language: updated.preferredLanguage,
+          communication_method: updated.communicationMethod,
+          primary_priority: updated.primaryPriority,
+          priorities: updated.priorities,
+          past_damages: updated.pastDamages,
+          past_damage_notes: updated.pastDamageNotes,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (tableErr) {
+        console.warn('farmer_profiles table upsert error (will use auth metadata):', tableErr);
+      }
+    }
+
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err?.message || 'Failed to save profile' };
+  }
+}
+
+/**
+ * Saves or updates a Farm Field
+ */
+export async function saveFarmField(
+  field: FarmField,
+  userId?: string
+): Promise<{ field: FarmField; error?: string }> {
+  try {
+    const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
+    const raw = localStorage.getItem(key);
+    const existing: FarmField[] = raw ? JSON.parse(raw) : [DEFAULT_INITIAL_FIELD];
+
+    const idx = existing.findIndex((f) => f.id === field.id);
+    let updatedList: FarmField[];
+
+    const fieldToSave = { ...field, updatedAt: new Date().toISOString() };
+
+    if (idx >= 0) {
+      updatedList = existing.map((f) => (f.id === field.id ? fieldToSave : f));
+    } else {
+      updatedList = [...existing, fieldToSave];
+    }
+
+    // If this field is marked primary, unmark others
+    if (fieldToSave.isPrimary) {
+      updatedList = updatedList.map((f) => ({
+        ...f,
+        isPrimary: f.id === fieldToSave.id,
+      }));
+    }
+
+    localStorage.setItem(key, JSON.stringify(updatedList));
+
+    // Sync to Supabase if configured
+    if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      try {
+        await supabase.from('farmer_fields').upsert({
+          id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
+          user_id: userId,
+          name: fieldToSave.name,
+          division: fieldToSave.division,
+          district: fieldToSave.district,
+          upazila: fieldToSave.upazila,
+          village: fieldToSave.village,
+          latitude: fieldToSave.latitude,
+          longitude: fieldToSave.longitude,
+          area: fieldToSave.area,
+          unit: fieldToSave.unit,
+          elevation: fieldToSave.elevation,
+          soil_type: fieldToSave.soilType,
+          irrigation: fieldToSave.irrigation,
+          water_source: fieldToSave.waterSource,
+          current_crop: fieldToSave.currentCrop,
+          previous_crop: fieldToSave.previousCrop,
+          planned_next_crop: fieldToSave.plannedNextCrop,
+          growing_season: fieldToSave.growingSeason,
+          is_primary: fieldToSave.isPrimary,
+          notes: fieldToSave.notes,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (err) {
+        console.warn('farmer_fields table upsert error:', err);
+      }
+    }
+
+    return { field: fieldToSave };
+  } catch (err: any) {
+    return { field, error: err?.message || 'Failed to save field' };
+  }
+}
+
+/**
+ * Deletes a Farm Field
+ */
+export async function deleteFarmField(
+  fieldId: string,
+  userId?: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
+    const raw = localStorage.getItem(key);
+    const existing: FarmField[] = raw ? JSON.parse(raw) : [];
+
+    const updated = existing.filter((f) => f.id !== fieldId);
+    // If deleted field was primary, make the first remaining field primary
+    if (updated.length > 0 && !updated.some((f) => f.isPrimary)) {
+      updated[0].isPrimary = true;
+    }
+
+    localStorage.setItem(key, JSON.stringify(updated));
+
+    if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      try {
+        await supabase.from('farmer_fields').delete().eq('id', fieldId).eq('user_id', userId);
+      } catch (err) {
+        console.warn('farmer_fields delete error:', err);
+      }
+    }
+
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err?.message || 'Failed to delete field' };
+  }
+}
+
+/**
+ * Uploads an avatar image (with size & format validation)
+ */
+export async function uploadAvatar(
+  file: File,
+  userId: string
+): Promise<{ url?: string; error?: string }> {
+  // 1. Validation
+  const maxBytes = 2 * 1024 * 1024; // 2 MB
+  if (file.size > maxBytes) {
+    return { error: 'Image file size must be less than 2MB' };
+  }
+
+  const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+  if (!validTypes.includes(file.type)) {
+    return { error: 'Only JPEG, PNG, and WebP images are supported' };
+  }
+
+  // 2. Try Supabase Storage upload
+  if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+    try {
+      const fileExt = file.name.split('.').pop() || 'jpg';
+      const filePath = `${userId}/avatar_${Date.now()}.${fileExt}`;
+
+      const { data, error: uploadErr } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file, { upsert: true });
+
+      if (!uploadErr && data) {
+        const { data: publicData } = supabase.storage.from('avatars').getPublicUrl(filePath);
+        if (publicData?.publicUrl) {
+          return { url: publicData.publicUrl };
+        }
+      }
+    } catch (storageErr) {
+      console.warn('Storage bucket upload failed, using local DataURL fallback:', storageErr);
+    }
+  }
+
+  // 3. Fallback to base64 DataURL
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({ url: reader.result as string });
+    reader.onerror = () => resolve({ error: 'Failed to read image file' });
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
+ * Returns the active/primary field
+ */
+export function getActiveField(fields: FarmField[]): FarmField {
+  if (!fields || fields.length === 0) return DEFAULT_INITIAL_FIELD;
+  const primary = fields.find((f) => f.isPrimary);
+  return primary || fields[0];
+}
