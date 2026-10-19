@@ -41,7 +41,7 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
           </h1>
 
           {/* Supporting Copy */}
-          <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-[#8FA3B8] font-normal">
+          <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-slate-200 font-normal drop-shadow-sm">
             {t.hero.sub}
           </p>
 
@@ -58,7 +58,7 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
           </div>
 
           {/* Trust points */}
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm text-[#8FA3B8] font-mono">
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-300 font-mono drop-shadow-sm">
             {t.hero.trust.map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[#B8FF3D]" />

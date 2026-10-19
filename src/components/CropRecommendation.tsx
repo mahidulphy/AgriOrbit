@@ -160,36 +160,36 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
         </div>
 
         {/* Reasons & Supporting Data Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-white/5 text-xs text-[#8FA3B8]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-white/5 text-xs text-slate-300">
           <div>
-            <span className="block text-[10px] uppercase font-mono text-[#8FA3B8] mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
               {language === 'en' ? 'Water Requirement' : 'পানির চাহিদা'}
             </span>
             <span className="font-bold text-white">
               {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn}
             </span>
-            <span className="block text-[11px] text-[#8FA3B8] mt-0.5">
+            <span className="block text-xs text-slate-300 mt-0.5">
               {language === 'en' ? crop.waterDetailEn : crop.waterDetailBn}
             </span>
           </div>
 
           <div>
-            <span className="block text-[10px] uppercase font-mono text-[#8FA3B8] mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
               {language === 'en' ? 'Growth Duration' : 'সময়কাল'}
             </span>
             <span className="font-mono text-white font-bold">
               {crop.durationDays} {language === 'en' ? 'Days' : 'দিন'}
             </span>
-            <span className="block text-[11px] text-[#8FA3B8] mt-0.5">
+            <span className="block text-xs text-slate-300 mt-0.5">
               {language === 'en' ? 'From seeding to harvest' : 'বপন থেকে কর্তন পর্যন্ত'}
             </span>
           </div>
 
           <div>
-            <span className="block text-[10px] uppercase font-mono text-[#8FA3B8] mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
               {language === 'en' ? 'Agronomic Fit' : 'প্রধান সুবিধা'}
             </span>
-            <p className="text-[11px] text-[#8FA3B8] leading-relaxed">
+            <p className="text-xs text-slate-200 leading-relaxed">
               {language === 'en' ? crop.shortWhyEn : crop.shortWhyBn}
             </p>
           </div>

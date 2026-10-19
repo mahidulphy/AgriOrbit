@@ -215,7 +215,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               >
                 <div>
                   {/* Top Season Number & Months */}
-                  <div className="flex items-center justify-between text-xs font-mono text-[#8FA3B8] mb-3">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
                     <span className="text-[#B8FF3D] font-bold uppercase">
                       0{index + 1} · {language === 'en' ? season.seasonEn : season.seasonBn}
                     </span>
@@ -243,12 +243,12 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                     </span>
                   </div>
 
-                  <span className="text-xs text-[#8FA3B8] font-mono block mb-4">
+                  <span className="text-xs text-slate-400 font-mono block mb-4">
                     {crop.durationDays} {language === 'en' ? 'Days growth duration' : 'দিন সময়কাল'}
                   </span>
 
                   {/* Agronomic Role in Cycle */}
-                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 text-xs text-[#8FA3B8] leading-relaxed mb-6">
+                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 text-xs text-slate-300 leading-relaxed mb-6">
                     <span className="text-[10px] uppercase font-mono text-white block mb-1">
                       {language === 'en' ? 'Agronomic Function' : 'পরিক্রমায় ভূমিকা'}:
                     </span>

@@ -27,16 +27,18 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open ? 'border-b border-white/[0.06] bg-ink-950/75 backdrop-blur-xl' : 'border-b border-transparent'
+        scrolled || open
+          ? 'border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl shadow-lg shadow-black/20'
+          : 'border-b border-white/5 bg-gradient-to-b from-[#050B14]/80 via-[#050B14]/40 to-transparent backdrop-blur-[2px]'
       }`}
     >
       <nav className="container-x flex h-16 items-center justify-between gap-4 md:h-20">
         <Wordmark />
 
-        <ul className="hidden items-center gap-8 text-sm text-slate-300 lg:flex">
+        <ul className="hidden items-center gap-8 text-sm font-medium text-slate-100 lg:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="transition hover:text-white">
+              <a href={l.href} className="transition-colors hover:text-[#B8FF3D] drop-shadow-sm">
                 {l.label}
               </a>
             </li>
@@ -49,18 +51,26 @@ export function Nav() {
             {t.nav.analyze}
             <ArrowRight className="h-4 w-4" />
           </button>
-          <button onClick={() => setOpen(!open)} className="rounded-full p-2 text-slate-300 hover:text-white lg:hidden" aria-label="Menu">
+          <button
+            onClick={() => setOpen(!open)}
+            className="rounded-xl p-2 bg-white/10 border border-white/15 text-slate-100 hover:text-white lg:hidden cursor-pointer"
+            aria-label="Menu"
+          >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
       {open && (
-        <div className="container-x pb-5 lg:hidden">
-          <ul className="flex flex-col gap-1 text-slate-200">
+        <div className="container-x pb-5 pt-2 lg:hidden bg-[#070D18]/95 backdrop-blur-2xl border-b border-white/10 rounded-b-2xl shadow-2xl">
+          <ul className="flex flex-col gap-1 text-slate-100">
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 hover:bg-white/5">
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-3.5 py-2.5 text-sm font-medium hover:bg-white/10 hover:text-[#B8FF3D] transition-colors"
+                >
                   {l.label}
                 </a>
               </li>

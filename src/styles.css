@@ -162,7 +162,7 @@
     color: #ffffff;
   }
   .section-sub {
-    color: #8fa3b8;
+    color: #cbd5e1;
     font-size: 1.05rem;
     line-height: 1.65;
     max-width: 40rem;
@@ -176,14 +176,22 @@
     font-family: var(--font-sans);
   }
 
-  /* Scrim overlays for authentic imagery */
+  /* Scrim overlays for authentic imagery with high contrast text protection */
   .scrim-hero {
-    background: linear-gradient(
-      180deg,
-      rgba(5, 11, 20, 0.4) 0%,
-      rgba(5, 11, 20, 0.75) 60%,
-      #050b14 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 11, 20, 0.93) 0%,
+        rgba(5, 11, 20, 0.8) 45%,
+        rgba(5, 11, 20, 0.45) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(5, 11, 20, 0.75) 0%,
+        rgba(5, 11, 20, 0.4) 35%,
+        rgba(5, 11, 20, 0.85) 80%,
+        #050b14 100%
+      );
   }
 
   .scrim-editorial-card {

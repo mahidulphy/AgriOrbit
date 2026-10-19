@@ -9,14 +9,14 @@ export function HeroCard({ conditions: c, shift }: { conditions: Conditions; shi
   const { t, num, range, date } = useLang();
 
   const tiles = [
-    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', tint: 'text-cyan-300' },
-    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: '°C', tint: 'text-amber-300' },
-    { icon: Droplets, label: t.heroCard.humidity, value: num(c.rh, 0), unit: '%', tint: 'text-sky-300' },
-    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: 'mm/d', tint: 'text-lime-300' },
+    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: '30d cumulative', tint: 'text-cyan-300' },
+    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: '°C', desc: 'Peak day high', tint: 'text-amber-300' },
+    { icon: Droplets, label: t.heroCard.humidity, value: num(c.rh, 0), unit: '%', desc: 'Mean relative', tint: 'text-sky-300' },
+    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: 'mm/d', desc: 'Hargreaves ET₀', tint: 'text-lime-300' },
   ];
 
   return (
-    <div className="glass p-5 sm:p-6">
+    <div className="glass p-5 sm:p-6 shadow-2xl border-white/10">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 font-display text-lg font-semibold text-white">
           <MapPin className="h-4 w-4 text-lime-300" />
@@ -26,22 +26,25 @@ export function HeroCard({ conditions: c, shift }: { conditions: Conditions; shi
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
-        {tiles.map(({ icon: Icon, label, value, unit, tint }) => (
-          <div key={label} className="tile p-3.5">
-            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+        {tiles.map(({ icon: Icon, label, value, unit, desc, tint }) => (
+          <div key={label} className="tile p-3.5 bg-[#050B14]/90 border-white/10">
+            <div className="flex items-center gap-1.5 text-xs text-slate-300">
               <Icon className={`h-3.5 w-3.5 ${tint}`} />
               {label}
             </div>
-            <div className="mt-1.5 font-display text-2xl font-semibold text-white">
+            <div className="mt-1.5 font-display text-2xl font-bold text-white">
               {value}
               <span className="ml-1 text-sm font-medium text-slate-400">{unit}</span>
+            </div>
+            <div className="mt-0.5 text-[10px] text-slate-400 font-mono">
+              {desc}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="tile mt-3 p-4">
-        <div className="text-xs font-medium text-slate-400">{t.heroCard.shift(range(shift.thenRange), range(shift.nowRange))}</div>
+      <div className="tile mt-3 p-4 bg-[#050B14]/90 border-white/10">
+        <div className="text-xs font-medium text-slate-300">{t.heroCard.shift(range(shift.thenRange), range(shift.nowRange))}</div>
         <div className="mt-3 space-y-3">
           {shift.seasons.map((s) => (
             <div key={s.season} className="grid grid-cols-[4.5rem_1fr_3.75rem] items-center gap-3 text-sm">
@@ -58,7 +61,10 @@ export function HeroCard({ conditions: c, shift }: { conditions: Conditions; shi
         </div>
       </div>
 
-      <p className="mt-4 text-[11px] text-slate-500">{t.heroCard.source(date(c.to))}</p>
+      <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
+        <span>{t.heroCard.source(date(c.from), date(c.to))}</span>
+        <span className="font-mono text-cyan-300/90 text-[11px]">172 mm Rain · 86% RH</span>
+      </div>
     </div>
   );
 }
