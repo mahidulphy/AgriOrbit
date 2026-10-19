@@ -4,15 +4,20 @@ import { Loader2 } from 'lucide-react';
 import { LandingPage } from './components/landing/LandingPage.tsx';
 import { AnalyzePage } from './components/analyze/AnalyzePage.tsx';
 import { LoginPage, SignUpPage, ForgotPasswordPage, AuthCallbackPage } from './components/auth';
+import { PrivacyPolicyPage, TermsPage } from './components/legal';
 import { useAuth } from './contexts/AuthContext.tsx';
 
-export type AppRoute = 'landing' | 'analyze' | 'login' | 'signup' | 'forgot-password' | 'callback';
+export type AppRoute = 'landing' | 'analyze' | 'login' | 'signup' | 'forgot-password' | 'callback' | 'privacy' | 'terms';
 
 export function resolveCurrentRoute(): AppRoute {
   if (typeof window === 'undefined') return 'landing';
 
   const hash = window.location.hash || '';
   const path = window.location.pathname || '';
+
+  // Legal pages
+  if (hash.startsWith('#/privacy') || path === '/privacy' || path.startsWith('/privacy')) return 'privacy';
+  if (hash.startsWith('#/terms') || path === '/terms' || path.startsWith('/terms')) return 'terms';
 
   // Auth callback handler
   if (hash.startsWith('#/auth/callback') || path.startsWith('/auth/callback')) return 'callback';
@@ -97,6 +102,14 @@ export default function App() {
 
   if (route === 'callback') {
     return <AuthCallbackPage />;
+  }
+
+  if (route === 'privacy') {
+    return <PrivacyPolicyPage />;
+  }
+
+  if (route === 'terms') {
+    return <TermsPage />;
   }
 
   return <LandingPage />;

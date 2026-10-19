@@ -125,8 +125,17 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
       </main>
 
       {/* Footer */}
-      <footer className="relative z-20 py-4 text-center text-xs text-slate-400 font-mono">
-        <p>AgriOrbit · NASA Space Apps Challenge 2026</p>
+      <footer className="relative z-20 py-4 text-center text-xs text-slate-400 font-mono space-y-1">
+        <div className="flex items-center justify-center gap-3">
+          <a href="#/privacy" className="hover:text-[#00E5FF] transition-colors underline underline-offset-4">
+            {lang === 'bn' ? 'গোপনীয়তা নীতি' : 'Privacy Policy'}
+          </a>
+          <span>·</span>
+          <a href="#/terms" className="hover:text-[#B8FF3D] transition-colors underline underline-offset-4">
+            {lang === 'bn' ? 'শর্তাবলী' : 'Terms & Conditions'}
+          </a>
+        </div>
+        <p className="text-[11px] text-slate-400">AgriOrbit · NASA Space Apps Challenge 2026</p>
       </footer>
     </div>
   );

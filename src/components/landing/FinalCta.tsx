@@ -26,7 +26,7 @@ export function FinalCta() {
 }
 
 export function Footer() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   return (
     <footer className="border-t border-white/[0.06] py-12">
       <div className="container-x grid gap-8 text-sm text-slate-400 md:grid-cols-[1.2fr_1fr]">
@@ -34,6 +34,15 @@ export function Footer() {
           <Wordmark />
           <p className="mt-4 max-w-md leading-relaxed">{t.footer.built}</p>
           <p className="mt-1 text-slate-500">{t.footer.challenge}</p>
+          <div className="mt-4 flex items-center gap-4 text-xs font-mono text-slate-400">
+            <a href="#/privacy" className="hover:text-[#00E5FF] transition-colors underline underline-offset-4">
+              {lang === 'bn' ? 'গোপনীয়তা নীতি' : 'Privacy Policy'}
+            </a>
+            <span>·</span>
+            <a href="#/terms" className="hover:text-[#B8FF3D] transition-colors underline underline-offset-4">
+              {lang === 'bn' ? 'শর্তাবলী ও নিয়মাবলী' : 'Terms & Conditions'}
+            </a>
+          </div>
         </div>
         <div className="md:text-right">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{t.footer.team}</div>
