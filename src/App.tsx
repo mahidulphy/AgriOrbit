@@ -5,15 +5,19 @@ import { LandingPage } from './components/landing/LandingPage.tsx';
 import { AnalyzePage } from './components/analyze/AnalyzePage.tsx';
 import { LoginPage, SignUpPage, ForgotPasswordPage, AuthCallbackPage } from './components/auth';
 import { PrivacyPolicyPage, TermsPage } from './components/legal';
+import { FarmerProfilePage } from './components/profile/FarmerProfilePage.tsx';
 import { useAuth } from './contexts/AuthContext.tsx';
 
-export type AppRoute = 'landing' | 'analyze' | 'login' | 'signup' | 'forgot-password' | 'callback' | 'privacy' | 'terms';
+export type AppRoute = 'landing' | 'analyze' | 'login' | 'signup' | 'forgot-password' | 'callback' | 'privacy' | 'terms' | 'profile';
 
 export function resolveCurrentRoute(): AppRoute {
   if (typeof window === 'undefined') return 'landing';
 
   const hash = window.location.hash || '';
   const path = window.location.pathname || '';
+
+  // Farmer Profile page
+  if (hash.startsWith('#/profile') || path === '/profile' || path.startsWith('/profile')) return 'profile';
 
   // Legal pages
   if (hash.startsWith('#/privacy') || path === '/privacy' || path.startsWith('/privacy')) return 'privacy';
@@ -110,6 +114,10 @@ export default function App() {
 
   if (route === 'terms') {
     return <TermsPage />;
+  }
+
+  if (route === 'profile') {
+    return <FarmerProfilePage />;
   }
 
   return <LandingPage />;

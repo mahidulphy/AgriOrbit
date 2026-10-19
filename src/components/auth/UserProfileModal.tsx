@@ -601,21 +601,29 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               )}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href="#/profile"
+                onClick={onClose}
+                className="px-3 py-2 rounded-xl bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-xs font-mono text-[#00E5FF] transition-colors border border-[#00E5FF]/30 hidden sm:inline-flex items-center gap-1"
+              >
+                <span>{isBn ? 'সম্পূর্ণ পৃষ্ঠা ↗' : 'Full Page ↗'}</span>
+              </a>
+
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 transition-colors cursor-pointer"
               >
                 {isBn ? 'বন্ধ করুন' : 'Close'}
               </button>
 
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer"
+                className="px-4 sm:px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer"
               >
                 <Save className="w-3.5 h-3.5" />
-                <span>{isBn ? 'তথ্য সংরক্ষণ করুন' : 'Save Profile'}</span>
+                <span>{isBn ? 'সংরক্ষণ' : 'Save'}</span>
               </button>
             </div>
           </div>

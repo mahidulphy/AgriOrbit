@@ -18,18 +18,51 @@ function initialStep(): AnalyzeStep {
   return 'location';
 }
 
+import { loadFarmerProfile, getActiveField } from '../../lib/farmerProfileService.ts';
+
 export function AnalyzePage() {
   const { lang, setLang } = useLang();
-  const { displayName } = useAuth();
+  const { user, displayName } = useAuth();
   const [step, setStepState] = useState<AnalyzeStep>(initialStep);
   const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
   const [secondaryPriority, setSecondaryPriority] = useState<FarmerPriorityId | null>(null);
+  const [farmerName, setFarmerName] = useState<string>('');
 
   const setStep = (next: AnalyzeStep) => {
     setStepState(next);
     window.location.hash = `#/analyze/${next}`;
   };
+
+  useEffect(() => {
+    async function syncFarmerContext() {
+      try {
+        const { profile, fields } = await loadFarmerProfile(user?.id);
+        if (profile) {
+          if (profile.fullName) setFarmerName(profile.fullName);
+          if (profile.primaryPriority) setPrimaryPriority(profile.primaryPriority);
+          if (profile.priorities && profile.priorities.length > 1) {
+            setSecondaryPriority(profile.priorities[1]);
+          }
+        }
+        if (fields && fields.length > 0) {
+          const activeField = getActiveField(fields);
+          if (activeField && activeField.district) {
+            setLocation({
+              district: activeField.district as DistrictId,
+              upazila: activeField.upazila || '',
+              latitude: activeField.latitude,
+              longitude: activeField.longitude,
+              source: 'preset',
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Failed to sync farmer context into AnalyzePage', err);
+      }
+    }
+    syncFarmerContext();
+  }, [user?.id]);
 
   useEffect(() => {
     const onHash = () => {
@@ -71,7 +104,7 @@ export function AnalyzePage() {
 
   return (
     <DashboardView
-      userName={displayName || (lang === 'en' ? 'Farmer' : 'খামারী')}
+      userName={farmerName || displayName || (lang === 'en' ? 'Farmer' : 'খামারী')}
       selectedDistrict={location.district as DistrictId}
       selectedUpazila={location.upazila}
       fieldLat={location.latitude}

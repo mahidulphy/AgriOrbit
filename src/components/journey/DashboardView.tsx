@@ -7,6 +7,7 @@ import {
   HelpCircle,
   Sliders,
   MapPin,
+  User,
   LogOut,
   Menu,
   X,
@@ -300,6 +301,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </button>
               );
             })}
+
+            {/* Direct Link to Farmer Profile & Fields */}
+            <a
+              href="#/profile"
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#00E5FF] hover:text-white hover:bg-[#00E5FF]/10 transition-all text-left cursor-pointer border border-[#00E5FF]/25 mt-2"
+            >
+              <User className="w-4 h-4 shrink-0 text-[#00E5FF]" />
+              <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'কৃষক প্রোফাইল ও জমি'}</span>
+            </a>
           </nav>
 
           {/* What-If Simulator Quick Trigger in Sidebar */}

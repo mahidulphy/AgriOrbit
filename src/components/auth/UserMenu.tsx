@@ -119,16 +119,25 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
 
           {/* Options */}
           <div className="py-1 space-y-0.5">
+            <a
+              href="#/profile"
+              onClick={() => setDropdownOpen(false)}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#B8FF3D] hover:text-white hover:bg-[#B8FF3D]/10 font-bold transition-colors text-left cursor-pointer"
+            >
+              <User className="w-4 h-4 text-[#B8FF3D]" />
+              <span>{isBn ? 'সম্পূর্ণ প্রোফাইল ও জমি' : 'Farmer Profile & Fields'}</span>
+            </a>
+
             <button
               type="button"
               onClick={() => {
                 setDropdownOpen(false);
                 setProfileModalOpen(true);
               }}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-200 hover:text-white hover:bg-white/10 transition-colors text-left cursor-pointer"
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-left cursor-pointer text-xs"
             >
-              <User className="w-4 h-4 text-[#00E5FF]" />
-              <span>{lang === 'en' ? 'Farmer Profile' : 'কৃষক প্রোফাইল'}</span>
+              <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
+              <span>{isBn ? 'দ্রুত ওভারভিউ (Modal)' : 'Quick Overview Modal'}</span>
             </button>
 
             <button
@@ -137,7 +146,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-red-300 hover:text-red-200 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
-              <span>{lang === 'en' ? 'Sign Out' : 'লগআউট'}</span>
+              <span>{isBn ? 'লগআউট' : 'Sign Out'}</span>
             </button>
           </div>
         </div>
