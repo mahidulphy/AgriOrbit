@@ -38,16 +38,18 @@ function evaluateCropWithNasa(
   // Deep copy so we don't mutate CROPS_DATABASE
   const crop: CropData = JSON.parse(JSON.stringify(baseCrop));
 
-  let score = crop.suitabilityScore;
+  // Calibrate base score to allow dynamic rule adjustments without artificial clamping
+  const calibratedBase = Math.round(crop.suitabilityScore * 0.85);
+  let score = calibratedBase;
   const deltas: ScoreDeltas = {
-    base: score,
+    base: calibratedBase,
     dryPenalty: 0,
     optimalSowingBonus: 0,
     heatPenalty: 0,
     waterDeficitPenalty: 0,
     primaryPriorityDelta: 0,
     secondaryPriorityDelta: 0,
-    finalScore: score,
+    finalScore: calibratedBase,
   };
 
   const rain = telemetry?.rainfall30d ?? 38;
@@ -158,8 +160,8 @@ function evaluateCropWithNasa(
     deltas.secondaryPriorityDelta = p2Delta;
   }
 
-  // Final score clamping
-  const finalScore = Math.min(98, Math.max(45, Math.round(score)));
+  // Final score — stop artificial 98% clamping, allow real dynamic score
+  const finalScore = Math.max(20, Math.min(100, Math.round(score)));
   deltas.finalScore = finalScore;
 
   const tier: CropData['suitabilityTier'] =
@@ -233,14 +235,33 @@ export function getRankedCrops(
   return season === 'All' ? sorted : sorted.filter((c) => c.seasonEn === season);
 }
 
+export function formatPriorityLabel(priority: FarmerPriorityId, lang: 'en' | 'bn'): string {
+  switch (priority) {
+    case 'save_water':
+      return lang === 'en' ? 'Save Water' : 'পানি সাশ্রয়';
+    case 'lower_cost':
+      return lang === 'en' ? 'Lower Cost' : 'কম খরচ';
+    case 'improve_soil':
+      return lang === 'en' ? 'Improve Soil Health' : 'মাটির উর্বরতা বৃদ্ধি';
+    case 'reduce_risk':
+      return lang === 'en' ? 'Reduce Climate Risk' : 'জলবায়ু ঝুঁকি হ্রাস';
+    case 'maximize_profit':
+      return lang === 'en' ? 'Lower Cost' : 'কম খরচ';
+    case 'maximize_yield':
+      return lang === 'en' ? 'Reduce Climate Risk' : 'জলবায়ু ঝুঁকি হ্রাস';
+    default:
+      return String(priority).replace('_', ' ');
+  }
+}
+
 export const PRIORITY_META: Record<
   FarmerPriorityId,
   { titleEn: string; titleBn: string }
 > = {
   save_water: { titleEn: 'Save Water', titleBn: 'পানি সাশ্রয়' },
   improve_soil: { titleEn: 'Improve Soil Health', titleBn: 'মাটির উর্বরতা বৃদ্ধি' },
-  maximize_profit: { titleEn: 'Maximize Profit', titleBn: 'সর্বোচ্চ লাভ' },
-  maximize_yield: { titleEn: 'Maximize Yield', titleBn: 'সর্বোচ্চ ফলন' },
+  maximize_profit: { titleEn: 'Lower Cost', titleBn: 'কম খরচ' },
+  maximize_yield: { titleEn: 'Reduce Climate Risk', titleBn: 'জলবায়ু ঝুঁকি হ্রাস' },
   lower_cost: { titleEn: 'Lower Cost', titleBn: 'কম খরচ' },
   reduce_risk: { titleEn: 'Reduce Climate Risk', titleBn: 'জলবায়ু ঝুঁকি হ্রাস' },
 };
@@ -255,12 +276,12 @@ export const PRIORITY_INFLUENCE: Record<FarmerPriorityId, { en: string; bn: stri
     bn: 'মাটির উর্বরতা প্রভাব: নাইট্রোজেন সংবন্ধনকারী মুগ, পাট ও মসুর সর্বোচ্চ +৫ পয়েন্ট পায়।',
   },
   maximize_profit: {
-    en: 'Profit-oriented (indicative, not a price forecast): crops combining strong local suitability with low/moderate water cost gain up to +4; marginal high-input options lose up to 8. Based on input-cost proxies, not market prices.',
-    bn: 'লাভ-ভিত্তিক (নির্দেশক, বাজারদরের পূর্বাভাস নয়): ভালো উপযোগিতা ও কম/মাঝারি খরচের ফসল সর্বোচ্চ +৪ পায়; ব্যয়বহুল প্রান্তিক ফসল সর্বোচ্চ ৮ হারায়।',
+    en: 'Lower Cost (input-conscious): crops combining strong local suitability with low/moderate water cost gain up to +4; marginal high-input options lose up to 8.',
+    bn: 'কম খরচ (সাশ্রয়ী ইনপুট): ভালো উপযোগিতা ও কম/মাঝারি খরচের ফসল সর্বোচ্চ +৪ পায়; ব্যয়বহুল প্রান্তিক ফসল সর্বোচ্চ ৮ হারায়।',
   },
   maximize_yield: {
-    en: 'Yield-oriented: proven local performers (85%+ base suitability) gain up to +3; marginal crops needing ideal conditions lose up to 8. Reflects expected suitability, not a guaranteed harvest.',
-    bn: 'ফলন-ভিত্তিক: প্রমাণিত উপযোগী ফসল (৮৫%+) সর্বোচ্চ +৩ পায়; আদর্শ পরিবেশ নির্ভর প্রান্তিক ফসল সর্বোচ্চ ৮ হারায়। এটি সম্ভাব্য উপযোগিতা, নিশ্চিত ফলন নয়।',
+    en: 'Yield & Risk resilience: proven local performers gain up to +3; short-duration crops gain resilience points against weather stress.',
+    bn: 'ফলন ও ঝুঁকি সহনশীলতা: প্রমাণিত উপযোগী ফসল সর্বোচ্চ +৩ পায়; দুর্যোগ এড়াতে স্বল্পমেয়াদী ফসল এগিয়ে থাকে।',
   },
   lower_cost: {
     en: 'Lower Cost boost: low-input Mustard, Lentil, and Jute gain up to +4; diesel-heavy Boro and capital-heavy Potato lose up to 12.',

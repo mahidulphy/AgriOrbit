@@ -6,7 +6,7 @@ import { getDistrictAdmin } from '../data/bdAdmin';
 import { IMAGES } from '../data/assets';
 import { SmsAdvisoryButton } from './dashboard/SmsAdvisoryButton';
 import type { EngineResult } from '../lib/engine';
-import type { TelemetryContext } from '../lib/cropSuitability';
+import { formatPriorityLabel, type TelemetryContext } from '../lib/cropSuitability';
 import { FAMILY_LABEL } from '../data/crops';
 
 interface SeasonRotationProps {
@@ -84,8 +84,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
         let roleEn = '';
         let roleBn = '';
         if (pick.crop.family === 'legume') {
-          roleEn = 'Biological Rhizobium nitrogen fixation (+2 N balance) naturally enriches soil for subsequent crops.';
-          roleBn = 'শিকড়ে রাইজোবিয়াম ব্যাকটেরিয়ার মাধ্যমে মাটিতে প্রাকৃতিক নাইট্রোজেন যোগ করে মাটির উর্বরতা বাড়ায়।';
+          roleEn = 'Biological Rhizobium nitrogen fixation naturally enriches topsoil organic fertility for subsequent crops in line with BARI/BRRI rotation standards.';
+          roleBn = 'শিকড়ে রাইজোবিয়াম ব্যাকটেরিয়ার মাধ্যমে মাটিতে প্রাকৃতিক নাইট্রোজেন সংবন্ধন ঘটিয়ে পরবর্তী ফসলের জন্য মাটির স্বাস্থ্য বাড়ায়।';
         } else if (pick.crop.family === 'mustard') {
           roleEn = 'Deep tap-root utilizes residual moisture; short duration frees field rapidly for summer pulse sowing.';
           roleBn = 'গভীর শিকড়ে মাটির নিচের রস ব্যবহার করে; স্বল্প সময়ে ঘরে ওঠায় পরবর্তী ডাল চাষের পথ সুগম করে।';
@@ -288,7 +288,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 <>
                   "Based on field observations in{' '}
                   <span className="text-[#00E5FF]">{district.nameEn}</span>, your priority to{' '}
-                  <span className="text-[#B8FF3D]">{selectedPriority.replace('_', ' ')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
+                  <span className="text-[#B8FF3D]">{formatPriorityLabel(selectedPriority, 'en')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
                   <span className="text-white underline decoration-[#B8FF3D]">
                     {sequenceNamesEn}
                   </span>{' '}

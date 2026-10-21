@@ -12,10 +12,11 @@ import {
   Sparkles,
   MapPin,
   Leaf,
+  Info,
 } from 'lucide-react';
 import type { CropData, DistrictId, FarmerPriorityId, Language } from '../../types';
 import type { EngineResult } from '../../lib/engine';
-import type { TelemetryContext } from '../../lib/cropSuitability';
+import { formatPriorityLabel, type TelemetryContext } from '../../lib/cropSuitability';
 import { SmsAdvisoryButton } from './SmsAdvisoryButton';
 
 export interface FarmerAdvisoryCardProps {
@@ -113,8 +114,8 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
               {isEn ? 'Selected Priority' : 'নির্বাচিত লক্ষ্য'}
             </span>
             <span className="font-bold text-[#B8FF3D] print:text-emerald-700 capitalize">
-              {selectedPriority.replace('_', ' ')}
-              {secondaryPriority ? ` + ${secondaryPriority.replace('_', ' ')}` : ''}
+              {formatPriorityLabel(selectedPriority, isEn ? 'en' : 'bn')}
+              {secondaryPriority ? ` + ${formatPriorityLabel(secondaryPriority, isEn ? 'en' : 'bn')}` : ''}
             </span>
           </div>
         </div>
@@ -140,7 +141,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
               <span className="text-[#8FA3B8] print:text-gray-600">{isEn ? 'Daily Max Temp' : 'সর্বোচ্চ তাপমাত্রা'}:</span>
               <span className="font-mono font-bold text-white print:text-black">{(telemetry.maxTemp ?? 32).toFixed(1)}°C</span>
             </div>
-            <div className="flex justify-between items-center pt-1 border-t border-white/5 print:border-gray-200">
+            <div className="flex justify-between items-center" title={`Net Water Balance = Rain (${Math.round(telemetry.rainfall30d ?? 38)} mm) - ET0. Deficit if negative.`}>
               <span className="text-[#8FA3B8] print:text-gray-600">{isEn ? 'Net Water Balance' : 'নিট পানি অবস্থা'}:</span>
               <span className={`font-mono font-bold ${(telemetry.waterBalance ?? 0) < -50 ? 'text-[#FF5C5C] print:text-red-600' : 'text-[#B8FF3D] print:text-emerald-600'}`}>
                 {(telemetry.waterBalance ?? 0) < 0 ? `${Math.round(telemetry.waterBalance ?? 0)} mm` : `+${Math.round(telemetry.waterBalance ?? 0)} mm`}
@@ -182,11 +183,11 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
             </div>
             <div className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5FF] print:text-blue-600 shrink-0 mt-0.5" />
-              <span>{isEn ? 'Enriches soil with biological Rhizobium nitrogen (+2 N balance).' : 'রাইজোবিয়াম ব্যাকটেরিয়ার সাহায্যে জমিতে প্রাকৃতিক নাইট্রোজেন যুক্ত করে।'}</span>
+              <span>{isEn ? 'Enriches soil with biological Rhizobium nitrogen fixation for subsequent crops.' : 'রাইজোবিয়াম ব্যাকটেরিয়ার সাহায্যে জমিতে প্রাকৃতিক নাইট্রোজেন সংবন্ধন ঘটিয়ে মাটির উর্বরতা বাড়ায়।'}</span>
             </div>
             <div className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-white print:text-black shrink-0 mt-0.5" />
-              <span>{isEn ? 'Saves an estimated ~44% irrigation diesel and groundwater pumping costs.' : 'ভূগর্ভস্থ পানি উত্তোলন ও সেচের ডিজেলে প্রায় ৪৪% খরচ বাঁচায়।'}</span>
+              <span>{isEn ? 'Substantially lowers irrigation fuel and groundwater pumping requirements compared to continuous-flooded cereals.' : 'টানা জলাবদ্ধ ফসলের তুলনায় সেচ জ্বালানি ও ভূগর্ভস্থ পানি উত্তোলনের প্রয়োজনীয়তা উল্লেখযোগ্যভাবে হ্রাস করে।'}</span>
             </div>
           </div>
         </div>
@@ -198,19 +199,14 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
           {isEn ? (
             <>
               "Based on field observations in <span className="text-[#00E5FF] print:text-blue-600">{districtName}</span>, your priority to{' '}
-              <span className="text-[#B8FF3D] print:text-emerald-700">{selectedPriority.replace('_', ' ')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
+              <span className="text-[#B8FF3D] print:text-emerald-700">{formatPriorityLabel(selectedPriority, 'en')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
               <span className="underline decoration-[#B8FF3D] text-white print:text-black">{rotationSequenceEn}</span> for your field's annual cycle."
             </>
           ) : (
             <>
               "বর্তমান <span className="text-[#00E5FF] print:text-blue-600">{districtName}</span> জেলার উপগ্রহ পরিস্থিতি, আপনার{' '}
               <span className="text-[#B8FF3D] print:text-emerald-700">
-                {selectedPriority === 'save_water' && 'পানি সাশ্রয়'}
-                {selectedPriority === 'improve_soil' && 'মাটির উর্বরতা বৃদ্ধি'}
-                {selectedPriority === 'maximize_profit' && 'সর্বোচ্চ লাভ'}
-                {selectedPriority === 'maximize_yield' && 'সর্বোচ্চ ফলন'}
-                {selectedPriority === 'lower_cost' && 'কম খরচ'}
-                {selectedPriority === 'reduce_risk' && 'জলবায়ু ঝুঁকি হ্রাস'}
+                {formatPriorityLabel(selectedPriority, 'bn')}
               </span>{' '}
               অগ্রাধিকার এবং নাসার পর্যবেক্ষণ অনুযায়ী, এগ্রিঅরবিট{' '}
               <span className="underline decoration-[#B8FF3D] text-white print:text-black">{rotationSequenceBn}</span> শস্য আবর্তন বিবেচনা করার পরামর্শ দিচ্ছে।"
@@ -224,14 +220,21 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
         </p>
       </div>
 
+      {/* Constructive Advisory Disclaimer */}
+      <div className="mt-2 text-[11px] text-slate-400 print:text-gray-600 leading-relaxed border-t border-white/10 print:border-black/20 pt-3">
+        {isEn
+          ? "Your feedback helps us improve AgriOrbit's recommendations. Recommendations are advisory based on NASA Earth observations and BARI/BRRI guidelines. Always verify with your local Upazila Agriculture Officer."
+          : "আপনার মতামত এগ্রিঅরবিটের সুপারিশ আরও নিখুঁত করতে সহায়তা করে। সুপারিশসমূহ নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই নির্দেশিকার ভিত্তিতে প্রণীত। চূড়ান্ত বাস্তবায়নে স্থানীয় উপজেলা কৃষি কর্মকর্তার পরামর্শ নিন।"}
+      </div>
+
       {/* Provenance & Action Cluster */}
       <div className="pt-6 border-t border-white/10 print:border-black/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-[11px] font-mono text-[#8FA3B8] print:text-gray-600">
           <ShieldCheck className="w-4 h-4 text-[#B8FF3D] print:text-emerald-600 shrink-0" />
           <span>
             {isEn
-              ? 'Data: NASA POWER · SMAP · MODIS · Open-Meteo · BARI Guidelines'
-              : 'তথ্যসূত্র: নাসা পাওয়ার · স্ম্যাপ · মডিস · ওপেন-মেটিও · বিএআরআই'}
+              ? 'Data: NASA POWER (Daily) · SMAP (Snapshot) · MODIS (Snapshot) · Open-Meteo · BARI Guidelines'
+              : 'তথ্যসূত্র: নাসা পাওয়ার (দৈনিক) · স্ম্যাপ (স্ন্যাপশট) · মডিস (স্ন্যাপশট) · ওপেন-মেটিও · বিএআরআই'}
           </span>
         </div>
 

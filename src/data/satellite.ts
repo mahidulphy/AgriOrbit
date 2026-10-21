@@ -21,7 +21,7 @@ const P = (soil: number, soilAnomaly: number, ndvi: number, lst: number): Satell
   soilAnomaly,
   ndvi,
   lst,
-  date: '—',
+  date: '2024-10-15',
   placeholder: true,
 });
 

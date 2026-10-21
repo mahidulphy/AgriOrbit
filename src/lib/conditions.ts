@@ -6,6 +6,7 @@ import type { DailyData } from './power.ts';
 
 export interface Conditions {
   rain30: number; // mm, sum of last 30 available days
+  rainUnavailable?: boolean; // true if NASA anomaly detected (> 1200mm or missing)
   tMax30: number; // °C, hottest day in the window
   tMaxAvg: number; // °C, mean daily high
   rh: number; // %, mean humidity
@@ -45,17 +46,37 @@ export function computeConditions(daily: DailyData, lat: number, days = 30): Con
     .slice(-days);
 
   const et0s = keys.map((k) => hargreavesEt0(daily.T2M_MAX[k], daily.T2M_MIN[k], lat, new Date(iso(k))));
-  const rain30 = sum(keys.map((k) => daily.PRECTOTCORR[k]));
+  
+  // Guard against NASA sentinel values (-999, negative precipitation)
+  const validRainValues = keys.map((k) => {
+    const val = daily.PRECTOTCORR[k];
+    return val !== undefined && val >= 0 ? val : 0;
+  });
+
+  let rawRain = sum(validRainValues);
+  let isRainUnavailable = false;
+
+  // Sanity check: If 30-day rain > 1200 mm, flag as data unavailable or log error
+  if (rawRain > 1200) {
+    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 1200 mm physical ceiling for period. Using district baseline.`);
+    isRainUnavailable = true;
+    rawRain = 35; // typical winter baseline
+  }
+
+  const rain30 = rawRain;
   const et0Total = sum(et0s);
+  // Net water balance = (Rainfall - ET0). If Rainfall < ET0, it is strictly negative (deficit).
+  const waterBalance = rain30 - et0Total;
 
   return {
     rain30,
+    rainUnavailable: isRainUnavailable,
     tMax30: Math.max(...keys.map((k) => daily.T2M_MAX[k])),
     tMaxAvg: sum(keys.map((k) => daily.T2M_MAX[k])) / keys.length,
     rh: sum(keys.map((k) => daily.RH2M[k])) / keys.length,
     et0: et0Total / keys.length,
     et0Total,
-    waterBalance: rain30 - et0Total,
+    waterBalance,
     from: iso(keys[0]),
     to: iso(keys[keys.length - 1]),
   };

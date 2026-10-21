@@ -51,7 +51,7 @@ import { computeFieldShift } from '../../lib/fieldShift';
 import { runEngine, type Priority } from '../../lib/engine';
 import { SATELLITE_BY_DIVISION } from '../../data/satellite';
 import { FieldShiftPanel } from '../landing/FieldShiftSection';
-import { getRankedCrops, type TelemetryContext } from '../../lib/cropSuitability';
+import { getRankedCrops, formatPriorityLabel, type TelemetryContext } from '../../lib/cropSuitability';
 
 interface DashboardViewProps {
   userName: string;
@@ -199,8 +199,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   // Ranked crops for Crop Plan & Advisory Card
   const rankedCrops = useMemo(
-    () => getRankedCrops(selectedPriority, secondaryPriority, 'All', telemetry),
-    [selectedPriority, secondaryPriority, telemetry]
+    () => {
+      const list = getRankedCrops(selectedPriority, secondaryPriority, 'All', telemetry);
+      if (!engineResult || !engineResult.picks || engineResult.picks.length === 0) return list;
+      const topPickId = engineResult.picks[0].crop.id;
+      const topKey = topPickId === 'boro' ? 'boro_rice' : topPickId === 'aus' ? 'aus_rice' : topPickId === 'aman' ? 't_aman_rice' : topPickId;
+      const topIdx = list.findIndex((c) => c.id === topKey || c.id === topPickId);
+      if (topIdx >= 0) {
+        const topCrop = { ...list[topIdx], suitabilityScore: engineResult.picks[0].score };
+        const remaining = list.filter((_, idx) => idx !== topIdx);
+        return [topCrop, ...remaining];
+      }
+      return list;
+    },
+    [selectedPriority, secondaryPriority, telemetry, engineResult]
   );
 
   // Water stressed threshold
@@ -273,7 +285,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 onClick={onChangePriority}
                 className="font-bold text-[#B8FF3D] hover:underline capitalize truncate max-w-[120px] cursor-pointer"
               >
-                {selectedPriority.replace('_', ' ')}
+                {formatPriorityLabel(selectedPriority, language)}
               </button>
             </div>
           </div>
@@ -544,7 +556,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div className="px-3 py-1.5 rounded-xl bg-[#050B14] border border-white/10 flex items-center gap-2">
                     <span className="text-slate-400 font-medium">{language === 'en' ? 'Priority:' : 'লক্ষ্য:'}</span>
                     <span className="font-bold text-[#B8FF3D] capitalize">
-                      {selectedPriority.replace('_', ' ')}
+                      {formatPriorityLabel(selectedPriority, language)}
                     </span>
                     <button
                       onClick={onChangePriority}
@@ -584,7 +596,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-slate-400 font-medium">{language === 'en' ? 'Suitability Score:' : 'উপযোগিতা:'}</span>
                     <span className="px-3 py-1 rounded-xl bg-[#050B14] border border-[#B8FF3D]/40 text-sm font-bold text-[#B8FF3D]">
-                      {(rankedCrops[0] ?? { suitabilityScore: 88 }).suitabilityScore}% {language === 'en' ? 'High Match' : 'উচ্চ উপযোগিতা'}
+                      {(rankedCrops[0] ?? { suitabilityScore: 88 }).suitabilityScore}/100 ({language === 'en' ? 'Match' : 'উপযোগিতা'})
                     </span>
                   </div>
                 </div>
@@ -592,8 +604,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 {/* Main Action Headline */}
                 <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug">
                   {language === 'en'
-                    ? `Plant ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} (${(rankedCrops[0] ?? { nameBn: 'মুসুর ডাল' }).nameBn}) as Primary Anchor Crop`
-                    : `আসন্ন রবি মৌসুমে প্রধান ফসল হিসেবে ${(rankedCrops[0] ?? { nameBn: 'মুসুর ডাল' }).nameBn} (${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn}) চাষ করুন`}
+                    ? `Plant ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} (${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn}) as Primary Anchor Crop`
+                    : `আসন্ন রবি মৌসুমে প্রধান ফসল হিসেবে ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} (${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn}) চাষ করুন`}
                 </h2>
 
                 {/* Why It Matters & Next Step Grid */}
@@ -606,8 +618,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
                       {language === 'en'
-                        ? `NASA SMAP satellite records topsoil moisture at ${activeSoil.toFixed(2)} m³/m³ with 30-day precipitation of ${Math.round(activeRain)} mm. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} uses up to 70% less irrigation water than Boro rice, saving ৳3,000–৳4,000/bigha in diesel pumping and conserving precious groundwater.`
-                        : `নাসার স্ম্যাপ উপগ্রহের তথ্যানুযায়ী মাটির আর্দ্রতা ${activeSoil.toFixed(2)} m³/m³ এবং ৩০ দিনের মোট বৃষ্টিপাত ${Math.round(activeRain)} মিমি। বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মুসুর ডাল' }).nameBn} চাষে সেচ খরচ প্রায় ৭০% কম, যা বিঘাপ্রতি ৩,০০০–৪,০০০ টাকা সাশ্রয় করে।`}
+                        ? `NASA SMAP satellite snapshot records topsoil moisture at ${activeSoil.toFixed(2)} m³/m³ with 30-day precipitation of ${Math.round(activeRain)} mm. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} requires significantly fewer supplemental irrigations than flood-irrigated winter Boro rice, reducing diesel pumping and conserving precious groundwater according to BARI guidelines.`
+                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil.toFixed(2)} m³/m³ এবং ৩০ দিনের মোট বৃষ্টিপাত ${Math.round(activeRain)} মিমি। বিএআরআই নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে অনেক কম সেচ লাগে, যা ডিজেল পাম্পিং কমায় এবং ভূগর্ভস্থ পানি সংরক্ষণ করে।`}
                     </p>
                   </div>
 
@@ -655,12 +667,23 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <span className="text-[#00E5FF] font-semibold text-[11px]">NASA POWER</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
-                      {Math.round(activeRain)} <span className="text-sm text-slate-400 font-normal">mm</span>
+                      {conditions.rainUnavailable ? (
+                        <span className="text-amber-400 text-sm font-sans font-medium">
+                          {language === 'en' ? 'Data Unavailable' : 'উপাত্ত অনুপস্থিত'}
+                        </span>
+                      ) : (
+                        <>
+                          {Math.round(activeRain)} <span className="text-sm text-slate-400 font-normal">mm</span>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
                     <div className="flex justify-between items-center">
-                      <span>{language === 'en' ? 'Net balance:' : 'নিট পানি:'}</span>
+                      <span className="flex items-center gap-1" title={`${language === 'en' ? 'Net Water Balance = Rainfall' : 'নিট পানি ভারসাম্য = বৃষ্টি'} (${Math.round(activeRain)} mm) − ET₀ Demand (${Math.round(conditions.et0Total)} mm) = ${activeWaterBalance >= 0 ? '+' : ''}${Math.round(activeWaterBalance)} mm`}>
+                        <span>{language === 'en' ? 'Net balance:' : 'নিট পানি:'}</span>
+                        <Info className="w-3 h-3 text-slate-400" />
+                      </span>
                       <span className={`font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
                         {activeWaterBalance >= 0 ? `+${Math.round(activeWaterBalance)}` : Math.round(activeWaterBalance)} mm
                       </span>
@@ -673,7 +696,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}</span>
-                      <span className="text-[#B8FF3D] font-semibold text-[11px]">NASA SMAP</span>
+                      <span className="text-[#B8FF3D] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture Snapshot">NASA SMAP (Snapshot)</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {activeSoil.toFixed(2)} <span className="text-sm text-slate-400 font-normal">m³/m³</span>
@@ -808,7 +831,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
                           <div className="text-right">
                             <span className="font-mono text-xl font-bold text-[#B8FF3D] block leading-none">
-                              {crop.suitabilityScore}%
+                              {crop.suitabilityScore}/100
                             </span>
                             <span className="text-[9px] font-mono uppercase text-slate-400">Match</span>
                           </div>
@@ -1147,7 +1170,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA SMAP"
+                        sourceName="NASA SMAP (Snapshot)"
                         status={whatIfActive ? 'simulated' : 'snapshot'}
                         date={whatIfActive ? 'Simulated' : sat.date}
                         language={language}
@@ -1195,7 +1218,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA MODIS / POWER"
+                        sourceName="NASA MODIS (Snapshot)"
                         status={whatIfActive ? 'simulated' : 'snapshot'}
                         date={whatIfActive ? 'Simulated' : sat.date}
                         language={language}
@@ -1241,7 +1264,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-[#00E5FF] font-bold block">01 · Water Conservation</span>
-                    <p>{language === 'en' ? 'Because subsurface moisture is low and rainfall anomaly is negative, choosing high-irrigation Boro rice increases diesel pumping costs by ৳12,000–৳18,000 per acre.' : 'যেহেতু বৃষ্টিপাত ও মাটির রস কম, অতিরিক্ত সেচ নির্ভর বোরো ধান চাষ করলে একর প্রতি ১২,০০০–১৮,০০০ টাকা বাড়তি ডিজেল ও বিদ্যুৎ খরচ হবে।'}</p>
+                    <p>{language === 'en' ? 'Because subsurface moisture is low and rainfall anomaly is negative, continuous flood-irrigated Boro rice substantially increases fuel pumping demands and strains local groundwater aquifers.' : 'যেহেতু বৃষ্টিপাত ও মাটির রস কম, টানা সেচ নির্ভর বোরো ধান চাষ করলে পাম্পিং জ্বালানির চাহিদা এবং ভূগর্ভস্থ পানির ওপর অতিরিক্ত চাপ বহুগুণ বেড়ে যায়।'}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-[#B8FF3D] font-bold block">02 · Tap-Root Advantage</span>
@@ -1249,7 +1272,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </div>
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-white font-bold block">03 · Biological Soil Recovery</span>
-                    <p>{language === 'en' ? 'A summer Mungbean catch-crop fixes 40 kg biological nitrogen per hectare, lowering fertilizer needs for the subsequent monsoon T. Aman rice by 30%.' : 'গ্রীষ্মকালীন মুগডাল চাষ করলে মাটিতে হেক্টর প্রতি ৪০ কেজি প্রাকৃতিক নাইট্রোজেন জমা হয়, যা পরবর্তী আমন ধানে ৩০% ইউরিয়া সারের খরচ বাঁচায়।'}</p>
+                    <p>{language === 'en' ? 'A summer Mungbean catch-crop fixes biological Rhizobium nitrogen into the plow layer, naturally conditioning soil for the subsequent monsoon T. Aman rice according to BARI guidelines.' : 'গ্রীষ্মকালীন মুগডাল চাষ করলে মাটিতে প্রাকৃতিকভাবে রাইজোবিয়াম নাইট্রোজেন সংবন্ধন ঘটে, যা পরবর্তী আমন ধানের জন্য মাটির উর্বরতা বাড়ায়।'}</p>
                   </div>
                 </div>
               </div>

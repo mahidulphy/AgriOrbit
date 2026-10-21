@@ -221,6 +221,15 @@ export const FarmerFeedbackLoop: React.FC<FarmerFeedbackLoopProps> = ({
           )}
         </div>
       )}
+      {/* Constructive Feedback Disclaimer */}
+      <div className="mt-6 pt-4 border-t border-white/10 text-xs text-slate-400 leading-relaxed flex items-start gap-2">
+        <Sparkles className="w-3.5 h-3.5 text-[#00E5FF] shrink-0 mt-0.5" />
+        <p>
+          {isEn
+            ? "Your feedback helps us improve AgriOrbit's recommendations. Recommendations are advisory based on NASA Earth observations and BARI/BRRI guidelines. Always verify with your local Upazila Agriculture Officer."
+            : "আপনার মতামত এগ্রিঅরবিটের সুপারিশ আরও নিখুঁত করতে সহায়তা করে। সুপারিশসমূহ নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই নির্দেশিকার ভিত্তিতে প্রণীত। চূড়ান্ত বাস্তবায়নে স্থানীয় উপজেলা কৃষি কর্মকর্তার পরামর্শ নিন।"}
+        </p>
+      </div>
     </section>
   );
 };
