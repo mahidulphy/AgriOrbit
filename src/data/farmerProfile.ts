@@ -20,13 +20,16 @@ export interface FarmerProfile {
 }
 
 export const PAST_DAMAGE_OPTIONS = [
-  { id: 'flash_flood', en: 'Flash Flood / Inundation', bn: 'আকস্মিক বন্যা / প্লাবন' },
-  { id: 'drought', en: 'Drought / Dry Spell', bn: 'খরা / তীব্র পানিস্বল্পতা' },
+  { id: 'flood', en: 'Flood / Inundation', bn: 'বন্যা / প্লাবন' },
+  { id: 'drought', en: 'Drought / Dry Spell', bn: 'খরা / অনাবৃষ্টি' },
+  { id: 'salinity', en: 'Salinity Intrusion', bn: 'লবণাক্ততা বৃদ্ধি' },
+  { id: 'heat_wave', en: 'Extreme Heat Wave', bn: 'তীব্র তাপদাহ' },
+  { id: 'hailstorm', en: 'Hailstorm', bn: 'শিলাবৃষ্টি' },
+  { id: 'river_erosion', en: 'Riverbank Erosion', bn: 'নদী ভাঙন' },
+  { id: 'pest_outbreak', en: 'Pest Outbreak', bn: 'পোকামাকড় ও বালাই আক্রমণ' },
+  { id: 'cold_wave', en: 'Cold Wave / Fog', bn: 'শৈত্যপ্রবাহ ও কুয়াশা' },
   { id: 'waterlogging', en: 'Waterlogging in Fields', bn: 'দীর্ঘমেয়াদী জলাবদ্ধতা' },
-  { id: 'pest_attack', en: 'Insect & Pest Infestation', bn: 'পোকামাকড় ও রোগবালাই' },
-  { id: 'heat_stress', en: 'Extreme Heat Stress', bn: 'অতিরিক্ত তাপদাহ' },
-  { id: 'cyclone', en: 'Storm / Cyclone Winds', bn: 'ঝড় ও দমকা হাওয়া' },
-  { id: 'salinity', en: 'Soil Salinity Intrusion', bn: 'লবণাক্ততা বৃদ্ধি' },
+  { id: 'cyclone', en: 'Storm / Cyclone Winds', bn: 'ঝড় ও ঘূর্ণিঝড়' },
   { id: 'none', en: 'No Major Damage in Past', bn: 'অতীতে কোনো বড় ক্ষতি হয়নি' },
 ] as const;
 

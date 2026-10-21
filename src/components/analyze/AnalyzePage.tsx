@@ -26,6 +26,7 @@ export function AnalyzePage() {
   const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
   const [secondaryPriority, setSecondaryPriority] = useState<FarmerPriorityId | null>(null);
+  const [previousCrop, setPreviousCrop] = useState<string>('jute');
   const [farmerName, setFarmerName] = useState<string>('');
 
   const setStep = (next: AnalyzeStep) => {
@@ -42,6 +43,7 @@ export function AnalyzePage() {
           const guestPriorityRaw = sessionStorage.getItem('agriorbit_guest_priority');
           if (guestFieldRaw) {
             const gf = JSON.parse(guestFieldRaw);
+            if (gf.previousCrop) setPreviousCrop(gf.previousCrop);
             if (gf.district) {
               setLocation({
                 district: gf.district as DistrictId,
@@ -73,6 +75,7 @@ export function AnalyzePage() {
           }
           if (fields && fields.length > 0) {
             const activeField = getActiveField(fields);
+            if (activeField?.previousCrop) setPreviousCrop(activeField.previousCrop);
             if (activeField && activeField.district) {
               setLocation({
                 district: activeField.district as DistrictId,
@@ -138,6 +141,7 @@ export function AnalyzePage() {
       fieldLng={location.longitude}
       selectedPriority={primaryPriority}
       secondaryPriority={secondaryPriority}
+      previousCrop={previousCrop}
       language={lang}
       onLanguageChange={handleLanguageChange}
       onChangeFieldLocation={() => {

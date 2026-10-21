@@ -154,3 +154,32 @@ test('5. Rotation Rule B (Nitrogen Trigger): forces legume when running nutrient
   const hasLegume = result.picks.some((p) => p.crop.family === 'legume');
   assert.ok(hasLegume, 'Recommended rotation sequence should include nitrogen-fixing legume');
 });
+
+test('6. Rotation Rule A with previous crop: blocks same botanical family as previousCrop from first pick', () => {
+  const inputWithAman = {
+    conditions: {
+      rain30: 45,
+      tMax30: 31,
+      tMaxAvg: 28,
+      rh: 70,
+      et0: 3.2,
+      et0Total: 96,
+      waterBalance: -51,
+      from: '2026-09-01',
+      to: '2026-09-30',
+    },
+    soil: 0.22,
+    shift,
+    forecast: cache.forecast,
+    priority: 'water' as const,
+    previousCrop: 'aman', // Grass family
+  };
+
+  const result = runEngine(inputWithAman);
+  assert.equal(result.picks.length, 3);
+  assert.notEqual(
+    result.picks[0].crop.family,
+    'grass',
+    `First pick ${result.picks[0].crop.nameEn} cannot be in grass family because previousCrop was Aman (grass)`
+  );
+});

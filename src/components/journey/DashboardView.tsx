@@ -61,6 +61,7 @@ interface DashboardViewProps {
   fieldLng: number;
   selectedPriority: FarmerPriorityId;
   secondaryPriority?: FarmerPriorityId | null;
+  previousCrop?: string;
   language: Language;
   onLanguageChange: (lang: Language) => void;
   onChangeFieldLocation: () => void;
@@ -94,6 +95,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   fieldLng,
   selectedPriority,
   secondaryPriority,
+  previousCrop,
   language,
   onLanguageChange,
   onChangeFieldLocation,
@@ -192,9 +194,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         shift: fieldShift,
         forecast: loaded.data.forecast,
         priority: mapPriority(selectedPriority),
+        previousCrop: previousCrop,
         today: new Date(),
       }),
-    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data.forecast, selectedPriority]
+    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data.forecast, selectedPriority, previousCrop]
   );
 
   // Ranked crops for Crop Plan & Advisory Card

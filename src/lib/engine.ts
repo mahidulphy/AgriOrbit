@@ -80,6 +80,7 @@ export interface EngineInput {
   forecast: ForecastDay[];
   priority: Priority;
   today?: Date;
+  previousCrop?: string;
 }
 
 export interface EngineResult {
@@ -232,6 +233,17 @@ export function runEngine(inp: EngineInput): EngineResult {
 
   const hasLegume = (s: SeasonId) => options[s].some((o) => o.crop.family === 'legume');
 
+  const normalizedPrev = inp.previousCrop ? inp.previousCrop.toLowerCase().trim() : '';
+  const prevCrop = normalizedPrev && normalizedPrev !== 'fallow' && normalizedPrev !== 'other'
+    ? CROPS.find(
+        (c) =>
+          c.id.toLowerCase() === normalizedPrev ||
+          c.nameEn.toLowerCase() === normalizedPrev ||
+          c.nameBn === inp.previousCrop
+      )
+    : undefined;
+  const prevFamily = prevCrop?.family;
+
   let best: CropScore[] | null = null;
   let bestTotal = -Infinity;
 
@@ -241,6 +253,9 @@ export function runEngine(inp: EngineInput): EngineResult {
         const seq = [a, b, c];
         let balance = 0;
         let ok = true;
+        if (prevFamily && seq[0].crop.family === prevFamily) {
+          ok = false; // rule A against real previous crop
+        }
         for (let i = 0; i < 3 && ok; i++) {
           if (i > 0) {
             if (seq[i].crop.family === seq[i - 1].crop.family) ok = false; // rule A
@@ -261,6 +276,14 @@ export function runEngine(inp: EngineInput): EngineResult {
   // Record WHY the rotation looks the way it does, for Explain Why.
   const notes: RotationNote[] = [];
   const nutrientTrail: number[] = [];
+  if (prevCrop && prevFamily) {
+    const blocked0 = options[seasons[0]].find(
+      (o) => o.score > picks[0].score && o.crop.family === prevFamily
+    );
+    if (blocked0) {
+      notes.push({ season: seasons[0], code: 'familyBlocked', v: { crop: blocked0.crop.id, prev: prevCrop.id } });
+    }
+  }
   let balance = 0;
   picks.forEach((p, i) => {
     if (i > 0) {
