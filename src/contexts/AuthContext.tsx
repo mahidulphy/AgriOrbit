@@ -46,19 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [onboardingCompleted, setOnboardingCompleted] = useState<boolean | null>(null);
   const configured = isSupabaseConfigured();
 
-    const fetchProfileDetails = async (userId: string) => {
-    // Check local profile cache first
-    let localCompleted: boolean | null = null;
-    try {
-      const raw = localStorage.getItem(`agriorbit_farmer_profile_v2_${userId}`);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed.onboardingCompleted === true) {
-          localCompleted = true;
-        }
-      }
-    } catch {}
-
+      const fetchProfileDetails = async (userId: string) => {
     try {
       let { data, error } = await supabase
         .from('profiles')
@@ -79,34 +67,48 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       if (error) {
-        console.error('AgriOrbit Auth: Error querying profile:', error);
-        // Requirement 4: On error, if local cache confirms onboarding completed, accept it
-        if (localCompleted === true) {
-          setOnboardingCompleted(true);
-        } else {
-          setOnboardingCompleted(false);
-        }
+        console.error('AgriOrbit Auth: Error querying profile from database:', error.message);
+        // Supabase is source of truth: if query errors, treat as not completed
+        setOnboardingCompleted(false);
       } else if (data) {
         if (data.full_name && data.full_name.trim()) {
           setProfileFullName(data.full_name.trim());
         }
-        // Requirement 3: Guard uses the onboarding_completed flag
-        setOnboardingCompleted(data.onboarding_completed === true || localCompleted === true);
-      } else {
-        // No profile row exists yet
-        if (localCompleted === true) {
-          setOnboardingCompleted(true);
-        } else {
-          setOnboardingCompleted(false);
+        const dbCompleted = data.onboarding_completed === true;
+        setOnboardingCompleted(dbCompleted);
+
+        // Requirement 3: If it differs from the localStorage cache, trust Supabase and update the cache
+        try {
+          const cacheKey = `agriorbit_farmer_profile_v2_${userId}`;
+          const raw = localStorage.getItem(cacheKey);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.onboardingCompleted !== dbCompleted) {
+              parsed.onboardingCompleted = dbCompleted;
+              localStorage.setItem(cacheKey, JSON.stringify(parsed));
+            }
+          }
+        } catch {
+          // ignore storage error
         }
-      }
-    } catch (err) {
-      console.error('AgriOrbit Auth: Exception querying profile:', err);
-      if (localCompleted === true) {
-        setOnboardingCompleted(true);
       } else {
+        // No profile row exists yet in Supabase
         setOnboardingCompleted(false);
+        try {
+          const cacheKey = `agriorbit_farmer_profile_v2_${userId}`;
+          const raw = localStorage.getItem(cacheKey);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.onboardingCompleted === true) {
+              parsed.onboardingCompleted = false;
+              localStorage.setItem(cacheKey, JSON.stringify(parsed));
+            }
+          }
+        } catch {}
       }
+    } catch (err: any) {
+      console.error('AgriOrbit Auth: Exception querying profile from database:', err?.message || 'Query error');
+      setOnboardingCompleted(false);
     }
   };
 

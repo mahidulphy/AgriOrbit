@@ -59,8 +59,8 @@ export const DEFAULT_INITIAL_FIELD: FarmField = {
   district: '',
   upazila: '',
   village: '',
-  latitude: 25.6217,
-  longitude: 88.6355,
+  latitude: 25.7439,
+  longitude: 89.2752,
   area: 2.5,
   unit: 'bigha',
   elevation: 'medium_high',
@@ -295,6 +295,53 @@ export async function saveFarmerProfile(
     const key = `${PROFILE_CACHE_KEY}_${userId || 'default'}`;
     const raw = localStorage.getItem(key);
     const existing = raw ? JSON.parse(raw) : DEFAULT_FARMER_PROFILE_DATA;
+
+    // If Supabase is configured and user is authenticated (Supabase is source of truth)
+    if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      // 1. Update Supabase Auth user metadata
+      try {
+        await supabase.auth.updateUser({
+          data: {
+            full_name: profile.fullName || existing.fullName,
+            phone: profile.phone || existing.phone,
+            avatar_url: profile.avatarUrl || existing.avatarUrl,
+            preferred_language: profile.preferredLanguage || existing.preferredLanguage,
+            primary_priority: profile.primaryPriority || existing.primaryPriority,
+          },
+        });
+      } catch (authErr) {
+        // non-critical warning
+      }
+
+      const profilePayload = {
+        id: userId,
+        full_name: profile.fullName ?? existing.fullName,
+        phone: profile.phone ?? existing.phone,
+        avatar_url: profile.avatarUrl ?? existing.avatarUrl,
+        preferred_language: profile.preferredLanguage ?? existing.preferredLanguage,
+        communication_method: profile.communicationMethod ?? existing.communicationMethod,
+        primary_priority: profile.primaryPriority ?? existing.primaryPriority,
+        priorities: profile.priorities ?? existing.priorities,
+        past_damages: profile.pastDamages ?? existing.pastDamages,
+        past_damage_notes: profile.pastDamageNotes ?? existing.pastDamageNotes,
+        onboarding_completed: profile.onboardingCompleted ?? existing.onboardingCompleted ?? false,
+        updated_at: new Date().toISOString(),
+      };
+
+      // 2. Upsert to public.profiles table
+      const { error: pErr } = await supabase.from('profiles').upsert(profilePayload);
+      if (pErr) {
+        console.error('Failed to save profile to database:', pErr.message);
+        // Try fallback table
+        const { error: fpErr } = await supabase.from('farmer_profiles').upsert(profilePayload);
+        if (fpErr) {
+          console.error('Failed to save profile to fallback database:', fpErr.message);
+          return { success: false, error: pErr.message || fpErr.message };
+        }
+      }
+    }
+
+    // Only update localStorage cache if Supabase save succeeded (or user is guest)
     const updated: FarmerProfileData = {
       ...existing,
       ...profile,
@@ -303,69 +350,13 @@ export async function saveFarmerProfile(
 
     localStorage.setItem(key, JSON.stringify(updated));
 
-    // Also sync active priority to legacy keys for recommendation engine cross-compatibility
     if (updated.primaryPriority) {
       localStorage.setItem('agriorbit_selected_priority', updated.primaryPriority);
     }
 
-    // If Supabase is configured and user is authenticated
-    if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
-      // 1. Update Supabase Auth user metadata
-      try {
-        await supabase.auth.updateUser({
-          data: {
-            full_name: updated.fullName,
-            phone: updated.phone,
-            avatar_url: updated.avatarUrl,
-            preferred_language: updated.preferredLanguage,
-            primary_priority: updated.primaryPriority,
-          },
-        });
-      } catch (authErr) {
-        console.warn('Auth metadata update non-critical warning:', authErr);
-      }
-
-      const profilePayload = {
-        id: userId,
-        full_name: updated.fullName,
-        phone: updated.phone,
-        avatar_url: updated.avatarUrl,
-        preferred_language: updated.preferredLanguage,
-        communication_method: updated.communicationMethod,
-        primary_priority: updated.primaryPriority,
-        priorities: updated.priorities,
-        past_damages: updated.pastDamages,
-        past_damage_notes: updated.pastDamageNotes,
-        onboarding_completed: updated.onboardingCompleted ?? false,
-        updated_at: new Date().toISOString(),
-      };
-
-      // 2. Upsert to public.profiles table
-      try {
-        console.log('[ONBOARDING_DEBUG] Upserting to public.profiles table with payload:', profilePayload);
-        const { error: pErr } = await supabase.from('profiles').upsert(profilePayload);
-        if (pErr) {
-          console.warn('[ONBOARDING_DEBUG] profiles table upsert returned error:', pErr);
-        } else {
-          console.log('[ONBOARDING_DEBUG] profiles table upsert succeeded.');
-        }
-      } catch (tableErr) {
-        console.warn('[ONBOARDING_DEBUG] profiles table upsert exception:', tableErr);
-      }
-
-      // Also upsert to public.farmer_profiles for compatibility
-      try {
-        const { error: fpErr } = await supabase.from('farmer_profiles').upsert(profilePayload);
-        if (fpErr) {
-          console.warn('[ONBOARDING_DEBUG] farmer_profiles table upsert error:', fpErr);
-        }
-      } catch {
-        // ignore
-      }
-    }
-
     return { success: true };
   } catch (err: any) {
+    console.error('Exception saving profile:', err?.message || 'Save error');
     return { success: false, error: err?.message || 'Failed to save profile' };
   }
 }
@@ -378,32 +369,9 @@ export async function saveFarmField(
   userId?: string
 ): Promise<{ field: FarmField; error?: string }> {
   try {
-    const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
-    const raw = localStorage.getItem(key);
-    const existing: FarmField[] = raw ? JSON.parse(raw) : [];
-
-    const idx = existing.findIndex((f) => f.id === field.id);
-    let updatedList: FarmField[];
-
     const fieldToSave = { ...field, updatedAt: new Date().toISOString() };
 
-    if (idx >= 0) {
-      updatedList = existing.map((f) => (f.id === field.id ? fieldToSave : f));
-    } else {
-      updatedList = [...existing, fieldToSave];
-    }
-
-    // If this field is marked primary, unmark others
-    if (fieldToSave.isPrimary) {
-      updatedList = updatedList.map((f) => ({
-        ...f,
-        isPrimary: f.id === fieldToSave.id,
-      }));
-    }
-
-    localStorage.setItem(key, JSON.stringify(updatedList));
-
-    // Sync to Supabase if configured
+    // Sync to Supabase if configured (Supabase is source of truth)
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
       const fieldPayload = {
         id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
@@ -431,27 +399,43 @@ export async function saveFarmField(
         updated_at: new Date().toISOString(),
       };
 
-      try {
-        console.log('[ONBOARDING_DEBUG] Upserting to public.fields table with payload:', fieldPayload);
-        const { error: fErr } = await supabase.from('fields').upsert(fieldPayload);
-        if (fErr) {
-          console.warn('[ONBOARDING_DEBUG] fields table upsert returned error:', fErr);
-        } else {
-          console.log('[ONBOARDING_DEBUG] fields table upsert succeeded.');
+      const { error: fErr } = await supabase.from('fields').upsert(fieldPayload);
+      if (fErr) {
+        console.error('Failed to save field to database:', fErr.message);
+        const { error: ffErr } = await supabase.from('farmer_fields').upsert(fieldPayload);
+        if (ffErr) {
+          console.error('Failed to save field to fallback database:', ffErr.message);
+          return { field, error: fErr.message || ffErr.message };
         }
-      } catch (err) {
-        console.warn('[ONBOARDING_DEBUG] fields table upsert exception:', err);
-      }
-
-      try {
-        await supabase.from('farmer_fields').upsert(fieldPayload);
-      } catch {
-        // ignore
       }
     }
 
+    // Only update localStorage cache after Supabase save succeeds
+    const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
+    const raw = localStorage.getItem(key);
+    const existing: FarmField[] = raw ? JSON.parse(raw) : [];
+
+    const idx = existing.findIndex((f) => f.id === field.id);
+    let updatedList: FarmField[];
+
+    if (idx >= 0) {
+      updatedList = existing.map((f) => (f.id === field.id ? fieldToSave : f));
+    } else {
+      updatedList = [...existing, fieldToSave];
+    }
+
+    if (fieldToSave.isPrimary) {
+      updatedList = updatedList.map((f) => ({
+        ...f,
+        isPrimary: f.id === fieldToSave.id,
+      }));
+    }
+
+    localStorage.setItem(key, JSON.stringify(updatedList));
+
     return { field: fieldToSave };
   } catch (err: any) {
+    console.error('Exception saving field:', err?.message || 'Save error');
     return { field, error: err?.message || 'Failed to save field' };
   }
 }

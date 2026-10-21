@@ -222,17 +222,13 @@ export const OnboardingWizardPage: React.FC = () => {
     });
   };
 
-    const handleCompleteOnboarding = async (e?: React.MouseEvent) => {
+      const handleCompleteOnboarding = async (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
 
-    console.log('[ONBOARDING_DEBUG] 1. Finish button clicked');
-    console.log('[ONBOARDING_DEBUG] 2. Current selectedPriorities:', selectedPriorities);
-
     if (selectedPriorities.length === 0) {
-      console.warn('[ONBOARDING_DEBUG] Validation failed: No priority selected');
       setSaveError(
         isBn
           ? 'দয়া করে অন্তত একটি প্রধান লক্ষ্য বেছে নিন।'
@@ -243,7 +239,6 @@ export const OnboardingWizardPage: React.FC = () => {
 
     setSaving(true);
     setSaveError(null);
-    console.log('[ONBOARDING_DEBUG] 3. Starting save process. User authenticated:', Boolean(user?.id), 'isGuest:', isGuest);
 
     try {
       const primaryPriority = selectedPriorities[0];
@@ -253,7 +248,7 @@ export const OnboardingWizardPage: React.FC = () => {
       const districtName = districtAdmin?.nameEn || 'Rangpur';
 
       if (user?.id) {
-        console.log('[ONBOARDING_DEBUG] 4a. Saving farm field for user:', user.id);
+        // Authenticated user: Save to Supabase first (source of truth)
         const newField: FarmField = {
           id: crypto.randomUUID(),
           name: `${districtName} Plot 1`,
@@ -280,15 +275,13 @@ export const OnboardingWizardPage: React.FC = () => {
         };
 
         const fieldRes = await saveFarmField(newField, user.id);
-        console.log('[ONBOARDING_DEBUG] 4b. saveFarmField result:', fieldRes);
         if (fieldRes.error) {
-          console.warn('[ONBOARDING_DEBUG] Field save warning:', fieldRes.error);
+          throw new Error(fieldRes.error);
         }
 
-        console.log('[ONBOARDING_DEBUG] 5a. Saving farmer profile (onboarding_completed: true)...');
         const profileRes = await saveFarmerProfile(
           {
-            fullName: fullName.trim() || displayName || user.email?.split('@')[0] || 'Farmer',
+            fullName: fullName.trim() || displayName || 'Farmer',
             phone: phone.trim(),
             primaryPriority,
             priorities: selectedPriorities,
@@ -296,23 +289,18 @@ export const OnboardingWizardPage: React.FC = () => {
           },
           user.id
         );
-        console.log('[ONBOARDING_DEBUG] 5b. saveFarmerProfile result:', profileRes);
 
-        if (!profileRes.success && profileRes.error) {
-          console.error('[ONBOARDING_DEBUG] Profile save reported error:', profileRes.error);
-          throw new Error(profileRes.error);
+        if (!profileRes.success) {
+          throw new Error(profileRes.error || 'Failed to save farmer profile');
         }
 
-        console.log('[ONBOARDING_DEBUG] 6a. Updating auth context state directly to true...');
+        // Only after Supabase saves of BOTH field and profile succeed:
         if (setOnboardingCompleted) {
           setOnboardingCompleted(true);
         }
-
-        console.log('[ONBOARDING_DEBUG] 6b. Calling refreshProfile()...');
         await refreshProfile();
-        console.log('[ONBOARDING_DEBUG] 6c. Profile refreshed successfully.');
       } else {
-        console.log('[ONBOARDING_DEBUG] 4-guest. Saving guest state to sessionStorage & localStorage...');
+        // Guest user: Save to sessionStorage and localStorage without database write
         sessionStorage.setItem(
           'agriorbit_guest_field',
           JSON.stringify({
@@ -336,17 +324,16 @@ export const OnboardingWizardPage: React.FC = () => {
         sessionStorage.setItem('agriorbit_guest_priorities', JSON.stringify(selectedPriorities));
         sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
         localStorage.setItem('agriorbit_guest_mode', 'true');
-        console.log('[ONBOARDING_DEBUG] Guest state saved successfully.');
       }
 
       // Sync active priority to legacy keys for recommendation engine cross-compatibility
       localStorage.setItem('agriorbit_selected_priority', primaryPriority);
       localStorage.setItem('agriorbit_selected_priorities', JSON.stringify(selectedPriorities));
 
-      console.log('[ONBOARDING_DEBUG] 7. Onboarding successfully completed! Navigating to #/dashboard now.');
+      // Navigate to dashboard
       window.location.hash = '#/dashboard';
     } catch (err: any) {
-      console.error('[ONBOARDING_DEBUG] Save error caught:', err);
+      console.error('Onboarding save error:', err?.message || 'Save error');
       setSaveError(
         isBn
           ? `তথ্য সংরক্ষণে সমস্যা হয়েছে: ${err?.message || 'অনুগ্রহ করে আবার চেষ্টা করুন।'}`
@@ -354,7 +341,6 @@ export const OnboardingWizardPage: React.FC = () => {
       );
     } finally {
       setSaving(false);
-      console.log('[ONBOARDING_DEBUG] Save process ended. saving = false');
     }
   };
 
