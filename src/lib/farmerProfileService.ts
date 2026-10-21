@@ -23,6 +23,7 @@ export interface FarmField {
   growingSeason: 'rabi' | 'kharif1' | 'kharif2';
   isPrimary: boolean;
   notes: string;
+  priority?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -39,6 +40,7 @@ export interface FarmerProfileData {
   priorities: FarmerPriorityId[];
   pastDamages: string[];
   pastDamageNotes: string;
+  onboardingCompleted?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -52,11 +54,11 @@ export const COMMUNICATION_METHODS = [
 
 export const DEFAULT_INITIAL_FIELD: FarmField = {
   id: 'field_primary_default',
-  name: 'প্রধান ধানি জমি (North Plot)',
-  division: 'Rangpur',
-  district: 'dinajpur',
-  upazila: 'Kaharole',
-  village: 'Rasulpur',
+  name: '',
+  division: '',
+  district: '',
+  upazila: '',
+  village: '',
   latitude: 25.6217,
   longitude: 88.6355,
   area: 2.5,
@@ -77,9 +79,9 @@ export const DEFAULT_INITIAL_FIELD: FarmField = {
 
 export const DEFAULT_FARMER_PROFILE_DATA: FarmerProfileData = {
   id: 'guest_user',
-  fullName: 'Mahidul Islam',
-  email: 'farmer@agriorbit.space',
-  phone: '01712-345678',
+  fullName: '',
+  email: '',
+  phone: '',
   avatarUrl: '',
   preferredLanguage: 'bn',
   communicationMethod: 'in_app',
@@ -164,6 +166,7 @@ export async function loadFarmerProfile(
           priorities: (profileRow.priorities as FarmerPriorityId[]) || ['save_water'],
           pastDamages: profileRow.past_damages || [],
           pastDamageNotes: profileRow.past_damage_notes || '',
+          onboardingCompleted: Boolean(profileRow.onboarding_completed),
           createdAt: profileRow.created_at,
           updatedAt: profileRow.updated_at,
         };
@@ -226,7 +229,7 @@ export async function loadFarmerProfile(
     id: userId || 'default_user',
   };
 
-  const finalFields: FarmField[] = cachedFields.length > 0 ? cachedFields : [DEFAULT_INITIAL_FIELD];
+  const finalFields: FarmField[] = cachedFields;
 
   // Sync to local cache
   try {
@@ -299,6 +302,7 @@ export async function saveFarmerProfile(
           priorities: updated.priorities,
           past_damages: updated.pastDamages,
           past_damage_notes: updated.pastDamageNotes,
+          onboarding_completed: updated.onboardingCompleted ?? false,
           updated_at: new Date().toISOString(),
         });
       } catch (tableErr) {
@@ -322,7 +326,7 @@ export async function saveFarmField(
   try {
     const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
     const raw = localStorage.getItem(key);
-    const existing: FarmField[] = raw ? JSON.parse(raw) : [DEFAULT_INITIAL_FIELD];
+    const existing: FarmField[] = raw ? JSON.parse(raw) : [];
 
     const idx = existing.findIndex((f) => f.id === field.id);
     let updatedList: FarmField[];

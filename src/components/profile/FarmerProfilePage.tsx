@@ -85,7 +85,7 @@ export const FarmerProfilePage: React.FC = () => {
           if (!loadedProfile.avatarUrl && authAvatarUrl) {
             loadedProfile.avatarUrl = authAvatarUrl;
           }
-          if (displayName && (!loadedProfile.fullName || loadedProfile.fullName === 'Mahidul Islam')) {
+          if (displayName && !loadedProfile.fullName) {
             loadedProfile.fullName = displayName;
           }
           setProfile(loadedProfile);

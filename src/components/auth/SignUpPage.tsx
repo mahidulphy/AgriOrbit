@@ -132,7 +132,7 @@ export const SignUpPage: React.FC = () => {
                   autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder={lang === 'en' ? 'Md. Rafiqul Islam' : 'মোঃ রফিকুল ইসলাম'}
+                  placeholder={lang === 'en' ? 'e.g. Abdul Karim' : 'যেমনঃ আবদুল করিম'}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF] transition-all"
                 />
               </div>

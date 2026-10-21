@@ -51,7 +51,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
   useEffect(() => {
     if (isOpen) {
       const current = getFarmerProfile(user?.id);
-      if (displayName && (!current.fullName || current.fullName === 'Mahidul Islam')) {
+      if (displayName && !current.fullName) {
         current.fullName = displayName;
       }
       setProfile(current);

@@ -10,6 +10,15 @@ interface UserMenuProps {
   compact?: boolean;
 }
 
+function getInitials(name: string): string {
+  if (!name) return 'F';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+  return parts[0].slice(0, 2).toUpperCase();
+}
+
 export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   const { user, isGuest, displayName, avatarUrl, provider, signOut } = useAuth();
   const { lang } = useLang();
@@ -20,7 +29,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const profile = getFarmerProfile(user?.id);
-  const farmerName = profile.fullName || displayName || (isBn ? 'খামারী' : 'Farmer');
+  const farmerName = isGuest
+    ? (isBn ? 'অতিথি' : 'Guest')
+    : (displayName || profile.fullName || (isBn ? 'খামারী' : 'Farmer'));
+
   const districtObj = BD_DISTRICTS.find((d) => d.id === profile.districtId);
   const districtName = districtObj ? (isBn ? districtObj.nameBn : districtObj.nameEn) : null;
 
@@ -52,7 +64,6 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   const handleSignOut = async () => {
     setDropdownOpen(false);
     await signOut();
-    window.location.hash = '';
   };
 
   return (
@@ -72,12 +83,12 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
         {avatarUrl ? (
           <img
             src={avatarUrl}
-            alt={displayName}
+            alt={farmerName}
             className="w-7 h-7 rounded-lg object-cover border border-[#B8FF3D]/40"
           />
         ) : (
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-xs font-bold font-mono text-[#B8FF3D]">
-            {displayName ? displayName.charAt(0).toUpperCase() : 'F'}
+            {getInitials(farmerName)}
           </div>
         )}
 

@@ -60,20 +60,20 @@ export const FARMING_GOALS = [
 ] as const;
 
 export const DEFAULT_FARMER_PROFILE: FarmerProfile = {
-  fullName: 'Mahidul Islam',
-  phone: '01712-345678',
-  districtId: 'dinajpur',
-  upazila: 'Kaharole',
-  village: 'Rasulpur',
-  landSize: 2.5,
+  fullName: '',
+  phone: '',
+  districtId: '',
+  upazila: '',
+  village: '',
+  landSize: 1.0,
   landUnit: 'bigha',
   landElevation: 'medium_high',
   soilType: 'loam',
   irrigation: 'deep_tubewell',
-  previousCrops: ['aman', 'mustard', 'boro'],
-  pastDamages: ['drought'],
-  pastDamageNotes: 'গত বছর খরার কারণে বোরো মৌসুমে অতিরিক্ত সেচ দিতে হয়েছিল।',
-  primaryGoal: 'resilience',
+  previousCrops: [],
+  pastDamages: [],
+  pastDamageNotes: '',
+  primaryGoal: 'soil_health',
   updatedAt: new Date().toISOString(),
 };
 
@@ -82,11 +82,13 @@ const STORAGE_KEY_PREFIX = 'agriorbit_farmer_profile_';
 export function getFarmerProfile(userId?: string): FarmerProfile {
   if (typeof window === 'undefined') return DEFAULT_FARMER_PROFILE;
   try {
-    const key = `${STORAGE_KEY_PREFIX}${userId || 'default'}`;
-    const stored = localStorage.getItem(key) || localStorage.getItem(`${STORAGE_KEY_PREFIX}default`);
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      return { ...DEFAULT_FARMER_PROFILE, ...parsed };
+    if (userId && userId !== 'guest_user') {
+      const key = `${STORAGE_KEY_PREFIX}${userId}`;
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return { ...DEFAULT_FARMER_PROFILE, ...parsed };
+      }
     }
   } catch (err) {
     console.error('Failed to load farmer profile', err);
@@ -97,11 +99,11 @@ export function getFarmerProfile(userId?: string): FarmerProfile {
 export function saveFarmerProfile(profile: FarmerProfile, userId?: string): void {
   if (typeof window === 'undefined') return;
   try {
-    const key = `${STORAGE_KEY_PREFIX}${userId || 'default'}`;
-    const payload = { ...profile, updatedAt: new Date().toISOString() };
-    localStorage.setItem(key, JSON.stringify(payload));
-    // Also update default key for easy cross-referencing
-    localStorage.setItem(`${STORAGE_KEY_PREFIX}default`, JSON.stringify(payload));
+    if (userId && userId !== 'guest_user') {
+      const key = `${STORAGE_KEY_PREFIX}${userId}`;
+      const payload = { ...profile, updatedAt: new Date().toISOString() };
+      localStorage.setItem(key, JSON.stringify(payload));
+    }
   } catch (err) {
     console.error('Failed to save farmer profile', err);
   }

@@ -15,7 +15,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 }) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [identifier, setIdentifier] = useState('farmer.rafiqul@agriorbit.org');
-  const [name, setName] = useState('Md. Rafiqul Islam');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('••••••••••••');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   };
 
   const handleQuickDemo = () => {
-    onSuccess('Md. Rafiqul Islam (Mithapukur, Rangpur)');
+    onSuccess('Demo Farmer (Rangpur)');
   };
 
   return (
@@ -98,7 +98,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Md. Rafiqul Islam"
+                  placeholder="e.g. Farmer Name"
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#B8FF3D]/60"
                 />
               </div>

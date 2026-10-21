@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS public.farmer_profiles (
   priorities TEXT[] DEFAULT ARRAY['save_water'],
   past_damages TEXT[] DEFAULT ARRAY[]::TEXT[],
   past_damage_notes TEXT,
+  onboarding_completed BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS public.farmer_fields (
   growing_season TEXT DEFAULT 'rabi',
   is_primary BOOLEAN DEFAULT FALSE,
   notes TEXT,
+  priority TEXT DEFAULT 'save_water',
   created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );

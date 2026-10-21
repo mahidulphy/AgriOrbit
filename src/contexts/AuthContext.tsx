@@ -14,6 +14,7 @@ export interface AuthContextType {
   provider: 'google' | 'email' | 'guest' | null;
   setAsGuest: () => void;
   clearGuest: () => void;
+  refreshProfile: () => Promise<void>;
   signInWithGoogle: () => Promise<{ error: AuthError | Error | null }>;
   signInWithGoogleIdToken: (idToken: string) => Promise<{ error: AuthError | Error | null }>;
   signInWithEmail: (email: string, password: string) => Promise<{ error: AuthError | Error | null }>;
@@ -39,7 +40,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return typeof window !== 'undefined' && localStorage.getItem(GUEST_STORAGE_KEY) === 'true';
   });
 
+  const [profileFullName, setProfileFullName] = useState<string>('');
   const configured = isSupabaseConfigured();
+
+  const fetchProfileFullName = async (userId: string) => {
+    try {
+      const { data } = await supabase
+        .from('farmer_profiles')
+        .select('full_name')
+        .eq('id', userId)
+        .maybeSingle();
+      if (data?.full_name && data.full_name.trim()) {
+        setProfileFullName(data.full_name.trim());
+      }
+    } catch {
+      // ignore
+    }
+  };
 
   // Initialize session & listen to auth state changes
   useEffect(() => {
@@ -60,6 +77,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (session?.user) {
           setIsGuest(false);
           localStorage.removeItem(GUEST_STORAGE_KEY);
+          fetchProfileFullName(session.user.id);
+        } else {
+          setProfileFullName('');
         }
       })
       .catch((err) => {
@@ -79,6 +99,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (currentSession?.user) {
         setIsGuest(false);
         localStorage.removeItem(GUEST_STORAGE_KEY);
+        fetchProfileFullName(currentSession.user.id);
+      } else {
+        setProfileFullName('');
       }
       setLoading(false);
     });
@@ -98,6 +121,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const clearGuest = () => {
     setIsGuest(false);
     localStorage.removeItem(GUEST_STORAGE_KEY);
+  };
+
+  const refreshProfile = async () => {
+    if (user?.id) {
+      await fetchProfileFullName(user.id);
+    }
   };
 
   // Google OAuth flow
@@ -121,7 +150,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           redirectTo: redirectUrl,
           queryParams: {
             access_type: 'offline',
-            prompt: 'consent',
+            prompt: 'select_account',
           },
         },
       });
@@ -275,18 +304,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.warn('Error during Supabase signOut', err);
       }
     }
+    // Clear all session/local storage for AgriOrbit (tokens, fields, preferences)
+    try {
+      if (typeof window !== 'undefined') {
+        const keysToRemove: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && (k.startsWith('agriorbit_') || k.startsWith('sb-') || k.includes('supabase'))) {
+            keysToRemove.push(k);
+          }
+        }
+        keysToRemove.forEach((k) => localStorage.removeItem(k));
+        sessionStorage.clear();
+      }
+    } catch (e) {
+      console.warn('Error clearing storage on sign out', e);
+    }
     setUser(null);
     setSession(null);
+    setProfileFullName('');
+    setIsGuest(false);
+    if (typeof window !== 'undefined') {
+      window.location.hash = '';
+    }
   };
 
   // User metadata resolution
+  // Profile table full_name -> user_metadata full_name / name -> email prefix -> Guest
   const displayName = useMemo(() => {
+    if (profileFullName) return profileFullName;
     if (user?.user_metadata?.full_name) return String(user.user_metadata.full_name);
     if (user?.user_metadata?.name) return String(user.user_metadata.name);
     if (user?.email) return user.email.split('@')[0];
-    if (isGuest) return 'Guest Farmer';
+    if (isGuest) return 'Guest';
     return '';
-  }, [user, isGuest]);
+  }, [profileFullName, user, isGuest]);
 
   const avatarUrl = useMemo(() => {
     if (user?.user_metadata?.avatar_url) return String(user.user_metadata.avatar_url);
@@ -313,6 +365,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     provider,
     setAsGuest,
     clearGuest,
+    refreshProfile,
     signInWithGoogle,
     signInWithGoogleIdToken,
     signInWithEmail,
