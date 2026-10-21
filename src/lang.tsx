@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { STRINGS, type Dict, type Lang } from './i18n.ts';
 
 const BN_DIGITS = '০১২৩৪৫৬৭৮৯';
+const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 interface LangValue {
   lang: Lang;
@@ -42,13 +43,23 @@ export function LangProvider({ children }: { children: ReactNode }) {
     return digits(s);
   };
 
+  const formatDate = (iso: string) => {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    if (lang === 'bn') {
+      return d.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' });
+    }
+    // Consistent "3 Sep", "2 Oct" (never "3 Sept") across all browsers & OS
+    return `${d.getDate()} ${EN_MONTHS[d.getMonth()]}`;
+  };
+
   const value: LangValue = {
     lang,
     setLang,
     t: STRINGS[lang],
     num,
     range: ([a, b]) => digits(`${a}–${b}`),
-    date: (iso) => new Date(iso).toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short' }),
+    date: formatDate,
   };
 
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>;

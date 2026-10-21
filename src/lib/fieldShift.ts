@@ -10,6 +10,7 @@
 //      not HOW MUCH, because the 2016 step inflates recent totals.
 
 import type { MonthlyData } from './power.ts';
+import { largestRemainderRound, calcRoundedDelta } from '../utils/rounding.ts';
 
 export type SeasonId = 'rabi' | 'kharif1' | 'kharif2';
 
@@ -29,13 +30,13 @@ export interface SeasonShift {
   season: SeasonId;
   thenTemp: number; // °C, mean
   nowTemp: number;
-  dTemp: number; // °C change
+  dTemp: number; // °C change (strictly nowTemp - thenTemp)
   thenHeat: number; // °C, mean of daily max
   nowHeat: number;
   dHeat: number;
-  thenShare: number; // % of the year's rain that falls in this season
+  thenShare: number; // % of the year's rain that falls in this season (integers summing to 100)
   nowShare: number;
-  dShare: number; // percentage points
+  dShare: number; // percentage points (strictly nowShare - thenShare)
 }
 
 export interface FieldShift {
@@ -81,18 +82,31 @@ export function computeFieldShift(m: MonthlyData): FieldShift {
   const a = windowStats(m, THEN_RANGE);
   const b = windowStats(m, nowRange);
 
-  const seasons = SEASONS.map((season, i) => ({
-    season,
-    thenTemp: a[i].temp,
-    nowTemp: b[i].temp,
-    dTemp: b[i].temp - a[i].temp,
-    thenHeat: a[i].heat,
-    nowHeat: b[i].heat,
-    dHeat: b[i].heat - a[i].heat,
-    thenShare: a[i].share,
-    nowShare: b[i].share,
-    dShare: b[i].share - a[i].share,
-  }));
+  // Apportion integer percentage shares that sum to exactly 100 via largest-remainder method
+  const thenRoundedShares = largestRemainderRound(a.map((x) => x.share), 100);
+  const nowRoundedShares = largestRemainderRound(b.map((x) => x.share), 100);
+
+  const seasons = SEASONS.map((season, i) => {
+    // Calculate deltas directly from displayed rounded numbers so 18.6 -> 19.1 shows +0.5, not +0.6
+    const tStats = calcRoundedDelta(a[i].temp, b[i].temp, 1);
+    const hStats = calcRoundedDelta(a[i].heat, b[i].heat, 1);
+    const thenShare = thenRoundedShares[i];
+    const nowShare = nowRoundedShares[i];
+    const dShare = nowShare - thenShare;
+
+    return {
+      season,
+      thenTemp: tStats.roundedThen,
+      nowTemp: tStats.roundedNow,
+      dTemp: tStats.delta,
+      thenHeat: hStats.roundedThen,
+      nowHeat: hStats.roundedNow,
+      dHeat: hStats.delta,
+      thenShare,
+      nowShare,
+      dShare,
+    };
+  });
 
   const yearly = years
     .filter((y) => y >= THEN_RANGE[0])

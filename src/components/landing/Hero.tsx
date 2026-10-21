@@ -6,7 +6,7 @@ import type { FieldShift } from '../../lib/fieldShift.ts';
 import { HeroCard } from './HeroCard.tsx';
 import { IMAGES } from '../../data/assets.ts';
 
-const SOURCES = ['NASA POWER', 'SMAP', 'MODIS', 'Open-Meteo', 'BARI'];
+const SOURCES = ['NASA POWER', 'SMAP', 'MODIS', 'Open-Meteo', 'BARI & BRRI'];
 
 export function Hero({ conditions, shift }: { conditions: Conditions; shift: FieldShift }) {
   const { t } = useLang();
@@ -51,7 +51,7 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
               {t.hero.cta}
               <ArrowRight className="h-4 w-4" />
             </button>
-            <a href="#story" className="btn btn-ghost px-6! py-3.5! text-sm! flex items-center gap-2 cursor-pointer">
+            <a href="#how" className="btn btn-ghost px-6! py-3.5! text-sm! flex items-center gap-2 cursor-pointer">
               {t.hero.cta2}
               <ArrowDown className="h-4 w-4 text-[#00E5FF]" />
             </a>
@@ -76,16 +76,19 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
         </div>
       </div>
 
-      {/* Data source strip */}
+      {/* Interactive data source strip linking to #data per requirement B.16 */}
       <div className="container-x mt-16 md:mt-20 flex justify-center relative z-10">
-        <div className="glass flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-full px-6 py-2.5 text-xs text-[#8FA3B8] font-mono border border-white/10">
+        <a
+          href="#data"
+          className="glass flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-full px-6 py-2.5 text-xs text-[#8FA3B8] font-mono border border-white/10 hover:text-white hover:border-[#00E5FF]/40 transition-colors group cursor-pointer"
+        >
           {SOURCES.map((s, i) => (
             <span key={s} className="flex items-center gap-6">
               {i > 0 && <span className="h-1 w-1 rounded-full bg-white/20" />}
               {s}
             </span>
           ))}
-        </div>
+        </a>
       </div>
     </section>
   );

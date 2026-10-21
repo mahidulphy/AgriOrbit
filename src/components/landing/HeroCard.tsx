@@ -2,17 +2,16 @@ import { CloudRain, Droplets, MapPin, Sprout, Thermometer } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
 import type { Conditions } from '../../lib/conditions.ts';
 import type { FieldShift } from '../../lib/fieldShift.ts';
-import { DeltaBar, SEASON_COLOR } from '../ui/ui.tsx';
 
 /** Real Rangpur numbers from the bundled NASA POWER snapshot, never invented. */
-export function HeroCard({ conditions: c, shift }: { conditions: Conditions; shift: FieldShift }) {
-  const { t, num, range, date } = useLang();
+export function HeroCard({ conditions: c }: { conditions: Conditions; shift: FieldShift }) {
+  const { t, num, date } = useLang();
 
   const tiles = [
-    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: '30d cumulative', tint: 'text-cyan-300' },
-    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: '°C', desc: 'Peak day high', tint: 'text-amber-300' },
-    { icon: Droplets, label: t.heroCard.humidity, value: num(c.rh, 0), unit: '%', desc: 'Mean relative', tint: 'text-sky-300' },
-    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: 'mm/d', desc: 'Hargreaves ET₀', tint: 'text-lime-300' },
+    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: t.heroCard.rainDesc, tint: 'text-cyan-300' },
+    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: '°C', desc: t.heroCard.heatDesc, tint: 'text-amber-300' },
+    { icon: Droplets, label: t.heroCard.humidity, value: num(c.rh, 0), unit: '%', desc: t.heroCard.humidityDesc, tint: 'text-sky-300' },
+    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: 'mm/d', desc: t.heroCard.et0Desc, tint: 'text-lime-300' },
   ];
 
   return (
@@ -43,27 +42,23 @@ export function HeroCard({ conditions: c, shift }: { conditions: Conditions; shi
         ))}
       </div>
 
-      <div className="tile mt-3 p-4 bg-[#050B14]/90 border-white/10">
-        <div className="text-xs font-medium text-slate-300">{t.heroCard.shift(range(shift.thenRange), range(shift.nowRange))}</div>
-        <div className="mt-3 space-y-3">
-          {shift.seasons.map((s) => (
-            <div key={s.season} className="grid grid-cols-[4.5rem_1fr_3.75rem] items-center gap-3 text-sm">
-              <span className="flex items-center gap-1.5 text-slate-300">
-                <span className="h-2 w-2 rounded-full" style={{ background: SEASON_COLOR[s.season] }} />
-                {t.season[s.season]}
-              </span>
-              <DeltaBar value={s.dTemp} max={1} />
-              <span className={`text-right font-semibold tabular-nums ${s.dTemp >= 0 ? 'text-amber-300' : 'text-sky-300'}`}>
-                {num(s.dTemp, 1, true)}°
-              </span>
-            </div>
-          ))}
+      {/* Concise teaser link to #field-shift per requirement B.12 */}
+      <a
+        href="#field-shift"
+        className="tile mt-3 p-3.5 bg-[#050B14]/90 border-white/10 flex items-center justify-between text-xs text-slate-300 hover:text-white hover:border-[#00E5FF]/40 transition-colors group cursor-pointer"
+      >
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-[#00E5FF] group-hover:scale-125 transition-transform" />
+          <span className="font-medium text-slate-200">{t.heroCard.shiftTeaser}</span>
         </div>
-      </div>
+        <span className="font-mono text-[#00E5FF] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+          {t.heroCard.shiftLink} &rarr;
+        </span>
+      </a>
 
       <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
         <span>{t.heroCard.source(date(c.from), date(c.to))}</span>
-        <span className="font-mono text-cyan-300/90 text-[11px]">172 mm Rain · 86% RH</span>
+        <span className="font-mono text-cyan-300/90 text-[11px]">{num(c.rain30, 0)} mm Rain · {num(c.rh, 0)}% RH</span>
       </div>
     </div>
   );

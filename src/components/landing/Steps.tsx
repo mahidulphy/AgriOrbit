@@ -1,12 +1,13 @@
-import { ArrowRight, MapPin, Satellite, Sprout, Compass, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
-import { goAnalyze } from '../../lib/nav.ts';
 import { IMAGES } from '../../data/assets.ts';
 import { HeroMap } from '../HeroMap.tsx';
+import { CROPS_DATABASE } from '../../data/agriData.ts';
 
 export function Steps() {
   const { lang } = useLang();
   const isBn = lang === 'bn';
+  const cropCount = Object.keys(CROPS_DATABASE).length;
 
   return (
     <section id="story" className="relative py-24 md:py-32 border-b border-white/10 bg-[#050B14]">
@@ -41,17 +42,17 @@ export function Steps() {
             </h3>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
-                ? 'বাংলাদেশের ৬৪টি জেলার প্রতিটি মাটির ধরন এবং ভূগর্ভস্থ পানির স্থিতি আলাদা। ৫ কিমি বৈজ্ঞানিক গ্রিডে আপনার জমির সুনির্দিষ্ট অবস্থান নির্ধারণ করা হয়।'
-                : 'Across Bangladesh’s 64 districts, soil permeability and groundwater response differ dramatically. AgriOrbit pins your field coordinates and computes a 5 km scientific observation circle.'}
+                ? 'বাংলাদেশের ৬৪টি জেলার মাটির বৈশিষ্ট্য ও ভূগর্ভস্থ পানির অবস্থা আলাদা। এগ্রিঅরবিট আপনার জমি চিহ্নিত করে পারিপার্শ্বিক ৫ কিমি এলাকা প্রাসঙ্গিক হিসেবে দেখায়; স্যাটেলাইট তথ্য বৃহত্তর গ্রিডজুড়ে গড় করা হয়।'
+                : 'Across Bangladesh’s 64 districts, soil permeability and groundwater response differ dramatically. AgriOrbit pins your field and shows a 5 km area for context. Satellite data is averaged over a larger grid.'}
             </p>
             <div className="pt-2">
-              <button
-                onClick={goAnalyze}
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono cursor-pointer"
+              <a
+                href="#/analyze"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono"
               >
                 <span>{isBn ? 'মানচিত্রে আপনার জেলা নির্বাচন করুন' : 'Locate your field on the map'}</span>
                 <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -63,7 +64,7 @@ export function Steps() {
                   <span>25.75° N, 89.25° E · Rangpur</span>
                 </div>
                 <div className="absolute bottom-4 right-4 z-10 bg-[#050B14]/90 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-[11px] font-mono text-[#8FA3B8]">
-                  5 km Context Circle
+                  5 km Context Area
                 </div>
               </HeroMap>
             </div>
@@ -86,12 +87,12 @@ export function Steps() {
                   NASA POWER · 2001 → Today
                 </span>
                 <h4 className="font-display text-xl sm:text-2xl font-bold text-white mb-2">
-                  {isBn ? '৩০ বছরের জলবায়ু স্থানান্তর' : 'Three Decades of Measured Climate Shift'}
+                  {isBn ? 'দুই দশকের পরিমাপকৃত জলবায়ু পরিবর্তন' : 'Two Decades of Measured Climate Shift'}
                 </h4>
                 <p className="text-xs sm:text-sm text-[#8FA3B8] leading-relaxed max-w-lg">
                   {isBn
-                    ? 'শীতের তাপমাত্রা বেড়েছে এবং বর্ষার শুরুর বৃষ্টি পিছিয়ে গেছে। ঐতিহাসিকভাবে নির্ধারিত সময়ে বীজ বপন করলে ফসল তাপপ্রবাহের ঝুঁকিতে পড়ে।'
-                    : 'Winter temperatures have climbed and rainfall distributions have drifted. Historical planting calendars expose crops to heat stress and water deficits.'}
+                    ? 'বৃষ্টির সময় পরিবর্তিত হয়েছে: খরিফ-১ মৌসুমে বৃষ্টিপাত ৩৫% থেকে বেড়ে ৪২% হয়েছে এবং খরিফ-২ এ ৬৪% থেকে কমে ৫৭% হয়েছে, আর রবি মৌসুম ০.৬°সে বেশি উষ্ণ হয়েছে।'
+                    : 'Rain timing moved: Kharif-1 now receives 42% of the year’s rain (up from 35%), Kharif-2 decreased from 64% to 57%, and Rabi winters warmed by +0.6°C.'}
                 </p>
               </div>
             </div>
@@ -108,8 +109,8 @@ export function Steps() {
             </h3>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
-                ? 'নাসা পাওয়ার-এর ৩০ বছরের তথ্য দিয়ে আপনার জেলার রবি, খরিফ-১ ও খরিফ-২ মৌসুমের তাপ এবং বৃষ্টির পরিবর্তন তাৎক্ষণিকভাবে দেখা যায়।'
-                : 'NASA POWER historical telemetry reveals whether your district’s dry season is warming and when rainfall actually arrives.'}
+                ? 'নাসা পাওয়ার-এর দুই দশকের তথ্য পর্যালোচনা করলে দেখা যায় জেলাভেদে মৌসুমভিত্তিক বৃষ্টিপাতের সময় ও তাপমাত্রায় সুনির্দিষ্ট পরিবর্তন এসেছে।'
+                : 'NASA POWER historical observations show how seasonal rain timing and temperatures have drifted across districts over the past two decades. Rather than uniform warming, rain distribution has shifted between seasons.'}
             </p>
             <div className="pt-2">
               <a
@@ -136,17 +137,17 @@ export function Steps() {
             </h3>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
-                ? 'অতিরিক্ত সেচ নির্ভর বোরো ধান চাষের বদলে কম পানির সরিষা বা মসুর ডাল নির্বাচন করলে সেচ খরচ বাঁচে এবং মাটির স্বাস্থ্য ভালো থাকে।'
-                : 'When surface soil moisture is low, high-water crops face heavy irrigation costs. AgriOrbit ranks 10 verified crops using BARI/BRRI agronomic rules.'}
+                ? `মাটির আর্দ্রতা কম থাকলে বেশি পানির ফসলে সেচের খরচ বেড়ে যায়। এগ্রিঅরবিট বারি ও ব্রি নির্দেশিকা অনুযায়ী ${cropCount}টি যাচাইকৃত ফসলের উপযুক্ততা মূল্যায়ন করে।`
+                : `When surface soil moisture is low, high-water crops face heavy irrigation costs. AgriOrbit ranks ${cropCount} verified crops using BARI & BRRI agronomic rules.`}
             </p>
             <div className="pt-2">
-              <button
-                onClick={goAnalyze}
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono cursor-pointer"
+              <a
+                href="#crops"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono"
               >
-                <span>{isBn ? '১০টি ফসলের উপযোগিতা মূল্যায়ন দেখুন' : 'Evaluate crop suitability for your field'}</span>
+                <span>{isBn ? `${cropCount}টি ফসলের উপযোগিতা তথ্যভাণ্ডার দেখুন` : `Evaluate ${cropCount} crops in the Atlas`}</span>
                 <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -166,10 +167,11 @@ export function Steps() {
                 <h4 className="font-display text-xl sm:text-2xl font-bold text-white mb-2">
                   {isBn ? 'সরিষা ও ডাল ফসলের সুবিধা' : 'Low-Water Legume & Oilseed Advantage'}
                 </h4>
+                {/* TODO: source needed - original text claimed "saving up to ৳16,000 per acre" */}
                 <p className="text-xs sm:text-sm text-[#8FA3B8] leading-relaxed max-w-lg">
                   {isBn
-                    ? 'স্বল্প সেচে উৎপাদিত সরিষা ও মসুর ডাল মাটির গভীর থেকে রস টানে এবং অতিরিক্ত ডিজেল পাম্পিং খরচ সাশ্রয় করে।'
-                    : 'Mustard and lentil require only 1–2 light irrigations, saving up to ৳16,000 per acre in pumping bills compared to Boro rice.'}
+                    ? 'সরিষা ও মসুর ডালে সীমিত সেচ প্রয়োজন হওয়ায় বোরো ধানের তুলনায় ডিজেল পাম্পিং খরচ উল্লেখযোগ্যভাবে কমে আসে।'
+                    : 'Mustard and lentil require fewer irrigations, substantially reducing diesel pumping expenses compared to high-water Boro rice.'}
                 </p>
               </div>
             </div>
@@ -177,6 +179,7 @@ export function Steps() {
         </div>
 
         {/* CHAPTER 04 — PLAN THE ROTATION */}
+        {/* Softened to a clean teaser linking to #rotation per requirement B.13 */}
         <div className="py-16 border-t border-white/10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7 order-2 lg:order-1">
             <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0B1626] min-h-[360px] flex flex-col justify-end p-6 sm:p-8">
@@ -189,15 +192,15 @@ export function Steps() {
               <div className="absolute inset-0 scrim-editorial-card" />
               <div className="relative z-10">
                 <span className="text-xs uppercase font-mono text-[#00E5FF] font-bold block mb-1">
-                  Annual Cycle Strategy
+                  {isBn ? 'ধারাবাহিক শস্যচক্র' : 'Continuous Crop Stewardship'}
                 </span>
                 <h4 className="font-display text-xl sm:text-2xl font-bold text-white mb-2">
-                  Rabi → Kharif-1 → Kharif-2
+                  {isBn ? 'মাটির স্বাস্থ্য ও পানি সুরক্ষা' : 'Restoring Soil & Aquifers Year-Round'}
                 </h4>
                 <p className="text-xs sm:text-sm text-[#8FA3B8] leading-relaxed max-w-lg">
                   {isBn
-                    ? 'রবি মৌসুমে সরিষা, খরিফ-১ এ মুগ ডাল এবং খরিফ-২ এ রোপা আমন ধান—মাটি ও পানির সর্বোত্তম ব্যবহার।'
-                    : 'Mustard in Rabi, green-manure Mungbean in Kharif-1, and rainfed T. Aman rice in Kharif-2 preserves aquifers and restores soil nitrogen.'}
+                    ? 'এক মৌসুমের ফসল পরের মৌসুমের মাটিকে সমৃদ্ধ করে। নিচে আমাদের ইন্টারেক্টিভ শস্য পর্যায় দেখুন।'
+                    : 'Each harvest leaves the soil replenished for the next season. Explore the full 3-season rotation below.'}
                 </p>
               </div>
             </div>
@@ -223,7 +226,7 @@ export function Steps() {
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5FF] hover:underline uppercase font-mono"
               >
                 <span>{isBn ? 'শস্য পর্যায় বিস্তারিত জানুন' : 'Learn about the 3-season rotation'}</span>
-                <ArrowRight className="h-3.5 w-3.5" />
+                <ArrowDown className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>

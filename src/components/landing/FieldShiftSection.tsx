@@ -1,14 +1,16 @@
 import { ArrowRight, CloudRain, Info, Thermometer } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
-import { goAnalyze } from '../../lib/nav.ts';
 import { rainTimingShift, warmestShift, type FieldShift, type SeasonId } from '../../lib/fieldShift.ts';
 import { SEASON_COLOR, SectionHeader } from '../ui/ui.tsx';
 
 /** Reusable: shows the Field Shift for any district (landing uses Rangpur). */
 export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
-  const { t, num } = useLang();
+  const { t, num, range } = useLang();
   const warm = warmestShift(shift);
   const rain = rainTimingShift(shift);
+
+  const thenLabel = `${t.fs.then} (${range(shift.thenRange)})`;
+  const nowLabel = `${t.fs.now} (${range(shift.nowRange)})`;
 
   return (
     <div className="space-y-6">
@@ -46,20 +48,50 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
             <p className="text-sm text-slate-500">{t.seasonHint[s.season]}</p>
 
             <dl className="mt-5 space-y-4">
-              <Row label={t.fs.temp} then={`${num(s.thenTemp, 1)}°`} now={`${num(s.nowTemp, 1)}°`} delta={`${num(s.dTemp, 1, true)}°C`} warm={s.dTemp >= 0} />
-              <Row label={t.fs.heat} then={`${num(s.thenHeat, 1)}°`} now={`${num(s.nowHeat, 1)}°`} delta={`${num(s.dHeat, 1, true)}°C`} warm={s.dHeat >= 0} />
-              <Row label={t.fs.share} then={`${num(s.thenShare, 0)}%`} now={`${num(s.nowShare, 0)}%`} delta={`${num(s.dShare, 0, true)} pt`} neutral />
+              <Row
+                label={t.fs.temp}
+                thenLabel={thenLabel}
+                nowLabel={nowLabel}
+                then={`${num(s.thenTemp, 1)}°`}
+                now={`${num(s.nowTemp, 1)}°`}
+                delta={`${num(s.dTemp, 1, true)}°C`}
+                warm={s.dTemp >= 0}
+              />
+              <Row
+                label={t.fs.heat}
+                thenLabel={thenLabel}
+                nowLabel={nowLabel}
+                then={`${num(s.thenHeat, 1)}°`}
+                now={`${num(s.nowHeat, 1)}°`}
+                delta={`${num(s.dHeat, 1, true)}°C`}
+                warm={s.dHeat >= 0}
+              />
+              <Row
+                label={t.fs.share}
+                thenLabel={thenLabel}
+                nowLabel={nowLabel}
+                then={`${num(s.thenShare, 0)}%`}
+                now={`${num(s.nowShare, 0)}%`}
+                delta={`${num(s.dShare, 0, true)} pt`}
+                neutral
+              />
             </dl>
           </article>
         ))}
       </div>
 
-      {/* When does the rain fall? — stacked bars, then vs now */}
+      {/* When does the rain fall? — stacked bars, then vs now with year ranges */}
       <div className="glass p-6">
         <h3 className="font-display text-lg font-semibold text-white">{t.fs.rainBarTitle}</h3>
         <div className="mt-5 space-y-4">
-          <RainBar label={t.fs.then} shares={Object.fromEntries(shift.seasons.map((s) => [s.season, s.thenShare])) as Record<SeasonId, number>} />
-          <RainBar label={t.fs.now} shares={Object.fromEntries(shift.seasons.map((s) => [s.season, s.nowShare])) as Record<SeasonId, number>} />
+          <RainBar
+            label={thenLabel}
+            shares={Object.fromEntries(shift.seasons.map((s) => [s.season, s.thenShare])) as Record<SeasonId, number>}
+          />
+          <RainBar
+            label={nowLabel}
+            shares={Object.fromEntries(shift.seasons.map((s) => [s.season, s.nowShare])) as Record<SeasonId, number>}
+          />
         </div>
         <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-400">
           {shift.seasons.map((s) => (
@@ -82,19 +114,36 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
   );
 }
 
-function Row({ label, then, now, delta, warm, neutral }: { label: string; then: string; now: string; delta: string; warm?: boolean; neutral?: boolean }) {
-  const { t } = useLang();
+function Row({
+  label,
+  thenLabel,
+  nowLabel,
+  then,
+  now,
+  delta,
+  warm,
+  neutral,
+}: {
+  label: string;
+  thenLabel: string;
+  nowLabel: string;
+  then: string;
+  now: string;
+  delta: string;
+  warm?: boolean;
+  neutral?: boolean;
+}) {
   const color = neutral ? 'text-cyan-200 bg-cyan-300/10' : warm ? 'text-amber-200 bg-amber-300/10' : 'text-sky-200 bg-sky-300/10';
   return (
     <div>
       <dt className="text-xs text-slate-400">{label}</dt>
-      <dd className="mt-1 flex items-center justify-between gap-2">
-        <span className="tabular-nums text-slate-300">
-          <span className="text-slate-500">{t.fs.then}</span> {then}
-          <span className="mx-1.5 text-slate-600">→</span>
-          <span className="text-slate-500">{t.fs.now}</span> <span className="font-semibold text-white">{now}</span>
+      <dd className="mt-1 flex flex-wrap items-center justify-between gap-2">
+        <span className="tabular-nums text-slate-300 text-xs sm:text-sm">
+          <span className="text-slate-500">{thenLabel}</span> {then}
+          <span className="mx-1 text-slate-600">→</span>
+          <span className="text-slate-500">{nowLabel}</span> <span className="font-semibold text-white">{now}</span>
         </span>
-        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums ${color}`}>{delta}</span>
+        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums shrink-0 ${color}`}>{delta}</span>
       </dd>
     </div>
   );
@@ -103,9 +152,9 @@ function Row({ label, then, now, delta, warm, neutral }: { label: string; then: 
 function RainBar({ label, shares }: { label: string; shares: Record<SeasonId, number> }) {
   const { num } = useLang();
   return (
-    <div className="grid grid-cols-[3.5rem_1fr] items-center gap-3">
-      <span className="text-sm text-slate-400">{label}</span>
-      <div className="flex h-8 overflow-hidden rounded-lg">
+    <div className="flex flex-col sm:grid sm:grid-cols-[10rem_1fr] items-start sm:items-center gap-2 sm:gap-3">
+      <span className="text-xs sm:text-sm font-mono text-slate-400 shrink-0">{label}</span>
+      <div className="flex h-8 w-full overflow-hidden rounded-lg">
         {(['rabi', 'kharif1', 'kharif2'] as SeasonId[]).map((s) => (
           <div
             key={s}
@@ -129,10 +178,16 @@ export function FieldShiftSection({ shift }: { shift: FieldShift }) {
         <div className="mt-12">
           <FieldShiftPanel shift={shift} />
         </div>
-        <button onClick={goAnalyze} className="btn btn-ghost mt-8">
-          {t.fs.cta}
-          <ArrowRight className="h-4 w-4" />
-        </button>
+        {/* Softened inline CTA to plain text link per requirement B.17 */}
+        <div className="mt-8">
+          <a
+            href="#/analyze"
+            className="inline-flex items-center gap-2 text-sm text-[#8FA3B8] hover:text-[#00E5FF] transition-colors font-mono underline underline-offset-4"
+          >
+            <span>{t.fs.cta}</span>
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
       </div>
     </section>
   );

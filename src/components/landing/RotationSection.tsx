@@ -40,8 +40,11 @@ export function RotationSection() {
                 <li key={s} className="flex flex-1 flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                   <div className="tile relative flex-1 overflow-hidden p-5">
                     <div className="absolute inset-x-0 top-0 h-1" style={{ background: SEASON_COLOR[s] }} />
-                    <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: SEASON_COLOR[s] }}>
-                      {t.season[s]}
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: SEASON_COLOR[s] }}>
+                        {t.season[s]}
+                      </div>
+                      <span className="font-mono text-xs font-bold text-slate-400">0{i + 1}</span>
                     </div>
                     <div className="text-xs text-slate-500">{t.seasonMonths[s]}</div>
                     <Icon className="mt-5 h-9 w-9 text-white" strokeWidth={1.4} />

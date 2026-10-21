@@ -361,8 +361,8 @@ export const CROPS_DATABASE: Record<string, CropData> = {
     waterDetailEn: 'Mainly pre-monsoon showers (150mm)',
     waterDetailBn: 'প্রাক-বর্ষার বৃষ্টিতেই বেশিরভাগ প্রয়োজন মেটে',
     durationDays: 65,
-    shortWhyEn: 'Pioneer green manure pulse; fixes nitrogen, suppresses weeds, and vacates field in time for T. Aman.',
-    shortWhyBn: 'মাটির উর্বরতা বাড়ায়, সবুজ সার হিসেবে কাজ করে এবং মাত্র ৬৫ দিনে পেকে আমন ধানের জন্য জমি তৈরি করে।',
+    shortWhyEn: 'Short pulse crop; harvest the pods, then work the plants into the soil to add nitrogen for T. Aman.',
+    shortWhyBn: 'স্বল্পমেয়াদী ডাল ফসল; শুঁটি তোলার পর গাছগুলো মাটিতে মিশিয়ে দিলে রোপা আমনের জন্য নাইট্রোজেন যোগ হয়।',
     explanation: {
       observationsTriggered: [
         'NASA POWER pre-monsoon rainfall distribution supports vegetative growth without standing water.',
@@ -435,8 +435,9 @@ export const CROPS_DATABASE: Record<string, CropData> = {
     waterDetailEn: '2-3 irrigations (250-300mm)',
     waterDetailBn: '২-৩টি সেচ প্রয়োজন (২৫০-৩০০ মিমি)',
     durationDays: 110,
-    shortWhyEn: 'Reliable winter cereal, requires 60% less water than Boro rice, though sensitive to late-winter terminal heat.',
-    shortWhyBn: 'বোরো ধানের চেয়ে ৬০% কম পানি লাগে, তবে শীতের শেষের গরমের কারণে সময়মতো বপন করা জরুরি।',
+    // TODO: source needed - original text claimed "requires 60% less water than Boro rice"
+    shortWhyEn: 'Reliable winter cereal, requires significantly less water than Boro rice, though sensitive to late-winter terminal heat.',
+    shortWhyBn: 'বোরো ধানের চেয়ে উল্লেখযোগ্য পরিমাণ কম পানি লাগে, তবে শীতের শেষের গরমের কারণে সময়মতো বপন করা জরুরি।',
     explanation: {
       observationsTriggered: [
         'NASA POWER winter temperatures are within the 15-24°C grain-filling envelope in Rangpur.',
@@ -507,8 +508,9 @@ export const CROPS_DATABASE: Record<string, CropData> = {
     waterDetailEn: '3-4 irrigations (400-500mm)',
     waterDetailBn: '৩-৪টি পরিমিত সেচ (৪০০-৫০০ মিমি)',
     durationDays: 135,
-    shortWhyEn: 'High productivity and market value for poultry feed; consumes half the water of Boro rice.',
-    shortWhyBn: 'বাজারে পোল্ট্রি খাদ্যের জন্য প্রচুর চাহিদা, লাভজনক এবং বোরোর অর্ধেকেরও কম পানি লাগে।',
+    // TODO: source needed - original text claimed "consumes half the water of Boro rice"
+    shortWhyEn: 'High productivity and market value for poultry feed; consumes much less water than Boro rice.',
+    shortWhyBn: 'বাজারে পোল্ট্রি খাদ্যের জন্য প্রচুর চাহিদা, লাভজনক এবং বোরোর চেয়ে অনেক কম পানি লাগে।',
     explanation: {
       observationsTriggered: [
         'NASA POWER solar radiation and soil temperatures in North Bengal promote vigorous maize ear formation.',
