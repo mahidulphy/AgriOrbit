@@ -28,7 +28,7 @@ export const LoginPage: React.FC = () => {
     } catch (e) {
       // fallback
     }
-    return '#/analyze/dashboard';
+    return '#/dashboard';
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

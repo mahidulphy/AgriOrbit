@@ -4,8 +4,8 @@
  * Ensures:
  * - Local development dynamically uses the active Vite development origin (e.g. http://localhost:5173).
  * - Production uses the deployed AgriOrbit domain (e.g. https://agri-orbit.vercel.app).
- * - No hardcoded 'localhost:3000' or static ports.
- * - Standard path-based redirect URIs without hash fragments ('#') for clean OAuth 2.0 / GoTrue compatibility.
+ * - No hardcoded 'localhost' or static ports.
+ * - Clean OAuth redirect targets using the application origin.
  */
 
 function getEnvVar(key: string): string {
@@ -55,12 +55,14 @@ export function getAppOrigin(): string {
 
 /**
  * Generates the fully-qualified OAuth / email auth redirect URL.
+ * Defaults to the application origin root (window.location.origin), avoiding 404s on static hosts.
  *
- * @param path - The callback path (default: '/auth/callback')
- * @returns Complete URL such as "http://localhost:5173/auth/callback" or "https://agri-orbit.vercel.app/auth/callback"
+ * @param path - Optional callback path. If omitted or empty, returns application origin.
+ * @returns Complete URL such as "https://agri-orbit.vercel.app" or "http://localhost:5173"
  */
-export function getAuthRedirectUrl(path: string = '/auth/callback'): string {
+export function getAuthRedirectUrl(path: string = ''): string {
   const origin = getAppOrigin();
+  if (!path || path === '/') return origin;
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${origin}${cleanPath}`;
 }

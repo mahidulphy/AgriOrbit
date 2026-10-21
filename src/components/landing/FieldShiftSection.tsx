@@ -181,7 +181,7 @@ export function FieldShiftSection({ shift }: { shift: FieldShift }) {
         {/* Softened inline CTA to plain text link per requirement B.17 */}
         <div className="mt-8">
           <a
-            href="#/analyze"
+            href="#/dashboard"
             className="inline-flex items-center gap-2 text-sm text-[#8FA3B8] hover:text-[#00E5FF] transition-colors font-mono underline underline-offset-4"
           >
             <span>{t.fs.cta}</span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLang } from '../../lang.tsx';
 import { useAuth } from '../../contexts/AuthContext.tsx';
 import { goHome } from '../../lib/nav.ts';
@@ -7,18 +7,17 @@ import type { DistrictId, FarmerPriorityId, Language, SelectedLocation } from '.
 import { FarmLocationStep } from '../journey/FarmLocationStep.tsx';
 import { FarmerPrioritySetup } from '../journey/FarmerPrioritySetup.tsx';
 import { DashboardView } from '../journey/DashboardView.tsx';
+import { loadFarmerProfile, getActiveField } from '../../lib/farmerProfileService.ts';
 
 type AnalyzeStep = 'location' | 'priority' | 'dashboard';
 
 function initialStep(): AnalyzeStep {
   if (typeof window !== 'undefined') {
-    if (window.location.hash.includes('dashboard')) return 'dashboard';
     if (window.location.hash.includes('priority')) return 'priority';
+    if (window.location.hash.includes('location')) return 'location';
   }
-  return 'location';
+  return 'dashboard';
 }
-
-import { loadFarmerProfile, getActiveField } from '../../lib/farmerProfileService.ts';
 
 export function AnalyzePage() {
   const { lang, setLang } = useLang();
@@ -31,7 +30,7 @@ export function AnalyzePage() {
 
   const setStep = (next: AnalyzeStep) => {
     setStepState(next);
-    window.location.hash = `#/analyze/${next}`;
+    window.location.hash = next === 'dashboard' ? '#/dashboard' : `#/analyze/${next}`;
   };
 
   useEffect(() => {

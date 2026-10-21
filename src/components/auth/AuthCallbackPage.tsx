@@ -67,7 +67,7 @@ export const AuthCallbackPage: React.FC = () => {
                   window.history.replaceState(null, '', window.location.pathname);
                 }
                 setTimeout(() => {
-                  window.location.hash = '#/analyze/dashboard';
+                  window.location.hash = '#/dashboard';
                 }, 1200);
                 return;
               }
@@ -88,7 +88,7 @@ export const AuthCallbackPage: React.FC = () => {
               window.history.replaceState(null, '', window.location.pathname);
             }
             setTimeout(() => {
-              window.location.hash = '#/analyze/dashboard';
+              window.location.hash = '#/dashboard';
             }, 1200);
           }
         } else {
@@ -101,7 +101,7 @@ export const AuthCallbackPage: React.FC = () => {
                 window.history.replaceState(null, '', window.location.pathname);
               }
               setTimeout(() => {
-                window.location.hash = '#/analyze/dashboard';
+                window.location.hash = '#/dashboard';
               }, 1200);
             }
           });
@@ -109,7 +109,7 @@ export const AuthCallbackPage: React.FC = () => {
           // Timeout fallback
           setTimeout(() => {
             if (mounted && status === 'verifying') {
-              window.location.hash = '#/analyze/dashboard';
+              window.location.hash = '#/dashboard';
             }
           }, 3000);
         }
@@ -156,7 +156,7 @@ export const AuthCallbackPage: React.FC = () => {
       } else {
         setUpdateSuccess(true);
         setTimeout(() => {
-          window.location.hash = '#/analyze/dashboard';
+          window.location.hash = '#/dashboard';
         }, 1500);
       }
     } catch (err: any) {

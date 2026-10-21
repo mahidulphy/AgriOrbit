@@ -7,8 +7,18 @@ import { LoginPage, SignUpPage, ForgotPasswordPage, AuthCallbackPage } from './c
 import { PrivacyPolicyPage, TermsPage } from './components/legal';
 import { FarmerProfilePage } from './components/profile/FarmerProfilePage.tsx';
 import { useAuth } from './contexts/AuthContext.tsx';
+import { supabase } from './lib/supabase.ts';
 
-export type AppRoute = 'landing' | 'analyze' | 'login' | 'signup' | 'forgot-password' | 'callback' | 'privacy' | 'terms' | 'profile';
+export type AppRoute =
+  | 'landing'
+  | 'dashboard'
+  | 'login'
+  | 'signup'
+  | 'forgot-password'
+  | 'callback'
+  | 'privacy'
+  | 'terms'
+  | 'profile';
 
 export function resolveCurrentRoute(): AppRoute {
   if (typeof window === 'undefined') return 'landing';
@@ -23,11 +33,12 @@ export function resolveCurrentRoute(): AppRoute {
   if (hash.startsWith('#/privacy') || path === '/privacy' || path.startsWith('/privacy')) return 'privacy';
   if (hash.startsWith('#/terms') || path === '/terms' || path.startsWith('/terms')) return 'terms';
 
-  // Auth callback handler (supports dedicated paths, hash routes, PKCE query code, and implicit hash tokens)
+  // Auth callback / token processing (ensures #access_token=... is NEVER treated as a 404 or random route)
   const isAuthCallback =
     hash.startsWith('#/auth/callback') ||
     path.startsWith('/auth/callback') ||
     hash.includes('access_token=') ||
+    hash.includes('refresh_token=') ||
     hash.includes('error_description=') ||
     (typeof window !== 'undefined' && (
       window.location.search.includes('code=') ||
@@ -41,8 +52,17 @@ export function resolveCurrentRoute(): AppRoute {
   if (hash.startsWith('#/signup') || path === '/signup' || path.startsWith('/signup')) return 'signup';
   if (hash.startsWith('#/forgot-password') || path === '/forgot-password' || path.startsWith('/forgot-password')) return 'forgot-password';
 
-  // Protected workspace routes
-  if (hash.startsWith('#/analyze') || path === '/analyze' || path.startsWith('/analyze')) return 'analyze';
+  // Dashboard & Workspace routes (#/dashboard, #/analyze, /dashboard, /analyze)
+  if (
+    hash.startsWith('#/dashboard') ||
+    path === '/dashboard' ||
+    path.startsWith('/dashboard') ||
+    hash.startsWith('#/analyze') ||
+    path === '/analyze' ||
+    path.startsWith('/analyze')
+  ) {
+    return 'dashboard';
+  }
 
   // Public landing page (including in-page anchors: #field-shift, #crops, #data...)
   return 'landing';
@@ -53,6 +73,37 @@ export default function App() {
   const { user, isGuest, loading } = useAuth();
 
   useEffect(() => {
+    // 1. Supabase OAuth & Auth State Listener at App Startup
+    // When Google OAuth or magic-link sign in succeeds (SIGNED_IN with session):
+    // Clears the token hash from the address bar and navigates straight to /#/dashboard
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        const hash = window.location.hash || '';
+        const search = window.location.search || '';
+        const isRecovery = hash.includes('type=recovery') || search.includes('type=recovery');
+
+        if (!isRecovery) {
+          if (
+            hash.includes('access_token=') ||
+            hash.includes('refresh_token=') ||
+            hash.startsWith('#/auth/callback') ||
+            window.location.pathname.startsWith('/auth/callback') ||
+            search.includes('code=')
+          ) {
+            // Clean the token hash from the address bar without page reload
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
+            // Navigate to dashboard
+            window.location.hash = '#/dashboard';
+          }
+        }
+      }
+    });
+
+    // 2. Hash and History Route Synchronization
     const onRouteSync = () => {
       const next = resolveCurrentRoute();
       setRoute((prev) => {
@@ -65,27 +116,28 @@ export default function App() {
     window.addEventListener('popstate', onRouteSync);
 
     return () => {
+      subscription.unsubscribe();
       window.removeEventListener('hashchange', onRouteSync);
       window.removeEventListener('popstate', onRouteSync);
     };
   }, []);
 
-  // Protected route guard for field analysis workspace
-  if (route === 'analyze') {
+  // Protected route guard for field dashboard workspace
+  if (route === 'dashboard') {
     if (loading) {
       return (
         <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
           <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
             <Loader2 className="w-6 h-6 animate-spin" />
           </div>
-          <p className="font-mono text-xs text-slate-400">Verifying satellite session...</p>
+          <p className="font-mono text-xs text-slate-400">Loading AgriOrbit dashboard...</p>
         </div>
       );
     }
 
     // If unauthenticated and not in guest mode, redirect to login while preserving target
     if (!user && !isGuest) {
-      const target = window.location.hash || '#/analyze/dashboard';
+      const target = window.location.hash || '#/dashboard';
       window.location.hash = `#/login?redirect=${encodeURIComponent(target)}`;
       return null;
     }
@@ -96,7 +148,7 @@ export default function App() {
   // Public authentication routes
   if (route === 'login') {
     if (!loading && (user || isGuest)) {
-      window.location.hash = '#/analyze/dashboard';
+      window.location.hash = '#/dashboard';
       return null;
     }
     return <LoginPage />;
@@ -104,7 +156,7 @@ export default function App() {
 
   if (route === 'signup') {
     if (!loading && user) {
-      window.location.hash = '#/analyze/dashboard';
+      window.location.hash = '#/dashboard';
       return null;
     }
     return <SignUpPage />;

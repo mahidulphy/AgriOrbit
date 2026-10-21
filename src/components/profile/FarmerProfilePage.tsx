@@ -292,7 +292,7 @@ export const FarmerProfilePage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <a
-              href="#/analyze/dashboard"
+              href="#/dashboard"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5 text-[#00E5FF]" />

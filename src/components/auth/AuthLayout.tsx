@@ -26,7 +26,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
 
   const handleContinueGuest = () => {
     setAsGuest();
-    window.location.hash = '#/analyze/dashboard';
+    window.location.hash = '#/dashboard';
   };
 
   return (

@@ -42,7 +42,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = ({ onError, onSuccess }
                   onError?.(error.message);
                 } else {
                   onSuccess?.();
-                  window.location.hash = '#/analyze/dashboard';
+                  window.location.hash = '#/dashboard';
                 }
               } catch (err: any) {
                 onError?.(err?.message || 'Failed to authenticate with Google ID token');

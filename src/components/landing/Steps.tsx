@@ -47,7 +47,7 @@ export function Steps() {
             </p>
             <div className="pt-2">
               <a
-                href="#/analyze"
+                href="#/dashboard"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono"
               >
                 <span>{isBn ? 'মানচিত্রে আপনার জেলা নির্বাচন করুন' : 'Locate your field on the map'}</span>

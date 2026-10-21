@@ -8,9 +8,9 @@ test('authUrl: getAppOrigin returns fallback when window is undefined', () => {
   assert.ok(!origin.endsWith('/'));
 });
 
-test('authUrl: getAuthRedirectUrl defaults to /auth/callback', () => {
+test('authUrl: getAuthRedirectUrl defaults to origin root without path', () => {
   const url = getAuthRedirectUrl();
-  assert.ok(url.endsWith('/auth/callback'));
+  assert.strictEqual(url, getAppOrigin());
   assert.ok(!url.includes('#'));
 });
 
