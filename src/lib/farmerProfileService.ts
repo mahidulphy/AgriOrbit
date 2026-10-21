@@ -139,19 +139,55 @@ export async function loadFarmerProfile(
   // 2. If Supabase is configured and user is authenticated, query Supabase
   if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
     try {
-      // Query farmer_profiles table
-      const { data: profileRow, error: profileErr } = await supabase
-        .from('farmer_profiles')
+      // Query profiles table, falling back to farmer_profiles
+      let profileRow: any = null;
+      let profileErr: any = null;
+
+      const pRes = await supabase
+        .from('profiles')
         .select('*')
         .eq('id', userId)
         .maybeSingle();
 
-      // Query farmer_fields table
-      const { data: fieldsRows, error: fieldsErr } = await supabase
-        .from('farmer_fields')
+      if (!pRes.error && pRes.data) {
+        profileRow = pRes.data;
+      } else {
+        const fpRes = await supabase
+          .from('farmer_profiles')
+          .select('*')
+          .eq('id', userId)
+          .maybeSingle();
+        if (!fpRes.error && fpRes.data) {
+          profileRow = fpRes.data;
+        } else {
+          profileErr = pRes.error || fpRes.error;
+        }
+      }
+
+      // Query fields table, falling back to farmer_fields
+      let fieldsRows: any[] | null = null;
+      let fieldsErr: any = null;
+
+      const fRes = await supabase
+        .from('fields')
         .select('*')
         .eq('user_id', userId)
         .order('is_primary', { ascending: false });
+
+      if (!fRes.error && fRes.data && fRes.data.length > 0) {
+        fieldsRows = fRes.data;
+      } else {
+        const ffRes = await supabase
+          .from('farmer_fields')
+          .select('*')
+          .eq('user_id', userId)
+          .order('is_primary', { ascending: false });
+        if (!ffRes.error && ffRes.data) {
+          fieldsRows = ffRes.data;
+        } else {
+          fieldsErr = fRes.error || ffRes.error;
+        }
+      }
 
       if (profileRow && !profileErr) {
         cachedProfile = {
@@ -218,20 +254,20 @@ export async function loadFarmerProfile(
           }
         }
       }
-    } catch (supaErr) {
-      console.warn('Supabase profile fetch fallback to local:', supaErr);
+    } catch (err) {
+      console.warn('Database query error, using local fallback:', err);
     }
   }
 
-  // 3. Ensure defaults if empty
+  // 3. Fallback to default if nothing found
   const finalProfile: FarmerProfileData = cachedProfile || {
     ...DEFAULT_FARMER_PROFILE_DATA,
-    id: userId || 'default_user',
+    id: userId || 'default',
   };
 
-  const finalFields: FarmField[] = cachedFields;
+  const finalFields: FarmField[] = cachedFields.length > 0 ? cachedFields : [];
 
-  // Sync to local cache
+  // Update local cache
   try {
     localStorage.setItem(
       `${PROFILE_CACHE_KEY}_${userId || 'default'}`,
@@ -289,24 +325,33 @@ export async function saveFarmerProfile(
         console.warn('Auth metadata update non-critical warning:', authErr);
       }
 
-      // 2. Upsert to public.farmer_profiles table
+      const profilePayload = {
+        id: userId,
+        full_name: updated.fullName,
+        phone: updated.phone,
+        avatar_url: updated.avatarUrl,
+        preferred_language: updated.preferredLanguage,
+        communication_method: updated.communicationMethod,
+        primary_priority: updated.primaryPriority,
+        priorities: updated.priorities,
+        past_damages: updated.pastDamages,
+        past_damage_notes: updated.pastDamageNotes,
+        onboarding_completed: updated.onboardingCompleted ?? false,
+        updated_at: new Date().toISOString(),
+      };
+
+      // 2. Upsert to public.profiles table
       try {
-        await supabase.from('farmer_profiles').upsert({
-          id: userId,
-          full_name: updated.fullName,
-          phone: updated.phone,
-          avatar_url: updated.avatarUrl,
-          preferred_language: updated.preferredLanguage,
-          communication_method: updated.communicationMethod,
-          primary_priority: updated.primaryPriority,
-          priorities: updated.priorities,
-          past_damages: updated.pastDamages,
-          past_damage_notes: updated.pastDamageNotes,
-          onboarding_completed: updated.onboardingCompleted ?? false,
-          updated_at: new Date().toISOString(),
-        });
+        await supabase.from('profiles').upsert(profilePayload);
       } catch (tableErr) {
-        console.warn('farmer_profiles table upsert error (will use auth metadata):', tableErr);
+        console.warn('profiles table upsert warning:', tableErr);
+      }
+
+      // Also upsert to public.farmer_profiles for compatibility
+      try {
+        await supabase.from('farmer_profiles').upsert(profilePayload);
+      } catch {
+        // ignore
       }
     }
 
@@ -351,33 +396,42 @@ export async function saveFarmField(
 
     // Sync to Supabase if configured
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      const fieldPayload = {
+        id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
+        user_id: userId,
+        name: fieldToSave.name,
+        division: fieldToSave.division,
+        district: fieldToSave.district,
+        upazila: fieldToSave.upazila,
+        village: fieldToSave.village,
+        latitude: fieldToSave.latitude,
+        longitude: fieldToSave.longitude,
+        area: fieldToSave.area,
+        unit: fieldToSave.unit,
+        elevation: fieldToSave.elevation,
+        soil_type: fieldToSave.soilType,
+        irrigation: fieldToSave.irrigation,
+        water_source: fieldToSave.waterSource,
+        current_crop: fieldToSave.currentCrop,
+        previous_crop: fieldToSave.previousCrop,
+        planned_next_crop: fieldToSave.plannedNextCrop,
+        growing_season: fieldToSave.growingSeason,
+        is_primary: fieldToSave.isPrimary,
+        priority: fieldToSave.priority || 'save_water',
+        notes: fieldToSave.notes,
+        updated_at: new Date().toISOString(),
+      };
+
       try {
-        await supabase.from('farmer_fields').upsert({
-          id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
-          user_id: userId,
-          name: fieldToSave.name,
-          division: fieldToSave.division,
-          district: fieldToSave.district,
-          upazila: fieldToSave.upazila,
-          village: fieldToSave.village,
-          latitude: fieldToSave.latitude,
-          longitude: fieldToSave.longitude,
-          area: fieldToSave.area,
-          unit: fieldToSave.unit,
-          elevation: fieldToSave.elevation,
-          soil_type: fieldToSave.soilType,
-          irrigation: fieldToSave.irrigation,
-          water_source: fieldToSave.waterSource,
-          current_crop: fieldToSave.currentCrop,
-          previous_crop: fieldToSave.previousCrop,
-          planned_next_crop: fieldToSave.plannedNextCrop,
-          growing_season: fieldToSave.growingSeason,
-          is_primary: fieldToSave.isPrimary,
-          notes: fieldToSave.notes,
-          updated_at: new Date().toISOString(),
-        });
+        await supabase.from('fields').upsert(fieldPayload);
       } catch (err) {
-        console.warn('farmer_fields table upsert error:', err);
+        console.warn('fields table upsert warning:', err);
+      }
+
+      try {
+        await supabase.from('farmer_fields').upsert(fieldPayload);
+      } catch {
+        // ignore
       }
     }
 
@@ -409,9 +463,14 @@ export async function deleteFarmField(
 
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
       try {
+        await supabase.from('fields').delete().eq('id', fieldId).eq('user_id', userId);
+      } catch {
+        // ignore
+      }
+      try {
         await supabase.from('farmer_fields').delete().eq('id', fieldId).eq('user_id', userId);
-      } catch (err) {
-        console.warn('farmer_fields delete error:', err);
+      } catch {
+        // ignore
       }
     }
 

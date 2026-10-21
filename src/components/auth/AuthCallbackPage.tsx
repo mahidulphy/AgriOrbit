@@ -4,6 +4,7 @@ import { AuthLayout } from './AuthLayout';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
+import { checkAndRedirectPostLogin } from '../../lib/onboardingGuard';
 
 export const AuthCallbackPage: React.FC = () => {
   const { updatePassword, user } = useAuth();
@@ -63,12 +64,9 @@ export const AuthCallbackPage: React.FC = () => {
             if (!exchangeError && exchangeData.session) {
               if (mounted) {
                 setStatus('success');
-                if (window.history && window.history.replaceState) {
-                  window.history.replaceState(null, '', window.location.pathname);
-                }
-                setTimeout(() => {
-                  window.location.hash = '#/dashboard';
-                }, 1200);
+                setTimeout(async () => {
+                  await checkAndRedirectPostLogin(exchangeData.session.user);
+                }, 800);
                 return;
               }
             }
@@ -84,12 +82,9 @@ export const AuthCallbackPage: React.FC = () => {
         if (data.session) {
           if (mounted) {
             setStatus('success');
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', window.location.pathname);
-            }
-            setTimeout(() => {
-              window.location.hash = '#/dashboard';
-            }, 1200);
+            setTimeout(async () => {
+              await checkAndRedirectPostLogin(data.session.user);
+            }, 800);
           }
         } else {
           // Listen briefly for session event if still initializing
@@ -97,19 +92,21 @@ export const AuthCallbackPage: React.FC = () => {
             if (session && mounted) {
               setStatus('success');
               sub.subscription.unsubscribe();
-              if (window.history && window.history.replaceState) {
-                window.history.replaceState(null, '', window.location.pathname);
-              }
-              setTimeout(() => {
-                window.location.hash = '#/dashboard';
-              }, 1200);
+              setTimeout(async () => {
+                await checkAndRedirectPostLogin(session.user);
+              }, 800);
             }
           });
 
           // Timeout fallback
-          setTimeout(() => {
+          setTimeout(async () => {
             if (mounted && status === 'verifying') {
-              window.location.hash = '#/dashboard';
+              const { data: s } = await supabase.auth.getSession();
+              if (s?.session?.user) {
+                await checkAndRedirectPostLogin(s.session.user);
+              } else {
+                window.location.hash = '#/onboarding';
+              }
             }
           }, 3000);
         }
@@ -199,7 +196,7 @@ export const AuthCallbackPage: React.FC = () => {
           <p className="text-xs text-slate-300 font-mono">
             {lang === 'en'
               ? 'Handshaking credentials. You will be redirected momentarily.'
-              : 'তথ্য যাচাই করা হচ্ছে। কিছুক্ষণের মধ্যে ড্যাশবোর্ডে প্রবেশ করবেন।'}
+              : 'তথ্য যাচাই করা হচ্ছে। কিছুক্ষণের মধ্যে আপনার অ্যাকাউন্টে প্রবেশ করবেন।'}
           </p>
         </div>
       )}
@@ -213,7 +210,7 @@ export const AuthCallbackPage: React.FC = () => {
             {lang === 'en' ? 'Authentication Complete' : 'লগইন সফল হয়েছে'}
           </h3>
           <p className="text-xs text-slate-300 font-mono">
-            {lang === 'en' ? 'Redirecting to your field dashboard...' : 'ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...'}
+            {lang === 'en' ? 'Checking farm profile...' : 'খামার প্রোফাইল যাচাই করা হচ্ছে...'}
           </p>
         </div>
       )}

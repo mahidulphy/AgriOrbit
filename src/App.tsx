@@ -1,5 +1,5 @@
 // AgriOrbit App Routing with Authentication Guards and Hash-Routing Preservation
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
 import { LandingPage } from './components/landing/LandingPage.tsx';
 import { AnalyzePage } from './components/analyze/AnalyzePage.tsx';
@@ -9,6 +9,7 @@ import { FarmerProfilePage } from './components/profile/FarmerProfilePage.tsx';
 import { OnboardingWizardPage } from './components/onboarding/OnboardingWizardPage.tsx';
 import { useAuth } from './contexts/AuthContext.tsx';
 import { supabase } from './lib/supabase.ts';
+import { checkAndRedirectPostLogin } from './lib/onboardingGuard.ts';
 
 export type AppRoute =
   | 'landing'
@@ -77,35 +78,40 @@ export function resolveCurrentRoute(): AppRoute {
 
 export default function App() {
   const [route, setRoute] = useState<AppRoute>(resolveCurrentRoute);
-  const { user, isGuest, loading } = useAuth();
+  const { user, isGuest, loading, onboardingCompleted } = useAuth();
+
+  // Detect whether the app was loaded directly from an OAuth callback or explicit signin
+  const incomingIsOAuth = typeof window !== 'undefined' && (
+    window.location.hash.includes('access_token=') ||
+    window.location.hash.includes('refresh_token=') ||
+    window.location.search.includes('code=') ||
+    window.location.hash.includes('code=') ||
+    window.location.pathname.startsWith('/auth/callback') ||
+    window.location.hash.startsWith('#/auth/callback') ||
+    sessionStorage.getItem('agriorbit_fresh_signin') === 'true'
+  );
+  const wasFreshSignIn = useRef(incomingIsOAuth);
 
   useEffect(() => {
     // 1. Supabase OAuth & Auth State Listener at App Startup
-    // When Google OAuth or magic-link sign in succeeds (SIGNED_IN with session):
-    // Clears the token hash from the address bar and navigates straight to /#/dashboard
+    // When Google OAuth or sign-in succeeds with a fresh signin:
+    // Fetch profile for session.user.id and redirect:
+    // if no profile row exists, or onboarding_completed is not true -> go to #/onboarding
+    // otherwise -> go to #/dashboard
+    // Only redirect right after a fresh sign-in (event SIGNED_IN from OAuth return),
+    // not on every page load or token refresh, so signed-in users can still browse the landing page.
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
         const hash = window.location.hash || '';
         const search = window.location.search || '';
         const isRecovery = hash.includes('type=recovery') || search.includes('type=recovery');
 
-        if (!isRecovery) {
-          if (
-            hash.includes('access_token=') ||
-            hash.includes('refresh_token=') ||
-            hash.startsWith('#/auth/callback') ||
-            window.location.pathname.startsWith('/auth/callback') ||
-            search.includes('code=')
-          ) {
-            // Clean the token hash from the address bar without page reload
-            if (window.history && window.history.replaceState) {
-              window.history.replaceState(null, '', window.location.pathname);
-            }
-            // Navigate to dashboard
-            window.location.hash = '#/dashboard';
-          }
+        if (!isRecovery && (wasFreshSignIn.current || sessionStorage.getItem('agriorbit_fresh_signin') === 'true')) {
+          wasFreshSignIn.current = false;
+          sessionStorage.removeItem('agriorbit_fresh_signin');
+          await checkAndRedirectPostLogin(session.user);
         }
       }
     });
@@ -129,7 +135,7 @@ export default function App() {
     };
   }, []);
 
-  // Protected route guard for field dashboard workspace
+  // Protected route guard for field dashboard & analyze workspace (#/dashboard, #/analyze)
   if (route === 'dashboard') {
     if (loading) {
       return (
@@ -149,23 +155,27 @@ export default function App() {
       return null;
     }
 
-    // Check onboarding completion
+    // Guest mode: skips onboarding and enters workspace directly
     if (isGuest) {
-      const hasGuestField = typeof window !== 'undefined' && Boolean(sessionStorage.getItem('agriorbit_guest_field'));
-      if (!hasGuestField) {
-        window.location.hash = '#/onboarding';
-        return null;
+      return <AnalyzePage />;
+    }
+
+    // Signed-in user: guard #/dashboard and #/analyze
+    if (user) {
+      if (onboardingCompleted === null) {
+        return (
+          <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
+            <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+            <p className="font-mono text-xs text-slate-400">Verifying farm registration status...</p>
+          </div>
+        );
       }
-    } else if (user) {
-      const profileCacheKey = `agriorbit_farmer_profile_${user.id}`;
-      const fieldsCacheKey = `agriorbit_farmer_fields_${user.id}`;
-      const rawProfile = typeof window !== 'undefined' ? localStorage.getItem(profileCacheKey) : null;
-      const rawFields = typeof window !== 'undefined' ? localStorage.getItem(fieldsCacheKey) : null;
 
-      const cachedProf = rawProfile ? JSON.parse(rawProfile) : null;
-      const cachedFields = rawFields ? JSON.parse(rawFields) : [];
-
-      if (!cachedProf?.onboardingCompleted && (!cachedFields || cachedFields.length === 0)) {
+      // Requirement 3 & 5: Guard uses the onboarding_completed flag.
+      // Redirect to #/onboarding if onboarding is not completed.
+      if (onboardingCompleted !== true) {
         window.location.hash = '#/onboarding';
         return null;
       }
@@ -182,16 +192,28 @@ export default function App() {
   // Public authentication routes
   if (route === 'login') {
     if (!loading && (user || isGuest)) {
-      window.location.hash = '#/dashboard';
-      return null;
+      if (isGuest || onboardingCompleted === true) {
+        window.location.hash = '#/dashboard';
+        return null;
+      }
+      if (onboardingCompleted === false) {
+        window.location.hash = '#/onboarding';
+        return null;
+      }
     }
     return <LoginPage />;
   }
 
   if (route === 'signup') {
     if (!loading && user) {
-      window.location.hash = '#/dashboard';
-      return null;
+      if (onboardingCompleted === true) {
+        window.location.hash = '#/dashboard';
+        return null;
+      }
+      if (onboardingCompleted === false) {
+        window.location.hash = '#/onboarding';
+        return null;
+      }
     }
     return <SignUpPage />;
   }

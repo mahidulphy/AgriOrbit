@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo, type ReactNode } from 'react';
 import type { User, Session, AuthError } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { getAuthRedirectUrl, getAppOrigin } from '../lib/authUrl';
+import { getAppOrigin } from '../lib/authUrl';
 
 export interface AuthContextType {
   user: User | null;
@@ -12,6 +12,7 @@ export interface AuthContextType {
   displayName: string;
   avatarUrl: string | null;
   provider: 'google' | 'email' | 'guest' | null;
+  onboardingCompleted: boolean | null;
   setAsGuest: () => void;
   clearGuest: () => void;
   refreshProfile: () => Promise<void>;
@@ -41,20 +42,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const [profileFullName, setProfileFullName] = useState<string>('');
+  const [onboardingCompleted, setOnboardingCompleted] = useState<boolean | null>(null);
   const configured = isSupabaseConfigured();
 
-  const fetchProfileFullName = async (userId: string) => {
+  const fetchProfileDetails = async (userId: string) => {
     try {
-      const { data } = await supabase
-        .from('farmer_profiles')
-        .select('full_name')
+      let { data, error } = await supabase
+        .from('profiles')
+        .select('full_name, onboarding_completed')
         .eq('id', userId)
         .maybeSingle();
-      if (data?.full_name && data.full_name.trim()) {
-        setProfileFullName(data.full_name.trim());
+
+      if (error && (error.code === '42P01' || error.message?.includes('does not exist') || error.message?.includes('schema cache'))) {
+        const fallback = await supabase
+          .from('farmer_profiles')
+          .select('full_name, onboarding_completed')
+          .eq('id', userId)
+          .maybeSingle();
+        if (!fallback.error) {
+          data = fallback.data;
+          error = null;
+        }
       }
-    } catch {
-      // ignore
+
+      if (error) {
+        console.error('AgriOrbit Auth: Error querying profile:', error);
+        // Requirement 4: On error, treat as NOT onboarded. Never treat error as completed.
+        setOnboardingCompleted(false);
+      } else if (data) {
+        if (data.full_name && data.full_name.trim()) {
+          setProfileFullName(data.full_name.trim());
+        }
+        // Requirement 3: Guard uses the onboarding_completed flag
+        setOnboardingCompleted(data.onboarding_completed === true);
+      } else {
+        // No profile row exists yet
+        setOnboardingCompleted(false);
+      }
+    } catch (err) {
+      console.error('AgriOrbit Auth: Exception querying profile:', err);
+      setOnboardingCompleted(false);
     }
   };
 
@@ -77,9 +104,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (session?.user) {
           setIsGuest(false);
           localStorage.removeItem(GUEST_STORAGE_KEY);
-          fetchProfileFullName(session.user.id);
+          fetchProfileDetails(session.user.id);
         } else {
           setProfileFullName('');
+          setOnboardingCompleted(null);
         }
       })
       .catch((err) => {
@@ -99,9 +127,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (currentSession?.user) {
         setIsGuest(false);
         localStorage.removeItem(GUEST_STORAGE_KEY);
-        fetchProfileFullName(currentSession.user.id);
+        fetchProfileDetails(currentSession.user.id);
       } else {
         setProfileFullName('');
+        setOnboardingCompleted(null);
       }
       setLoading(false);
     });
@@ -125,7 +154,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const refreshProfile = async () => {
     if (user?.id) {
-      await fetchProfileFullName(user.id);
+      await fetchProfileDetails(user.id);
     }
   };
 
@@ -140,10 +169,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
+      // Mark fresh sign-in to trigger post-login onboarding check upon redirect return
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('agriorbit_fresh_signin', 'true');
+      }
+
       // Use window.location.origin directly (e.g. https://agri-orbit.vercel.app or http://localhost:5173)
       const redirectUrl = typeof window !== 'undefined' && window.location?.origin
         ? window.location.origin
         : getAppOrigin();
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -161,7 +196,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Google Sign-In with ID Token (Client-Side Google Identity Services flow - keeps branding on agri-orbit.vercel.app)
+  // Google Sign-In with ID Token (Client-Side Google Identity Services flow)
   const signInWithGoogleIdToken = async (idToken: string) => {
     if (!configured) {
       return {
@@ -172,6 +207,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('agriorbit_fresh_signin', 'true');
+      }
+
       const { data, error } = await supabase.auth.signInWithIdToken({
         provider: 'google',
         token: idToken,
@@ -181,6 +220,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         clearGuest();
         setSession(data.session);
         setUser(data.user);
+        if (data.user) {
+          await fetchProfileDetails(data.user.id);
+        }
       }
 
       return { error };
@@ -200,6 +242,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('agriorbit_fresh_signin', 'true');
+      }
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email.trim(),
         password,
@@ -207,6 +253,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (!error && data.user) {
         clearGuest();
+        await fetchProfileDetails(data.user.id);
       }
 
       return { error };
@@ -227,10 +274,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      // Use window.location.origin directly
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('agriorbit_fresh_signin', 'true');
+      }
+
       const emailRedirectTo = typeof window !== 'undefined' && window.location?.origin
         ? window.location.origin
         : getAppOrigin();
+
       const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
         password,
@@ -261,10 +312,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      // Use window.location.origin directly
       const redirectTo = typeof window !== 'undefined' && window.location?.origin
         ? window.location.origin
         : getAppOrigin();
+
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
         redirectTo,
       });
@@ -323,6 +374,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setSession(null);
     setProfileFullName('');
+    setOnboardingCompleted(null);
     setIsGuest(false);
     if (typeof window !== 'undefined') {
       window.location.hash = '';
@@ -363,6 +415,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     displayName,
     avatarUrl,
     provider,
+    onboardingCompleted,
     setAsGuest,
     clearGuest,
     refreshProfile,

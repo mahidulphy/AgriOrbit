@@ -4,6 +4,8 @@ import { AuthLayout } from './AuthLayout';
 import { GoogleButton } from './GoogleButton';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
+import { supabase } from '../../lib/supabase';
+import { checkAndRedirectPostLogin } from '../../lib/onboardingGuard';
 
 export const LoginPage: React.FC = () => {
   const { signInWithEmail, setAsGuest } = useAuth();
@@ -50,7 +52,12 @@ export const LoginPage: React.FC = () => {
       if (signInError) {
         setError(signInError.message);
       } else {
-        window.location.hash = getRedirectTarget();
+        const { data: s } = await supabase.auth.getSession();
+        if (s?.session?.user) {
+          await checkAndRedirectPostLogin(s.session.user);
+        } else {
+          window.location.hash = '#/dashboard';
+        }
       }
     } catch (err: any) {
       setError(err?.message || 'Authentication failed. Please verify credentials.');
@@ -61,7 +68,7 @@ export const LoginPage: React.FC = () => {
 
   const handleGuestAccess = () => {
     setAsGuest();
-    window.location.hash = getRedirectTarget();
+    window.location.hash = '#/dashboard';
   };
 
   return (

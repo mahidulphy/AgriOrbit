@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
+import { supabase } from '../../lib/supabase';
+import { checkAndRedirectPostLogin } from '../../lib/onboardingGuard';
 
 interface GoogleButtonProps {
   onError?: (message: string) => void;
@@ -42,7 +44,12 @@ export const GoogleButton: React.FC<GoogleButtonProps> = ({ onError, onSuccess }
                   onError?.(error.message);
                 } else {
                   onSuccess?.();
-                  window.location.hash = '#/dashboard';
+                  const { data: s } = await supabase.auth.getSession();
+                  if (s?.session?.user) {
+                    await checkAndRedirectPostLogin(s.session.user);
+                  } else {
+                    window.location.hash = '#/onboarding';
+                  }
                 }
               } catch (err: any) {
                 onError?.(err?.message || 'Failed to authenticate with Google ID token');
