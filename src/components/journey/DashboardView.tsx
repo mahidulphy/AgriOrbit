@@ -365,7 +365,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </aside>
 
       {/* 2. MOBILE TOP BAR & DRAWER */}
-      <header className="md:hidden sticky top-0 z-40 bg-[#070D18]/95 backdrop-blur-md border-b border-white/10 px-4 h-16 flex items-center justify-between">
+      <header className="md:hidden sticky top-0 z-50 bg-[#070D18]/95 backdrop-blur-md border-b border-white/10 px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -462,7 +462,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Top Operational Header Bar */}
-        <header className="hidden md:flex h-16 border-b border-white/10 bg-[#0B1626]/80 backdrop-blur-md px-6 items-center justify-between shrink-0">
+        <header className="hidden md:flex h-16 border-b border-white/10 bg-[#0B1626]/80 backdrop-blur-md px-6 items-center justify-between shrink-0 relative z-50">
           {/* Breadcrumb & Field Identity */}
           <div className="flex items-center gap-3 text-xs font-mono">
             <span className="text-[#8FA3B8]">{language === 'en' ? 'AgriOrbit' : 'এগ্রিঅরবিট'}</span>

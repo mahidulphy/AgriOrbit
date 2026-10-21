@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { User, LogIn, LogOut, ChevronDown, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
@@ -26,7 +27,14 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [coords, setCoords] = useState<{ top: number; left?: number; right?: number; width: number }>({
+    top: 0,
+    width: 240,
+  });
 
   const profile = getFarmerProfile(user?.id);
   const farmerName = isGuest
@@ -36,15 +44,95 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   const districtObj = BD_DISTRICTS.find((d) => d.id === profile.districtId);
   const districtName = districtObj ? (isBn ? districtObj.nameBn : districtObj.nameEn) : null;
 
+  // Calculate coordinates for portal placement under trigger button
+  const updatePosition = () => {
+    if (!triggerButtonRef.current) return;
+    const rect = triggerButtonRef.current.getBoundingClientRect();
+    const dropdownWidth = 240;
+    const margin = 8;
+    const top = rect.bottom + margin;
+
+    const viewportWidth = window.innerWidth;
+    const rightEdge = viewportWidth - rect.right;
+
+    let left: number | undefined;
+    let right: number | undefined = Math.max(8, rightEdge);
+
+    if (viewportWidth < 280) {
+      left = 8;
+      right = 8;
+    } else if (rect.right - dropdownWidth < 8) {
+      left = 8;
+      right = undefined;
+    }
+
+    setCoords({
+      top,
+      left,
+      right,
+      width: Math.min(dropdownWidth, viewportWidth - 16),
+    });
+  };
+
+  // Recalculate on open, resize, scroll
+  useEffect(() => {
+    if (dropdownOpen) {
+      updatePosition();
+      window.addEventListener('resize', updatePosition);
+      window.addEventListener('scroll', updatePosition, true);
+      return () => {
+        window.removeEventListener('resize', updatePosition);
+        window.removeEventListener('scroll', updatePosition, true);
+      };
+    }
+  }, [dropdownOpen]);
+
   // Close dropdown on outside click
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    if (!dropdownOpen) return;
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      if (
+        triggerButtonRef.current &&
+        !triggerButtonRef.current.contains(target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(target)
+      ) {
         setDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDropdownOpen(false);
+        triggerButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [dropdownOpen]);
+
+  // Close on route change
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setDropdownOpen(false);
+    };
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
   }, []);
 
   const isAuthenticated = Boolean(user || isGuest);
@@ -67,9 +155,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
   };
 
   return (
-    <div className="relative inline-block" ref={menuRef}>
+    <div className="relative inline-block">
       {/* Trigger Button */}
       <button
+        ref={triggerButtonRef}
         type="button"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border transition-all cursor-pointer ${
@@ -105,9 +194,22 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
         />
       </button>
 
-      {/* Dropdown Menu */}
-      {dropdownOpen && (
-        <div className="absolute right-0 mt-2 w-60 rounded-2xl bg-[#0B1626] border border-white/15 shadow-2xl p-2 z-50 text-xs animate-fadeIn backdrop-blur-xl">
+      {/* Dropdown Menu attached to document.body via Portal (z-9999 ensures it floats above all page content) */}
+      {dropdownOpen && typeof document !== 'undefined' && createPortal(
+        <div
+          ref={dropdownRef}
+          style={{
+            position: 'fixed',
+            top: `${coords.top}px`,
+            ...(coords.left !== undefined ? { left: `${coords.left}px` } : {}),
+            ...(coords.right !== undefined ? { right: `${coords.right}px` } : {}),
+            width: `${coords.width}px`,
+            zIndex: 9999,
+          }}
+          className="rounded-2xl bg-[#0B1626] border border-white/20 shadow-2xl p-2 text-xs animate-fadeIn backdrop-blur-2xl ring-1 ring-black/50"
+          role="menu"
+          aria-orientation="vertical"
+        >
           {/* User info banner */}
           <div className="p-2.5 pb-3 border-b border-white/10">
             <span className="font-display font-bold text-white block truncate text-sm">
@@ -134,6 +236,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
               href="#/profile"
               onClick={() => setDropdownOpen(false)}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#B8FF3D] hover:text-white hover:bg-[#B8FF3D]/10 font-bold transition-colors text-left cursor-pointer"
+              role="menuitem"
             >
               <User className="w-4 h-4 text-[#B8FF3D]" />
               <span>{isBn ? 'সম্পূর্ণ প্রোফাইল ও জমি' : 'Farmer Profile & Fields'}</span>
@@ -146,6 +249,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
                 setProfileModalOpen(true);
               }}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-left cursor-pointer text-xs"
+              role="menuitem"
             >
               <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
               <span>{isBn ? 'দ্রুত ওভারভিউ (Modal)' : 'Quick Overview Modal'}</span>
@@ -155,12 +259,14 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
               type="button"
               onClick={handleSignOut}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-red-300 hover:text-red-200 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
+              role="menuitem"
             >
               <LogOut className="w-4 h-4" />
               <span>{isBn ? 'লগআউট' : 'Sign Out'}</span>
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Profile Modal */}

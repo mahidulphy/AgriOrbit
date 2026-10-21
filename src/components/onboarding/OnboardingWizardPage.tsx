@@ -34,26 +34,53 @@ import {
   PastHazardsSection,
 } from '../profile/sections';
 
-const STEP_NAMES_BN: Record<number, string> = {
-  1: 'ব্যক্তিগত তথ্য',
-  2: 'জমির তথ্য',
-  3: 'ফসলের ইতিহাস',
-  4: 'চাষের লক্ষ্য',
-  5: 'অতীতের দুর্যোগ (ঐচ্ছিক)',
+const toBnDigit = (n: number | string): string => {
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(n).replace(/\d/g, (d) => bnDigits[Number(d)]);
 };
 
-const STEP_NAMES_EN: Record<number, string> = {
-  1: 'Personal Info',
-  2: 'Farm Field',
-  3: 'Crop History',
-  4: 'Farming Priorities',
-  5: 'Past Hazards (Optional)',
+const getStepTitle = (s: number, guest: boolean, bn: boolean): string => {
+  if (guest) {
+    switch (s) {
+      case 1:
+        return bn ? 'জমির তথ্য' : 'Farm Field';
+      case 2:
+        return bn ? 'ফসলের ইতিহাস' : 'Crop History';
+      case 3:
+        return bn ? 'চাষের লক্ষ্য' : 'Farming Priorities';
+      case 4:
+        return bn ? 'অতীতের দুর্যোগ (ঐচ্ছিক)' : 'Past Hazards (Optional)';
+      default:
+        return '';
+    }
+  } else {
+    switch (s) {
+      case 1:
+        return bn ? 'ব্যক্তিগত তথ্য' : 'Personal Info';
+      case 2:
+        return bn ? 'জমির তথ্য' : 'Farm Field';
+      case 3:
+        return bn ? 'ফসলের ইতিহাস' : 'Crop History';
+      case 4:
+        return bn ? 'চাষের লক্ষ্য' : 'Farming Priorities';
+      case 5:
+        return bn ? 'অতীতের দুর্যোগ (ঐচ্ছিক)' : 'Past Hazards (Optional)';
+      default:
+        return '';
+    }
+  }
 };
 
 export const OnboardingWizardPage: React.FC = () => {
   const { user, isGuest, displayName, refreshProfile, setOnboardingCompleted } = useAuth();
   const { lang, setLang } = useLang();
   const isBn = lang === 'bn';
+
+  const isGuestMode = Boolean(isGuest || !user);
+  const totalSteps = isGuestMode ? 4 : 5;
+  const stepStorageKey = user?.id
+    ? `agriorbit_onboarding_step_${user.id}`
+    : 'agriorbit_guest_onboarding_step';
 
   const [step, setStep] = useState<number>(1);
   const [loadingInitial, setLoadingInitial] = useState<boolean>(true);
@@ -91,7 +118,22 @@ export const OnboardingWizardPage: React.FC = () => {
       setLoadingInitial(true);
       try {
         let initialStep = 1;
-        const storedStep = sessionStorage.getItem('agriorbit_onboarding_step');
+        const storedStep =
+          sessionStorage.getItem(stepStorageKey) || localStorage.getItem(stepStorageKey);
+
+        if (storedStep) {
+          const parsed = parseInt(storedStep, 10);
+          if (!isNaN(parsed) && parsed >= 1 && parsed <= totalSteps) {
+            initialStep = parsed;
+          }
+        } else {
+          const hash = window.location.hash || '';
+          if (hash.includes('step=priority')) {
+            initialStep = isGuestMode ? 3 : 4;
+          } else if (hash.includes('step=location')) {
+            initialStep = isGuestMode ? 1 : 2;
+          }
+        }
 
         if (user?.id) {
           // Authenticated farmer
@@ -136,29 +178,6 @@ export const OnboardingWizardPage: React.FC = () => {
                 latitude: dAdmin ? dAdmin.lat : 25.7439,
                 longitude: dAdmin ? dAdmin.lng : 89.2752,
               }));
-            }
-
-            // Determine resume step if no explicit query in hash
-            const hash = window.location.hash || '';
-            if (hash.includes('step=priority')) {
-              initialStep = 4;
-            } else if (hash.includes('step=location')) {
-              initialStep = 2;
-            } else if (storedStep && Number(storedStep) >= 1 && Number(storedStep) <= 5) {
-              initialStep = Number(storedStep);
-            } else {
-              // Smart check for last unfinished step
-              if (!resolvedName || resolvedName.trim().length < 2) {
-                initialStep = 1;
-              } else if (!fields || fields.length === 0 || !fields[0].district) {
-                initialStep = 2;
-              } else if (!fields[0].currentCrop || !fields[0].previousCrop) {
-                initialStep = 3;
-              } else if (!profile.priorities || profile.priorities.length === 0) {
-                initialStep = 4;
-              } else {
-                initialStep = 5;
-              }
             }
           }
         } else {
@@ -207,12 +226,6 @@ export const OnboardingWizardPage: React.FC = () => {
                 if (gh.pastDamageNotes) setPastDamageNotes(gh.pastDamageNotes);
               } catch {}
             }
-
-            if (storedStep && Number(storedStep) >= 1 && Number(storedStep) <= 5) {
-              initialStep = Number(storedStep);
-            } else {
-              initialStep = 1;
-            }
           }
         }
 
@@ -230,7 +243,7 @@ export const OnboardingWizardPage: React.FC = () => {
     return () => {
       active = false;
     };
-  }, [user?.id, displayName]);
+  }, [user?.id, displayName, isGuestMode, totalSteps, stepStorageKey]);
 
   // Update Field helper
   const handleFieldChange = (updated: Partial<FarmField>) => {
@@ -272,8 +285,8 @@ export const OnboardingWizardPage: React.FC = () => {
     });
   };
 
-  // Step 1 Validation
-  const validateStep1 = (): boolean => {
+  // Personal Info Validation (Signed-in Step 1)
+  const validatePersonalInfo = (): boolean => {
     const errs: Record<string, string> = {};
     if (!fullName || fullName.trim().length < 2) {
       errs.fullName = isBn
@@ -284,8 +297,8 @@ export const OnboardingWizardPage: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  // Step 2 Validation
-  const validateStep2 = (): boolean => {
+  // Farm Field Validation (Signed-in Step 2 / Guest Step 1)
+  const validateFarmField = (): boolean => {
     const errs: Record<string, string> = {};
     if (!field.district) {
       errs.district = isBn ? 'একটি জেলা নির্বাচন করুন' : 'Please select a district';
@@ -297,8 +310,8 @@ export const OnboardingWizardPage: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  // Step 3 Validation
-  const validateStep3 = (): boolean => {
+  // Crop History Validation (Signed-in Step 3 / Guest Step 2)
+  const validateCropHistory = (): boolean => {
     const errs: Record<string, string> = {};
     if (!currentCrop) {
       errs.currentCrop = isBn ? 'বর্তমান ফসল নির্বাচন করুন' : 'Please select current crop';
@@ -310,8 +323,8 @@ export const OnboardingWizardPage: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  // Step 4 Validation
-  const validateStep4 = (): boolean => {
+  // Farming Priorities Validation (Signed-in Step 4 / Guest Step 3)
+  const validateFarmingPriorities = (): boolean => {
     const errs: Record<string, string> = {};
     if (selectedPriorities.length === 0) {
       errs.priority = isBn
@@ -326,120 +339,193 @@ export const OnboardingWizardPage: React.FC = () => {
   const handleNext = async () => {
     setSaveError(null);
 
-    if (step === 1) {
-      if (!validateStep1()) return;
-      setSavingStep(true);
-      try {
-        if (user?.id) {
-          const res = await saveFarmerProfile(
-            {
-              fullName: fullName.trim(),
-              phone: phone.trim(),
-              communicationMethod,
-            },
-            user.id
-          );
-          if (!res.success) throw new Error(res.error || 'Failed to save personal info');
-        } else {
-          sessionStorage.setItem(
-            'agriorbit_guest_profile',
-            JSON.stringify({ fullName, phone, communicationMethod })
-          );
-        }
-        sessionStorage.setItem('agriorbit_onboarding_step', '2');
-        setStep(2);
-      } catch (err: any) {
-        setSaveError(err?.message || (isBn ? 'তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save personal info'));
-      } finally {
-        setSavingStep(false);
-      }
-    } else if (step === 2) {
-      if (!validateStep2()) return;
-      setSavingStep(true);
-      try {
-        const dAdmin = getDistrictAdmin(field.district as DistrictId);
-        const updatedField: FarmField = {
-          ...field,
-          id: field.id || crypto.randomUUID(),
-          name: field.name || `${dAdmin?.nameEn || 'Primary'} Plot 1`,
-          division: dAdmin?.division || field.division || 'Rangpur',
-          district: field.district,
-          upazila: field.upazila || DISTRICT_WIDE_UPAZILA,
-          area: Number(field.area) || 1.5,
-          unit: field.unit || 'bigha',
-          elevation: field.elevation || 'medium_high',
-          soilType: field.soilType || 'loam',
-          irrigation: field.irrigation || 'shallow_tubewell',
-          waterSource: field.waterSource || (field.irrigation === 'canal_surface' ? 'river' : field.irrigation === 'rainfed' ? 'rainwater' : 'groundwater'),
-          currentCrop,
-          previousCrop,
-          isPrimary: true,
-          updatedAt: new Date().toISOString(),
-        };
-
-        if (user?.id) {
-          const res = await saveFarmField(updatedField, user.id);
-          if (res.error) throw new Error(res.error);
-        } else {
-          sessionStorage.setItem('agriorbit_guest_field', JSON.stringify(updatedField));
-        }
-        setField(updatedField);
-        sessionStorage.setItem('agriorbit_onboarding_step', '3');
-        setStep(3);
-      } catch (err: any) {
-        setSaveError(err?.message || (isBn ? 'জমির তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save field details'));
-      } finally {
-        setSavingStep(false);
-      }
-    } else if (step === 3) {
-      if (!validateStep3()) return;
-      setSavingStep(true);
-      try {
-        const updatedField: FarmField = {
-          ...field,
-          currentCrop,
-          previousCrop,
-          updatedAt: new Date().toISOString(),
-        };
-
-        if (user?.id) {
-          const res = await saveFarmField(updatedField, user.id);
-          if (res.error) throw new Error(res.error);
-        } else {
-          sessionStorage.setItem('agriorbit_guest_field', JSON.stringify(updatedField));
-        }
-        setField(updatedField);
-        sessionStorage.setItem('agriorbit_onboarding_step', '4');
-        setStep(4);
-      } catch (err: any) {
-        setSaveError(err?.message || (isBn ? 'ফসলের ইতিহাস সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save crop history'));
-      } finally {
-        setSavingStep(false);
-      }
-    } else if (step === 4) {
-      if (!validateStep4()) return;
-      setSavingStep(true);
-      try {
-        const primary = selectedPriorities[0];
-        const secondary = selectedPriorities[1] || null;
-
-        if (user?.id) {
-          // Rule: onboarding_completed = true is set only after step 4 is saved
-          const pRes = await saveFarmerProfile(
-            {
-              primaryPriority: primary,
-              priorities: selectedPriorities,
-              onboardingCompleted: true,
-            },
-            user.id
-          );
-          if (!pRes.success) throw new Error(pRes.error || 'Failed to save priorities');
-
-          if (setOnboardingCompleted) {
-            setOnboardingCompleted(true);
+    if (!isGuestMode) {
+      // --- SIGNED-IN USER FLOW (5 steps) ---
+      if (step === 1) {
+        if (!validatePersonalInfo()) return;
+        setSavingStep(true);
+        try {
+          if (user?.id) {
+            const res = await saveFarmerProfile(
+              {
+                fullName: fullName.trim(),
+                phone: phone.trim(),
+                communicationMethod,
+              },
+              user.id
+            );
+            if (!res.success) throw new Error(res.error || (isBn ? 'ব্যক্তিগত তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save personal info'));
           }
-          await refreshProfile();
-        } else {
+          sessionStorage.setItem(stepStorageKey, '2');
+          localStorage.setItem(stepStorageKey, '2');
+          setStep(2);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save personal info'));
+        } finally {
+          setSavingStep(false);
+        }
+      } else if (step === 2) {
+        if (!validateFarmField()) return;
+        setSavingStep(true);
+        try {
+          const dAdmin = getDistrictAdmin(field.district as DistrictId);
+          const updatedField: FarmField = {
+            ...field,
+            id: field.id || crypto.randomUUID(),
+            name: field.name || `${dAdmin?.nameEn || 'Primary'} Plot 1`,
+            division: dAdmin?.division || field.division || 'Rangpur',
+            district: field.district,
+            upazila: field.upazila || DISTRICT_WIDE_UPAZILA,
+            area: Number(field.area) || 1.5,
+            unit: field.unit || 'bigha',
+            elevation: field.elevation || 'medium_high',
+            soilType: field.soilType || 'loam',
+            irrigation: field.irrigation || 'shallow_tubewell',
+            waterSource: field.waterSource || (field.irrigation === 'canal_surface' ? 'river' : field.irrigation === 'rainfed' ? 'rainwater' : 'groundwater'),
+            currentCrop,
+            previousCrop,
+            isPrimary: true,
+            updatedAt: new Date().toISOString(),
+          };
+
+          if (user?.id) {
+            const res = await saveFarmField(updatedField, user.id);
+            if (res.error) throw new Error(res.error);
+          }
+          setField(updatedField);
+          sessionStorage.setItem(stepStorageKey, '3');
+          localStorage.setItem(stepStorageKey, '3');
+          setStep(3);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'জমির তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save field details'));
+        } finally {
+          setSavingStep(false);
+        }
+      } else if (step === 3) {
+        if (!validateCropHistory()) return;
+        setSavingStep(true);
+        try {
+          const updatedField: FarmField = {
+            ...field,
+            currentCrop,
+            previousCrop,
+            updatedAt: new Date().toISOString(),
+          };
+
+          if (user?.id) {
+            const res = await saveFarmField(updatedField, user.id);
+            if (res.error) throw new Error(res.error);
+          }
+          setField(updatedField);
+          sessionStorage.setItem(stepStorageKey, '4');
+          localStorage.setItem(stepStorageKey, '4');
+          setStep(4);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'ফসলের ইতিহাস সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save crop history'));
+        } finally {
+          setSavingStep(false);
+        }
+      } else if (step === 4) {
+        if (!validateFarmingPriorities()) return;
+        setSavingStep(true);
+        try {
+          const primary = selectedPriorities[0];
+
+          if (user?.id) {
+            const pRes = await saveFarmerProfile(
+              {
+                primaryPriority: primary,
+                priorities: selectedPriorities,
+                onboardingCompleted: true,
+              },
+              user.id
+            );
+            if (!pRes.success) throw new Error(pRes.error || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+
+            if (setOnboardingCompleted) {
+              setOnboardingCompleted(true);
+            }
+            await refreshProfile();
+          }
+
+          localStorage.setItem('agriorbit_selected_priority', primary);
+          localStorage.setItem('agriorbit_selected_priorities', JSON.stringify(selectedPriorities));
+
+          sessionStorage.setItem(stepStorageKey, '5');
+          localStorage.setItem(stepStorageKey, '5');
+          setStep(5);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+        } finally {
+          setSavingStep(false);
+        }
+      }
+    } else {
+      // --- GUEST USER FLOW (4 steps) ---
+      if (step === 1) {
+        // Step 1: Farm Field
+        if (!validateFarmField()) return;
+        setSavingStep(true);
+        try {
+          const dAdmin = getDistrictAdmin(field.district as DistrictId);
+          const updatedField: FarmField = {
+            ...field,
+            id: field.id || 'guest_field_1',
+            name: field.name || `${dAdmin?.nameEn || 'Primary'} Plot 1`,
+            division: dAdmin?.division || field.division || 'Rangpur',
+            district: field.district,
+            upazila: field.upazila || DISTRICT_WIDE_UPAZILA,
+            area: Number(field.area) || 1.5,
+            unit: field.unit || 'bigha',
+            elevation: field.elevation || 'medium_high',
+            soilType: field.soilType || 'loam',
+            irrigation: field.irrigation || 'shallow_tubewell',
+            waterSource: field.waterSource || (field.irrigation === 'canal_surface' ? 'river' : field.irrigation === 'rainfed' ? 'rainwater' : 'groundwater'),
+            currentCrop,
+            previousCrop,
+            isPrimary: true,
+            updatedAt: new Date().toISOString(),
+          };
+
+          sessionStorage.setItem('agriorbit_guest_field', JSON.stringify(updatedField));
+          setField(updatedField);
+          sessionStorage.setItem(stepStorageKey, '2');
+          localStorage.setItem(stepStorageKey, '2');
+          setStep(2);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'জমির তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save field details'));
+        } finally {
+          setSavingStep(false);
+        }
+      } else if (step === 2) {
+        // Step 2: Crop History
+        if (!validateCropHistory()) return;
+        setSavingStep(true);
+        try {
+          const updatedField: FarmField = {
+            ...field,
+            currentCrop,
+            previousCrop,
+            updatedAt: new Date().toISOString(),
+          };
+          sessionStorage.setItem('agriorbit_guest_field', JSON.stringify(updatedField));
+          setField(updatedField);
+          sessionStorage.setItem(stepStorageKey, '3');
+          localStorage.setItem(stepStorageKey, '3');
+          setStep(3);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'ফসলের ইতিহাস সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save crop history'));
+        } finally {
+          setSavingStep(false);
+        }
+      } else if (step === 3) {
+        // Step 3: Farming Priorities
+        if (!validateFarmingPriorities()) return;
+        setSavingStep(true);
+        try {
+          const primary = selectedPriorities[0];
+          const secondary = selectedPriorities[1] || null;
+
           sessionStorage.setItem('agriorbit_guest_priorities', JSON.stringify(selectedPriorities));
           sessionStorage.setItem('agriorbit_guest_priority', primary);
           if (secondary) {
@@ -449,17 +535,17 @@ export const OnboardingWizardPage: React.FC = () => {
           }
           sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
           localStorage.setItem('agriorbit_guest_mode', 'true');
+          localStorage.setItem('agriorbit_selected_priority', primary);
+          localStorage.setItem('agriorbit_selected_priorities', JSON.stringify(selectedPriorities));
+
+          sessionStorage.setItem(stepStorageKey, '4');
+          localStorage.setItem(stepStorageKey, '4');
+          setStep(4);
+        } catch (err: any) {
+          setSaveError(err?.message || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+        } finally {
+          setSavingStep(false);
         }
-
-        localStorage.setItem('agriorbit_selected_priority', primary);
-        localStorage.setItem('agriorbit_selected_priorities', JSON.stringify(selectedPriorities));
-
-        sessionStorage.setItem('agriorbit_onboarding_step', '5');
-        setStep(5);
-      } catch (err: any) {
-        setSaveError(err?.message || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
-      } finally {
-        setSavingStep(false);
       }
     }
   };
@@ -469,11 +555,12 @@ export const OnboardingWizardPage: React.FC = () => {
     setSaveError(null);
     setFieldErrors({});
     const prevStep = Math.max(1, step - 1);
-    sessionStorage.setItem('agriorbit_onboarding_step', String(prevStep));
+    sessionStorage.setItem(stepStorageKey, String(prevStep));
+    localStorage.setItem(stepStorageKey, String(prevStep));
     setStep(prevStep);
   };
 
-  // Finish Onboarding from Step 5 (Save Hazards)
+  // Finish Onboarding from Final Step (Save Hazards)
   const handleFinishWithHazards = async () => {
     setSavingStep(true);
     setSaveError(null);
@@ -487,7 +574,7 @@ export const OnboardingWizardPage: React.FC = () => {
           },
           user.id
         );
-        if (!res.success) throw new Error(res.error || 'Failed to save past hazard data');
+        if (!res.success) throw new Error(res.error || (isBn ? 'তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save past hazard data'));
         if (setOnboardingCompleted) setOnboardingCompleted(true);
         await refreshProfile();
       } else {
@@ -495,9 +582,12 @@ export const OnboardingWizardPage: React.FC = () => {
           'agriorbit_guest_hazards',
           JSON.stringify({ pastDamages, pastDamageNotes })
         );
+        sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
+        localStorage.setItem('agriorbit_guest_mode', 'true');
       }
 
-      sessionStorage.removeItem('agriorbit_onboarding_step');
+      sessionStorage.removeItem(stepStorageKey);
+      localStorage.removeItem(stepStorageKey);
       window.location.hash = '#/dashboard';
     } catch (err: any) {
       setSaveError(err?.message || (isBn ? 'তথ্য সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save past hazards'));
@@ -506,9 +596,14 @@ export const OnboardingWizardPage: React.FC = () => {
     }
   };
 
-  // Skip Step 5 directly to dashboard (since Step 4 already completed onboarding)
+  // Skip Final Step directly to dashboard
   const handleSkipHazards = () => {
-    sessionStorage.removeItem('agriorbit_onboarding_step');
+    if (isGuestMode) {
+      sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
+      localStorage.setItem('agriorbit_guest_mode', 'true');
+    }
+    sessionStorage.removeItem(stepStorageKey);
+    localStorage.removeItem(stepStorageKey);
     window.location.hash = '#/dashboard';
   };
 
@@ -523,12 +618,14 @@ export const OnboardingWizardPage: React.FC = () => {
     );
   }
 
-  const progressPercent = step * 20;
+  const progressPercent = Math.round((step / totalSteps) * 100);
+  const isPrioritiesStep = isGuestMode ? step === 3 : step === 4;
+  const isFinalStep = step === totalSteps;
 
   return (
     <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
       {/* 1. Navbar Header */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <BrandLogo />
@@ -544,19 +641,23 @@ export const OnboardingWizardPage: React.FC = () => {
         </div>
       </header>
 
-      {/* 2. Unified Progress Bar ("ধাপ X / 5" and step name) */}
-      <div className="w-full bg-[#07101D] border-b border-white/10 px-4 sm:px-6 py-3.5 sticky top-16 z-30">
+      {/* 2. Unified Progress Bar ("ধাপ X / Y" and step name) */}
+      <div className="w-full bg-[#07101D] border-b border-white/10 px-4 sm:px-6 py-3.5 sticky top-16 z-40">
         <div className="max-w-4xl mx-auto space-y-2">
           <div className="flex items-center justify-between text-xs sm:text-sm font-mono">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded bg-[#B8FF3D]/15 text-[#B8FF3D] font-bold border border-[#B8FF3D]/30">
-                {isBn ? `ধাপ ${step} / ৫` : `Step ${step} / 5`}
+                {isBn
+                  ? `ধাপ ${toBnDigit(step)} / ${toBnDigit(totalSteps)}`
+                  : `Step ${step} / ${totalSteps}`}
               </span>
               <span className="font-bold text-white">
-                {isBn ? STEP_NAMES_BN[step] : STEP_NAMES_EN[step]}
+                {getStepTitle(step, isGuestMode, isBn)}
               </span>
             </div>
-            <span className="text-[#00E5FF] font-bold">{progressPercent}%</span>
+            <span className="text-[#00E5FF] font-bold">
+              {isBn ? `${toBnDigit(progressPercent)}%` : `${progressPercent}%`}
+            </span>
           </div>
 
           <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
@@ -579,7 +680,7 @@ export const OnboardingWizardPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={step === 5 ? handleFinishWithHazards : handleNext}
+                onClick={isFinalStep ? handleFinishWithHazards : handleNext}
                 className="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-200 border border-red-500/40 text-xs font-mono font-bold flex items-center gap-1 cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -600,12 +701,12 @@ export const OnboardingWizardPage: React.FC = () => {
       {/* 4. Wizard Step Form Body */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl space-y-6">
-          {/* STEP 1: Personal Info */}
-          {step === 1 && (
+          {/* STEP: Personal Info (Signed-in only, Step 1) */}
+          {!isGuestMode && step === 1 && (
             <PersonalInfoSection
               fullName={fullName}
               onFullNameChange={setFullName}
-              email={user?.email || (isGuest ? 'guest@agriorbit.com' : '')}
+              email={user?.email || ''}
               phone={phone}
               onPhoneChange={setPhone}
               communicationMethod={communicationMethod}
@@ -617,8 +718,8 @@ export const OnboardingWizardPage: React.FC = () => {
             />
           )}
 
-          {/* STEP 2: Farm Field */}
-          {step === 2 && (
+          {/* STEP: Farm Field (Signed-in Step 2, Guest Step 1) */}
+          {((!isGuestMode && step === 2) || (isGuestMode && step === 1)) && (
             <FarmFieldSection
               field={field}
               onChange={handleFieldChange}
@@ -628,8 +729,8 @@ export const OnboardingWizardPage: React.FC = () => {
             />
           )}
 
-          {/* STEP 3: Crop History (NEW) */}
-          {step === 3 && (
+          {/* STEP: Crop History (Signed-in Step 3, Guest Step 2) */}
+          {((!isGuestMode && step === 3) || (isGuestMode && step === 2)) && (
             <CropHistorySection
               currentCrop={currentCrop}
               onCurrentCropChange={setCurrentCrop}
@@ -641,8 +742,8 @@ export const OnboardingWizardPage: React.FC = () => {
             />
           )}
 
-          {/* STEP 4: Farming Priorities */}
-          {step === 4 && (
+          {/* STEP: Farming Priorities (Signed-in Step 4, Guest Step 3) */}
+          {((!isGuestMode && step === 4) || (isGuestMode && step === 3)) && (
             <FarmingPrioritiesSection
               selectedPriorities={selectedPriorities}
               onTogglePriority={handleTogglePriority}
@@ -656,8 +757,8 @@ export const OnboardingWizardPage: React.FC = () => {
             />
           )}
 
-          {/* STEP 5: Past Hazards (Optional / Can be skipped) */}
-          {step === 5 && (
+          {/* STEP: Past Hazards (Signed-in Step 5, Guest Step 4 - Optional / Can be skipped) */}
+          {((!isGuestMode && step === 5) || (isGuestMode && step === 4)) && (
             <PastHazardsSection
               pastDamages={pastDamages}
               onToggleDamage={handleToggleHazard}
@@ -682,14 +783,14 @@ export const OnboardingWizardPage: React.FC = () => {
                 </button>
               ) : (
                 <span className="text-xs font-mono text-slate-500 hidden sm:inline-block">
-                  {isBn ? 'ধাপ ১ অবধ্যতামূলক' : 'Step 1 is required'}
+                  {isBn ? 'ধাপ ১ বাধ্যতামূলক' : 'Step 1 is required'}
                 </span>
               )}
             </div>
 
             <div className="w-full sm:w-auto flex items-center gap-3 justify-end">
-              {/* Skip button for Step 5 */}
-              {step === 5 && (
+              {/* Skip button for Final Step */}
+              {isFinalStep && (
                 <button
                   type="button"
                   onClick={handleSkipHazards}
@@ -700,8 +801,8 @@ export const OnboardingWizardPage: React.FC = () => {
                 </button>
               )}
 
-              {/* Direct Skip to Dashboard on Step 4 (optional shortcut) */}
-              {step === 4 && selectedPriorities.length >= 1 && (
+              {/* Direct Skip to Dashboard on Priorities Step (optional shortcut) */}
+              {isPrioritiesStep && selectedPriorities.length >= 1 && (
                 <button
                   type="button"
                   onClick={async () => {
@@ -716,7 +817,7 @@ export const OnboardingWizardPage: React.FC = () => {
               )}
 
               {/* Primary Next / Finish Button */}
-              {step < 5 ? (
+              {!isFinalStep ? (
                 <button
                   type="button"
                   onClick={handleNext}
@@ -731,7 +832,7 @@ export const OnboardingWizardPage: React.FC = () => {
                   ) : (
                     <>
                       <span>
-                        {step === 4
+                        {isPrioritiesStep
                           ? isBn
                             ? 'পরবর্তী: দুর্যোগ তথ্য (ঐচ্ছিক)'
                             : 'Next: Past Hazards (Optional)'
