@@ -6,12 +6,14 @@ import { AnalyzePage } from './components/analyze/AnalyzePage.tsx';
 import { LoginPage, SignUpPage, ForgotPasswordPage, AuthCallbackPage } from './components/auth';
 import { PrivacyPolicyPage, TermsPage } from './components/legal';
 import { FarmerProfilePage } from './components/profile/FarmerProfilePage.tsx';
+import { OnboardingWizardPage } from './components/onboarding/OnboardingWizardPage.tsx';
 import { useAuth } from './contexts/AuthContext.tsx';
 import { supabase } from './lib/supabase.ts';
 
 export type AppRoute =
   | 'landing'
   | 'dashboard'
+  | 'onboarding'
   | 'login'
   | 'signup'
   | 'forgot-password'
@@ -51,6 +53,11 @@ export function resolveCurrentRoute(): AppRoute {
   if (hash.startsWith('#/login') || path === '/login' || path.startsWith('/login')) return 'login';
   if (hash.startsWith('#/signup') || path === '/signup' || path.startsWith('/signup')) return 'signup';
   if (hash.startsWith('#/forgot-password') || path === '/forgot-password' || path.startsWith('/forgot-password')) return 'forgot-password';
+
+  // Onboarding route
+  if (hash.startsWith('#/onboarding') || path === '/onboarding' || path.startsWith('/onboarding')) {
+    return 'onboarding';
+  }
 
   // Dashboard & Workspace routes (#/dashboard, #/analyze, /dashboard, /analyze)
   if (
@@ -142,7 +149,34 @@ export default function App() {
       return null;
     }
 
+    // Check onboarding completion
+    if (isGuest) {
+      const hasGuestField = typeof window !== 'undefined' && Boolean(sessionStorage.getItem('agriorbit_guest_field'));
+      if (!hasGuestField) {
+        window.location.hash = '#/onboarding';
+        return null;
+      }
+    } else if (user) {
+      const profileCacheKey = `agriorbit_farmer_profile_${user.id}`;
+      const fieldsCacheKey = `agriorbit_farmer_fields_${user.id}`;
+      const rawProfile = typeof window !== 'undefined' ? localStorage.getItem(profileCacheKey) : null;
+      const rawFields = typeof window !== 'undefined' ? localStorage.getItem(fieldsCacheKey) : null;
+
+      const cachedProf = rawProfile ? JSON.parse(rawProfile) : null;
+      const cachedFields = rawFields ? JSON.parse(rawFields) : [];
+
+      if (!cachedProf?.onboardingCompleted && (!cachedFields || cachedFields.length === 0)) {
+        window.location.hash = '#/onboarding';
+        return null;
+      }
+    }
+
     return <AnalyzePage />;
+  }
+
+  // Onboarding Wizard route
+  if (route === 'onboarding') {
+    return <OnboardingWizardPage />;
   }
 
   // Public authentication routes

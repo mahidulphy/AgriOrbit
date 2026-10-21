@@ -21,7 +21,7 @@ function initialStep(): AnalyzeStep {
 
 export function AnalyzePage() {
   const { lang, setLang } = useLang();
-  const { user, displayName } = useAuth();
+  const { user, isGuest, displayName } = useAuth();
   const [step, setStepState] = useState<AnalyzeStep>(initialStep);
   const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
@@ -35,33 +35,61 @@ export function AnalyzePage() {
 
   useEffect(() => {
     async function syncFarmerContext() {
-      try {
-        const { profile, fields } = await loadFarmerProfile(user?.id);
-        if (profile) {
-          if (profile.fullName) setFarmerName(profile.fullName);
-          if (profile.primaryPriority) setPrimaryPriority(profile.primaryPriority);
-          if (profile.priorities && profile.priorities.length > 1) {
-            setSecondaryPriority(profile.priorities[1]);
+      // 1. Read guest sessionStorage if guest mode
+      if (isGuest || !user) {
+        try {
+          const guestFieldRaw = sessionStorage.getItem('agriorbit_guest_field');
+          const guestPriorityRaw = sessionStorage.getItem('agriorbit_guest_priority');
+          if (guestFieldRaw) {
+            const gf = JSON.parse(guestFieldRaw);
+            if (gf.district) {
+              setLocation({
+                district: gf.district as DistrictId,
+                upazila: gf.upazila || '',
+                latitude: gf.latitude,
+                longitude: gf.longitude,
+                source: 'preset',
+              });
+            }
           }
-        }
-        if (fields && fields.length > 0) {
-          const activeField = getActiveField(fields);
-          if (activeField && activeField.district) {
-            setLocation({
-              district: activeField.district as DistrictId,
-              upazila: activeField.upazila || '',
-              latitude: activeField.latitude,
-              longitude: activeField.longitude,
-              source: 'preset',
-            });
+          if (guestPriorityRaw) {
+            setPrimaryPriority(guestPriorityRaw as FarmerPriorityId);
           }
+        } catch {
+          // ignore
         }
-      } catch (err) {
-        console.error('Failed to sync farmer context into AnalyzePage', err);
+      }
+
+      // 2. Read user profile from Supabase & localStorage if authenticated
+      if (user?.id) {
+        try {
+          const { profile, fields } = await loadFarmerProfile(user.id);
+          if (profile) {
+            if (profile.fullName) setFarmerName(profile.fullName);
+            if (profile.primaryPriority) setPrimaryPriority(profile.primaryPriority);
+            if (profile.priorities && profile.priorities.length > 1) {
+              setSecondaryPriority(profile.priorities[1]);
+            }
+          }
+          if (fields && fields.length > 0) {
+            const activeField = getActiveField(fields);
+            if (activeField && activeField.district) {
+              setLocation({
+                district: activeField.district as DistrictId,
+                upazila: activeField.upazila || '',
+                latitude: activeField.latitude,
+                longitude: activeField.longitude,
+                source: 'preset',
+              });
+            }
+          }
+        } catch (err) {
+          console.error('Failed to sync farmer context into AnalyzePage', err);
+        }
       }
     }
     syncFarmerContext();
-  }, [user?.id]);
+  }, [user?.id, isGuest]);
 
   useEffect(() => {
     const onHash = () => {
@@ -112,8 +140,12 @@ export function AnalyzePage() {
       secondaryPriority={secondaryPriority}
       language={lang}
       onLanguageChange={handleLanguageChange}
-      onChangeFieldLocation={() => setStep('location')}
-      onChangePriority={() => setStep('priority')}
+      onChangeFieldLocation={() => {
+        window.location.hash = '#/onboarding?step=location';
+      }}
+      onChangePriority={() => {
+        window.location.hash = '#/onboarding?step=priority';
+      }}
       onLogout={goHome}
     />
   );
