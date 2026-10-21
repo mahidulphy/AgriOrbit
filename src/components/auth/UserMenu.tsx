@@ -53,7 +53,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
     return (
       <a
         href="#/login"
-        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-100 hover:text-white text-xs font-mono font-medium transition-colors cursor-pointer"
+        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0B1626]/90 hover:bg-[#0B1626] border border-white/20 text-white text-xs font-mono font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer hover:border-[#00E5FF]/50"
       >
         <LogIn className="w-3.5 h-3.5 text-[#00E5FF]" />
         <span>{lang === 'en' ? 'Sign In' : 'লগইন'}</span>
@@ -74,8 +74,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className={`flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border transition-all cursor-pointer ${
           dropdownOpen
-            ? 'bg-white/10 border-[#B8FF3D]/40 text-white shadow-md shadow-black/30'
-            : 'bg-white/5 hover:bg-white/10 border-white/10 text-slate-200'
+            ? 'bg-[#0B1626] border-[#B8FF3D]/50 text-white shadow-md shadow-black/30'
+            : 'bg-[#0B1626]/90 hover:bg-[#0B1626] border-white/20 text-slate-100 hover:text-white backdrop-blur-md shadow-sm'
         }`}
         aria-expanded={dropdownOpen}
         aria-haspopup="true"

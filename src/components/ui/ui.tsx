@@ -24,7 +24,7 @@ export function Wordmark() {
   return (
     <a href="#" className="flex items-center gap-2.5" aria-label="AgriOrbit home">
       <Logo />
-      <span className="font-display text-lg font-semibold tracking-tight text-white">
+      <span className="font-display text-lg font-semibold tracking-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
         Agri<span className="text-lime-300">Orbit</span>
       </span>
     </a>

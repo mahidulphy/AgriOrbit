@@ -181,17 +181,34 @@
     background:
       linear-gradient(
         90deg,
-        rgba(5, 11, 20, 0.93) 0%,
-        rgba(5, 11, 20, 0.8) 45%,
-        rgba(5, 11, 20, 0.45) 100%
+        rgba(5, 11, 20, 0.96) 0%,
+        rgba(5, 11, 20, 0.90) 42%,
+        rgba(5, 11, 20, 0.65) 60%,
+        rgba(5, 11, 20, 0.25) 80%,
+        rgba(5, 11, 20, 0.12) 100%
       ),
       linear-gradient(
         180deg,
         rgba(5, 11, 20, 0.75) 0%,
-        rgba(5, 11, 20, 0.4) 35%,
+        rgba(5, 11, 20, 0.20) 25%,
+        rgba(5, 11, 20, 0.30) 65%,
         rgba(5, 11, 20, 0.85) 80%,
         #050b14 100%
       );
+  }
+
+  @media (max-width: 1023px) {
+    .scrim-hero {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5, 11, 20, 0.94) 0%,
+          rgba(5, 11, 20, 0.88) 45%,
+          rgba(5, 11, 20, 0.65) 70%,
+          rgba(5, 11, 20, 0.92) 90%,
+          #050b14 100%
+        );
+    }
   }
 
   .scrim-editorial-card {

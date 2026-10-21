@@ -167,7 +167,7 @@ export const OnboardingWizardPage: React.FC = () => {
       setSelectedDistrict(geo.district.id as DistrictId);
       const candidates = getUpazilasFor(geo.district.id as DistrictId);
       const matched = matchUpazila(candidates, geo.addressHint);
-      setSelectedUpazila(matched?.id || candidates[0]?.id || DISTRICT_WIDE_UPAZILA);
+      setSelectedUpazila(matched || candidates[0]?.id || DISTRICT_WIDE_UPAZILA);
     }
   };
 
@@ -542,12 +542,10 @@ export const OnboardingWizardPage: React.FC = () => {
 
                   <div className="w-full h-[320px] sm:h-[400px] rounded-2xl overflow-hidden border border-white/15 relative">
                     <BangladeshMap
-                      selectedDistrict={selectedDistrict}
-                      fieldCoords={{ lat: fieldLat, lng: fieldLng }}
+                      latitude={fieldLat}
+                      longitude={fieldLng}
                       flyTarget={mapFlyTarget}
-                      onLocationSelect={handleMapSelect}
-                      interactive={true}
-                      className="w-full h-full"
+                      onSelect={handleMapSelect}
                     />
                   </div>
                 </div>

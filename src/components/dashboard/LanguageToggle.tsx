@@ -36,7 +36,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
     <div
       role="group"
       aria-label="Language selector"
-      className={`relative inline-flex items-center rounded-xl bg-[#0B1626]/90 p-1 border border-white/10 backdrop-blur-md shadow-inner transition-all duration-300 ${className}`}
+      className={`relative inline-flex items-center rounded-xl bg-[#0B1626]/95 p-1 border border-white/20 backdrop-blur-md shadow-md transition-all duration-300 ${className}`}
     >
       {showIcon && (
         <span className="pl-2 pr-1 text-[#8FA3B8] hidden sm:inline-flex items-center">
@@ -54,7 +54,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
         } ${
           isEnglish
             ? 'bg-[#B8FF3D] text-[#050B14] shadow-[0_0_12px_rgba(184,255,61,0.35)] font-bold'
-            : 'text-[#8FA3B8] hover:text-white hover:bg-white/5'
+            : 'text-slate-200 hover:text-white hover:bg-white/10 font-medium'
         }`}
       >
         English
@@ -70,7 +70,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
         } ${
           !isEnglish
             ? 'bg-[#B8FF3D] text-[#050B14] shadow-[0_0_12px_rgba(184,255,61,0.35)] font-bold'
-            : 'text-[#8FA3B8] hover:text-white hover:bg-white/5'
+            : 'text-slate-200 hover:text-white hover:bg-white/10 font-medium'
         }`}
       >
         বাংলা

@@ -25,7 +25,7 @@ const en = {
     sub: 'AgriOrbit combines Earth observations, local agricultural information and farmer priorities to help plan better crop decisions for a changing climate.',
     cta: 'Analyze my field',
     cta2: 'Explore How It Works',
-    trust: ['Rule-based, no black box', 'Works offline', 'English & বাংলা'],
+    trust: ['Rule-based, explainable logic', 'Works offline', 'English & বাংলা'],
   },
   heroCard: {
     place: 'Rangpur',
@@ -263,7 +263,7 @@ const bn: Dict = {
     sub: 'নাসার উপগ্রহ পর্যবেক্ষণ, স্থানীয় কৃষি তথ্য ও কৃষকের অগ্রাধিকারের সমন্বয়ে জলবায়ু পরিবর্তনের সাথে খাপ খাইয়ে সঠিক ফসল নির্বাচন করুন।',
     cta: 'আমার জমি বিশ্লেষণ করুন',
     cta2: 'কার্যপ্রণালী জানুন',
-    trust: ['নিয়মভিত্তিক, কোনো লুকানো হিসাব নেই', 'অফলাইনেও চলে', 'বাংলা ও English'],
+    trust: ['নিয়মভিত্তিক ও স্বচ্ছ যুক্তি', 'অফলাইনেও চলে', 'বাংলা ও English'],
   },
   heroCard: {
     place: 'রংপুর',

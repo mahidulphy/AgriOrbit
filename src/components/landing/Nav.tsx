@@ -29,8 +29,8 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl shadow-lg shadow-black/20'
-          : 'border-b border-white/5 bg-gradient-to-b from-[#050B14]/80 via-[#050B14]/40 to-transparent backdrop-blur-[2px]'
+          ? 'border-b border-white/15 bg-[#050B14]/95 backdrop-blur-xl shadow-xl shadow-black/40'
+          : 'border-b border-white/10 bg-[#050B14]/85 backdrop-blur-md shadow-md shadow-black/30'
       }`}
     >
       <nav className="container-x flex h-16 items-center justify-between gap-4 md:h-20">
@@ -39,7 +39,10 @@ export function Nav() {
         <ul className="hidden items-center gap-8 text-sm font-medium text-slate-100 lg:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="transition-colors hover:text-[#B8FF3D] drop-shadow-sm">
+              <a
+                href={l.href}
+                className="transition-colors hover:text-[#B8FF3D] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+              >
                 {l.label}
               </a>
             </li>
