@@ -46,6 +46,7 @@
   html {
     background: #050b14;
     color: #ffffff;
+    color-scheme: dark;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -61,6 +62,39 @@
   html:lang(bn) h1, html:lang(bn) h2 { line-height: 1.3; letter-spacing: 0; }
   ::selection { background: rgb(184 255 61 / 0.3); color: #b8ff3d; }
   section[id] { scroll-margin-top: 5rem; }
+
+  /* ───────────── Native Select Dropdown Readability ───────────── */
+  select {
+    color-scheme: dark;
+  }
+
+  select option,
+  select optgroup {
+    background-color: var(--color-orbit-surface, #0b1626);
+    color: #ffffff;
+    font-family: var(--font-sans);
+  }
+
+  select optgroup {
+    font-weight: 700;
+    color: var(--color-orbit-muted, #8fa3b8);
+    background-color: var(--color-orbit-bg, #050b14);
+  }
+
+  select option:checked {
+    background-color: var(--color-ink-800, #101f36);
+    color: var(--color-orbit-lime, #b8ff3d);
+  }
+
+  select option:hover,
+  select option:focus {
+    background-color: var(--color-ink-700, #182c4d);
+    color: var(--color-orbit-cyan, #00e5ff);
+  }
+
+  select option:disabled {
+    color: var(--color-orbit-muted, #8fa3b8);
+  }
 }
 
 /* ───────────── Reusable pieces ───────────── */
