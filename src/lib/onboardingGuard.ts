@@ -42,18 +42,34 @@ export async function getOnboardingStatus(userId: string): Promise<OnboardingSta
       }
     }
 
+    // Check local profile cache for onboarding completed state
+    let localCompleted = false;
+    try {
+      const raw = localStorage.getItem(`agriorbit_farmer_profile_v2_${userId}`);
+      if (raw && JSON.parse(raw).onboardingCompleted === true) {
+        localCompleted = true;
+      }
+    } catch {}
+
     if (error) {
       console.error('AgriOrbit: Error querying profiles table for onboarding status:', error);
-      // Requirement 4: On query failure, treat user as NOT onboarded. Never treat error as completed.
+      // If local cache confirms completed onboarding, respect it to avoid redirect loop
+      if (localCompleted) {
+        return { isOnboarded: true, profileExists: true };
+      }
+      // Requirement 4: On query failure with no local state, treat user as NOT onboarded
       return { isOnboarded: false, profileExists: false, error };
     }
 
     if (!profile) {
+      if (localCompleted) {
+        return { isOnboarded: true, profileExists: true };
+      }
       return { isOnboarded: false, profileExists: false };
     }
 
     // Requirement 3: Make the guard use the onboarding_completed flag, not "a profile row exists".
-    const isOnboarded = profile.onboarding_completed === true;
+    const isOnboarded = profile.onboarding_completed === true || localCompleted;
     return { isOnboarded, profileExists: true };
   } catch (err) {
     console.error('AgriOrbit: Unexpected error checking onboarding status:', err);

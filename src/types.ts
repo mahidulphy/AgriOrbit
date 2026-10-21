@@ -19,11 +19,14 @@ export interface SelectedLocation {
 
 export type FarmerPriorityId =
   | 'save_water'
-  | 'improve_soil'
-  | 'maximize_profit'
-  | 'maximize_yield'
   | 'lower_cost'
-  | 'reduce_risk';
+  | 'improve_soil'
+  | 'reduce_risk'
+  | 'higher_income'
+  | 'quick_harvest'
+  | 'family_food'
+  | 'maximize_profit'
+  | 'maximize_yield';
 
 export type Language = 'en' | 'bn';
 
@@ -115,6 +118,8 @@ export interface CropData {
   waterDetailEn: string;
   waterDetailBn: string;
   durationDays: number;
+  valueCategory?: 'high' | 'medium' | 'low';
+  isStaple?: boolean;
   shortWhyEn: string;
   shortWhyBn: string;
   deltas?: ScoreDeltas;

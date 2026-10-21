@@ -11,6 +11,11 @@ import {
   Sprout,
   Coins,
   ShieldAlert,
+  ShieldCheck,
+  TrendingUp,
+  Clock,
+  AlertTriangle,
+  RefreshCw,
   User,
   Phone,
   Layers,
@@ -39,7 +44,7 @@ import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { UserMenu } from '../auth/UserMenu';
 
 export const OnboardingWizardPage: React.FC = () => {
-  const { user, isGuest, displayName, refreshProfile } = useAuth();
+  const { user, isGuest, displayName, refreshProfile, setOnboardingCompleted } = useAuth();
   const { lang, setLang } = useLang();
   const isBn = lang === 'bn';
 
@@ -72,7 +77,8 @@ export const OnboardingWizardPage: React.FC = () => {
   const [irrigation, setIrrigation] = useState<FarmField['irrigation']>('shallow_tubewell');
 
   // Step 3: Farming Priority State (NO pre-selected default)
-  const [selectedPriority, setSelectedPriority] = useState<FarmerPriorityId | null>(null);
+  const [selectedPriorities, setSelectedPriorities] = useState<FarmerPriorityId[]>([]);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   // UI state
   const [saving, setSaving] = useState(false);
@@ -90,8 +96,10 @@ export const OnboardingWizardPage: React.FC = () => {
           if (profile) {
             setFullName(profile.fullName || user.user_metadata?.full_name || user.user_metadata?.name || '');
             setPhone(profile.phone || '');
-            if (profile.primaryPriority) {
-              setSelectedPriority(profile.primaryPriority);
+            if (profile.priorities && profile.priorities.length > 0) {
+              setSelectedPriorities(profile.priorities.slice(0, 2));
+            } else if (profile.primaryPriority) {
+              setSelectedPriorities([profile.primaryPriority]);
             }
           }
           if (fields && fields.length > 0) {
@@ -124,8 +132,16 @@ export const OnboardingWizardPage: React.FC = () => {
             if (parsed.soilType) setSoilType(parsed.soilType);
             if (parsed.irrigation) setIrrigation(parsed.irrigation);
           }
-          if (guestPriority) {
-            setSelectedPriority(guestPriority as FarmerPriorityId);
+          const guestPrioritiesRaw = sessionStorage.getItem('agriorbit_guest_priorities');
+          if (guestPrioritiesRaw) {
+            try {
+              const parsed = JSON.parse(guestPrioritiesRaw);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                setSelectedPriorities(parsed.slice(0, 2));
+              }
+            } catch {}
+          } else if (guestPriority) {
+            setSelectedPriorities([guestPriority as FarmerPriorityId]);
           }
         } catch {
           // ignore
@@ -193,20 +209,51 @@ export const OnboardingWizardPage: React.FC = () => {
     );
   };
 
-  const handleCompleteOnboarding = async () => {
-    if (!selectedPriority) {
-      alert(isBn ? 'দয়া করে একটি প্রধান লক্ষ্য বেছে নিন।' : 'Please select your primary farming priority.');
+    const handleTogglePriority = (pId: FarmerPriorityId) => {
+    setSaveError(null);
+    setSelectedPriorities((prev) => {
+      if (prev.includes(pId)) {
+        return prev.filter((p) => p !== pId);
+      }
+      if (prev.length < 2) {
+        return [...prev, pId];
+      }
+      return [prev[0], pId];
+    });
+  };
+
+    const handleCompleteOnboarding = async (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    console.log('[ONBOARDING_DEBUG] 1. Finish button clicked');
+    console.log('[ONBOARDING_DEBUG] 2. Current selectedPriorities:', selectedPriorities);
+
+    if (selectedPriorities.length === 0) {
+      console.warn('[ONBOARDING_DEBUG] Validation failed: No priority selected');
+      setSaveError(
+        isBn
+          ? 'দয়া করে অন্তত একটি প্রধান লক্ষ্য বেছে নিন।'
+          : 'Please select at least one primary priority.'
+      );
       return;
     }
 
     setSaving(true);
+    setSaveError(null);
+    console.log('[ONBOARDING_DEBUG] 3. Starting save process. User authenticated:', Boolean(user?.id), 'isGuest:', isGuest);
+
     try {
+      const primaryPriority = selectedPriorities[0];
+      const secondaryPriority = selectedPriorities[1] || null;
       const districtAdmin = getDistrictAdmin(selectedDistrict);
       const divisionName = districtAdmin?.division || 'Rangpur';
       const districtName = districtAdmin?.nameEn || 'Rangpur';
 
       if (user?.id) {
-        // Authenticated user: Save to farmer_fields and farmer_profiles
+        console.log('[ONBOARDING_DEBUG] 4a. Saving farm field for user:', user.id);
         const newField: FarmField = {
           id: crypto.randomUUID(),
           name: `${districtName} Plot 1`,
@@ -232,20 +279,40 @@ export const OnboardingWizardPage: React.FC = () => {
           updatedAt: new Date().toISOString(),
         };
 
-        await saveFarmField(newField, user.id);
-        await saveFarmerProfile(
+        const fieldRes = await saveFarmField(newField, user.id);
+        console.log('[ONBOARDING_DEBUG] 4b. saveFarmField result:', fieldRes);
+        if (fieldRes.error) {
+          console.warn('[ONBOARDING_DEBUG] Field save warning:', fieldRes.error);
+        }
+
+        console.log('[ONBOARDING_DEBUG] 5a. Saving farmer profile (onboarding_completed: true)...');
+        const profileRes = await saveFarmerProfile(
           {
             fullName: fullName.trim() || displayName || user.email?.split('@')[0] || 'Farmer',
             phone: phone.trim(),
-            primaryPriority: selectedPriority,
-            priorities: [selectedPriority],
+            primaryPriority,
+            priorities: selectedPriorities,
             onboardingCompleted: true,
           },
           user.id
         );
+        console.log('[ONBOARDING_DEBUG] 5b. saveFarmerProfile result:', profileRes);
+
+        if (!profileRes.success && profileRes.error) {
+          console.error('[ONBOARDING_DEBUG] Profile save reported error:', profileRes.error);
+          throw new Error(profileRes.error);
+        }
+
+        console.log('[ONBOARDING_DEBUG] 6a. Updating auth context state directly to true...');
+        if (setOnboardingCompleted) {
+          setOnboardingCompleted(true);
+        }
+
+        console.log('[ONBOARDING_DEBUG] 6b. Calling refreshProfile()...');
         await refreshProfile();
+        console.log('[ONBOARDING_DEBUG] 6c. Profile refreshed successfully.');
       } else {
-        // Guest user: Save to sessionStorage
+        console.log('[ONBOARDING_DEBUG] 4-guest. Saving guest state to sessionStorage & localStorage...');
         sessionStorage.setItem(
           'agriorbit_guest_field',
           JSON.stringify({
@@ -260,22 +327,34 @@ export const OnboardingWizardPage: React.FC = () => {
             division: divisionName,
           })
         );
-        sessionStorage.setItem('agriorbit_guest_priority', selectedPriority);
+        sessionStorage.setItem('agriorbit_guest_priority', primaryPriority);
+        if (secondaryPriority) {
+          sessionStorage.setItem('agriorbit_guest_secondary_priority', secondaryPriority);
+        } else {
+          sessionStorage.removeItem('agriorbit_guest_secondary_priority');
+        }
+        sessionStorage.setItem('agriorbit_guest_priorities', JSON.stringify(selectedPriorities));
         sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
         localStorage.setItem('agriorbit_guest_mode', 'true');
-        localStorage.setItem('agriorbit_selected_priority', selectedPriority);
+        console.log('[ONBOARDING_DEBUG] Guest state saved successfully.');
       }
 
       // Sync active priority to legacy keys for recommendation engine cross-compatibility
-      localStorage.setItem('agriorbit_selected_priority', selectedPriority);
+      localStorage.setItem('agriorbit_selected_priority', primaryPriority);
+      localStorage.setItem('agriorbit_selected_priorities', JSON.stringify(selectedPriorities));
 
-      // Navigate straight to dashboard
+      console.log('[ONBOARDING_DEBUG] 7. Onboarding successfully completed! Navigating to #/dashboard now.');
       window.location.hash = '#/dashboard';
-    } catch (err) {
-      console.error('Error completing onboarding:', err);
-      alert(isBn ? 'তথ্য সংরক্ষণে সমস্যা হয়েছে, আবার চেষ্টা করুন।' : 'Failed to save setup. Please try again.');
+    } catch (err: any) {
+      console.error('[ONBOARDING_DEBUG] Save error caught:', err);
+      setSaveError(
+        isBn
+          ? `তথ্য সংরক্ষণে সমস্যা হয়েছে: ${err?.message || 'অনুগ্রহ করে আবার চেষ্টা করুন।'}`
+          : `Failed to complete setup: ${err?.message || 'Please check your connection and retry.'}`
+      );
     } finally {
       setSaving(false);
+      console.log('[ONBOARDING_DEBUG] Save process ended. saving = false');
     }
   };
 
@@ -578,182 +657,265 @@ export const OnboardingWizardPage: React.FC = () => {
             </div>
           )}
 
-          {/* ================= STEP 3: FARMING PRIORITY (4 CARDS, NO DEFAULT) ================= */}
+          {/* ================= STEP 3: FARMING PRIORITY (7 CARDS, UP TO 2 GOALS) ================= */}
           {step === 3 && (
             <div className="space-y-6">
-              <p className="text-sm text-slate-300">
-                {isBn
-                  ? 'আপনার খামারের জন্য সবচেয়ে গুরুত্বপূর্ণ লক্ষ্যটি বেছে নিন। নাসা উপগ্রহ ডেটা এই লক্ষ্যের ভিত্তিতে ফসল র‍্যাংকিং করবে।'
-                  : 'Choose the most critical objective for your farm. NASA satellite rules will optimize crop recommendations to meet this goal.'}
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                {/* 1. Save Water */}
-                <div
-                  onClick={() => setSelectedPriority('save_water')}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between ${
-                    selectedPriority === 'save_water'
-                      ? 'bg-[#00E5FF]/10 border-[#00E5FF] shadow-xl shadow-[#00E5FF]/15 ring-1 ring-[#00E5FF]'
-                      : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/[0.07]'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#00E5FF]/20 border border-[#00E5FF]/40 flex items-center justify-center text-[#00E5FF]">
-                        <Droplets className="w-5 h-5" />
-                      </div>
-                      {selectedPriority === 'save_water' && (
-                        <div className="w-6 h-6 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#050B14]">
-                          <Check className="w-4 h-4 stroke-[3]" />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-display font-bold text-base text-white mb-1.5">
-                      {isBn ? 'পানি সাশ্রয় (Save Water)' : 'Save Water'}
-                    </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                      {isBn
-                        ? 'গভীর সেচের পরিবর্তে কম পানির ডাল ও তৈলবীজকে প্রাধান্য দেয়, ফলে ভূগর্ভস্থ পানির অপচয় ও পাম্পিং খরচ রোধ হয়।'
-                        : 'Prioritizes drought-tolerant legumes and oilseeds requiring minimal irrigation instead of continuous groundwater pumping.'}
-                    </p>
-                  </div>
-                  <div className="text-[11px] font-mono text-[#00E5FF] pt-2 border-t border-white/10">
-                    {isBn ? 'বোরোর চেয়ে মসুর ও সরিষাকে অগ্রাধিকার দেয়' : 'Boosts Lentil & Mustard over heavy Boro'}
-                  </div>
-                </div>
-
-                {/* 2. Lower Cost */}
-                <div
-                  onClick={() => setSelectedPriority('lower_cost')}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between ${
-                    selectedPriority === 'lower_cost'
-                      ? 'bg-[#B8FF3D]/10 border-[#B8FF3D] shadow-xl shadow-[#B8FF3D]/15 ring-1 ring-[#B8FF3D]'
-                      : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/[0.07]'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-[#B8FF3D]">
-                        <Coins className="w-5 h-5" />
-                      </div>
-                      {selectedPriority === 'lower_cost' && (
-                        <div className="w-6 h-6 rounded-full bg-[#B8FF3D] flex items-center justify-center text-[#050B14]">
-                          <Check className="w-4 h-4 stroke-[3]" />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-display font-bold text-base text-white mb-1.5">
-                      {isBn ? 'কম খরচ (Lower Cost)' : 'Lower Cost'}
-                    </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                      {isBn
-                        ? 'সেচের জন্য ডিজেল ও রাসায়নিক সারের বাড়তি খরচ কমিয়ে স্বল্প পুঁজিতে সম্মানজনক মুনাফার সুযোগ তৈরি করে।'
-                        : 'Minimizes costly diesel pumping and synthetic fertilizers, favoring low-input high-margin cash crops.'}
-                    </p>
-                  </div>
-                  <div className="text-[11px] font-mono text-[#B8FF3D] pt-2 border-t border-white/10">
-                    {isBn ? 'ব্যয়বহুল আলুর চেয়ে সাশ্রয়ী ফসল বাছাই' : 'Favors low-input Mustard & Pulses over capex Potato'}
-                  </div>
-                </div>
-
-                {/* 3. Soil Health */}
-                <div
-                  onClick={() => setSelectedPriority('improve_soil')}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between ${
-                    selectedPriority === 'improve_soil'
-                      ? 'bg-emerald-500/10 border-emerald-400 shadow-xl shadow-emerald-500/15 ring-1 ring-emerald-400'
-                      : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/[0.07]'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
-                        <Sprout className="w-5 h-5" />
-                      </div>
-                      {selectedPriority === 'improve_soil' && (
-                        <div className="w-6 h-6 rounded-full bg-emerald-400 flex items-center justify-center text-[#050B14]">
-                          <Check className="w-4 h-4 stroke-[3]" />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-display font-bold text-base text-white mb-1.5">
-                      {isBn ? 'মাটির স্বাস্থ্য (Improve Soil Health)' : 'Improve Soil Health'}
-                    </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                      {isBn
-                        ? 'মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন সংবন্ধন ও জৈব পদার্থ বৃদ্ধিকারী ফসল নির্বাচন করে জমির উর্বরতা বাড়ায়।'
-                        : 'Selects nitrogen-fixing pulses and high biomass rotation crops to regenerate depleted soil biology.'}
-                    </p>
-                  </div>
-                  <div className="text-[11px] font-mono text-emerald-400 pt-2 border-t border-white/10">
-                    {isBn ? 'মুগডাল ও পাটের মাধ্যমে প্রাকৃতিক নাইট্রোজেন বৃদ্ধি' : 'Boosts Mungbean & Jute for biological fertility'}
-                  </div>
-                </div>
-
-                {/* 4. Lower Risk */}
-                <div
-                  onClick={() => setSelectedPriority('reduce_risk')}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between ${
-                    selectedPriority === 'reduce_risk'
-                      ? 'bg-amber-500/10 border-amber-400 shadow-xl shadow-amber-500/15 ring-1 ring-amber-400'
-                      : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/[0.07]'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
-                        <ShieldAlert className="w-5 h-5" />
-                      </div>
-                      {selectedPriority === 'reduce_risk' && (
-                        <div className="w-6 h-6 rounded-full bg-amber-400 flex items-center justify-center text-[#050B14]">
-                          <Check className="w-4 h-4 stroke-[3]" />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-display font-bold text-base text-white mb-1.5">
-                      {isBn ? 'ঝুঁকি হ্রাস (Reduce Climate Risk)' : 'Lower Risk'}
-                    </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-3">
-                      {isBn
-                        ? 'আকস্মিক খরা, তাপপ্রবাহ বা আগাম বন্যার মতো চরম আবহাওয়ার ক্ষতি এড়াতে সহনশীল ও নিরাপদ ফসল নিশ্চিত করে।'
-                        : 'Avoids vulnerable weather windows; picks resilient varieties against sudden heat waves or early monsoons.'}
-                    </p>
-                  </div>
-                  <div className="text-[11px] font-mono text-amber-400 pt-2 border-t border-white/10">
-                    {isBn ? 'স্বল্পমেয়াদী ও চরম আবহাওয়া সহনশীল ফসল' : 'Picks short-duration crops to escape weather stress'}
-                  </div>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <p className="text-xs sm:text-sm text-slate-300">
+                  {isBn
+                    ? 'আপনার খামারের জন্য সর্বোচ্চ ২টি লক্ষ্য বেছে নিন (১ম লক্ষ্য পূর্ণ প্রভাব, ২য় লক্ষ্য ৫০% প্রভাব পাবে)।'
+                    : 'Choose up to 2 farming goals (1st goal receives full weight, 2nd goal receives 50% weight).'}
+                </p>
+                <div className="text-xs font-mono font-semibold shrink-0">
+                  <span className={selectedPriorities.length > 0 ? 'text-[#B8FF3D]' : 'text-slate-400'}>
+                    {isBn ? `নির্বাচিত: ${selectedPriorities.length}/২` : `Selected: ${selectedPriorities.length}/2`}
+                  </span>
                 </div>
               </div>
 
+              {saveError && (
+                <div className="p-3.5 sm:p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
+                  <div className="flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+                    <span>{saveError}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCompleteOnboarding}
+                    disabled={saving}
+                    className="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 text-red-200 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${saving ? 'animate-spin' : ''}`} />
+                    <span>{isBn ? 'পুনরায় চেষ্টা করুন' : 'Retry'}</span>
+                  </button>
+                </div>
+              )}
+
+              {/* 7 Priority Cards in 2-Column Compact Grid on Mobile */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 pt-1">
+                {[
+                  {
+                    id: 'save_water' as FarmerPriorityId,
+                    icon: Droplets,
+                    titleEn: 'Save Water',
+                    titleBn: 'বিদ্যুৎ ও সেচ খরচ বাঁচানো',
+                    subEn: 'Prioritizes drought-tolerant pulses & oilseeds over thirsty Boro.',
+                    subBn: 'অতিরিক্ত সেচের বদলে কম পানির ডাল ও তেলবীজকে প্রাধান্য দেয়।',
+                    exampleEn: 'Boosts Lentil & Mustard over heavy Boro',
+                    exampleBn: 'বোরোর চেয়ে মসুর ও সরিষাকে অগ্রাধিকার দেয়',
+                    borderColor: 'border-[#00E5FF]',
+                    bgColor: 'bg-[#00E5FF]/10',
+                    ringColor: 'ring-[#00E5FF]',
+                    textColor: 'text-[#00E5FF]',
+                    badgeBg: 'bg-[#00E5FF] text-[#050B14]',
+                    iconBg: 'bg-[#00E5FF]/20 border-[#00E5FF]/40 text-[#00E5FF]',
+                  },
+                  {
+                    id: 'lower_cost' as FarmerPriorityId,
+                    icon: Coins,
+                    titleEn: 'Low Input Cost',
+                    titleBn: 'কম খরচে আবাদ',
+                    subEn: 'Minimizes costly diesel pumping and synthetic fertilizers.',
+                    subBn: 'সেচ ও রাসায়নিক সারের বাড়তি খরচ কমিয়ে স্বল্প পুঁজিতে আবাদ।',
+                    exampleEn: 'Favors low-input Mustard & Pulses over capex Potato',
+                    exampleBn: 'ব্যয়বহুল আলুর চেয়ে সাশ্রয়ী সরিষা ও ডাল বাছাই',
+                    borderColor: 'border-[#B8FF3D]',
+                    bgColor: 'bg-[#B8FF3D]/10',
+                    ringColor: 'ring-[#B8FF3D]',
+                    textColor: 'text-[#B8FF3D]',
+                    badgeBg: 'bg-[#B8FF3D] text-[#050B14]',
+                    iconBg: 'bg-[#B8FF3D]/20 border-[#B8FF3D]/40 text-[#B8FF3D]',
+                  },
+                  {
+                    id: 'improve_soil' as FarmerPriorityId,
+                    icon: Sprout,
+                    titleEn: 'Soil Health',
+                    titleBn: 'মাটির উর্বরতা বৃদ্ধি',
+                    subEn: 'Biological nitrogen fixation and organic matter replenishment.',
+                    subBn: 'প্রাকৃতিক নাইট্রোজেন সংবন্ধন ও মাটির জৈব শক্তি পুনরুদ্ধার।',
+                    exampleEn: 'Boosts Mungbean & Jute for biological fertility',
+                    exampleBn: 'মুগডাল ও পাটের মাধ্যমে প্রাকৃতিক নাইট্রোজেন বৃদ্ধি',
+                    borderColor: 'border-emerald-400',
+                    bgColor: 'bg-emerald-500/10',
+                    ringColor: 'ring-emerald-400',
+                    textColor: 'text-emerald-400',
+                    badgeBg: 'bg-emerald-400 text-[#050B14]',
+                    iconBg: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-400',
+                  },
+                  {
+                    id: 'reduce_risk' as FarmerPriorityId,
+                    icon: ShieldAlert,
+                    titleEn: 'Climate Resilience',
+                    titleBn: 'আবহাওয়ার ঝুঁকি কমানো',
+                    subEn: 'Avoids vulnerable weather windows against heatwaves or storms.',
+                    subBn: 'আকস্মিক খরা, তাপপ্রবাহ বা আগাম বন্যার ক্ষতি এড়াতে সহনশীল ফসল।',
+                    exampleEn: 'Picks short-duration resilient varieties against weather stress',
+                    exampleBn: 'স্বল্পমেয়াদী ও চরম আবহাওয়া সহনশীল জাত',
+                    borderColor: 'border-amber-400',
+                    bgColor: 'bg-amber-500/10',
+                    ringColor: 'ring-amber-400',
+                    textColor: 'text-amber-400',
+                    badgeBg: 'bg-amber-400 text-[#050B14]',
+                    iconBg: 'bg-amber-500/20 border-amber-400/40 text-amber-400',
+                  },
+                  {
+                    id: 'higher_income' as FarmerPriorityId,
+                    icon: TrendingUp,
+                    titleEn: 'Higher Profit Potential',
+                    titleBn: 'বেশি আয়ের সম্ভাবনা',
+                    subEn: 'Commercial cash crops with high return potential.',
+                    subBn: 'বাজারে ভালো দাম পাওয়া সম্ভাবনাময় বাণিজ্যিক ফসল।',
+                    exampleEn: 'Favors Potato, Maize, Mustard, Lentil',
+                    exampleBn: 'বাণিজ্যিক ফসল: আলু, ভুট্টা, সরিষা, মসুর',
+                    disclaimerEn: '* Approximate value category, not live market prices',
+                    disclaimerBn: '* আনুমানিক আয়ের শ্রেণী, তাৎক্ষণিক বাজারদর নয়',
+                    borderColor: 'border-purple-400',
+                    bgColor: 'bg-purple-500/10',
+                    ringColor: 'ring-purple-400',
+                    textColor: 'text-purple-300',
+                    badgeBg: 'bg-purple-400 text-[#050B14]',
+                    iconBg: 'bg-purple-500/20 border-purple-400/40 text-purple-300',
+                  },
+                  {
+                    id: 'quick_harvest' as FarmerPriorityId,
+                    icon: Clock,
+                    titleEn: 'Quick Harvest',
+                    titleBn: 'দ্রুত ফসল তোলা',
+                    subEn: 'Fast turnaround (65–85 days) to free land rapidly for the next crop.',
+                    subBn: 'মাত্র ৬৫-৮৫ দিনে ঘরে ওঠে এবং জমি দ্রুত পরবর্তী ফসলের জন্য খালি করে।',
+                    exampleEn: 'Rapid 65-80d crops: Mungbean, Mustard',
+                    exampleBn: 'দ্রুততম ফসল: মুগ ডাল (৬৫ দিন), সরিষা (৮০ দিন)',
+                    borderColor: 'border-orange-400',
+                    bgColor: 'bg-orange-500/10',
+                    ringColor: 'ring-orange-400',
+                    textColor: 'text-orange-400',
+                    badgeBg: 'bg-orange-400 text-[#050B14]',
+                    iconBg: 'bg-orange-500/20 border-orange-400/40 text-orange-400',
+                  },
+                  {
+                    id: 'family_food' as FarmerPriorityId,
+                    icon: ShieldCheck,
+                    titleEn: 'Family Food Security',
+                    titleBn: 'পারিবারিক খাদ্য নিরাপত্তা',
+                    subEn: 'Secures year-round household nutrition: rice, wheat, and daily pulses.',
+                    subBn: 'পরিবারের সারা বছরের ভাত, আটা ও ডালের চাহিদা ও পুষ্টি নিশ্চিত করে।',
+                    exampleEn: 'Prioritizes staple food: Rice, Wheat, Lentils',
+                    exampleBn: 'মৌলিক খাদ্য নিরাপত্তা: ধান, গম, মসুর ডাল',
+                    borderColor: 'border-sky-400',
+                    bgColor: 'bg-sky-500/10',
+                    ringColor: 'ring-sky-400',
+                    textColor: 'text-sky-400',
+                    badgeBg: 'bg-sky-400 text-[#050B14]',
+                    iconBg: 'bg-sky-500/20 border-sky-400/40 text-sky-400',
+                  },
+                ].map((card) => {
+                  const Icon = card.icon;
+                  const rank = selectedPriorities.indexOf(card.id);
+                  const isSelected = rank >= 0;
+
+                  return (
+                    <div
+                      key={card.id}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isSelected}
+                      onClick={() => handleTogglePriority(card.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleTogglePriority(card.id);
+                        }
+                      }}
+                      className={`p-3 sm:p-4 rounded-2xl border transition-all cursor-pointer relative flex flex-col justify-between select-none min-h-[145px] sm:min-h-[175px] ${
+                        isSelected
+                          ? `${card.bgColor} ${card.borderColor} shadow-lg ring-1 ${card.ringColor}`
+                          : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/[0.07]'
+                      }`}
+                    >
+                      <div>
+                        {/* Header: Icon + Badge */}
+                        <div className="flex items-center justify-between mb-2">
+                          <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center shrink-0 border ${card.iconBg}`}>
+                            <Icon className="w-4 h-4" />
+                          </div>
+
+                          {rank === 0 && (
+                            <span className="text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#B8FF3D] text-[#050B14] flex items-center gap-1 shadow-sm">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                              <span>{isBn ? '১ম লক্ষ্য' : '1st'}</span>
+                            </span>
+                          )}
+
+                          {rank === 1 && (
+                            <span className="text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#00E5FF] text-[#050B14] flex items-center gap-1 shadow-sm">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                              <span>{isBn ? '২য় (৫০%)' : '2nd (50%)'}</span>
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Title & Description */}
+                        <h3 className="font-display font-bold text-xs sm:text-sm text-white mb-1 leading-snug">
+                          {isBn ? card.titleBn : card.titleEn}
+                        </h3>
+                        <p className="text-[10px] sm:text-xs text-slate-300 leading-snug mb-2 line-clamp-2">
+                          {isBn ? card.subBn : card.subEn}
+                        </p>
+                      </div>
+
+                      {/* Footer: Example & Disclaimer */}
+                      <div>
+                        <div className={`text-[10px] sm:text-[11px] font-mono ${card.textColor} pt-1.5 border-t border-white/10 truncate`}>
+                          {isBn ? card.exampleBn : card.exampleEn}
+                        </div>
+                        {card.disclaimerBn && (
+                          <div className="text-[9px] text-slate-400 italic pt-0.5 leading-none">
+                            {isBn ? card.disclaimerBn : card.disclaimerEn}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
               {/* Step 3 Actions */}
-              <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-2 cursor-pointer transition-colors"
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>{isBn ? 'পূর্ববর্তী' : 'Back'}</span>
                 </button>
 
-                <button
-                  type="button"
-                  disabled={!selectedPriority || saving}
-                  onClick={handleCompleteOnboarding}
-                  className="px-7 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6eb2f] text-[#050B14] font-bold text-sm flex items-center gap-2 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-[#B8FF3D]/25"
-                >
-                  {saving ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{isBn ? 'সংরক্ষণ করা হচ্ছে...' : 'Saving Setup...'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>{isBn ? 'ড্যাশবোর্ডে প্রবেশ করুন' : 'Complete Setup & Go to Dashboard'}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                  {selectedPriorities.length === 0 && (
+                    <span className="text-xs font-mono text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1.5 rounded-lg text-center">
+                      {isBn ? 'একটি লক্ষ্য বেছে নিন (সর্বোচ্চ ২টি)' : 'Choose a goal (up to 2)'}
+                    </span>
                   )}
-                </button>
+
+                  <button
+                    type="button"
+                    disabled={selectedPriorities.length === 0 || saving}
+                    onClick={handleCompleteOnboarding}
+                    className="relative z-10 w-full sm:w-auto px-7 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6eb2f] text-[#050B14] font-bold text-sm flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-[#B8FF3D]/25"
+                  >
+                    {saving ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>{isBn ? 'সংরক্ষণ করা হচ্ছে...' : 'Saving Setup...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>{isBn ? 'ড্যাশবোর্ডে প্রবেশ করুন' : 'Complete Setup & Go to Dashboard'}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           )}

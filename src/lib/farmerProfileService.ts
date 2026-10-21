@@ -342,14 +342,23 @@ export async function saveFarmerProfile(
 
       // 2. Upsert to public.profiles table
       try {
-        await supabase.from('profiles').upsert(profilePayload);
+        console.log('[ONBOARDING_DEBUG] Upserting to public.profiles table with payload:', profilePayload);
+        const { error: pErr } = await supabase.from('profiles').upsert(profilePayload);
+        if (pErr) {
+          console.warn('[ONBOARDING_DEBUG] profiles table upsert returned error:', pErr);
+        } else {
+          console.log('[ONBOARDING_DEBUG] profiles table upsert succeeded.');
+        }
       } catch (tableErr) {
-        console.warn('profiles table upsert warning:', tableErr);
+        console.warn('[ONBOARDING_DEBUG] profiles table upsert exception:', tableErr);
       }
 
       // Also upsert to public.farmer_profiles for compatibility
       try {
-        await supabase.from('farmer_profiles').upsert(profilePayload);
+        const { error: fpErr } = await supabase.from('farmer_profiles').upsert(profilePayload);
+        if (fpErr) {
+          console.warn('[ONBOARDING_DEBUG] farmer_profiles table upsert error:', fpErr);
+        }
       } catch {
         // ignore
       }
@@ -423,9 +432,15 @@ export async function saveFarmField(
       };
 
       try {
-        await supabase.from('fields').upsert(fieldPayload);
+        console.log('[ONBOARDING_DEBUG] Upserting to public.fields table with payload:', fieldPayload);
+        const { error: fErr } = await supabase.from('fields').upsert(fieldPayload);
+        if (fErr) {
+          console.warn('[ONBOARDING_DEBUG] fields table upsert returned error:', fErr);
+        } else {
+          console.log('[ONBOARDING_DEBUG] fields table upsert succeeded.');
+        }
       } catch (err) {
-        console.warn('fields table upsert warning:', err);
+        console.warn('[ONBOARDING_DEBUG] fields table upsert exception:', err);
       }
 
       try {

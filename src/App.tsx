@@ -163,6 +163,7 @@ export default function App() {
     // Signed-in user: guard #/dashboard and #/analyze
     if (user) {
       if (onboardingCompleted === null) {
+        console.log('[ONBOARDING_DEBUG] App.tsx guard: onboardingCompleted is null (loading status)...');
         return (
           <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
             <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
@@ -176,9 +177,12 @@ export default function App() {
       // Requirement 3 & 5: Guard uses the onboarding_completed flag.
       // Redirect to #/onboarding if onboarding is not completed.
       if (onboardingCompleted !== true) {
+        console.warn('[ONBOARDING_DEBUG] App.tsx guard: onboardingCompleted is NOT true (value:', onboardingCompleted, '). Redirecting to #/onboarding!');
         window.location.hash = '#/onboarding';
         return null;
       }
+
+      console.log('[ONBOARDING_DEBUG] App.tsx guard: onboardingCompleted is TRUE! Rendering dashboard workspace.');
     }
 
     return <AnalyzePage />;

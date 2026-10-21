@@ -20,7 +20,7 @@ export const RULES = {
   deficitMm: -50, // rain − ET₀ over 30 days below this -> water deficit
 };
 
-export type Priority = 'water' | 'soil' | 'cost' | 'risk';
+export type Priority = 'water' | 'soil' | 'cost' | 'risk' | 'income' | 'harvest' | 'food';
 export type Source = 'BARI' | 'BRRI' | 'POWER' | 'SMAP' | 'OpenMeteo' | 'Priority';
 
 export type ReasonCode =
@@ -40,7 +40,9 @@ export type ReasonCode =
   | 'priCost'
   | 'priShort'
   | 'priLong'
-  | 'priFlood';
+  | 'priFlood'
+  | 'priIncome'
+  | 'priFood';
 
 export interface Reason {
   code: ReasonCode;
@@ -173,7 +175,7 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
   }
 
   // 8. Farmer priority.
-  switch (inp.priority) {
+    switch (inp.priority) {
     case 'water':
       if (LEVEL_WATER[crop.water]) add('priWater', LEVEL_WATER[crop.water], 'Priority', { level: crop.water });
       break;
@@ -187,6 +189,18 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
       if (crop.days <= 90) add('priShort', 8, 'Priority', { days: crop.days });
       if (crop.days >= 140) add('priLong', -6, 'Priority', { days: crop.days });
       if (crop.floodTolerant) add('priFlood', 4, 'Priority', {});
+      break;
+    case 'income':
+      if (crop.value_category === 'high') add('priIncome', 8, 'Priority', { level: 'high' });
+      else if (crop.value_category === 'medium') add('priIncome', 3, 'Priority', { level: 'medium' });
+      break;
+    case 'harvest':
+      if (crop.days <= 75) add('priShort', 10, 'Priority', { days: crop.days });
+      else if (crop.days <= 90) add('priShort', 6, 'Priority', { days: crop.days });
+      else if (crop.days >= 140) add('priLong', -6, 'Priority', { days: crop.days });
+      break;
+    case 'food':
+      if (crop.is_staple) add('priFood', 8, 'Priority', {});
       break;
   }
 

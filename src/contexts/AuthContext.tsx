@@ -13,6 +13,7 @@ export interface AuthContextType {
   avatarUrl: string | null;
   provider: 'google' | 'email' | 'guest' | null;
   onboardingCompleted: boolean | null;
+  setOnboardingCompleted?: (completed: boolean | null) => void;
   setAsGuest: () => void;
   clearGuest: () => void;
   refreshProfile: () => Promise<void>;
@@ -45,7 +46,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [onboardingCompleted, setOnboardingCompleted] = useState<boolean | null>(null);
   const configured = isSupabaseConfigured();
 
-  const fetchProfileDetails = async (userId: string) => {
+    const fetchProfileDetails = async (userId: string) => {
+    // Check local profile cache first
+    let localCompleted: boolean | null = null;
+    try {
+      const raw = localStorage.getItem(`agriorbit_farmer_profile_v2_${userId}`);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.onboardingCompleted === true) {
+          localCompleted = true;
+        }
+      }
+    } catch {}
+
     try {
       let { data, error } = await supabase
         .from('profiles')
@@ -67,21 +80,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (error) {
         console.error('AgriOrbit Auth: Error querying profile:', error);
-        // Requirement 4: On error, treat as NOT onboarded. Never treat error as completed.
-        setOnboardingCompleted(false);
+        // Requirement 4: On error, if local cache confirms onboarding completed, accept it
+        if (localCompleted === true) {
+          setOnboardingCompleted(true);
+        } else {
+          setOnboardingCompleted(false);
+        }
       } else if (data) {
         if (data.full_name && data.full_name.trim()) {
           setProfileFullName(data.full_name.trim());
         }
         // Requirement 3: Guard uses the onboarding_completed flag
-        setOnboardingCompleted(data.onboarding_completed === true);
+        setOnboardingCompleted(data.onboarding_completed === true || localCompleted === true);
       } else {
         // No profile row exists yet
-        setOnboardingCompleted(false);
+        if (localCompleted === true) {
+          setOnboardingCompleted(true);
+        } else {
+          setOnboardingCompleted(false);
+        }
       }
     } catch (err) {
       console.error('AgriOrbit Auth: Exception querying profile:', err);
-      setOnboardingCompleted(false);
+      if (localCompleted === true) {
+        setOnboardingCompleted(true);
+      } else {
+        setOnboardingCompleted(false);
+      }
     }
   };
 

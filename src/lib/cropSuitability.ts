@@ -160,6 +160,20 @@ function evaluateCropWithNasa(
     deltas.secondaryPriorityDelta = p2Delta;
   }
 
+    // Priority-specific explain-why rule annotations
+  if (primary === 'higher_income' && (crop.valueCategory === 'high' || ['potato', 'maize', 'mustard', 'lentil'].includes(crop.id))) {
+    dynamicRulesEn.push('Rule INC-01: High commercial value crop (+5 pts) approximate value category, not live market price.');
+    dynamicRulesBn.push('রুল INC-01: উচ্চ বাণিজ্যিক মূল্যের সম্ভাবনা (+৫ পয়েন্ট) আনুমানিক শ্রেণী, তাৎক্ষণিক বাজারদর নয়।');
+  }
+  if (primary === 'quick_harvest' && crop.durationDays <= 85) {
+    dynamicRulesEn.push(`Rule HARV-01: Quick turnaround crop (${crop.durationDays} days <= 85) frees field early (+4 to +6 pts).`);
+    dynamicRulesBn.push(`রুল HARV-01: দ্রুত ফসল ঘরে তোলার সুবিধা (${crop.durationDays} দিন) জমি দ্রুত খালি করে (+৪ থেকে +৬ পয়েন্ট)।`);
+  }
+  if (primary === 'family_food' && (crop.isStaple || ['boro_rice', 'aman_rice', 'aus_rice', 'wheat', 'lentil'].includes(crop.id))) {
+    dynamicRulesEn.push('Rule STAPLE-01: Essential staple food crop awarded +5 nutritional security bonus.');
+    dynamicRulesBn.push('রুল STAPLE-01: পরিবারের মৌলিক খাদ্য ও পুষ্টি নিরাপত্তার প্রধান ফসল হিসেবে +৫ পয়েন্ট বোনাস।');
+  }
+
   // Final score — stop artificial 98% clamping, allow real dynamic score
   const finalScore = Math.max(20, Math.min(100, Math.round(score)));
   deltas.finalScore = finalScore;
@@ -199,18 +213,6 @@ function priorityDelta(crop: CropData, priority: FarmerPriorityId): number {
       return crop.waterRequirementEn === 'Low' ? 4 : 0;
     case 'improve_soil':
       return crop.id === 'mungbean' || crop.id === 'jute' || crop.id === 'lentil' ? 5 : 0;
-    case 'maximize_profit': {
-      let d = 0;
-      if (crop.suitabilityScore >= 85 && crop.waterRequirementEn !== 'High') d += 4;
-      if (crop.suitabilityTier === 'marginal') d -= 8;
-      return d;
-    }
-    case 'maximize_yield': {
-      let d = 0;
-      if (crop.suitabilityScore >= 85) d += 3;
-      if (crop.suitabilityTier === 'marginal') d -= 8;
-      return d;
-    }
     case 'lower_cost': {
       let d = 0;
       if (crop.id === 'mustard' || crop.id === 'lentil' || crop.id === 'jute') d += 4;
@@ -218,7 +220,34 @@ function priorityDelta(crop: CropData, priority: FarmerPriorityId): number {
       return d;
     }
     case 'reduce_risk':
-      return crop.durationDays <= 90 ? 5 : 0;
+    case 'maximize_yield': {
+      let d = 0;
+      if (crop.durationDays <= 80) d += 6;
+      else if (crop.durationDays <= 95) d += 4;
+      else if (crop.durationDays <= 115) d += 2;
+      else if (crop.durationDays >= 140) d -= 4;
+      return d;
+    }
+    case 'higher_income':
+    case 'maximize_profit': {
+      // High commercial value category (approximate, not live market prices)
+      const cat = crop.valueCategory || (['potato', 'maize', 'mustard', 'lentil', 'boro_rice'].includes(crop.id) ? 'high' : 'medium');
+      return cat === 'high' ? 5 : cat === 'medium' ? 2 : 0;
+    }
+    case 'quick_harvest': {
+      let d = 0;
+      if (crop.durationDays <= 75) d += 6;
+      else if (crop.durationDays <= 90) d += 4;
+      else if (crop.durationDays <= 110) d += 2;
+      else if (crop.durationDays >= 140) d -= 5;
+      return d;
+    }
+    case 'family_food': {
+      const isStaple = crop.isStaple ?? ['boro_rice', 'aman_rice', 'aus_rice', 'wheat', 'lentil', 'mungbean'].includes(crop.id);
+      return isStaple ? 5 : 0;
+    }
+    default:
+      return 0;
   }
 }
 
@@ -244,11 +273,17 @@ export function formatPriorityLabel(priority: FarmerPriorityId, lang: 'en' | 'bn
     case 'improve_soil':
       return lang === 'en' ? 'Improve Soil Health' : 'মাটির উর্বরতা বৃদ্ধি';
     case 'reduce_risk':
-      return lang === 'en' ? 'Reduce Climate Risk' : 'জলবায়ু ঝুঁকি হ্রাস';
+      return lang === 'en' ? 'Reduce Climate Risk' : 'আবহাওয়ার ঝুঁকি কমানো';
+    case 'higher_income':
+      return lang === 'en' ? 'Higher Income' : 'বেশি আয়ের সম্ভাবনা';
+    case 'quick_harvest':
+      return lang === 'en' ? 'Quick Harvest' : 'দ্রুত ফসল তোলা';
+    case 'family_food':
+      return lang === 'en' ? 'Family Food Security' : 'পারিবারিক খাদ্য নিরাপত্তা';
     case 'maximize_profit':
-      return lang === 'en' ? 'Lower Cost' : 'কম খরচ';
+      return lang === 'en' ? 'Higher Income' : 'বেশি আয়ের সম্ভাবনা';
     case 'maximize_yield':
-      return lang === 'en' ? 'Reduce Climate Risk' : 'জলবায়ু ঝুঁকি হ্রাস';
+      return lang === 'en' ? 'Reduce Climate Risk' : 'আবহাওয়ার ঝুঁকি কমানো';
     default:
       return String(priority).replace('_', ' ');
   }
@@ -259,11 +294,14 @@ export const PRIORITY_META: Record<
   { titleEn: string; titleBn: string }
 > = {
   save_water: { titleEn: 'Save Water', titleBn: 'পানি সাশ্রয়' },
-  improve_soil: { titleEn: 'Improve Soil Health', titleBn: 'মাটির উর্বরতা বৃদ্ধি' },
-  maximize_profit: { titleEn: 'Lower Cost', titleBn: 'কম খরচ' },
-  maximize_yield: { titleEn: 'Reduce Climate Risk', titleBn: 'জলবায়ু ঝুঁকি হ্রাস' },
   lower_cost: { titleEn: 'Lower Cost', titleBn: 'কম খরচ' },
-  reduce_risk: { titleEn: 'Reduce Climate Risk', titleBn: 'জলবায়ু ঝুঁকি হ্রাস' },
+  improve_soil: { titleEn: 'Improve Soil Health', titleBn: 'মাটির উর্বরতা বৃদ্ধি' },
+  reduce_risk: { titleEn: 'Reduce Climate Risk', titleBn: 'আবহাওয়ার ঝুঁকি কমানো' },
+  higher_income: { titleEn: 'Higher Income', titleBn: 'বেশি আয়ের সম্ভাবনা' },
+  quick_harvest: { titleEn: 'Quick Harvest', titleBn: 'দ্রুত ফসল তোলা' },
+  family_food: { titleEn: 'Family Food Security', titleBn: 'পারিবারিক খাদ্য নিরাপত্তা' },
+  maximize_profit: { titleEn: 'Higher Income', titleBn: 'বেশি আয়ের সম্ভাবনা' },
+  maximize_yield: { titleEn: 'Reduce Climate Risk', titleBn: 'আবহাওয়ার ঝুঁকি কমানো' },
 };
 
 export const PRIORITY_INFLUENCE: Record<FarmerPriorityId, { en: string; bn: string }> = {
@@ -271,25 +309,37 @@ export const PRIORITY_INFLUENCE: Record<FarmerPriorityId, { en: string; bn: stri
     en: 'Save Water boost: low-water crops gain up to +4 match points; flood-irrigated Boro rice is penalized by up to 18 points when water is limited.',
     bn: 'পানি সাশ্রয় প্রভাব: স্বল্প পানির ফসল সর্বোচ্চ +৪ পয়েন্ট পায়; পানি সীমিত থাকলে বোরো ধান ১৮ পয়েন্ট পর্যন্ত কর্তন পায়।',
   },
-  improve_soil: {
-    en: 'Soil Health boost: nitrogen-fixing Mungbean, Jute, and Lentil gain up to +5 match points for rebuilding soil fertility.',
-    bn: 'মাটির উর্বরতা প্রভাব: নাইট্রোজেন সংবন্ধনকারী মুগ, পাট ও মসুর সর্বোচ্চ +৫ পয়েন্ট পায়।',
-  },
-  maximize_profit: {
-    en: 'Lower Cost (input-conscious): crops combining strong local suitability with low/moderate water cost gain up to +4; marginal high-input options lose up to 8.',
-    bn: 'কম খরচ (সাশ্রয়ী ইনপুট): ভালো উপযোগিতা ও কম/মাঝারি খরচের ফসল সর্বোচ্চ +৪ পায়; ব্যয়বহুল প্রান্তিক ফসল সর্বোচ্চ ৮ হারায়।',
-  },
-  maximize_yield: {
-    en: 'Yield & Risk resilience: proven local performers gain up to +3; short-duration crops gain resilience points against weather stress.',
-    bn: 'ফলন ও ঝুঁকি সহনশীলতা: প্রমাণিত উপযোগী ফসল সর্বোচ্চ +৩ পায়; দুর্যোগ এড়াতে স্বল্পমেয়াদী ফসল এগিয়ে থাকে।',
-  },
   lower_cost: {
     en: 'Lower Cost boost: low-input Mustard, Lentil, and Jute gain up to +4; diesel-heavy Boro and capital-heavy Potato lose up to 12.',
     bn: 'কম খরচ প্রভাব: সাশ্রয়ী সরিষা, মসুর ও পাট সর্বোচ্চ +৪ পায়; ব্যয়বহুল বোরো ও আলু সর্বোচ্চ ১২ হারায়।',
   },
+  improve_soil: {
+    en: 'Soil Health boost: nitrogen-fixing Mungbean, Jute, and Lentil gain up to +5 match points for rebuilding soil fertility.',
+    bn: 'মাটির উর্বরতা প্রভাব: নাইট্রোজেন সংবন্ধনকারী মুগ, পাট ও মসুর সর্বোচ্চ +৫ পয়েন্ট পায়।',
+  },
   reduce_risk: {
-    en: 'Climate Risk boost: short-duration crops (90 days or less) gain up to +5 for escaping heatwaves and flash floods.',
-    bn: 'ঝুঁকি হ্রাস প্রভাব: স্বল্পমেয়াদী ফসল (৯০ দিন বা কম) সর্বোচ্চ +৫ পায়।',
+    en: 'Climate Risk boost: short-duration crops gain up to +6 for escaping heatwaves and erratic storms.',
+    bn: 'ঝুঁকি হ্রাস প্রভাব: দুর্যোগ এড়াতে স্বল্পমেয়াদী সহনশীল ফসল সর্বোচ্চ +৬ পয়েন্ট পায়।',
+  },
+  higher_income: {
+    en: 'Higher Income boost (approximate, not live market prices): high commercial value crops (Potato, Maize, Mustard, Lentil) gain +5 points.',
+    bn: 'বেশি আয় প্রভাব (আনুমানিক, বাজারদর নয়): উচ্চ বাণিজ্যিক মূল্যের ফসল (আলু, ভুট্টা, সরিষা, মসুর) সর্বোচ্চ +৫ পয়েন্ট পায়।',
+  },
+  quick_harvest: {
+    en: 'Quick Harvest boost: ultra-fast turnaround crops (<=75 days like Mungbean, Mustard) gain up to +6 to free land rapidly.',
+    bn: 'দ্রুত ফসল তোলার প্রভাব: দ্রুততম ফসল (মুগ ডাল, সরিষা) দ্রুত জমি খালি করতে সর্বোচ্চ +৬ পয়েন্ট পায়।',
+  },
+  family_food: {
+    en: 'Food Security boost: daily household staples (rice, wheat, pulses) gain +5 points for securing family nutrition.',
+    bn: 'খাদ্য নিরাপত্তা প্রভাব: পারিবারিক পুষ্টি ও খোরাকি মেটাতে প্রধান দানা ও ডাল শস্য সর্বোচ্চ +৫ পয়েন্ট পায়।',
+  },
+  maximize_profit: {
+    en: 'Higher Income boost (approximate, not live market prices): high commercial value crops gain +5 points.',
+    bn: 'বেশি আয় প্রভাব (আনুমানিক, বাজারদর নয়): উচ্চ বাণিজ্যিক মূল্যের ফসল সর্বোচ্চ +৫ পয়েন্ট পায়।',
+  },
+  maximize_yield: {
+    en: 'Climate Risk boost: short-duration and resilient crops gain up to +6 points.',
+    bn: 'ঝুঁকি হ্রাস প্রভাব: স্বল্পমেয়াদী সহনশীল ফসল সর্বোচ্চ +৬ পয়েন্ট পায়।',
   },
 };
 
