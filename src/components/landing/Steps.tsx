@@ -1,4 +1,3 @@
-import { ArrowRight, ArrowDown } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
 import { IMAGES } from '../../data/assets.ts';
 import { HeroMap } from '../HeroMap.tsx';
@@ -45,15 +44,6 @@ export function Steps() {
                 ? 'বাংলাদেশের ৬৪টি জেলার মাটির বৈশিষ্ট্য ও ভূগর্ভস্থ পানির অবস্থা আলাদা। এগ্রিঅরবিট আপনার জমি চিহ্নিত করে পারিপার্শ্বিক ৫ কিমি এলাকা প্রাসঙ্গিক হিসেবে দেখায়; স্যাটেলাইট তথ্য বৃহত্তর গ্রিডজুড়ে গড় করা হয়।'
                 : 'Across Bangladesh’s 64 districts, soil permeability and groundwater response differ dramatically. AgriOrbit pins your field and shows a 5 km area for context. Satellite data is averaged over a larger grid.'}
             </p>
-            <div className="pt-2">
-              <a
-                href="#/dashboard"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono"
-              >
-                <span>{isBn ? 'মানচিত্রে আপনার জেলা নির্বাচন করুন' : 'Locate your field on the map'}</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
           </div>
 
           <div className="lg:col-span-7">
@@ -99,56 +89,42 @@ export function Steps() {
           </div>
 
           <div className="lg:col-span-5 space-y-4 order-1 lg:order-2">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#00E5FF] uppercase">
-              <span>02</span>
-              <span aria-hidden="true">·</span>
-              <span>UNDERSTAND THE SHIFT</span>
-            </div>
-            <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-              {isBn ? 'আপনার এলাকার পরিবেশ কীভাবে বদলেছে বুঝুন।' : 'Understand how the conditions around your field are changing.'}
-            </h3>
+            <a href="#field-shift" className="group block space-y-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#00E5FF] uppercase">
+                <span>02</span>
+                <span aria-hidden="true">·</span>
+                <span>UNDERSTAND THE SHIFT</span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight group-hover:text-[#00E5FF] transition-colors">
+                {isBn ? 'আপনার এলাকার পরিবেশ কীভাবে বদলেছে বুঝুন।' : 'Understand how the conditions around your field are changing.'}
+              </h3>
+            </a>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
                 ? 'নাসা পাওয়ার-এর দুই দশকের তথ্য পর্যালোচনা করলে দেখা যায় জেলাভেদে মৌসুমভিত্তিক বৃষ্টিপাতের সময় ও তাপমাত্রায় সুনির্দিষ্ট পরিবর্তন এসেছে।'
                 : 'NASA POWER historical observations show how seasonal rain timing and temperatures have drifted across districts over the past two decades. Rather than uniform warming, rain distribution has shifted between seasons.'}
             </p>
-            <div className="pt-2">
-              <a
-                href="#field-shift"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5FF] hover:underline uppercase font-mono"
-              >
-                <span>{isBn ? 'ফিল্ড শিফট বিস্তারিত দেখুন' : 'Explore the Field Shift analysis'}</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
           </div>
         </div>
 
         {/* CHAPTER 03 — CHOOSE THE CROP */}
         <div className="py-16 border-t border-white/10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#B8FF3D] uppercase">
-              <span>03</span>
-              <span aria-hidden="true">·</span>
-              <span>CHOOSE THE CROP</span>
-            </div>
-            <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-              {isBn ? 'বর্তমান অবস্থার সাথে ফসলের চাহিদা মেলান।' : 'Match current conditions with crop needs.'}
-            </h3>
+            <a href="#crops" className="group block space-y-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#B8FF3D] uppercase">
+                <span>03</span>
+                <span aria-hidden="true">·</span>
+                <span>CHOOSE THE CROP</span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight group-hover:text-[#B8FF3D] transition-colors">
+                {isBn ? 'বর্তমান অবস্থার সাথে ফসলের চাহিদা মেলান।' : 'Match current conditions with crop needs.'}
+              </h3>
+            </a>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
                 ? `মাটির আর্দ্রতা কম থাকলে বেশি পানির ফসলে সেচের খরচ বেড়ে যায়। এগ্রিঅরবিট বারি ও ব্রি নির্দেশিকা অনুযায়ী ${cropCount}টি যাচাইকৃত ফসলের উপযুক্ততা মূল্যায়ন করে।`
                 : `When surface soil moisture is low, high-water crops face heavy irrigation costs. AgriOrbit ranks ${cropCount} verified crops using BARI & BRRI agronomic rules.`}
             </p>
-            <div className="pt-2">
-              <a
-                href="#crops"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#B8FF3D] hover:underline uppercase font-mono"
-              >
-                <span>{isBn ? `${cropCount}টি ফসলের উপযোগিতা তথ্যভাণ্ডার দেখুন` : `Evaluate ${cropCount} crops in the Atlas`}</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
           </div>
 
           <div className="lg:col-span-7">
@@ -179,7 +155,6 @@ export function Steps() {
         </div>
 
         {/* CHAPTER 04 — PLAN THE ROTATION */}
-        {/* Softened to a clean teaser linking to #rotation per requirement B.13 */}
         <div className="py-16 border-t border-white/10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7 order-2 lg:order-1">
             <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0B1626] min-h-[360px] flex flex-col justify-end p-6 sm:p-8">
@@ -207,28 +182,21 @@ export function Steps() {
           </div>
 
           <div className="lg:col-span-5 space-y-4 order-1 lg:order-2">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#00E5FF] uppercase">
-              <span>04</span>
-              <span aria-hidden="true">·</span>
-              <span>PLAN THE ROTATION</span>
-            </div>
-            <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-              {isBn ? 'একটি ফসল সিদ্ধান্তকে মৌসুমি কৌশলে রূপান্তর করুন।' : 'Turn one crop decision into a seasonal strategy.'}
-            </h3>
+            <a href="#rotation" className="group block space-y-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#00E5FF] uppercase">
+                <span>04</span>
+                <span aria-hidden="true">·</span>
+                <span>PLAN THE ROTATION</span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight group-hover:text-[#00E5FF] transition-colors">
+                {isBn ? 'একটি ফসল সিদ্ধান্তকে মৌসুমি কৌশলে রূপান্তর করুন।' : 'Turn one crop decision into a seasonal strategy.'}
+              </h3>
+            </a>
             <p className="text-sm sm:text-base text-[#8FA3B8] leading-relaxed">
               {isBn
                 ? 'একক ফসল মাটির পুষ্টি শেষ করে। এগ্রিঅরবিট তিন মৌসুমের ধারাবাহিক পরিকল্পনা তৈরি করে যাতে প্রতিটি ফসল পরের মৌসুমের জন্য জমি প্রস্তুত রাখে।'
                 : 'Monoculture depletes soil nutrients. AgriOrbit arranges a 3-season cycle so each harvest naturally enriches the ground for what comes next.'}
             </p>
-            <div className="pt-2">
-              <a
-                href="#rotation"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5FF] hover:underline uppercase font-mono"
-              >
-                <span>{isBn ? 'শস্য পর্যায় বিস্তারিত জানুন' : 'Learn about the 3-season rotation'}</span>
-                <ArrowDown className="h-3.5 w-3.5" />
-              </a>
-            </div>
           </div>
         </div>
       </div>

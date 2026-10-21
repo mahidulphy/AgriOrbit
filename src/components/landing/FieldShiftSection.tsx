@@ -1,4 +1,4 @@
-import { ArrowRight, CloudRain, Info, Thermometer } from 'lucide-react';
+import { CloudRain, Info, Thermometer } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
 import { rainTimingShift, warmestShift, type FieldShift, type SeasonId } from '../../lib/fieldShift.ts';
 import { SEASON_COLOR, SectionHeader } from '../ui/ui.tsx';
@@ -177,16 +177,6 @@ export function FieldShiftSection({ shift }: { shift: FieldShift }) {
         <SectionHeader eyebrow={t.fs.eyebrow} title={t.fs.title} sub={t.fs.sub(range(shift.thenRange), range(shift.nowRange))} />
         <div className="mt-12">
           <FieldShiftPanel shift={shift} />
-        </div>
-        {/* Softened inline CTA to plain text link per requirement B.17 */}
-        <div className="mt-8">
-          <a
-            href="#/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-[#8FA3B8] hover:text-[#00E5FF] transition-colors font-mono underline underline-offset-4"
-          >
-            <span>{t.fs.cta}</span>
-            <ArrowRight className="h-4 w-4" />
-          </a>
         </div>
       </div>
     </section>

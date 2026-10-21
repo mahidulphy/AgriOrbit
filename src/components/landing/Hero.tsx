@@ -51,7 +51,10 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
               {t.hero.cta}
               <ArrowRight className="h-4 w-4" />
             </button>
-            <a href="#how" className="btn btn-ghost px-6! py-3.5! text-sm! flex items-center gap-2 cursor-pointer">
+            <a
+              href="#how"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors cursor-pointer px-2 py-2"
+            >
               {t.hero.cta2}
               <ArrowDown className="h-4 w-4 text-[#00E5FF]" />
             </a>

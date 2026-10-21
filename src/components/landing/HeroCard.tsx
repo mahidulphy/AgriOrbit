@@ -42,19 +42,17 @@ export function HeroCard({ conditions: c }: { conditions: Conditions; shift: Fie
         ))}
       </div>
 
-      {/* Concise teaser link to #field-shift per requirement B.12 */}
-      <a
-        href="#field-shift"
-        className="tile mt-3 p-3.5 bg-[#050B14]/90 border-white/10 flex items-center justify-between text-xs text-slate-300 hover:text-white hover:border-[#00E5FF]/40 transition-colors group cursor-pointer"
-      >
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-[#00E5FF] group-hover:scale-125 transition-transform" />
-          <span className="font-medium text-slate-200">{t.heroCard.shiftTeaser}</span>
-        </div>
-        <span className="font-mono text-[#00E5FF] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-          {t.heroCard.shiftLink} &rarr;
-        </span>
-      </a>
+      {/* Small text link to #field-shift (not looking like a button) */}
+      <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+        <span className="text-slate-300 font-medium">{t.heroCard.shiftTeaser}</span>
+        <a
+          href="#field-shift"
+          className="inline-flex items-center gap-1 font-mono text-xs text-[#00E5FF] hover:underline transition-colors cursor-pointer"
+        >
+          <span>{t.heroCard.shiftLink}</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
 
       <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
         <span>{t.heroCard.source(date(c.from), date(c.to))}</span>
