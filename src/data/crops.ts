@@ -491,7 +491,7 @@ export const CROPS: Crop[] = [
     ],
     "key_risks_en": [
       "Cold injury (<15°C) at seedling and booting stage",
-      "Heat stress (>35°C) during flowering causing spikelet sterility",
+      "Early flash floods in haor and wetland basins",
       "Groundwater depletion and excessive irrigation pumping costs"
     ],
     "key_risks_bn": [
@@ -624,8 +624,7 @@ export const CROPS: Crop[] = [
     ],
     "key_risks_en": [
       "Terminal heat stress (>30°C in March) causing grain shriveling",
-      "Wheat Blast disease (Magnaporthe oryzae) in warm, humid weather",
-      "Fog and overcast conditions at flowering triggering rust"
+      "Wheat Blast disease (Magnaporthe oryzae) in warm, humid weather"
     ],
     "key_risks_bn": [
       "টার্মিনাল হিট স্ট্রেস (ফেব্রুয়ারি-মার্চে অকাল তাপমাত্রা বৃদ্ধি)",
@@ -810,8 +809,8 @@ export const CROPS: Crop[] = [
         "max": 150
       },
       "kharif1": {
-        "min": 90,
-        "max": 110
+        "min": 100,
+        "max": 120
       }
     }
   },
@@ -1888,7 +1887,7 @@ export const CROPS: Crop[] = [
     "rainfall_alerts": [],
     "key_risks_en": [
       "Nor'wester storms and hail at harvest (April–May) causing lodging and head rot",
-      "Moisture deficit during head development (<15% SMAP)"
+      "Sclerotinia head rot disease"
     ],
     "key_risks_bn": [
       "কাটার সময় (এপ্রিল-মে) কালবৈশাখী ঝড় ও শিলাবৃষ্টি (গাছ ভেঙে মাথায় পানি জমে পচন)",
@@ -2019,10 +2018,15 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Excess moisture causing seedling damping-off",
-      "Pods shattering if harvest is delayed in hot dry spells"
+      "Waterlogging",
+      "Prolonged drought",
+      "Excess heat"
     ],
-    "key_risks_bn": [],
+    "key_risks_bn": [
+      "জলাবদ্ধতা",
+      "দীর্ঘ খরা",
+      "অতিরিক্ত তাপ"
+    ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
     "value_category": "medium",
@@ -2132,9 +2136,8 @@ export const CROPS: Crop[] = [
       "Untimely late-winter rainfall causing tuber rotting in the ground"
     ],
     "key_risks_bn": [
-      "লেট ব্লাইট / নাবি ধসা রোগ (টানা মেঘলা ও কুয়াশাচ্ছন্ন আবহাওয়া",
-      "আর্দ্রতা >৮৫%",
-      "তাপমাত্রা ১২-২২°C)",
+      "লেট ব্লাইট / নাবি ধসা রোগ (টানা মেঘলা ও কুয়াশাচ্ছন্ন আবহাওয়া, আর্দ্রতা >৮৫%)",
+      "উচ্চ তাপমাত্রা (রাতের তাপমাত্রা >২২°C হলে কন্দ গঠন ব্যাহত)",
       "অসময়ে বৃষ্টিতে কন্দ পচা"
     ],
     "decision_rules_en": [
@@ -3289,10 +3292,13 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Waterlogging at seedling stage (<30 days old)",
-      "Drought during early vegetative growth"
+      "Waterlogging",
+      "Prolonged drought"
     ],
-    "key_risks_bn": [],
+    "key_risks_bn": [
+      "জলাবদ্ধতা",
+      "দীর্ঘ খরা"
+    ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
     "value_category": "medium",
@@ -3403,10 +3409,15 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging during germination and early tillering",
-      "Red rot disease (Colletotrichum falcatum) in poorly drained soils"
+      "Waterlogging",
+      "Prolonged drought",
+      "Diseases"
     ],
-    "key_risks_bn": [],
+    "key_risks_bn": [
+      "জলাবদ্ধতা",
+      "দীর্ঘ খরা",
+      "রোগবালাই"
+    ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
     "value_category": "high",
@@ -3524,10 +3535,13 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Waterlogging at flowering and boll setting",
-      "Excess rain causing boll shedding and fiber discoloration"
+      "Heavy rain at sowing",
+      "Waterlogging"
     ],
-    "key_risks_bn": [],
+    "key_risks_bn": [
+      "বপনের সময় অতিবৃষ্টি",
+      "জলাবদ্ধতা"
+    ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
     "value_category": "high",
@@ -3607,14 +3621,10 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Severe health hazard, extreme soil nutrient depleting, discouraged by DAE",
-      "Heavy rainfall and standing water causing rapid root wilting",
-      "Leaf spotting and damping-off diseases"
+      "Not recommended by AgriOrbit: harmful to health and depletes soil fertility"
     ],
     "key_risks_bn": [
-      "জনস্বাস্থ্যের জন্য ক্ষতিকর ও জমির উর্বরতা হ্রাসকারী (কৃষি সম্প্রসারণ অধিদপ্তর কর্তৃক নিরুৎসাহিত)",
-      "অতিবৃষ্টি ও শিকড় নেতিয়ে পড়া",
-      "জলাবদ্ধতা ও রোগবালাই"
+      "অ্যাগ্রিঅরবিট কর্তৃক সুপারিশকৃত নয়: স্বাস্থ্যের জন্য ক্ষতিকর ও মাটির উর্বরতা হ্রাস করে"
     ],
     "nasa_data_link_en": null,
     "nasa_data_link_bn": null,
@@ -4102,7 +4112,7 @@ export const CROPS: Crop[] = [
     "rainfall_alerts": [],
     "key_risks_en": [
       "Rhizome rot (Pythium aphanidermatum) in waterlogged soils",
-      "Bacterial wilt and shoot borer"
+      "Intense sunlight and heatwaves (ginger requires 20–40% shade)"
     ],
     "key_risks_bn": [
       "রাইজোম রট / কন্দ পচা রোগ (পানি নিষ্কাশনের অভাব হলে)",
@@ -4730,7 +4740,7 @@ export const CROPS: Crop[] = [
     "rainfall_alerts": [],
     "key_risks_en": [
       "Heavy rainfall and dense fog at flowering causing flower drop and pod borer infestation",
-      "Aphid infestation and bean common mosaic virus",
+      "High temperature (>32°C) causing flower shedding",
       "Root rot when soil moisture exceeds 35%"
     ],
     "key_risks_bn": [
