@@ -22,6 +22,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { BD_DISTRICTS } from '../../data/districts';
 import { CROPS } from '../../data/crops';
+import { CROP_CATEGORIES } from '../../data/cropCategories';
 import {
   FarmerProfile,
   getFarmerProfile,
@@ -396,23 +397,36 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     : 'Select previously cultivated crops. This helps AgriOrbit prevent soil nutrient exhaustion:'}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
-                  {CROPS.map((crop) => {
-                    const selected = profile.previousCrops.includes(crop.id);
+                <div className="space-y-4">
+                  {CROP_CATEGORIES.map((cat) => {
+                    const catCrops = CROPS.filter((c) => c.category_id === cat.id);
+                    if (catCrops.length === 0) return null;
                     return (
-                      <button
-                        type="button"
-                        key={crop.id}
-                        onClick={() => toggleCrop(crop.id)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer border ${
-                          selected
-                            ? 'bg-[#B8FF3D]/15 border-[#B8FF3D] text-[#B8FF3D] font-bold shadow-sm'
-                            : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
-                        }`}
-                      >
-                        {selected ? '✓ ' : '+ '}
-                        {isBn ? crop.nameBn : crop.nameEn}
-                      </button>
+                      <div key={cat.id} className="p-3 rounded-xl bg-[#050B14] border border-white/5">
+                        <div className="text-[11px] font-mono font-bold text-[#00E5FF] mb-2 uppercase tracking-wider">
+                          {isBn ? cat.name_bn : cat.name_en}
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {catCrops.map((crop) => {
+                            const selected = profile.previousCrops.includes(crop.id);
+                            return (
+                              <button
+                                type="button"
+                                key={crop.id}
+                                onClick={() => toggleCrop(crop.id)}
+                                className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer border ${
+                                  selected
+                                    ? 'bg-[#B8FF3D]/15 border-[#B8FF3D] text-[#B8FF3D] font-bold shadow-sm'
+                                    : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                                }`}
+                              >
+                                {selected ? '✓ ' : '+ '}
+                                {isBn ? crop.name_bn : crop.name_en}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
                     );
                   })}
                 </div>

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { CropData, FarmerPriorityId, Language } from '../types';
 import { getRankedCrops, SeasonFilter, type TelemetryContext } from '../lib/cropSuitability';
+import { cropById } from '../data/crops';
 
 interface CropRecommendationProps {
   selectedPriority: FarmerPriorityId;
@@ -63,6 +64,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
     const showWaterPenalty = isDry && (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice');
     const showOptimalSowing = isOptimalSowing && (crop.suitabilityScore >= 80);
     const showHeatStress = isHot && (crop.id === 'wheat' || crop.id === 'potato');
+    const isEstimated = cropById(crop.id)?.data_confidence === 'estimated';
 
     return (
       <div
@@ -100,6 +102,12 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
 
             {/* Dynamic Rule Trigger Badges */}
             <div className="flex flex-wrap items-center gap-2">
+              {isEstimated && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                  <AlertCircle className="w-3 h-3" />
+                  {language === 'en' ? 'Estimated data' : 'আনুমানিক তথ্য'}
+                </span>
+              )}
               {showWaterSaver && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30">
                   <Droplets className="w-3 h-3" />
@@ -210,7 +218,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
               <span>{language === 'en' ? 'CROP COMPATIBILITY EVALUATION' : 'ফসল উপযোগিতা মূল্যায়ন'}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {language === 'en' ? 'NASA Data-Driven Crop Compatibility' : '১০টি প্রধান ফসলের উপযোগিতা মূল্যায়ন'}
+              {language === 'en' ? 'NASA Data-Driven Crop Compatibility' : `${displayedCrops.length}টি প্রধান ফসলের উপযোগিতা মূল্যায়ন`}
             </h2>
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
               {language === 'en'
@@ -234,7 +242,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                     : 'text-[#8FA3B8] hover:text-white'
                 }`}
               >
-                {s === 'All' && (language === 'en' ? 'All (10)' : 'সকল')}
+                {s === 'All' && (language === 'en' ? `All (${displayedCrops.length})` : `সকল (${displayedCrops.length})`)}
                 {s === 'Rabi' && (language === 'en' ? 'Rabi' : 'রবি')}
                 {s === 'Kharif-1' && (language === 'en' ? 'Kharif-1' : 'খরিফ-১')}
                 {s === 'Kharif-2' && (language === 'en' ? 'Kharif-2' : 'খরিফ-২')}

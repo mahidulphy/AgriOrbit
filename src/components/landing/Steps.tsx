@@ -1,12 +1,12 @@
 import { useLang } from '../../lang.tsx';
 import { IMAGES } from '../../data/assets.ts';
 import { HeroMap } from '../HeroMap.tsx';
-import { CROPS_DATABASE } from '../../data/agriData.ts';
+import { CROPS } from '../../data/crops.ts';
 
 export function Steps() {
   const { lang } = useLang();
   const isBn = lang === 'bn';
-  const cropCount = Object.keys(CROPS_DATABASE).length;
+  const cropCount = CROPS.filter(c => c.recommendable).length;
 
   return (
     <section id="story" className="relative py-24 md:py-32 border-b border-white/10 bg-[#050B14]">

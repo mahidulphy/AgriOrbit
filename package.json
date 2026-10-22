@@ -9,7 +9,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "test": "tsx --test src/lib/*.test.ts src/utils/*.test.ts",
+    "test": "tsx --test src/lib/*.test.ts src/utils/*.test.ts src/data/*.test.ts",
     "clean": "rm -rf dist"
   },
   "dependencies": {

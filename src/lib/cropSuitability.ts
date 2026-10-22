@@ -1,5 +1,6 @@
 import type { CropData, FarmerPriorityId, Language } from '../types';
 import { CROPS_DATABASE } from '../data/agriData';
+import { cropById } from '../data/crops';
 
 export type SeasonFilter = 'All' | 'Rabi' | 'Kharif-1' | 'Kharif-2';
 
@@ -61,6 +62,12 @@ function evaluateCropWithNasa(
   const dynamicObservationsBn: string[] = [];
   const dynamicRulesEn: string[] = [];
   const dynamicRulesBn: string[] = [];
+
+  const cropMeta = cropById(crop.id);
+  if (cropMeta?.data_confidence === 'estimated') {
+    dynamicObservationsBn.push('এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।');
+    dynamicObservationsEn.push('Estimated data: unverified with field trials; confirm with local upazila agriculture office.');
+  }
 
   // ─────────────────────────────────────────────────────────────
   // RULE 1: DRY STRESS PENALTY (Rainfall < 50mm AND Soil Moisture < 0.15)
@@ -257,10 +264,20 @@ export function getRankedCrops(
   season: SeasonFilter = 'All',
   telemetry?: TelemetryContext,
 ): CropData[] {
-  const allCrops = Object.values(CROPS_DATABASE).map((crop) =>
-    evaluateCropWithNasa(crop, primary, secondary, telemetry),
-  );
-  const sorted = [...allCrops].sort((a, b) => b.suitabilityScore - a.suitabilityScore);
+  const allCrops = Object.values(CROPS_DATABASE)
+    .filter((c, idx, arr) => arr.findIndex((x) => x.id === c.id) === idx)
+    .map((crop) => evaluateCropWithNasa(crop, primary, secondary, telemetry));
+
+  const sorted = [...allCrops].sort((a, b) => {
+    if (b.suitabilityScore !== a.suitabilityScore) {
+      return b.suitabilityScore - a.suitabilityScore;
+    }
+    const cropA = cropById(a.id);
+    const cropB = cropById(b.id);
+    if (cropA?.data_confidence === 'research' && cropB?.data_confidence !== 'research') return -1;
+    if (cropB?.data_confidence === 'research' && cropA?.data_confidence !== 'research') return 1;
+    return a.nameEn.localeCompare(b.nameEn);
+  });
   return season === 'All' ? sorted : sorted.filter((c) => c.seasonEn === season);
 }
 

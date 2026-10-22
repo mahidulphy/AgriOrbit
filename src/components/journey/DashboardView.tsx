@@ -799,7 +799,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onClick={() => handleTabClick('crops')}
                       className="text-xs font-mono text-[#00E5FF] hover:underline flex items-center gap-1 cursor-pointer"
                     >
-                      <span>{language === 'en' ? 'See all 10 crops →' : 'সকল ১০টি ফসল →'}</span>
+                      <span>{language === 'en' ? `See all ${rankedCrops.length} crops →` : `সকল ${rankedCrops.length}টি ফসল →`}</span>
                     </button>
                   </div>
 

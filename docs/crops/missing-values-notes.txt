@@ -1,0 +1,11 @@
+AgriOrbit crop database — missing values filled (working draft)
+Source: user-provided pasted crop database.
+Rows included: 37
+
+Important:
+- Existing source values were preserved where possible.
+- Provisional values are explicitly labelled as provisional/estimated in the relevant cells.
+- Soybean, jute, sugarcane and cotton estimates require validation against Bangladesh-specific crop guidance and local crop varieties.
+- Tobacco: unsupported numeric fields were not invented; they are marked as requiring verified data. Algorithm Decision Rules keeps recommendable = false.
+- SMAP soil-moisture percentages are provisional agronomic placeholders, not validated SMAP retrieval thresholds. Calibrate against local soil texture, crop stage and satellite/product units before production use.
+- For production recommendations, validate agronomic values with DAE/BAMIS/BRRI/BSRI/CCDB or relevant local agricultural extension sources.

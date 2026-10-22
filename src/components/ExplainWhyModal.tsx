@@ -1,7 +1,8 @@
 import React from 'react';
-import { X, Check, Database, ShieldCheck, Droplet, Layers, Cpu, Compass, Calculator, TrendingUp, TrendingDown } from 'lucide-react';
+import { X, Check, Database, AlertCircle, ShieldCheck, Droplet, Layers, Cpu, Compass, Calculator, TrendingUp, TrendingDown } from 'lucide-react';
 import { CropData, FarmerPriorityId, Language } from '../types';
 import { priorityInfluenceText } from '../lib/cropSuitability';
+import { cropById } from '../data/crops';
 
 interface ExplainWhyModalProps {
   crop: CropData | null;
@@ -21,6 +22,8 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
   if (!crop) return null;
 
   // Resolve deltas or derive fallback deltas for transparent mathematical breakdown
+  const isEstimated = cropById(crop.id)?.data_confidence === 'estimated';
+
   const deltas = crop.deltas ?? {
     base: Math.max(60, crop.suitabilityScore - (crop.suitabilityScore >= 80 ? 15 : 5)),
     dryPenalty: crop.waterRequirementEn === 'Low' ? 4 : crop.waterRequirementEn === 'High' ? -15 : 0,
@@ -64,6 +67,22 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8 space-y-6">
+          {/* Estimated Data Warning Banner */}
+          {isEstimated && (
+            <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 shrink-0 text-amber-400 mt-0.5" />
+              <div>
+                <div className="font-semibold text-amber-300 font-mono text-xs uppercase tracking-wider">
+                  {language === 'en' ? 'Estimated Data' : 'আনুমানিক তথ্য'}
+                </div>
+                <p className="mt-1 text-amber-200/90 leading-relaxed text-xs">
+                  {language === 'en'
+                    ? 'This crop’s data has not yet been field-verified; please confirm with your local agriculture extension office.'
+                    : 'এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।'}
+                </p>
+              </div>
+            </div>
+          )}
           {/* DETERMINISTIC RULE-BASED SCORE CALCULATION TABLE */}
           <div className="p-6 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/30 shadow-inner">
             <div className="flex items-center justify-between mb-3">
