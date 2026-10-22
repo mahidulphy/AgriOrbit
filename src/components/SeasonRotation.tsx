@@ -3,7 +3,6 @@ import { ArrowDown, HelpCircle, Droplet, Sparkles, CheckCircle2, ShieldCheck, Pr
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../types';
 import { ROTATION_PLANS, CROPS_DATABASE } from '../data/agriData';
 import { getDistrictAdmin } from '../data/bdAdmin';
-import { IMAGES } from '../data/assets';
 import { SmsAdvisoryButton } from './dashboard/SmsAdvisoryButton';
 import type { EngineResult } from '../lib/engine';
 import { formatPriorityLabel, type TelemetryContext } from '../lib/cropSuitability';

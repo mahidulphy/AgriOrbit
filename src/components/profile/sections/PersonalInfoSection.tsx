@@ -64,6 +64,7 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
                 src={avatarUrl}
                 alt={fullName || 'Farmer'}
                 className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-[#B8FF3D]/40 shadow-lg"
+                loading="lazy"
               />
             ) : (
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border-2 border-[#B8FF3D]/40 flex items-center justify-center text-2xl font-bold font-mono text-[#B8FF3D]">

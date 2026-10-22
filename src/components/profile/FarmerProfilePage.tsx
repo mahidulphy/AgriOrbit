@@ -387,6 +387,7 @@ export const FarmerProfilePage: React.FC = () => {
                     src={profile.avatarUrl}
                     alt={profile.fullName}
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border-2 border-[#B8FF3D]/40 shadow-xl"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border-2 border-[#B8FF3D]/40 flex items-center justify-center text-3xl font-bold font-mono text-[#B8FF3D] shadow-xl">

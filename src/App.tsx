@@ -1,15 +1,32 @@
 // AgriOrbit App Routing with Authentication Guards and Hash-Routing Preservation
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 import { LandingPage } from './components/landing/LandingPage.tsx';
-import { AnalyzePage } from './components/analyze/AnalyzePage.tsx';
-import { LoginPage, SignUpPage, ForgotPasswordPage, AuthCallbackPage } from './components/auth';
-import { PrivacyPolicyPage, TermsPage } from './components/legal';
-import { FarmerProfilePage } from './components/profile/FarmerProfilePage.tsx';
-import { OnboardingWizardPage } from './components/onboarding/OnboardingWizardPage.tsx';
 import { useAuth } from './contexts/AuthContext.tsx';
 import { supabase } from './lib/supabase.ts';
 import { checkAndRedirectPostLogin } from './lib/onboardingGuard.ts';
+
+// Lazy-loaded routes to keep initial bundle tiny and move MapLibre (~1 MB) out of initial bundle
+const AnalyzePage = lazy(() => import('./components/analyze/AnalyzePage.tsx').then((m) => ({ default: m.AnalyzePage })));
+const OnboardingWizardPage = lazy(() => import('./components/onboarding/OnboardingWizardPage.tsx').then((m) => ({ default: m.OnboardingWizardPage })));
+const FarmerProfilePage = lazy(() => import('./components/profile/FarmerProfilePage.tsx').then((m) => ({ default: m.FarmerProfilePage })));
+const LoginPage = lazy(() => import('./components/auth').then((m) => ({ default: m.LoginPage })));
+const SignUpPage = lazy(() => import('./components/auth').then((m) => ({ default: m.SignUpPage })));
+const ForgotPasswordPage = lazy(() => import('./components/auth').then((m) => ({ default: m.ForgotPasswordPage })));
+const AuthCallbackPage = lazy(() => import('./components/auth').then((m) => ({ default: m.AuthCallbackPage })));
+const PrivacyPolicyPage = lazy(() => import('./components/legal').then((m) => ({ default: m.PrivacyPolicyPage })));
+const TermsPage = lazy(() => import('./components/legal').then((m) => ({ default: m.TermsPage })));
+
+function RouteLoading() {
+  return (
+    <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
+      <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
+        <Loader2 className="w-6 h-6 animate-spin" />
+      </div>
+      <p className="font-mono text-xs text-slate-400">Loading...</p>
+    </div>
+  );
+}
 
 export type AppRoute =
   | 'landing'
@@ -157,13 +174,16 @@ export default function App() {
 
     // Guest mode: skips onboarding and enters workspace directly
     if (isGuest) {
-      return <AnalyzePage />;
+      return (
+        <Suspense fallback={<RouteLoading />}>
+          <AnalyzePage />
+        </Suspense>
+      );
     }
 
     // Signed-in user: guard #/dashboard and #/analyze
     if (user) {
       if (onboardingCompleted === null) {
-        
         return (
           <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
             <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
@@ -177,20 +197,25 @@ export default function App() {
       // Requirement 3 & 5: Guard uses the onboarding_completed flag.
       // Redirect to #/onboarding if onboarding is not completed.
       if (onboardingCompleted !== true) {
-        
         window.location.hash = '#/onboarding';
         return null;
       }
-
-      
     }
 
-    return <AnalyzePage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <AnalyzePage />
+      </Suspense>
+    );
   }
 
   // Onboarding Wizard route
   if (route === 'onboarding') {
-    return <OnboardingWizardPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <OnboardingWizardPage />
+      </Suspense>
+    );
   }
 
   // Public authentication routes
@@ -205,7 +230,11 @@ export default function App() {
         return null;
       }
     }
-    return <LoginPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <LoginPage />
+      </Suspense>
+    );
   }
 
   if (route === 'signup') {
@@ -219,27 +248,51 @@ export default function App() {
         return null;
       }
     }
-    return <SignUpPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <SignUpPage />
+      </Suspense>
+    );
   }
 
   if (route === 'forgot-password') {
-    return <ForgotPasswordPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <ForgotPasswordPage />
+      </Suspense>
+    );
   }
 
   if (route === 'callback') {
-    return <AuthCallbackPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <AuthCallbackPage />
+      </Suspense>
+    );
   }
 
   if (route === 'privacy') {
-    return <PrivacyPolicyPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <PrivacyPolicyPage />
+      </Suspense>
+    );
   }
 
   if (route === 'terms') {
-    return <TermsPage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <TermsPage />
+      </Suspense>
+    );
   }
 
   if (route === 'profile') {
-    return <FarmerProfilePage />;
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <FarmerProfilePage />
+      </Suspense>
+    );
   }
 
   return <LandingPage />;

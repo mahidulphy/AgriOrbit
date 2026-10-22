@@ -121,6 +121,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 src={avatarUrl}
                 alt={profile.fullName || displayName}
                 className="w-10 h-10 rounded-xl object-cover border border-[#B8FF3D]/50 shadow-sm flex-shrink-0"
+                loading="lazy"
               />
             ) : (
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-sm font-bold font-mono text-[#B8FF3D] flex-shrink-0">

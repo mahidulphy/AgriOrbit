@@ -174,6 +174,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
             src={avatarUrl}
             alt={farmerName}
             className="w-7 h-7 rounded-lg object-cover border border-[#B8FF3D]/40"
+            loading="lazy"
           />
         ) : (
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-xs font-bold font-mono text-[#B8FF3D]">
