@@ -320,7 +320,7 @@ export function runEngine(inp: EngineInput): EngineResult {
   const options = Object.fromEntries(
     seasons.map((s, i) => [
       s,
-      CROPS.filter((c) => c.recommendable && c.seasons.includes(s))
+      CROPS.filter((c) => c.recommendable && (c.seasons.includes(s) || Boolean(c.occupies_seasons?.includes(s))))
         .map((c) => scoreCrop(c, s, i === 0, inp, alerts))
         .sort((a, b) => {
           if (b.score !== a.score) return b.score - a.score;

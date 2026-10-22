@@ -90,6 +90,7 @@ export interface Crop {
   sowing_window: SowingWindow;
   harvest_window: SowingWindow;
   duration_days: { min: number; max: number } | null;
+  seasonal_duration?: Partial<Record<SeasonId, { min: number; max: number }>>;
   growth_stages: GrowthStage[];
   water_need_mm: { min: number; max: number } | null;
   irrigation_notes_en: string | null;
@@ -801,7 +802,17 @@ export const CROPS: Crop[] = [
     "nutrient": -3,
     "days": 155,
     "cost": "medium",
-    "source": "BARI"
+    "source": "BARI",
+    "seasonal_duration": {
+      "rabi": {
+        "min": 130,
+        "max": 150
+      },
+      "kharif1": {
+        "min": 90,
+        "max": 110
+      }
+    }
   },
   {
     "id": "lentil",
@@ -1686,8 +1697,7 @@ export const CROPS: Crop[] = [
     "plant_family": "pedaliaceae",
     "is_legume": false,
     "seasons": [
-      "kharif1",
-      "kharif2"
+      "kharif1"
     ],
     "sowing_window": {
       "months_en": "mid-February – April",
@@ -1810,8 +1820,7 @@ export const CROPS: Crop[] = [
     "plant_family": "asteraceae",
     "is_legume": false,
     "seasons": [
-      "rabi",
-      "kharif1"
+      "rabi"
     ],
     "sowing_window": {
       "months_en": "mid-November – late-December",
@@ -2670,7 +2679,12 @@ export const CROPS: Crop[] = [
     "nutrient": -1,
     "days": 240,
     "cost": "medium",
-    "source": "BARI"
+    "source": "BARI",
+    "occupies_seasons": [
+      "kharif1",
+      "kharif2"
+    ],
+    "is_long_duration": true
   },
   {
     "id": "eddoe_taro",
@@ -2793,7 +2807,12 @@ export const CROPS: Crop[] = [
     "nutrient": -1,
     "days": 180,
     "cost": "medium",
-    "source": "BARI"
+    "source": "BARI",
+    "occupies_seasons": [
+      "kharif1",
+      "kharif2"
+    ],
+    "is_long_duration": true
   },
   {
     "id": "tannia",
@@ -2938,7 +2957,8 @@ export const CROPS: Crop[] = [
     ],
     "occupies_seasons": [
       "kharif1",
-      "kharif2"
+      "kharif2",
+      "rabi"
     ],
     "is_long_duration": true,
     "sowing_window": {
@@ -3305,9 +3325,7 @@ export const CROPS: Crop[] = [
     "plant_family": "poaceae",
     "is_legume": false,
     "seasons": [
-      "rabi",
-      "kharif1",
-      "kharif2"
+      "rabi"
     ],
     "occupies_seasons": [
       "rabi",
@@ -3874,8 +3892,7 @@ export const CROPS: Crop[] = [
     "is_legume": false,
     "seasons": [
       "rabi",
-      "kharif1",
-      "kharif2"
+      "kharif1"
     ],
     "sowing_window": {
       "months_en": "Rabi: Oct – Nov; Kharif-1: Feb – March",
@@ -4633,6 +4650,7 @@ export const CROPS: Crop[] = [
     "plant_family": "fabaceae",
     "is_legume": true,
     "seasons": [
+      "kharif2",
       "rabi"
     ],
     "sowing_window": {
@@ -4746,7 +4764,12 @@ export const CROPS: Crop[] = [
     "nutrient": 2,
     "days": 180,
     "cost": "medium",
-    "source": "BARI"
+    "source": "BARI",
+    "occupies_seasons": [
+      "kharif2",
+      "rabi"
+    ],
+    "is_long_duration": true
   }
 ];
 
