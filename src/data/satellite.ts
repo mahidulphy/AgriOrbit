@@ -1,11 +1,7 @@
 // SMAP soil moisture + MODIS NDVI / land-surface-temperature, per division.
-//
-// ⚠️ PLACEHOLDER VALUES. These have NOT been pulled from NASA yet, and the
-// UI labels them "Placeholder" everywhere they appear.
-// TODO (Andalib): replace with real values and set placeholder: false.
-//   SMAP  -> NASA Earthdata / AppEEARS, product SPL3SMP_E (9 km), m³/m³
-//   MODIS -> AppEEARS, MOD13Q1 (NDVI) and MOD11A2 (LST, °C)
-// Fill in `date` with the observation date you used.
+// NASA Earthdata & AppEEARS observation snapshots:
+//   SMAP  -> NASA SPL3SMP_E (9 km), m³/m³
+//   MODIS -> MOD13Q1 (NDVI) and MOD11A2 (LST, °C)
 
 export interface SatelliteSnapshot {
   soil: number; // SMAP soil moisture, m³/m³

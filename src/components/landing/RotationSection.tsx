@@ -7,7 +7,7 @@ const CROP_ICONS = { rabi: Flower2, kharif1: Sprout, kharif2: Wheat };
 const RULE_ICONS = [Repeat, Sprout, SlidersHorizontal];
 
 export function RotationSection() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   return (
     <section id="rotation" className="relative py-20 md:py-28">
       <div className="container-x grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
@@ -33,7 +33,7 @@ export function RotationSection() {
 
         <div className="glass p-5 sm:p-7">
           <span className="chip text-slate-300">{t.rot.example}</span>
-          <ol className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-stretch">
+          <ol className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-stretch list-none p-0 m-0">
             {SEASONS.map((s, i) => {
               const Icon = CROP_ICONS[s];
               return (
@@ -44,7 +44,9 @@ export function RotationSection() {
                       <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: SEASON_COLOR[s] }}>
                         {t.season[s]}
                       </div>
-                      <span className="font-mono text-xs font-bold text-slate-400">0{i + 1}</span>
+                      <span className="font-mono text-xs font-bold text-slate-400">
+                        {lang === 'bn' ? `০${i + 1}`.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]) : `0${i + 1}`}
+                      </span>
                     </div>
                     <div className="text-xs text-slate-500">{t.seasonMonths[s]}</div>
                     <Icon className="mt-5 h-9 w-9 text-white" strokeWidth={1.4} />
