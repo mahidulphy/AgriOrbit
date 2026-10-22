@@ -45,11 +45,6 @@ const en = {
     cooler: 'cooler',
     source: (from: string, to: string) => `NASA POWER · ${from} – ${to}`,
   },
-  steps: [
-    { k: 'Orbit', t: 'Satellites observe', d: 'NASA POWER, SMAP and MODIS measure rain, heat, soil moisture and crop health from space.' },
-    { k: 'Region', t: 'We zoom to your district', d: 'Any of Bangladesh’s 64 districts, compared with its own climate history.' },
-    { k: 'Field', t: 'You get a field plan', d: 'A 3-season rotation, risk alerts and one plain sentence of advice.' },
-  ],
 
   fs: {
     eyebrow: 'The Field Shift',
@@ -283,11 +278,6 @@ const bn: Dict = {
     cooler: 'বেশি ঠান্ডা',
     source: (from: string, to: string) => `নাসা পাওয়ার · ${from} – ${to}`,
   },
-  steps: [
-    { k: 'কক্ষপথ', t: 'স্যাটেলাইট পর্যবেক্ষণ করে', d: 'নাসা পাওয়ার, স্ম্যাপ ও মোডিস মহাকাশ থেকে বৃষ্টি, তাপ, মাটির আর্দ্রতা ও ফসলের স্বাস্থ্য মাপে।' },
-    { k: 'অঞ্চল', t: 'আপনার জেলায় যাই', d: 'বাংলাদেশের ৬৪ জেলার যেকোনোটি, তার নিজের জলবায়ু ইতিহাসের সাথে তুলনা করে।' },
-    { k: 'জমি', t: 'জমির পরিকল্পনা পান', d: 'তিন মৌসুমের শস্য পর্যায়, ঝুঁকির সতর্কতা আর এক লাইনের সহজ পরামর্শ।' },
-  ],
 
   fs: {
     eyebrow: 'ফিল্ড শিফট',

@@ -4,7 +4,7 @@ import { computeConditions } from '../../lib/conditions.ts';
 import { computeFieldShift } from '../../lib/fieldShift.ts';
 import { Nav } from './Nav.tsx';
 import { Hero } from './Hero.tsx';
-import { Steps } from './Steps.tsx';
+
 import { FieldShiftSection } from './FieldShiftSection.tsx';
 import { EditorialCropAtlas } from './EditorialCropAtlas.tsx';
 import { WhySection } from './WhySection.tsx';
@@ -22,7 +22,7 @@ export function LandingPage() {
       <Nav />
       <main>
         <Hero conditions={conditions} shift={shift} />
-        <Steps />
+
         <FieldShiftSection shift={shift} />
         <EditorialCropAtlas />
         <WhySection />
