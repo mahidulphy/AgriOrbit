@@ -578,7 +578,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 <p>
                   {isBn
                     ? 'আপনার খামারের তথ্য, অতীত ফসল ও দুর্যোগের অভিজ্ঞতা আপনার ডিভাইসে ও সেশনে নিরাপদে সংরক্ষিত থাকে। এটি সরাসরি নাসা আর্থ অবজারভেশন ও মৃত্তিকা ডেটার সাথে যুক্ত হয়ে সর্বোত্তম ফসল সুপারিশে ব্যবহৃত হয়।'
-                    : 'Your farm profile, crop history, and disaster experience are securely stored. AgriOrbit uses this context alongside NASA telemetry to personalize recommendations for your exact land.'}
+                    : 'Your farm profile, crop history, and disaster experience are securely stored. AgriOrbit uses this context alongside NASA data to personalize recommendations for your exact land.'}
                 </p>
               </div>
 

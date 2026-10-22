@@ -715,7 +715,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <span className="text-[#B8FF3D] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture Snapshot">NASA SMAP (Snapshot)</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
-                      {activeSoil.toFixed(2)} <span className="text-sm text-slate-400 font-normal">m³/m³</span>
+                      {Math.round(activeSoil * 100)}% <span className="text-xs text-slate-400 font-normal font-mono">({activeSoil.toFixed(2)} m³/m³)</span>
                     </div>
                     {/* Gauge bar */}
                     <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
@@ -772,7 +772,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
                     <div className="flex justify-between items-center">
                       <span>{language === 'en' ? 'Sensor:' : 'সেন্সর:'}</span>
-                      <span className="font-medium text-slate-300">RH2M Mean</span>
+                      <span className="font-medium text-slate-300">{language === 'en' ? 'Relative Humidity' : 'বাতাসের আর্দ্রতা'}</span>
                     </div>
                   </div>
                 </div>
@@ -781,7 +781,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between col-span-2 sm:col-span-1">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                      <span className="font-medium">{language === 'en' ? 'Water Need (ET₀)' : 'পানির চাহিদা'}</span>
+                      <span className="font-medium">{language === 'en' ? 'Crop Water Need' : 'ফসলের পানির চাহিদা'}</span>
                       <span className="text-[#B8FF3D] font-semibold text-[11px]">FAO-56</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
@@ -1054,7 +1054,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             {language === 'en' ? 'SMAP Soil Moisture' : 'মাটির আর্দ্রতা'}
                           </span>
                           <span className="font-mono text-sm font-bold text-[#00E5FF]">
-                            {simSoil.toFixed(2)} <span className="text-[11px] font-normal text-slate-400">m³/m³</span>
+                            {Math.round(simSoil * 100)}% <span className="text-[10px] font-normal text-slate-400 font-mono">({simSoil.toFixed(2)} m³/m³)</span>
                           </span>
                         </div>
                         <input
@@ -1137,7 +1137,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="space-y-8 animate-fadeIn">
               <div className="pb-4 border-b border-white/10">
                 <span className="text-xs font-mono uppercase text-[#00E5FF] tracking-wider font-bold block mb-1">
-                  {language === 'en' ? 'Environmental Telemetry' : 'পরিবেশগত উপাত্ত'}
+                  {language === 'en' ? 'Environmental Field Data' : 'পরিবেশগত উপাত্ত'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
                   {language === 'en' ? `Field Observations for ${upazilaName}` : `${upazilaName}-এর উপগ্রহ পর্যবেক্ষণ`}
@@ -1176,7 +1176,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
-                    <span>Hargreaves ET₀</span>
+                    <span>{language === 'en' ? 'Crop Water Demand (ET₀)' : 'ফসলের বাষ্পীভবন চাহিদা (ET₀)'}</span>
                     <span className="text-white font-bold">{Math.round(conditions.et0Total)} mm ({conditions.et0.toFixed(1)} mm/d)</span>
                   </div>
                 </div>
@@ -1203,7 +1203,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
 
                     <div className="font-mono text-4xl font-bold text-white mb-1">
-                      {activeSoil.toFixed(2)} <span className="text-base text-slate-400 font-normal">m³/m³</span>
+                      {Math.round(activeSoil * 100)}% <span className="text-xs text-slate-400 font-normal font-mono">({activeSoil.toFixed(2)} m³/m³)</span>
                     </div>
                     <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
                       <div
@@ -1224,7 +1224,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
-                    <span>Air Humidity (RH2M)</span>
+                    <span>{language === 'en' ? 'Relative Humidity' : 'বাতাসের আপেক্ষিক আর্দ্রতা'}</span>
                     <span className="text-white font-semibold">{Math.round(conditions.rh)}% RH</span>
                   </div>
                 </div>

@@ -167,7 +167,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
             {/* District Dropdown */}
             <div>
               <label className="block text-xs font-mono font-bold text-white mb-2 uppercase tracking-wider">
-                {language === 'en' ? 'District / জেলা' : 'জেলা'}
+                {language === 'en' ? 'District' : 'জেলা'}
               </label>
               <div className="relative">
                 <select
@@ -197,7 +197,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
             {/* Upazila Dropdown */}
             <div>
               <label className="block text-xs font-mono font-bold text-white mb-2 uppercase tracking-wider">
-                {language === 'en' ? 'Upazila / উপজেলা' : 'উপজেলা'}
+                {language === 'en' ? 'Upazila' : 'উপজেলা'}
               </label>
               <div className="relative">
                 <select

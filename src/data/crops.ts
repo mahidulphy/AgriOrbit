@@ -213,8 +213,8 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "কাটার সময় ভারী বৃষ্টিতে শিষেই ধান গজানো"
+      "Early-season drought during establishment",
+      "Pre-harvest sprouting in the panicle due to heavy rain during harvest"
     ],
     "key_risks_bn": [
       "প্রারম্ভিক খরা",
@@ -350,9 +350,9 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "Pest attacks",
-      "Flash flood risk"
+      "Late-season terminal drought (\"Ashwina drought\" in Sept–Oct)",
+      "Stem borer and Brown Planthopper (\"Current Poka\")",
+      "Flash floods during tillering"
     ],
     "key_risks_bn": [
       "আশ্বিনা খরা (সেপ্টেম্বর-অক্টোবরে বৃষ্টি না হওয়া)",
@@ -490,9 +490,9 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Cold stress and frost injury",
-      "Flash flood risk",
-      "ভূগর্ভস্থ পানির সংকট ও অতিরিক্ত সেচ খরচ"
+      "Cold injury (<15°C) at seedling and booting stage",
+      "Heat stress (>35°C) during flowering causing spikelet sterility",
+      "Groundwater depletion and excessive irrigation pumping costs"
     ],
     "key_risks_bn": [
       "শীতকালীন তীব্র শৈত্যপ্রবাহ",
@@ -623,8 +623,9 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Heat stress during reproductive stage",
-      "Fungal/bacterial disease pressure"
+      "Terminal heat stress (>30°C in March) causing grain shriveling",
+      "Wheat Blast disease (Magnaporthe oryzae) in warm, humid weather",
+      "Fog and overcast conditions at flowering triggering rust"
     ],
     "key_risks_bn": [
       "টার্মিনাল হিট স্ট্রেস (ফেব্রুয়ারি-মার্চে অকাল তাপমাত্রা বৃদ্ধি)",
@@ -755,9 +756,9 @@ export const CROPS: Crop[] = [
       }
     ],
     "key_risks_en": [
-      "Cold stress and frost injury",
-      "Drought stress during critical stages",
-      "Waterlogging and poor drainage"
+      "Cold stress (<10°C halts seedling growth)",
+      "Heat stress and drought at silking (>35°C destroys pollen)",
+      "Waterlogging (standing water for 24–48 hrs kills plants)"
     ],
     "key_risks_bn": [
       "শৈত্যপ্রবাহ (<১০°C বৃদ্ধি বন্ধ)",
@@ -890,9 +891,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "ফুল ফোটার সময় মেঘলা ও কুয়াশাচ্ছন্ন আবহাওয়া (স্টেমফাইলিয়াম ব্লাইট)",
-      "Heat stress during reproductive stage"
+      "Untimely rain and waterlogging (collar and root rot)",
+      "Cloudy and foggy weather during flowering (Stemphylium blight)",
+      "Terminal heat stress in March causing early dry-down"
     ],
     "key_risks_bn": [
       "অকাল বৃষ্টি ও জলাবদ্ধতা (গোড়া পচা)",
@@ -1016,9 +1017,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "কাটার সময় প্রাক-বর্ষার বৃষ্টি (পড স্প্রাউটিং ও পচন)",
-      "মেঘলা আবহাওয়ায় হলুদ মোজাইক ভাইরাস (YMV)",
-      "Drought stress during critical stages"
+      "Pre-monsoon rain during harvest (pod sprouting and rotting)",
+      "Yellow Mosaic Virus (YMV) outbreak during cloudy weather",
+      "Prolonged early drought in Kharif-1"
     ],
     "key_risks_bn": [
       "কাটার সময় প্রাক-বর্ষার বৃষ্টি (পড স্প্রাউটিং ও পচন)",
@@ -1141,9 +1142,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "চারা অবস্থায় জমিতে পানি জমে থাকা (শিকড় পচা)",
-      "ফুল ফোটার সময় একটানা মেঘলা ও আর্দ্র আবহাওয়া (ডাউনি মিলডিউ)",
-      "পাকার সময় শিলাবৃষ্টি"
+      "Waterlogging during seedling stage causing root rot",
+      "Continuous cloudy and humid weather during flowering (Downy mildew)",
+      "Hailstorms during pod maturity and ripening"
     ],
     "key_risks_bn": [
       "চারা অবস্থায় জমিতে পানি জমে থাকা (শিকড় পচা)",
@@ -1266,8 +1267,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Pest attacks"
+      "Heavy rainfall and waterlogging causing collar/root rot",
+      "Yellow Mosaic Virus (YMV) and insect vectors"
     ],
     "key_risks_bn": [
       "অতিরিক্ত বৃষ্টিপাত ও জলাবদ্ধতা (গোড়া ও শিকড় পচন)",
@@ -1389,8 +1390,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "ফুল ফোটার সময় উচ্চ আর্দ্রতা (>৭৫%) ও কুয়াশা (বোট্রাইটিস গ্রে মোল্ড)"
+      "Untimely rain and waterlogging triggering root rot and Fusarium wilt",
+      "High humidity (>75%) and fog during flowering (Botrytis gray mold)"
     ],
     "key_risks_bn": [
       "অকাল বৃষ্টি ও জলাবদ্ধতা (শিকড় পচন ও উইল্ট রোগ)",
@@ -1512,9 +1513,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Pest attacks",
-      "Waterlogging and poor drainage",
-      "ফুল ফোটার সময় মেঘলা আকাশ"
+      "Aphid infestation during warm, foggy weather",
+      "Untimely rainfall and poor drainage causing root suffocation",
+      "Overcast skies during flowering reducing bee pollination"
     ],
     "key_risks_bn": [
       "জাপপোকা (Aphid) আক্রমণ (উষ্ণ ও কুয়াশাচ্ছন্ন আবহাওয়ায়)",
@@ -1638,9 +1639,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "পেগিং পর্যায়ে মাটির আর্দ্রতাহীনতা ও শক্ত মাটি (ফল ঢুকতে পারে না)",
-      "Flash flood risk",
-      "Fungal/bacterial disease pressure"
+      "Soil crusting and moisture deficit during pegging preventing pod penetration",
+      "Waterlogging during pod maturation causing pod rot",
+      "Tikka leaf spot disease during warm humid intervals"
     ],
     "key_risks_bn": [
       "পেগিং পর্যায়ে মাটির আর্দ্রতাহীনতা ও শক্ত মাটি (ফল ঢুকতে পারে না)",
@@ -1763,8 +1764,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "কাটার সময় কালবৈশাখী ঝড় ও ভারী বৃষ্টি (ফল ফেটে বীজ ঝরে যাওয়া)"
+      "Extreme waterlogging vulnerability (standing water for 12 hrs kills seedlings)",
+      "Nor'wester (Kalbaishakhi) storms and heavy rain during harvest causing capsule shattering"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতা (চারা অবস্থায় ১২ ঘণ্টা পানি জমলে সম্পূর্ণ ক্ষেত নষ্ট)",
@@ -1886,8 +1887,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "কাটার সময় (এপ্রিল-মে) কালবৈশাখী ঝড় ও শিলাবৃষ্টি (গাছ ভেঙে মাথায় পানি জমে পচন)",
-      "Fungal/bacterial disease pressure"
+      "Nor'wester storms and hail at harvest (April–May) causing lodging and head rot",
+      "Moisture deficit during head development (<15% SMAP)"
     ],
     "key_risks_bn": [
       "কাটার সময় (এপ্রিল-মে) কালবৈশাখী ঝড় ও শিলাবৃষ্টি (গাছ ভেঙে মাথায় পানি জমে পচন)",
@@ -2017,7 +2018,10 @@ export const CROPS: Crop[] = [
         "alert_bn": "জলাবদ্ধতার ঝুঁকি: দ্রুত পানি নিষ্কাশন নিশ্চিত করুন"
       }
     ],
-    "key_risks_en": [],
+    "key_risks_en": [
+      "Excess moisture causing seedling damping-off",
+      "Pods shattering if harvest is delayed in hot dry spells"
+    ],
     "key_risks_bn": [],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -2123,10 +2127,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Fungal/bacterial disease pressure",
-      "আর্দ্রতা >৮৫%",
-      "Heat stress during reproductive stage",
-      "অসময়ে বৃষ্টিতে কন্দ পচা"
+      "Late blight disease (Phytophthora infestans) when humidity >85% with fog",
+      "High temperature (>22°C night temp) reducing tuberization",
+      "Untimely late-winter rainfall causing tuber rotting in the ground"
     ],
     "key_risks_bn": [
       "লেট ব্লাইট / নাবি ধসা রোগ (টানা মেঘলা ও কুয়াশাচ্ছন্ন আবহাওয়া",
@@ -2250,9 +2253,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Pest attacks",
-      "অতি শুষ্ক মাটিতে কন্দ ফেটে যাওয়া"
+      "Waterlogging at tuber maturity (rots within 24 hrs)",
+      "Sweet potato weevil (Cylas formicarius)",
+      "Tuber cracking and weevil attack in excessively dry soil"
     ],
     "key_risks_bn": [
       "কন্দ পাকার সময় জলাবদ্ধতা (চব্বিশ ঘণ্টায় পচে যায়)",
@@ -2381,8 +2384,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "এনথ্রাকনোজ ব্লাইট (টানা বৃষ্টি ও উষ্ণ আর্দ্রতায় পাতা ঝলসানো)"
+      "Waterlogging causing tuber rotting in poorly drained soils",
+      "Anthracnose leaf blight during prolonged monsoon rain and warm humidity"
     ],
     "key_risks_bn": [
       "টানা জলাবদ্ধতায় কন্দ পচন",
@@ -2510,8 +2513,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "Waterlogging and poor drainage"
+      "Severe drought halting leaf growth and hardening corms",
+      "Corm rot due to stagnant water and poor drainage"
     ],
     "key_risks_bn": [
       "চরম খরায় পাতার বিস্তার বন্ধ ও কন্দ শক্ত হয়ে যাওয়া",
@@ -2633,8 +2636,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "Fungal/bacterial disease pressure"
+      "Severe drought or drying of rootzone water table",
+      "Taro leaf blight (Phytophthora colocasiae)"
     ],
     "key_risks_bn": [
       "শুকনো খরা বা পানির স্তর শুকিয়ে যাওয়া",
@@ -2762,8 +2765,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Fungal/bacterial disease pressure"
+      "Standing water causing corm rot (cannot tolerate waterlogging)",
+      "Taro leaf blight (Phytophthora colocasiae)"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতা (স্থায়ী পানি জমলে মুখী পচে নষ্ট হয়ে যায়)",
@@ -2896,8 +2899,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "Waterlogging and poor drainage"
+      "Prolonged drought stunting rhizome expansion",
+      "Rhizome rot in poorly drained waterlogged soils"
     ],
     "key_risks_bn": [
       "দীর্ঘমেয়াদী খরায় রাইজোম ছোট হয়ে যাওয়া",
@@ -3025,8 +3028,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "আর্লি স্প্রাউটিংয়ে শুকিয়ে যাওয়া"
+      "Corm rot (collar rot) caused by stagnant waterlogging",
+      "Desiccation of sprouts during severe pre-monsoon heat and drought"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতায় ওলের কন্দ পচন (কলা রট / কন্দ পচা)",
@@ -3155,8 +3158,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Cold stress and frost injury"
+      "Waterlogging (standing water for 24–48 hrs rots root tubers)",
+      "Cold stress (<12°C causes complete defoliation)"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতা (চব্বিশ থেকে আটচল্লিশ ঘণ্টা পানি জমলে শিকড় সম্পূর্ণ পচে যায়)",
@@ -3285,7 +3288,10 @@ export const CROPS: Crop[] = [
         "alert_bn": "চারা অবস্থায় জলাবদ্ধতা বৃদ্ধি স্তব্ধ করে দেয়"
       }
     ],
-    "key_risks_en": [],
+    "key_risks_en": [
+      "Waterlogging at seedling stage (<30 days old)",
+      "Drought during early vegetative growth"
+    ],
     "key_risks_bn": [],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -3396,7 +3402,10 @@ export const CROPS: Crop[] = [
       "max": 0.5
     },
     "rainfall_alerts": [],
-    "key_risks_en": [],
+    "key_risks_en": [
+      "Waterlogging during germination and early tillering",
+      "Red rot disease (Colletotrichum falcatum) in poorly drained soils"
+    ],
     "key_risks_bn": [],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -3514,7 +3523,10 @@ export const CROPS: Crop[] = [
         "alert_bn": "গুটি ফোটার সময় অতিবৃষ্টিতে গুটি পচন ও আঁশের ক্ষতি"
       }
     ],
-    "key_risks_en": [],
+    "key_risks_en": [
+      "Waterlogging at flowering and boll setting",
+      "Excess rain causing boll shedding and fiber discoloration"
+    ],
     "key_risks_bn": [],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -3595,13 +3607,13 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Drought stress during critical stages",
-      "অতিবৃষ্টি",
-      "Waterlogging and poor drainage"
+      "Severe health hazard, extreme soil nutrient depleting, discouraged by DAE",
+      "Heavy rainfall and standing water causing rapid root wilting",
+      "Leaf spotting and damping-off diseases"
     ],
     "key_risks_bn": [
-      "খরা",
-      "অতিবৃষ্টি",
+      "জনস্বাস্থ্যের জন্য ক্ষতিকর ও জমির উর্বরতা হ্রাসকারী (কৃষি সম্প্রসারণ অধিদপ্তর কর্তৃক নিরুৎসাহিত)",
+      "অতিবৃষ্টি ও শিকড় নেতিয়ে পড়া",
       "জলাবদ্ধতা ও রোগবালাই"
     ],
     "nasa_data_link_en": null,
@@ -3709,9 +3721,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Fungal/bacterial disease pressure",
-      "আর্দ্রতার ওঠানামায় কন্দ ফেটে যাওয়া"
+      "Rainfall at harvest causing bulb rot in storage",
+      "Purple blotch disease (Alternaria porri) during warm, humid weather",
+      "Bulb splitting and rotting caused by erratic soil moisture fluctuations"
     ],
     "key_risks_bn": [
       "কাটার সময় বৃষ্টি ও জলাবদ্ধতা (কন্দ পচা)",
@@ -3834,8 +3846,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Cold stress and frost injury",
-      "Waterlogging and poor drainage"
+      "Lack of winter chilling preventing clove differentiation",
+      "Waterlogging from excess irrigation or rain causing bulb rot"
     ],
     "key_risks_bn": [
       "শীতের তীব্রতা ও দৈর্ঘ্যের অভাব (কোয়া বিভাজন না হওয়া)",
@@ -3958,9 +3970,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Fungal/bacterial disease pressure",
-      "Fungal/bacterial disease pressure"
+      "Waterlogging (standing water kills plants within 24 hrs)",
+      "Anthracnose fruit rot and dieback",
+      "Thrips infestation and chilli leaf curl virus"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতা (চব্বিশ ঘণ্টায় শিকড় পচে গাছ মরে যায়)",
@@ -4089,8 +4101,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Fungal/bacterial disease pressure",
-      "Heat stress during reproductive stage"
+      "Rhizome rot (Pythium aphanidermatum) in waterlogged soils",
+      "Bacterial wilt and shoot borer"
     ],
     "key_risks_bn": [
       "রাইজোম রট / কন্দ পচা রোগ (পানি নিষ্কাশনের অভাব হলে)",
@@ -4218,8 +4230,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Fungal/bacterial disease pressure",
-      "Waterlogging and poor drainage"
+      "Rhizome rot and leaf blotch disease",
+      "Prolonged waterlogging during monsoon"
     ],
     "key_risks_bn": [
       "রাইজোম পচন ও পাতা ঝলসানো রোগ",
@@ -4342,9 +4354,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Cold stress and frost injury",
-      "Waterlogging and poor drainage",
-      "Heat stress during reproductive stage"
+      "Late blight (Phytophthora infestans) during foggy winter",
+      "Waterlogging (plants wilt within 12 hrs of standing water)",
+      "Heat stress causing flower drop"
     ],
     "key_risks_bn": [
       "নাবি ধসা / লেট ব্লাইট রোগ (শীতকালে কুয়াশা ও মেঘলা আবহাওয়ায়)",
@@ -4469,8 +4481,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Waterlogging and poor drainage",
-      "Pest attacks"
+      "Bacterial wilt and root rot if waterlogged for 24 hrs",
+      "Brinjal shoot and fruit borer (BSFB)"
     ],
     "key_risks_bn": [
       "জলাবদ্ধতা (চব্বিশ ঘণ্টা পানি জমলে ব্যাকটেরিয়াল উইল্ট ও শিকড় পচন)",
@@ -4593,8 +4605,8 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "Heat stress during reproductive stage",
-      "আর্দ্রতার চরম তারতম্যে মুলা ফেটে যাওয়া ও ফাঁপা স্পঞ্জি হওয়া"
+      "High temperature causing premature bolting and pithiness",
+      "Root splitting and pithiness/sponginess caused by erratic moisture fluctuations"
     ],
     "key_risks_bn": [
       "উচ্চ তাপমাত্রা (>২৮°C বোল্টিং ও শক্ত মূল)",
@@ -4717,9 +4729,9 @@ export const CROPS: Crop[] = [
     },
     "rainfall_alerts": [],
     "key_risks_en": [
-      "ফুল ফোটার সময় অতিবৃষ্টি ও কুয়াশা (ফুল পচন ও পোড বোরার আক্রমণ)",
-      "Heat stress during reproductive stage",
-      "মাটির আর্দ্রতা >৩৫% এ শিকড় পচন"
+      "Heavy rainfall and dense fog at flowering causing flower drop and pod borer infestation",
+      "Aphid infestation and bean common mosaic virus",
+      "Root rot when soil moisture exceeds 35%"
     ],
     "key_risks_bn": [
       "ফুল ফোটার সময় অতিবৃষ্টি ও কুয়াশা (ফুল পচন ও পোড বোরার আক্রমণ)",

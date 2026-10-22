@@ -122,7 +122,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
           {isBn
             ? 'আপনার জমির অবস্থান এবং বৈশিষ্ট্য নির্ধারণ করুন। নাসা স্যাটেলাইট এই অবস্থানের আবহাওয়া ও মাটির তথ্য বিশ্লেষণ করবে।'
-            : 'Specify your field plot location and soil characteristics to power NASA agro-climatic telemetry.'}
+            : 'Specify your field plot location and soil characteristics to power NASA agro-climatic observations.'}
         </p>
       </div>
 

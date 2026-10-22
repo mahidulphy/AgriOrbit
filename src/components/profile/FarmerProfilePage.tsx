@@ -584,7 +584,7 @@ export const FarmerProfilePage: React.FC = () => {
                 <p className="text-xs text-slate-400 mt-0.5">
                   {isBn
                     ? 'আপনার একাধিক জমি যুক্ত করুন। যে জমিটি সক্রিয় রাখবেন, ড্যাশবোর্ডে সেই জমির নাসা স্যাটেলাইট উপাত্ত প্রদর্শিত হবে।'
-                    : 'Manage multiple plots. The active field powers your dashboard telemetry and 3-season crop planner.'}
+                    : 'Manage multiple plots. The active field powers your dashboard field data and 3-season crop planner.'}
                 </p>
               </div>
 

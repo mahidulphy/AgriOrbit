@@ -135,7 +135,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#8FA3B8] print:text-gray-600">{isEn ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}:</span>
-              <span className="font-mono font-bold text-[#00E5FF] print:text-blue-700">{(telemetry.soilMoisture ?? 0.22).toFixed(2)} m³/m³</span>
+              <span className="font-mono font-bold text-[#00E5FF] print:text-blue-700">{Math.round((telemetry.soilMoisture ?? 0.22) * 100)}% <span className="text-xs font-normal text-slate-400">({(telemetry.soilMoisture ?? 0.22).toFixed(2)} m³/m³)</span></span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#8FA3B8] print:text-gray-600">{isEn ? 'Daily Max Temp' : 'সর্বোচ্চ তাপমাত্রা'}:</span>

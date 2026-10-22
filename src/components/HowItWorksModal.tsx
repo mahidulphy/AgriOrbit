@@ -46,7 +46,7 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
               </h4>
               <p className="leading-relaxed">
                 {language === 'en'
-                  ? 'Continuous satellite telemetry tracks precipitation (POWER), soil moisture (SMAP), and surface heat/vegetation (MODIS) across Bangladesh.'
+                  ? 'Continuous satellite observations track precipitation (POWER), soil moisture (SMAP), and surface heat/vegetation (MODIS) across Bangladesh.'
                   : 'নাসা পাওয়ার, স্ম্যাপ এবং মডিস উপগ্রহ প্রতিনিয়ত বৃষ্টিপাত, মাটির আর্দ্রতা ও উদ্ভিদের স্বাস্থ্য পর্যবেক্ষণ করে।'}
               </p>
             </div>

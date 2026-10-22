@@ -125,7 +125,7 @@ export function EditorialCropAtlas() {
               <span>{isBn ? 'রংপুর অঞ্চলের উদাহরণ স্কোর' : 'Example scores for Rangpur'}</span>
             </div>
             <span className="text-[11px] font-mono text-slate-400">
-              {isBn ? 'কার্ডে ট্যাপ করে বিস্তারিত দেখুন' : 'Click any card to inspect full telemetry'}
+              {isBn ? 'কার্ডে ট্যাপ করে বিস্তারিত দেখুন' : 'Click any card to inspect full field data'}
             </span>
           </div>
         </div>
@@ -354,7 +354,7 @@ export function EditorialCropAtlas() {
                             <p className="text-[11px] text-[#8FA3B8] line-clamp-2 leading-relaxed">
                               {crop.key_risks_bn[0]
                                 ? (isBn ? `সতর্কতা: ${crop.key_risks_bn[0]}` : `Caution: ${crop.key_risks_en[0] || crop.key_risks_bn[0]}`)
-                                : (isBn ? 'মৌসুম ও মাটির আর্দ্রতার জন্য উপযোগী।' : 'Agronomically suited to the agro-ecological season.')}
+                                : (isBn ? 'তথ্য নেই' : 'No data')}
                             </p>
                           </div>
                         </div>
