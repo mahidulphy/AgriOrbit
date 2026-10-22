@@ -1,7 +1,7 @@
 // SMAP soil moisture + MODIS NDVI / land-surface-temperature, per division.
-// NASA Earthdata & AppEEARS observation snapshots:
-//   SMAP  -> NASA SPL3SMP_E (9 km), m³/m³
-//   MODIS -> MOD13Q1 (NDVI) and MOD11A2 (LST, °C)
+// PLACEHOLDER VALUES - not yet pulled from NASA. UI labels them "Placeholder".
+//   SMAP  -> NASA Earthdata / AppEEARS, product SPL3SMP_E (9 km), m³/m³
+//   MODIS -> AppEEARS, MOD13Q1 (NDVI) and MOD11A2 (LST, °C)
 
 export interface SatelliteSnapshot {
   soil: number; // SMAP soil moisture, m³/m³

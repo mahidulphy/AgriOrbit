@@ -16,7 +16,7 @@ export const RULES = {
   drySoil: 0.15, // ... AND soil moisture below this -> penalize thirsty crops
   heatC: 35, // max temperature above this -> heat-stress alert
   optimalSoil: [0.25, 0.3] as [number, number], // optimal-sowing badge
-  floodRain7d: 150, // forecast rain over 7 days (mm) -> flood alert (BARI threshold)
+  floodRain7d: 150, // provisional threshold, not yet validated against BARI/BMD guidance
   deficitMm: -50, // rain − ET₀ over 30 days below this -> water deficit
 };
 
