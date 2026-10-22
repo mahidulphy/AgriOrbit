@@ -95,8 +95,8 @@ export const FarmerFeedbackLoop: React.FC<FarmerFeedbackLoopProps> = ({
 
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1.5 leading-relaxed">
               {isEn
-                ? 'Your feedback helps calibrate NASA Earth Observation crop models with practical ground-truth farming in Bangladesh.'
-                : 'আপনার বাস্তব মতামত নাসার উপগ্রহভিত্তিক কৃষি মডেলসমূহকে মাঠের বাস্তবতার সাথে আরও নিখুঁত করতে সহায়তা করে।'}
+                ? 'Your feedback helps us improve recommendations with practical ground-truth farming in Bangladesh.'
+                : 'আপনার বাস্তব মতামত মাঠপর্যায়ের অভিজ্ঞতার ভিত্তিতে আমাদের সুপারিশসমূহকে আরও নিখুঁত করতে সহায়তা করে।'}
             </p>
           </div>
 

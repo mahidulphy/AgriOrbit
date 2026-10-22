@@ -1344,8 +1344,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {language === 'en'
-                    ? 'AgriOrbit deliberately avoids "black-box" machine learning. Every recommendation stems from transparent, deterministic agronomic rules combining NASA Earth observations, BARI crop standards, and farmer priorities.'
-                    : 'এগ্রিঅরবিট কোনো ব্ল্যাক-বক্স মেশিন লার্নিং ব্যবহার করে না। প্রতিটি সুপারিশ নাসা উপগ্রহ পর্যবেক্ষণ, বিএআরআই কৃষি গবেষণা মানদণ্ড এবং কৃষকের নিজস্ব লক্ষ্যের ভিত্তিতে তৈরি।'}
+                    ? 'AgriOrbit relies on deterministic agronomic rules. Every recommendation stems from transparent criteria based on BARI/BRRI guidance, published agro-ecological research, and NASA Earth observations.'
+                    : 'এগ্রিঅরবিট স্পষ্ট কৃষি নিয়মের ভিত্তিতে পরিচালিত হয়। প্রতিটি সুপারিশ নাসা উপগ্রহ পর্যবেক্ষণ, বিএআরআই/বিআরআরআই কৃষি গবেষণা নির্দেশিকা এবং কৃষকের নিজস্ব লক্ষ্যের ভিত্তিতে তৈরি।'}
                 </p>
               </div>
 

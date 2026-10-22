@@ -355,8 +355,8 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
         monthsEn: 'November – February',
         monthsBn: 'নভেম্বর – ফেব্রুয়ারি',
         crop: CROPS_DATABASE['lentil'],
-        agronomicRoleEn: 'Saves ৳12,000–18,000 per acre in diesel and electricity pumping bills vs. Boro.',
-        agronomicRoleBn: 'বোরো ধানের তুলনায় একরে ১২,০০০–১৮,০০০ টাকার সেচ খরচ বাঁচায়।',
+        agronomicRoleEn: 'Significantly reduces diesel and electricity pumping needs compared to flood-irrigated Boro.',
+        agronomicRoleBn: 'সেচ নির্ভর বোরো ধানের তুলনায় সেচ জ্বালানি ও বিদ্যুৎ উত্তোলনের প্রয়োজনীয়তা উল্লেখযোগ্যভাবে কমায়।',
       },
       {
         seasonEn: 'Kharif-1 (Summer)',

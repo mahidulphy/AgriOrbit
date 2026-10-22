@@ -66,7 +66,7 @@ function evaluateCropWithNasa(
   const cropMeta = cropById(crop.id);
   if (cropMeta?.data_confidence === 'estimated') {
     dynamicObservationsBn.push('এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।');
-    dynamicObservationsEn.push('Estimated data: unverified with field trials; confirm with local upazila agriculture office.');
+    dynamicObservationsEn.push('Estimated data: preliminary parameters; confirm with local upazila agriculture office.');
   }
 
   // ─────────────────────────────────────────────────────────────

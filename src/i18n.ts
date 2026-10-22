@@ -25,7 +25,7 @@ const en = {
     sub: 'AgriOrbit combines Earth observations, local agricultural information and farmer priorities to help plan better crop decisions for a changing climate.',
     cta: 'Analyze my field',
     cta2: 'Explore How It Works',
-    trust: ['Rule-based, explainable logic', 'Works offline', 'English & বাংলা'],
+    trust: ['Rule-based, explainable logic', 'Based on BARI/BRRI guidance and NASA data', 'English & বাংলা'],
   },
   heroCard: {
     place: 'Rangpur',
@@ -148,7 +148,7 @@ const en = {
       saturatedRisk: (forecastMm: number, soilMoisture: string) =>
         `Open-Meteo forecasts ~${forecastMm} mm of rain while NASA SMAP detects topsoil near saturation (${soilMoisture} m³/m³). Any supplemental water will cause standing waterlogging and root hypoxia.`,
       naturalRecharge: (forecastMm: number, soilMoisture: string) =>
-        `While topsoil is currently dry (${soilMoisture} m³/m³), the incoming ${forecastMm} mm forecast will naturally replenish root-zone moisture, saving diesel pumping expenses (৳1,200–৳2,500/bigha).`,
+        `While topsoil is currently dry (${soilMoisture} m³/m³), the incoming ${forecastMm} mm forecast will naturally replenish root-zone moisture, saving diesel pumping expenses.`,
       heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
         `Open-Meteo forecasts ${forecastMm} mm over the next 7 days (peak ${peakMm} mm on ${peakDate}). Field conditions can quickly become saturated.`,
       drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>
@@ -258,7 +258,7 @@ const bn: Dict = {
     sub: 'নাসার উপগ্রহ পর্যবেক্ষণ, স্থানীয় কৃষি তথ্য ও কৃষকের অগ্রাধিকারের সমন্বয়ে জলবায়ু পরিবর্তনের সাথে খাপ খাইয়ে সঠিক ফসল নির্বাচন করুন।',
     cta: 'আমার জমি বিশ্লেষণ করুন',
     cta2: 'কার্যপ্রণালী জানুন',
-    trust: ['নিয়মভিত্তিক ও স্বচ্ছ যুক্তি', 'অফলাইনেও চলে', 'বাংলা ও English'],
+    trust: ['নিয়মভিত্তিক ও স্বচ্ছ যুক্তি', 'বারি/ব্রি ও নাসা উপাত্তের ভিত্তিতে', 'বাংলা ও English'],
   },
   heroCard: {
     place: 'রংপুর',
@@ -381,7 +381,7 @@ const bn: Dict = {
       saturatedRisk: (forecastMm: number, soilMoisture: string) =>
         `ওপেন-মেটিও আগামী ৭ দিনে প্রায় ${forecastMm} মিমি বৃষ্টির পূর্বাভাস দিচ্ছে এবং নাসা এসএমএপি অনুযায়ী মাটি ইতিমধ্যে স্যাচুরেশনের কাছাকাছি (${soilMoisture} m³/m³)। বাড়তি পানি শিকড় পচনের ঝুঁকি তৈরি করবে।`,
       naturalRecharge: (forecastMm: number, soilMoisture: string) =>
-        `মাটি বর্তমানে শুষ্ক হলেও (${soilMoisture} m³/m³), পূর্বাভাস অনুযায়ী ${forecastMm} মিমি বৃষ্টি মাটির প্রয়োজনীয় রস প্রাকৃতিকভাবে পূরণ করবে এবং সেচ খরচ বাঁচাবে।`,
+        `মাটি বর্তমানে শুষ্ক হলেও (${soilMoisture} m³/m³), পূর্বাভাস অনুযায়ী ${forecastMm} মিমি বৃষ্টি মাটির প্রয়োজনীয় রস প্রাকৃতিকভাবে পূরণ করবে এবং বাড়তি সেচের প্রয়োজন কমাবে।`,
       heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
         `ওপেন-মেটিও আগামী ৭ দিনে ${forecastMm} মিমি বৃষ্টির পূর্বাভাস দিচ্ছে (সর্বোচ্চ ${peakMm} মিমি ${peakDate}-এ)। মাঠ দ্রুত অতিরিক্ত আর্দ্র হতে পারে।`,
       drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>

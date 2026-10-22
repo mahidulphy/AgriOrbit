@@ -426,12 +426,6 @@ export const FarmerProfilePage: React.FC = () => {
                   <h1 className="font-display text-2xl sm:text-3xl font-bold text-white">
                     {profile.fullName || (isBn ? 'কৃষক প্রোফাইল' : 'Farmer Profile')}
                   </h1>
-                  {emailConfirmed && !isGuest && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30">
-                      <CheckCircle2 className="w-3 h-3" />
-                      <span>{isBn ? 'যাচাইকৃত কৃষক' : 'Verified Farmer'}</span>
-                    </span>
-                  )}
                 </div>
 
                 <div className="mt-1 flex items-center gap-3 text-xs font-mono text-slate-400 flex-wrap">

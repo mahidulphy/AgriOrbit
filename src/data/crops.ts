@@ -4920,7 +4920,7 @@ export function toCropData(crop: Crop): CropData {
   ];
 
   if (isEstimated) {
-    obsEn.push('Estimated data: unverified with field trials; confirm with local upazila agriculture office.');
+    obsEn.push('Estimated data: preliminary parameters; confirm with local upazila agriculture office.');
     obsBn.push('এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।');
   }
 

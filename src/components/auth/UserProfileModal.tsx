@@ -135,7 +135,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 {emailConfirmed && !isGuest && (
                   <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
                     <CheckCircle2 className="w-2.5 h-2.5" />
-                    <span>{isBn ? 'যাচাইকৃত' : 'Verified'}</span>
+                    <span>{isBn ? 'ইমেইল নিশ্চিত' : 'Email Verified'}</span>
                   </span>
                 )}
               </div>

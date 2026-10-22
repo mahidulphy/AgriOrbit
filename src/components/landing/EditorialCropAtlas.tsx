@@ -389,8 +389,8 @@ export function EditorialCropAtlas() {
               </span>
               <p className="text-slate-400">
                 {isBn
-                  ? `${researchCount}টি ফসলের তথ্য গবেষণা-ভিত্তিক (বারি ও ব্রি প্রকাশিত নথি), ${estimatedCount}টি আনুমানিক (মাঠ পর্যায়ের যাচাই চলছে)। কোনো কৃত্রিম বা অনুমিত ডেটা ব্যবহার করা হয়নি।`
-                  : `${researchCount} crops are strictly research-backed (BARI/BRRI research guidelines), ${estimatedCount} are estimated (field trials and local calibrations in progress). Zero invented telemetry.`}
+                  ? `${researchCount}টি ফসলের তথ্য গবেষণা-ভিত্তিক (বারি ও ব্রি প্রকাশিত নথি), এবং ${estimatedCount}টি প্রাথমিক প্রাক্কলন। বারি ও ব্রি নির্দেশিকা এবং নাসা উপাত্তের ভিত্তিতে প্রণীত।`
+                  : `${researchCount} crops are strictly research-backed (BARI/BRRI research guidelines), and ${estimatedCount} are estimated from published agricultural literature. Based on BARI/BRRI guidance and NASA data.`}
               </p>
             </div>
           </div>
@@ -466,7 +466,7 @@ export function EditorialCropAtlas() {
                 <p className="leading-relaxed">
                   {isBn
                     ? 'এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।'
-                    : 'This crop data is estimated from preliminary references and field trials are ongoing. Always verify with your local Upazila Agriculture Officer before field deployment.'}
+                    : 'This crop data is estimated from preliminary agricultural references. Always verify with your local Upazila Agriculture Officer before field deployment.'}
                 </p>
               </div>
             )}

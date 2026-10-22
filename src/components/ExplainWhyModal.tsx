@@ -91,14 +91,14 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                 <span>{language === 'en' ? 'Deterministic Score Breakdown' : 'স্বচ্ছ গাণিতিক স্কোর গণনা'}</span>
               </div>
               <span className="text-[10px] font-mono text-[#8FA3B8] px-2 py-0.5 rounded bg-white/5 border border-white/10">
-                {language === 'en' ? 'Pure Rule-Based · Zero Black Box' : 'রুল-ভিত্তিক · কোনো কৃত্রিম অনুমান নয়'}
+                {language === 'en' ? 'Pure Rule-Based · Transparent Logic' : 'স্বচ্ছ নিয়ম-ভিত্তিক · প্রত্যক্ষ যুক্তি'}
               </span>
             </div>
 
             <p className="text-xs text-[#8FA3B8] mb-4">
               {language === 'en'
-                ? 'AgriOrbit evaluates empirical agronomic rules against NASA Earth observations to determine final suitability without statistical machine learning.'
-                : 'এগ্রিঅরবিট কোনো ব্ল্যাক-বক্স এআই ব্যবহার করে না। নাসার উপগ্রহ উপাত্ত ও বিএআরআই কৃষি গবেষণা নিয়মের ভিত্তিতে স্পষ্ট যোগ-বিয়োগ করা হয়।'}
+                ? 'AgriOrbit evaluates empirical agronomic rules against NASA Earth observations to determine final suitability based on BARI/BRRI guidance and NASA data.'
+                : 'এগ্রিঅরবিট নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই কৃষি গবেষণা নির্দেশিকার ভিত্তিতে স্পষ্ট নিয়মে উপযোগিতা মূল্যায়ন করে।'}
             </p>
 
             <div className="overflow-x-auto">
