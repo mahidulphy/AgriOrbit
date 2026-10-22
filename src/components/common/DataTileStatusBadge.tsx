@@ -15,7 +15,7 @@ export interface DataTileStatusBadgeProps {
  * Formats a date into "06 Oct 2026" (English) or "০৬ অক্টো ২০২৬" (Bangla).
  */
 export function formatBadgeDate(dateVal?: string | Date, language: Language = 'en'): string {
-  if (!dateVal) return '06 Oct 2026';
+  if (!dateVal) return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
   try {
     const d = typeof dateVal === 'string' ? new Date(dateVal) : dateVal;
     if (isNaN(d.getTime())) {
@@ -28,7 +28,7 @@ export function formatBadgeDate(dateVal?: string | Date, language: Language = 'e
       year: 'numeric',
     });
   } catch {
-    return '06 Oct 2026';
+    return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
   }
 }
 

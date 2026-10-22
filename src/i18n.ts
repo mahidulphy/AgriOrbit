@@ -29,7 +29,8 @@ const en = {
   },
   heroCard: {
     place: 'Rangpur',
-    now: 'Snapshot · 3 Sep – 2 Oct 2026',
+    now: (from?: string, to?: string) => (from && to ? `Snapshot · ${from} – ${to}` : 'Data unavailable'),
+    unavailable: 'Data unavailable',
     rain: '30-Day Rainfall',
     heat: 'Peak Temperature',
     humidity: 'Relative Humidity',
@@ -262,7 +263,8 @@ const bn: Dict = {
   },
   heroCard: {
     place: 'রংপুর',
-    now: 'স্ন্যাপশট · ৩ সেপ্টে – ২ অক্টো ২০২৬',
+    now: (from?: string, to?: string) => (from && to ? `স্ন্যাপশট · ${from} – ${to}` : 'উপাত্ত পাওয়া যায়নি'),
+    unavailable: 'উপাত্ত পাওয়া যায়নি',
     rain: '৩০ দিনের মোট বৃষ্টি',
     heat: 'সর্বোচ্চ তাপমাত্রা',
     humidity: 'বাতাসের আর্দ্রতা',

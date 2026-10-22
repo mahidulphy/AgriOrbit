@@ -5,7 +5,15 @@ import type { FieldShift } from '../../lib/fieldShift.ts';
 
 /** Real Rangpur numbers from the bundled NASA POWER snapshot, never invented. */
 export function HeroCard({ conditions: c }: { conditions: Conditions; shift: FieldShift }) {
-  const { t, num, date } = useLang();
+  const { t, num, date, lang } = useLang();
+
+  const toYear = c?.to ? c.to.slice(0, 4) : '';
+  const fromFormatted = c?.from ? date(c.from) : '';
+  const toFormatted = c?.to
+    ? `${date(c.to)}${toYear ? ` ${lang === 'bn' ? toYear.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]) : toYear}` : ''}`
+    : '';
+  const snapshotDateLabel =
+    fromFormatted && toFormatted ? t.heroCard.now(fromFormatted, toFormatted) : t.heroCard.unavailable;
 
   const tiles = [
     { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: t.heroCard.rainDesc, tint: 'text-cyan-300' },
@@ -21,7 +29,7 @@ export function HeroCard({ conditions: c }: { conditions: Conditions; shift: Fie
           <MapPin className="h-4 w-4 text-lime-300" />
           {t.heroCard.place}
         </div>
-        <span className="chip text-slate-300">{t.heroCard.now}</span>
+        <span className="chip text-slate-300">{snapshotDateLabel}</span>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">

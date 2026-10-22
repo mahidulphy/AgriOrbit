@@ -482,9 +482,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <span>
                 {whatIfActive
                   ? (language === 'en' ? 'Simulation Active' : 'সিমুলেশন চলছে')
-                  : loaded.mode === 'live'
-                  ? (language === 'en' ? 'NASA POWER & SMAP Live' : 'নাসা লাইভ ফিড')
-                  : (language === 'en' ? 'NASA POWER Cache' : 'নাসা ক্যাশ')}
+                  : (() => {
+                      const rawDate = loaded?.data?.fetchedAt || conditions?.to;
+                      if (!rawDate) {
+                        return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+                      }
+                      const dateObj = new Date(rawDate);
+                      if (isNaN(dateObj.getTime())) {
+                        return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+                      }
+                      const dateStr = dateObj.toLocaleDateString(language === 'bn' ? 'bn-BD' : 'en-GB', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      });
+                      return language === 'en' ? `NASA data · ${dateStr}` : `নাসা উপাত্ত · ${dateStr}`;
+                    })()}
               </span>
             </div>
 
