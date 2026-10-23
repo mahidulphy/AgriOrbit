@@ -21,7 +21,7 @@ import { CROPS_DATABASE } from '../../data/agriData.ts';
 type SeasonFilter = 'all' | 'rabi' | 'kharif1' | 'kharif2';
 
 export function EditorialCropAtlas() {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
   const isBn = lang === 'bn';
 
   const [selectedCategory, setSelectedCategory] = useState<CropCategoryId | 'all'>('all');
@@ -389,8 +389,8 @@ export function EditorialCropAtlas() {
               </span>
               <p className="text-slate-400">
                 {isBn
-                  ? `${researchCount}টি ফসলের তথ্য গবেষণা-ভিত্তিক (বারি ও ব্রি প্রকাশিত নথি), এবং ${estimatedCount}টি প্রাথমিক প্রাক্কলন। বারি ও ব্রি নির্দেশিকা এবং নাসা উপাত্তের ভিত্তিতে প্রণীত।`
-                  : `${researchCount} crops are strictly research-backed (BARI/BRRI research guidelines), and ${estimatedCount} are estimated from published agricultural literature. Based on BARI/BRRI guidance and NASA data.`}
+                  ? t.atlas.provenanceDesc(researchCount, estimatedCount)
+                  : t.atlas.provenanceDesc(researchCount, estimatedCount)}
               </p>
             </div>
           </div>

@@ -70,12 +70,17 @@ const en = {
     eyebrow: 'Why AgriOrbit',
     title: 'Satellites observe. Rules explain. You decide.',
     cards: [
-      { n: '01', t: 'NASA observes', d: 'Rain, temperature, humidity, soil moisture and vegetation health for your area, from free NASA data.' },
+      { n: '01', t: 'NASA observes', d: 'NASA POWER gives rain, temperature and humidity today; soil moisture and vegetation (SMAP/MODIS) are being added.' },
       { n: '02', t: 'AgriOrbit explains', d: 'Every score comes from a written rule you can read. No machine learning, no black box. For example:' },
       { n: '03', t: 'The farmer decides', d: 'We show options and reasons, not orders. Your knowledge of your own land has the final say.' },
     ],
     exampleLabel: 'Example rule',
     example: 'Rain 30d = 38 mm < 50  and  soil = 0.14 < 0.15\n→ high-water crops  −15',
+  },
+
+  atlas: {
+    provenanceDesc: (researchCount: number, estimatedCount: number) =>
+      `${researchCount} crops use values from BARI/BRRI guidance compiled by our team; ${estimatedCount} are estimated.`,
   },
 
   data: {
@@ -88,8 +93,8 @@ const en = {
     items: [
       { name: 'NASA POWER · daily', what: 'Rain, temperature, humidity', how: 'Also used to estimate crop water need (ET₀, Hargreaves method).', status: 'live' },
       { name: 'NASA POWER · monthly', what: 'Climate history, 2001 → today', how: 'Powers the Field Shift comparison.', status: 'live' },
-      { name: 'NASA SMAP', what: 'Soil moisture (m³/m³)', how: 'A snapshot per district, updated regularly.', status: 'snapshot' },
-      { name: 'NASA MODIS', what: 'Vegetation (NDVI) and land temperature', how: 'A snapshot per district, updated regularly.', status: 'snapshot' },
+      { name: 'NASA SMAP', what: 'Soil moisture (m³/m³)', how: 'Sample values for now. Real NASA data coming soon.', status: 'snapshot' },
+      { name: 'NASA MODIS', what: 'Vegetation (NDVI) and land temperature', how: 'Sample values for now. Real NASA data coming soon.', status: 'snapshot' },
       { name: 'Open-Meteo', what: '7-day weather forecast', how: 'Not NASA, credited separately. Fills the 2–3 day gap and looks ahead.', status: 'live' },
       { name: 'BARI & BRRI guidelines', what: 'Crop rules for Bangladesh', how: 'Published crop guidance from BARI and BRRI (no partnership).', status: 'guidance' },
     ] as { name: string; what: string; how: string; status: 'live' | 'snapshot' | 'guidance' }[],
@@ -304,12 +309,17 @@ const bn: Dict = {
     eyebrow: 'কেন অ্যাগ্রিঅরবিট',
     title: 'স্যাটেলাইট দেখে। নিয়ম বোঝায়। সিদ্ধান্ত আপনার।',
     cards: [
-      { n: '০১', t: 'নাসা পর্যবেক্ষণ করে', d: 'আপনার এলাকার বৃষ্টি, তাপমাত্রা, আর্দ্রতা, মাটির আর্দ্রতা ও গাছপালার স্বাস্থ্য, নাসার বিনামূল্যের তথ্য থেকে।' },
+      { n: '০১', t: 'নাসা পর্যবেক্ষণ করে', d: 'নাসা পাওয়ার আজ বৃষ্টি, তাপমাত্রা ও আর্দ্রতা দেয়; মাটির আর্দ্রতা ও গাছপালার তথ্য (স্ম্যাপ/মোডিস) যুক্ত করা হচ্ছে।' },
       { n: '০২', t: 'অ্যাগ্রিঅরবিট ব্যাখ্যা করে', d: 'প্রতিটি স্কোর আসে লেখা নিয়ম থেকে, যা আপনি পড়তে পারেন। কোনো মেশিন লার্নিং নেই, কোনো লুকানো হিসাব নেই। যেমন:' },
       { n: '০৩', t: 'কৃষক সিদ্ধান্ত নেন', d: 'আমরা বিকল্প আর কারণ দেখাই, আদেশ নয়। আপনার জমি সম্পর্কে আপনার জ্ঞানই শেষ কথা।' },
     ],
     exampleLabel: 'উদাহরণ নিয়ম',
     example: 'বৃষ্টি ৩০ দিন = ৩৮ মিমি < ৫০  এবং  মাটি = ০.১৪ < ০.১৫\n→ বেশি পানির ফসল  −১৫',
+  },
+
+  atlas: {
+    provenanceDesc: (researchCount: number, estimatedCount: number) =>
+      `${researchCount}টি ফসলের মান আমাদের দল বারি ও ব্রি নির্দেশিকা থেকে সংকলন করেছে; ${estimatedCount}টি আনুমানিক।`,
   },
 
   data: {
@@ -322,8 +332,8 @@ const bn: Dict = {
     items: [
       { name: 'নাসা পাওয়ার · দৈনিক', what: 'বৃষ্টি, তাপমাত্রা, আর্দ্রতা', how: 'ফসলের পানির চাহিদা (ET₀, হারগ্রিভস পদ্ধতি) হিসাবেও ব্যবহৃত।', status: 'live' },
       { name: 'নাসা পাওয়ার · মাসিক', what: 'জলবায়ুর ইতিহাস, ২০০১ → আজ', how: 'ফিল্ড শিফট তুলনা এখান থেকে।', status: 'live' },
-      { name: 'নাসা স্ম্যাপ', what: 'মাটির আর্দ্রতা (m³/m³)', how: 'প্রতি জেলার স্ন্যাপশট, নিয়মিত হালনাগাদ করা হয়।', status: 'snapshot' },
-      { name: 'নাসা মোডিস', what: 'গাছপালা (NDVI) ও ভূমির তাপমাত্রা', how: 'প্রতি জেলার স্ন্যাপশট, নিয়মিত হালনাগাদ করা হয়।', status: 'snapshot' },
+      { name: 'নাসা স্ম্যাপ', what: 'মাটির আর্দ্রতা (m³/m³)', how: 'আপাতত নমুনা মান। আসল নাসা উপাত্ত শীঘ্রই আসছে।', status: 'snapshot' },
+      { name: 'নাসা মোডিস', what: 'গাছপালা (NDVI) ও ভূমির তাপমাত্রা', how: 'আপাতত নমুনা মান। আসল নাসা উপাত্ত শীঘ্রই আসছে।', status: 'snapshot' },
       { name: 'ওপেন-মেটিও', what: '৭ দিনের আবহাওয়া পূর্বাভাস', how: 'নাসার নয়, আলাদাভাবে কৃতজ্ঞতা জানানো হলো। ২–৩ দিনের ঘাটতি পূরণ করে, সামনে দেখায়।', status: 'live' },
       { name: 'বারি ও ব্রি নির্দেশিকা', what: 'বাংলাদেশের ফসলের নিয়ম', how: 'বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (বারি) ও বাংলাদেশ ধান গবেষণা ইনস্টিটিউটের (ব্রি) প্রকাশিত নির্দেশিকা (কোনো অংশীদারিত্ব নেই)।', status: 'guidance' },
     ],
