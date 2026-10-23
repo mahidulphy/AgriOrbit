@@ -21,7 +21,7 @@ import type { LocationCache } from '../lib/power';
 
 export interface GpmObservationResult {
   sourceBadge: 'NASA';
-  datasetName: 'NASA GPM / IMERG';
+  datasetName: 'NASA POWER (precipitation)';
   spatialResolution: '~10 km (0.1° grid)';
   recentRain7dMm: number;
   recentRain14dMm: number;
@@ -36,7 +36,7 @@ export interface GpmObservationResult {
   };
   observedSummaryEn: string;
   observedSummaryBn: string;
-  dataStatus: 'live' | 'cached' | 'bundled';
+  dataStatus: 'live' | 'cached' | 'bundled' | 'unavailable';
   updatedAt: string;
 }
 
@@ -61,7 +61,7 @@ function formatIso(k: string): string {
  */
 export function computeGpmMetricsFromDaily(
   dailyPrecip: Record<string, number>,
-  dataStatus: 'live' | 'cached' | 'bundled' = 'cached',
+  dataStatus: 'live' | 'cached' | 'bundled' | 'unavailable' = 'cached',
   fetchedAtIso?: string,
 ): GpmObservationResult {
   const dates = Object.keys(dailyPrecip)
@@ -71,7 +71,7 @@ export function computeGpmMetricsFromDaily(
   if (dates.length === 0) {
     return {
       sourceBadge: 'NASA',
-      datasetName: 'NASA GPM / IMERG',
+      datasetName: 'NASA POWER (precipitation)',
       spatialResolution: '~10 km (0.1° grid)',
       recentRain7dMm: 0,
       recentRain14dMm: 0,
@@ -124,23 +124,27 @@ export function computeGpmMetricsFromDaily(
   const startIso = formatIso(last7Keys[0] ?? dates[0]);
   const endIso = formatIso(last7Keys[last7Keys.length - 1] ?? dates[dates.length - 1]);
 
-  const summaryEn =
+  const cacheDateStr = fetchedAtIso ? fetchedAtIso.split('T')[0] : '';
+  const cachePrefixEn = dataStatus === 'cached' ? `Cached NASA POWER data from ${cacheDateStr}. ` : '';
+  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${cacheDateStr})। ` : '';
+
+  const summaryEn = cachePrefixEn + (
     comparison === 'Elevated'
       ? `Recent rainfall is elevated (${rain7d} mm over past 7 days, +${anomalyPct}% vs 30-day baseline).`
       : comparison === 'Deficit'
       ? `Recent rainfall is below baseline (${rain7d} mm over past 7 days, ${anomalyPct}% vs baseline).`
-      : `Recent rainfall is within normal range (${rain7d} mm over past 7 days).`;
+      : `Recent rainfall is within normal range (${rain7d} mm over past 7 days).`);
 
-  const summaryBn =
+  const summaryBn = cachePrefixBn + (
     comparison === 'Elevated'
       ? `সাম্প্রতিক বৃষ্টিপাত স্বাভাবিকের চেয়ে বেশি (গত ৭ দিনে ${rain7d} মিমি, গড়ের চেয়ে +${anomalyPct}%)।`
       : comparison === 'Deficit'
       ? `সাম্প্রতিক বৃষ্টিপাত স্বাভাবিকের চেয়ে কম (গত ৭ দিনে ${rain7d} মিমি, গড়ের চেয়ে ${anomalyPct}%)।`
-      : `সাম্প্রতিক বৃষ্টিপাত স্বাভাবিক মাত্রায় রয়েছে (গত ৭ দিনে ${rain7d} মিমি)।`;
+      : `সাম্প্রতিক বৃষ্টিপাত স্বাভাবিক মাত্রায় রয়েছে (গত ৭ দিনে ${rain7d} মিমি)।`);
 
   return {
     sourceBadge: 'NASA',
-    datasetName: 'NASA GPM / IMERG',
+    datasetName: 'NASA POWER (precipitation)',
     spatialResolution: '~10 km (0.1° grid)',
     recentRain7dMm: rain7d,
     recentRain14dMm: rain14d,
@@ -228,11 +232,37 @@ export async function getGpmObservation(
     }
   }
 
-  // 3. Bundled Snapshot (Last resort guarantee)
-  const bundled = fallbackRangpur as LocationCache;
-  return computeGpmMetricsFromDaily(
-    bundled.daily.PRECTOTCORR,
-    'bundled',
-    bundled.fetchedAt,
-  );
+  // 3. Bundled Snapshot (Only for Rangpur!)
+  if (d?.id === 'rangpur' || districtId === 'rangpur') {
+    const bundled = fallbackRangpur as LocationCache;
+    return computeGpmMetricsFromDaily(
+      bundled.daily.PRECTOTCORR,
+      'bundled',
+      bundled.fetchedAt,
+    );
+  }
+
+  // Never show fallback-rangpur.json for another district; show "Data unavailable for <district>"
+  const distName = d ? d.nameEn : districtId;
+  const distNameBn = d ? d.nameBn : districtId;
+  return {
+    sourceBadge: 'NASA',
+    datasetName: 'NASA POWER (precipitation)',
+    spatialResolution: '~10 km (0.1° grid)',
+    recentRain7dMm: 0,
+    recentRain14dMm: 0,
+    recentDailyMeanMm: 0,
+    baselineComparison: 'Normal',
+    baselineComparisonBn: 'স্বাভাবিক',
+    anomalyPct: 0,
+    observationWindow: {
+      startDate: 'N/A',
+      endDate: 'N/A',
+      daysCount: 0,
+    },
+    observedSummaryEn: `Data unavailable for ${distName}`,
+    observedSummaryBn: `${distNameBn}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+    dataStatus: 'unavailable',
+    updatedAt: '',
+  };
 }

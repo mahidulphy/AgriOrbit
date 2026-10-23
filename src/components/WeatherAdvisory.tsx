@@ -26,6 +26,8 @@ import { computeForecastMetrics } from '../services/weatherForecast';
 import { DataTileStatusBadge } from './common/DataTileStatusBadge';
 import fallbackRangpur from '../data/fallback-rangpur.json';
 import type { LocationCache } from '../lib/power';
+import { SATELLITE_BY_DIVISION } from '../data/satellite';
+import { getDistrictAdmin } from '../data/districts';
 
 export interface WeatherAdvisoryProps {
   districtId: DistrictId | string;
@@ -73,12 +75,47 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   const isEn = language === 'en';
+  const admin = getDistrictAdmin(districtId);
+  const sat = (admin && SATELLITE_BY_DIVISION[admin.division]) ?? SATELLITE_BY_DIVISION['Rangpur'];
 
   // Instant deterministic initial advisory from bundled snapshot to guarantee zero blank screens
   const defaultInitialAdvisory = useMemo(() => {
+    const isRangpur = districtId === 'rangpur';
     const bundled = fallbackRangpur as LocationCache;
-    const gpm = computeGpmMetricsFromDaily(bundled.daily.PRECTOTCORR, 'bundled', bundled.fetchedAt);
-    const forecast = computeForecastMetrics(bundled.forecast, 'bundled', bundled.fetchedAt);
+    const gpm = isRangpur
+      ? computeGpmMetricsFromDaily(bundled.daily.PRECTOTCORR, 'bundled', bundled.fetchedAt)
+      : {
+          sourceBadge: 'NASA' as const,
+          datasetName: 'NASA POWER (precipitation)' as const,
+          spatialResolution: '~10 km (0.1° grid)' as const,
+          recentRain7dMm: 0,
+          recentRain14dMm: 0,
+          recentDailyMeanMm: 0,
+          baselineComparison: 'Normal' as const,
+          baselineComparisonBn: 'স্বাভাবিক' as const,
+          anomalyPct: 0,
+          observationWindow: { startDate: 'N/A', endDate: 'N/A', daysCount: 0 },
+          observedSummaryEn: `Data unavailable for ${admin?.nameEn ?? districtId}`,
+          observedSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+          dataStatus: 'unavailable' as const,
+          updatedAt: '',
+        };
+    const forecast = isRangpur
+      ? computeForecastMetrics(bundled.forecast, 'bundled', bundled.fetchedAt)
+      : {
+          sourceBadge: 'FORECAST' as const,
+          providerName: 'Open-Meteo' as const,
+          totalRain7dMm: 0,
+          rainDaysCount: 0,
+          peakRainMm: 0,
+          peakRainDate: 'N/A',
+          hasHeavyRainRisk: false,
+          forecastDays: [],
+          forecastSummaryEn: `Data unavailable for ${admin?.nameEn ?? districtId}`,
+          forecastSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+          dataStatus: 'unavailable' as const,
+          updatedAt: '',
+        };
     return evaluateWeatherAdvisory({
       gpm,
       forecast,
@@ -250,7 +287,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
-                      sourceName="NASA GPM"
+                      sourceName="NASA POWER (precipitation)"
                       status={activeAdvisory.gpm.dataStatus === 'live' ? 'live' : activeAdvisory.gpm.dataStatus === 'cached' ? 'cached' : 'snapshot'}
                       date={activeAdvisory.gpm.updatedAt}
                       language={language}
@@ -287,7 +324,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 </div>
 
                 <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
-                  <span>NASA GPM / IMERG</span>
+                  <span>NASA POWER (precipitation)</span>
                   <span>{activeAdvisory.gpm.observationWindow.daysCount} days</span>
                 </div>
               </div>
@@ -331,9 +368,9 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
-                      sourceName="NASA SMAP"
+                      sourceName="NASA SMAP (Snapshot)"
                       status="snapshot"
-                      date="2026-10-06"
+                      date={sat.date}
                       language={language}
                     />
                     <span className="text-[10px] font-mono text-[#8FA3B8]">SPL3SMP_E (9km)</span>
@@ -453,7 +490,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 </span>
                 <div className="space-y-1.5 text-xs text-slate-300">
                   <p>
-                    <strong className="text-white">NASA GPM:</strong> {isEn ? 'Observes what is happening (recent rainfall estimates on a ~10 km satellite grid).' : 'নাসার জিপিএম স্যাটেলাইট পর্যবেক্ষণ করে অতীতে কী বৃষ্টিপাত হয়েছে (~১০ কিমি গ্রিড)।'}
+                    <strong className="text-white">NASA POWER (precipitation):</strong> {isEn ? 'Observes what is happening (recent rainfall estimates on a ~10 km satellite/model grid).' : 'নাসা পাওয়ার পর্যবেক্ষণ করে অতীতে কী বৃষ্টিপাত হয়েছে (~১০ কিমি গ্রিড)।'}
                   </p>
                   <p>
                     <strong className="text-white">Open-Meteo:</strong> {isEn ? 'Provides what is expected (next 7-day numerical weather precipitation forecast).' : 'ওপেন-মেটিও আগামী ৭ দিনের সম্ভাব্য বৃষ্টিপাতের পূর্বাভাস দেয়।'}

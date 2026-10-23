@@ -39,21 +39,34 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   const topThreeCrops = displayedCrops.slice(0, 3);
   const remainingCrops = displayedCrops.slice(3);
 
-  const isDry = (telemetry?.rainfall30d ?? 38) < 50 && (telemetry?.soilMoisture ?? 0.18) < 0.15;
-  const isOptimalSowing = (telemetry?.soilMoisture ?? 0.18) >= 0.25 && (telemetry?.soilMoisture ?? 0.18) <= 0.30;
-  const isHot = (telemetry?.maxTemp ?? 33) > 35;
+  const isDry =
+    telemetry?.rainfall30d !== undefined &&
+    telemetry?.soilMoisture !== undefined &&
+    telemetry.rainfall30d < 50 &&
+    telemetry.soilMoisture < 0.15;
+  const isOptimalSowing =
+    telemetry?.soilMoisture !== undefined &&
+    telemetry.soilMoisture >= 0.25 &&
+    telemetry.soilMoisture <= 0.30;
+  const isHot =
+    telemetry?.maxTemp !== undefined &&
+    telemetry.maxTemp > 35;
 
   const renderCropCard = (crop: CropData, index: number, isTopThree: boolean) => {
     const isHigh = crop.suitabilityTier === 'high';
     const isMod = crop.suitabilityTier === 'moderate';
 
-    const tierLabel = isHigh
+    const tierLabel = crop.notEnoughData
+      ? (language === 'en' ? 'Not enough data' : 'পর্যাপ্ত উপাত্ত নেই')
+      : isHigh
       ? (language === 'en' ? 'High suitability' : 'উচ্চ উপযোগিতা')
       : isMod
       ? (language === 'en' ? 'Moderate suitability' : 'মাঝারি উপযোগিতা')
       : (language === 'en' ? 'Lower suitability' : 'কম উপযোগিতা');
 
-    const barColor = isHigh
+    const barColor = crop.notEnoughData
+      ? 'bg-slate-600'
+      : isHigh
       ? 'bg-[#B8FF3D]'
       : isMod
       ? 'bg-[#00E5FF]'
@@ -139,11 +152,11 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
             <div className="text-right">
               <div className="flex items-baseline justify-end gap-1.5">
                 <span className="font-mono text-2xl font-bold text-white">
-                  {crop.suitabilityScore}%
+                  {crop.notEnoughData ? (language === 'en' ? 'Not enough data' : 'পর্যাপ্ত উপাত্ত নেই') : `${crop.suitabilityScore}%`}
                 </span>
               </div>
               <span className={`text-[10px] uppercase font-mono font-bold tracking-wider ${
-                isHigh ? 'text-[#B8FF3D]' : isMod ? 'text-[#00E5FF]' : 'text-[#FF5C5C]'
+                crop.notEnoughData ? 'text-amber-400' : isHigh ? 'text-[#B8FF3D]' : isMod ? 'text-[#00E5FF]' : 'text-[#FF5C5C]'
               }`}>
                 {tierLabel}
               </span>
@@ -222,8 +235,8 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
             </h2>
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
               {language === 'en'
-                ? 'Scores computed by deterministic agronomic rules reacting in real-time to NASA POWER precipitation, SMAP soil moisture, and your priorities.'
-                : 'নাসার উপগ্রহ উপাত্ত এবং আপনার পছন্দের লক্ষ্যের সাথে মিলিয়ে রুল-ভিত্তিক উপযোগিতা মূল্যায়ন।'}
+                ? 'Scores computed by deterministic agronomic rules reacting to live NASA POWER weather data, with soil moisture based on placeholder values for now, and your priorities.'
+                : 'সুনির্দিষ্ট কৃষি নিয়মের ভিত্তিতে স্কোর নির্ধারিত; নাসা পাওয়ারের আবহাওয়া তথ্য লাইভ এবং মাটির আর্দ্রতা আপাতত নমুনা মান হিসেবে ব্যবহৃত।'}
             </p>
           </div>
 

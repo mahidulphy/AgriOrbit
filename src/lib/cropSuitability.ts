@@ -53,10 +53,15 @@ function evaluateCropWithNasa(
     finalScore: calibratedBase,
   };
 
-  const rain = telemetry?.rainfall30d ?? 38;
-  const soil = telemetry?.soilMoisture ?? 0.18;
-  const maxT = telemetry?.maxTemp ?? 33.7;
-  const wBal = telemetry?.waterBalance ?? -65;
+  const rain = telemetry?.rainfall30d;
+  const soil = telemetry?.soilMoisture;
+  const maxT = telemetry?.maxTemp;
+  const wBal = telemetry?.waterBalance;
+  const hasTelemetry = rain !== undefined && soil !== undefined && maxT !== undefined && wBal !== undefined;
+
+  if (!hasTelemetry) {
+    crop.notEnoughData = true;
+  }
 
   const dynamicObservationsEn: string[] = [];
   const dynamicObservationsBn: string[] = [];
@@ -69,92 +74,96 @@ function evaluateCropWithNasa(
     dynamicObservationsEn.push('Estimated data: preliminary parameters; confirm with local upazila agriculture office.');
   }
 
+    if (hasTelemetry) {
   // ─────────────────────────────────────────────────────────────
-  // RULE 1: DRY STRESS PENALTY (Rainfall < 50mm AND Soil Moisture < 0.15)
-  // ─────────────────────────────────────────────────────────────
-  if (rain < 50 && soil < 0.15) {
-    if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice') {
-      const penalty = -20;
-      score += penalty;
-      deltas.dryPenalty = penalty;
+    // RULE 1: DRY STRESS PENALTY (Rainfall < 50mm AND Soil Moisture < 0.15)
+    // ─────────────────────────────────────────────────────────────
+    if (rain < 50 && soil < 0.15) {
+      if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice') {
+        const penalty = -20;
+        score += penalty;
+        deltas.dryPenalty = penalty;
+        dynamicObservationsEn.push(
+          `NASA POWER rainfall (${rain.toFixed(0)} mm < 50 mm) & SMAP soil moisture (${soil.toFixed(2)} < 0.15 m³/m³) confirm severe moisture deficit.`,
+        );
+        dynamicObservationsBn.push(
+          `নাসা পাওয়ার বৃষ্টিপাত (${rain.toFixed(0)} মিমি < ৫০ মিমি) ও স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} < ০.১৫) তীব্র পানির ঘাটতি নিশ্চিত করে।`,
+        );
+        dynamicRulesEn.push(
+          `Rule DRY-01: High-water crops face heavy -20 penalty due to low rainfall (<50 mm) and dry rootzone (<0.15 m³/m³).`,
+        );
+        dynamicRulesBn.push(
+          `রুল DRY-01: বৃষ্টি ঘাটতি (<৫০ মিমি) ও শুষ্ক মাটির (<০.১৫) কারণে উচ্চ সেচ নির্ভর ফসলে ২০ পয়েন্ট কর্তন।`,
+        );
+      } else if (crop.waterRequirementEn === 'Medium') {
+        const penalty = -8;
+        score += penalty;
+        deltas.dryPenalty = penalty;
+        dynamicRulesEn.push(`Rule DRY-02: Moderate-water crop absorbs light -8 penalty under water-deficit conditions.`);
+        dynamicRulesBn.push(`রুল DRY-02: পানি ঘাটতির পরিবেশে মাঝারি পানির ফসলে ৮ পয়েন্ট কর্তন।`);
+      } else if (crop.waterRequirementEn === 'Low') {
+        score += 4;
+        deltas.dryPenalty = 4;
+        dynamicRulesEn.push(`Rule DRY-03: Low-water crop awarded +4 water-saver resilience bonus under dry conditions.`);
+        dynamicRulesBn.push(`রুল DRY-03: শুষ্ক পরিবেশে স্বল্প পানির সহনশীল ফসলে +৪ পয়েন্ট বোনাস।`);
+      }
+    }
+  
+    // ─────────────────────────────────────────────────────────────
+    // RULE 2: OPTIMAL SOWING MOISTURE BADGE (Soil 0.25 - 0.30 m³/m³)
+    // ─────────────────────────────────────────────────────────────
+    if (soil >= 0.25 && soil <= 0.3) {
+      const bonus = 5;
+      score += bonus;
+      deltas.optimalSowingBonus = bonus;
       dynamicObservationsEn.push(
-        `NASA POWER rainfall (${rain.toFixed(0)} mm < 50 mm) & SMAP soil moisture (${soil.toFixed(2)} < 0.15 m³/m³) confirm severe moisture deficit.`,
+        `SMAP surface moisture (${soil.toFixed(2)} m³/m³) matches the optimal 0.25–0.30 seed germination range.`,
       );
       dynamicObservationsBn.push(
-        `নাসা পাওয়ার বৃষ্টিপাত (${rain.toFixed(0)} মিমি < ৫০ মিমি) ও স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} < ০.১৫) তীব্র পানির ঘাটতি নিশ্চিত করে।`,
+        `স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} m³/m³) বীজ গজানোর জন্য সবচেয়ে আদর্শ ০.২৫–০.৩০ সীমার মধ্যে রয়েছে।`,
       );
+      dynamicRulesEn.push(`Rule SOW-01: Optimal sowing moisture verified (+5 bonus) for rapid seedling emergence.`);
+      dynamicRulesBn.push(`রুল SOW-01: দ্রুত চারা গজানোর অনুকূল আর্দ্রতার জন্য বপন প্রস্তুতি বোনাস (+৫ পয়েন্ট)।`);
+    }
+  
+    // ─────────────────────────────────────────────────────────────
+    // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C)
+    // ─────────────────────────────────────────────────────────────
+    if (maxT > 35) {
+      if (crop.id === 'wheat' || crop.id === 'potato') {
+        const penalty = -10;
+        score += penalty;
+        deltas.heatPenalty = penalty;
+        dynamicObservationsEn.push(
+          `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
+        );
+        dynamicObservationsBn.push(
+          `নাসা পাওয়ার পরিমাপে সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}° সে. (> ৩৫° সে. সীমা), তাপজনিত ফলন বিপর্যয়ের ঝুঁকি।`,
+        );
+        dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
+        dynamicRulesBn.push(`রুল HEAT-02: তাপ-সংবেদনশীল ফসলে সতর্কতা ও ১০ পয়েন্ট কর্তন।`);
+      }
+    }
+  
+    // ─────────────────────────────────────────────────────────────
+    // RULE 4: EVAPOTRANSPIRATION DEFICIT (Rainfall - ET₀ < -50 mm)
+    // ─────────────────────────────────────────────────────────────
+    if (wBal < -50 && crop.waterRequirementEn === 'High') {
+      const penalty = -5;
+      score += penalty;
+      deltas.waterDeficitPenalty = penalty;
       dynamicRulesEn.push(
-        `Rule DRY-01: High-water crops face heavy -20 penalty due to low rainfall (<50 mm) and dry rootzone (<0.15 m³/m³).`,
+        `Rule ET-04: High evapotranspiration deficit (${wBal.toFixed(0)} mm) penalizes flood irrigation overhead (-5 pts).`,
       );
       dynamicRulesBn.push(
-        `রুল DRY-01: বৃষ্টি ঘাটতি (<৫০ মিমি) ও শুষ্ক মাটির (<০.১৫) কারণে উচ্চ সেচ নির্ভর ফসলে ২০ পয়েন্ট কর্তন।`,
+        `রুল ET-04: পানির অতিরিক্ত বাষ্পীভবন ঘাটতির (${wBal.toFixed(0)} মিমি) কারণে সেচনির্ভর ফসলে ৫ পয়েন্ট কর্তন।`,
       );
-    } else if (crop.waterRequirementEn === 'Medium') {
-      const penalty = -8;
-      score += penalty;
-      deltas.dryPenalty = penalty;
-      dynamicRulesEn.push(`Rule DRY-02: Moderate-water crop absorbs light -8 penalty under water-deficit conditions.`);
-      dynamicRulesBn.push(`রুল DRY-02: পানি ঘাটতির পরিবেশে মাঝারি পানির ফসলে ৮ পয়েন্ট কর্তন।`);
-    } else if (crop.waterRequirementEn === 'Low') {
-      score += 4;
-      deltas.dryPenalty = 4;
-      dynamicRulesEn.push(`Rule DRY-03: Low-water crop awarded +4 water-saver resilience bonus under dry conditions.`);
-      dynamicRulesBn.push(`রুল DRY-03: শুষ্ক পরিবেশে স্বল্প পানির সহনশীল ফসলে +৪ পয়েন্ট বোনাস।`);
     }
+  
+    
   }
 
-  // ─────────────────────────────────────────────────────────────
-  // RULE 2: OPTIMAL SOWING MOISTURE BADGE (Soil 0.25 - 0.30 m³/m³)
-  // ─────────────────────────────────────────────────────────────
-  if (soil >= 0.25 && soil <= 0.3) {
-    const bonus = 5;
-    score += bonus;
-    deltas.optimalSowingBonus = bonus;
-    dynamicObservationsEn.push(
-      `SMAP surface moisture (${soil.toFixed(2)} m³/m³) matches the optimal 0.25–0.30 seed germination range.`,
-    );
-    dynamicObservationsBn.push(
-      `স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} m³/m³) বীজ গজানোর জন্য সবচেয়ে আদর্শ ০.২৫–০.৩০ সীমার মধ্যে রয়েছে।`,
-    );
-    dynamicRulesEn.push(`Rule SOW-01: Optimal sowing moisture verified (+5 bonus) for rapid seedling emergence.`);
-    dynamicRulesBn.push(`রুল SOW-01: দ্রুত চারা গজানোর অনুকূল আর্দ্রতার জন্য বপন প্রস্তুতি বোনাস (+৫ পয়েন্ট)।`);
-  }
-
-  // ─────────────────────────────────────────────────────────────
-  // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C)
-  // ─────────────────────────────────────────────────────────────
-  if (maxT > 35) {
-    if (crop.id === 'wheat' || crop.id === 'potato') {
-      const penalty = -10;
-      score += penalty;
-      deltas.heatPenalty = penalty;
-      dynamicObservationsEn.push(
-        `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
-      );
-      dynamicObservationsBn.push(
-        `নাসা পাওয়ার পরিমাপে সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}° সে. (> ৩৫° সে. সীমা), তাপজনিত ফলন বিপর্যয়ের ঝুঁকি।`,
-      );
-      dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
-      dynamicRulesBn.push(`রুল HEAT-02: তাপ-সংবেদনশীল ফসলে সতর্কতা ও ১০ পয়েন্ট কর্তন।`);
-    }
-  }
-
-  // ─────────────────────────────────────────────────────────────
-  // RULE 4: EVAPOTRANSPIRATION DEFICIT (Rainfall - ET₀ < -50 mm)
-  // ─────────────────────────────────────────────────────────────
-  if (wBal < -50 && crop.waterRequirementEn === 'High') {
-    const penalty = -5;
-    score += penalty;
-    deltas.waterDeficitPenalty = penalty;
-    dynamicRulesEn.push(
-      `Rule ET-04: High evapotranspiration deficit (${wBal.toFixed(0)} mm) penalizes flood irrigation overhead (-5 pts).`,
-    );
-    dynamicRulesBn.push(
-      `রুল ET-04: পানির অতিরিক্ত বাষ্পীভবন ঘাটতির (${wBal.toFixed(0)} মিমি) কারণে সেচনির্ভর ফসলে ৫ পয়েন্ট কর্তন।`,
-    );
-  }
-
-  // ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
   // RULE 5: FARMER PRIORITY STEERING
   // ─────────────────────────────────────────────────────────────
   const p1Delta = priorityDelta(crop, primary);

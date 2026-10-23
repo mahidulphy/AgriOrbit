@@ -123,6 +123,7 @@ export interface CropData {
   shortWhyEn: string;
   shortWhyBn: string;
   deltas?: ScoreDeltas;
+  notEnoughData?: boolean;
   explanation: {
     observationsTriggered: string[];
     observationsTriggeredBn: string[];

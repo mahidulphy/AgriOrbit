@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { BD_DISTRICTS, BD_DIVISIONS, getDistrictAdmin, type DistrictId } from '../../data/bdAdmin';
 import type { Language, SelectedLocation } from '../../types';
-import { getNasaContext, nasaSourceLabel } from '../../lib/nasaContext';
 import {
   DISTRICT_WIDE_UPAZILA,
   formatLocation,
@@ -60,7 +59,6 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
 
   const names = formatLocation(location, language);
   const upazilas = getUpazilasFor(location.district);
-  const nasa = getNasaContext(location.district);
   const sourceLabel = SOURCE_LABEL[location.source];
 
   const flyTo = (lng: number, lat: number, zoom: number) => {
@@ -272,27 +270,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
               </div>
             </div>
 
-            {/* Telemetry Snapshot Preview */}
-            <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 text-xs space-y-2">
-              <div className="flex items-center justify-between text-xs text-[#8FA3B8]">
-                <span className="font-mono">{nasaSourceLabel(nasa, names.district, language)}</span>
-                <span className="font-bold text-[#00E5FF]">5 km Context</span>
-              </div>
-              <div className="grid grid-cols-3 gap-2 font-mono text-center pt-1">
-                <div className="p-2 rounded-lg bg-white/5 border border-white/5">
-                  <span className="block text-[10px] text-[#8FA3B8]">Rainfall</span>
-                  <span className="text-white font-bold">{nasa.power.rainfallMm} mm</span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/5 border border-white/5">
-                  <span className="block text-[10px] text-[#8FA3B8]">Soil H₂O</span>
-                  <span className="text-white font-bold">{nasa.smap.surfaceMoisture}</span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/5 border border-white/5">
-                  <span className="block text-[10px] text-[#8FA3B8]">NDVI</span>
-                  <span className="text-[#B8FF3D] font-bold">{nasa.modis.ndvi}</span>
-                </div>
-              </div>
-            </div>
+            
           </div>
 
           {/* RIGHT: Map Canvas (7 cols) */}

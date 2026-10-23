@@ -136,13 +136,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   }, [selectedDistrict]);
 
   // Derived baseline conditions & climate shift from real NASA POWER records
+  const hasData = loaded.mode !== 'unavailable' && !!loaded.data;
   const conditions = useMemo(
-    () => computeConditions(loaded.data.daily, loaded.data.lat),
+    () => hasData ? computeConditions(loaded.data.daily, loaded.data.lat) : computeConditions(BUNDLED_RANGPUR.daily, BUNDLED_RANGPUR.lat),
     [loaded.data.daily, loaded.data.lat]
   );
 
   const fieldShift = useMemo(
-    () => computeFieldShift(loaded.data.monthly),
+    () => hasData ? computeFieldShift(loaded.data.monthly) : computeFieldShift(BUNDLED_RANGPUR.monthly),
     [loaded.data.monthly]
   );
 
@@ -192,7 +193,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         },
         soil: activeSoil,
         shift: fieldShift,
-        forecast: loaded.data.forecast,
+        forecast: loaded.data?.forecast ?? BUNDLED_RANGPUR.forecast,
         priority: mapPriority(selectedPriority),
         previousCrop: previousCrop,
         today: new Date(),
@@ -483,6 +484,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 {whatIfActive
                   ? (language === 'en' ? 'Simulation Active' : 'সিমুলেশন চলছে')
                   : (() => {
+                      if (loaded.mode === 'unavailable') {
+                        return language === 'en' ? `Data unavailable for ${districtName.split(' ')[0]}` : `${districtName.split(' ')[0]}-এর উপাত্ত পাওয়া যায়নি`;
+                      }
                       const rawDate = loaded?.data?.fetchedAt || conditions?.to;
                       if (!rawDate) {
                         return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
@@ -496,6 +500,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         month: 'short',
                         year: 'numeric',
                       });
+                      if (loaded.mode === 'cache') {
+                        return language === 'en' ? `Cached NASA POWER data from ${dateStr}` : `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${dateStr})`;
+                      }
                       return language === 'en' ? `NASA data · ${dateStr}` : `নাসা উপাত্ত · ${dateStr}`;
                     })()}
               </span>
@@ -1157,8 +1164,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
                         sourceName="NASA POWER"
-                        status={whatIfActive ? 'simulated' : loaded.mode === 'live' ? 'live' : 'cached'}
-                        date={loaded.data.fetchedAt.split('T')[0]}
+                        status={whatIfActive ? 'simulated' : loaded.mode === 'live' ? 'live' : loaded.mode === 'cache' ? 'cached' : loaded.mode === 'unavailable' ? 'unavailable' : 'snapshot'}
+                        date={loaded.data?.fetchedAt ? loaded.data.fetchedAt.split('T')[0] : undefined}
                         language={language}
                       />
                       <span className={`font-mono text-xs font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>

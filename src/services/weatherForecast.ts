@@ -28,7 +28,7 @@ export interface WeatherForecastResult {
   forecastDays: ForecastDay[];
   forecastSummaryEn: string;
   forecastSummaryBn: string;
-  dataStatus: 'live' | 'cached' | 'bundled';
+  dataStatus: 'live' | 'cached' | 'bundled' | 'unavailable';
   updatedAt: string;
 }
 
@@ -44,7 +44,7 @@ export const FORECAST_THRESHOLDS = {
  */
 export function computeForecastMetrics(
   forecastDays: ForecastDay[],
-  dataStatus: 'live' | 'cached' | 'bundled' = 'cached',
+  dataStatus: 'live' | 'cached' | 'bundled' | 'unavailable' = 'cached',
   updatedAtIso?: string,
 ): WeatherForecastResult {
   if (!forecastDays || forecastDays.length === 0) {
@@ -82,6 +82,10 @@ export function computeForecastMetrics(
     totalRain7d >= FORECAST_THRESHOLDS.heavyRain7dMm ||
     peakRain >= FORECAST_THRESHOLDS.peakRainSingleDayMm;
 
+  const cacheDateStr = updatedAtIso ? updatedAtIso.split('T')[0] : '';
+  const cachePrefixEn = dataStatus === 'cached' ? `Cached NASA POWER data from ${cacheDateStr}. ` : '';
+  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${cacheDateStr})। ` : '';
+
   let summaryEn: string;
   let summaryBn: string;
 
@@ -108,8 +112,8 @@ export function computeForecastMetrics(
     peakRainDate: peakDate,
     hasHeavyRainRisk: hasHeavyRisk,
     forecastDays: days,
-    forecastSummaryEn: summaryEn,
-    forecastSummaryBn: summaryBn,
+    forecastSummaryEn: cachePrefixEn + summaryEn,
+    forecastSummaryBn: cachePrefixBn + summaryBn,
     dataStatus,
     updatedAt: updatedAtIso ?? new Date().toISOString(),
   };
@@ -178,11 +182,31 @@ export async function getWeatherForecast(
     }
   }
 
-  // 3. Bundled Snapshot (Guaranteed offline resilience)
-  const bundled = fallbackRangpur as LocationCache;
-  return computeForecastMetrics(
-    bundled.forecast,
-    'bundled',
-    bundled.fetchedAt,
-  );
+  // 3. Bundled Snapshot (Only for Rangpur!)
+  if (d?.id === 'rangpur' || districtId === 'rangpur') {
+    const bundled = fallbackRangpur as LocationCache;
+    return computeForecastMetrics(
+      bundled.forecast,
+      'bundled',
+      bundled.fetchedAt,
+    );
+  }
+
+  // Never show fallback-rangpur.json for another district; show "Data unavailable for <district>"
+  const distName = d ? d.nameEn : districtId;
+  const distNameBn = d ? d.nameBn : districtId;
+  return {
+    sourceBadge: 'FORECAST',
+    providerName: 'Open-Meteo',
+    totalRain7dMm: 0,
+    rainDaysCount: 0,
+    peakRainMm: 0,
+    peakRainDate: 'N/A',
+    hasHeavyRainRisk: false,
+    forecastDays: [],
+    forecastSummaryEn: `Data unavailable for ${distName}`,
+    forecastSummaryBn: `${distNameBn}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+    dataStatus: 'unavailable',
+    updatedAt: '',
+  };
 }
