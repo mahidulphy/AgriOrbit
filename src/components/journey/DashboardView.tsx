@@ -49,7 +49,7 @@ import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
 import { runEngine, type Priority } from '../../lib/engine';
-import { SATELLITE_BY_DIVISION } from '../../data/satellite';
+import { getDistrictSatellite } from '../../data/satellite';
 import { FieldShiftPanel } from '../landing/FieldShiftSection';
 import { getRankedCrops, formatPriorityLabel, type TelemetryContext } from '../../lib/cropSuitability';
 
@@ -147,26 +147,33 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     [loaded.data.monthly]
   );
 
-  // Satellite division context (SMAP & MODIS)
-  const sat = SATELLITE_BY_DIVISION[district.division] ?? SATELLITE_BY_DIVISION['Rangpur'];
+  // Real NASA Earthdata AppEEARS observations for the active district
+  const districtSat = getDistrictSatellite(district.id);
+  const smapData = districtSat?.smap ?? null;
+  const ndviData = districtSat?.ndvi ?? null;
+  const lstDayData = districtSat?.lstDay ?? null;
+  const lstNightData = districtSat?.lstNight ?? null;
+  const isSoilFlaggedWater = smapData?.flag === 'possible_water_contamination';
+  const realSoilMoisture = (smapData && !isSoilFlaggedWater) ? smapData.value : null;
 
   // What-If Environmental Simulator Controls
   const [whatIfActive, setWhatIfActive] = useState(false);
-  const [simSoil, setSimSoil] = useState<number>(sat.soil);
+  const [simSoil, setSimSoil] = useState<number>(smapData?.value ?? 0.22);
   const [simRain, setSimRain] = useState<number>(Math.round(conditions.rain30));
   const [simMaxTemp, setSimMaxTemp] = useState<number>(Math.round(conditions.tMax30));
 
   // Sync simulation sliders when base district data updates (if not actively simulating)
   useEffect(() => {
     if (!whatIfActive) {
-      setSimSoil(sat.soil);
+      setSimSoil(smapData?.value ?? 0.22);
       setSimRain(Math.round(conditions.rain30));
       setSimMaxTemp(Math.round(conditions.tMax30));
     }
-  }, [sat.soil, conditions.rain30, conditions.tMax30, whatIfActive]);
+  }, [smapData?.value, conditions.rain30, conditions.tMax30, whatIfActive]);
 
-  // Active telemetry driving the scoring engine
-  const activeSoil = whatIfActive ? simSoil : sat.soil;
+  // Active telemetry driving the scoring engine:
+  // If soil is null or flagged as possible water contamination, engine receives null to skip soil rules
+  const activeSoil: number | null = whatIfActive ? simSoil : realSoilMoisture;
   const activeRain = whatIfActive ? simRain : conditions.rain30;
   const activeMaxTemp = whatIfActive ? simMaxTemp : conditions.tMax30;
   const activeWaterBalance = activeRain - conditions.et0Total;
@@ -220,7 +227,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   );
 
   // Water stressed threshold
-  const isWaterStressed = activeSoil < 0.20 || activeRain < 50 || activeWaterBalance < -50;
+  const isWaterStressed = (activeSoil !== null && activeSoil < 0.20) || activeRain < 50 || activeWaterBalance < -50;
 
   const DASHBOARD_NAV_ITEMS = [
     { id: 'overview' as const, en: 'Overview', bn: 'সারসংক্ষেপ', icon: LayoutDashboard },
@@ -641,8 +648,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
                       {language === 'en'
-                        ? `NASA SMAP satellite snapshot records topsoil moisture at ${activeSoil.toFixed(2)} m³/m³ with 30-day precipitation of ${Math.round(activeRain)} mm. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} requires significantly fewer supplemental irrigations than flood-irrigated winter Boro rice, reducing diesel pumping and conserving precious groundwater according to BARI guidelines.`
-                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil.toFixed(2)} m³/m³ এবং ৩০ দিনের মোট বৃষ্টিপাত ${Math.round(activeRain)} মিমি। বিএআরআই নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে অনেক কম সেচ লাগে, যা ডিজেল পাম্পিং কমায় এবং ভূগর্ভস্থ পানি সংরক্ষণ করে।`}
+                        ? `NASA SMAP satellite snapshot records topsoil moisture at ${(activeSoil !== null ? activeSoil.toFixed(2) : 'N/A')} m³/m³ with 30-day precipitation of ${Math.round(activeRain)} mm. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} requires significantly fewer supplemental irrigations than flood-irrigated winter Boro rice, reducing diesel pumping and conserving precious groundwater according to BARI guidelines.`
+                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${(activeSoil !== null ? activeSoil.toFixed(2) : 'N/A')} m³/m³ এবং ৩০ দিনের মোট বৃষ্টিপাত ${Math.round(activeRain)} মিমি। বিএআরআই নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে অনেক কম সেচ লাগে, যা ডিজেল পাম্পিং কমায় এবং ভূগর্ভস্থ পানি সংরক্ষণ করে।`}
                     </p>
                   </div>
 
@@ -719,27 +726,70 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}</span>
-                      <span className="text-[#B8FF3D] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture Snapshot">NASA SMAP (Snapshot)</span>
+                      <span className="text-[#B8FF3D] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture">
+                        {whatIfActive
+                          ? (language === 'en' ? 'NASA SMAP · Simulated' : 'নাসা স্ম্যাপ · সিমুলেশন')
+                          : smapData
+                          ? `NASA SMAP · ${smapData.date} (${smapData.pass})`
+                          : (language === 'en' ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')}
+                      </span>
                     </div>
-                    <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
-                      {Math.round(activeSoil * 100)}% <span className="text-xs text-slate-400 font-normal font-mono">({activeSoil.toFixed(2)} m³/m³)</span>
+                    <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display flex items-baseline gap-2">
+                      {whatIfActive ? (
+                        <>
+                          {Math.round(simSoil * 100)}%{' '}
+                          <span className="text-xs text-slate-400 font-normal font-mono">({simSoil.toFixed(2)} m³/m³)</span>
+                        </>
+                      ) : smapData ? (
+                        <>
+                          {Math.round(smapData.value * 100)}%{' '}
+                          <span className="text-xs text-slate-400 font-normal font-mono">({smapData.value.toFixed(2)} m³/m³)</span>
+                        </>
+                      ) : (
+                        <span className="text-lg text-slate-400 font-normal font-mono">
+                          {language === 'en' ? 'No data' : 'তথ্য নেই'}
+                        </span>
+                      )}
                     </div>
+                    {!whatIfActive && isSoilFlaggedWater && (
+                      <div className="mt-1 text-[11px] text-amber-400 font-medium">
+                        {language === 'en' ? '⚠ may include open water' : '⚠ উন্মুক্ত জলাশয় অন্তর্ভুক্ত থাকতে পারে'}
+                      </div>
+                    )}
                     {/* Gauge bar */}
-                    <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${
-                          activeSoil < 0.15 ? 'bg-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'bg-[#B8FF3D]' : 'bg-[#00E5FF]'
-                        }`}
-                        style={{ width: `${Math.min(100, Math.max(10, (activeSoil / 0.40) * 100))}%` }}
-                      />
-                    </div>
+                    {(whatIfActive || smapData) && (
+                      <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${
+                            (whatIfActive ? simSoil : smapData!.value) < 0.15
+                              ? 'bg-[#FF5C5C]'
+                              : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                              ? 'bg-[#B8FF3D]'
+                              : 'bg-[#00E5FF]'
+                          }`}
+                          style={{ width: `${Math.min(100, Math.max(10, ((whatIfActive ? simSoil : smapData!.value) / 0.40) * 100))}%` }}
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="mt-2 text-xs text-slate-400 flex items-center justify-between">
                     <span>{language === 'en' ? 'Status:' : 'অবস্থা:'}</span>
-                    <span className={`font-semibold ${activeSoil < 0.15 ? 'text-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'text-[#B8FF3D]' : 'text-[#00E5FF]'}`}>
-                      {activeSoil < 0.15
+                    <span
+                      className={`font-semibold ${
+                        !whatIfActive && !smapData
+                          ? 'text-slate-400'
+                          : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                          ? 'text-[#FF5C5C]'
+                          : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                          ? 'text-[#B8FF3D]'
+                          : 'text-[#00E5FF]'
+                      }`}
+                    >
+                      {!whatIfActive && !smapData
+                        ? (language === 'en' ? 'No data' : 'তথ্য নেই')
+                        : (whatIfActive ? simSoil : smapData!.value) < 0.15
                         ? (language === 'en' ? 'Deficit' : 'ঘাটতি')
-                        : activeSoil >= 0.25 && activeSoil <= 0.30
+                        : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
                         ? (language === 'en' ? 'Optimal' : 'বপন উপযোগী')
                         : (language === 'en' ? 'Adequate' : 'পর্যাপ্ত')}
                     </span>
@@ -1000,7 +1050,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <button
                           type="button"
                           onClick={() => {
-                            setSimSoil(sat.soil);
+                            setSimSoil(smapData?.value ?? 0.22);
                             setSimRain(Math.round(conditions.rain30));
                             setSimMaxTemp(Math.round(conditions.tMax30));
                           }}
@@ -1193,41 +1243,93 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
-                        sourceName="NASA SMAP (Snapshot)"
-                        status={whatIfActive ? 'simulated' : 'snapshot'}
-                        date={whatIfActive ? 'Simulated' : sat.date}
+                        sourceName="NASA SMAP"
+                        status={whatIfActive ? 'simulated' : smapData ? 'snapshot' : 'unavailable'}
+                        customLabel={
+                          whatIfActive
+                            ? (language === 'en' ? 'NASA SMAP · Simulated' : 'নাসা স্ম্যাপ · সিমুলেশন')
+                            : smapData
+                            ? `NASA SMAP · ${smapData.date} (${smapData.pass})`
+                            : (language === 'en' ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')
+                        }
                         language={language}
                       />
-                      <span className={`font-mono text-xs font-semibold ${
-                        activeSoil < 0.15 ? 'text-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'text-[#B8FF3D]' : 'text-[#00E5FF]'
-                      }`}>
-                        {activeSoil < 0.15
-                           ? (language === 'en' ? 'Moisture Deficit' : 'আর্দ্রতা ঘাটতি')
-                          : activeSoil >= 0.25 && activeSoil <= 0.30
+                      <span
+                        className={`font-mono text-xs font-semibold ${
+                          !whatIfActive && !smapData
+                            ? 'text-slate-400'
+                            : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                            ? 'text-[#FF5C5C]'
+                            : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                            ? 'text-[#B8FF3D]'
+                            : 'text-[#00E5FF]'
+                        }`}
+                      >
+                        {!whatIfActive && !smapData
+                          ? (language === 'en' ? 'No data' : 'তথ্য নেই')
+                          : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                          ? (language === 'en' ? 'Moisture Deficit' : 'আর্দ্রতা ঘাটতি')
+                          : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
                           ? (language === 'en' ? 'Optimal Sowing' : 'বপন উপযোগী')
                           : (language === 'en' ? 'Adequate' : 'পর্যাপ্ত')}
                       </span>
                     </div>
 
-                    <div className="font-mono text-4xl font-bold text-white mb-1">
-                      {Math.round(activeSoil * 100)}% <span className="text-xs text-slate-400 font-normal font-mono">({activeSoil.toFixed(2)} m³/m³)</span>
+                    <div className="font-mono text-4xl font-bold text-white mb-1 flex items-baseline gap-2">
+                      {whatIfActive ? (
+                        <>
+                          {Math.round(simSoil * 100)}%{' '}
+                          <span className="text-xs text-slate-400 font-normal font-mono">({simSoil.toFixed(2)} m³/m³)</span>
+                        </>
+                      ) : smapData ? (
+                        <>
+                          {Math.round(smapData.value * 100)}%{' '}
+                          <span className="text-xs text-slate-400 font-normal font-mono">({smapData.value.toFixed(2)} m³/m³)</span>
+                        </>
+                      ) : (
+                        <span className="text-2xl text-slate-400 font-normal font-mono">
+                          {language === 'en' ? 'No data' : 'তথ্য নেই'}
+                        </span>
+                      )}
                     </div>
-                    <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${
-                          activeSoil < 0.15 ? 'bg-[#FF5C5C]' : activeSoil >= 0.25 && activeSoil <= 0.30 ? 'bg-[#B8FF3D]' : 'bg-[#00E5FF]'
-                        }`}
-                        style={{ width: `${Math.min(100, Math.max(10, (activeSoil / 0.40) * 100))}%` }}
-                      />
-                    </div>
-                    <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
-                      <span className={activeSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
-                      <span className={activeSoil >= 0.25 && activeSoil <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Target (0.25–0.30)</span>
-                    </div>
+
+                    {!whatIfActive && isSoilFlaggedWater && (
+                      <div className="mb-2 text-xs text-amber-400 font-medium">
+                        {language === 'en' ? '⚠ may include open water' : '⚠ উন্মুক্ত জলাশয় অন্তর্ভুক্ত থাকতে পারে'}
+                      </div>
+                    )}
+
+                    {(whatIfActive || smapData) && (
+                      <>
+                        <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${
+                              (whatIfActive ? simSoil : smapData!.value) < 0.15
+                                ? 'bg-[#FF5C5C]'
+                                : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                                ? 'bg-[#B8FF3D]'
+                                : 'bg-[#00E5FF]'
+                            }`}
+                            style={{ width: `${Math.min(100, Math.max(10, ((whatIfActive ? simSoil : smapData!.value) / 0.40) * 100))}%` }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
+                          <span className={(whatIfActive ? simSoil : smapData!.value) < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
+                          <span className={(whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Target (0.25–0.30)</span>
+                        </div>
+                      </>
+                    )}
+
                     <p className="text-xs text-slate-300 mt-3 leading-relaxed">
                       {language === 'en'
-                        ? '0–5 cm rootzone layer measured by L-band radiometer. Evaluates seed germination and shallow vs deep taproot crops.'
-                        : '০–৫ সেমি শিকড় স্তরের আর্দ্রতা। বীজ গজানো ও ফসলের শিকড় প্রসারণের সক্ষমতা নির্দেশ করে।'}
+                        ? '0–5 cm rootzone layer measured by L-band radiometer (~1.4 GHz, penetrates clouds). Evaluates seed germination and shallow vs deep taproot crops.'
+                        : '০–৫ সেমি শিকড় স্তরের আর্দ্রতা (L-ব্যান্ড রেডিওমিটার, মেঘ ভেদ করতে সক্ষম)। বীজ গজানো ও ফসলের শিকড় প্রসারণের সক্ষমতা নির্দেশ করে।'}
+                    </p>
+
+                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                      {language === 'en'
+                        ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
+                        : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
@@ -1239,13 +1341,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 {/* 3. Temperature & Biosphere */}
                 <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <DataTileStatusBadge
-                        sourceName="NASA MODIS (Snapshot)"
-                        status={whatIfActive ? 'simulated' : 'snapshot'}
-                        date={whatIfActive ? 'Simulated' : sat.date}
-                        language={language}
-                      />
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <DataTileStatusBadge
+                          sourceName="NASA MODIS NDVI"
+                          status={ndviData ? 'snapshot' : 'unavailable'}
+                          customLabel={
+                            ndviData
+                              ? `NASA MODIS NDVI · 16-day from ${ndviData.periodStart}`
+                              : (language === 'en' ? 'NASA MODIS NDVI · No data' : 'নাসা মোডিস NDVI · তথ্য নেই')
+                          }
+                          language={language}
+                        />
+                        <DataTileStatusBadge
+                          sourceName="NASA MODIS LST"
+                          status={lstDayData ? 'snapshot' : 'unavailable'}
+                          customLabel={
+                            lstDayData
+                              ? `NASA MODIS LST · 8-day from ${lstDayData.periodStart}`
+                              : (language === 'en' ? 'NASA MODIS LST · No data' : 'নাসা মোডিস LST · তথ্য নেই')
+                          }
+                          language={language}
+                        />
+                      </div>
                       <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
                         {activeMaxTemp > 35
                           ? (language === 'en' ? 'Heat Stress (>35°C)' : 'তাপপ্রবাহ সতর্কতা (>৩৫° সে.)')
@@ -1258,13 +1376,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
                     <p className="text-xs text-slate-300 mt-3 leading-relaxed">
                       {language === 'en'
-                        ? `Vegetation index is ${sat.ndvi} NDVI. Daytime thermal reading is ${sat.lst}°C, monitored for flowering heat sensitivity.`
-                        : `উদ্ভিদ সজীবতা সূচক ${sat.ndvi} NDVI। ভূ-পৃষ্ঠের তাপমাত্রা ${sat.lst}°C, ফুল ফোটা ও দানা বাঁধার জন্য পর্যবেক্ষণাধীন।`}
+                        ? `Vegetation index is ${ndviData ? `${ndviData.value.toFixed(2)} NDVI` : 'unavailable (cloud cover across composite)'}. Daytime land surface thermal reading is ${lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'unavailable'}, monitored for flowering heat sensitivity.`
+                        : `উদ্ভিদ সজীবতা সূচক ${ndviData ? `${ndviData.value.toFixed(2)} NDVI` : 'অনুপলব্ধ (মেঘের আচ্ছাদন)'}। ভূ-পৃষ্ঠের তাপমাত্রা ${lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'অনুপলব্ধ'}, ফুল ফোটা ও দানা বাঁধার জন্য পর্যবেক্ষণাধীন।`}
+                    </p>
+
+                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                      {language === 'en'
+                        ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
+                        : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
-                    <span>MODIS Surface Temp</span>
-                    <span className="text-white font-semibold">{sat.lst}°C</span>
+                    <span>MODIS Surface Temp (Day / Night)</span>
+                    <span className="text-white font-semibold">
+                      {lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'N/A'} / {lstNightData ? `${lstNightData.value.toFixed(1)}°C` : 'N/A'}
+                    </span>
                   </div>
                 </div>
               </div>

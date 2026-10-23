@@ -330,3 +330,39 @@ test('11. Inactive decision rules: all 5 rules defined, marked active: false wit
     assert.ok(rule.suggestion_bn.length > 0);
   }
 });
+
+test('12. Missing or flagged soil moisture (soil: null) skips soil rules cleanly', () => {
+  const boro = cropById('boro');
+  const mustard = cropById('mustard');
+
+  const nullSoilInput = {
+    conditions: {
+      rain30: 30, // < 50mm, dry
+      tMax30: 28,
+      tMaxAvg: 26,
+      rh: 70,
+      et0: 3.0,
+      et0Total: 90,
+      waterBalance: -60,
+      from: '2026-09-01',
+      to: '2026-09-30',
+    },
+    soil: null,
+    shift,
+    forecast: cache.forecast,
+    priority: 'water' as const,
+  };
+
+  const alerts = computeAlerts(nullSoilInput);
+  assert.ok(!alerts.some((a) => a.code === 'lowWater'), 'Should not trigger lowWater alert when soil is null');
+
+  const boroScore = scoreCrop(boro, 'rabi', true, nullSoilInput, alerts);
+  assert.ok(!boroScore.reasons.some((r) => r.source === 'SMAP'), 'Should not apply SMAP reasons when soil is null');
+
+  const mustardScore = scoreCrop(mustard, 'rabi', true, nullSoilInput, alerts);
+  assert.equal(mustardScore.optimalSowing, false, 'optimalSowing should be false when soil is null');
+  assert.ok(!mustardScore.reasons.some((r) => r.source === 'SMAP'), 'Should not apply SMAP reasons when soil is null');
+
+  const result = runEngine(nullSoilInput);
+  assert.ok(result.picks.length === 3, 'Engine should successfully recommend 3 seasons even when soil is null');
+});

@@ -158,7 +158,7 @@ export interface Alert {
 
 export interface EngineInput {
   conditions: Conditions;
-  soil: number; // SMAP (or what-if) soil moisture, m³/m³
+  soil: number | null; // SMAP (or what-if) soil moisture, m³/m³; null if unavailable or water-flagged
   shift: FieldShift;
   forecast: ForecastDay[];
   priority: Priority;
@@ -199,7 +199,7 @@ export function computeAlerts(inp: EngineInput): Alert[] {
   if (c.tMax30 > RULES.heatC) alerts.push({ code: 'heat', source: 'POWER', v: { t: round1(c.tMax30) } });
   else if (fMax > RULES.heatC) alerts.push({ code: 'heat', source: 'OpenMeteo', v: { t: round1(fMax) } });
 
-  if (c.rain30 < RULES.dryRainMm && soil < RULES.drySoil)
+  if (soil !== null && c.rain30 < RULES.dryRainMm && soil < RULES.drySoil)
     alerts.push({ code: 'lowWater', source: 'SMAP', v: { rain: Math.round(c.rain30), soil } });
 
   const rain7 = forecast.reduce((a, d) => a + d.rain, 0);
@@ -251,15 +251,17 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
     const { rain30, waterBalance } = inp.conditions;
     const soil = inp.soil;
 
-    // 4. DRY RULE: 30-day rain < 50 mm AND soil < 0.15 -> thirsty crops lose points.
-    if (rain30 < RULES.dryRainMm && soil < RULES.drySoil && crop.water !== 'low')
-      add('dry', crop.water === 'high' ? -20 : -8, 'SMAP', { rain: Math.round(rain30), soil });
+    // 4. DRY RULE & 5. Soil moisture at sowing.
+    // If soil is null (or flagged as possible water contamination), skip soil rules cleanly.
+    if (soil !== null) {
+      if (rain30 < RULES.dryRainMm && soil < RULES.drySoil && crop.water !== 'low')
+        add('dry', crop.water === 'high' ? -20 : -8, 'SMAP', { rain: Math.round(rain30), soil });
 
-    // 5. Soil moisture at sowing.
-    const optimal = soil >= RULES.optimalSoil[0] && soil <= RULES.optimalSoil[1];
-    if (optimal) add('soilOptimal', 5, 'SMAP', { soil });
-    if (soil >= crop.soilMin && soil <= crop.soilMax) add('soilFit', 5, 'SMAP', { soil, min: crop.soilMin, max: crop.soilMax });
-    else if (soil < crop.soilMin - 0.05 || soil > crop.soilMax + 0.05) add('soilOff', -5, 'SMAP', { soil, min: crop.soilMin, max: crop.soilMax });
+      const optimal = soil >= RULES.optimalSoil[0] && soil <= RULES.optimalSoil[1];
+      if (optimal) add('soilOptimal', 5, 'SMAP', { soil });
+      if (soil >= crop.soilMin && soil <= crop.soilMax) add('soilFit', 5, 'SMAP', { soil, min: crop.soilMin, max: crop.soilMax });
+      else if (soil < crop.soilMin - 0.05 || soil > crop.soilMax + 0.05) add('soilOff', -5, 'SMAP', { soil, min: crop.soilMin, max: crop.soilMax });
+    }
 
     // 6. Water balance: rain minus crop water demand (ET₀) over 30 days.
     if (waterBalance < RULES.deficitMm && crop.water === 'high') add('deficit', -5, 'POWER', { balance: Math.round(waterBalance) });

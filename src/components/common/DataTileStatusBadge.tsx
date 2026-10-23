@@ -7,6 +7,7 @@ export interface DataTileStatusBadgeProps {
   sourceName: string; // e.g. "NASA GPM", "NASA SMAP", "NASA POWER"
   status: TelemetryDataMode;
   date?: string | Date; // ISO string, date object, or formatted date string
+  customLabel?: string;
   language?: Language;
   className?: string;
 }
@@ -42,6 +43,7 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
   sourceName,
   status,
   date,
+  customLabel,
   language = 'en',
   className = '',
 }) => {
@@ -82,14 +84,20 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
   return (
     <div
       className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md border font-mono text-[10px] font-semibold tracking-wide ${statusStyles.badge} ${className}`}
-      title={`${sourceName} · ${status.toUpperCase()} · ${formattedDate}`}
+      title={customLabel ?? `${sourceName} · ${status.toUpperCase()} · ${formattedDate}`}
     >
       <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusStyles.dot}`} />
-      <span className="font-bold">{sourceName}</span>
-      <span className="opacity-40">·</span>
-      <span className="uppercase">{statusLabel}</span>
-      <span className="opacity-40">·</span>
-      <span className="text-white/80 tabular-nums">{formattedDate}</span>
+      {customLabel ? (
+        <span className="font-semibold">{customLabel}</span>
+      ) : (
+        <>
+          <span className="font-bold">{sourceName}</span>
+          <span className="opacity-40">·</span>
+          <span className="uppercase">{statusLabel}</span>
+          <span className="opacity-40">·</span>
+          <span className="text-white/80 tabular-nums">{formattedDate}</span>
+        </>
+      )}
     </div>
   );
 };

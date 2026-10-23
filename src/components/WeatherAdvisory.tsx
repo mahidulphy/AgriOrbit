@@ -26,7 +26,7 @@ import { computeForecastMetrics } from '../services/weatherForecast';
 import { DataTileStatusBadge } from './common/DataTileStatusBadge';
 import fallbackRangpur from '../data/fallback-rangpur.json';
 import type { LocationCache } from '../lib/power';
-import { SATELLITE_BY_DIVISION } from '../data/satellite';
+import { getDistrictSatellite } from '../data/satellite';
 import { getDistrictAdmin } from '../data/districts';
 
 export interface WeatherAdvisoryProps {
@@ -34,7 +34,7 @@ export interface WeatherAdvisoryProps {
   upazilaName?: string;
   lat?: number;
   lng?: number;
-  soilMoisture?: number;
+  soilMoisture?: number | null;
   priority?: FarmerPriorityId;
   language?: Language;
   onDismiss?: () => void;
@@ -76,7 +76,10 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
   const isEn = language === 'en';
   const admin = getDistrictAdmin(districtId);
-  const sat = (admin && SATELLITE_BY_DIVISION[admin.division]) ?? SATELLITE_BY_DIVISION['Rangpur'];
+  const districtSat = getDistrictSatellite(districtId);
+  const smapRecord = districtSat?.smap ?? null;
+  const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination';
+  const effectiveSoilMoisture = (soilMoisture !== undefined && soilMoisture !== null) ? soilMoisture : (smapRecord?.value ?? 0.22);
 
   // Instant deterministic initial advisory from bundled snapshot to guarantee zero blank screens
   const defaultInitialAdvisory = useMemo(() => {
@@ -119,7 +122,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
     return evaluateWeatherAdvisory({
       gpm,
       forecast,
-      soilMoisture,
+      soilMoisture: effectiveSoilMoisture,
       districtId,
       upazilaName,
       farmerPriority: priority,
@@ -131,7 +134,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
     let isCancelled = false;
     setIsLoading(true);
 
-    getWeatherAdvisoryForLocation(districtId, lat, lng, soilMoisture, priority, {
+    getWeatherAdvisoryForLocation(districtId, lat, lng, effectiveSoilMoisture, priority, {
       upazilaName,
     })
       .then((res) => {
@@ -368,9 +371,13 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
-                      sourceName="NASA SMAP (Snapshot)"
-                      status="snapshot"
-                      date={sat.date}
+                      sourceName="NASA SMAP"
+                      status={smapRecord ? 'snapshot' : 'unavailable'}
+                      customLabel={
+                        smapRecord
+                          ? `NASA SMAP · ${smapRecord.date} (${smapRecord.pass})`
+                          : (isEn ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')
+                      }
                       language={language}
                     />
                     <span className="text-[10px] font-mono text-[#8FA3B8]">SPL3SMP_E (9km)</span>
@@ -382,21 +389,39 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="font-mono text-2xl font-bold text-white">
-                      {isEn ? activeAdvisory.fieldCondition.soilMoistureStatus : activeAdvisory.fieldCondition.soilMoistureStatusBn}
+                      {smapRecord ? (
+                        `${smapRecord.value.toFixed(2)} m³/m³`
+                      ) : (
+                        <span className="text-base text-slate-400 font-normal">{isEn ? 'No data' : 'তথ্য নেই'}</span>
+                      )}
                     </span>
-                    <span className="text-xs font-mono text-[#00E5FF]">
-                      {activeAdvisory.fieldCondition.soilMoistureValue.toFixed(2)} m³/m³
-                    </span>
+                    {isSoilFlaggedWater && (
+                      <span className="text-[10px] font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.5 rounded">
+                        {isEn ? 'may include open water' : 'উন্মুক্ত জলাশয় অন্তর্ভুক্ত থাকতে পারে'}
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-xs text-[#8FA3B8] mt-2 leading-relaxed">
-                    {isEn ? activeAdvisory.fieldCondition.rootZoneInsightEn : activeAdvisory.fieldCondition.rootZoneInsightBn}
+                    {smapRecord
+                      ? (isEn ? activeAdvisory.fieldCondition.rootZoneInsightEn : activeAdvisory.fieldCondition.rootZoneInsightBn)
+                      : (isEn ? 'No recommended quality observation in the last 14 days (water fraction, dense vegetation, or RFI).' : 'বিগত ১৪ দিনে কোনো গ্রহণযোগ্য মানের পর্যবেক্ষণ পাওয়া যায়নি (অতিরিক্ত জলাশয় বা ঘন বনায়ন)।')}
+                  </p>
+
+                  <p className="text-[10px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                    {isEn
+                      ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
+                      : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
                   </p>
                 </div>
 
                 <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
                   <span>{isEn ? 'Status' : 'অবস্থা'}</span>
-                  <span className="text-white">{isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn}</span>
+                  <span className="text-white">
+                    {smapRecord
+                      ? (isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn)
+                      : (isEn ? 'No data' : 'তথ্য নেই')}
+                  </span>
                 </div>
               </div>
             </div>

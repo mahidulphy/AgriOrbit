@@ -94,8 +94,8 @@ const en = {
     items: [
       { name: 'NASA POWER · daily', what: 'Rain, temperature, humidity', how: 'Also used to estimate crop water need (ET₀, Hargreaves method).', status: 'live' },
       { name: 'NASA POWER · monthly', what: 'Climate history, 2001 → today', how: 'Powers the Field Shift comparison.', status: 'live' },
-      { name: 'NASA SMAP', what: 'Soil moisture (m³/m³)', how: 'Sample values for now. Real NASA data coming soon.', status: 'snapshot' },
-      { name: 'NASA MODIS', what: 'Vegetation (NDVI) and land temperature', how: 'Sample values for now. Real NASA data coming soon.', status: 'snapshot' },
+      { name: 'NASA SMAP', what: 'Soil moisture (m³/m³)', how: 'NASA SMAP & MODIS, observed Sep–Oct 2026.', status: 'snapshot' },
+      { name: 'NASA MODIS', what: 'Vegetation (NDVI) and land temperature', how: 'NASA SMAP & MODIS, observed Sep–Oct 2026.', status: 'snapshot' },
       { name: 'Open-Meteo', what: '7-day weather forecast', how: 'Not NASA, credited separately. Fills the 2–3 day gap and looks ahead.', status: 'live' },
       { name: 'BARI & BRRI guidelines', what: 'Crop rules for Bangladesh', how: 'Published crop guidance from BARI and BRRI (no partnership).', status: 'guidance' },
     ] as { name: string; what: string; how: string; status: 'live' | 'snapshot' | 'guidance' }[],
@@ -334,8 +334,8 @@ const bn: Dict = {
     items: [
       { name: 'নাসা পাওয়ার · দৈনিক', what: 'বৃষ্টি, তাপমাত্রা, আর্দ্রতা', how: 'ফসলের পানির চাহিদা (ET₀, হারগ্রিভস পদ্ধতি) হিসাবেও ব্যবহৃত।', status: 'live' },
       { name: 'নাসা পাওয়ার · মাসিক', what: 'জলবায়ুর ইতিহাস, ২০০১ → আজ', how: 'ফিল্ড শিফট তুলনা এখান থেকে।', status: 'live' },
-      { name: 'নাসা স্ম্যাপ', what: 'মাটির আর্দ্রতা (m³/m³)', how: 'আপাতত নমুনা মান। আসল নাসা উপাত্ত শীঘ্রই আসছে।', status: 'snapshot' },
-      { name: 'নাসা মোডিস', what: 'গাছপালা (NDVI) ও ভূমির তাপমাত্রা', how: 'আপাতত নমুনা মান। আসল নাসা উপাত্ত শীঘ্রই আসছে।', status: 'snapshot' },
+      { name: 'নাসা স্ম্যাপ', what: 'মাটির আর্দ্রতা (m³/m³)', how: 'নাসা স্ম্যাপ ও মোডিস, পর্যবেক্ষণ সেপ্টেম্বর–অক্টোবর ২০২৬।', status: 'snapshot' },
+      { name: 'নাসা মোডিস', what: 'গাছপালা (NDVI) ও ভূমির তাপমাত্রা', how: 'নাসা স্ম্যাপ ও মোডিস, পর্যবেক্ষণ সেপ্টেম্বর–অক্টোবর ২০২৬।', status: 'snapshot' },
       { name: 'ওপেন-মেটিও', what: '৭ দিনের আবহাওয়া পূর্বাভাস', how: 'নাসার নয়, আলাদাভাবে কৃতজ্ঞতা জানানো হলো। ২–৩ দিনের ঘাটতি পূরণ করে, সামনে দেখায়।', status: 'live' },
       { name: 'বারি ও ব্রি নির্দেশিকা', what: 'বাংলাদেশের ফসলের নিয়ম', how: 'বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (বারি) ও বাংলাদেশ ধান গবেষণা ইনস্টিটিউটের (ব্রি) প্রকাশিত নির্দেশিকা (কোনো অংশীদারিত্ব নেই)।', status: 'guidance' },
     ],

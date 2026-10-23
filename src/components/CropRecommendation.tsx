@@ -43,10 +43,10 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
     telemetry?.rainfall30d !== undefined &&
     telemetry?.soilMoisture !== undefined &&
     telemetry.rainfall30d < 50 &&
-    telemetry.soilMoisture < 0.15;
+    telemetry.soilMoisture !== null && telemetry.soilMoisture < 0.15;
   const isOptimalSowing =
     telemetry?.soilMoisture !== undefined &&
-    telemetry.soilMoisture >= 0.25 &&
+    telemetry.soilMoisture !== null && telemetry.soilMoisture >= 0.25 &&
     telemetry.soilMoisture <= 0.30;
   const isHot =
     telemetry?.maxTemp !== undefined &&

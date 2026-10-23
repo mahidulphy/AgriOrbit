@@ -1,0 +1,1169 @@
+{
+  "_meta": {
+    "request": "agriorbit_bd_districts_oct2026",
+    "requestId": "3d27655e-9af7-4df5-a83d-9785ec7600b9",
+    "pointType": "district_hq",
+    "products": {
+      "smap": "SPL3SMP_E.006",
+      "ndvi": "MOD13Q1.061",
+      "lst": "MOD11A2.061"
+    },
+    "generatedAt": "2026-10-23T12:39:17.325Z"
+  },
+  "dhaka": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.39,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 31.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "gazipur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.476,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "narayanganj": {
+    "smap": null,
+    "ndvi": null,
+    "lstDay": {
+      "value": 31.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "munshiganj": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.4332,
+      "periodStart": "2026-09-14",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "narsingdi": {
+    "smap": {
+      "value": 0.385,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.5077,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 30.7,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "manikganj": {
+    "smap": {
+      "value": 0.3022,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 11
+    },
+    "ndvi": {
+      "value": 0.6698,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.9,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "tangail": {
+    "smap": {
+      "value": 0.3231,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 13
+    },
+    "ndvi": {
+      "value": 0.3612,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "kishoreganj": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7183,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.1,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "faridpur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5834,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "rajbari": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7645,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "shariatpur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7617,
+      "periodStart": "2026-09-14",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 27.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.2,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "madaripur": {
+    "smap": {
+      "value": 0.3397,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 11
+    },
+    "ndvi": {
+      "value": 0.5019,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "gopalganj": {
+    "smap": {
+      "value": 0.5697,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 11,
+      "flag": "possible_water_contamination"
+    },
+    "ndvi": {
+      "value": 0.5013,
+      "periodStart": "2026-09-14",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "chattogram": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.4133,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 27,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "coxsbazar": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.677,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.5,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "cumilla": {
+    "smap": {
+      "value": 0.31,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.5573,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30.8,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 27.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "chandpur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.4859,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "noakhali": {
+    "smap": {
+      "value": 0.31,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.6139,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.1,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "feni": {
+    "smap": {
+      "value": 0.2768,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 8
+    },
+    "ndvi": {
+      "value": 0.4384,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30.7,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "lakshmipur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5501,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.8,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "brahmanbaria": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5921,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.9,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "rangamati": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.3198,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "khagrachari": {
+    "smap": {
+      "value": 0.211,
+      "date": "2026-10-20",
+      "pass": "AM",
+      "recentCount": 12
+    },
+    "ndvi": {
+      "value": 0.7918,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "bandarban": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6323,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.9,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "rajshahi": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6808,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.7,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "bogura": {
+    "smap": {
+      "value": 0.1933,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.3933,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 30.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "pabna": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6347,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.9,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "sirajganj": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5546,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29.5,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "natore": {
+    "smap": {
+      "value": 0.2939,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 6
+    },
+    "ndvi": {
+      "value": 0.5746,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 28.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.2,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "naogaon": {
+    "smap": {
+      "value": 0.2248,
+      "date": "2026-10-14",
+      "pass": "AM",
+      "recentCount": 3
+    },
+    "ndvi": {
+      "value": 0.5314,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.2,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "chapainawabganj": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5944,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 28.7,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "joypurhat": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.744,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 27.5,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 24.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "khulna": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.53,
+      "periodStart": "2026-09-14",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 27.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "jashore": {
+    "smap": {
+      "value": 0.2948,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.6099,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "satkhira": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6458,
+      "periodStart": "2026-09-14",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "bagerhat": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7055,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "kushtia": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6659,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "jhenaidah": {
+    "smap": {
+      "value": 0.2337,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.7269,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.4,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "magura": {
+    "smap": {
+      "value": 0.296,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 11
+    },
+    "ndvi": {
+      "value": 0.5307,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.1,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "narail": {
+    "smap": {
+      "value": 0.4136,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 11
+    },
+    "ndvi": {
+      "value": 0.6601,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "meherpur": {
+    "smap": {
+      "value": 0.2696,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.7674,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "chuadanga": {
+    "smap": {
+      "value": 0.2594,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.5244,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.9,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "barishal": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7122,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "patuakhali": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6184,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 27.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "bhola": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.8722,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.8,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "pirojpur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.8093,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 27.7,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.2,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "jhalokati": {
+    "smap": {
+      "value": 0.3521,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.5866,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 28.3,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "barguna": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6834,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "sylhet": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5321,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 31,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 27.8,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "moulvibazar": {
+    "smap": {
+      "value": 0.2681,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 9
+    },
+    "ndvi": {
+      "value": 0.7337,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.8,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "habiganj": {
+    "smap": {
+      "value": 0.206,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.6337,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.8,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "sunamganj": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.4631,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 29,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "rangpur": {
+    "smap": {
+      "value": 0.2145,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 3
+    },
+    "ndvi": {
+      "value": 0.6866,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 27.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 23.8,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "dinajpur": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.5858,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 24.8,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "kurigram": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6886,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.5,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 23.9,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "gaibandha": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.6125,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 28.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "lalmonirhat": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.8305,
+      "periodStart": "2026-09-30",
+      "reliability": 0
+    },
+    "lstDay": {
+      "value": 26.2,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 23.7,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "nilphamari": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.619,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 24.6,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "panchagarh": {
+    "smap": {
+      "value": 0.1672,
+      "date": "2026-10-17",
+      "pass": "AM",
+      "recentCount": 6
+    },
+    "ndvi": {
+      "value": 0.6579,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.6,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 24.5,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "thakurgaon": {
+    "smap": null,
+    "ndvi": {
+      "value": 0.7205,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 27.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 24.3,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "mymensingh": {
+    "smap": {
+      "value": 0.2576,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 10
+    },
+    "ndvi": {
+      "value": 0.3906,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.9,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.9,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "jamalpur": {
+    "smap": {
+      "value": 0.216,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 7
+    },
+    "ndvi": {
+      "value": 0.6704,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 28.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.1,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "netrokona": {
+    "smap": {
+      "value": 0.2542,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 8
+    },
+    "ndvi": {
+      "value": 0.5703,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.4,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 26.2,
+      "periodStart": "2026-10-08"
+    }
+  },
+  "sherpur": {
+    "smap": {
+      "value": 0.218,
+      "date": "2026-10-20",
+      "pass": "PM",
+      "recentCount": 7
+    },
+    "ndvi": {
+      "value": 0.5338,
+      "periodStart": "2026-09-30",
+      "reliability": 1
+    },
+    "lstDay": {
+      "value": 29.1,
+      "periodStart": "2026-10-08"
+    },
+    "lstNight": {
+      "value": 25.6,
+      "periodStart": "2026-10-08"
+    }
+  }
+}

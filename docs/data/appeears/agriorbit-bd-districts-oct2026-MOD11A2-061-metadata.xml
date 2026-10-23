@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmi:MI_Metadata
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.isotc211.org/2005/gmi https://ngdc.noaa.gov/metadata/published/xsd/schema.xsd"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:gco="http://www.isotc211.org/2005/gco"
+  xmlns:gmd="http://www.isotc211.org/2005/gmd"
+  xmlns:gmx="http://www.isotc211.org/2005/gmx"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:gss="http://www.isotc211.org/2005/gss"
+  xmlns:gts="http://www.isotc211.org/2005/gts"
+  xmlns:gsr="http://www.isotc211.org/2005/gsr"
+  xmlns:gmi="http://www.isotc211.org/2005/gmi"
+  xmlns:srv="http://www.isotc211.org/2005/srv">
+
+
+  <!-- FILE IDENTIFIER -->
+  <gmd:fileIdentifier>
+    <gco:CharacterString>agriorbit-bd-districts-oct2026-MOD11A2-061-metadata.xml</gco:CharacterString>
+  </gmd:fileIdentifier>
+
+  <!-- METADATA AND RESOURCE LANGUAGE -->
+  <gmd:language>
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng">eng
+    </gmd:LanguageCode>
+  </gmd:language>
+
+  <!-- CHARACTER SET -->
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode
+      codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
+      codeListValue="UTF8">UTF8
+    </gmd:MD_CharacterSetCode>
+  </gmd:characterSet>
+
+  <!-- HIERARCHY LEVEL -->
+  <gmd:hierarchyLevel>
+    <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+                      codeListValue="series">series
+    </gmd:MD_ScopeCode>
+  </gmd:hierarchyLevel>
+
+  <!-- CONTACT INFORMATION -->
+  <gmd:contact>
+    <gmd:CI_ResponsibleParty>
+      <gmd:organisationName>
+        <gco:CharacterString>LP DAAC at The EROS Center</gco:CharacterString>
+      </gmd:organisationName>
+      <gmd:contactInfo>
+        <gmd:CI_Contact>
+          <gmd:phone>
+            <gmd:CI_Telephone>
+              <gmd:voice>
+                <gco:CharacterString>605-594-6116</gco:CharacterString>
+              </gmd:voice>
+              <gmd:voice>
+                <gco:CharacterString>866-573-3222 (866-LPE-DAAC)</gco:CharacterString>
+              </gmd:voice>
+              <gmd:facsimile>
+                <gco:CharacterString>605-594-6963</gco:CharacterString>
+              </gmd:facsimile>
+            </gmd:CI_Telephone>
+          </gmd:phone>
+          <gmd:address>
+            <gmd:CI_Address>
+              <gmd:deliveryPoint>
+                <gco:CharacterString>Mundt Federal Building</gco:CharacterString>
+              </gmd:deliveryPoint>
+              <gmd:city>
+                <gco:CharacterString>Sioux Falls</gco:CharacterString>
+              </gmd:city>
+              <gmd:administrativeArea>
+                <gco:CharacterString>SD</gco:CharacterString>
+              </gmd:administrativeArea>
+              <gmd:postalCode>
+                <gco:CharacterString>57198</gco:CharacterString>
+              </gmd:postalCode>
+              <gmd:country>
+                <gco:CharacterString>United States</gco:CharacterString>
+              </gmd:country>
+              <gmd:electronicMailAddress>
+                <gco:CharacterString>LPDAAC@usgs.gov</gco:CharacterString>
+              </gmd:electronicMailAddress>
+            </gmd:CI_Address>
+          </gmd:address>
+          <gmd:onlineResource>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://lpdaac.usgs.gov/</gmd:URL>
+              </gmd:linkage>
+            </gmd:CI_OnlineResource>
+          </gmd:onlineResource>
+        </gmd:CI_Contact>
+      </gmd:contactInfo>
+      <gmd:role>
+        <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                         codeListValue="pointOfContact" codeSpace="007">pointOfContact
+        </gmd:CI_RoleCode>
+      </gmd:role>
+    </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+
+  <!-- METADATA DATE -->
+  <gmd:dateStamp>
+    <gco:Date>2026-10-23</gco:Date>
+  </gmd:dateStamp>
+
+  <!-- METADATA STANDARD NAME -->
+  <gmd:metadataStandardName>
+    <gco:CharacterString>ISO 19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and gridded data
+    </gco:CharacterString>
+  </gmd:metadataStandardName>
+
+  <!-- METADATA VERSION -->
+  <gmd:metadataStandardVersion>
+    <gco:CharacterString>ISO 19115-2:2009</gco:CharacterString>
+  </gmd:metadataStandardVersion>
+
+  <!-- SPATIAL REPRESENTATION -->
+  <gmd:spatialRepresentationInfo>
+    <gmd:MD_VectorSpatialRepresentation>
+      <gmd:topologyLevel>
+        <gmd:MD_TopologyLevelCode
+          codeList="http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_TopologyLevelCode"
+          codeListValue="geometryOnly">geometryOnly
+        </gmd:MD_TopologyLevelCode>
+      </gmd:topologyLevel>
+      <gmd:geometricObjects>
+        <gmd:MD_GeometricObjects>
+          <gmd:geometricObjectType>
+            <gmd:MD_GeometricObjectTypeCode
+              codeList="http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_GeometricObjectTypeCode"
+              codeListValue="point">point
+            </gmd:MD_GeometricObjectTypeCode>
+          </gmd:geometricObjectType>
+          <gmd:geometricObjectCount>
+            <gco:Integer>64</gco:Integer>
+          </gmd:geometricObjectCount>
+        </gmd:MD_GeometricObjects>
+      </gmd:geometricObjects>
+    </gmd:MD_VectorSpatialRepresentation>
+  </gmd:spatialRepresentationInfo>
+
+  <!-- DATA INFORMATION -->
+  <gmd:identificationInfo>
+    <gmd:MD_DataIdentification>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>MOD11A2.061</gco:CharacterString>
+          </gmd:title>
+          <gmd:alternateTitle>
+            <gco:CharacterString>Land Surface Temperature & Emissivity (LST&E)</gco:CharacterString>
+          </gmd:alternateTitle>
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date>
+                <gco:Date>2026-10-23</gco:Date>
+              </gmd:date>
+              <gmd:dateType>
+                <gmd:CI_DateTypeCode
+                  codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                  codeListValue="creation">creation
+                </gmd:CI_DateTypeCode>
+              </gmd:dateType>
+            </gmd:CI_Date>
+          </gmd:date>
+          <gmd:identifier>
+            <gmd:MD_Identifier>
+              <gmd:code>
+                <gmx:Anchor
+                  xlink:href="https://doi.org/10.5067/MODIS/MOD11A2.061"
+                  xlink:title="DOI"
+                  xlink:actuate="onRequest">
+                    10.5067/MODIS/MOD11A2.061
+                </gmx:Anchor>
+              </gmd:code>
+             </gmd:MD_Identifier>
+          </gmd:identifier>
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString>
+          The Application for Extracting and Exploring Analysis Ready Samples (AppEEARS) offers a simple and efficient
+          way to access and transform geospatial data from a variety of federal data archives. AppEEARS enables users
+          to subset geospatial datasets using spatial, temporal, and band/layer parameters. Two types of sample
+          requests are available: point samples for geographic coordinates and area samples for spatial areas via
+          vector polygons. Sample requests submitted to AppEEARS provide users not only with data values, but also
+          associated quality data values. Interactive visualizations with summary statistics are provided for each
+          sample within the application, which allow users to preview and interact with their samples before
+          downloading their data.
+        </gco:CharacterString>
+      </gmd:abstract>
+      <gmd:resourceConstraints>
+        <gmd:MD_LegalConstraints>
+          <gmd:useLimitation>
+            <gco:CharacterString>Disclaimer - While every effort has been made to ensure that these data are accurate
+              and reliable within the limits of the current state of the art, NASA cannot assume liability for any
+              damages caused by any errors or omissions in the data, nor as a result of the failure of the data to
+              function on a particular system. NASA makes no warranty, expressed or implied, nor does the fact of
+              distribution constitute such a warranty.
+            </gco:CharacterString>
+          </gmd:useLimitation>
+        </gmd:MD_LegalConstraints>
+      </gmd:resourceConstraints>
+      <gmd:spatialResolution>
+        <gmd:MD_Resolution>
+          <gmd:distance>
+            <gco:Distance uom="meters">1000</gco:Distance>
+          </gmd:distance>
+        </gmd:MD_Resolution>
+      </gmd:spatialResolution>
+      <gmd:language>
+        <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng">eng
+        </gmd:LanguageCode>
+      </gmd:language>
+      <gmd:extent>
+        <gmd:EX_Extent>
+          <gmd:temporalElement>
+            <gmd:EX_TemporalExtent>
+              <gmd:extent>
+                <gml:TimeNode gml:id="TemporalGranularity">
+                  <gml:description>8 day</gml:description>
+                </gml:TimeNode>
+              </gmd:extent>
+            </gmd:EX_TemporalExtent>
+          </gmd:temporalElement>
+        </gmd:EX_Extent>
+      </gmd:extent>
+      <gmd:supplementalInformation>
+        <gco:CharacterString>Rahimi, E., & Jung, C. (2026). Global disturbance-recovery atlas v1.0: greenness and land surface temperature trajectories around 7,559 disturbances and matched controls (Version 1.0). Zenodo. https://doi.org/10.5281/ZENODO.23448392
+
+Rahimi, E., & Jung, C. (2026). Global disturbance-recovery atlas v1.0: greenness and land surface temperature trajectories around 7,559 disturbances and matched controls (Version 1.0). Zenodo. https://doi.org/10.5281/ZENODO.23448393
+
+Wan, Z., Hook, S., & Hulley, G. (2021). MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V061. NASA Land Processes Distributed Active Archive Center. https://doi.org/10.5067/MODIS/MOD11A2.061
+
+Matougui, Z. (2024). Jijel province dataset for wildfire susceptibility assessment. PANGAEA. https://doi.org/10.1594/PANGAEA.973698
+
+Xing, Z., Haoyan, Z., & Wei, W. (2023). Remote Sensing Drought Monitoring Dataset based Temperature Vegetation Precipitation Dryness Index (TVPDI) from 2001 to 2021 in China (v2.0) (Version 2.0). Zenodo. https://doi.org/10.5281/ZENODO.7762104
+
+Xing, Z., Haoyan, Z., & Wei, W. (2023). Remote Sensing Drought Monitoring Dataset based Temperature Vegetation Precipitation Dryness Index (TVPDI) from 2001 to 2021 in China (v2.0) (Version 2.0). Zenodo. https://doi.org/10.5281/ZENODO.7762105
+
+Xing, Z., Haoyan, Z., & Wei, W. (2022). Remote Sensing Drought Monitoring Dataset based Temperature Vegetation Precipitation Dryness Index (TVPDI) from 2001 to 2020 in China (Version 1.0). Zenodo. https://doi.org/10.5281/ZENODO.6615934
+
+Xing, Z., Haoyan, Z., & Wei, W. (2022). Remote Sensing Drought Monitoring Dataset based Temperature Vegetation Precipitation Dryness Index (TVPDI) from 2001 to 2020 in China (Version 1.0). Zenodo. https://doi.org/10.5281/ZENODO.6615935. Accessed October 23, 2026.</gco:CharacterString>
+      </gmd:supplementalInformation>
+      <gmd:supplementalInformation>
+        <gco:CharacterString>AppEEARS Team. (2026). Application for Extracting and Exploring Analysis Ready Samples (AppEEARS). Ver. 3.132. NASA EOSDIS Land Processes Distributed Active Archive Center (LP DAAC), USGS/Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, USA. Accessed October 23, 2026. https://appeears.earthdatacloud.nasa.gov</gco:CharacterString>
+      </gmd:supplementalInformation>
+    </gmd:MD_DataIdentification>
+  </gmd:identificationInfo>
+
+  <!-- SOURCE AND PROCESSING INFORMATION -->
+  <gmd:dataQualityInfo>
+    <gmd:DQ_DataQuality>
+      <gmd:scope>
+        <gmd:DQ_Scope>
+          <gmd:level>
+            <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+                              codeListValue="dataset">dataset
+            </gmd:MD_ScopeCode>
+          </gmd:level>
+          <gmd:extent>
+            <gmd:EX_Extent>
+              <gmd:description>
+                <gco:CharacterString>Extracted points</gco:CharacterString>
+              </gmd:description>
+              <gmd:geographicElement>
+                <gmd:EX_BoundingPolygon>
+                  <gmd:polygon>
+                    <gml:MultiPoint gml:id="ID">
+                      <gml:pointMembers>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">dhaka
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.8103 90.4125</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">gazipur
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>24.0023 90.4266</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">narayanganj
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.6239 90.4997</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">munshiganj
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.5529 90.5337</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">narsingdi
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.9227 90.7172</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">manikganj
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.8617 90.0003</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">tangail
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>24.2499 89.9167</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">kishoreganj
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>24.4447 90.7763</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">faridpur
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.6071 89.8426</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">rajbari
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.7132 89.6482</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">shariatpur
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.2423 90.4348</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">madaripur
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.1641 90.1894</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">gopalganj
+                          </gml:identifier>
+                          <gml:name>Dhaka</gml:name>
+                          <gml:pos>23.0055 89.8266</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">chattogram
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>22.3569 91.7832</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">coxsbazar
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>21.4272 92.0058</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">cumilla
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>23.4683 91.1788</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">chandpur
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>23.2333 90.671</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">noakhali
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>22.8698 91.0995</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">feni
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>23.0159 91.3976</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">lakshmipur
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>22.9444 90.8282</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">brahmanbaria
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>23.9575 91.1119</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">rangamati
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>22.7324 92.2985</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">khagrachari
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>23.1193 91.9847</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">bandarban
+                          </gml:identifier>
+                          <gml:name>Chattogram</gml:name>
+                          <gml:pos>22.1951 92.2184</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">rajshahi
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.3745 88.6042</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">bogura
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.851 89.3711</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">pabna
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.0129 89.2598</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">sirajganj
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.4534 89.6991</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">natore
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.4102 89.0076</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">naogaon
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.9132 88.7531</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">chapainawabganj
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>24.5962 88.277</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">joypurhat
+                          </gml:identifier>
+                          <gml:name>Rajshahi</gml:name>
+                          <gml:pos>25.0947 89.0945</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">khulna
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>22.8456 89.5403</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">jashore
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.1697 89.2148</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">satkhira
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>22.7185 89.0707</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">bagerhat
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>22.6516 89.7856</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">kushtia
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.8907 89.1301</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">jhenaidah
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.5454 89.153</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">magura
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.4859 89.4194</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">narail
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.1725 89.5126</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">meherpur
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.7623 88.6318</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">chuadanga
+                          </gml:identifier>
+                          <gml:name>Khulna</gml:name>
+                          <gml:pos>23.6407 88.8417</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">barishal
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.7029 90.3466</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">patuakhali
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.3596 90.3299</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">bhola
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.1785 90.71</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">pirojpur
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.584 89.9723</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">jhalokati
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.6417 90.1987</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">barguna
+                          </gml:identifier>
+                          <gml:name>Barishal</gml:name>
+                          <gml:pos>22.159 90.1278</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">sylhet
+                          </gml:identifier>
+                          <gml:name>Sylhet</gml:name>
+                          <gml:pos>24.8999 91.8721</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">moulvibazar
+                          </gml:identifier>
+                          <gml:name>Sylhet</gml:name>
+                          <gml:pos>24.4829 91.764</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">habiganj
+                          </gml:identifier>
+                          <gml:name>Sylhet</gml:name>
+                          <gml:pos>24.3749 91.4152</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">sunamganj
+                          </gml:identifier>
+                          <gml:name>Sylhet</gml:name>
+                          <gml:pos>25.0711 91.3994</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">rangpur
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.7439 89.2752</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">dinajpur
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.6217 88.6355</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">kurigram
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.8072 89.6292</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">gaibandha
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.3288 89.5281</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">lalmonirhat
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.9923 89.2847</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">nilphamari
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>25.931 88.8562</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">panchagarh
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>26.3411 88.5542</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">thakurgaon
+                          </gml:identifier>
+                          <gml:name>Rangpur</gml:name>
+                          <gml:pos>26.0418 88.4285</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">mymensingh
+                          </gml:identifier>
+                          <gml:name>Mymensingh</gml:name>
+                          <gml:pos>24.7471 90.4203</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">jamalpur
+                          </gml:identifier>
+                          <gml:name>Mymensingh</gml:name>
+                          <gml:pos>24.9376 89.9371</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">netrokona
+                          </gml:identifier>
+                          <gml:name>Mymensingh</gml:name>
+                          <gml:pos>24.8831 90.7297</gml:pos>
+                        </gml:Point>
+                        <gml:Point gml:id="point_1">
+                          <gml:identifier codeSpace="https://appeears.earthdatacloud.nasa.gov/">sherpur
+                          </gml:identifier>
+                          <gml:name>Mymensingh</gml:name>
+                          <gml:pos>25.0203 90.0156</gml:pos>
+                        </gml:Point>
+                      </gml:pointMembers>
+                    </gml:MultiPoint>
+                  </gmd:polygon>
+                </gmd:EX_BoundingPolygon>
+              </gmd:geographicElement>
+              <gmd:temporalElement>
+                <gmd:EX_TemporalExtent>
+                  <gmd:extent>
+                    <gml:TimeInstant gml:id="StartDate">
+                      <gml:name>Start Date</gml:name>
+                      <gml:timePosition>2026-09-01</gml:timePosition>
+                    </gml:TimeInstant>
+                  </gmd:extent>
+                </gmd:EX_TemporalExtent>
+              </gmd:temporalElement>
+              <gmd:temporalElement>
+                <gmd:EX_TemporalExtent>
+                  <gmd:extent>
+                    <gml:TimeInstant gml:id="EndDate">
+                      <gml:timePosition>2026-10-23</gml:timePosition>
+                    </gml:TimeInstant>
+                  </gmd:extent>
+                </gmd:EX_TemporalExtent>
+              </gmd:temporalElement>
+            </gmd:EX_Extent>
+          </gmd:extent>
+        </gmd:DQ_Scope>
+      </gmd:scope>
+      <gmd:lineage>
+        <gmd:LI_Lineage>
+          <gmd:processStep>
+            <gmi:LE_ProcessStep>
+              <gmd:description>
+                <gco:CharacterString>Software Information</gco:CharacterString>
+              </gmd:description>
+              <gmi:processingInformation>
+                <gmi:LE_Processing>
+                  <gmi:identifier>
+                    <gmd:MD_Identifier>
+                      <gmd:code>
+                        <gmx:Anchor
+                          xlink:href="https://appeears.earthdatacloud.nasa.gov/"
+                          xlink:title="AppEEARS"
+                          xlink:actuate="onRequest">
+                            Application for Extracting and Exploring Analysis Ready Samples
+                        </gmx:Anchor>
+                      </gmd:code>
+                    </gmd:MD_Identifier>
+                  </gmi:identifier>
+                  <gmi:softwareReference>
+                    <gmd:CI_Citation>
+                      <gmd:title>
+                        <gco:CharacterString>Application for Extracting and Exploring Analysis Ready Samples</gco:CharacterString>
+                      </gmd:title>
+                      <gmd:alternateTitle>
+                        <gco:CharacterString>AppEEARS</gco:CharacterString>
+                      </gmd:alternateTitle>
+                      <gmd:date>
+                        <gmd:CI_Date>
+                          <gmd:date>
+                            <gco:Date>2026-10-23</gco:Date>
+                          </gmd:date>
+                          <gmd:dateType>
+                            <gmd:CI_DateTypeCode
+                              codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                              codeListValue="creation">creation
+                            </gmd:CI_DateTypeCode>
+                          </gmd:dateType>
+                        </gmd:CI_Date>
+                      </gmd:date>
+                      <gmd:edition>
+                        <gco:CharacterString>3.132</gco:CharacterString>
+                      </gmd:edition>
+                    </gmd:CI_Citation>
+                  </gmi:softwareReference>
+                </gmi:LE_Processing>
+              </gmi:processingInformation>
+            </gmi:LE_ProcessStep>
+          </gmd:processStep>
+          <gmd:source>
+            <gmi:LE_Source>
+              <gmd:sourceCitation>
+                <gmd:CI_Citation>
+                  <gmd:title>
+                    <gmx:FileName src="agriorbit-bd-districts-oct2026-granule-list.txt">Text file with data pool URLs for all source granules used in the extraction</gmx:FileName>
+                  </gmd:title>
+                  <gmd:date>
+                    <gmd:CI_Date>
+                      <gmd:date>
+                        <gco:Date>2026-10-23</gco:Date>
+                      </gmd:date>
+                      <gmd:dateType>
+                        <gmd:CI_DateTypeCode
+                          codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                          codeListValue="creation">creation
+                        </gmd:CI_DateTypeCode>
+                      </gmd:dateType>
+                    </gmd:CI_Date>
+                  </gmd:date>
+                </gmd:CI_Citation>
+              </gmd:sourceCitation>
+            </gmi:LE_Source>
+          </gmd:source>
+        </gmd:LI_Lineage>
+      </gmd:lineage>
+    </gmd:DQ_DataQuality>
+  </gmd:dataQualityInfo>
+
+  <!-- RESOURCE AND METADATA CONSTRAINTS -->
+  <gmd:metadataConstraints>
+    <gmd:MD_LegalConstraints>
+      <gmd:useLimitation>
+        <gco:CharacterString>Disclaimer - While every effort has been made to ensure that these data are accurate
+          and reliable within the limits of the current state of the art, NASA cannot assume liability for any
+          damages caused by any errors or omissions in the data, nor as a result of the failure of the data to
+          function on a particular system. NASA makes no warranty, expressed or implied, nor does the fact of
+          distribution constitute such a warranty.
+        </gco:CharacterString>
+      </gmd:useLimitation>
+    </gmd:MD_LegalConstraints>
+  </gmd:metadataConstraints>
+
+</gmi:MI_Metadata>

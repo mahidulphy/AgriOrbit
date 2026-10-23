@@ -8,7 +8,7 @@ export interface ShortTermRiskAlertProps {
   upazilaName?: string;
   lat?: number;
   lng?: number;
-  soilMoisture?: number;
+  soilMoisture?: number | null;
   priority?: FarmerPriorityId;
   messageEn?: string;
   messageBn?: string;

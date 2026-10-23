@@ -9,7 +9,7 @@ const SECONDARY_WEIGHT = 0.5;
 
 export interface TelemetryContext {
   rainfall30d?: number; // mm
-  soilMoisture?: number; // m³/m³
+  soilMoisture?: number | null; // m³/m³
   maxTemp?: number; // °C
   waterBalance?: number; // rain30 - ET0 in mm
 }
@@ -78,7 +78,7 @@ function evaluateCropWithNasa(
   // ─────────────────────────────────────────────────────────────
     // RULE 1: DRY STRESS PENALTY (Rainfall < 50mm AND Soil Moisture < 0.15)
     // ─────────────────────────────────────────────────────────────
-    if (rain < 50 && soil < 0.15) {
+    if (soil !== null && soil !== undefined && rain < 50 && soil < 0.15) {
       if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice') {
         const penalty = -20;
         score += penalty;
@@ -112,7 +112,7 @@ function evaluateCropWithNasa(
     // ─────────────────────────────────────────────────────────────
     // RULE 2: OPTIMAL SOWING MOISTURE BADGE (Soil 0.25 - 0.30 m³/m³)
     // ─────────────────────────────────────────────────────────────
-    if (soil >= 0.25 && soil <= 0.3) {
+    if (soil !== null && soil !== undefined && soil >= 0.25 && soil <= 0.3) {
       const bonus = 5;
       score += bonus;
       deltas.optimalSowingBonus = bonus;
