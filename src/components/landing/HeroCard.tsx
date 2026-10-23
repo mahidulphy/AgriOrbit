@@ -4,7 +4,7 @@ import type { Conditions } from '../../lib/conditions.ts';
 import type { FieldShift } from '../../lib/fieldShift.ts';
 
 /** Real Rangpur numbers from the bundled NASA POWER snapshot, never invented. */
-export function HeroCard({ conditions: c }: { conditions: Conditions; shift: FieldShift }) {
+export function HeroCard({ conditions: c, isLive = false }: { conditions: Conditions; shift: FieldShift; isLive?: boolean }) {
   const { t, num, date, lang } = useLang();
 
   const toYear = c?.to ? c.to.slice(0, 4) : '';
@@ -14,6 +14,9 @@ export function HeroCard({ conditions: c }: { conditions: Conditions; shift: Fie
     : '';
   const snapshotDateLabel =
     fromFormatted && toFormatted ? t.heroCard.now(fromFormatted, toFormatted) : t.heroCard.unavailable;
+  const liveDateLabel =
+    fromFormatted && toFormatted ? t.heroCard.live(fromFormatted, toFormatted) : 'NASA POWER';
+  const headerLabel = isLive ? liveDateLabel : snapshotDateLabel;
 
   const tiles = [
     { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: t.heroCard.rainDesc, tint: 'text-cyan-300' },
@@ -24,12 +27,19 @@ export function HeroCard({ conditions: c }: { conditions: Conditions; shift: Fie
 
   return (
     <div className="glass p-5 sm:p-6 shadow-2xl border-white/10">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 font-display text-lg font-semibold text-white">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 font-display text-lg font-semibold text-white shrink-0">
           <MapPin className="h-4 w-4 text-lime-300" />
           {t.heroCard.place}
         </div>
-        <span className="chip text-slate-300">{snapshotDateLabel}</span>
+        <span
+          className={`chip whitespace-nowrap transition-colors duration-300 ${
+            isLive ? 'border-lime-300/40 bg-lime-300/10 text-lime-200' : 'text-slate-300'
+          }`}
+        >
+          {isLive && <span className="h-1.5 w-1.5 rounded-full bg-[#B8FF3D] animate-pulse shrink-0" />}
+          {headerLabel}
+        </span>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
@@ -62,9 +72,9 @@ export function HeroCard({ conditions: c }: { conditions: Conditions; shift: Fie
         </a>
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
-        <span>{t.heroCard.source(date(c.from), date(c.to))}</span>
-        <span className="font-mono text-cyan-300/90 text-[11px]">{num(c.rain30, 0)} mm Rain · {num(c.rh, 0)}% RH</span>
+      <div className="mt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+        <span className="truncate">{t.heroCard.source(date(c.from), date(c.to))}</span>
+        <span className="font-mono text-cyan-300/90 text-[11px] whitespace-nowrap shrink-0">{num(c.rain30, 0)} mm Rain · {num(c.rh, 0)}% RH</span>
       </div>
     </div>
   );

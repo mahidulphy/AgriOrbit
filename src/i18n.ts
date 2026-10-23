@@ -30,6 +30,7 @@ const en = {
   heroCard: {
     place: 'Rangpur',
     now: (from?: string, to?: string) => (from && to ? `Snapshot · ${from} – ${to}` : 'Data unavailable'),
+    live: (from?: string, to?: string) => (from && to ? `NASA POWER · ${from} – ${to}` : 'NASA POWER'),
     unavailable: 'Data unavailable',
     rain: '30-Day Rainfall',
     heat: 'Peak Temperature',
@@ -269,6 +270,7 @@ const bn: Dict = {
   heroCard: {
     place: 'রংপুর',
     now: (from?: string, to?: string) => (from && to ? `স্ন্যাপশট · ${from} – ${to}` : 'উপাত্ত পাওয়া যায়নি'),
+    live: (from?: string, to?: string) => (from && to ? `নাসা পাওয়ার · ${from} – ${to}` : 'নাসা পাওয়ার'),
     unavailable: 'উপাত্ত পাওয়া যায়নি',
     rain: '৩০ দিনের মোট বৃষ্টি',
     heat: 'সর্বোচ্চ তাপমাত্রা',

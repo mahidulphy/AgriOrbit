@@ -8,7 +8,7 @@ import { IMAGES } from '../../data/assets.ts';
 
 const SOURCES = ['NASA POWER', 'SMAP', 'MODIS', 'Open-Meteo', 'BARI & BRRI'];
 
-export function Hero({ conditions, shift }: { conditions: Conditions; shift: FieldShift }) {
+export function Hero({ conditions, shift, isLive = false }: { conditions: Conditions; shift: FieldShift; isLive?: boolean }) {
   const { t } = useLang();
 
   return (
@@ -81,7 +81,7 @@ export function Hero({ conditions, shift }: { conditions: Conditions; shift: Fie
         {/* Real Rangpur Snapshot Telemetry Card */}
         <div className="animate-rise [animation-delay:150ms]">
           <div className="animate-float">
-            <HeroCard conditions={conditions} shift={shift} />
+            <HeroCard conditions={conditions} shift={shift} isLive={isLive} />
           </div>
         </div>
       </div>

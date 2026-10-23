@@ -14,20 +14,25 @@ import { BD_DISTRICTS } from '../src/data/districts.ts';
 const all = process.argv.includes('--all');
 const targets = all ? BD_DISTRICTS : BD_DISTRICTS.filter((d) => d.id === 'rangpur');
 
-mkdirSync('public/cache', { recursive: true });
+try {
+  mkdirSync('public/cache', { recursive: true });
 
-for (const d of targets) {
-  // Rangpur uses the project's focus point (25.75, 89.25); others use district HQ.
-  const lat = d.id === 'rangpur' ? 25.75 : Number(d.lat.toFixed(2));
-  const lon = d.id === 'rangpur' ? 89.25 : Number(d.lng.toFixed(2));
-  try {
-    const data = await fetchAll(d.nameEn, lat, lon, 60000);
-    const json = JSON.stringify(data);
-    writeFileSync(`public/cache/${d.id}.json`, json);
-    if (d.id === 'rangpur') writeFileSync('src/data/fallback-rangpur.json', json);
-    console.log(`✓ ${d.nameEn} (${(json.length / 1024).toFixed(0)} KB)`);
-  } catch (err) {
-    console.error(`✗ ${d.nameEn}: ${(err as Error).message}`);
+  for (const d of targets) {
+    // Rangpur uses the project's focus point (25.75, 89.25); others use district HQ.
+    const lat = d.id === 'rangpur' ? 25.75 : Number(d.lat.toFixed(2));
+    const lon = d.id === 'rangpur' ? 89.25 : Number(d.lng.toFixed(2));
+    try {
+      const timeoutMs = all ? 60000 : 15000;
+      const data = await fetchAll(d.nameEn, lat, lon, timeoutMs);
+      const json = JSON.stringify(data);
+      writeFileSync(`public/cache/${d.id}.json`, json);
+      if (d.id === 'rangpur') writeFileSync('src/data/fallback-rangpur.json', json);
+      console.log(`✓ ${d.nameEn} (${(json.length / 1024).toFixed(0)} KB)`);
+    } catch (err) {
+      console.warn(`✗ ${d.nameEn} fetch skipped (keeping existing snapshot): ${(err as Error).message}`);
+    }
+    if (all) await new Promise((r) => setTimeout(r, 1500)); // be polite to NASA's servers
   }
-  if (all) await new Promise((r) => setTimeout(r, 1500)); // be polite to NASA's servers
+} catch (outerErr) {
+  console.warn('scripts/fetch-cache.ts encountered an error (keeping existing snapshot):', outerErr);
 }

@@ -5,6 +5,7 @@
   "type": "module",
   "description": "AgriOrbit - NASA Earth observations for Bangladesh agriculture. Team: Bay of Orbits.",
   "scripts": {
+    "prebuild": "tsx scripts/fetch-cache.ts",
     "dev": "vite --port=3000",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
