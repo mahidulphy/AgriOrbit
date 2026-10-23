@@ -45,7 +45,7 @@ export interface WeatherAdvisoryProps {
  * 2. Field Action Weather Advisory Banner
  *
  * SCIENTIFIC FOUNDATION:
- *   NASA GPM / IMERG (Recent rainfall observation / estimate - ~10km grid)
+ *   NASA POWER (precipitation) (Recent rainfall observation / estimate - ~10km grid)
  *           ↓
  *   Open-Meteo (7-day precipitation forecast)
  *           ↓
@@ -285,7 +285,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
             {/* 3 SCIENTIFIC TILES */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-              {/* TILE 1: NASA GPM Observation */}
+              {/* TILE 1: NASA POWER (precipitation) Observation */}
               <div className="p-4 rounded-2xl bg-[#0B1626]/90 border border-white/10 flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
@@ -410,17 +410,19 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
                   <p className="text-[10px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
                     {isEn
-                      ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
-                      : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
+                      ? 'Measured at the district HQ point (SMAP 9 km).'
+                      : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি)।'}
                   </p>
                 </div>
 
                 <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
                   <span>{isEn ? 'Status' : 'অবস্থা'}</span>
-                  <span className="text-white">
-                    {smapRecord
-                      ? (isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn)
-                      : (isEn ? 'No data' : 'তথ্য নেই')}
+                  <span className={isSoilFlaggedWater ? 'text-amber-400 font-semibold' : 'text-white'}>
+                    {!smapRecord
+                      ? (isEn ? 'No data' : 'তথ্য নেই')
+                      : isSoilFlaggedWater
+                      ? (isEn ? 'Uncertain' : 'অনিশ্চিত')
+                      : (isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn)}
                   </span>
                 </div>
               </div>

@@ -2,7 +2,7 @@
  * AgriOrbit Field Action Weather Advisory Engine
  *
  * PIPELINE:
- *   NASA GPM / IMERG (Recent rainfall observation / estimate - ~10km grid)
+ *   NASA POWER (precipitation) (Recent rainfall observation / estimate - ~10km grid)
  *           ↓
  *   Open-Meteo (7-day precipitation forecast)
  *           ↓
@@ -76,7 +76,7 @@ export type AdvisorySeverity = 'danger' | 'warning' | 'info' | 'success';
 
 export interface EvaluatedParameter {
   parameter: string;
-  source: 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'Season Calendar';
+  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'Season Calendar';
   observedValue: string | number;
   thresholdCondition: string;
   satisfied: boolean;
@@ -231,8 +231,8 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
       satisfied: isForecastHeavyRain,
     },
     {
-      parameter: 'Recent Observed Rainfall (NASA GPM / IMERG)',
-      source: 'NASA GPM',
+      parameter: 'Recent Observed Rainfall (NASA POWER (precipitation))',
+      source: 'NASA POWER',
       observedValue: `${gpm.recentRain7dMm} mm (${gpm.baselineComparison})`,
       thresholdCondition: `gpmRecent ${gpm.recentRain7dMm}mm ${gpm.recentRain7dMm >= thresholds.gpmElevatedRainMm ? '>' : '≤'} gpmElevated ${thresholds.gpmElevatedRainMm}mm`,
       satisfied: isGpmElevated,

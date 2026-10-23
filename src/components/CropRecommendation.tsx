@@ -235,8 +235,8 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
             </h2>
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
               {language === 'en'
-                ? 'Scores computed by deterministic agronomic rules reacting to live NASA POWER weather data, with soil moisture based on placeholder values for now, and your priorities.'
-                : 'সুনির্দিষ্ট কৃষি নিয়মের ভিত্তিতে স্কোর নির্ধারিত; নাসা পাওয়ারের আবহাওয়া তথ্য লাইভ এবং মাটির আর্দ্রতা আপাতত নমুনা মান হিসেবে ব্যবহৃত।'}
+                ? 'Scores computed by deterministic agronomic rules reacting to NASA POWER weather (live) and NASA SMAP/MODIS observations (dated), and your priorities.'
+                : 'সুনির্দিষ্ট কৃষি নিয়মের ভিত্তিতে স্কোর নির্ধারিত; নাসা পাওয়ার আবহাওয়া (লাইভ) ও নাসা স্ম্যাপ/মোডিস পর্যবেক্ষণ (নির্দিষ্ট তারিখের) এবং আপনার অগ্রাধিকার।'}
             </p>
           </div>
 

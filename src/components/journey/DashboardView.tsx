@@ -761,7 +761,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
                         <div
                           className={`h-full rounded-full ${
-                            (whatIfActive ? simSoil : smapData!.value) < 0.15
+                            !whatIfActive && isSoilFlaggedWater
+                              ? 'bg-amber-400'
+                              : (whatIfActive ? simSoil : smapData!.value) < 0.15
                               ? 'bg-[#FF5C5C]'
                               : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
                               ? 'bg-[#B8FF3D]'
@@ -778,6 +780,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       className={`font-semibold ${
                         !whatIfActive && !smapData
                           ? 'text-slate-400'
+                          : !whatIfActive && isSoilFlaggedWater
+                          ? 'text-amber-400'
                           : (whatIfActive ? simSoil : smapData!.value) < 0.15
                           ? 'text-[#FF5C5C]'
                           : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -787,6 +791,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     >
                       {!whatIfActive && !smapData
                         ? (language === 'en' ? 'No data' : 'তথ্য নেই')
+                        : !whatIfActive && isSoilFlaggedWater
+                        ? (language === 'en' ? 'Uncertain' : 'অনিশ্চিত')
                         : (whatIfActive ? simSoil : smapData!.value) < 0.15
                         ? (language === 'en' ? 'Deficit' : 'ঘাটতি')
                         : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -1258,6 +1264,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         className={`font-mono text-xs font-semibold ${
                           !whatIfActive && !smapData
                             ? 'text-slate-400'
+                            : !whatIfActive && isSoilFlaggedWater
+                            ? 'text-amber-400'
                             : (whatIfActive ? simSoil : smapData!.value) < 0.15
                             ? 'text-[#FF5C5C]'
                             : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -1267,6 +1275,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       >
                         {!whatIfActive && !smapData
                           ? (language === 'en' ? 'No data' : 'তথ্য নেই')
+                          : !whatIfActive && isSoilFlaggedWater
+                          ? (language === 'en' ? 'Uncertain' : 'অনিশ্চিত')
                           : (whatIfActive ? simSoil : smapData!.value) < 0.15
                           ? (language === 'en' ? 'Moisture Deficit' : 'আর্দ্রতা ঘাটতি')
                           : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -1304,7 +1314,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
                           <div
                             className={`h-full rounded-full ${
-                              (whatIfActive ? simSoil : smapData!.value) < 0.15
+                              !whatIfActive && isSoilFlaggedWater
+                                ? 'bg-amber-400'
+                                : (whatIfActive ? simSoil : smapData!.value) < 0.15
                                 ? 'bg-[#FF5C5C]'
                                 : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
                                 ? 'bg-[#B8FF3D]'
@@ -1328,8 +1340,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                     <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
                       {language === 'en'
-                        ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
-                        : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
+                        ? 'Measured at the district HQ point (SMAP 9 km).'
+                        : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি)।'}
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
