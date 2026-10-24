@@ -1,13 +1,14 @@
 import React from 'react';
 import type { Language } from '../../types';
 
-export type TelemetryDataMode = 'live' | 'cached' | 'snapshot' | 'simulated' | 'unavailable';
+export type TelemetryDataMode = 'live' | 'daily' | 'cached' | 'snapshot' | 'simulated' | 'unavailable';
 
 export interface DataTileStatusBadgeProps {
   sourceName: string; // e.g. "NASA GPM", "NASA SMAP", "NASA POWER"
   status: TelemetryDataMode;
   date?: string | Date; // ISO string, date object, or formatted date string
   customLabel?: string;
+  customStatusLabel?: string;
   language?: Language;
   className?: string;
 }
@@ -35,8 +36,8 @@ export function formatBadgeDate(dateVal?: string | Date, language: Language = 'e
 
 /**
  * Data Tile Status Badge:
- * Prominently and honestly shows whether data is LIVE, CACHED, or a static SNAPSHOT,
- * accompanied by the last-updated date (e.g. "NASA GPM · Cached · 06 Oct 2026").
+ * Prominently and honestly shows whether data is LIVE, UPDATED DAILY, CACHED, or a static SNAPSHOT,
+ * accompanied by the last-updated date (e.g. "NASA SMAP · observed 22 Oct 2026 · UPDATED DAILY").
  * Never labels cached or snapshot data as live.
  */
 export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
@@ -44,24 +45,32 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
   status,
   date,
   customLabel,
+  customStatusLabel,
   language = 'en',
   className = '',
 }) => {
   const isEn = language === 'en';
   const formattedDate = formatBadgeDate(date, language);
 
-  const statusLabel = {
-    live: isEn ? 'LIVE' : 'সরাসরি',
-    cached: isEn ? 'CACHED' : 'সংরক্ষিত',
-    snapshot: isEn ? 'SNAPSHOT' : 'সাম্প্রতিক',
-    simulated: isEn ? 'SIMULATED' : 'সিমুলেশন',
-    unavailable: isEn ? 'UNAVAILABLE' : 'তথ্য নেই',
-  }[status];
+  const statusLabel =
+    customStatusLabel ??
+    {
+      live: isEn ? 'LIVE' : 'সরাসরি',
+      daily: isEn ? 'UPDATED DAILY' : 'দৈনিক আপডেট',
+      cached: isEn ? 'CACHED' : 'সংরক্ষিত',
+      snapshot: isEn ? 'SNAPSHOT' : 'স্ন্যাপশট',
+      simulated: isEn ? 'SIMULATED' : 'সিমুলেশন',
+      unavailable: isEn ? 'UNAVAILABLE' : 'তথ্য নেই',
+    }[status];
 
   const statusStyles = {
     live: {
       badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-      dot: 'bg-emerald-400 ',
+      dot: 'bg-emerald-400',
+    },
+    daily: {
+      badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+      dot: 'bg-emerald-400',
     },
     cached: {
       badge: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
@@ -73,13 +82,16 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
     },
     simulated: {
       badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-      dot: 'bg-purple-400 ',
+      dot: 'bg-purple-400',
     },
     unavailable: {
       badge: 'bg-slate-500/15 text-slate-400 border-slate-500/30',
       dot: 'bg-slate-400',
     },
   }[status];
+
+  // Avoid duplicating status tag if customLabel already includes it
+  const labelIncludesStatus = customLabel && customLabel.toLowerCase().includes(statusLabel.toLowerCase());
 
   return (
     <div
@@ -88,7 +100,17 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
     >
       <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusStyles.dot}`} />
       {customLabel ? (
-        <span className="font-semibold">{customLabel}</span>
+        <span className="font-semibold flex items-center gap-1.5">
+          <span>{customLabel}</span>
+          {!labelIncludesStatus && (
+            <>
+              <span className="opacity-40">·</span>
+              <span className="uppercase text-[9px] px-1 py-0.2 rounded bg-white/10 font-mono tracking-wider font-semibold">
+                {statusLabel}
+              </span>
+            </>
+          )}
+        </span>
       ) : (
         <>
           <span className="font-bold">{sourceName}</span>

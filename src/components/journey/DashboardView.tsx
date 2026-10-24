@@ -36,7 +36,7 @@ import { SeasonRotation } from '../SeasonRotation';
 import { ExplainWhyModal } from '../ExplainWhyModal';
 import { BrandLogo } from '../common/BrandLogo';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
-import { DataTileStatusBadge } from '../common/DataTileStatusBadge';
+import { DataTileStatusBadge, formatBadgeDate } from '../common/DataTileStatusBadge';
 import {
   ShortTermRiskAlert,
   MiniMapThumbnail,
@@ -50,7 +50,7 @@ import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
 import { runEngine, type Priority } from '../../lib/engine';
-import { getDistrictSatellite } from '../../data/satellite';
+import { useDistrictSatellite } from '../../lib/satelliteService';
 import { FieldShiftPanel } from '../landing/FieldShiftSection';
 import { getRankedCrops, formatPriorityLabel, type TelemetryContext } from '../../lib/cropSuitability';
 
@@ -148,8 +148,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     [loaded.data.monthly]
   );
 
-  // Real NASA Earthdata AppEEARS observations for the active district
-  const districtSat = getDistrictSatellite(district.id);
+  // Real NASA Earthdata observations for the active district (updated dynamically from Supabase/cache)
+  const {
+    satellite: districtSat,
+    isSmapFresh,
+    isNdviFresh,
+    isLstFresh,
+  } = useDistrictSatellite(district.id);
   const sentinel2Data = districtSat?.sentinel2 ?? null;
   const jaxaData = districtSat?.jaxa ?? null;
   const insatData = districtSat?.insat ?? null;
@@ -1249,12 +1254,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
                         sourceName="NASA SMAP"
-                        status={whatIfActive ? 'simulated' : smapData ? 'snapshot' : 'unavailable'}
+                        status={whatIfActive ? 'simulated' : smapData ? (isSmapFresh ? 'daily' : 'snapshot') : 'unavailable'}
                         customLabel={
                           whatIfActive
                             ? (language === 'en' ? 'NASA SMAP · Simulated' : 'নাসা স্ম্যাপ · সিমুলেশন')
                             : smapData
-                            ? `NASA SMAP · ${smapData.date} (${smapData.pass})`
+                            ? (language === 'en'
+                                ? `NASA SMAP · observed ${formatBadgeDate(smapData.date, 'en')} (${smapData.pass})`
+                                : `নাসা স্ম্যাপ · পর্যবেক্ষণ ${formatBadgeDate(smapData.date, 'bn')} (${smapData.pass})`)
                             : (language === 'en' ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')
                         }
                         language={language}
@@ -1370,20 +1377,24 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <div className="flex flex-wrap items-center gap-1.5">
                         <DataTileStatusBadge
                           sourceName="NASA MODIS NDVI"
-                          status={ndviData ? 'snapshot' : 'unavailable'}
+                          status={ndviData ? (isNdviFresh ? 'daily' : 'snapshot') : 'unavailable'}
                           customLabel={
                             ndviData
-                              ? `NASA MODIS NDVI · 16-day from ${ndviData.periodStart}`
+                              ? (language === 'en'
+                                  ? `${ndviData.source || 'NASA MODIS'} NDVI · observed ${formatBadgeDate(ndviData.periodStart, 'en')}`
+                                  : `${ndviData.source || 'নাসা মোডিস'} NDVI · পর্যবেক্ষণ ${formatBadgeDate(ndviData.periodStart, 'bn')}`)
                               : (language === 'en' ? 'NASA MODIS NDVI · No data' : 'নাসা মোডিস NDVI · তথ্য নেই')
                           }
                           language={language}
                         />
                         <DataTileStatusBadge
                           sourceName="NASA MODIS LST"
-                          status={lstDayData ? 'snapshot' : 'unavailable'}
+                          status={lstDayData ? (isLstFresh ? 'daily' : 'snapshot') : 'unavailable'}
                           customLabel={
                             lstDayData
-                              ? `NASA MODIS LST · 8-day from ${lstDayData.periodStart}`
+                              ? (language === 'en'
+                                  ? `NASA MODIS LST · observed ${formatBadgeDate(lstDayData.periodStart, 'en')}`
+                                  : `নাসা মোডিস LST · পর্যবেক্ষণ ${formatBadgeDate(lstDayData.periodStart, 'bn')}`)
                               : (language === 'en' ? 'NASA MODIS LST · No data' : 'নাসা মোডিস LST · তথ্য নেই')
                           }
                           language={language}

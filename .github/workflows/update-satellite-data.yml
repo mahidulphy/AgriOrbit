@@ -1,0 +1,77 @@
+name: Update Daily Satellite Observations
+
+on:
+  schedule:
+    # Runs daily at 01:00 UTC (07:00 AM Bangladesh Standard Time)
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      district:
+        description: 'District to update (leave empty for all 64 districts)'
+        required: false
+        default: ''
+      skip_smap:
+        description: 'Skip SMAP soil moisture extraction'
+        type: boolean
+        default: false
+      skip_ndvi:
+        description: 'Skip MODIS/VIIRS NDVI extraction'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-satellite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Execute satellite ingestion
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+          EARTHDATA_TOKEN: ${{ secrets.EARTHDATA_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.district }}" ]; then
+            ARGS="$ARGS --district ${{ github.event.inputs.district }}"
+          fi
+          if [ "${{ github.event.inputs.skip_smap }}" = "true" ]; then
+            ARGS="$ARGS --skip-smap"
+          fi
+          if [ "${{ github.event.inputs.skip_ndvi }}" = "true" ]; then
+            ARGS="$ARGS --skip-ndvi"
+          fi
+          npx tsx scripts/update-satellite-data.ts $ARGS
+
+      - name: Commit and push updated satellite snapshot
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/satellite.json)" ]; then
+            git add src/data/satellite.json
+            git commit -m "chore(satellite): automated daily satellite observations update [skip ci]"
+            git push
+            echo "Committed and pushed updated satellite snapshot."
+          else
+            echo "No changes to src/data/satellite.json."
+          fi

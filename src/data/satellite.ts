@@ -36,6 +36,7 @@ export interface NdviRecord {
   value: number;
   periodStart: string;
   reliability: number;
+  source?: string;
 }
 
 export interface LstRecord {

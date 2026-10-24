@@ -1,15 +1,22 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
+const env = typeof import.meta !== 'undefined' && (import.meta as any).env ? (import.meta as any).env : {};
+const procEnv = typeof process !== 'undefined' && process.env ? process.env : {};
+
 const supabaseUrl = (
-  import.meta.env.VITE_SUPABASE_URL ||
-  (import.meta.env as any).NEXT_PUBLIC_SUPABASE_URL ||
+  env.VITE_SUPABASE_URL ||
+  env.NEXT_PUBLIC_SUPABASE_URL ||
+  procEnv.VITE_SUPABASE_URL ||
+  procEnv.SUPABASE_URL ||
   ''
 ).trim();
 
 const supabaseAnonKey = (
-  import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  (import.meta.env as any).NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-  (import.meta.env as any).NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  env.VITE_SUPABASE_ANON_KEY ||
+  env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  procEnv.VITE_SUPABASE_ANON_KEY ||
+  procEnv.SUPABASE_ANON_KEY ||
   ''
 ).trim();
 
@@ -26,8 +33,7 @@ export const isSupabaseConfigured = (): boolean => {
   );
 };
 
-// Fallback dummy URL and Key for client instantiation when credentials are not yet set
-// This ensures createClient never throws during initial evaluation or test suites
+// Return either a real client or a safe fallback so modules can load without crashing.
 const safeUrl = isSupabaseConfigured() ? supabaseUrl : 'https://placeholder-agriorbit.supabase.co';
 const safeKey = isSupabaseConfigured() ? supabaseAnonKey : 'placeholder-anon-key';
 

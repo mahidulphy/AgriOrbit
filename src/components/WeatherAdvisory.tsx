@@ -26,7 +26,8 @@ import { computeForecastMetrics } from '../services/weatherForecast';
 import { DataTileStatusBadge } from './common/DataTileStatusBadge';
 import fallbackRangpur from '../data/fallback-rangpur.json';
 import type { LocationCache } from '../lib/power';
-import { getDistrictSatellite } from '../data/satellite';
+import { useDistrictSatellite } from '../lib/satelliteService';
+import { formatBadgeDate } from './common/DataTileStatusBadge';
 import { getDistrictAdmin } from '../data/districts';
 
 export interface WeatherAdvisoryProps {
@@ -76,7 +77,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
   const isEn = language === 'en';
   const admin = getDistrictAdmin(districtId);
-  const districtSat = getDistrictSatellite(districtId);
+  const { satellite: districtSat, isSmapFresh } = useDistrictSatellite(districtId);
   const smapRecord = districtSat?.smap ?? null;
   const sentinel1Record = districtSat?.sentinel1 ?? null;
   const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination';
@@ -391,10 +392,12 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
                       sourceName="NASA SMAP"
-                      status={smapRecord ? 'snapshot' : 'unavailable'}
+                      status={smapRecord ? (isSmapFresh ? 'daily' : 'snapshot') : 'unavailable'}
                       customLabel={
                         smapRecord
-                          ? `NASA SMAP · ${smapRecord.date} (${smapRecord.pass})`
+                          ? (isEn
+                              ? `NASA SMAP · observed ${formatBadgeDate(smapRecord.date, 'en')} (${smapRecord.pass})`
+                              : `নাসা স্ম্যাপ · পর্যবেক্ষণ ${formatBadgeDate(smapRecord.date, 'bn')} (${smapRecord.pass})`)
                           : (isEn ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')
                       }
                       language={language}

@@ -13,7 +13,7 @@
       "insat": "ISRO MOSDAC INSAT-3DR (Imager LST & HE Rain)",
       "nisar": "NASA-ISRO NISAR L3 Provisional Soil Moisture (200m)"
     },
-    "generatedAt": "2026-10-23T12:39:17.325Z"
+    "generatedAt": "2026-10-24T13:15:54.210Z"
   },
   "dhaka": {
     "smap": null,
@@ -3821,9 +3821,10 @@
       "recentCount": 3
     },
     "ndvi": {
-      "value": 0.6866,
-      "periodStart": "2026-09-30",
-      "reliability": 0
+      "value": 0.74,
+      "periodStart": "2026-09-06",
+      "reliability": 0,
+      "source": "MYD13Q1"
     },
     "lstDay": {
       "value": 27.6,
