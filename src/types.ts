@@ -100,6 +100,7 @@ export interface ScoreDeltas {
   heatPenalty: number;
   waterDeficitPenalty: number;
   sentinel1FloodPenalty?: number;
+  sentinel2StressPenalty?: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;

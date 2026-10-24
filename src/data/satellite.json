@@ -7,7 +7,8 @@
       "smap": "SPL3SMP_E.006",
       "ndvi": "MOD13Q1.061",
       "lst": "MOD11A2.061",
-      "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)"
+      "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)",
+      "sentinel2": "ESA Sentinel-2 MSI L2A (10m NDVI)"
     },
     "generatedAt": "2026-10-23T12:39:17.325Z"
   },
@@ -40,6 +41,19 @@
       "statusBn": "7.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.41,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.41 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.41 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.39,
+      "anomalyPct": 5.1
     }
   },
   "gazipur": {
@@ -71,6 +85,19 @@
       "statusBn": "8.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.52,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.52 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.52 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.5,
+      "anomalyPct": 4
     }
   },
   "narayanganj": {
@@ -98,6 +125,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.6,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.6 10m field NDVI (healthy canopy)",
+      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.58,
+      "anomalyPct": 3.4
     }
   },
   "munshiganj": {
@@ -129,6 +169,19 @@
       "statusBn": "14.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.45,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.45 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.45 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.43,
+      "anomalyPct": 4.7
     }
   },
   "narsingdi": {
@@ -165,6 +218,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.55,
+      "anomalyPct": 3.6
     }
   },
   "manikganj": {
@@ -201,6 +267,19 @@
       "statusBn": "11.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.73,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.73 10m field NDVI (healthy canopy)",
+      "statusBn": "0.73 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.71,
+      "anomalyPct": 2.8
     }
   },
   "tangail": {
@@ -237,6 +316,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.4,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.4 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.4 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.38,
+      "anomalyPct": 5.3
     }
   },
   "kishoreganj": {
@@ -268,6 +360,19 @@
       "statusBn": "18.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.75,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.75 10m field NDVI (healthy canopy)",
+      "statusBn": "0.75 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.73,
+      "anomalyPct": 2.7
     }
   },
   "faridpur": {
@@ -299,6 +404,19 @@
       "statusBn": "15.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.63,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.63 10m field NDVI (healthy canopy)",
+      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.61,
+      "anomalyPct": 3.3
     }
   },
   "rajbari": {
@@ -330,6 +448,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.8,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.8 10m field NDVI (healthy canopy)",
+      "statusBn": "0.8 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.78,
+      "anomalyPct": 2.6
     }
   },
   "shariatpur": {
@@ -361,6 +492,19 @@
       "statusBn": "15.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.78,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.78 10m field NDVI (healthy canopy)",
+      "statusBn": "0.78 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.76,
+      "anomalyPct": 2.6
     }
   },
   "madaripur": {
@@ -397,6 +541,19 @@
       "statusBn": "16.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.54,
+      "anomalyPct": 3.7
     }
   },
   "gopalganj": {
@@ -434,6 +591,19 @@
       "statusBn": "22.4% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.54,
+      "anomalyPct": 3.7
     }
   },
   "chattogram": {
@@ -465,6 +635,19 @@
       "statusBn": "9.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.43,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.43 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.43 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.41,
+      "anomalyPct": 4.9
     }
   },
   "coxsbazar": {
@@ -496,6 +679,19 @@
       "statusBn": "11.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.74,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.74 10m field NDVI (healthy canopy)",
+      "statusBn": "0.74 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.72,
+      "anomalyPct": 2.8
     }
   },
   "cumilla": {
@@ -532,6 +728,19 @@
       "statusBn": "10.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.6,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.6 10m field NDVI (healthy canopy)",
+      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.58,
+      "anomalyPct": 3.4
     }
   },
   "chandpur": {
@@ -563,6 +772,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.54,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.54 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.54 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.52,
+      "anomalyPct": 3.8
     }
   },
   "noakhali": {
@@ -599,6 +821,19 @@
       "statusBn": "17.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.66,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.66 10m field NDVI (healthy canopy)",
+      "statusBn": "0.66 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.64,
+      "anomalyPct": 3.1
     }
   },
   "feni": {
@@ -635,6 +870,19 @@
       "statusBn": "14.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.5,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.5 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.5 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.48,
+      "anomalyPct": 4.2
     }
   },
   "lakshmipur": {
@@ -666,6 +914,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.55,
+      "anomalyPct": 3.6
     }
   },
   "brahmanbaria": {
@@ -697,6 +958,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.63,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.63 10m field NDVI (healthy canopy)",
+      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.61,
+      "anomalyPct": 3.3
     }
   },
   "rangamati": {
@@ -728,6 +1002,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.38,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.38 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.38 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.36,
+      "anomalyPct": 5.6
     }
   },
   "khagrachari": {
@@ -764,6 +1051,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.82,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.82 10m field NDVI (healthy canopy)",
+      "statusBn": "0.82 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.8,
+      "anomalyPct": 2.5
     }
   },
   "bandarban": {
@@ -795,6 +1095,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.69 10m field NDVI (healthy canopy)",
+      "statusBn": "0.69 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.67,
+      "anomalyPct": 3
     }
   },
   "rajshahi": {
@@ -826,6 +1139,19 @@
       "statusBn": "3.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.73,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.73 10m field NDVI (healthy canopy)",
+      "statusBn": "0.73 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.71,
+      "anomalyPct": 2.8
     }
   },
   "bogura": {
@@ -862,6 +1188,19 @@
       "statusBn": "6.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.42,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.42 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.42 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.4,
+      "anomalyPct": 5
     }
   },
   "pabna": {
@@ -893,6 +1232,19 @@
       "statusBn": "12.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.65,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.65 10m field NDVI (healthy canopy)",
+      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.63,
+      "anomalyPct": 3.2
     }
   },
   "sirajganj": {
@@ -924,6 +1276,19 @@
       "statusBn": "16.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.61 10m field NDVI (healthy canopy)",
+      "statusBn": "0.61 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.59,
+      "anomalyPct": 3.4
     }
   },
   "natore": {
@@ -960,6 +1325,19 @@
       "statusBn": "13.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.6,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.6 10m field NDVI (healthy canopy)",
+      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.58,
+      "anomalyPct": 3.4
     }
   },
   "naogaon": {
@@ -996,6 +1374,19 @@
       "statusBn": "7.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.55,
+      "anomalyPct": 3.6
     }
   },
   "chapainawabganj": {
@@ -1027,6 +1418,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.61 10m field NDVI (healthy canopy)",
+      "statusBn": "0.61 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.59,
+      "anomalyPct": 3.4
     }
   },
   "joypurhat": {
@@ -1058,6 +1462,19 @@
       "statusBn": "4.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.8,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.8 10m field NDVI (healthy canopy)",
+      "statusBn": "0.8 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.78,
+      "anomalyPct": 2.6
     }
   },
   "khulna": {
@@ -1089,6 +1506,19 @@
       "statusBn": "15.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.54,
+      "anomalyPct": 3.7
     }
   },
   "jashore": {
@@ -1125,6 +1555,19 @@
       "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.65,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.65 10m field NDVI (healthy canopy)",
+      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.63,
+      "anomalyPct": 3.2
     }
   },
   "satkhira": {
@@ -1156,6 +1599,19 @@
       "statusBn": "17.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.7,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.7 10m field NDVI (healthy canopy)",
+      "statusBn": "0.7 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.68,
+      "anomalyPct": 2.9
     }
   },
   "bagerhat": {
@@ -1187,6 +1643,19 @@
       "statusBn": "16.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.76,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.76 10m field NDVI (healthy canopy)",
+      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.74,
+      "anomalyPct": 2.7
     }
   },
   "kushtia": {
@@ -1218,6 +1687,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.71,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.71 10m field NDVI (healthy canopy)",
+      "statusBn": "0.71 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.69,
+      "anomalyPct": 2.9
     }
   },
   "jhenaidah": {
@@ -1254,6 +1736,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.79,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.79 10m field NDVI (healthy canopy)",
+      "statusBn": "0.79 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.77,
+      "anomalyPct": 2.6
     }
   },
   "magura": {
@@ -1290,6 +1785,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.54,
+      "anomalyPct": 3.7
     }
   },
   "narail": {
@@ -1326,6 +1834,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.69 10m field NDVI (healthy canopy)",
+      "statusBn": "0.69 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.67,
+      "anomalyPct": 3
     }
   },
   "meherpur": {
@@ -1362,6 +1883,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.82,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.82 10m field NDVI (healthy canopy)",
+      "statusBn": "0.82 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.8,
+      "anomalyPct": 2.5
     }
   },
   "chuadanga": {
@@ -1398,6 +1932,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.58,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.58 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.58 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.56,
+      "anomalyPct": 3.6
     }
   },
   "barishal": {
@@ -1429,6 +1976,19 @@
       "statusBn": "18.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.76,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.76 10m field NDVI (healthy canopy)",
+      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.74,
+      "anomalyPct": 2.7
     }
   },
   "patuakhali": {
@@ -1460,6 +2020,19 @@
       "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.64,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.64 10m field NDVI (healthy canopy)",
+      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.62,
+      "anomalyPct": 3.2
     }
   },
   "bhola": {
@@ -1491,6 +2064,19 @@
       "statusBn": "19.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.85,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.85 10m field NDVI (healthy canopy)",
+      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.83,
+      "anomalyPct": 2.4
     }
   },
   "pirojpur": {
@@ -1522,6 +2108,19 @@
       "statusBn": "16.3% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.85,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.85 10m field NDVI (healthy canopy)",
+      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.83,
+      "anomalyPct": 2.4
     }
   },
   "jhalokati": {
@@ -1558,6 +2157,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.65,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.65 10m field NDVI (healthy canopy)",
+      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.63,
+      "anomalyPct": 3.2
     }
   },
   "barguna": {
@@ -1589,6 +2201,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.72 10m field NDVI (healthy canopy)",
+      "statusBn": "0.72 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.7,
+      "anomalyPct": 2.9
     }
   },
   "sylhet": {
@@ -1620,6 +2245,19 @@
       "statusBn": "19.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 8.4,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.54,
+      "anomalyPct": 3.7
     }
   },
   "moulvibazar": {
@@ -1656,6 +2294,19 @@
       "statusBn": "13.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.76,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.76 10m field NDVI (healthy canopy)",
+      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.74,
+      "anomalyPct": 2.7
     }
   },
   "habiganj": {
@@ -1692,6 +2343,19 @@
       "statusBn": "17.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.68,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.68 10m field NDVI (healthy canopy)",
+      "statusBn": "0.68 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.66,
+      "anomalyPct": 3
     }
   },
   "sunamganj": {
@@ -1723,6 +2387,19 @@
       "statusBn": "24.5% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.52,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.52 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.52 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.5,
+      "anomalyPct": 4
     }
   },
   "rangpur": {
@@ -1759,6 +2436,19 @@
       "statusBn": "14.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.71,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.69,
+      "anomalyPct": 2.9
     }
   },
   "dinajpur": {
@@ -1790,6 +2480,19 @@
       "statusBn": "5.6% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.64,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.64 10m field NDVI (healthy canopy)",
+      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.62,
+      "anomalyPct": 3.2
     }
   },
   "kurigram": {
@@ -1821,6 +2524,19 @@
       "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.48,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.48 10m NDVI (-22.6% below baseline · delayed canopy)",
+      "statusBn": "0.48 ১০মি NDVI (স্বাভাবিকের চেয়ে ২২.৬% কম · ফসলে বৃদ্ধি বিলম্ব)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.62,
+      "anomalyPct": -22.6
     }
   },
   "gaibandha": {
@@ -1852,6 +2568,19 @@
       "statusBn": "16.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.67,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.67 10m field NDVI (healthy canopy)",
+      "statusBn": "0.67 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.65,
+      "anomalyPct": 3.1
     }
   },
   "lalmonirhat": {
@@ -1883,6 +2612,19 @@
       "statusBn": "15.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.85,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.85 10m field NDVI (healthy canopy)",
+      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.83,
+      "anomalyPct": 2.4
     }
   },
   "nilphamari": {
@@ -1914,6 +2656,19 @@
       "statusBn": "11.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.64,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.64 10m field NDVI (healthy canopy)",
+      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.62,
+      "anomalyPct": 3.2
     }
   },
   "panchagarh": {
@@ -1950,6 +2705,19 @@
       "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.68,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.68 10m field NDVI (healthy canopy)",
+      "statusBn": "0.68 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.66,
+      "anomalyPct": 3
     }
   },
   "thakurgaon": {
@@ -1981,6 +2749,19 @@
       "statusBn": "4.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.74,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.74 10m field NDVI (healthy canopy)",
+      "statusBn": "0.74 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.72,
+      "anomalyPct": 2.8
     }
   },
   "mymensingh": {
@@ -2017,6 +2798,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.41,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "vegetation_stress",
+      "statusEn": "0.41 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.41 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.39,
+      "anomalyPct": 5.1
     }
   },
   "jamalpur": {
@@ -2053,6 +2847,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.72 10m field NDVI (healthy canopy)",
+      "statusBn": "0.72 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.7,
+      "anomalyPct": 2.9
     }
   },
   "netrokona": {
@@ -2089,6 +2896,19 @@
       "statusBn": "21.3% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.63,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "optimal",
+      "statusEn": "0.63 10m field NDVI (healthy canopy)",
+      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.61,
+      "anomalyPct": 3.3
     }
   },
   "sherpur": {
@@ -2125,6 +2945,19 @@
       "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
+    },
+    "sentinel2": {
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-10",
+      "cloudCoverPct": 2.1,
+      "resolutionMeters": 10,
+      "status": "moderate",
+      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
+      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-2 MSI",
+      "baselineNdvi": 0.55,
+      "anomalyPct": 3.6
     }
   }
 }

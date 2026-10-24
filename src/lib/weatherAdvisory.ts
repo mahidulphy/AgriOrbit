@@ -77,7 +77,7 @@ export type AdvisorySeverity = 'danger' | 'warning' | 'info' | 'success';
 
 export interface EvaluatedParameter {
   parameter: string;
-  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'Season Calendar';
+  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'ESA Sentinel-2' | 'JAXA Earth API' | 'Season Calendar';
   observedValue: string | number;
   thresholdCondition: string;
   satisfied: boolean;
@@ -141,6 +141,8 @@ export interface AdvisoryRuleContext {
   forecast: WeatherForecastResult;
   soilMoisture: number; // SMAP m³/m³ (e.g. 0.18, 0.26, 0.32)
   sentinel1FloodedCroplandPct?: number | null;
+  sentinel2Ndvi10m?: number | null;
+  sentinel2AnomalyPct?: number | null;
   districtId: DistrictId | string;
   upazilaName?: string;
   season?: 'Rabi' | 'Kharif-1' | 'Kharif-2';
@@ -209,6 +211,8 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const isGpmElevated = gpm.recentRain7dMm >= thresholds.gpmElevatedRainMm || gpm.baselineComparison === 'Elevated';
   const isGpmDeficit = gpm.recentRain7dMm <= thresholds.gpmDeficitRainMm || gpm.baselineComparison === 'Deficit';
   const sentinel1FloodPct = context.sentinel1FloodedCroplandPct;
+  const sentinel2Ndvi = context.sentinel2Ndvi10m;
+  const sentinel2Anomaly = context.sentinel2AnomalyPct;
 
   let conditionType: ConditionType = 'favorable';
   let severity: AdvisorySeverity = 'success';
@@ -392,6 +396,16 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     : `সংরক্ষিত তথ্য ব্যবহার হচ্ছে · আপডেট: ${new Date(gpm.updatedAt).toLocaleDateString('bn-BD', { day: '2-digit', month: 'short', year: 'numeric' })}`;
 
   
+  if (sentinel2Anomaly !== undefined && sentinel2Anomaly !== null) {
+    evaluatedParams.push({
+      parameter: 'Field Vegetation Canopy Health (ESA Sentinel-2 10m NDVI)',
+      source: 'ESA Sentinel-2',
+      observedValue: `${sentinel2Ndvi !== undefined && sentinel2Ndvi !== null ? sentinel2Ndvi.toFixed(2) : 'N/A'} (${sentinel2Anomaly > 0 ? '+' : ''}${sentinel2Anomaly.toFixed(1)}% vs baseline)`,
+      thresholdCondition: `anomaly ${sentinel2Anomaly.toFixed(1)}% ${sentinel2Anomaly < -15 ? '<' : '≥'} stressThreshold -15.0%`,
+      satisfied: sentinel2Anomaly < -15,
+    });
+  }
+
   if (sentinel1FloodPct !== undefined && sentinel1FloodPct !== null) {
     evaluatedParams.push({
       parameter: 'Cropland Flooding / Waterlogging (ESA Sentinel-1 SAR)',
@@ -464,6 +478,8 @@ export async function getWeatherAdvisoryForLocation(
 ): Promise<WeatherAdvisoryResult> {
   const sat = getDistrictSatellite(districtId);
   const sentinel1FloodedCroplandPct = sat?.sentinel1?.floodedCroplandPct ?? null;
+  const sentinel2Ndvi10m = sat?.sentinel2?.ndvi10m ?? null;
+  const sentinel2AnomalyPct = sat?.sentinel2?.anomalyPct ?? null;
 
   const [gpm, forecast] = await Promise.all([
     getGpmObservation(districtId, lat, lng),
@@ -480,5 +496,7 @@ export async function getWeatherAdvisoryForLocation(
     farmerPriority,
     thresholds: options?.thresholds,
     sentinel1FloodedCroplandPct,
+    sentinel2Ndvi10m,
+    sentinel2AnomalyPct,
   });
 }

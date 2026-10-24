@@ -59,12 +59,27 @@ export interface Sentinel1Record {
   source: 'ESA Sentinel-1 C-SAR';
 }
 
+export interface Sentinel2Record {
+  ndvi10m: number;
+  periodStart: string;
+  cloudCoverPct: number;
+  resolutionMeters: 10;
+  status: 'optimal' | 'moderate' | 'vegetation_stress' | 'bare_soil';
+  statusEn: string;
+  statusBn: string;
+  observedAt: string;
+  source: 'ESA Sentinel-2 MSI';
+  baselineNdvi: number;
+  anomalyPct: number;
+}
+
 export interface DistrictSatelliteRecord {
   smap: SmapRecord | null;
   ndvi: NdviRecord | null;
   lstDay: LstRecord | null;
   lstNight: LstRecord | null;
   sentinel1?: Sentinel1Record | null;
+  sentinel2?: Sentinel2Record | null;
 }
 
 export interface SatelliteDatasetMeta {
@@ -75,6 +90,8 @@ export interface SatelliteDatasetMeta {
     smap: string;
     ndvi: string;
     lst: string;
+    sentinel1?: string;
+    sentinel2?: string;
   };
   generatedAt: string;
 }

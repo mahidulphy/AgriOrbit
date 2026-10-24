@@ -37,6 +37,8 @@ export interface TelemetryContext {
   maxTemp?: number; // °C
   waterBalance?: number; // rain30 - ET0 in mm
   sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
+  sentinel2Ndvi10m?: number | null; // 10m field NDVI (ESA Sentinel-2 MSI)
+  sentinel2AnomalyPct?: number | null; // % deviation from baseline NDVI
 }
 
 export interface ScoreDeltas {
@@ -46,6 +48,7 @@ export interface ScoreDeltas {
   heatPenalty: number;
   waterDeficitPenalty: number;
   sentinel1FloodPenalty: number;
+  sentinel2StressPenalty: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;
@@ -75,6 +78,7 @@ function evaluateCropWithNasa(
     heatPenalty: 0,
     waterDeficitPenalty: 0,
     sentinel1FloodPenalty: 0,
+    sentinel2StressPenalty: 0,
     primaryPriorityDelta: 0,
     secondaryPriorityDelta: 0,
     finalScore: calibratedBase,
@@ -208,6 +212,50 @@ function evaluateCropWithNasa(
         );
         dynamicRulesBn.push(
           `নিয়ম SAR-01: সেন্টিনেল-১: জমিতে ${toBnDigits(floodPct.toFixed(1))}% জলাবদ্ধতা (> ১০%) → পানি সংবেদনশীল ফসলে -১৫ নম্বর।`
+        );
+      }
+    }
+
+
+    // RULE VEG-02: ESA SENTINEL-2 10M VEGETATION HEALTH & CROP STRESS
+    // ─────────────────────────────────────────────────────────────
+    const s2Anomaly = telemetry?.sentinel2AnomalyPct;
+    const s2Ndvi = telemetry?.sentinel2Ndvi10m;
+    if (s2Anomaly !== undefined && s2Anomaly !== null && s2Anomaly < -15) {
+      const isSlowOrDemanding = (crop.durationDays ?? 100) >= 120 || crop.waterRequirementEn === 'High';
+      const isFastOrResilient = (crop.durationDays ?? 100) <= 85 || ['mungbean', 'mustard', 'radish', 'blackgram', 'sesame'].includes(crop.id);
+
+      if (isSlowOrDemanding) {
+        const penalty = -10;
+        score += penalty;
+        deltas.sentinel2StressPenalty = penalty;
+        dynamicObservationsEn.push(
+          `ESA Sentinel-2: 10m NDVI is ${s2Ndvi !== null && s2Ndvi !== undefined ? s2Ndvi.toFixed(2) : 'depressed'} (${s2Anomaly.toFixed(1)}% vs baseline) indicates field canopy stress.`
+        );
+        dynamicObservationsBn.push(
+          `ইএসএ সেন্টিনেল-২: ১০মি NDVI ${s2Ndvi !== null && s2Ndvi !== undefined ? s2Ndvi.toFixed(2) : ''} (স্বাভাবিকের চেয়ে ${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% কম) জমিতে বৃদ্ধির ঘাটতি নির্দেশ করে।`
+        );
+        dynamicRulesEn.push(
+          `Rule VEG-02: Sentinel-2 10m NDVI anomaly (${s2Anomaly.toFixed(1)}% < -15%) → long-duration/demanding crops penalized -10.`
+        );
+        dynamicRulesBn.push(
+          `নিয়ম VEG-02: সেন্টিনেল-২ ১০মি NDVI ঘাটতি (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% < -১৫%) → দীর্ঘমেয়াদী ফসলে -১০ নম্বর।`
+        );
+      } else if (isFastOrResilient) {
+        const bonus = 5;
+        score += bonus;
+        deltas.sentinel2StressPenalty = bonus;
+        dynamicObservationsEn.push(
+          `ESA Sentinel-2: 10m NDVI indicates canopy lag (${s2Anomaly.toFixed(1)}%); favoring short-duration catch crop.`
+        );
+        dynamicObservationsBn.push(
+          `ইএসএ সেন্টিনেল-২: ১০মি চিত্রে ফসলে বৃদ্ধির ধকল (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}%), তাই দ্রুত সংগ্রহযোগ্য ফসল অগ্রাধিকার দেওয়া হয়েছে।`
+        );
+        dynamicRulesEn.push(
+          `Rule VEG-02: Sentinel-2 10m NDVI anomaly (${s2Anomaly.toFixed(1)}% < -15%) → short-duration catch crop +5 bonus.`
+        );
+        dynamicRulesBn.push(
+          `নিয়ম VEG-02: সেন্টিনেল-২ ১০মি NDVI ঘাটতি (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% < -১৫%) → স্বল্পমেয়াদী বিকল্প ফসলে +৫ বোনাস।`
         );
       }
     }

@@ -1,8 +1,8 @@
-import { BookOpen, CloudRain, CloudSun, Droplets, History, Leaf, Radar } from 'lucide-react';
+import { BookOpen, CloudRain, CloudSun, Droplets, History, Leaf, Radar, Scan } from 'lucide-react';
 import { useLang } from '../../lang.tsx';
 import { SectionHeader } from '../ui/ui.tsx';
 
-const ICONS = [CloudRain, History, Droplets, Leaf, Radar, CloudSun, BookOpen];
+const ICONS = [CloudRain, History, Droplets, Leaf, Radar, Scan, CloudSun, BookOpen];
 
 export function DataSection() {
   const { t } = useLang();
