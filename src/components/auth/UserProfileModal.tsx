@@ -21,6 +21,7 @@ import {
   Send,
 } from 'lucide-react';
 import { sendTestAlert } from '../../lib/testAlertClient';
+import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { BD_DISTRICTS } from '../../data/districts';
@@ -72,8 +73,32 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
         current.fullName = displayName;
       }
       setProfile(current);
+
+      if (user?.id && !isGuest) {
+        (async () => {
+          try {
+            const { data, error } = await supabase
+              .from('profiles')
+              .select('email_alerts, sms_alerts, phone, full_name')
+              .eq('id', user.id)
+              .maybeSingle();
+
+            if (!error && data) {
+              setProfile((prev) => ({
+                ...prev,
+                emailAlerts: data.email_alerts ?? prev.emailAlerts,
+                smsAlerts: data.sms_alerts ?? prev.smsAlerts,
+                phone: data.phone || prev.phone,
+                fullName: data.full_name || prev.fullName,
+              }));
+            }
+          } catch (err) {
+            console.error('Error syncing profile from Supabase:', err);
+          }
+        })();
+      }
     }
-  }, [isOpen, user?.id, displayName]);
+  }, [isOpen, user?.id, displayName, isGuest]);
 
   if (!isOpen) return null;
 
@@ -83,9 +108,27 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
     window.location.hash = '';
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     saveFarmerProfile(profile, user?.id);
+
+    if (user?.id && !isGuest) {
+      const { error: sbErr } = await supabase
+        .from('profiles')
+        .update({
+          full_name: profile.fullName || null,
+          phone: profile.phone || null,
+          email_alerts: Boolean(profile.emailAlerts),
+          sms_alerts: Boolean(profile.smsAlerts),
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', user.id);
+
+      if (sbErr) {
+        console.error('Failed to update profile alerts in Supabase:', sbErr.message);
+      }
+    }
+
     setSavedToast(true);
     setTimeout(() => setSavedToast(false), 2500);
   };
@@ -612,22 +655,34 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     </div>
                   </label>
 
-                  <div className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 opacity-60 cursor-not-allowed">
+                  <label className={`flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
+                    profile.phone?.trim()
+                      ? 'bg-white/5 border-white/10 hover:border-white/20'
+                      : 'bg-white/[0.03] border-amber-500/30 hover:border-amber-500/40'
+                  }`}>
                     <input
                       type="checkbox"
-                      checked={false}
-                      disabled={true}
-                      className="mt-1 w-4 h-4 rounded text-slate-500 border-white/10 bg-black/40 cursor-not-allowed"
+                      checked={Boolean(profile.smsAlerts)}
+                      onChange={(e) => setProfile({ ...profile, smsAlerts: e.target.checked })}
+                      className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
                     />
-                    <div className="space-y-0.5">
-                      <span className="text-xs font-semibold text-slate-300 block">
-                        {isBn ? 'এসএমএস সতর্কতা (শীঘ্রই আসছে, নিষ্ক্রিয়)' : 'SMS alerts (coming soon, disabled)'}
+                    <div className="space-y-1 flex-1">
+                      <span className="text-xs font-semibold text-white block">
+                        {isBn ? 'এসএমএস সতর্কতা' : 'SMS alerts'}
                       </span>
-                      <span className="text-[11px] text-slate-500 block font-mono">
-                        {isBn ? 'টেলিকম গেটওয়ে ও মোবাইল ব্রডকাস্ট সংযোগাধীন' : 'Telecom SMS gateway integration in progress'}
+                      <span className="text-[11px] text-slate-400 block font-mono">
+                        {isBn
+                          ? 'চরম আবহাওয়া বা দুর্যোগের তাৎক্ষণিক মোবাইল এসএমএস সতর্কতা'
+                          : 'Urgent mobile SMS alerts for extreme weather'}
                       </span>
+                      {!profile.phone?.trim() && (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-amber-300 pt-0.5">
+                          <AlertTriangle className="w-3 h-3 shrink-0 text-amber-400" />
+                          {isBn ? 'এসএমএস সতর্কতার জন্য একটি মোবাইল নম্বর যোগ করুন' : 'Add a phone number to enable SMS alerts'}
+                        </span>
+                      )}
                     </div>
-                  </div>
+                  </label>
 
                   {/* Test Alert Button for Logged-In Users */}
                   {!isGuest && user && (
