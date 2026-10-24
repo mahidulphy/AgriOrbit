@@ -91,6 +91,7 @@ export const OnboardingWizardPage: React.FC = () => {
   const [fullName, setFullName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [communicationMethod, setCommunicationMethod] = useState<FarmerProfileData['communicationMethod']>('in_app');
+  const [emailAlerts, setEmailAlerts] = useState<boolean>(false);
   const [avatarUrl, setAvatarUrl] = useState<string>('');
 
   const [field, setField] = useState<FarmField>({
@@ -148,6 +149,11 @@ export const OnboardingWizardPage: React.FC = () => {
             setFullName(resolvedName);
             setPhone(profile.phone || '');
             setCommunicationMethod(profile.communicationMethod || 'in_app');
+            if (profile.emailAlerts !== undefined) {
+              setEmailAlerts(Boolean(profile.emailAlerts));
+            } else if (profile.smsAlerts !== undefined) {
+              setEmailAlerts(Boolean(profile.smsAlerts));
+            }
             setAvatarUrl(profile.avatarUrl || user.user_metadata?.avatar_url || '');
 
             if (profile.priorities && profile.priorities.length > 0) {
@@ -351,6 +357,8 @@ export const OnboardingWizardPage: React.FC = () => {
                 fullName: fullName.trim(),
                 phone: phone.trim(),
                 communicationMethod,
+                emailAlerts,
+                smsAlerts: emailAlerts,
               },
               user.id
             );
@@ -570,6 +578,8 @@ export const OnboardingWizardPage: React.FC = () => {
           {
             pastDamages,
             pastDamageNotes,
+            emailAlerts,
+            smsAlerts: emailAlerts,
             onboardingCompleted: true,
           },
           user.id
@@ -597,8 +607,23 @@ export const OnboardingWizardPage: React.FC = () => {
   };
 
   // Skip Final Step directly to dashboard
-  const handleSkipHazards = () => {
-    if (isGuestMode) {
+  const handleSkipHazards = async () => {
+    if (user?.id) {
+      try {
+        await saveFarmerProfile(
+          {
+            emailAlerts,
+            smsAlerts: emailAlerts,
+            onboardingCompleted: true,
+          },
+          user.id
+        );
+        if (setOnboardingCompleted) setOnboardingCompleted(true);
+        await refreshProfile();
+      } catch (e) {
+        console.warn('Error saving final status on skip:', e);
+      }
+    } else if (isGuestMode) {
       sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
       localStorage.setItem('agriorbit_guest_mode', 'true');
     }
@@ -711,10 +736,15 @@ export const OnboardingWizardPage: React.FC = () => {
               onPhoneChange={setPhone}
               communicationMethod={communicationMethod}
               onCommunicationMethodChange={setCommunicationMethod}
+              emailAlerts={emailAlerts}
+              onEmailAlertsChange={setEmailAlerts}
+              smsAlerts={emailAlerts}
+              onSmsAlertsChange={setEmailAlerts}
               avatarUrl={avatarUrl}
               errors={fieldErrors}
               isBn={isBn}
               showAvatarUpload={false}
+              isLoggedIn={Boolean(user)}
             />
           )}
 

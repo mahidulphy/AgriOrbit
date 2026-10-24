@@ -1,3 +1,4 @@
+import { EmailAlertsToggle } from '../../common/EmailAlertsToggle';
 import React, { useRef, useState } from 'react';
 import { User, Mail, Phone, Bell, Camera, Loader2, Send } from 'lucide-react';
 import { COMMUNICATION_METHODS } from '../../../lib/farmerProfileService';
@@ -234,33 +235,15 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
           </label>
 
           {/* Email Alerts Toggle (SMS coming soon) */}
-          <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
-            <input
-              type="checkbox"
-              checked={Boolean(emailAlerts || smsAlerts)}
-              onChange={(e) => {
-                const val = e.target.checked;
-                onEmailAlertsChange && onEmailAlertsChange(val);
-                onSmsAlertsChange && onSmsAlertsChange(val);
-              }}
-              className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
-            />
-            <div className="space-y-1 flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-white block">
-                  {isBn ? 'ইমেইল সতর্কতা (এসএমএস শীঘ্রই আসছে)' : 'Email alerts (SMS coming soon)'}
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
-                  EMAIL
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-400 block leading-relaxed font-mono">
-                {isBn
-                  ? 'চরম আবহাওয়া, খরা বা আকস্মিক বন্যার বাস্তব নাসা উপগ্রহ ও আবহাওয়া সতর্কবার্তা সরাসরি আপনার নিবন্ধিত ইমেইলে পৌঁছাবে। (মোবাইল এসএমএস সম্প্রচার শীঘ্রই যুক্ত হবে)'
-                  : 'Real NASA satellite & weather alerts for extreme heat, drought, and heavy rainfall sent directly to your email. (Mobile SMS broadcast coming soon)'}
-              </span>
-            </div>
-          </label>
+          <EmailAlertsToggle
+            id="personal-info-alerts-toggle"
+            checked={Boolean(emailAlerts || smsAlerts)}
+            onChange={(val) => {
+              onEmailAlertsChange?.(val);
+              onSmsAlertsChange?.(val);
+            }}
+            isBn={isBn}
+          />
 
           {/* Test Alert Button for Logged-In Users */}
           {isLoggedIn && (

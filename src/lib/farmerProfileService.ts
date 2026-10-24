@@ -357,6 +357,17 @@ export async function saveFarmerProfile(
     };
 
     localStorage.setItem(key, JSON.stringify(updated));
+    try {
+      if (userId && userId !== 'guest_user') {
+        localStorage.setItem(`agriorbit_farmer_profile_${userId}`, JSON.stringify({
+          fullName: updated.fullName,
+          phone: updated.phone,
+          emailAlerts: updated.emailAlerts,
+          smsAlerts: updated.smsAlerts,
+          updatedAt: updated.updatedAt,
+        }));
+      }
+    } catch {}
 
     if (updated.primaryPriority) {
       localStorage.setItem('agriorbit_selected_priority', updated.primaryPriority);

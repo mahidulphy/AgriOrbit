@@ -1,3 +1,4 @@
+import { EmailAlertsToggle } from '../common/EmailAlertsToggle';
 import React, { useState, useEffect } from 'react';
 import {
   X,
@@ -638,32 +639,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 </span>
 
                 <div className="space-y-2">
-                  <label className="flex items-start gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={Boolean(profile.emailAlerts || profile.smsAlerts)}
-                      onChange={(e) => {
-                        const val = e.target.checked;
-                        setProfile({ ...profile, emailAlerts: val, smsAlerts: val });
-                      }}
-                      className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
-                    />
-                    <div className="space-y-1 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-white block">
-                          {isBn ? 'ইমেইল সতর্কতা (এসএমএস শীঘ্রই আসছে)' : 'Email alerts (SMS coming soon)'}
-                        </span>
-                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
-                          EMAIL
-                        </span>
-                      </div>
-                      <span className="text-[11px] text-slate-400 block font-mono leading-relaxed">
-                        {isBn
-                          ? 'চরম আবহাওয়া বা খরায় সরাসরি আপনার নিবন্ধিত ইমেইলে সতর্কবার্তা পৌঁছাবে।'
-                          : 'Extreme weather, drought, and rain warnings sent directly to your email.'}
-                      </span>
-                    </div>
-                  </label>
+                  <EmailAlertsToggle
+                    id="user-profile-alerts-toggle"
+                    checked={Boolean(profile.emailAlerts || profile.smsAlerts)}
+                    onChange={(val) => setProfile({ ...profile, emailAlerts: val, smsAlerts: val })}
+                    isBn={isBn}
+                  />
 
                   {/* Test Alert Button for Logged-In Users */}
                   {!isGuest && user && (
