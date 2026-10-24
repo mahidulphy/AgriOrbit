@@ -1,4 +1,4 @@
-import { processGenerateAlerts } from '../src/lib/alertGenerator';
+import { processGenerateAlerts } from '../src/lib/alertGenerator.ts';
 
 export default async function handler(req: any, res?: any) {
   const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;

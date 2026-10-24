@@ -1,12 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
-import { fetchPowerDaily, fetchForecast } from './power';
-import { computeConditions } from './conditions';
-import { getDistrictSatellite } from '../data/satellite';
-import { computeAlerts, type Alert } from './engine';
-import { BD_DISTRICTS } from '../data/districts';
-import { getDistrictAdmin, nearestDistrict } from '../data/bdAdmin';
-import type { AlertSeverity } from '../types';
+import { fetchPowerDaily, fetchForecast } from './power.ts';
+import { computeConditions } from './conditions.ts';
+import { getDistrictSatellite } from '../data/satellite.ts';
+import { computeAlerts, type Alert } from './engine.ts';
+import { BD_DISTRICTS } from '../data/districts.ts';
+import { getDistrictAdmin, nearestDistrict } from '../data/bdAdmin.ts';
+import type { AlertSeverity } from '../types.ts';
 
 export interface AlertGeneratorOptions {
   authHeader?: string | null;

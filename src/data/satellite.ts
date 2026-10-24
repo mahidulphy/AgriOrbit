@@ -22,7 +22,7 @@
  *  - district_hq: all measurements extracted at district headquarters coordinates.
  */
 
-import rawSatelliteJson from './satellite.json';
+import rawSatelliteJson from './satellite.json' with { type: 'json' };
 
 export interface SmapRecord {
   value: number;
