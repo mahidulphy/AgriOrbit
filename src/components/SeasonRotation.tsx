@@ -208,10 +208,10 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             const isLast = index === displaySeasons.length - 1;
 
             return (
-              <div
-                key={`${season.seasonEn}-${crop.id}`}
-                className="p-6 sm:p-8 rounded-2xl bg-[#0B1626] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between relative group"
-              >
+              <React.Fragment key={`${season.seasonEn}-${crop.id}`}>
+                <div
+                  className="p-6 sm:p-8 rounded-2xl bg-[#0B1626] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between relative group"
+                >
                 <div>
                   {/* Top Season Number & Months */}
                   <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
@@ -270,9 +270,15 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                   </button>
                 </div>
               </div>
-            );
-          })}
-        </div>
+              {!isLast && (
+                <div className="flex md:hidden justify-center items-center -my-2 text-slate-500">
+                  <ArrowDown className="w-5 h-5 text-[#B8FF3D]/70 animate-bounce" />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
 
         {/* Actionable Editorial Decision Support Certificate */}
         <div className="rounded-3xl bg-[#0B1626] border border-[#B8FF3D]/40 p-8 sm:p-10 shadow-2xl relative overflow-hidden">

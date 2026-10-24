@@ -26,7 +26,7 @@ export function HeroCard({ conditions: c, isLive = false }: { conditions: Condit
   ];
 
   return (
-    <div className="glass p-5 sm:p-6 shadow-2xl border-white/10">
+    <div className="glass p-4 sm:p-6 shadow-2xl border-white/10">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 font-display text-lg font-semibold text-white shrink-0">
           <MapPin className="h-4 w-4 text-lime-300" />
@@ -72,7 +72,7 @@ export function HeroCard({ conditions: c, isLive = false }: { conditions: Condit
         </a>
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
+      <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-1.5 sm:gap-2">
         <span className="truncate">{t.heroCard.source(date(c.from), date(c.to))}</span>
         <span className="font-mono text-cyan-300/90 text-[11px] whitespace-nowrap shrink-0">{num(c.rain30, 0)} {lang === 'bn' ? 'মিমি বৃষ্টি' : 'mm Rain'} · {num(c.rh, 0)}% {lang === 'bn' ? 'আর্দ্রতা' : 'RH'}</span>
       </div>

@@ -175,11 +175,13 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
       ref={dropdownRef}
       style={{
         position: 'fixed',
-        top: buttonRect ? Math.min(window.innerHeight - 450, buttonRect.bottom + 8) : 64,
-        right: buttonRect ? Math.max(12, window.innerWidth - buttonRect.right) : 16,
+        top: buttonRect ? Math.max(8, buttonRect.bottom + 8) : 64,
+        ...(typeof window !== 'undefined' && window.innerWidth < 480
+          ? { left: 12, right: 12, width: 'auto' }
+          : { right: buttonRect ? Math.max(12, window.innerWidth - buttonRect.right) : 16 }),
         zIndex: 99999,
       }}
-      className="w-[92vw] sm:w-[420px] max-h-[85vh] flex flex-col rounded-2xl bg-[#070D18]/98 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/80 text-white animate-fadeIn overflow-hidden"
+      className="w-auto sm:w-[420px] max-h-[80vh] flex flex-col rounded-2xl bg-[#070D18]/98 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/80 text-white animate-fadeIn overflow-hidden"
     >
       {/* Header */}
       <div className="p-4 border-b border-white/10 bg-[#0B1626]/90 flex items-center justify-between">

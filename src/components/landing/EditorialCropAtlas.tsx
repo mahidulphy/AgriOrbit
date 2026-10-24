@@ -162,7 +162,7 @@ export function EditorialCropAtlas() {
             </div>
 
             {/* Season Tabs */}
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-[#050B14] border border-white/10 overflow-x-auto">
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-[#050B14] border border-white/10 overflow-x-auto no-scrollbar flex-nowrap">
               {(
                 [
                   { id: 'all', en: 'All Seasons', bn: 'সব মৌসুম' },
@@ -187,7 +187,7 @@ export function EditorialCropAtlas() {
           </div>
 
           {/* Row 2: Category Filter Chips */}
-          <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto pb-1">
+          <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-nowrap pb-1">
             <button
               onClick={() => setSelectedCategory('all')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer whitespace-nowrap border ${
@@ -412,11 +412,11 @@ export function EditorialCropAtlas() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
           onClick={() => setDetailCrop(null)}
         >
           <div
-            className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0B1626] border border-white/15 p-6 sm:p-8 shadow-2xl relative space-y-6 text-white"
+            className="w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-2xl overflow-y-auto rounded-none sm:rounded-3xl bg-[#0B1626] border-0 sm:border sm:border-white/15 p-4 sm:p-8 shadow-2xl relative space-y-6 text-white"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -458,7 +458,7 @@ export function EditorialCropAtlas() {
 
               <button
                 onClick={() => setDetailCrop(null)}
-                className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Close detail modal"
               >
                 <X className="w-5 h-5" />

@@ -135,15 +135,19 @@ function Row({
 }) {
   const color = neutral ? 'text-cyan-200 bg-cyan-300/10' : warm ? 'text-amber-200 bg-amber-300/10' : 'text-sky-200 bg-sky-300/10';
   return (
-    <div>
-      <dt className="text-xs text-slate-400">{label}</dt>
-      <dd className="mt-1 flex flex-wrap items-center justify-between gap-2">
-        <span className="tabular-nums text-slate-300 text-xs sm:text-sm">
-          <span className="text-slate-500">{thenLabel}</span> {then}
-          <span className="mx-1 text-slate-600">→</span>
-          <span className="text-slate-500">{nowLabel}</span> <span className="font-semibold text-white">{now}</span>
+    <div className="py-1 border-b border-white/5 last:border-0">
+      <div className="flex items-center justify-between gap-2">
+        <dt className="text-xs text-slate-400 font-medium">{label}</dt>
+        <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums shrink-0 ${color}`}>{delta}</span>
+      </div>
+      <dd className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tabular-nums text-slate-300">
+        <span className="text-slate-400">
+          <span className="text-slate-500 text-[11px]">{thenLabel}:</span> {then}
         </span>
-        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums shrink-0 ${color}`}>{delta}</span>
+        <span className="text-slate-600 font-mono">→</span>
+        <span className="text-slate-200">
+          <span className="text-slate-500 text-[11px]">{nowLabel}:</span> <span className="font-semibold text-white">{now}</span>
+        </span>
       </dd>
     </div>
   );
@@ -152,16 +156,16 @@ function Row({
 function RainBar({ label, shares }: { label: string; shares: Record<SeasonId, number> }) {
   const { num } = useLang();
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-[10rem_1fr] items-start sm:items-center gap-2 sm:gap-3">
+    <div className="flex flex-col sm:grid sm:grid-cols-[10rem_1fr] items-start sm:items-center gap-1.5 sm:gap-3">
       <span className="text-xs sm:text-sm font-mono text-slate-400 shrink-0">{label}</span>
-      <div className="flex h-8 w-full overflow-hidden rounded-lg">
+      <div className="flex h-8 w-full overflow-hidden rounded-lg bg-black/30">
         {(['rabi', 'kharif1', 'kharif2'] as SeasonId[]).map((s) => (
           <div
             key={s}
-            className="flex items-center justify-center text-xs font-semibold text-ink-950 transition-all duration-700"
+            className="flex items-center justify-center text-[11px] sm:text-xs font-semibold text-ink-950 transition-all duration-700 min-w-0"
             style={{ width: `${shares[s]}%`, background: SEASON_COLOR[s] }}
           >
-            {shares[s] >= 8 && `${num(shares[s], 0)}%`}
+            {shares[s] >= 12 && `${num(shares[s], 0)}%`}
           </div>
         ))}
       </div>

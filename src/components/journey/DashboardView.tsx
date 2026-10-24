@@ -377,17 +377,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <BrandLogo imgClassName="h-8 w-auto object-contain mix-blend-screen shrink-0" />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <NotificationBell compact />
           <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
           <UserMenu compact />
-          <button
-            onClick={onLogout}
-            title={language === 'en' ? 'Exit to Website' : 'হোমে ফিরুন'}
-            className="p-1.5 rounded-lg bg-white/5 text-[#8FA3B8] hover:text-white border border-white/10 cursor-pointer"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-          </button>
         </div>
       </header>
 

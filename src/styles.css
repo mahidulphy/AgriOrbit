@@ -50,18 +50,34 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   body {
     min-height: 100vh;
     font-family: var(--font-sans);
     background-color: #050b14;
     color: #ffffff;
+    overflow-x: hidden;
+    max-width: 100vw;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  * {
+    overflow-wrap: anywhere;
   }
   /* Bengali script typographical spacing */
-  html:lang(bn) body { line-height: 1.7; }
-  html:lang(bn) h1, html:lang(bn) h2 { line-height: 1.3; letter-spacing: 0; }
+  html:lang(bn) body { line-height: 1.55; }
+  html:lang(bn) h1, html:lang(bn) h2 { line-height: 1.25; letter-spacing: 0; }
   ::selection { background: rgb(184 255 61 / 0.3); color: #b8ff3d; }
   section[id] { scroll-margin-top: 5rem; }
+
+  /* Prevent auto-zooming on focus in iOS and mobile browsers */
+  @media (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
 
   /* ───────────── Native Select Dropdown Readability ───────────── */
   select {
@@ -103,7 +119,10 @@
     width: 100%;
     max-width: 1240px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-x { padding-inline: 1.5rem; }
   }
   @media (min-width: 768px) {
     .container-x { padding-inline: 2rem; }
@@ -190,8 +209,8 @@
   .section-title {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2rem, 3.8vw, 3rem);
-    line-height: 1.15;
+    font-size: clamp(1.65rem, 5vw, 2.75rem);
+    line-height: 1.2;
     letter-spacing: -0.01em;
     color: #ffffff;
   }
@@ -400,4 +419,13 @@
   .agriorbit-orbit-arc .orbit-path {
     animation: none;
   }
+}
+
+/* Mobile scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

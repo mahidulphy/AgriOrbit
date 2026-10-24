@@ -12,7 +12,7 @@ export function Hero({ conditions, shift, isLive = false }: { conditions: Condit
   const { t, lang } = useLang();
 
   return (
-    <section className="relative isolate overflow-hidden min-h-[90vh] flex flex-col justify-center pt-28 pb-20 md:pt-36 md:pb-28 border-b border-white/10">
+    <section className="relative isolate overflow-hidden min-h-[90vh] flex flex-col justify-center pt-24 pb-14 sm:pt-28 sm:pb-20 md:pt-36 md:pb-28 border-b border-white/10">
       {/* Full-bleed authentic documentary background image */}
       <div className="absolute inset-0 -z-20">
         <img
@@ -34,7 +34,7 @@ export function Hero({ conditions, shift, isLive = false }: { conditions: Condit
           </div>
 
           {/* Clean Modern Editorial Headline with enhanced text shadow */}
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12] text-balance drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+          <h1 className="font-display text-[28px] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.18] sm:leading-[1.12] text-balance drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
             {t.hero.title1}
             <br />
             <span className="text-[#B8FF3D] drop-shadow-[0_0_20px_rgba(184,255,61,0.25)]">{t.hero.title2}</span>
@@ -48,14 +48,14 @@ export function Hero({ conditions, shift, isLive = false }: { conditions: Condit
           </div>
 
           {/* CTAs */}
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button onClick={goAnalyze} className="btn btn-primary px-7! py-3.5! text-base! cursor-pointer shadow-xl shadow-[#B8FF3D]/20">
+          <div className="mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <button onClick={goAnalyze} className="btn btn-primary w-full sm:w-auto justify-center min-h-[48px] px-7! py-3.5! text-base! cursor-pointer shadow-xl shadow-[#B8FF3D]/20">
               {t.hero.cta}
               <ArrowRight className="h-4 w-4" />
             </button>
             <a
               href="#how"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-200 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] transition-colors cursor-pointer px-2 py-2"
+              className="inline-flex items-center justify-center gap-2 min-h-[44px] text-sm font-medium text-slate-200 hover:text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] transition-colors cursor-pointer px-4 py-2 rounded-xl bg-white/5 sm:bg-transparent border border-white/10 sm:border-transparent"
             >
               {t.hero.cta2}
               <ArrowDown className="h-4 w-4 text-[#00E5FF]" />
@@ -87,7 +87,7 @@ export function Hero({ conditions, shift, isLive = false }: { conditions: Condit
       </div>
 
       {/* Interactive data source strip linking to #data per requirement B.16 */}
-      <div className="container-x mt-16 md:mt-20 flex justify-center relative z-10">
+      <div className="container-x mt-10 sm:mt-16 md:mt-20 flex justify-center relative z-10">
         <a
           href="#data"
           className="glass flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-full px-6 py-2.5 text-xs text-slate-300 font-mono border border-white/15 hover:text-white hover:border-[#00E5FF]/40 transition-colors group cursor-pointer shadow-lg shadow-black/40"
