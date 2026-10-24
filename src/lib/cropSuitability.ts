@@ -39,6 +39,9 @@ export interface TelemetryContext {
   sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
   sentinel2Ndvi10m?: number | null; // 10m field NDVI (ESA Sentinel-2 MSI)
   sentinel2AnomalyPct?: number | null; // % deviation from baseline NDVI
+  jaxaRain30dMm?: number | null; // 30-day rain from JAXA GSMaP v8
+  jaxaSoilMoisture?: number | null; // soil moisture m³/m³ from JAXA AMSR2
+  jaxaSpi30dIndex?: number | null; // JAXA 30-day Standardized Precipitation Index
 }
 
 export interface ScoreDeltas {
@@ -49,6 +52,7 @@ export interface ScoreDeltas {
   waterDeficitPenalty: number;
   sentinel1FloodPenalty: number;
   sentinel2StressPenalty: number;
+  jaxaDroughtPenalty: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;
@@ -79,6 +83,7 @@ function evaluateCropWithNasa(
     waterDeficitPenalty: 0,
     sentinel1FloodPenalty: 0,
     sentinel2StressPenalty: 0,
+    jaxaDroughtPenalty: 0,
     primaryPriorityDelta: 0,
     secondaryPriorityDelta: 0,
     finalScore: calibratedBase,
@@ -256,6 +261,51 @@ function evaluateCropWithNasa(
         );
         dynamicRulesBn.push(
           `নিয়ম VEG-02: সেন্টিনেল-২ ১০মি NDVI ঘাটতি (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% < -১৫%) → স্বল্পমেয়াদী বিকল্প ফসলে +৫ বোনাস।`
+        );
+      }
+    }
+
+
+    // RULE JAXA-01: DUAL-SATELLITE DROUGHT CONFIRMATION (JAXA AMSR2 + SPI & SMAP)
+    // ─────────────────────────────────────────────────────────────
+    const amsr2 = telemetry?.jaxaSoilMoisture;
+    const spi = telemetry?.jaxaSpi30dIndex;
+    const isDualDrought =
+      (amsr2 !== undefined && amsr2 !== null && amsr2 < 0.16 && soil !== null && soil !== undefined && soil < 0.18) ||
+      (spi !== undefined && spi !== null && spi < -1.2);
+
+    if (isDualDrought) {
+      if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice') {
+        const penalty = -15;
+        score += penalty;
+        deltas.jaxaDroughtPenalty = penalty;
+        dynamicObservationsEn.push(
+          `JAXA AMSR2 (${amsr2 !== null && amsr2 !== undefined ? amsr2.toFixed(2) : 'N/A'} m³/m³) & SPI drought index (${spi !== null && spi !== undefined ? spi.toFixed(2) : 'N/A'}) confirm severe moisture depletion.`
+        );
+        dynamicObservationsBn.push(
+          `জাক্সা এএমএসআর২ (${amsr2 !== null && amsr2 !== undefined ? amsr2.toFixed(2) : ''} m³/m³) ও খরা সূচক SPI (${spi !== null && spi !== undefined ? spi.toFixed(2) : ''}) মাটিতে তীব্র পানিশূন্যতা নিশ্চিত করেছে।`
+        );
+        dynamicRulesEn.push(
+          `Rule JAXA-01: Dual-agency satellite drought verified (AMSR2 + SMAP + SPI < -1.2) → high-water crop penalized -15.`
+        );
+        dynamicRulesBn.push(
+          `নিয়ম JAXA-01: যৌথ উপগ্রহ পর্যবেক্ষণ দ্বারা খরা নিশ্চিত (AMSR2 + SMAP + SPI < -১.২) → সেচনির্ভর ফসলে -১৫ নম্বর।`
+        );
+      } else if (crop.waterRequirementEn === 'Low' || ['sesame', 'chickpea', 'mustard', 'grass_pea'].includes(crop.id)) {
+        const bonus = 5;
+        score += bonus;
+        deltas.jaxaDroughtPenalty = bonus;
+        dynamicObservationsEn.push(
+          `JAXA SPI (${spi !== null && spi !== undefined ? spi.toFixed(2) : 'N/A'}) confirms dry spell; drought-hardy crop promoted.`
+        );
+        dynamicObservationsBn.push(
+          `জাক্সা খরা সূচক অনুযায়ী শুষ্ক পরিস্থিতি বিরাজ করায় খরা-সহনশীল ফসল অগ্রাধিকার পেয়েছে।`
+        );
+        dynamicRulesEn.push(
+          `Rule JAXA-01: Dual-agency satellite drought verified → drought-hardy crop +5 bonus.`
+        );
+        dynamicRulesBn.push(
+          `নিয়ম JAXA-01: যৌথ উপগ্রহ তথ্যে খরা পরিস্থিতিতে খরা-সহনশীল ফসলে +৫ বোনাস।`
         );
       }
     }

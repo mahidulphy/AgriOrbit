@@ -8,7 +8,8 @@
       "ndvi": "MOD13Q1.061",
       "lst": "MOD11A2.061",
       "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)",
-      "sentinel2": "ESA Sentinel-2 MSI L2A (10m NDVI)"
+      "sentinel2": "ESA Sentinel-2 MSI L2A (10m NDVI)",
+      "jaxa": "JAXA Earth API (GSMaP v8, AMSR2)"
     },
     "generatedAt": "2026-10-23T12:39:17.325Z"
   },
@@ -54,6 +55,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.39,
       "anomalyPct": 5.1
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "gazipur": {
@@ -98,6 +111,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.5,
       "anomalyPct": 4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "narayanganj": {
@@ -138,6 +163,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
       "anomalyPct": 3.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "munshiganj": {
@@ -182,6 +219,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.43,
       "anomalyPct": 4.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "narsingdi": {
@@ -231,6 +280,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
       "anomalyPct": 3.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.38,
+      "spi30dIndex": 0.8,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.38 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "manikganj": {
@@ -280,6 +341,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.71,
       "anomalyPct": 2.8
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.31,
+      "spi30dIndex": 0.45,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.31 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.31 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "tangail": {
@@ -329,6 +402,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.38,
       "anomalyPct": 5.3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.33,
+      "spi30dIndex": 0.55,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.33 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.33 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "kishoreganj": {
@@ -373,6 +458,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.73,
       "anomalyPct": 2.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "faridpur": {
@@ -417,6 +514,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
       "anomalyPct": 3.3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "rajbari": {
@@ -461,6 +570,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.78,
       "anomalyPct": 2.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "shariatpur": {
@@ -505,6 +626,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.76,
       "anomalyPct": 2.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "madaripur": {
@@ -554,6 +687,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
       "anomalyPct": 3.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.35,
+      "spi30dIndex": 0.65,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.35 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.35 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "gopalganj": {
@@ -604,6 +749,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
       "anomalyPct": 3.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.38,
+      "spi30dIndex": 0.8,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.38 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "chattogram": {
@@ -648,6 +805,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.41,
       "anomalyPct": 4.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "coxsbazar": {
@@ -692,6 +861,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.72,
       "anomalyPct": 2.8
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "cumilla": {
@@ -741,6 +922,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
       "anomalyPct": 3.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.32,
+      "spi30dIndex": 0.5,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.32 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.32 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "chandpur": {
@@ -785,6 +978,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.52,
       "anomalyPct": 3.8
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "noakhali": {
@@ -834,6 +1039,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.64,
       "anomalyPct": 3.1
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.32,
+      "spi30dIndex": 0.5,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.32 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.32 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "feni": {
@@ -883,6 +1100,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.48,
       "anomalyPct": 4.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.29,
+      "spi30dIndex": 0.35,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.29 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.29 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "lakshmipur": {
@@ -927,6 +1156,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
       "anomalyPct": 3.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "brahmanbaria": {
@@ -971,6 +1212,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
       "anomalyPct": 3.3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "rangamati": {
@@ -1015,6 +1268,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.36,
       "anomalyPct": 5.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "khagrachari": {
@@ -1064,6 +1329,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.8,
       "anomalyPct": 2.5
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.22,
+      "spi30dIndex": 0,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.22 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.22 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "bandarban": {
@@ -1108,6 +1385,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.67,
       "anomalyPct": 3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "rajshahi": {
@@ -1152,6 +1441,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.71,
       "anomalyPct": 2.8
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "bogura": {
@@ -1201,6 +1502,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.4,
       "anomalyPct": 5
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.2,
+      "spi30dIndex": -0.1,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.2 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.2 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "pabna": {
@@ -1245,6 +1558,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "sirajganj": {
@@ -1289,6 +1614,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.59,
       "anomalyPct": 3.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "natore": {
@@ -1338,6 +1675,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
       "anomalyPct": 3.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.3,
+      "spi30dIndex": 0.4,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.3 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.3 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "naogaon": {
@@ -1387,6 +1736,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
       "anomalyPct": 3.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "chapainawabganj": {
@@ -1431,6 +1792,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.59,
       "anomalyPct": 3.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "joypurhat": {
@@ -1475,6 +1848,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.78,
       "anomalyPct": 2.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "khulna": {
@@ -1519,6 +1904,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
       "anomalyPct": 3.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "jashore": {
@@ -1568,6 +1965,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.3,
+      "spi30dIndex": 0.4,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.3 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.3 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "satkhira": {
@@ -1612,6 +2021,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.68,
       "anomalyPct": 2.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "bagerhat": {
@@ -1656,6 +2077,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
       "anomalyPct": 2.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "kushtia": {
@@ -1700,6 +2133,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.69,
       "anomalyPct": 2.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "jhenaidah": {
@@ -1749,6 +2194,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.77,
       "anomalyPct": 2.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.24,
+      "spi30dIndex": 0.1,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.24 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.24 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "magura": {
@@ -1798,6 +2255,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
       "anomalyPct": 3.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.31,
+      "spi30dIndex": 0.45,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.31 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.31 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "narail": {
@@ -1847,6 +2316,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.67,
       "anomalyPct": 3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.38,
+      "spi30dIndex": 0.8,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.38 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "meherpur": {
@@ -1896,6 +2377,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.8,
       "anomalyPct": 2.5
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.28,
+      "spi30dIndex": 0.3,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.28 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.28 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "chuadanga": {
@@ -1945,6 +2438,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.56,
       "anomalyPct": 3.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.27,
+      "spi30dIndex": 0.25,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.27 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.27 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "barishal": {
@@ -1989,6 +2494,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
       "anomalyPct": 2.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "patuakhali": {
@@ -2033,6 +2550,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "bhola": {
@@ -2077,6 +2606,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
       "anomalyPct": 2.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "pirojpur": {
@@ -2121,6 +2662,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
       "anomalyPct": 2.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "jhalokati": {
@@ -2170,6 +2723,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.36,
+      "spi30dIndex": 0.7,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.36 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.36 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "barguna": {
@@ -2214,6 +2779,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.7,
       "anomalyPct": 2.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "sylhet": {
@@ -2258,6 +2835,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
       "anomalyPct": 3.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 112.5,
+      "amsr2SoilMoisture": 0.28,
+      "spi30dIndex": 0.45,
+      "status": "discrepancy",
+      "statusEn": "GSMaP: 112.5mm vs NASA POWER: 68mm (sources disagree by 44.5mm · check local gauge)",
+      "statusBn": "জিএসএমএপি: 112.5মিমি বনাম নাসা পাওয়ার: ৬৮মিমি (তথ্যে 44.5মিমি অমিল · স্থানীয় রেইনগেজ যাচাই করুন)",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 44.5,
+      "rainDiscrepancyPct": 39.6
     }
   },
   "moulvibazar": {
@@ -2307,6 +2896,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
       "anomalyPct": 2.7
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.28,
+      "spi30dIndex": 0.3,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.28 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.28 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "habiganj": {
@@ -2356,6 +2957,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.66,
       "anomalyPct": 3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.22,
+      "spi30dIndex": 0,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.22 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.22 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "sunamganj": {
@@ -2400,6 +3013,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.5,
       "anomalyPct": 4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "rangpur": {
@@ -2449,6 +3074,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.69,
       "anomalyPct": 2.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 32.4,
+      "amsr2SoilMoisture": 0.22,
+      "spi30dIndex": -0.15,
+      "status": "favorable",
+      "statusEn": "GSMaP: 32.4mm · AMSR2: 0.22 m³/m³ (aligned with NASA POWER)",
+      "statusBn": "জিএসএমএপি: 32.4মিমি · এএমএসআর২: 0.22 m³/m³ (নাসার তথ্যের সাথে সামঞ্জস্যপূর্ণ)",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4.4,
+      "rainDiscrepancyPct": 13.6
     }
   },
   "dinajpur": {
@@ -2493,6 +3130,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "kurigram": {
@@ -2537,6 +3186,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
       "anomalyPct": -22.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "gaibandha": {
@@ -2581,6 +3242,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.65,
       "anomalyPct": 3.1
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "lalmonirhat": {
@@ -2625,6 +3298,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
       "anomalyPct": 2.4
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 35.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "nilphamari": {
@@ -2669,6 +3354,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
       "anomalyPct": 3.2
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "panchagarh": {
@@ -2718,6 +3415,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.66,
       "anomalyPct": 3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.18,
+      "spi30dIndex": -0.2,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.18 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.18 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "thakurgaon": {
@@ -2762,6 +3471,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.72,
       "anomalyPct": 2.8
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "mymensingh": {
@@ -2811,6 +3532,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.39,
       "anomalyPct": 5.1
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 28.2,
+      "amsr2SoilMoisture": 0.27,
+      "spi30dIndex": 0.25,
+      "status": "favorable",
+      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.27 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.27 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "jamalpur": {
@@ -2860,6 +3593,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.7,
       "anomalyPct": 2.9
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 49.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "netrokona": {
@@ -2909,6 +3654,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
       "anomalyPct": 3.3
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 56.2,
+      "amsr2SoilMoisture": 0.26,
+      "spi30dIndex": 0.2,
+      "status": "favorable",
+      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.26 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.26 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   },
   "sherpur": {
@@ -2958,6 +3715,18 @@
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
       "anomalyPct": 3.6
+    },
+    "jaxa": {
+      "gsmapRain30dMm": 42.2,
+      "amsr2SoilMoisture": 0.23,
+      "spi30dIndex": 0.05,
+      "status": "favorable",
+      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
+      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
+      "observedAt": "2026-10-24",
+      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
+      "rainDiscrepancyMm": 4,
+      "rainDiscrepancyPct": 10
     }
   }
 }

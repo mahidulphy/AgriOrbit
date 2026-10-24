@@ -195,7 +195,32 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     </tr>
                   )}
 
-                                    {/* Sentinel-2 10m Vegetation Health / Crop Stress */}
+                                                      {/* JAXA AMSR2 / SPI Drought Confirmation */}
+                  {deltas.jaxaDroughtPenalty !== undefined && deltas.jaxaDroughtPenalty !== 0 && (
+                    <tr>
+                      <td className="py-2.5 pr-3">
+                        <span className="text-[#FAFAFA] font-medium block">
+                          {language === 'en' ? 'Dual-Satellite Drought Index (JAXA-01)' : 'যৌথ উপগ্রহ খরা সূচক (JAXA-01)'}
+                        </span>
+                        <span className="text-[11px] text-[#737373]">
+                          {deltas.jaxaDroughtPenalty < 0
+                            ? (language === 'en'
+                              ? 'JAXA AMSR2 + SPI and NASA SMAP confirm severe topsoil drought (-15 pts)'
+                              : 'জাক্সা এএমএসআর২ ও নাসা স্ম্যাপ উভয়েই তীব্র খরা নিশ্চিত করেছে (-১৫)')
+                            : (language === 'en'
+                              ? 'Drought-hardy crop bonus under low moisture (+5 pts)'
+                              : 'শুষ্ক পরিস্থিতিতে খরা-সহনশীল ফসলে বাড়তি নম্বর (+৫)')
+                          }
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">JAXA Earth API</td>
+                      <td className={`py-2.5 px-3 text-right font-semibold ${deltas.jaxaDroughtPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
+                        {deltas.jaxaDroughtPenalty > 0 ? `+${deltas.jaxaDroughtPenalty}` : deltas.jaxaDroughtPenalty}
+                      </td>
+                    </tr>
+                  )}
+
+                  {/* Sentinel-2 10m Vegetation Health / Crop Stress */}
                   {deltas.sentinel2StressPenalty !== undefined && deltas.sentinel2StressPenalty !== 0 && (
                     <tr>
                       <td className="py-2.5 pr-3">

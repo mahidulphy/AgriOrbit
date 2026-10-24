@@ -151,6 +151,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   // Real NASA Earthdata AppEEARS observations for the active district
   const districtSat = getDistrictSatellite(district.id);
   const sentinel2Data = districtSat?.sentinel2 ?? null;
+  const jaxaData = districtSat?.jaxa ?? null;
   const smapData = districtSat?.smap ?? null;
   const ndviData = districtSat?.ndvi ?? null;
   const lstDayData = districtSat?.lstDay ?? null;
@@ -189,8 +190,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       sentinel1FloodedCroplandPct: districtSat?.sentinel1?.floodedCroplandPct ?? null,
       sentinel2Ndvi10m: sentinel2Data?.ndvi10m ?? null,
       sentinel2AnomalyPct: sentinel2Data?.anomalyPct ?? null,
+      jaxaRain30dMm: jaxaData?.gsmapRain30dMm ?? null,
+      jaxaSoilMoisture: jaxaData?.amsr2SoilMoisture ?? null,
+      jaxaSpi30dIndex: jaxaData?.spi30dIndex ?? null,
     }),
-    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct]
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex]
   );
 
   // Pure mathematical rule engine execution

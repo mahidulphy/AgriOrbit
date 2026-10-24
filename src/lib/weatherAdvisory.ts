@@ -143,6 +143,9 @@ export interface AdvisoryRuleContext {
   sentinel1FloodedCroplandPct?: number | null;
   sentinel2Ndvi10m?: number | null;
   sentinel2AnomalyPct?: number | null;
+  jaxaRain30dMm?: number | null;
+  jaxaSoilMoisture?: number | null;
+  jaxaSpi30dIndex?: number | null;
   districtId: DistrictId | string;
   upazilaName?: string;
   season?: 'Rabi' | 'Kharif-1' | 'Kharif-2';
@@ -213,6 +216,9 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const sentinel1FloodPct = context.sentinel1FloodedCroplandPct;
   const sentinel2Ndvi = context.sentinel2Ndvi10m;
   const sentinel2Anomaly = context.sentinel2AnomalyPct;
+  const jaxaRain = context.jaxaRain30dMm;
+  const jaxaSoil = context.jaxaSoilMoisture;
+  const jaxaSpi = context.jaxaSpi30dIndex;
 
   let conditionType: ConditionType = 'favorable';
   let severity: AdvisorySeverity = 'success';
@@ -406,6 +412,36 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     });
   }
 
+  if (jaxaRain !== undefined && jaxaRain !== null) {
+    const nasa30dEst = gpm.recentRain7dMm * (30 / 7);
+    const rainDiffMm = Math.abs(nasa30dEst - jaxaRain);
+    const rainDiffPct = (rainDiffMm / Math.max(nasa30dEst, jaxaRain, 1)) * 100;
+    const isDiscrepancy = rainDiffMm > 25 && rainDiffPct > 30;
+
+    evaluatedParams.push({
+      parameter: 'Cross-Agency Rainfall Agreement (NASA POWER vs JAXA GSMaP v8)',
+      source: 'JAXA Earth API',
+      observedValue: `NASA ~30d: ${nasa30dEst.toFixed(0)}mm vs JAXA GSMaP: ${jaxaRain.toFixed(0)}mm (${isDiscrepancy ? 'Δ ' + rainDiffMm.toFixed(0) + 'mm Discrepancy' : 'Aligned'})`,
+      thresholdCondition: 'diff > 25mm AND diffPct > 30%',
+      satisfied: isDiscrepancy,
+    });
+
+    if (isDiscrepancy) {
+      rulesTriggered.push(`Rule RAIN-DISCREPANCY-01: NASA POWER (${nasa30dEst.toFixed(0)}mm) and JAXA GSMaP (${jaxaRain.toFixed(0)}mm) disagree by ${rainDiffMm.toFixed(0)}mm (${rainDiffPct.toFixed(0)}%). Verify local gauge.`);
+      rulesTriggeredBn.push(`নিয়ম RAIN-DISCREPANCY-01: নাসা ও জাক্সার বৃষ্টিপাত পরিমাপে ${rainDiffMm.toFixed(0)}মিমি (${rainDiffPct.toFixed(0)}%) অমিল ধরা পড়েছে। স্থানীয় রেইনগেজে নিশ্চিত করুন।`);
+    }
+  }
+
+  if (jaxaSoil !== undefined && jaxaSoil !== null) {
+    evaluatedParams.push({
+      parameter: 'Topsoil Moisture & SPI Drought Index (JAXA AMSR2 on GCOM-W)',
+      source: 'JAXA Earth API',
+      observedValue: `${jaxaSoil.toFixed(2)} m³/m³ (SPI: ${jaxaSpi !== undefined && jaxaSpi !== null ? jaxaSpi.toFixed(2) : 'N/A'})`,
+      thresholdCondition: 'AMSR2 < 0.16 m³/m³ OR SPI < -1.2',
+      satisfied: jaxaSoil < 0.16 || (jaxaSpi !== undefined && jaxaSpi !== null && jaxaSpi < -1.2),
+    });
+  }
+
   if (sentinel1FloodPct !== undefined && sentinel1FloodPct !== null) {
     evaluatedParams.push({
       parameter: 'Cropland Flooding / Waterlogging (ESA Sentinel-1 SAR)',
@@ -480,6 +516,9 @@ export async function getWeatherAdvisoryForLocation(
   const sentinel1FloodedCroplandPct = sat?.sentinel1?.floodedCroplandPct ?? null;
   const sentinel2Ndvi10m = sat?.sentinel2?.ndvi10m ?? null;
   const sentinel2AnomalyPct = sat?.sentinel2?.anomalyPct ?? null;
+  const jaxaRain30dMm = sat?.jaxa?.gsmapRain30dMm ?? null;
+  const jaxaSoilMoisture = sat?.jaxa?.amsr2SoilMoisture ?? null;
+  const jaxaSpi30dIndex = sat?.jaxa?.spi30dIndex ?? null;
 
   const [gpm, forecast] = await Promise.all([
     getGpmObservation(districtId, lat, lng),
@@ -498,5 +537,8 @@ export async function getWeatherAdvisoryForLocation(
     sentinel1FloodedCroplandPct,
     sentinel2Ndvi10m,
     sentinel2AnomalyPct,
+    jaxaRain30dMm,
+    jaxaSoilMoisture,
+    jaxaSpi30dIndex,
   });
 }

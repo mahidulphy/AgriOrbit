@@ -73,6 +73,19 @@ export interface Sentinel2Record {
   anomalyPct: number;
 }
 
+export interface JaxaRecord {
+  gsmapRain30dMm: number;
+  amsr2SoilMoisture: number;
+  spi30dIndex: number;
+  status: 'favorable' | 'moderate' | 'drought_alert' | 'discrepancy';
+  statusEn: string;
+  statusBn: string;
+  observedAt: string;
+  source: 'JAXA Earth API (GSMaP v8 / AMSR2)';
+  rainDiscrepancyMm?: number;
+  rainDiscrepancyPct?: number;
+}
+
 export interface DistrictSatelliteRecord {
   smap: SmapRecord | null;
   ndvi: NdviRecord | null;
@@ -80,6 +93,7 @@ export interface DistrictSatelliteRecord {
   lstNight: LstRecord | null;
   sentinel1?: Sentinel1Record | null;
   sentinel2?: Sentinel2Record | null;
+  jaxa?: JaxaRecord | null;
 }
 
 export interface SatelliteDatasetMeta {
@@ -92,6 +106,7 @@ export interface SatelliteDatasetMeta {
     lst: string;
     sentinel1?: string;
     sentinel2?: string;
+    jaxa?: string;
   };
   generatedAt: string;
 }
