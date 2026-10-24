@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Mail, Lock, User, Sparkles } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User } from 'lucide-react';
 import { Language } from '../../types';
 
 interface AuthScreenProps {
@@ -28,18 +28,18 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 relative font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 relative font-editorial selection:bg-[#22C55E]/20 selection:text-[#22C55E]">
       {/* Back button */}
       <button
         onClick={onBackToLanding}
-        className="absolute top-8 left-8 text-xs font-semibold text-[#8FA3B8] hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
+        className="absolute top-8 left-8 text-xs font-semibold text-[#A3A3A3] hover:text-white flex items-center gap-2 transition-colors cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>{language === 'en' ? 'Back to Overview' : 'মূল পাতায় ফিরে যান'}</span>
       </button>
 
       {/* Auth Card Container */}
-      <div className="w-full max-w-md bg-[#0B1626] border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10">
+      <div className="w-full max-w-md bg-[#141414] border border-[#262626] rounded-lg p-8 sm:p-10 shadow-2xl relative z-10">
         {/* Brand Header */}
         <div className="text-center mb-8">
           <a href="#" aria-label="AgriOrbit" className="inline-block mx-auto mb-3">
@@ -57,7 +57,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           <h2 className="font-display text-2xl font-bold text-white">
             {language === 'en' ? 'Field Advisory Engine' : 'ফিল্ড অ্যাডভাইজরি ইঞ্জিন'}
           </h2>
-          <p className="text-xs text-[#8FA3B8] mt-1">
+          <p className="text-xs text-[#A3A3A3] mt-1">
             {language === 'en'
               ? 'Access your farm field analysis & rotation engine'
               : 'আপনার জমির উপগ্রহ তথ্য ও শস্য পরিকল্পনা ব্যবস্থা'}
@@ -65,14 +65,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         </div>
 
         {/* Tab Toggle: Login vs Create Account */}
-        <div className="grid grid-cols-2 p-1 bg-[#050B14] rounded-xl border border-white/10 mb-6">
+        <div className="grid grid-cols-2 p-1 bg-[#0A0A0A] rounded-lg border border-[#262626] mb-6">
           <button
             type="button"
             onClick={() => setIsSignUp(false)}
             className={`py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               !isSignUp
-                ? 'bg-[#B8FF3D] text-[#050B14] font-bold shadow-sm'
-                : 'text-[#8FA3B8] hover:text-white'
+                ? 'bg-[#22C55E] text-black font-semibold'
+                : 'text-[#A3A3A3] hover:text-white'
             }`}
           >
             {language === 'en' ? 'Sign In' : 'লগইন'}
@@ -82,8 +82,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             onClick={() => setIsSignUp(true)}
             className={`py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               isSignUp
-                ? 'bg-[#B8FF3D] text-[#050B14] font-bold shadow-sm'
-                : 'text-[#8FA3B8] hover:text-white'
+                ? 'bg-[#22C55E] text-black font-semibold'
+                : 'text-[#A3A3A3] hover:text-white'
             }`}
           >
             {language === 'en' ? 'New Account' : 'নতুন অ্যাকাউন্ট'}
@@ -98,14 +98,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 {language === 'en' ? 'Farmer Name' : 'কৃষকের নাম'}
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-[#00E5FF] absolute left-3.5 top-3.5" />
+                <User className="w-4 h-4 text-[#737373] absolute left-3.5 top-3.5" />
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Farmer Name"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#B8FF3D]/60"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm focus:outline-none focus:border-[#404040]"
                 />
               </div>
             </div>
@@ -116,14 +116,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               {language === 'en' ? 'Email or Mobile Number' : 'ইমেইল অথবা মোবাইল নম্বর'}
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[#00E5FF] absolute left-3.5 top-3.5" />
+              <Mail className="w-4 h-4 text-[#737373] absolute left-3.5 top-3.5" />
               <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="017XXXXXXXX or email@domain.com"
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#B8FF3D]/60 font-mono"
+                className="w-full pl-10 pr-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm focus:outline-none focus:border-[#404040] font-mono"
               />
             </div>
           </div>
@@ -133,21 +133,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               {language === 'en' ? 'Password' : 'পাসওয়ার্ড'}
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-[#00E5FF] absolute left-3.5 top-3.5" />
+              <Lock className="w-4 h-4 text-[#737373] absolute left-3.5 top-3.5" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm focus:outline-none focus:border-[#B8FF3D]/60"
+                className="w-full pl-10 pr-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm focus:outline-none focus:border-[#404040]"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm tracking-tight transition-all duration-150 transform hover:-translate-y-0.5 shadow-xl shadow-[#B8FF3D]/20 cursor-pointer"
+            className="w-full py-3.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-sm transition-colors cursor-pointer"
           >
             {isSignUp
               ? language === 'en'
@@ -160,16 +160,16 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         </form>
 
         {/* Quick Demo Access */}
-        <div className="mt-8 pt-6 border-t border-white/10 text-center">
-          <p className="text-[11px] text-[#8FA3B8] mb-3">
+        <div className="mt-8 pt-6 border-t border-[#262626] text-center">
+          <p className="text-[11px] text-[#A3A3A3] mb-3">
             {language === 'en' ? 'Instant access with preloaded demo profile:' : 'ডেমো প্রোফাইলে অবিলম্বে প্রবেশ করুন:'}
           </p>
           <button
             type="button"
             onClick={handleQuickDemo}
-            className="w-full py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-[#00E5FF]/30 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            className="w-full py-3 px-4 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#B8FF3D]" />
+            
             <span>
               {language === 'en'
                 ? '1-Click Demo Login as Farmer Rafiqul'

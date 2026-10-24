@@ -19,11 +19,11 @@ const TermsPage = lazy(() => import('./components/legal').then((m) => ({ default
 
 function RouteLoading() {
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
-      <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-4">
+      <div className="w-10 h-10 rounded-lg border border-[#262626] bg-[#141414] flex items-center justify-center text-[#22C55E] mb-3">
         <Loader2 className="w-6 h-6 animate-spin" />
       </div>
-      <p className="font-mono text-xs text-slate-400">Loading...</p>
+      <p className="font-mono text-xs text-[#737373]">Loading...</p>
     </div>
   );
 }
@@ -156,11 +156,11 @@ export default function App() {
   if (route === 'dashboard') {
     if (loading) {
       return (
-        <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
-          <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
+        <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-4">
+          <div className="w-10 h-10 rounded-lg border border-[#262626] bg-[#141414] flex items-center justify-center text-[#22C55E] mb-3">
             <Loader2 className="w-6 h-6 animate-spin" />
           </div>
-          <p className="font-mono text-xs text-slate-400">Loading AgriOrbit dashboard...</p>
+          <p className="font-mono text-xs text-[#737373]">Loading AgriOrbit dashboard...</p>
         </div>
       );
     }
@@ -185,11 +185,11 @@ export default function App() {
     if (user) {
       if (onboardingCompleted === null) {
         return (
-          <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
-            <div className="w-12 h-12 rounded-2xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-3">
+          <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-4">
+            <div className="w-10 h-10 rounded-lg border border-[#262626] bg-[#141414] flex items-center justify-center text-[#22C55E] mb-3">
               <Loader2 className="w-6 h-6 animate-spin" />
             </div>
-            <p className="font-mono text-xs text-slate-400">Verifying farm registration status...</p>
+            <p className="font-mono text-xs text-[#737373]">Verifying farm registration status...</p>
           </div>
         );
       }

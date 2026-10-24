@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { MapPin, Navigation, Layers, Droplets, Info } from 'lucide-react';
+import { MapPin, Navigation, Info } from 'lucide-react';
 import { BD_DISTRICTS, BD_DIVISIONS } from '../../../data/districts';
 import { getDistrictAdmin, type DistrictId } from '../../../data/bdAdmin';
 import {
@@ -27,7 +27,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
   isOnboarding = false,
   errors,
 }) => {
-  const [showMap, setShowMap] = useState<boolean>(true);
+  const [, setShowMap] = useState<boolean>(true);
   const [locating, setLocating] = useState<boolean>(false);
   const [mapFlyTarget, setMapFlyTarget] = useState<MapFlyTarget | null>(null);
 
@@ -59,53 +59,54 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
       longitude: lng,
     });
 
-    if (admin) {
-      flyTo(admin.lng, admin.lat, 10);
-    }
+    flyTo(lng, lat, 10);
   };
 
   const handleMapSelect = async (lat: number, lng: number) => {
     const seq = ++requestSeq.current;
-    const geo = await reverseGeocode(lat, lng);
-    if (seq !== requestSeq.current) return;
+    setShowMap(true);
 
-    if (!geo.outsideBangladesh && geo.district.id) {
-      const candidates = getUpazilasFor(geo.district.id as DistrictId);
-      const matched = matchUpazila(candidates, geo.addressHint);
-      const dAdmin = getDistrictAdmin(geo.district.id as DistrictId);
+    onChange({
+      latitude: lat,
+      longitude: lng,
+    });
 
-      onChange({
-        district: geo.district.id,
-        division: dAdmin?.division || field.division,
-        upazila: matched || candidates[0]?.id || DISTRICT_WIDE_UPAZILA,
-        latitude: lat,
-        longitude: lng,
-      });
-    } else {
-      onChange({
-        latitude: lat,
-        longitude: lng,
-      });
+    try {
+      const geo = await reverseGeocode(lat, lng);
+      if (seq !== requestSeq.current) return;
+
+      if (geo && geo.district && !geo.outsideBangladesh) {
+        const upazilas = getUpazilasFor(geo.district.id as DistrictId);
+        const resolvedUpazila = matchUpazila(upazilas, geo.addressHint);
+
+        onChange({
+          district: geo.district.id,
+          division: geo.district.division || field.division,
+          upazila: resolvedUpazila ?? undefined,
+        });
+      }
+    } catch (err) {
+      console.warn('Reverse geocoding error:', err);
     }
   };
 
   const handleUseMyLocation = () => {
     if (!navigator.geolocation) {
-      alert(isBn ? 'আপনার ব্রাউজার লোকেশন সাপোর্ট করে না' : 'Geolocation is not supported by your browser.');
+      alert(isBn ? 'আপনার ব্রাউজারে জিপিএস সুবিধা নেই।' : 'Geolocation not supported by this browser.');
       return;
     }
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
-        setLocating(false);
         const { latitude, longitude } = pos.coords;
         handleMapSelect(latitude, longitude);
         flyTo(longitude, latitude, 12);
+        setLocating(false);
       },
       (err) => {
-        setLocating(false);
         console.warn('Geolocation error:', err);
-        alert(isBn ? 'আপনার বর্তমান লোকেশন পাওয়া যায়নি।' : 'Unable to retrieve your current location.');
+        setLocating(false);
+        alert(isBn ? 'আপনার অবস্থান শনাক্ত করা যায়নি।' : 'Unable to retrieve your current location.');
       },
       { timeout: 10000, enableHighAccuracy: true }
     );
@@ -113,58 +114,55 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="border-b border-white/10 pb-4">
-        <h2 className="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-[#00E5FF]" />
-          <span>{isBn ? 'জমির অবস্থান ও বৈশিষ্ট্য' : 'Field Location & Specifications'}</span>
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+      <div>
+        <h3 className="font-display font-semibold text-lg text-[#FAFAFA]">
+          {isBn ? 'জমির অবস্থান ও ভৌগোলিক তথ্য' : 'Field Location & Land Characteristics'}
+        </h3>
+        <p className="text-xs text-[#737373] mt-1">
           {isBn
-            ? 'আপনার জমির অবস্থান ও ধরন ঠিক করুন। নাসার স্যাটেলাইট এই এলাকার আবহাওয়া ও মাটির তথ্য যাচাই করবে।'
-            : 'Specify your field plot location and soil characteristics to power NASA agro-climatic observations.'}
+            ? 'জমির সঠিক অবস্থান নির্ধারণ করুন যাতে নাসা স্যাটেলাইট তথ্য সঠিকভাবে মেলানো যায়।'
+            : 'Pinpoint your field plot so satellite observations match your exact ground reality.'}
         </p>
       </div>
 
-      {/* Onboarding multi-field informative note */}
       {isOnboarding && (
-        <div className="p-3.5 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-start gap-3 text-xs sm:text-sm text-[#00E5FF]">
-          <Info className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#00E5FF]" />
+        <div className="p-3.5 rounded-xl bg-[#141414] border border-[#262626] flex items-start gap-3 text-xs text-[#A3A3A3]">
+          <Info className="w-4 h-4 shrink-0 mt-0.5 text-[#22C55E]" />
           <p className="leading-relaxed">
             {isBn
-              ? 'এখানে আপনার প্রধান চাষের জমির তথ্য দিন। অনবোর্ডিং শেষে প্রোফাইল পেজ (Profile) থেকে যেকোনো সময় আরও একাধিক জমি যুক্ত করতে পারবেন।'
-              : 'Register your primary cultivation plot here. You can easily add and manage more fields anytime from your Profile later.'}
+              ? 'এখানে আপনার প্রধান চাষের জমির তথ্য দিন। অনবোর্ডিং শেষে প্রোফাইল থেকে যেকোনো সময় আরও একাধিক জমি যুক্ত করতে পারবেন।'
+              : 'Register your primary cultivation plot here. You can add more fields anytime from your Profile later.'}
           </p>
         </div>
       )}
 
       {/* Profile specific: Field Name & Primary Checkbox */}
       {!isOnboarding && (
-        <div className="grid sm:grid-cols-3 gap-4 items-end p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+        <div className="grid sm:grid-cols-3 gap-4 items-end p-4 rounded-xl bg-[#0A0A0A] border border-[#262626]">
           <div className="sm:col-span-2">
-            <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
-              {isBn ? 'জমির নাম / প্লট নম্বর' : 'Field Name / Plot Label'} <span className="text-[#00E5FF]">*</span>
+            <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+              {isBn ? 'জমির নাম / প্লট নম্বর' : 'Field Name / Plot Label'} <span className="text-[#22C55E]">*</span>
             </label>
             <input
               type="text"
               value={field.name}
               onChange={(e) => onChange({ name: e.target.value })}
               placeholder={isBn ? 'যেমন: উত্তর বিলের ধানি জমি' : 'e.g. North Basin Plot 1'}
-              className="w-full min-h-[48px] px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white text-base focus:border-[#00E5FF] focus:outline-none"
+              className="w-full min-h-[44px] px-3.5 py-2 rounded-lg bg-[#141414] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none"
               required
             />
-            {errors?.name && <p className="text-xs text-red-400 mt-1 font-mono">{errors.name}</p>}
+            {errors?.name && <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.name}</p>}
           </div>
 
-          <div className="pb-2">
-            <label className="flex items-center gap-2.5 text-xs font-mono text-slate-300 cursor-pointer min-h-[48px]">
+          <div className="pb-1">
+            <label className="flex items-center gap-2.5 text-xs font-mono text-[#A3A3A3] cursor-pointer min-h-[44px]">
               <input
                 type="checkbox"
                 checked={field.isPrimary}
                 onChange={(e) => onChange({ isPrimary: e.target.checked })}
-                className="w-5 h-5 rounded bg-[#07101D] border-white/20 text-[#B8FF3D] focus:ring-0 cursor-pointer"
+                className="w-4 h-4 rounded bg-[#0A0A0A] border-[#262626] text-[#22C55E] accent-[#22C55E] focus:ring-0 cursor-pointer"
               />
-              <span className="font-semibold text-white">{isBn ? 'প্রধান সক্রিয় জমি' : 'Set as Primary Field'}</span>
+              <span className="font-medium text-[#FAFAFA]">{isBn ? 'প্রধান সক্রিয় জমি' : 'Set as Primary Field'}</span>
             </label>
           </div>
         </div>
@@ -173,18 +171,18 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
       {/* Main Grid: Form Controls (Left) & Interactive Map (Right) */}
       <div className="grid lg:grid-cols-12 gap-6 items-start">
         {/* Left Form Controls */}
-        <div className="lg:col-span-6 space-y-5">
+        <div className="lg:col-span-6 space-y-4">
           {/* District Selection */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
-                {isBn ? 'জেলা নির্বাচন করুন (৬৪ জেলা)' : 'Select District (64 Districts)'} <span className="text-[#00E5FF]">*</span>
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider">
+                {isBn ? 'জেলা নির্বাচন করুন (৬৪ জেলা)' : 'Select District (64 Districts)'} <span className="text-[#22C55E]">*</span>
               </label>
               <button
                 type="button"
                 onClick={handleUseMyLocation}
                 disabled={locating}
-                className="text-xs font-mono text-[#00E5FF] hover:text-[#B8FF3D] flex items-center gap-1 transition-colors cursor-pointer py-1"
+                className="text-xs font-mono text-[#737373] hover:text-[#FAFAFA] flex items-center gap-1 transition-colors cursor-pointer py-1"
               >
                 <Navigation className={`w-3.5 h-3.5 ${locating ? 'animate-spin' : ''}`} />
                 <span>{locating ? (isBn ? 'শনাক্ত হচ্ছে...' : 'Locating...') : (isBn ? 'আমার অবস্থান' : 'Use GPS')}</span>
@@ -193,14 +191,14 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
             <select
               value={field.district || 'rangpur'}
               onChange={(e) => handleDistrictChange(e.target.value as DistrictId)}
-              className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] transition-colors cursor-pointer"
+              className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] transition-colors cursor-pointer"
             >
               {BD_DIVISIONS.map((div) => {
                 const dists = BD_DISTRICTS.filter((d) => d.division === div.nameEn);
                 return (
-                  <optgroup key={div.nameEn} label={isBn ? div.nameBn : div.nameEn} className="bg-[#050B14] text-slate-300 font-bold">
+                  <optgroup key={div.nameEn} label={isBn ? div.nameBn : div.nameEn} className="bg-[#141414] text-[#A3A3A3] font-semibold">
                     {dists.map((d) => (
-                      <option key={d.id} value={d.id}>
+                      <option key={d.id} value={d.id} className="bg-[#141414] text-[#FAFAFA]">
                         {isBn ? d.nameBn : d.nameEn}
                       </option>
                     ))}
@@ -208,24 +206,24 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
                 );
               })}
             </select>
-            {errors?.district && <p className="text-xs text-red-400 mt-1 font-mono">{errors.district}</p>}
+            {errors?.district && <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.district}</p>}
           </div>
 
           {/* Upazila Selection */}
           <div>
-            <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
               {isBn ? 'উপজেলা' : 'Upazila'}
             </label>
             <select
               value={field.upazila || DISTRICT_WIDE_UPAZILA}
               onChange={(e) => onChange({ upazila: e.target.value })}
-              className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] transition-colors cursor-pointer"
+              className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] transition-colors cursor-pointer"
             >
-              <option value={DISTRICT_WIDE_UPAZILA}>
+              <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#141414] text-[#FAFAFA]">
                 {isBn ? 'সমগ্র জেলা (গড় আবহাওয়া)' : 'District-wide (Average)'}
               </option>
               {upazilaList.map((u) => (
-                <option key={u.id} value={u.id}>
+                <option key={u.id} value={u.id} className="bg-[#141414] text-[#FAFAFA]">
                   {isBn ? u.nameBn : u.nameEn}
                 </option>
               ))}
@@ -234,7 +232,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
 
           {/* Village / Area (Optional) */}
           <div>
-            <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
               {isBn ? 'গ্রাম / মৌজা (ঐচ্ছিক)' : 'Village / Area (Optional)'}
             </label>
             <input
@@ -242,15 +240,15 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
               value={field.village || ''}
               onChange={(e) => onChange({ village: e.target.value })}
               placeholder={isBn ? 'যেমন: রামপুর / উত্তর পাড়া' : 'e.g. Rampur / Uttar Para'}
-              className="w-full min-h-[48px] px-3.5 py-2.5 bg-white/5 border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF]"
+              className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E]"
             />
           </div>
 
           {/* Land Area and Unit */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
-                {isBn ? 'জমির পরিমাপ' : 'Land Area'} <span className="text-[#00E5FF]">*</span>
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+                {isBn ? 'জমির পরিমাপ' : 'Land Area'} <span className="text-[#22C55E]">*</span>
               </label>
               <input
                 type="number"
@@ -259,42 +257,42 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
                 value={field.area || ''}
                 onChange={(e) => onChange({ area: parseFloat(e.target.value) || 0 })}
                 placeholder="1.5"
-                className="w-full min-h-[48px] px-3.5 py-2.5 bg-white/5 border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF]"
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E]"
               />
-              {errors?.area && <p className="text-xs text-red-400 mt-1 font-mono">{errors.area}</p>}
+              {errors?.area && <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.area}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
                 {isBn ? 'একক' : 'Unit'}
               </label>
               <select
                 value={field.unit || 'bigha'}
                 onChange={(e) => onChange({ unit: e.target.value as any })}
-                className="w-full min-h-[48px] px-3 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] cursor-pointer"
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
               >
-                <option value="bigha">{isBn ? 'বিঘা (৩৩ শতাংশ)' : 'Bigha (33 dec)'}</option>
-                <option value="acre">{isBn ? 'একর' : 'Acre'}</option>
-                <option value="decimal">{isBn ? 'শতাংশ / শতক' : 'Decimal'}</option>
-                <option value="hectare">{isBn ? 'হেক্টর' : 'Hectare'}</option>
+                <option value="bigha" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'বিঘা (৩৩ শতাংশ)' : 'Bigha (33 dec)'}</option>
+                <option value="acre" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'একর' : 'Acre'}</option>
+                <option value="decimal" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'শতাংশ / শতক' : 'Decimal'}</option>
+                <option value="hectare" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'হেক্টর' : 'Hectare'}</option>
               </select>
             </div>
           </div>
 
           {/* Elevation, Soil Type & Irrigation */}
-          <div className="space-y-4 pt-1">
+          <div className="space-y-3 pt-1">
             {/* Elevation */}
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
                 {isBn ? 'জমির উচ্চতা ও প্লাবন ধরন' : 'Land Elevation / Inundation'}
               </label>
               <select
                 value={field.elevation || 'medium_high'}
                 onChange={(e) => onChange({ elevation: e.target.value as any })}
-                className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] cursor-pointer"
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
               >
                 {LAND_ELEVATION_OPTIONS.map((opt) => (
-                  <option key={opt.id} value={opt.id}>
+                  <option key={opt.id} value={opt.id} className="bg-[#141414] text-[#FAFAFA]">
                     {isBn ? opt.bn : opt.en}
                   </option>
                 ))}
@@ -303,16 +301,16 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
 
             {/* Soil Type */}
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
                 {isBn ? 'মাটির ধরন' : 'Soil Classification'}
               </label>
               <select
                 value={field.soilType || 'loam'}
                 onChange={(e) => onChange({ soilType: e.target.value as any })}
-                className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] cursor-pointer"
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
               >
                 {SOIL_TYPE_OPTIONS.map((opt) => (
-                  <option key={opt.id} value={opt.id}>
+                  <option key={opt.id} value={opt.id} className="bg-[#141414] text-[#FAFAFA]">
                     {isBn ? opt.bn : opt.en}
                   </option>
                 ))}
@@ -321,7 +319,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
 
             {/* Irrigation Source */}
             <div>
-              <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
                 {isBn ? 'সেচ সুবিধা ও ব্যবস্থা' : 'Irrigation Infrastructure'}
               </label>
               <select
@@ -331,10 +329,10 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
                   const wSource = irr === 'canal_surface' ? 'river' : irr === 'rainfed' ? 'rainwater' : 'groundwater';
                   onChange({ irrigation: irr, waterSource: wSource });
                 }}
-                className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#0B1626] border border-white/15 rounded-xl text-white text-base focus:outline-none focus:border-[#00E5FF] cursor-pointer"
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
               >
                 {IRRIGATION_OPTIONS.map((opt) => (
-                  <option key={opt.id} value={opt.id}>
+                  <option key={opt.id} value={opt.id} className="bg-[#141414] text-[#FAFAFA]">
                     {isBn ? opt.bn : opt.en}
                   </option>
                 ))}
@@ -344,17 +342,17 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
         </div>
 
         {/* Right: Map Pin & Interactive Visualizer */}
-        <div className="lg:col-span-6 space-y-3">
+        <div className="lg:col-span-6 space-y-2.5">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+            <span className="text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider">
               {isBn ? 'স্যাটেলাইট জিপিএস অবস্থান পিন' : 'Interactive Map Pin'}
             </span>
-            <span className="text-xs font-mono text-[#00E5FF]">
+            <span className="text-xs font-mono text-[#737373]">
               {field.latitude.toFixed(4)}° N, {field.longitude.toFixed(4)}° E
             </span>
           </div>
 
-          <div className="rounded-2xl border border-white/15 overflow-hidden bg-[#050B14] relative h-[320px] sm:h-[400px]">
+          <div className="rounded-xl border border-[#262626] overflow-hidden bg-[#0A0A0A] relative h-[320px] sm:h-[390px]">
             <BangladeshMap
               latitude={field.latitude}
               longitude={field.longitude}
@@ -363,10 +361,10 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
             />
 
             {/* Overlay hint */}
-            <div className="absolute bottom-3 inset-x-3 bg-[#0B1626]/90 backdrop-blur-md border border-white/10 rounded-xl p-2.5 text-center text-xs text-slate-300 font-mono pointer-events-none">
+            <div className="absolute bottom-3 inset-x-3 bg-[#141414]/90 border border-[#262626] rounded-lg p-2 text-center text-xs text-[#737373] font-mono pointer-events-none">
               {isBn
-                ? '📍 মানচিত্রে সরাসরি ক্লিক করে আপনার জমির সুনির্দিষ্ট অবস্থান নির্ধারণ করতে পারেন।'
-                : '📍 Click anywhere on the map to pin your field coordinates.'}
+                ? 'মানচিত্রে সরাসরি ক্লিক করে আপনার জমির অবস্থান চিহ্নিত করতে পারেন।'
+                : 'Click anywhere on the map to pin your field coordinates.'}
             </div>
           </div>
         </div>

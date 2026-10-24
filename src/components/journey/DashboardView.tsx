@@ -245,32 +245,32 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col md:flex-row font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col md:flex-row font-editorial selection:bg-[#22C55E] selection:text-black">
       {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP) */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#070D18] border-r border-white/10 shrink-0 h-screen sticky top-0 z-30 justify-between">
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#070D18] border-r border-[#262626] shrink-0 h-screen sticky top-0 z-30 justify-between">
         <div className="p-5 flex flex-col gap-6 overflow-y-auto">
           {/* App Brand Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
             <BrandLogo />
-            <span className="text-[10px] font-mono text-[#00E5FF] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/20">
+            <span className="text-[10px] font-mono text-[#FAFAFA] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-[#262626]">
               {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
             </span>
           </div>
 
           {/* Selected Field Context Card */}
-          <div className="p-3.5 rounded-2xl bg-[#0B1626] border border-white/10 space-y-2">
+          <div className="p-3.5 rounded-2xl bg-[#141414] border border-[#262626] space-y-2">
             <div className="flex items-center justify-between text-[11px] font-mono text-[#8FA3B8]">
               <span className="uppercase">{language === 'en' ? 'Active Field' : 'আপনার জমি'}</span>
               <button
                 onClick={onChangeFieldLocation}
-                className="text-[#00E5FF] hover:underline font-bold text-[10px] uppercase cursor-pointer"
+                className="text-[#FAFAFA] hover:underline font-bold text-[10px] uppercase cursor-pointer"
               >
                 {language === 'en' ? 'Change' : 'বদলান'}
               </button>
             </div>
 
             <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-[#B8FF3D] shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" />
               <div className="min-w-0">
                 <h4 className="font-display font-bold text-sm text-white truncate">
                   {upazilaName}, {districtName.split(' ')[0]}
@@ -282,11 +282,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
 
             {/* Active Priority Chip */}
-            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px]">
+            <div className="pt-2 border-t border-[#262626] flex items-center justify-between text-[10px]">
               <span className="text-[#8FA3B8] font-mono">{language === 'en' ? 'Priority' : 'লক্ষ্য'}:</span>
               <button
                 onClick={onChangePriority}
-                className="font-bold text-[#B8FF3D] hover:underline capitalize truncate max-w-[120px] cursor-pointer"
+                className="font-bold text-[#22C55E] hover:underline capitalize truncate max-w-[120px] cursor-pointer"
               >
                 {formatPriorityLabel(selectedPriority, language)}
               </button>
@@ -307,11 +307,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   onClick={() => handleTabClick(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer text-left ${
                     isActive
-                      ? 'bg-[#B8FF3D] text-[#050B14] font-bold shadow-md shadow-[#B8FF3D]/20'
+                      ? 'bg-[#22C55E] text-black font-bold '
                       : 'text-[#8FA3B8] hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#050B14]' : 'text-[#8FA3B8]'}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-black' : 'text-[#8FA3B8]'}`} />
                   <span className="truncate">{language === 'en' ? item.en : item.bn}</span>
                 </button>
               );
@@ -320,9 +320,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             {/* Direct Link to Farmer Profile & Fields */}
             <a
               href="#/profile"
-              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#00E5FF] hover:text-white hover:bg-[#00E5FF]/10 transition-all text-left cursor-pointer border border-[#00E5FF]/25 mt-2"
+              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#FAFAFA] hover:text-white hover:bg-[#404040]/10 transition-all text-left cursor-pointer border border-[#262626] mt-2"
             >
-              <User className="w-4 h-4 shrink-0 text-[#00E5FF]" />
+              <User className="w-4 h-4 shrink-0 text-[#FAFAFA]" />
               <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'প্রোফাইল ও জমি'}</span>
             </a>
           </nav>
@@ -334,11 +334,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className={`w-full p-3 rounded-2xl border text-xs font-mono transition-all cursor-pointer flex items-center justify-between ${
                 whatIfActive
                   ? 'bg-purple-950/40 border-purple-500/50 text-purple-200 shadow-md shadow-purple-900/30'
-                  : 'bg-[#0B1626] border-white/10 text-[#8FA3B8] hover:text-white hover:border-white/20'
+                  : 'bg-[#141414] border-[#262626] text-[#8FA3B8] hover:text-white hover:border-[#262626]'
               }`}
             >
               <div className="flex items-center gap-2">
-                <Sliders className={`w-4 h-4 ${whatIfActive ? 'text-purple-400' : 'text-[#B8FF3D]'}`} />
+                <Sliders className={`w-4 h-4 ${whatIfActive ? 'text-purple-400' : 'text-[#22C55E]'}`} />
                 <span className="font-semibold">{language === 'en' ? 'What-If Simulator' : 'সিমুলেটর'}</span>
               </div>
               <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${whatIfActive ? 'bg-purple-500/30 text-purple-300' : 'bg-white/5 text-[#8FA3B8]'}`}>
@@ -349,13 +349,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Sidebar Footer Utilities */}
-        <div className="p-4 border-t border-white/10 bg-[#050B14]/80 flex flex-col gap-3">
+        <div className="p-4 border-t border-[#262626] bg-[#0A0A0A]/80 flex flex-col gap-3">
           <div className="flex items-center justify-between gap-2">
             <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
             <button
               onClick={onLogout}
               title={language === 'en' ? 'Exit to Public Website' : 'হোমে ফিরুন'}
-              className="p-2 rounded-xl bg-white/5 hover:bg-[#FF5C5C]/20 border border-white/10 text-[#8FA3B8] hover:text-[#FF5C5C] transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-mono"
+              className="p-2 rounded-xl bg-white/5 hover:bg-[#FF5C5C]/20 border border-[#262626] text-[#8FA3B8] hover:text-[#FF5C5C] transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-mono"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="text-[10px] uppercase font-bold">{language === 'en' ? 'Exit' : 'হোমে ফিরুন'}</span>
@@ -365,11 +365,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </aside>
 
       {/* 2. MOBILE TOP BAR & DRAWER */}
-      <header className="md:hidden sticky top-0 z-50 bg-[#070D18]/95 backdrop-blur-md border-b border-white/10 px-4 h-16 flex items-center justify-between">
+      <header className="md:hidden sticky top-0 z-50 bg-[#070D18]/95 backdrop-blur-md border-b border-[#262626] px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl bg-white/5 border border-white/10 text-white cursor-pointer"
+            className="p-2 rounded-xl bg-white/5 border border-[#262626] text-white cursor-pointer"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -387,9 +387,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* Mobile Slide-Over Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="w-72 bg-[#070D18] h-full p-5 flex flex-col justify-between border-r border-white/10">
+          <div className="w-72 bg-[#070D18] h-full p-5 flex flex-col justify-between border-r border-[#262626]">
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="flex items-center justify-between pb-3 border-b border-[#262626]">
                 <BrandLogo imgClassName="h-7 w-auto object-contain mix-blend-screen shrink-0" />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
@@ -400,12 +400,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* Location Context */}
-              <div className="p-3 rounded-xl bg-[#0B1626] border border-white/10 text-xs">
+              <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] text-xs">
                 <span className="text-[10px] text-[#8FA3B8] font-mono uppercase block">{language === 'en' ? 'Active Field' : 'নির্বাচিত জমি'}</span>
                 <span className="font-bold text-white block mt-0.5">{upazilaName}, {districtName}</span>
                 <button
                   onClick={() => { setMobileMenuOpen(false); onChangeFieldLocation(); }}
-                  className="text-[11px] text-[#00E5FF] underline mt-1 block"
+                  className="text-[11px] text-[#FAFAFA] underline mt-1 block"
                 >
                   {language === 'en' ? 'Change Location' : 'এলাকা বদলান'}
                 </button>
@@ -422,7 +422,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onClick={() => handleTabClick(item.id)}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                         isActive
-                          ? 'bg-[#B8FF3D] text-[#050B14] font-bold'
+                          ? 'bg-[#22C55E] text-black font-bold'
                           : 'text-[#8FA3B8] hover:text-white'
                       }`}
                     >
@@ -434,14 +434,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
             </div>
 
-            <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
+            <div className="pt-2 border-t border-[#262626] flex flex-col gap-2">
               <div className="flex justify-between items-center px-1">
                 <span className="text-xs font-mono text-slate-400">{language === 'en' ? 'Account:' : 'অ্যাকাউন্ট:'}</span>
                 <UserMenu />
               </div>
               <button
                 onClick={onLogout}
-                className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-center text-[#FF5C5C]"
+                className="w-full py-2.5 rounded-xl bg-white/5 border border-[#262626] text-xs font-mono text-center text-[#FF5C5C]"
               >
                 {language === 'en' ? 'Exit to Website' : 'হোমে ফিরুন'}
               </button>
@@ -453,14 +453,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Top Operational Header Bar */}
-        <header className="hidden md:flex h-16 border-b border-white/10 bg-[#0B1626]/80 backdrop-blur-md px-6 items-center justify-between shrink-0 relative z-50">
+        <header className="hidden md:flex h-16 border-b border-[#262626] bg-[#141414]/80 backdrop-blur-md px-6 items-center justify-between shrink-0 relative z-50">
           {/* Breadcrumb & Field Identity */}
           <div className="flex items-center gap-3 text-xs font-mono">
             <span className="text-[#8FA3B8]">{language === 'en' ? 'AgriOrbit' : 'এগ্রিঅরবিট'}</span>
             <span className="text-white/30">/</span>
             <span className="text-white font-bold">{upazilaName}, {districtName}</span>
             <span className="text-white/30">/</span>
-            <span className="text-[#B8FF3D] capitalize">
+            <span className="text-[#22C55E] capitalize">
               {DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}
             </span>
           </div>
@@ -468,8 +468,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Quick Status Chips */}
           <div className="flex items-center gap-3 text-xs">
             {/* Satellite Live Pulse Chip */}
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#050B14] border border-white/10 text-[11px] font-mono text-slate-300">
-              <span className={`w-2 h-2 rounded-full ${whatIfActive ? 'bg-purple-400 animate-pulse' : loaded.mode === 'live' ? 'bg-[#B8FF3D]' : 'bg-[#00E5FF]'}`} />
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A0A0A] border border-[#262626] text-[11px] font-mono text-slate-300">
+              <span className={`w-2 h-2 rounded-full ${whatIfActive ? 'bg-purple-400 ' : loaded.mode === 'live' ? 'bg-[#22C55E]' : 'bg-[#404040]'}`} />
               <span>
                 {whatIfActive
                   ? (language === 'en' ? 'Simulation Active' : 'সিমুলেশন চলছে')
@@ -508,14 +508,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={() => setWhatIfActive(!whatIfActive)}
               className={`px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                 whatIfActive
-                  ? 'bg-purple-950/60 text-[#B8FF3D] border-[#B8FF3D]/40 shadow-md shadow-purple-900/30'
-                  : 'bg-white/5 hover:bg-white/10 text-slate-200 border-white/10'
+                  ? 'bg-purple-950/60 text-[#22C55E] border-[#262626] shadow-md shadow-purple-900/30'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-200 border-[#262626]'
               }`}
             >
-              <Sliders className="w-3.5 h-3.5 text-[#B8FF3D]" />
+              <Sliders className="w-3.5 h-3.5 text-[#22C55E]" />
               <span>{language === 'en' ? 'Simulator' : 'সিমুলেটর'}</span>
               {whatIfActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D] animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] " />
               )}
             </button>
 
@@ -546,14 +546,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {activeTab === 'overview' && (
             <div className="space-y-8 animate-fadeIn">
               {/* 1. Active Field & Strategy Context Banner */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-none">
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#B8FF3D]/15 border border-[#B8FF3D]/30 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-[#B8FF3D]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#22C55E]/15 border border-[#262626] flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-[#22C55E]" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-[#00E5FF]">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[#FAFAFA]">
                         {language === 'en' ? 'Active Field Location' : 'নির্বাচিত জমি'}
                       </span>
                       <span className="text-white/20">·</span>
@@ -569,14 +569,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                 <div className="flex flex-wrap items-center gap-3 text-xs">
                   {/* Priority Badge */}
-                  <div className="px-3 py-1.5 rounded-xl bg-[#050B14] border border-white/10 flex items-center gap-2">
+                  <div className="px-3 py-1.5 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center gap-2">
                     <span className="text-slate-400 font-medium">{language === 'en' ? 'Priority:' : 'চাহিদা:'}</span>
-                    <span className="font-bold text-[#B8FF3D] capitalize">
+                    <span className="font-bold text-[#22C55E] capitalize">
                       {formatPriorityLabel(selectedPriority, language)}
                     </span>
                     <button
                       onClick={onChangePriority}
-                      className="text-[11px] text-[#00E5FF] hover:underline font-semibold ml-1 cursor-pointer"
+                      className="text-[11px] text-[#FAFAFA] hover:underline font-semibold ml-1 cursor-pointer"
                     >
                       {language === 'en' ? 'Change' : 'পরিবর্তন'}
                     </button>
@@ -585,22 +585,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   {/* Change Field Location Button */}
                   <button
                     onClick={onChangeFieldLocation}
-                    className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium hover:text-[#B8FF3D] transition-colors cursor-pointer flex items-center gap-1.5"
+                    className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-medium hover:text-[#22C55E] transition-colors cursor-pointer flex items-center gap-1.5"
                   >
-                    <Compass className="w-3.5 h-3.5 text-[#00E5FF]" />
+                    <Compass className="w-3.5 h-3.5 text-[#FAFAFA]" />
                     <span>{language === 'en' ? 'Change Field' : 'জমি পরিবর্তন'}</span>
                   </button>
                 </div>
               </div>
 
               {/* 2. PRIMARY FOCUS: THE HERO RECOMMENDED FARMER ACTION CARD */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0B1626] via-[#0B1626] to-[#071424] border-2 border-[#B8FF3D]/50 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-80 h-80 bg-[#B8FF3D]/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+              <div className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] shadow-none relative overflow-hidden">
+                
 
                 {/* Top Tag Row */}
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full bg-[#B8FF3D]/15 text-[#B8FF3D] border border-[#B8FF3D]/40 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full bg-[#22C55E]/15 text-[#22C55E] border border-[#262626] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <Award className="w-3.5 h-3.5" />
                       <span>{language === 'en' ? 'Primary Recommended Action' : 'শীর্ষ প্রস্তাবিত পদক্ষেপ'}</span>
                     </span>
@@ -611,7 +611,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-slate-400 font-medium">{language === 'en' ? 'Suitability Score:' : 'স্কোর:'}</span>
-                    <span className="px-3 py-1 rounded-xl bg-[#050B14] border border-[#B8FF3D]/40 text-sm font-bold text-[#B8FF3D]">
+                    <span className="px-3 py-1 rounded-xl bg-[#0A0A0A] border border-[#262626] text-sm font-bold text-[#22C55E]">
                       {(rankedCrops[0] ?? { suitabilityScore: 88 }).suitabilityScore}/100 ({language === 'en' ? 'Match' : 'উপযুক্ত'})
                     </span>
                   </div>
@@ -625,10 +625,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </h2>
 
                 {/* Why It Matters & Next Step Grid */}
-                <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 border-t border-white/10">
+                <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 border-t border-[#262626]">
                   {/* Why this action matters */}
-                  <div className="p-4 sm:p-5 rounded-2xl bg-[#050B14]/80 border border-white/5 space-y-2">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#0A0A0A]/80 border border-[#262626] space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FAFAFA]">
                       <Info className="w-3.5 h-3.5" />
                       <span>{language === 'en' ? 'Why This Matters' : 'কেন এটি গুরুত্বপূর্ণ'}</span>
                     </div>
@@ -640,8 +640,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </div>
 
                   {/* Practical Next Step */}
-                  <div className="p-4 sm:p-5 rounded-2xl bg-[#050B14]/80 border border-white/5 space-y-2">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B8FF3D]">
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#0A0A0A]/80 border border-[#262626] space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#22C55E]">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>{language === 'en' ? 'Practical Next Step' : 'পরবর্তী বাস্তব পদক্ষেপ'}</span>
                     </div>
@@ -657,7 +657,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <button
                     onClick={() => handleTabClick('crops')}
-                    className="px-5 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm cursor-pointer flex items-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all hover:scale-[1.01]"
+                    className="px-5 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-sm cursor-pointer flex items-center gap-2  transition-all hover:scale-[1.01]"
                   >
                     <span>{language === 'en' ? 'View 3-Season Rotation Plan' : '৩-মৌসুমী পরিক্রমা দেখুন'}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -665,9 +665,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   <button
                     onClick={() => setExplainCrop(rankedCrops[0] ?? null)}
-                    className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-sm cursor-pointer flex items-center gap-2 transition-colors"
+                    className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-medium text-sm cursor-pointer flex items-center gap-2 transition-colors"
                   >
-                    <HelpCircle className="w-4 h-4 text-[#00E5FF]" />
+                    <HelpCircle className="w-4 h-4 text-[#FAFAFA]" />
                     <span>{language === 'en' ? 'Explain Scoring Logic' : 'স্কোরের নিয়ম দেখুন'}</span>
                   </button>
                 </div>
@@ -676,11 +676,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* 3. Field Condition Cards (5-KPI Grid: Rainfall, Soil Moisture, Max Temp, Relative Humidity, ET0) */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
                 {/* 1. 30-Day Rainfall */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? '30-Day Rain' : '৩০ দিনের বৃষ্টি'}</span>
-                      <span className="text-[#00E5FF] font-semibold text-[11px]">NASA POWER</span>
+                      <span className="text-[#FAFAFA] font-semibold text-[11px]">NASA POWER</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {conditions.rainUnavailable ? (
@@ -694,13 +694,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       )}
                     </div>
                   </div>
-                  <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
+                  <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
                       <span className="flex items-center gap-1" title={`${language === 'en' ? 'Net Water Balance = Rainfall' : 'নিট পানি ভারসাম্য = বৃষ্টি'} (${Math.round(activeRain)} mm) − ET₀ Demand (${Math.round(conditions.et0Total)} mm) = ${activeWaterBalance >= 0 ? '+' : ''}${Math.round(activeWaterBalance)} mm`}>
                         <span>{language === 'en' ? 'Net balance:' : 'নিট পানি:'}</span>
                         <Info className="w-3 h-3 text-slate-400" />
                       </span>
-                      <span className={`font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
+                      <span className={`font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#22C55E]'}`}>
                         {activeWaterBalance >= 0 ? `+${Math.round(activeWaterBalance)}` : Math.round(activeWaterBalance)} mm
                       </span>
                     </div>
@@ -708,11 +708,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
 
                 {/* 2. Soil Moisture */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}</span>
-                      <span className="text-[#B8FF3D] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture">
+                      <span className="text-[#22C55E] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture">
                         {whatIfActive
                           ? (language === 'en' ? 'NASA SMAP · Simulated' : 'নাসা স্ম্যাপ · সিমুলেশন')
                           : smapData
@@ -752,8 +752,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                               : (whatIfActive ? simSoil : smapData!.value) < 0.15
                               ? 'bg-[#FF5C5C]'
                               : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
-                              ? 'bg-[#B8FF3D]'
-                              : 'bg-[#00E5FF]'
+                              ? 'bg-[#22C55E]'
+                              : 'bg-[#404040]'
                           }`}
                           style={{ width: `${Math.min(100, Math.max(10, ((whatIfActive ? simSoil : smapData!.value) / 0.40) * 100))}%` }}
                         />
@@ -771,8 +771,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           : (whatIfActive ? simSoil : smapData!.value) < 0.15
                           ? 'text-[#FF5C5C]'
                           : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
-                          ? 'text-[#B8FF3D]'
-                          : 'text-[#00E5FF]'
+                          ? 'text-[#22C55E]'
+                          : 'text-[#FAFAFA]'
                       }`}
                     >
                       {!whatIfActive && !smapData
@@ -789,17 +789,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
 
                 {/* 3. Daily Max Temp */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Max Day Temp' : 'সর্বোচ্চ তাপমাত্রা'}</span>
-                      <span className="text-[#00E5FF] font-semibold text-[11px]">NASA POWER</span>
+                      <span className="text-[#FAFAFA] font-semibold text-[11px]">NASA POWER</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {activeMaxTemp.toFixed(1)} <span className="text-sm text-slate-400 font-normal">°C</span>
                     </div>
                   </div>
-                  <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
+                  <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
                       <span>{language === 'en' ? '30d Mean:' : '৩০ দিনের গড়:'}</span>
                       <span className="font-semibold text-slate-200">{conditions.tMaxAvg.toFixed(1)}°C</span>
@@ -808,7 +808,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
 
                 {/* 4. Relative Humidity */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Air Humidity' : 'বাতাসের আর্দ্রতা'}</span>
@@ -818,7 +818,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       {Math.round(conditions.rh)} <span className="text-sm text-slate-400 font-normal">%</span>
                     </div>
                   </div>
-                  <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
+                  <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
                       <span>{language === 'en' ? 'Sensor:' : 'সেন্সর:'}</span>
                       <span className="font-medium text-slate-300">{language === 'en' ? 'Relative Humidity' : 'বাতাসের আর্দ্রতা'}</span>
@@ -827,17 +827,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
 
                 {/* 5. Crop Water Need (ET0) */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between col-span-2 sm:col-span-1">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between col-span-2 sm:col-span-1">
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Crop Water Need' : 'ফসলের পানির চাহিদা'}</span>
-                      <span className="text-[#B8FF3D] font-semibold text-[11px]">FAO-56</span>
+                      <span className="text-[#22C55E] font-semibold text-[11px]">FAO-56</span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {conditions.et0.toFixed(1)} <span className="text-sm text-slate-400 font-normal">mm/d</span>
                     </div>
                   </div>
-                  <div className="mt-3 pt-2.5 border-t border-white/5 text-xs text-slate-400">
+                  <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
                       <span>{language === 'en' ? 'Total Demand:' : 'মোট চাহিদা:'}</span>
                       <span className="font-semibold text-slate-200">{Math.round(conditions.et0Total)} mm</span>
@@ -850,16 +850,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Left Column: Top 3 Recommended Crops (7 Cols) */}
                 <div className="lg:col-span-7 space-y-4">
-                  <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#262626]">
                     <div className="flex items-center gap-2">
-                      <Sprout className="w-4 h-4 text-[#B8FF3D]" />
+                      <Sprout className="w-4 h-4 text-[#22C55E]" />
                       <h3 className="font-display font-bold text-lg text-white">
                         {language === 'en' ? 'Top Crop Recommendations' : 'শীর্ষ প্রস্তাবিত ফসল'}
                       </h3>
                     </div>
                     <button
                       onClick={() => handleTabClick('crops')}
-                      className="text-xs font-mono text-[#00E5FF] hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-xs font-mono text-[#FAFAFA] hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <span>{language === 'en' ? `See all ${rankedCrops.length} crops →` : `সকল ${rankedCrops.length}টি ফসল →`}</span>
                     </button>
@@ -869,11 +869,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     {rankedCrops.slice(0, 3).map((crop, idx) => (
                       <div
                         key={crop.id}
-                        className="p-4 rounded-xl bg-[#0B1626] border border-white/10 hover:border-[#B8FF3D]/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        className="p-4 rounded-xl bg-[#141414] border border-[#262626] hover:border-[#262626] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                       >
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#B8FF3D]/15 text-[#B8FF3D] border border-[#B8FF3D]/30">
+                            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#22C55E]/15 text-[#22C55E] border border-[#262626]">
                               #{idx + 1}
                             </span>
                             <h4 className="font-display font-bold text-base text-white truncate">
@@ -895,14 +895,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                         <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
                           <div className="text-right">
-                            <span className="font-mono text-xl font-bold text-[#B8FF3D] block leading-none">
+                            <span className="font-mono text-xl font-bold text-[#22C55E] block leading-none">
                               {crop.suitabilityScore}/100
                             </span>
                             <span className="text-[9px] font-mono uppercase text-slate-400">Match</span>
                           </div>
                           <button
                             onClick={() => setExplainCrop(crop)}
-                            className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-[#00E5FF] cursor-pointer"
+                            className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-xs font-mono text-[#FAFAFA] cursor-pointer"
                           >
                             {language === 'en' ? 'Why?' : 'কেন?'}
                           </button>
@@ -914,31 +914,31 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                 {/* Right Column: 3-Season Rotation Timeline (5 Cols) */}
                 <div className="lg:col-span-5 space-y-4">
-                  <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#262626]">
                     <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-[#00E5FF]" />
+                      <Calendar className="w-4 h-4 text-[#FAFAFA]" />
                       <h3 className="font-display font-bold text-lg text-white">
                         {language === 'en' ? 'Annual Rotation Sequence' : 'বার্ষিক আবর্তন পরিক্রমা'}
                       </h3>
                     </div>
                     <button
                       onClick={() => handleTabClick('crops')}
-                      className="text-xs font-mono text-[#00E5FF] hover:underline cursor-pointer"
+                      className="text-xs font-mono text-[#FAFAFA] hover:underline cursor-pointer"
                     >
                       {language === 'en' ? 'Details →' : 'বিস্তারিত →'}
                     </button>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#0B1626] border border-white/10 space-y-3">
+                  <div className="p-4 rounded-2xl bg-[#141414] border border-[#262626] space-y-3">
                     {/* Season Trail */}
                     <div className="space-y-2.5">
                       {engineResult.picks.map((pick, i) => {
                         const seasonLabel = pick.season === 'rabi' ? (language === 'en' ? 'Rabi' : 'রবি') : pick.season === 'kharif1' ? (language === 'en' ? 'Kharif-1' : 'খরিফ-১') : (language === 'en' ? 'Kharif-2' : 'খরিফ-২');
                         const months = pick.season === 'rabi' ? 'Nov–Feb' : pick.season === 'kharif1' ? 'Mar–Jun' : 'Jul–Oct';
                         return (
-                          <div key={pick.season} className="p-3 rounded-xl bg-[#050B14] border border-white/5 flex items-center justify-between">
+                          <div key={pick.season} className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-between">
                             <div className="flex items-center gap-2.5">
-                              <span className="w-5 h-5 rounded-full bg-white/10 text-[10px] font-mono flex items-center justify-center font-bold text-[#B8FF3D]">
+                              <span className="w-5 h-5 rounded-full bg-white/10 text-[10px] font-mono flex items-center justify-center font-bold text-[#22C55E]">
                                 0{i + 1}
                               </span>
                               <div>
@@ -950,7 +950,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                                 </span>
                               </div>
                             </div>
-                            <span className="font-mono text-xs font-bold text-[#B8FF3D]">
+                            <span className="font-mono text-xs font-bold text-[#22C55E]">
                               {pick.score}%
                             </span>
                           </div>
@@ -959,12 +959,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
 
                     {/* Rule Badges */}
-                    <div className="pt-3 border-t border-white/5 space-y-1.5 text-xs font-mono text-slate-300">
-                      <div className="flex items-center gap-1.5 text-[#B8FF3D]">
+                    <div className="pt-3 border-t border-[#262626] space-y-1.5 text-xs font-mono text-slate-300">
+                      <div className="flex items-center gap-1.5 text-[#22C55E]">
                         <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                         <span>{language === 'en' ? 'Rule A: Family Alternation Verified' : 'নিয়ম ১: একই ফসল বারবার নয়'}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-[#00E5FF]">
+                      <div className="flex items-center gap-1.5 text-[#FAFAFA]">
                         <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                         <span>{language === 'en' ? 'Rule B: Biological N-Balance Active' : 'রুল খ: নাইট্রোজেন সংবন্ধন সক্রিয়'}</span>
                       </div>
@@ -989,7 +989,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               />
 
               {/* Collapsible Advanced Decision Tools: What-If Environmental Simulator */}
-              <div className="rounded-2xl bg-[#0B1626] border border-white/10 overflow-hidden shadow-xl transition-all">
+              <div className="rounded-2xl bg-[#141414] border border-[#262626] overflow-hidden shadow-none transition-all">
                 <button
                   type="button"
                   onClick={() => setWhatIfActive(!whatIfActive)}
@@ -997,9 +997,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${
-                      whatIfActive ? 'bg-purple-950/60 border-purple-500/40 text-purple-300' : 'bg-white/5 border-white/10 text-slate-300'
+                      whatIfActive ? 'bg-purple-950/60 border-purple-500/40 text-purple-300' : 'bg-white/5 border-[#262626] text-slate-300'
                     }`}>
-                      <Sliders className="w-5 h-5 text-[#B8FF3D]" />
+                      <Sliders className="w-5 h-5 text-[#22C55E]" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
@@ -1023,14 +1023,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         ? (language === 'en' ? 'Hide Simulator Controls' : 'কন্ট্রোল প্যানেল লুকান')
                         : (language === 'en' ? 'Test Climate & Drought Scenarios' : 'খরা ও বৃষ্টির প্রভাব পরীক্ষা করুন')}
                     </span>
-                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${whatIfActive ? 'rotate-180 text-[#B8FF3D]' : ''}`} />
+                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${whatIfActive ? 'rotate-180 text-[#22C55E]' : ''}`} />
                   </div>
                 </button>
 
                 {/* Collapsible Panel Content */}
                 {whatIfActive && (
-                  <div className="p-5 sm:p-6 border-t border-white/10 bg-[#050B14]/90 space-y-5 animate-fadeIn">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+                  <div className="p-5 sm:p-6 border-t border-[#262626] bg-[#0A0A0A]/90 space-y-5 animate-fadeIn">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#262626]">
                       <div>
                         <p className="text-xs text-slate-300">
                           {language === 'en'
@@ -1046,7 +1046,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             setSimRain(Math.round(conditions.rain30));
                             setSimMaxTemp(Math.round(conditions.tMax30));
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-[#B8FF3D] cursor-pointer flex items-center gap-1.5 transition-colors"
+                          className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs font-mono text-[#22C55E] cursor-pointer flex items-center gap-1.5 transition-colors"
                         >
                           <RefreshCw className="w-3.5 h-3.5" />
                           <span>{language === 'en' ? 'Reset to NASA Baseline' : 'মূল মানে ফেরত'}</span>
@@ -1066,7 +1066,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           setSimRain(15);
                           setSimMaxTemp(36);
                         }}
-                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
                       >
                         🌵 {language === 'en' ? 'Severe Drought' : 'তীব্র খরা'} (0.12 m³, 15mm)
                       </button>
@@ -1077,7 +1077,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           setSimRain(85);
                           setSimMaxTemp(28);
                         }}
-                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
                       >
                         🌱 {language === 'en' ? 'Optimal Sowing' : 'অনুকূল বপন'} (0.28 m³, 85mm)
                       </button>
@@ -1088,7 +1088,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           setSimRain(35);
                           setSimMaxTemp(38);
                         }}
-                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs text-slate-200 hover:text-white transition-colors cursor-pointer"
                       >
                         🔥 {language === 'en' ? 'Heatwave Blast' : 'তাপদাহ'} (38°C)
                       </button>
@@ -1097,12 +1097,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     {/* The 3 Sliders */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                       {/* 1. Soil Moisture Slider */}
-                      <div className="p-4 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
+                      <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
                         <div className="flex justify-between items-center text-xs">
                           <span className="text-slate-300 font-medium">
                             {language === 'en' ? 'SMAP Soil Moisture' : 'মাটির আর্দ্রতা'}
                           </span>
-                          <span className="font-mono text-sm font-bold text-[#00E5FF]">
+                          <span className="font-mono text-sm font-bold text-[#FAFAFA]">
                             {Math.round(simSoil * 100)}% <span className="text-[10px] font-normal text-slate-400 font-mono">({simSoil.toFixed(2)} m³/m³)</span>
                           </span>
                         </div>
@@ -1113,21 +1113,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           step="0.01"
                           value={simSoil}
                           onChange={(e) => setSimSoil(parseFloat(e.target.value))}
-                          className="w-full accent-[#00E5FF] cursor-pointer"
+                          className="w-full accent-[#22C55E] cursor-pointer"
                         />
                         <div className="flex justify-between text-[11px] font-mono text-slate-400">
                           <span className={simSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
-                          <span className={simSoil >= 0.25 && simSoil <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Target (0.25–0.30)</span>
+                          <span className={simSoil >= 0.25 && simSoil <= 0.30 ? 'text-[#22C55E] font-bold' : ''}>Target (0.25–0.30)</span>
                         </div>
                       </div>
 
                       {/* 2. Rainfall Slider */}
-                      <div className="p-4 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
+                      <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
                         <div className="flex justify-between items-center text-xs">
                           <span className="text-slate-300 font-medium">
                             {language === 'en' ? '30-Day Rain' : '৩০ দিনের বৃষ্টি'}
                           </span>
-                          <span className="font-mono text-sm font-bold text-[#B8FF3D]">
+                          <span className="font-mono text-sm font-bold text-[#22C55E]">
                             {simRain} <span className="text-[11px] font-normal text-slate-400">mm</span>
                           </span>
                         </div>
@@ -1138,17 +1138,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           step="5"
                           value={simRain}
                           onChange={(e) => setSimRain(parseInt(e.target.value))}
-                          className="w-full accent-[#B8FF3D] cursor-pointer"
+                          className="w-full accent-[#22C55E] cursor-pointer"
                         />
                         <div className="flex justify-between text-[11px] font-mono text-slate-400">
                           <span className={simRain < 50 ? 'text-[#FF5C5C] font-bold' : ''}>Drought (&lt;50mm)</span>
                           <span>Normal</span>
-                          <span className={simRain > 150 ? 'text-[#00E5FF] font-bold' : ''}>Surplus (&gt;150mm)</span>
+                          <span className={simRain > 150 ? 'text-[#FAFAFA] font-bold' : ''}>Surplus (&gt;150mm)</span>
                         </div>
                       </div>
 
                       {/* 3. Max Temp Slider */}
-                      <div className="p-4 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
+                      <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
                         <div className="flex justify-between items-center text-xs">
                           <span className="text-slate-300 font-medium">
                             {language === 'en' ? 'Daily Max Temp' : 'সর্বোচ্চ তাপমাত্রা'}
@@ -1168,7 +1168,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         />
                         <div className="flex justify-between text-[11px] font-mono text-slate-400">
                           <span>Cool (&lt;25°C)</span>
-                          <span className={simMaxTemp >= 25 && simMaxTemp <= 32 ? 'text-[#B8FF3D] font-bold' : ''}>Optimal (25–32°C)</span>
+                          <span className={simMaxTemp >= 25 && simMaxTemp <= 32 ? 'text-[#22C55E] font-bold' : ''}>Optimal (25–32°C)</span>
                           <span className={simMaxTemp > 35 ? 'text-[#FF5C5C] font-bold' : ''}>Stress (&gt;35°C)</span>
                         </div>
                       </div>
@@ -1184,8 +1184,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* ═════════════════════════════════════════════════════════════════ */}
           {activeTab === 'conditions' && (
             <div className="space-y-8 animate-fadeIn">
-              <div className="pb-4 border-b border-white/10">
-                <span className="text-xs font-mono uppercase text-[#00E5FF] tracking-wider font-bold block mb-1">
+              <div className="pb-4 border-b border-[#262626]">
+                <span className="text-xs font-mono uppercase text-[#FAFAFA] tracking-wider font-bold block mb-1">
                   {language === 'en' ? 'Environmental Field Data' : 'জমির পরিবেশের তথ্য'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
@@ -1201,7 +1201,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* Telemetry 3-Card Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* 1. Rainfall */}
-                <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
@@ -1210,7 +1210,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         date={loaded.data?.fetchedAt ? loaded.data.fetchedAt.split('T')[0] : undefined}
                         language={language}
                       />
-                      <span className={`font-mono text-xs font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
+                      <span className={`font-mono text-xs font-semibold ${activeWaterBalance < -50 ? 'text-[#FF5C5C]' : 'text-[#22C55E]'}`}>
                         {activeWaterBalance < 0 ? `${Math.round(activeWaterBalance)} mm Net` : `+${Math.round(activeWaterBalance)} mm Net`}
                       </span>
                     </div>
@@ -1224,14 +1224,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         : `৩০ দিনের মোট বৃষ্টিপাত। বাষ্পীভবন চাহিদার তুলনায় নিট পানির অবস্থা ${Math.round(activeWaterBalance)} মিমি।`}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
+                  <div className="pt-4 mt-6 border-t border-[#262626] flex justify-between text-xs font-mono text-slate-400">
                     <span>{language === 'en' ? 'Crop Water Demand (ET₀)' : 'ফসলের বাষ্পীভবন চাহিদা (ET₀)'}</span>
                     <span className="text-white font-bold">{Math.round(conditions.et0Total)} mm ({conditions.et0.toFixed(1)} mm/d)</span>
                   </div>
                 </div>
 
                 {/* 2. Soil Moisture */}
-                <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <DataTileStatusBadge
@@ -1255,8 +1255,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             : (whatIfActive ? simSoil : smapData!.value) < 0.15
                             ? 'text-[#FF5C5C]'
                             : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
-                            ? 'text-[#B8FF3D]'
-                            : 'text-[#00E5FF]'
+                            ? 'text-[#22C55E]'
+                            : 'text-[#FAFAFA]'
                         }`}
                       >
                         {!whatIfActive && !smapData
@@ -1305,15 +1305,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                                 : (whatIfActive ? simSoil : smapData!.value) < 0.15
                                 ? 'bg-[#FF5C5C]'
                                 : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
-                                ? 'bg-[#B8FF3D]'
-                                : 'bg-[#00E5FF]'
+                                ? 'bg-[#22C55E]'
+                                : 'bg-[#404040]'
                             }`}
                             style={{ width: `${Math.min(100, Math.max(10, ((whatIfActive ? simSoil : smapData!.value) / 0.40) * 100))}%` }}
                           />
                         </div>
                         <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
                           <span className={(whatIfActive ? simSoil : smapData!.value) < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
-                          <span className={(whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30 ? 'text-[#B8FF3D] font-bold' : ''}>Target (0.25–0.30)</span>
+                          <span className={(whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30 ? 'text-[#22C55E] font-bold' : ''}>Target (0.25–0.30)</span>
                         </div>
                       </>
                     )}
@@ -1324,20 +1324,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         : '০–৫ সেমি শিকড় স্তরের আর্দ্রতা (L-ব্যান্ড রেডিওমিটার, মেঘ ভেদ করতে সক্ষম)। বীজ গজানো ও ফসলের শিকড় প্রসারণের সক্ষমতা নির্দেশ করে।'}
                     </p>
 
-                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-[#262626] pt-2">
                       {language === 'en'
                         ? 'Measured at the district HQ point (SMAP 9 km).'
                         : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি)।'}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
+                  <div className="pt-4 mt-6 border-t border-[#262626] flex justify-between text-xs font-mono text-slate-400">
                     <span>{language === 'en' ? 'Relative Humidity' : 'বাতাসের আপেক্ষিক আর্দ্রতা'}</span>
                     <span className="text-white font-semibold">{Math.round(conditions.rh)}% RH</span>
                   </div>
                 </div>
 
                 {/* 3. Temperature & Biosphere */}
-                <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
                       <div className="flex flex-wrap items-center gap-1.5">
@@ -1362,7 +1362,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           language={language}
                         />
                       </div>
-                      <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#B8FF3D]'}`}>
+                      <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#22C55E]'}`}>
                         {activeMaxTemp > 35
                           ? (language === 'en' ? 'Heat Stress (>35°C)' : 'তাপপ্রবাহ সতর্কতা (>৩৫° সে.)')
                           : (language === 'en' ? 'Safe Growth Range' : 'অনুকূল তাপমাত্রা')}
@@ -1378,13 +1378,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         : `উদ্ভিদ সজীবতা সূচক ${ndviData ? `${ndviData.value.toFixed(2)} NDVI` : 'অনুপলব্ধ (মেঘের আচ্ছাদন)'}। ভূ-পৃষ্ঠের তাপমাত্রা ${lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'অনুপলব্ধ'}, ফুল ফোটা ও দানা বাঁধার জন্য পর্যবেক্ষণাধীন।`}
                     </p>
 
-                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                    <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-[#262626] pt-2">
                       {language === 'en'
                         ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
                         : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-white/10 flex justify-between text-xs font-mono text-slate-400">
+                  <div className="pt-4 mt-6 border-t border-[#262626] flex justify-between text-xs font-mono text-slate-400">
                     <span>MODIS Surface Temp (Day / Night)</span>
                     <span className="text-white font-semibold">
                       {lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'N/A'} / {lstNightData ? `${lstNightData.value.toFixed(1)}°C` : 'N/A'}
@@ -1394,8 +1394,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* Spatial Resolution Disclaimer */}
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10 flex items-start gap-3 text-xs text-slate-300">
-                <Info className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-[#0A0A0A] border border-[#262626] flex items-start gap-3 text-xs text-slate-300">
+                <Info className="w-4 h-4 text-[#FAFAFA] shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
                   {language === 'en'
                     ? `Spatial resolution note: NASA SMAP (9 km), GPM/POWER (10 km to 0.5°), and MODIS (250m–1km) observations represent regional agro-climatic conditions across ${upazilaName}, providing broad environmental indicators rather than direct in-situ sensor probes buried in this specific field.`
@@ -1404,20 +1404,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* Agronomic Reasoning */}
-              <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 space-y-4">
+              <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] space-y-4">
                 <h3 className="font-display font-bold text-lg text-white">
                   {language === 'en' ? 'Agronomic Reasoning for your Soil & Weather' : 'মাটি ও আবহাওয়ার বাস্তব অবস্থা'}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
-                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
-                    <span className="font-mono text-[#00E5FF] font-bold block">01 · Water Conservation</span>
+                  <div className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-1">
+                    <span className="font-mono text-[#FAFAFA] font-bold block">01 · Water Conservation</span>
                     <p>{language === 'en' ? 'Because subsurface moisture is low and rainfall anomaly is negative, continuous flood-irrigated Boro rice substantially increases fuel pumping demands and strains local groundwater aquifers.' : 'বৃষ্টিপাত ও মাটির রস কম থাকলে সেচ নির্ভর বোরো ধান চাষে পাম্পের খরচ ও পানির অপচয় অনেক বেড়ে যায়।'}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
-                    <span className="font-mono text-[#B8FF3D] font-bold block">02 · Tap-Root Advantage</span>
+                  <div className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-1">
+                    <span className="font-mono text-[#22C55E] font-bold block">02 · Tap-Root Advantage</span>
                     <p>{language === 'en' ? 'Lentil and Mustard possess tap roots that exploit deeper subsoil moisture, requiring only 1–2 light irrigations to reach full maturity.' : 'মসুর ও সরিষা মাটির গভীর থেকে রস টানতে পারে, তাই মাত্র ১–২টি হালকা সেচেই ভালো ফলন পাওয়া যায়।'}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
+                  <div className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-1">
                     <span className="font-mono text-white font-bold block">03 · Biological Soil Recovery</span>
                     <p>{language === 'en' ? 'A summer Mungbean catch-crop fixes biological Rhizobium nitrogen into the plow layer, naturally conditioning soil for the subsequent monsoon T. Aman rice according to BARI guidelines.' : 'গ্রীষ্মে মুগ ডাল চাষ করলে মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন বাড়ে, যা পরের আমন ধানের ফলনে সাহায্য করে।'}</p>
                   </div>
@@ -1455,8 +1455,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* ═════════════════════════════════════════════════════════════════ */}
           {activeTab === 'shift' && (
             <div className="space-y-8 animate-fadeIn">
-              <div className="pb-4 border-b border-white/10">
-                <span className="text-xs font-mono uppercase text-[#00E5FF] tracking-wider font-bold block mb-1">
+              <div className="pb-4 border-b border-[#262626]">
+                <span className="text-xs font-mono uppercase text-[#FAFAFA] tracking-wider font-bold block mb-1">
                   {language === 'en' ? 'Decadal Climate Shift' : 'দীর্ঘমেয়াদী আবহাওয়া বদল'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
@@ -1478,9 +1478,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* ═════════════════════════════════════════════════════════════════ */}
           {activeTab === 'explain' && (
             <div className="space-y-8 animate-fadeIn">
-              <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#00E5FF] uppercase">
-                  <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
+              <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#FAFAFA] uppercase">
+                  <ShieldCheck className="w-4 h-4 text-[#FAFAFA]" />
                   <span>{language === 'en' ? 'Core Scientific Methodology' : 'মৌলিক বৈজ্ঞানিক নীতিমালা'}</span>
                 </div>
                 <h2 className="font-display text-2xl font-bold text-white">
@@ -1495,8 +1495,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
               {/* The 5 Empirical Rules */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-5 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
-                  <span className="font-mono text-xs text-[#B8FF3D] font-bold block uppercase">
+                <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
+                  <span className="font-mono text-xs text-[#22C55E] font-bold block uppercase">
                     Rule 1 · Moisture Deficit Rule
                   </span>
                   <h4 className="text-sm font-bold text-white">
@@ -1509,8 +1509,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
-                  <span className="font-mono text-xs text-[#00E5FF] font-bold block uppercase">
+                <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
+                  <span className="font-mono text-xs text-[#FAFAFA] font-bold block uppercase">
                     Rule 2 · Optimal Sowing Window Rule
                   </span>
                   <h4 className="text-sm font-bold text-white">
@@ -1523,7 +1523,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
+                <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
                   <span className="font-mono text-xs text-[#FF5C5C] font-bold block uppercase">
                     Rule 3 · Thermal Stress Rule
                   </span>
@@ -1537,8 +1537,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl bg-[#0B1626] border border-white/10 space-y-2">
-                  <span className="font-mono text-xs text-[#B8FF3D] font-bold block uppercase">
+                <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
+                  <span className="font-mono text-xs text-[#22C55E] font-bold block uppercase">
                     Rule 4 · Botanical Alternation & Nitrogen Triggers
                   </span>
                   <h4 className="text-sm font-bold text-white">
@@ -1553,7 +1553,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* Interactive Score Breakdown Trigger */}
-              <div className="p-6 rounded-2xl bg-[#0B1626] border border-[#B8FF3D]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="font-display text-lg font-bold text-white">
                     {language === 'en' ? `Inspect Score Breakdown: ${rankedCrops[0]?.nameEn}` : `স্কোরের কারণ দেখুন: ${rankedCrops[0]?.nameBn}`}
@@ -1567,7 +1567,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setExplainCrop(rankedCrops[0])}
-                  className="px-5 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-xs cursor-pointer flex items-center gap-2 shrink-0"
+                  className="px-5 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-xs cursor-pointer flex items-center gap-2 shrink-0"
                 >
                   <Calculator className="w-4 h-4" />
                   <span>{language === 'en' ? 'Open Mathematical Table' : 'হিসাবের বিস্তারিত দেখুন'}</span>

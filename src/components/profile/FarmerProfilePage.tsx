@@ -279,8 +279,8 @@ export const FarmerProfilePage: React.FC = () => {
 
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
-        <Loader2 className="w-8 h-8 animate-spin text-[#00E5FF] mb-3" />
+      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-4">
+        <Loader2 className="w-8 h-8 animate-spin text-[#FAFAFA] mb-3" />
         <span className="font-mono text-xs text-slate-400">
           {isBn ? 'কৃষক প্রোফাইল লোড হচ্ছে...' : 'Loading Farmer Profile...'}
         </span>
@@ -292,17 +292,17 @@ export const FarmerProfilePage: React.FC = () => {
   const emailConfirmed = Boolean(user?.email_confirmed_at || provider === 'google');
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col font-editorial selection:bg-[#22C55E] selection:text-black">
       
       {/* 1. Header Bar */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-[#262626] bg-[#0A0A0A]/90 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <a
               href="#/dashboard"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs font-mono text-slate-300 hover:text-white transition-colors"
             >
-              <ArrowLeft className="w-3.5 h-3.5 text-[#00E5FF]" />
+              <ArrowLeft className="w-3.5 h-3.5 text-[#FAFAFA]" />
               <span className="hidden sm:inline">{isBn ? 'ড্যাশবোর্ডে ফিরুন' : 'Back to Dashboard'}</span>
               <span className="sm:hidden">{isBn ? 'ড্যাশবোর্ড' : 'Back'}</span>
             </a>
@@ -311,15 +311,15 @@ export const FarmerProfilePage: React.FC = () => {
 
           <div className="flex items-center gap-3">
             {/* Completion Pill */}
-            <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs font-mono">
+            <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-white/5 border border-[#262626] text-xs font-mono">
               <span className="text-slate-400">{isBn ? 'প্রোফাইল পূর্ণতা:' : 'Profile:'}</span>
               <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] rounded-full transition-all duration-500"
+                  className="h-full bg-[#22C55E] rounded-full transition-all duration-500"
                   style={{ width: `${completionPercent}%` }}
                 />
               </div>
-              <span className="font-bold text-[#B8FF3D]">{completionPercent}%</span>
+              <span className="font-bold text-[#22C55E]">{completionPercent}%</span>
             </div>
 
             {/* Language Toggle */}
@@ -329,9 +329,9 @@ export const FarmerProfilePage: React.FC = () => {
                 setLang(next);
                 setProfile({ ...profile, preferredLanguage: next });
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#262626] text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
             >
-              <Globe className="w-3.5 h-3.5 text-[#B8FF3D]" />
+              <Globe className="w-3.5 h-3.5 text-[#22C55E]" />
               <span>{isBn ? 'English' : 'বাংলা'}</span>
             </button>
 
@@ -339,7 +339,7 @@ export const FarmerProfilePage: React.FC = () => {
             <button
               onClick={() => handleSaveProfile()}
               disabled={saving}
-              className="px-4 py-1.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black font-mono font-bold text-xs flex items-center gap-1.5 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer disabled:opacity-50"
+              className="px-4 py-1.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-mono font-bold text-xs flex items-center gap-1.5 transition-all  cursor-pointer disabled:opacity-50"
             >
               {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
               <span>{isBn ? 'সংরক্ষণ' : 'Save'}</span>
@@ -350,7 +350,7 @@ export const FarmerProfilePage: React.FC = () => {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 bg-[#0B1626] border border-[#B8FF3D]/40 text-[#B8FF3D] px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-mono animate-fadeIn">
+        <div className="fixed top-20 right-6 z-50 bg-[#141414] border border-[#262626] text-[#22C55E] px-4 py-2.5 rounded-2xl shadow-none flex items-center gap-2 text-xs font-mono animate-fadeIn">
           <CheckCircle2 className="w-4 h-4" />
           <span>{toastMessage}</span>
         </div>
@@ -375,8 +375,8 @@ export const FarmerProfilePage: React.FC = () => {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8">
         
         {/* Profile Hero Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#00E5FF]/5 via-[#B8FF3D]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] shadow-none relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 hidden" />
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
             {/* Avatar & Farmer Details */}
@@ -386,11 +386,11 @@ export const FarmerProfilePage: React.FC = () => {
                   <img
                     src={profile.avatarUrl}
                     alt={profile.fullName}
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border-2 border-[#B8FF3D]/40 shadow-xl"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover border-2 border-[#262626] shadow-none"
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border-2 border-[#B8FF3D]/40 flex items-center justify-center text-3xl font-bold font-mono text-[#B8FF3D] shadow-xl">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-[#0A0A0A] border-2 border-[#262626] flex items-center justify-center text-3xl font-bold font-mono text-[#22C55E] shadow-none">
                     {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : 'F'}
                   </div>
                 )}
@@ -400,14 +400,14 @@ export const FarmerProfilePage: React.FC = () => {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingAvatar}
-                  className="absolute inset-0 rounded-3xl bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-[10px] font-mono text-white transition-opacity cursor-pointer border border-[#00E5FF]/40"
+                  className="absolute inset-0 rounded-xl bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-[10px] font-mono text-white transition-opacity cursor-pointer border border-[#262626]"
                   title="Upload profile photo"
                 >
                   {uploadingAvatar ? (
-                    <Loader2 className="w-5 h-5 animate-spin text-[#00E5FF]" />
+                    <Loader2 className="w-5 h-5 animate-spin text-[#FAFAFA]" />
                   ) : (
                     <>
-                      <Camera className="w-5 h-5 text-[#B8FF3D] mb-1" />
+                      <Camera className="w-5 h-5 text-[#22C55E] mb-1" />
                       <span>{isBn ? 'ছবি পরিবর্তন' : 'Change'}</span>
                     </>
                   )}
@@ -431,14 +431,14 @@ export const FarmerProfilePage: React.FC = () => {
 
                 <div className="mt-1 flex items-center gap-3 text-xs font-mono text-slate-400 flex-wrap">
                   <span className="flex items-center gap-1">
-                    <Mail className="w-3.5 h-3.5 text-[#00E5FF]" />
+                    <Mail className="w-3.5 h-3.5 text-[#FAFAFA]" />
                     <span>{profile.email || user?.email || (isGuest ? 'Guest Access' : '')}</span>
                   </span>
                   {profile.phone && (
                     <>
                       <span>·</span>
                       <span className="flex items-center gap-1 text-slate-300">
-                        <Phone className="w-3.5 h-3.5 text-[#B8FF3D]" />
+                        <Phone className="w-3.5 h-3.5 text-[#22C55E]" />
                         <span>{profile.phone}</span>
                       </span>
                     </>
@@ -447,13 +447,13 @@ export const FarmerProfilePage: React.FC = () => {
 
                 {/* Badges */}
                 <div className="mt-3 flex items-center gap-2 flex-wrap text-[10px] font-mono">
-                  <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[#00E5FF] uppercase">
+                  <span className="px-2 py-0.5 rounded bg-white/5 border border-[#262626] text-[#FAFAFA] uppercase">
                     {provider === 'google' ? 'Google OAuth' : provider === 'email' ? 'Email Auth' : 'Guest Mode'}
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300">
+                  <span className="px-2 py-0.5 rounded bg-white/5 border border-[#262626] text-slate-300">
                     {fields.length} {isBn ? 'টি জমি যুক্ত' : fields.length === 1 ? 'Field Registered' : 'Fields Registered'}
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-purple-300">
+                  <span className="px-2 py-0.5 rounded bg-white/5 border border-[#262626] text-purple-300">
                     {isBn ? 'সদস্য:' : 'Joined:'} {new Date(profile.createdAt).getFullYear()}
                   </span>
                 </div>
@@ -461,14 +461,14 @@ export const FarmerProfilePage: React.FC = () => {
             </div>
 
             {/* Mobile Completion progress */}
-            <div className="w-full sm:w-auto p-4 rounded-2xl bg-[#050B14] border border-white/5 text-xs font-mono space-y-2">
+            <div className="w-full sm:w-auto p-4 rounded-2xl bg-[#0A0A0A] border border-[#262626] text-xs font-mono space-y-2">
               <div className="flex items-center justify-between gap-4">
                 <span className="text-slate-400">{isBn ? 'প্রোফাইল পূর্ণতা' : 'Completeness'}</span>
-                <span className="font-bold text-[#B8FF3D]">{completionPercent}%</span>
+                <span className="font-bold text-[#22C55E]">{completionPercent}%</span>
               </div>
               <div className="w-full sm:w-44 h-2 rounded-full bg-white/10 overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] rounded-full transition-all duration-500"
+                  className="h-full bg-[#22C55E] rounded-full transition-all duration-500"
                   style={{ width: `${completionPercent}%` }}
                 />
               </div>
@@ -482,13 +482,13 @@ export const FarmerProfilePage: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-white/10 pb-1 text-xs font-mono overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-2 border-b border-[#262626] pb-1 text-xs font-mono overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveTab('info')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'info'
-                ? 'bg-[#00E5FF]/15 border-[#00E5FF] text-[#00E5FF] font-bold shadow-sm'
+                ? 'bg-[#22C55E]/10 border-[#22C55E]/40 text-[#22C55E] font-semibold'
                 : 'border-transparent text-slate-400 hover:text-white hover:bg-white/5'
             }`}
           >
@@ -501,7 +501,7 @@ export const FarmerProfilePage: React.FC = () => {
             onClick={() => setActiveTab('fields')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'fields'
-                ? 'bg-[#B8FF3D]/15 border-[#B8FF3D] text-[#B8FF3D] font-bold shadow-sm'
+                ? 'bg-[#22C55E]/10 border-[#22C55E]/40 text-[#22C55E] font-semibold'
                 : 'border-transparent text-slate-400 hover:text-white hover:bg-white/5'
             }`}
           >
@@ -539,7 +539,7 @@ export const FarmerProfilePage: React.FC = () => {
         {/* TAB 1: PERSONAL INFORMATION */}
         {activeTab === 'info' && (
           <form onSubmit={handleSaveProfile} className="space-y-6 animate-fadeIn">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] shadow-none space-y-6">
               <PersonalInfoSection
                 fullName={profile.fullName}
                 onFullNameChange={(val) => setProfile({ ...profile, fullName: val })}
@@ -564,11 +564,11 @@ export const FarmerProfilePage: React.FC = () => {
               />
 
               {/* Save Button */}
-              <div className="pt-4 border-t border-white/10 flex justify-end">
+              <div className="pt-4 border-t border-[#262626] flex justify-end">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all  cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   <span>{isBn ? 'ব্যক্তিগত তথ্য সংরক্ষণ করুন' : 'Save Personal Details'}</span>
@@ -581,7 +581,7 @@ export const FarmerProfilePage: React.FC = () => {
         {/* TAB 2: MULTI-FIELD FARM MANAGEMENT */}
         {activeTab === 'fields' && (
           <div className="space-y-6 animate-fadeIn">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-3xl bg-[#0B1626] border border-white/10 shadow-xl">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-xl bg-[#141414] border border-[#262626] shadow-none">
               <div>
                 <h2 className="font-display text-lg font-bold text-white">
                   {isBn ? 'খামার ও চাষের জমির তালিকা' : 'Registered Agricultural Fields'}
@@ -596,7 +596,7 @@ export const FarmerProfilePage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleOpenAddField}
-                className="px-4 py-2.5 rounded-xl bg-[#00E5FF] hover:bg-[#00cce6] text-black font-mono font-bold text-xs flex items-center gap-2 transition-all shadow-md shadow-[#00E5FF]/20 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-mono font-bold text-xs flex items-center gap-2 transition-all  cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>{isBn ? 'নতুন জমি যুক্ত করুন' : 'Add New Field'}</span>
@@ -612,10 +612,10 @@ export const FarmerProfilePage: React.FC = () => {
                 return (
                   <div
                     key={field.id}
-                    className={`p-6 rounded-3xl border transition-all relative flex flex-col justify-between ${
+                    className={`p-6 rounded-xl border transition-all relative flex flex-col justify-between ${
                       field.isPrimary
-                        ? 'bg-[#0B1626] border-[#B8FF3D]/50 shadow-xl shadow-[#B8FF3D]/5 ring-1 ring-[#B8FF3D]/30'
-                        : 'bg-[#0B1626]/80 border-white/10 hover:border-white/20'
+                        ? 'bg-[#141414] border-[#22C55E]  '
+                        : 'bg-[#141414]/80 border-[#262626] hover:border-[#262626]'
                     }`}
                   >
                     <div>
@@ -626,7 +626,7 @@ export const FarmerProfilePage: React.FC = () => {
                             {field.name}
                           </span>
                           {field.isPrimary && (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#B8FF3D]/15 text-[#B8FF3D] border border-[#B8FF3D]/30">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/20">
                               ★ {isBn ? 'সক্রিয় জমি' : 'Active Field'}
                             </span>
                           )}
@@ -655,20 +655,20 @@ export const FarmerProfilePage: React.FC = () => {
                       </div>
 
                       {/* Location & Coordinates */}
-                      <div className="p-3 rounded-2xl bg-[#050B14] border border-white/5 space-y-1.5 text-xs font-mono text-slate-300 mb-4">
+                      <div className="p-3 rounded-2xl bg-[#0A0A0A] border border-[#262626] space-y-1.5 text-xs font-mono text-slate-300 mb-4">
                         <div className="flex items-center gap-1.5 text-white">
-                          <MapPin className="w-3.5 h-3.5 text-[#00E5FF]" />
+                          <MapPin className="w-3.5 h-3.5 text-[#FAFAFA]" />
                           <span>
                             {field.village ? `${field.village}, ` : ''}
                             {field.upazila ? `${field.upazila}, ` : ''}
-                            <strong className="text-[#00E5FF]">{districtName}</strong>
+                            <strong className="text-[#FAFAFA]">{districtName}</strong>
                           </span>
                         </div>
                         <div className="text-[11px] text-slate-400 flex items-center justify-between">
                           <span>
                             GPS: {field.latitude.toFixed(4)}° N, {field.longitude.toFixed(4)}° E
                           </span>
-                          <span className="text-[#B8FF3D] font-bold">
+                          <span className="text-[#22C55E] font-bold">
                             {field.area} {field.unit}
                           </span>
                         </div>
@@ -676,7 +676,7 @@ export const FarmerProfilePage: React.FC = () => {
 
                       {/* Agronomy Tags */}
                       <div className="grid grid-cols-2 gap-2 text-xs font-mono mb-4">
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                        <div className="p-2.5 rounded-xl bg-white/5 border border-[#262626]">
                           <span className="text-[10px] text-slate-400 block mb-0.5">
                             {isBn ? 'বর্তমান ফসল:' : 'Current Crop:'}
                           </span>
@@ -685,7 +685,7 @@ export const FarmerProfilePage: React.FC = () => {
                           </span>
                         </div>
 
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                        <div className="p-2.5 rounded-xl bg-white/5 border border-[#262626]">
                           <span className="text-[10px] text-slate-400 block mb-0.5">
                             {isBn ? 'মাটির ধরন:' : 'Soil Type:'}
                           </span>
@@ -694,7 +694,7 @@ export const FarmerProfilePage: React.FC = () => {
                           </span>
                         </div>
 
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                        <div className="p-2.5 rounded-xl bg-white/5 border border-[#262626]">
                           <span className="text-[10px] text-slate-400 block mb-0.5">
                             {isBn ? 'সেচ ব্যবস্থা:' : 'Irrigation:'}
                           </span>
@@ -703,11 +703,11 @@ export const FarmerProfilePage: React.FC = () => {
                           </span>
                         </div>
 
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                        <div className="p-2.5 rounded-xl bg-white/5 border border-[#262626]">
                           <span className="text-[10px] text-slate-400 block mb-0.5">
                             {isBn ? 'পরবর্তী ফসল:' : 'Planned Next:'}
                           </span>
-                          <span className="text-[#00E5FF] font-bold capitalize">
+                          <span className="text-[#FAFAFA] font-bold capitalize">
                             {CROPS.find((c) => c.id === field.plannedNextCrop)?.[isBn ? 'nameBn' : 'nameEn'] || field.plannedNextCrop}
                           </span>
                         </div>
@@ -725,7 +725,7 @@ export const FarmerProfilePage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => handleSetPrimaryField(field.id)}
-                        className="w-full py-2 rounded-xl bg-white/5 hover:bg-[#B8FF3D]/15 border border-white/10 hover:border-[#B8FF3D]/40 text-xs font-mono text-slate-300 hover:text-[#B8FF3D] transition-colors cursor-pointer mt-2"
+                        className="w-full py-2 rounded-xl bg-white/5 hover:bg-[#22C55E]/10 border border-[#262626] hover:border-[#262626] text-xs font-mono text-slate-300 hover:text-[#22C55E] transition-colors cursor-pointer mt-2"
                       >
                         {isBn ? 'এই জমিটিকে সক্রিয় করুন' : 'Make Active Field'}
                       </button>
@@ -740,7 +740,7 @@ export const FarmerProfilePage: React.FC = () => {
         {/* TAB 3: FARMING PRIORITIES & PREFERENCES */}
         {activeTab === 'preferences' && (
           <form onSubmit={handleSaveProfile} className="space-y-6 animate-fadeIn">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] shadow-none space-y-6">
               <FarmingPrioritiesSection
                 selectedPriorities={profile.priorities}
                 onTogglePriority={handleTogglePriority}
@@ -751,11 +751,11 @@ export const FarmerProfilePage: React.FC = () => {
               />
 
               {/* Save Button */}
-              <div className="pt-4 border-t border-white/10 flex justify-end">
+              <div className="pt-4 border-t border-[#262626] flex justify-end">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all  cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   <span>{isBn ? 'সংরক্ষণ করুন' : 'Save Priorities'}</span>
@@ -768,7 +768,7 @@ export const FarmerProfilePage: React.FC = () => {
         {/* TAB 4: PAST HAZARDS & HISTORICAL DAMAGE */}
         {activeTab === 'history' && (
           <form onSubmit={handleSaveProfile} className="space-y-6 animate-fadeIn">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] shadow-none space-y-6">
               <PastHazardsSection
                 pastDamages={profile.pastDamages}
                 onToggleDamage={(hazardId) => {
@@ -790,11 +790,11 @@ export const FarmerProfilePage: React.FC = () => {
               />
 
               {/* Save Button */}
-              <div className="pt-4 border-t border-white/10 flex justify-end">
+              <div className="pt-4 border-t border-[#262626] flex justify-end">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all  cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   <span>{isBn ? 'দুর্যোগ বিবরণ সংরক্ষণ করুন' : 'Save Past Hazard Details'}</span>
@@ -809,12 +809,12 @@ export const FarmerProfilePage: React.FC = () => {
       {/* 2. FIELD ADD / EDIT MODAL */}
       {fieldModalOpen && editingField && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md p-4 sm:p-6 flex min-h-full items-center justify-center animate-fadeIn font-editorial">
-          <div className="relative w-full max-w-2xl my-auto rounded-3xl bg-[#0B1626] border border-white/15 shadow-2xl text-white overflow-hidden max-h-[92vh] flex flex-col">
+          <div className="relative w-full max-w-2xl my-auto rounded-xl bg-[#141414] border border-[#262626] shadow-none text-white overflow-hidden max-h-[92vh] flex flex-col">
             
             {/* Modal Header */}
-            <div className="p-5 border-b border-white/10 bg-[#07101D] flex items-center justify-between flex-shrink-0">
+            <div className="p-5 border-b border-[#262626] bg-[#0A0A0A] flex items-center justify-between flex-shrink-0">
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-5 h-5 text-[#00E5FF]" />
+                <MapPin className="w-5 h-5 text-[#FAFAFA]" />
                 <h3 className="font-display font-bold text-lg text-white">
                   {editingField.id.startsWith('field_') && !fields.some((f) => f.id === editingField.id)
                     ? isBn ? 'নতুন জমি যুক্ত করুন' : 'Register New Field'
@@ -862,12 +862,12 @@ export const FarmerProfilePage: React.FC = () => {
                   value={editingField.notes}
                   onChange={(e) => setEditingField({ ...editingField, notes: e.target.value })}
                   placeholder={isBn ? 'যেমন: বৃষ্টির পানি জমে না, দোআঁশ মাটি...' : 'e.g. Well-drained plot, good DTW access...'}
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:border-[#00E5FF] focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-[#262626] text-white text-xs focus:border-[#404040] focus:outline-none"
                 />
               </div>
 
               {/* Modal Footer Actions */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-[#262626] flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -880,7 +880,7 @@ export const FarmerProfilePage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#00E5FF] hover:bg-[#00cce6] text-black text-xs font-mono font-bold flex items-center gap-1.5 shadow-md shadow-[#00E5FF]/20"
+                  className="px-5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black text-xs font-mono font-bold flex items-center gap-1.5 "
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>{isBn ? 'জমি সংরক্ষণ করুন' : 'Save Field'}</span>
@@ -894,7 +894,7 @@ export const FarmerProfilePage: React.FC = () => {
       {/* 3. DELETE FIELD CONFIRMATION DIALOG */}
       {deleteConfirmId && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center animate-fadeIn font-editorial">
-          <div className="bg-[#0B1626] border border-red-500/30 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+          <div className="bg-[#141414] border border-red-500/30 rounded-xl p-6 max-w-sm w-full text-center space-y-4 shadow-none">
             <div className="w-12 h-12 rounded-2xl bg-red-500/15 border border-red-500/30 text-red-400 mx-auto flex items-center justify-center">
               <Trash2 className="w-6 h-6" />
             </div>

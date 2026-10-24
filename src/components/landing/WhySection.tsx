@@ -8,31 +8,32 @@ const ICONS = [Satellite, ScrollText, UserCheck];
 export function WhySection() {
   const { t } = useLang();
   return (
-    <section id="how" className="relative py-20 md:py-28">
-      <div className="absolute inset-x-0 top-0 -z-10 h-full bg-linear-to-b from-transparent via-ink-900/60 to-transparent" />
+    <section id="how" className="relative py-20 md:py-28 border-b border-[#262626]">
       <div className="container-x">
         <SectionHeader eyebrow={t.why.eyebrow} title={t.why.title} center />
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {t.why.cards.map((c, i) => {
             const Icon = ICONS[i];
             const middle = i === 1;
             return (
               <article
                 key={c.n}
-                className={`glass relative flex flex-col p-7 ${middle ? 'border-lime-300/25 md:-translate-y-4 shadow-[0_30px_80px_-30px_rgb(163_230_53/0.35)]' : ''}`}
+                className="flex flex-col justify-between rounded-xl border border-[#262626] bg-[#141414] p-6 sm:p-7 transition-colors duration-150 hover:border-[#404040]"
               >
-                <div className="flex items-center justify-between">
-                  <div className={`grid h-12 w-12 place-items-center rounded-2xl ${middle ? 'bg-lime-300 text-ink-950' : 'bg-white/[0.06] text-lime-300'}`}>
-                    <Icon className="h-6 w-6" strokeWidth={1.7} />
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="grid h-10 w-10 place-items-center rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#22C55E]">
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    </div>
+                    <span className="font-mono text-xl font-semibold text-[#737373]">{c.n}</span>
                   </div>
-                  <span className="font-display text-4xl font-bold text-white/10">{c.n}</span>
+                  <h3 className="mt-5 font-display text-xl font-semibold text-[#FAFAFA]">{c.t}</h3>
+                  <p className="mt-2.5 leading-relaxed text-sm text-[#A3A3A3]">{c.d}</p>
                 </div>
-                <h3 className="mt-6 font-display text-2xl font-semibold text-white">{c.t}</h3>
-                <p className="mt-3 leading-relaxed text-slate-400">{c.d}</p>
                 {middle && (
-                  <div className="mt-5 rounded-xl border border-white/10 bg-ink-950/80 p-4">
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-lime-300">{t.why.exampleLabel}</div>
-                    <pre className="mt-2 whitespace-pre-wrap font-mono text-[12.5px] leading-relaxed text-cyan-100">{t.why.example}</pre>
+                  <div className="mt-6 rounded-lg border border-[#262626] bg-[#0A0A0A] p-3.5">
+                    <div className="text-[10px] font-mono font-medium uppercase tracking-wider text-[#737373]">{t.why.exampleLabel}</div>
+                    <pre className="mt-2 whitespace-pre-wrap font-mono text-xs leading-relaxed text-[#A3A3A3]">{t.why.example}</pre>
                   </div>
                 )}
               </article>

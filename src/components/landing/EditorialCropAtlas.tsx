@@ -5,9 +5,7 @@ import {
   Search,
   X,
   Thermometer,
-  CloudRain,
   AlertTriangle,
-  Info,
   ChevronRight,
   Database,
   Satellite,
@@ -72,7 +70,7 @@ export function EditorialCropAtlas() {
       }
     }
     // Sort within each category by suitability score
-    for (const [catId, arr] of map.entries()) {
+    for (const [, arr] of map.entries()) {
       arr.sort((a, b) => {
         const scoreA = CROPS_DATABASE[a.id]?.suitabilityScore ?? (a.recommendable ? 85 : 0);
         const scoreB = CROPS_DATABASE[b.id]?.suitabilityScore ?? (b.recommendable ? 85 : 0);
@@ -104,56 +102,54 @@ export function EditorialCropAtlas() {
   };
 
   return (
-    <section id="crops" className="relative py-24 md:py-32 border-b border-white/10 bg-[#070e1a]/80">
+    <section id="crops" className="relative py-20 md:py-28 border-b border-[#262626]">
       <div className="container-x">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#B8FF3D] uppercase mb-3">
-              <span>AGRONOMIC ATLAS</span>
-              <span aria-hidden="true">·</span>
-              <span>{isBn ? `${totalCrops}টি ফসলের পূর্ণ জ্ঞানভাণ্ডার` : `FULL ${totalCrops} CROP KNOWLEDGE BASE`}</span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+            <span className="text-xs font-mono font-medium uppercase tracking-wider text-[#A3A3A3] block mb-2">
+              {isBn ? 'ফসল নির্দেশিকা' : 'Crop Atlas'}
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[#FAFAFA] tracking-tight">
               {isBn ? 'বাংলাদেশের প্রধান ফসল ও আবহাওয়া সহনশীলতা' : 'Bangladesh Crop Atlas & Climate Suitability'}
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[#8FA3B8] leading-relaxed">
+            <p className="mt-3 text-base text-[#A3A3A3] leading-relaxed">
               {isBn
-                ? `বারি (BARI) ও ব্রি (BRRI)-এর কৃষি নির্দেশিকা এবং নাসার স্যাটেলাইট তথ্য অনুযায়ী ${toBn(totalCrops)}টি ফসলের তাপমাত্রা, পানির চাহিদা ও বাস্তব সম্ভাবনা।`
-                : `Comprehensive agro-climatic database of ${totalCrops} Bangladeshi crops combining BARI & BRRI scientific research with NASA Earth observation parameters.`}
+                ? `বারি (BARI) ও ব্রি (BRRI)-এর পরামর্শ এবং নাসার তথ্য মিলিয়ে আপনার এলাকার জন্য ${toBn(totalCrops)}টি ফসলের মূল্যায়ন।`
+                : `${totalCrops} crops, scored for your district using BARI/BRRI guidance and NASA data.`}
             </p>
           </div>
 
           {/* Example score tag */}
-          <div className="flex flex-col items-start md:items-end gap-2">
-            <div className="text-xs font-mono text-[#8FA3B8] flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0B1626] border border-white/10">
-              <span className="w-2 h-2 rounded-full bg-[#B8FF3D] animate-pulse" />
+          <div className="flex flex-col items-start md:items-end gap-1.5">
+            <div className="text-xs font-mono text-[#A3A3A3] flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
               <span>{isBn ? 'রংপুরের জন্য নমুনা স্কোর' : 'Example scores for Rangpur'}</span>
             </div>
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className="text-[11px] font-mono text-[#737373]">
               {isBn ? 'যেকোনো ফসলে চাপ দিয়ে বিস্তারিত দেখুন' : 'Click any card to inspect full field data'}
             </span>
           </div>
         </div>
 
         {/* Filter Toolbar */}
-        <div className="space-y-4 mb-10 p-4 sm:p-5 rounded-2xl bg-[#0B1626] border border-white/10">
+        <div className="space-y-4 mb-10 p-4 sm:p-5 rounded-xl bg-[#141414] border border-[#262626]">
           {/* Row 1: Search & Season tabs */}
-          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
             {/* Search Box */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3.5 top-3.5 w-4 h-4 text-[#8FA3B8]" />
+              <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#737373]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={isBn ? 'ফসলের নাম দিয়ে খুঁজুন (বাংলা বা ইংরেজি)...' : 'Search by crop name (English or Bangla)...'}
-                className="w-full min-h-[44px] pl-10 pr-9 py-2 rounded-xl bg-white/5 border border-white/15 text-white text-sm focus:border-[#B8FF3D] focus:outline-none placeholder:text-slate-500 font-mono"
+                className="w-full min-h-[40px] pl-10 pr-9 py-2 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none placeholder:text-[#737373] font-mono"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-3 text-slate-400 hover:text-white cursor-pointer"
+                  className="absolute right-3 top-2.5 text-[#737373] hover:text-[#FAFAFA] cursor-pointer"
                   aria-label="Clear search"
                 >
                   <X className="w-4 h-4" />
@@ -162,7 +158,7 @@ export function EditorialCropAtlas() {
             </div>
 
             {/* Season Tabs */}
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-[#050B14] border border-white/10 overflow-x-auto no-scrollbar flex-nowrap">
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-[#0A0A0A] border border-[#262626] overflow-x-auto no-scrollbar flex-nowrap">
               {(
                 [
                   { id: 'all', en: 'All Seasons', bn: 'সব মৌসুম' },
@@ -174,10 +170,10 @@ export function EditorialCropAtlas() {
                 <button
                   key={tab.id}
                   onClick={() => setSelectedSeason(tab.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  className={`px-3 py-1.5 rounded-md text-xs font-mono transition-colors cursor-pointer whitespace-nowrap ${
                     selectedSeason === tab.id
-                      ? 'bg-[#B8FF3D] text-[#050B14] font-bold shadow-sm'
-                      : 'text-[#8FA3B8] hover:text-white'
+                      ? 'bg-[#FAFAFA] text-[#0A0A0A] font-medium'
+                      : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
                   }`}
                 >
                   {isBn ? tab.bn : tab.en}
@@ -187,13 +183,13 @@ export function EditorialCropAtlas() {
           </div>
 
           {/* Row 2: Category Filter Chips */}
-          <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-nowrap pb-1">
+          <div className="pt-3 border-t border-[#262626] flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-nowrap">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer whitespace-nowrap border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer whitespace-nowrap border ${
                 selectedCategory === 'all'
-                  ? 'bg-[#00E5FF]/15 border-[#00E5FF] text-[#00E5FF] font-bold shadow-sm'
-                  : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                  ? 'bg-[#FAFAFA] text-[#0A0A0A] border-transparent font-medium'
+                  : 'bg-transparent border-[#262626] text-[#A3A3A3] hover:text-[#FAFAFA] hover:border-[#404040]'
               }`}
             >
               {isBn ? `সব ফসল (${filteredCrops.length})` : `All Categories (${filteredCrops.length})`}
@@ -205,14 +201,14 @@ export function EditorialCropAtlas() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer whitespace-nowrap border ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer whitespace-nowrap border ${
                     isSelected
-                      ? 'bg-[#00E5FF]/15 border-[#00E5FF] text-[#00E5FF] font-bold shadow-sm'
-                      : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#FAFAFA] text-[#0A0A0A] border-transparent font-medium'
+                      : 'bg-transparent border-[#262626] text-[#A3A3A3] hover:text-[#FAFAFA] hover:border-[#404040]'
                   }`}
                 >
                   <span>{isBn ? cat.name_bn : cat.name_en}</span>
-                  <span className="ml-1.5 opacity-60">({count})</span>
+                  <span className="ml-1 opacity-60">({count})</span>
                 </button>
               );
             })}
@@ -221,17 +217,17 @@ export function EditorialCropAtlas() {
 
         {/* Crops Container */}
         {filteredCrops.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-2xl bg-[#0B1626] border border-white/10">
-            <Search className="w-10 h-10 text-slate-500 mx-auto mb-3" />
-            <h3 className="text-lg font-bold text-white">
+          <div className="text-center py-14 px-4 rounded-xl bg-[#141414] border border-[#262626]">
+            <Search className="w-8 h-8 text-[#737373] mx-auto mb-2" />
+            <h3 className="text-base font-semibold text-[#FAFAFA]">
               {isBn ? 'কোনো ফসল পাওয়া যায়নি' : 'No crops found matching filters'}
             </h3>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-xs text-[#737373] mt-1">
               {isBn ? 'অন্য কোনো নাম বা ফিল্টার পরিবর্তন করে চেষ্টা করুন।' : 'Try adjusting your search query or season filter.'}
             </p>
           </div>
         ) : (
-          <div className="space-y-12">
+          <div className="space-y-10">
             {CROP_CATEGORIES.map((cat) => {
               const cropsInCat = cropsByCategory.get(cat.id) || [];
               if (cropsInCat.length === 0) return null;
@@ -241,26 +237,25 @@ export function EditorialCropAtlas() {
               const hasMore = cropsInCat.length > 8 && !isExpanded;
 
               return (
-                <div key={cat.id} className="space-y-5">
+                <div key={cat.id} className="space-y-4">
                   {/* Category Header */}
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <div className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#00E5FF]" />
-                      <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <div className="flex items-center justify-between border-b border-[#262626] pb-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <h3 className="font-display text-lg font-semibold text-[#FAFAFA]">
                         {isBn ? cat.name_bn : cat.name_en}
                       </h3>
-                      <span className="text-xs font-mono text-[#8FA3B8] px-2 py-0.5 rounded bg-white/5 border border-white/10">
-                        {cropsInCat.length} {isBn ? 'টি ফসল' : 'crops'}
+                      <span className="text-xs font-mono text-[#737373] px-2 py-0.5 rounded bg-[#0A0A0A] border border-[#262626]">
+                        {cropsInCat.length} {isBn ? 'টি' : 'crops'}
                       </span>
                     </div>
 
-                    <p className="hidden md:block text-xs text-[#8FA3B8] max-w-md text-right font-mono">
+                    <p className="hidden md:block text-xs text-[#737373] max-w-md text-right font-mono">
                       {isBn ? cat.description_bn : cat.description_en}
                     </p>
                   </div>
 
                   {/* Cards Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {displayCrops.map((crop) => {
                       const dataCrop = CROPS_DATABASE[crop.id];
                       const score = dataCrop?.suitabilityScore ?? (crop.recommendable ? 85 : 0);
@@ -271,93 +266,80 @@ export function EditorialCropAtlas() {
                         <div
                           key={crop.id}
                           onClick={() => setDetailCrop(crop)}
-                          className="p-5 rounded-2xl bg-[#0B1626] border border-white/10 hover:border-[#B8FF3D]/50 hover:bg-[#0E1B2E] transition-all flex flex-col justify-between group cursor-pointer relative"
+                          className="p-5 rounded-xl bg-[#141414] border border-[#262626] hover:border-[#404040] transition-colors duration-150 flex flex-col justify-between group cursor-pointer relative"
                         >
                           <div>
-                            {/* Card Top: Season badges + Score */}
+                            {/* Card Top: Season labels + Score or Badge */}
                             <div className="flex items-center justify-between mb-3 gap-2">
-                              <div className="flex flex-wrap gap-1">
-                                {crop.seasons.map((s) => (
-                                  <span
-                                    key={s}
-                                    className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-[#00E5FF] border border-white/10 uppercase"
-                                  >
-                                    {getSeasonLabel(s)}
-                                  </span>
-                                ))}
-                              </div>
+                              <span className="font-mono text-xs text-[#737373]">
+                                {crop.seasons.map((s) => getSeasonLabel(s)).join(', ')}
+                              </span>
 
                               {isNonRecommendable ? (
-                                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/15 text-red-400 border border-red-500/30">
-                                  {isBn ? 'আমরা সুপারিশ করি না' : 'Not Recommendable'}
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-[#EF4444]/30 bg-[#EF4444]/10 text-[#EF4444]">
+                                  {isBn ? 'সুপারিশ নয়' : 'Not Recommended'}
+                                </span>
+                              ) : isEstimated ? (
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-[#F59E0B]/30 bg-[#F59E0B]/10 text-[#F59E0B]">
+                                  {isBn ? 'আনুমানিক' : 'Estimated'}
                                 </span>
                               ) : (
-                                <div className="text-right">
-                                  <span className="text-[11px] font-mono font-bold text-[#B8FF3D]">
-                                    {score}/100
-                                  </span>
-                                </div>
+                                <span className="text-xs font-mono font-semibold text-[#FAFAFA]">
+                                  {score}/100
+                                </span>
                               )}
                             </div>
 
                             {/* Crop Titles */}
-                            <h4 className="text-lg font-bold text-white group-hover:text-[#B8FF3D] transition-colors flex items-center justify-between">
+                            <h4 className="text-base font-semibold text-[#FAFAFA] group-hover:text-[#22C55E] transition-colors flex items-center justify-between">
                               <span>{isBn ? crop.name_bn : crop.name_en}</span>
-                              <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-[#B8FF3D] group-hover:translate-x-0.5 transition-all" />
+                              <ChevronRight className="w-4 h-4 text-[#737373] group-hover:text-[#22C55E] transition-colors" />
                             </h4>
-                            <p className="text-xs text-[#8FA3B8] italic mt-0.5 mb-3">
-                              {crop.scientific_name || (isBn ? 'তথ্য নেই' : 'Scientific name not recorded')}
+                            <p className="text-xs text-[#737373] italic mt-0.5 mb-3 truncate">
+                              {crop.scientific_name || (isBn ? 'তথ্য নেই' : 'No scientific name')}
                             </p>
 
-                            {/* Estimated Badge */}
-                            {isEstimated && (
-                              <div className="mb-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-[10px] font-mono text-amber-300">
-                                <AlertTriangle className="w-3 h-3" />
-                                <span>{isBn ? 'আনুমানিক তথ্য' : 'Estimated data'}</span>
-                              </div>
-                            )}
-
-                            {/* Telemetry Stats */}
-                            <div className="space-y-2 text-xs text-[#8FA3B8] py-3 border-t border-b border-white/10">
+                            {/* Stats */}
+                            <div className="space-y-1.5 text-xs text-[#A3A3A3] py-2.5 border-t border-b border-[#262626]">
                               <div className="flex items-center justify-between">
-                                <span className="flex items-center gap-1.5">
-                                  <Clock className="w-3.5 h-3.5 text-white/50" />
+                                <span className="flex items-center gap-1.5 text-[#737373]">
+                                  <Clock className="w-3.5 h-3.5" />
                                   {isBn ? 'জীবনকাল' : 'Duration'}
                                 </span>
-                                <span className="text-white font-mono">
+                                <span className="text-[#FAFAFA] font-mono">
                                   {crop.duration_days
-                                    ? `${toBn(crop.duration_days.min, isBn)}–${toBn(crop.duration_days.max, isBn)} ${isBn ? 'দিন' : 'days'}`
-                                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                                    ? `${toBn(crop.duration_days.min, isBn)}–${toBn(crop.duration_days.max, isBn)} ${isBn ? 'দিন' : 'd'}`
+                                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                                 </span>
                               </div>
                               <div className="flex items-center justify-between">
-                                <span className="flex items-center gap-1.5">
-                                  <Droplets className="w-3.5 h-3.5 text-white/50" />
-                                  {isBn ? 'পানির চাহিদা' : 'Water need'}
+                                <span className="flex items-center gap-1.5 text-[#737373]">
+                                  <Droplets className="w-3.5 h-3.5" />
+                                  {isBn ? 'পানি' : 'Water'}
                                 </span>
-                                <span className="text-white font-mono">
+                                <span className="text-[#FAFAFA] font-mono">
                                   {crop.water_need_mm
                                     ? `${toBn(crop.water_need_mm.min, isBn)}–${toBn(crop.water_need_mm.max, isBn)} ${isBn ? 'মিমি' : 'mm'}`
-                                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                                 </span>
                               </div>
                               <div className="flex items-center justify-between">
-                                <span className="flex items-center gap-1.5">
-                                  <Thermometer className="w-3.5 h-3.5 text-white/50" />
+                                <span className="flex items-center gap-1.5 text-[#737373]">
+                                  <Thermometer className="w-3.5 h-3.5" />
                                   {isBn ? 'অনুকূল তাপমাত্রা' : 'Opt. Temp'}
                                 </span>
-                                <span className="text-white font-mono">
+                                <span className="text-[#FAFAFA] font-mono">
                                   {crop.temperature_c.optimal_min != null && crop.temperature_c.optimal_max != null
-                                    ? `${toBn(crop.temperature_c.optimal_min, isBn)}–${toBn(crop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে.' : 'C'}`
-                                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                                    ? `${toBn(crop.temperature_c.optimal_min, isBn)}–${toBn(crop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে' : 'C'}`
+                                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                                 </span>
                               </div>
                             </div>
                           </div>
 
-                          {/* Short Why / Description */}
-                          <div className="pt-3">
-                            <p className="text-[11px] text-[#8FA3B8] line-clamp-2 leading-relaxed">
+                          {/* Caution */}
+                          <div className="pt-2.5">
+                            <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
                               {crop.key_risks_bn[0]
                                 ? (isBn ? `সতর্কতা: ${crop.key_risks_bn[0]}` : `Caution: ${crop.key_risks_en[0] || crop.key_risks_bn[0]}`)
                                 : (isBn ? 'তথ্য নেই' : 'No data')}
@@ -373,7 +355,7 @@ export function EditorialCropAtlas() {
                     <div className="text-center pt-2">
                       <button
                         onClick={() => toggleCategoryExpand(cat.id)}
-                        className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#00E5FF] hover:bg-white/10 hover:border-[#00E5FF]/40 transition-all cursor-pointer"
+                        className="px-4 py-2 rounded-lg bg-[#141414] border border-[#262626] text-xs font-mono text-[#A3A3A3] hover:text-[#FAFAFA] hover:border-[#404040] transition-colors cursor-pointer"
                       >
                         {isBn ? `আরও ${cropsInCat.length - 8}টি ফসল দেখুন ↓` : `Show all ${cropsInCat.length} crops in this category ↓`}
                       </button>
@@ -385,15 +367,15 @@ export function EditorialCropAtlas() {
           </div>
         )}
 
-        {/* Transparency Footer Note */}
-        <div className="mt-16 p-6 rounded-2xl bg-[#0B1626] border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        {/* Provenance Footer Note */}
+        <div className="mt-14 p-5 sm:p-6 rounded-xl bg-[#141414] border border-[#262626] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
-            <Database className="w-5 h-5 text-[#B8FF3D] flex-shrink-0 mt-0.5" />
-            <div className="text-xs sm:text-sm text-slate-300">
-              <span className="font-bold text-white block mb-0.5">
-                {isBn ? 'তথ্যের নির্ভরযোগ্য উৎস' : 'Transparent Agronomic Data Provenance'}
+            <Database className="w-4 h-4 text-[#22C55E] shrink-0 mt-1" />
+            <div className="text-xs text-[#A3A3A3]">
+              <span className="font-semibold text-[#FAFAFA] block mb-0.5">
+                {isBn ? 'তথ্যের উৎস ও ভিত্তি' : 'Where the numbers come from'}
               </span>
-              <p className="text-slate-400">
+              <p className="text-[#737373]">
                 {isBn
                   ? t.atlas.provenanceDesc(researchCount, estimatedCount)
                   : t.atlas.provenanceDesc(researchCount, estimatedCount)}
@@ -401,55 +383,55 @@ export function EditorialCropAtlas() {
             </div>
           </div>
 
-          <div className="text-[11px] font-mono text-slate-400 border border-white/10 px-3 py-1.5 rounded-xl bg-white/5 whitespace-nowrap">
-            {isBn ? 'সূত্র: ব্রি আধুনিক ধানের চাষ (২১তম সংস্করণ) ও বারি নির্দেশিকা' : 'Sources: BRRI 21st Ed. & BARI Agronomy Guidelines'}
+          <div className="text-[11px] font-mono text-[#737373] border border-[#262626] px-3 py-1.5 rounded-lg bg-[#0A0A0A] whitespace-nowrap">
+            {isBn ? 'সূত্র: ব্রি ২১তম সংস্করণ ও বারি নির্দেশিকা' : 'Sources: BRRI 21st Ed. & BARI Guidelines'}
           </div>
         </div>
       </div>
 
-      {/* DETAIL SHEET MODAL */}
+      {/* DETAIL MODAL */}
       {detailCrop && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm"
           onClick={() => setDetailCrop(null)}
         >
           <div
-            className="w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-2xl overflow-y-auto rounded-none sm:rounded-3xl bg-[#0B1626] border-0 sm:border sm:border-white/15 p-4 sm:p-8 shadow-2xl relative space-y-6 text-white"
+            className="w-full h-full sm:h-auto sm:max-h-[85vh] sm:max-w-2xl overflow-y-auto rounded-xl bg-[#141414] border border-[#262626] p-5 sm:p-7 shadow-2xl relative space-y-5 text-[#FAFAFA]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-white/10 pb-5">
+            <div className="flex items-start justify-between border-b border-[#262626] pb-4">
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-[#00E5FF] border border-white/10">
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#0A0A0A] text-[#A3A3A3] border border-[#262626]">
                     {CROP_CATEGORIES.find((c) => c.id === detailCrop.category_id)?.[isBn ? 'name_bn' : 'name_en']}
                   </span>
                   {detailCrop.data_confidence === 'estimated' ? (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 flex items-center gap-1">
                       <AlertTriangle className="w-3 h-3" />
                       {isBn ? 'আনুমানিক তথ্য' : 'Estimated Data'}
                     </span>
                   ) : (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#B8FF3D]/15 text-[#B8FF3D] border border-[#B8FF3D]/30">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30">
                       {isBn ? 'গবেষণা-ভিত্তিক' : 'Research-Backed'}
                     </span>
                   )}
                   {!detailCrop.recommendable && (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
-                      {isBn ? 'আমরা সুপারিশ করি না' : 'Non-Recommendable'}
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#EF4444]/10 text-[#EF4444] border border-[#EF4444]/30">
+                      {isBn ? 'সুপারিশ নয়' : 'Non-Recommendable'}
                     </span>
                   )}
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold font-display text-white">
+                <h3 className="text-xl sm:text-2xl font-semibold font-display text-[#FAFAFA]">
                   {isBn ? detailCrop.name_bn : detailCrop.name_en}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#8FA3B8] italic mt-0.5">
+                <p className="text-xs text-[#737373] italic mt-0.5">
                   {detailCrop.scientific_name || (isBn ? 'তথ্য নেই' : 'No scientific name')}
                   {detailCrop.plant_family && (
-                    <span className="ml-2 font-mono text-[11px] text-[#00E5FF]">
+                    <span className="ml-2 font-mono text-[11px] text-[#A3A3A3]">
                       ({isBn ? 'গোত্র:' : 'Family:'} {detailCrop.plant_family})
                     </span>
                   )}
@@ -458,40 +440,40 @@ export function EditorialCropAtlas() {
 
               <button
                 onClick={() => setDetailCrop(null)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#737373] hover:text-[#FAFAFA] transition-colors cursor-pointer"
                 aria-label="Close detail modal"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Estimated Warning Banner */}
+            {/* Estimated Warning */}
             {detailCrop.data_confidence === 'estimated' && (
-              <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 text-xs sm:text-sm text-amber-200">
-                <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-lg bg-[#F59E0B]/10 border border-[#F59E0B]/30 flex items-start gap-2.5 text-xs text-[#F59E0B]">
+                <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
                   {isBn
-                    ? 'এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।'
-                    : 'This crop data is estimated from preliminary agricultural references. Always verify with your local Upazila Agriculture Officer before field deployment.'}
+                    ? 'এই ফসলের তথ্য এখনো প্রাথমিক উৎস থেকে নেওয়া; স্থানীয় কৃষি কর্মকর্তার সাথে পরামর্শ করে নিশ্চিত হোন।'
+                    : 'This crop data is estimated from preliminary agricultural references. Verify with your local agriculture officer.'}
                 </p>
               </div>
             )}
 
             {/* Sowing & Harvest Windows */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
-                <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-[11px] font-mono text-[#737373] uppercase tracking-wider block">
                   {isBn ? 'বপন বা রোপণ সময়' : 'Sowing Window'}
                 </span>
-                <p className="font-bold text-white text-sm">
+                <p className="font-semibold text-[#FAFAFA] text-sm">
                   {isBn ? detailCrop.sowing_window.months_bn : detailCrop.sowing_window.months_en}
                 </p>
               </div>
-              <div className="p-4 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
-                <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-[11px] font-mono text-[#737373] uppercase tracking-wider block">
                   {isBn ? 'ফসল কাটার সময়' : 'Harvest Window'}
                 </span>
-                <p className="font-bold text-white text-sm">
+                <p className="font-semibold text-[#FAFAFA] text-sm">
                   {isBn ? detailCrop.harvest_window.months_bn : detailCrop.harvest_window.months_en}
                 </p>
               </div>
@@ -499,71 +481,68 @@ export function EditorialCropAtlas() {
 
             {/* Growth Stages Timeline */}
             {detailCrop.growth_stages.length > 0 && (
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10 space-y-3">
-                <span className="text-xs font-mono font-bold text-[#B8FF3D] uppercase tracking-wider flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" />
+              <div className="p-4 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-2.5">
+                <span className="text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#22C55E]" />
                   {isBn ? 'ফসলের বিভিন্ন ধাপ ও সময়কাল' : 'Growth Stages Timeline'}
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
                   {detailCrop.growth_stages.map((stg, i) => (
-                    <div key={i} className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-xs">
-                      <span className="text-[10px] font-mono text-slate-400 block mb-0.5">
+                    <div key={i} className="p-2.5 rounded-md bg-[#141414] border border-[#262626] text-xs">
+                      <span className="text-[10px] font-mono text-[#737373] block mb-0.5">
                         {isBn ? `ধাপ ${i + 1}` : `Stage ${i + 1}`} ({stg.weeks_min}–{stg.weeks_max} {isBn ? 'সপ্তাহ' : 'wks'})
                       </span>
-                      <p className="font-medium text-white">{isBn ? stg.name_bn : stg.name_en}</p>
+                      <p className="font-medium text-[#FAFAFA]">{isBn ? stg.name_bn : stg.name_en}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Technical Agronomic Metrics */}
+            {/* Agronomic Metrics */}
             <div className="grid sm:grid-cols-3 gap-3 text-xs">
-              {/* Temperature */}
-              <div className="p-3.5 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 uppercase block flex items-center gap-1">
-                  <Thermometer className="w-3 h-3 text-amber-400" />
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-[10px] font-mono text-[#737373] uppercase block flex items-center gap-1">
+                  <Thermometer className="w-3 h-3 text-[#A3A3A3]" />
                   {isBn ? 'তাপমাত্রা' : 'Temperature'}
                 </span>
-                <p className="font-mono font-bold text-sm text-white">
+                <p className="font-mono font-semibold text-sm text-[#FAFAFA]">
                   {detailCrop.temperature_c.optimal_min != null
-                    ? `${toBn(detailCrop.temperature_c.optimal_min, isBn)}–${toBn(detailCrop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে.' : 'C'}`
-                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                    ? `${toBn(detailCrop.temperature_c.optimal_min, isBn)}–${toBn(detailCrop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে' : 'C'}`
+                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                 </p>
-                <span className="text-[10px] text-slate-400 block">
-                  {isBn ? `ন্যূনতম: ${toBn(detailCrop.temperature_c.base ?? 'নেই', isBn)}°সে.` : `Base: ${detailCrop.temperature_c.base ?? 'N/A'}°C`}
+                <span className="text-[10px] text-[#737373] block">
+                  {isBn ? `ন্যূনতম: ${toBn(detailCrop.temperature_c.base ?? 'নেই', isBn)}°সে` : `Base: ${detailCrop.temperature_c.base ?? 'N/A'}°C`}
                   {detailCrop.temperature_c.critical_max && ` · সংকট: ${detailCrop.temperature_c.critical_max}°C`}
                 </span>
               </div>
 
-              {/* Water Need */}
-              <div className="p-3.5 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 uppercase block flex items-center gap-1">
-                  <Droplets className="w-3 h-3 text-[#00E5FF]" />
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-[10px] font-mono text-[#737373] uppercase block flex items-center gap-1">
+                  <Droplets className="w-3 h-3 text-[#A3A3A3]" />
                   {isBn ? 'পানির চাহিদা' : 'Water Need'}
                 </span>
-                <p className="font-mono font-bold text-sm text-white">
+                <p className="font-mono font-semibold text-sm text-[#FAFAFA]">
                   {detailCrop.water_need_mm
                     ? `${toBn(detailCrop.water_need_mm.min, isBn)}–${toBn(detailCrop.water_need_mm.max, isBn)} ${isBn ? 'মিমি' : 'mm'}`
-                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                 </p>
-                <span className="text-[10px] text-slate-400 block line-clamp-1">
+                <span className="text-[10px] text-[#737373] block truncate">
                   {isBn ? detailCrop.irrigation_notes_bn : detailCrop.irrigation_notes_en}
                 </span>
               </div>
 
-              {/* SMAP Soil Moisture */}
-              <div className="p-3.5 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono text-slate-400 uppercase block flex items-center gap-1">
-                  <Satellite className="w-3 h-3 text-[#B8FF3D]" />
-                  {isBn ? 'মাটির রস (SMAP)' : 'SMAP Moisture'}
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-[10px] font-mono text-[#737373] uppercase block flex items-center gap-1">
+                  <Satellite className="w-3 h-3 text-[#A3A3A3]" />
+                  {isBn ? 'মাটির আর্দ্রতা' : 'Soil Moisture'}
                 </span>
-                <p className="font-mono font-bold text-sm text-white">
+                <p className="font-mono font-semibold text-sm text-[#FAFAFA]">
                   {detailCrop.smap_optimal.min != null
                     ? `${Math.round(detailCrop.smap_optimal.min * 100)}%–${Math.round(detailCrop.smap_optimal.max! * 100)}%`
-                    : (isBn ? 'তথ্য নেই' : 'No data')}
+                    : (isBn ? 'তথ্য নেই' : 'N/A')}
                 </p>
-                <span className="text-[10px] text-slate-400 block">
+                <span className="text-[10px] text-[#737373] block">
                   {detailCrop.smap_optimal.min != null ? `${detailCrop.smap_optimal.min} - ${detailCrop.smap_optimal.max} m³/m³` : ''}
                 </span>
               </div>
@@ -571,16 +550,16 @@ export function EditorialCropAtlas() {
 
             {/* Key Risks */}
             {detailCrop.key_risks_bn.length > 0 && (
-              <div className="space-y-2">
-                <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <AlertTriangle className="w-3.5 h-3.5" />
+              <div className="space-y-1.5">
+                <span className="text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 text-[#F59E0B]" />
                   {isBn ? 'প্রধান ঝুঁকি ও সতর্কতা' : 'Key Climate & Agronomic Risks'}
                 </span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {detailCrop.key_risks_bn.map((risk, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200"
+                      className="px-2.5 py-1 rounded-md bg-[#0A0A0A] border border-[#262626] text-xs text-[#A3A3A3]"
                     >
                       {isBn ? risk : (detailCrop.key_risks_en[i] || risk)}
                     </span>
@@ -591,31 +570,28 @@ export function EditorialCropAtlas() {
 
             {/* Algorithm Decision Logic */}
             {detailCrop.decision_rules_bn && detailCrop.decision_rules_bn.length > 0 && (
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10 space-y-1.5">
-                <span className="text-xs font-mono font-bold text-[#00E5FF] uppercase tracking-wider flex items-center gap-1.5">
-                  <Compass className="w-3.5 h-3.5" />
-                  {isBn ? 'অ্যালগরিদমের সিদ্ধান্ত লজিক (Rule Engine)' : 'Algorithm Decision Logic'}
+              <div className="p-3.5 rounded-lg bg-[#0A0A0A] border border-[#262626] space-y-1">
+                <span className="text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-[#22C55E]" />
+                  {isBn ? 'সিদ্ধান্ত লজিক' : 'Algorithm Decision Logic'}
                 </span>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs text-[#737373] leading-relaxed">
                   {isBn ? detailCrop.decision_rules_bn[0] : (detailCrop.decision_rules_en?.[0] || detailCrop.decision_rules_bn[0])}
                 </p>
               </div>
             )}
 
             {/* Sources & Citations */}
-            <div className="border-t border-white/10 pt-4 space-y-2">
-              <span className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="border-t border-[#262626] pt-3.5 space-y-1.5">
+              <span className="text-xs font-mono text-[#737373] uppercase tracking-wider block">
                 {isBn ? 'উৎস ও রেফারেন্স' : 'Sources & Scientific Provenance'}
               </span>
-              <div className="space-y-1 text-xs text-slate-400 font-mono">
+              <div className="space-y-1 text-xs text-[#737373] font-mono">
                 {detailCrop.sources.map((s, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D]" />
-                    <span className="text-white">{s.file}</span>
+                    <span className="w-1 h-1 rounded-full bg-[#22C55E]" />
+                    <span className="text-[#A3A3A3]">{s.file}</span>
                     <span>· {s.section}</span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-white/5 border border-white/10 uppercase">
-                      {s.confidence || 'research'}
-                    </span>
                   </div>
                 ))}
               </div>

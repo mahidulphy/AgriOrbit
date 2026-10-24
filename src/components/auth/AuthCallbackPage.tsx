@@ -187,7 +187,7 @@ export const AuthCallbackPage: React.FC = () => {
     >
       {status === 'verifying' && (
         <div className="py-8 text-center space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center mx-auto text-[#00E5FF]">
+          <div className="w-14 h-14 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center mx-auto text-[#22C55E]">
             <Loader2 className="w-7 h-7 animate-spin" />
           </div>
           <h3 className="font-display font-bold text-lg text-white">
@@ -203,7 +203,7 @@ export const AuthCallbackPage: React.FC = () => {
 
       {status === 'success' && (
         <div className="py-8 text-center space-y-4 animate-fadeIn">
-          <div className="w-14 h-14 rounded-2xl bg-[#B8FF3D]/15 border border-[#B8FF3D]/40 flex items-center justify-center mx-auto text-[#B8FF3D]">
+          <div className="w-14 h-14 rounded-lg bg-[#22C55E]/10 border border-[#22C55E]/30 flex items-center justify-center mx-auto text-[#22C55E]">
             <CheckCircle2 className="w-7 h-7" />
           </div>
           <h3 className="font-display font-bold text-lg text-white">
@@ -219,7 +219,7 @@ export const AuthCallbackPage: React.FC = () => {
         <div className="space-y-5 animate-fadeIn">
           {updateSuccess ? (
             <div className="py-6 text-center space-y-3">
-              <CheckCircle2 className="w-10 h-10 text-[#B8FF3D] mx-auto" />
+              <CheckCircle2 className="w-10 h-10 text-[#22C55E] mx-auto" />
               <h4 className="font-display font-bold text-white text-base">
                 {lang === 'en' ? 'Password Updated Successfully' : 'পাসওয়ার্ড সফলভাবে সংরক্ষিত হয়েছে'}
               </h4>
@@ -245,7 +245,7 @@ export const AuthCallbackPage: React.FC = () => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#404040]"
                   />
                 </div>
               </div>
@@ -266,7 +266,7 @@ export const AuthCallbackPage: React.FC = () => {
                     value={confirmNewPassword}
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#404040]"
                   />
                 </div>
               </div>
@@ -274,10 +274,10 @@ export const AuthCallbackPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={updating}
-                className="w-full py-3 px-4 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm transition-all duration-200 shadow-lg shadow-[#B8FF3D]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full py-3 px-4 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {updating ? (
-                  <Loader2 className="w-4 h-4 animate-spin text-[#050B14]" />
+                  <Loader2 className="w-4 h-4 animate-spin text-black" />
                 ) : (
                   <>
                     <span>{lang === 'en' ? 'Save New Password & Continue' : 'পাসওয়ার্ড সংরক্ষণ করুন'}</span>
@@ -292,7 +292,7 @@ export const AuthCallbackPage: React.FC = () => {
 
       {status === 'error' && (
         <div className="py-6 text-center space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#FF5C5C]/15 border border-[#FF5C5C]/40 flex items-center justify-center mx-auto text-[#FF5C5C]">
+          <div className="w-14 h-14 rounded-lg bg-[#FF5C5C]/15 border border-[#FF5C5C]/40 flex items-center justify-center mx-auto text-[#FF5C5C]">
             <AlertCircle className="w-7 h-7" />
           </div>
           <h3 className="font-display font-bold text-lg text-white">
@@ -304,7 +304,7 @@ export const AuthCallbackPage: React.FC = () => {
           <div className="pt-2">
             <a
               href="#/login"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white font-mono text-xs cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-[#262626] text-white font-mono text-xs cursor-pointer"
             >
               <span>{lang === 'en' ? 'Return to Sign In' : 'লগইনে ফিরে যান'}</span>
               <ArrowRight className="w-4 h-4" />

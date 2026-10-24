@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import {
-  HelpCircle,
   Droplets,
-  Calendar,
-  Filter,
   ArrowUpRight,
-  Check,
   AlertCircle,
-  Sparkles,
   SunDim,
   ChevronDown,
   ChevronUp,
@@ -65,14 +60,14 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
       : (language === 'en' ? 'Lower suitability' : 'কম উপযোগী');
 
     const barColor = crop.notEnoughData
-      ? 'bg-slate-600'
+      ? 'bg-[#737373]'
       : isHigh
-      ? 'bg-[#B8FF3D]'
+      ? 'bg-[#22C55E]'
       : isMod
-      ? 'bg-[#00E5FF]'
-      : 'bg-[#FF5C5C]/80';
+      ? 'bg-[#FAFAFA]'
+      : 'bg-[#EF4444]';
 
-    // Contextual NASA Badges
+    // Contextual Badges
     const showWaterSaver = isDry && crop.waterRequirementEn === 'Low';
     const showWaterPenalty = isDry && (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice');
     const showOptimalSowing = isOptimalSowing && (crop.suitabilityScore >= 80);
@@ -82,81 +77,78 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
     return (
       <div
         key={crop.id}
-        className={`p-6 rounded-2xl bg-[#0B1626] border transition-all ${
+        className={`p-5 sm:p-6 rounded-xl bg-[#141414] border transition-colors ${
           isTopThree
-            ? 'border-[#B8FF3D]/40 shadow-lg shadow-black/40 hover:border-[#B8FF3D]'
+            ? 'border-[#262626] hover:border-[#404040]'
             : isHigh
-            ? 'border-[#B8FF3D]/30 hover:border-[#B8FF3D]'
-            : isMod
-            ? 'border-white/10 hover:border-[#00E5FF]/40'
-            : 'border-white/5 opacity-85 hover:opacity-100'
+            ? 'border-[#262626] hover:border-[#404040]'
+            : 'border-[#262626] opacity-90 hover:opacity-100 hover:border-[#404040]'
         }`}
       >
         {/* Header Row: Title, Season, Score */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-3.5">
           <div>
-            <div className="flex flex-wrap items-baseline gap-3 mb-1.5">
+            <div className="flex flex-wrap items-baseline gap-2.5 mb-1.5">
               {isTopThree && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-[#B8FF3D]/15 text-[#B8FF3D] border border-[#B8FF3D]/30">
-                  <Award className="w-3 h-3" />
-                  {language === 'en' ? `#${index + 1} Top Recommendation` : `#${index + 1} শীর্ষ প্রস্তাবনা`}
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-[#0A0A0A] text-[#FAFAFA] border border-[#262626]">
+                  <Award className="w-3 h-3 text-[#22C55E]" />
+                  {language === 'en' ? `#${index + 1} Top Choice` : `#${index + 1} শীর্ষ প্রস্তাবনা`}
                 </span>
               )}
-              <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-[#FAFAFA] tracking-tight">
                 {language === 'en' ? crop.nameEn : crop.nameBn}
               </h3>
-              <span className="text-xs text-[#8FA3B8] font-mono">
+              <span className="text-xs text-[#737373] font-mono">
                 {language === 'en' ? crop.seasonEn : crop.seasonBn}
               </span>
-              <span className="text-xs text-[#8FA3B8] italic font-serif">
+              <span className="text-xs text-[#737373] italic">
                 ({crop.scientificName})
               </span>
             </div>
 
-            {/* Dynamic Rule Trigger Badges */}
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Rule Trigger Badges (max 1 or 2 small ones) */}
+            <div className="flex flex-wrap items-center gap-1.5 mt-1">
               {isEstimated && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30">
                   <AlertCircle className="w-3 h-3" />
-                  {language === 'en' ? 'Estimated data' : 'আনুমানিক তথ্য'}
+                  {language === 'en' ? 'Estimated' : 'আনুমানিক'}
                 </span>
               )}
               {showWaterSaver && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/30">
                   <Droplets className="w-3 h-3" />
-                  {language === 'en' ? 'Dry-Resilient (+4)' : 'কম পানিতে টিকে থাকে (+৪)'}
+                  {language === 'en' ? 'Dry-Resilient' : 'কম পানিতে টিকে'}
                 </span>
               )}
               {showWaterPenalty && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#FF5C5C]/15 text-[#FF5C5C] border border-[#FF5C5C]/30">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#EF4444]/10 text-[#EF4444] border border-[#EF4444]/30">
                   <AlertCircle className="w-3 h-3" />
-                  {language === 'en' ? 'Water Deficit Penalty (-20)' : 'পানির অভাবে ২০ নম্বর কাটা'}
+                  {language === 'en' ? 'Water Deficit' : 'পানির ঘাটতি'}
                 </span>
               )}
               {showOptimalSowing && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30">
-                  <Sparkles className="w-3 h-3" />
-                  {language === 'en' ? 'Optimal Sowing Moisture' : 'বীজ বোনার উপযুক্ত রস'}
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#0A0A0A] text-[#FAFAFA] border border-[#262626]">
+                  {language === 'en' ? 'Optimal Sowing' : 'বপনের উপযুক্ত রস'}
                 </span>
               )}
               {showHeatStress && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30">
                   <SunDim className="w-3 h-3" />
-                  {language === 'en' ? 'Heat Sensitive (-10)' : 'গরম সহ্য করতে পারে না (-১০)'}
+                  {language === 'en' ? 'Heat Sensitive' : 'গরম সংবেদনশীল'}
                 </span>
               )}
             </div>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             <div className="text-right">
               <div className="flex items-baseline justify-end gap-1.5">
-                <span className="font-mono text-2xl font-bold text-white">
-                  {crop.notEnoughData ? (language === 'en' ? 'Not enough data' : 'পর্যাপ্ত তথ্য নেই') : `${crop.suitabilityScore}%`}
+                <span className="font-mono text-xl font-semibold text-[#FAFAFA]">
+                  {crop.notEnoughData ? (language === 'en' ? 'N/A' : 'তথ্য নেই') : `${crop.suitabilityScore}%`}
                 </span>
               </div>
-              <span className={`text-[10px] uppercase font-mono font-bold tracking-wider ${
-                crop.notEnoughData ? 'text-amber-400' : isHigh ? 'text-[#B8FF3D]' : isMod ? 'text-[#00E5FF]' : 'text-[#FF5C5C]'
+              <span className={`text-[10px] uppercase font-mono font-medium tracking-wider ${
+                crop.notEnoughData ? 'text-[#737373]' : isHigh ? 'text-[#22C55E]' : 'text-[#A3A3A3]'
               }`}>
                 {tierLabel}
               </span>
@@ -164,53 +156,53 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
 
             <button
               onClick={() => onExplainCrop(crop)}
-              className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-[#0A0A0A] hover:bg-[#1A1A1A] border border-[#262626] text-xs font-mono font-medium text-[#FAFAFA] transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <span>{language === 'en' ? 'Explain Why' : 'কারণ দেখুন'}</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#B8FF3D]" />
+              <span>{language === 'en' ? 'Explain' : 'কারণ দেখুন'}</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#22C55E]" />
             </button>
           </div>
         </div>
 
-        {/* Progress Bar (Visual Suitability Scale) */}
-        <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden mb-4">
+        {/* Visual Suitability Bar */}
+        <div className="w-full bg-[#0A0A0A] h-1.5 rounded-full overflow-hidden mb-3.5 border border-[#262626]">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+            className={`h-full rounded-full transition-all duration-300 ${barColor}`}
             style={{ width: `${crop.suitabilityScore}%` }}
           />
         </div>
 
         {/* Reasons & Supporting Data Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-white/5 text-xs text-slate-300">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#262626] text-xs text-[#A3A3A3]">
           <div>
-            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-[#737373] font-medium mb-0.5">
               {language === 'en' ? 'Water Requirement' : 'পানির চাহিদা'}
             </span>
-            <span className="font-bold text-white">
+            <span className="font-medium text-[#FAFAFA]">
               {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn}
             </span>
-            <span className="block text-xs text-slate-300 mt-0.5">
+            <span className="block text-xs text-[#737373] mt-0.5">
               {language === 'en' ? crop.waterDetailEn : crop.waterDetailBn}
             </span>
           </div>
 
           <div>
-            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-[#737373] font-medium mb-0.5">
               {language === 'en' ? 'Growth Duration' : 'সময়কাল'}
             </span>
-            <span className="font-mono text-white font-bold">
+            <span className="font-mono text-[#FAFAFA] font-medium">
               {crop.durationDays} {language === 'en' ? 'Days' : 'দিন'}
             </span>
-            <span className="block text-xs text-slate-300 mt-0.5">
+            <span className="block text-xs text-[#737373] mt-0.5">
               {language === 'en' ? 'From seeding to harvest' : 'বীজ বোনা থেকে ফসল তোলা'}
             </span>
           </div>
 
           <div>
-            <span className="block text-[10px] uppercase font-mono text-slate-400 font-medium mb-0.5">
+            <span className="block text-[10px] uppercase font-mono text-[#737373] font-medium mb-0.5">
               {language === 'en' ? 'Agronomic Fit' : 'প্রধান সুবিধা'}
             </span>
-            <p className="text-xs text-slate-200 leading-relaxed">
+            <p className="text-xs text-[#A3A3A3] leading-relaxed line-clamp-2">
               {language === 'en' ? crop.shortWhyEn : crop.shortWhyBn}
             </p>
           </div>
@@ -220,39 +212,34 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   };
 
   return (
-    <section id="crops-section" className="py-6 sm:py-10">
+    <section id="crops-section" className="py-6 sm:py-8">
       <div className="max-w-7xl mx-auto">
-        {/* Section Editorial Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-2">
-              <span>03</span>
-              <span aria-hidden="true">·</span>
-              <span>{language === 'en' ? 'CROP COMPATIBILITY EVALUATION' : 'কোন ফসল কেমন হবে'}</span>
-            </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {language === 'en' ? 'NASA Data-Driven Crop Compatibility' : `${displayedCrops.length}টি ফসলের চাষের সম্ভাবনা`}
+            <span className="text-xs uppercase tracking-wider text-[#737373] font-mono font-medium block mb-1.5">
+              {language === 'en' ? 'CROP EVALUATION' : 'ফসল মূল্যায়ন'}
+            </span>
+            <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#FAFAFA] tracking-tight">
+              {language === 'en' ? 'Data-Driven Crop Compatibility' : `${displayedCrops.length}টি ফসলের সম্ভাবনা`}
             </h2>
-            <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
+            <p className="text-xs text-[#737373] mt-1 max-w-xl">
               {language === 'en'
-                ? 'Scores computed by deterministic agronomic rules reacting to NASA POWER weather (live) and NASA SMAP/MODIS observations (dated), and your priorities.'
+                ? 'Scores computed by deterministic agronomic rules reacting to NASA weather and soil observations.'
                 : 'নাসার আবহাওয়া ও মাটির রসের তথ্য এবং আপনার চাহিদার ওপর ভিত্তি করে এই সম্ভাবনা হিসাব করা হয়েছে।'} 
             </p>
           </div>
 
           {/* Season Filter Tabs */}
-          <div className="p-1 rounded-xl bg-[#0B1626] border border-white/10 flex items-center gap-1 text-xs self-start sm:self-auto">
-            <span className="text-[#8FA3B8] px-2 text-[11px] font-mono hidden md:inline">
-              {language === 'en' ? 'Season' : 'মৌসুম'}:
-            </span>
+          <div className="p-1 rounded-lg bg-[#0A0A0A] border border-[#262626] flex items-center gap-1 text-xs self-start sm:self-auto">
             {(['All', 'Rabi', 'Kharif-1', 'Kharif-2'] as const).map((s) => (
               <button
                 key={s}
                 onClick={() => setFilterSeason(s)}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition-colors cursor-pointer whitespace-nowrap ${
+                className={`px-3 py-1.5 rounded-md font-mono text-xs transition-colors cursor-pointer whitespace-nowrap ${
                   filterSeason === s
-                    ? 'bg-[#B8FF3D] text-[#050B14]'
-                    : 'text-[#8FA3B8] hover:text-white'
+                    ? 'bg-[#FAFAFA] text-[#0A0A0A] font-medium'
+                    : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
                 }`}
               >
                 {s === 'All' && (language === 'en' ? `All (${displayedCrops.length})` : `সব (${displayedCrops.length})`)}
@@ -265,15 +252,15 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
         </div>
 
         {/* Top 3 Crops Display */}
-        <div className="space-y-4 mb-6">
-          <div className="flex items-center justify-between text-xs font-mono text-[#8FA3B8] px-1">
+        <div className="space-y-3.5 mb-5">
+          <div className="flex items-center justify-between text-xs font-mono text-[#737373] px-1">
             <span>
               {language === 'en'
                 ? `Showing Top 3 Recommended Crops (${filterSeason} Season)`
                 : `সেরা ৩টি প্রস্তাবিত ফসল (${filterSeason === 'All' ? 'সব মৌসুম' : filterSeason})`}
             </span>
-            <span className="text-[#B8FF3D] font-bold">
-              {topThreeCrops.length} {language === 'en' ? 'Primary Matches' : 'টি সেরা ফসল'}
+            <span className="text-[#FAFAFA] font-medium">
+              {topThreeCrops.length} {language === 'en' ? 'Matches' : 'টি ফসল'}
             </span>
           </div>
 
@@ -284,8 +271,8 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
         {remainingCrops.length > 0 && (
           <div className="pt-2">
             {showAllCrops && (
-              <div className="space-y-4 mb-6 animate-fadeIn">
-                <div className="text-xs font-mono text-[#8FA3B8] px-1">
+              <div className="space-y-3.5 mb-5 animate-fadeIn">
+                <div className="text-xs font-mono text-[#737373] px-1">
                   {language === 'en'
                     ? `Additional Evaluated Crops (${remainingCrops.length} remaining)`
                     : `অন্যান্য ফসল (${remainingCrops.length}টি বাকি)`}
@@ -298,7 +285,7 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
               <button
                 type="button"
                 onClick={() => setShowAllCrops(!showAllCrops)}
-                className="px-6 py-3 rounded-2xl bg-[#0B1626] hover:bg-white/10 border border-white/10 hover:border-[#B8FF3D]/50 text-xs font-mono font-bold text-white transition-all flex items-center gap-2 cursor-pointer shadow-lg group"
+                className="px-5 py-2.5 rounded-lg bg-[#141414] hover:bg-[#1A1A1A] border border-[#262626] text-xs font-mono font-medium text-[#FAFAFA] transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <span>
                   {showAllCrops
@@ -308,9 +295,9 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
                         : `সব ফসল দেখুন (আরও ${remainingCrops.length}টি) ↓`)}
                 </span>
                 {showAllCrops ? (
-                  <ChevronUp className="w-4 h-4 text-[#B8FF3D] group-hover:-translate-y-0.5 transition-transform" />
+                  <ChevronUp className="w-4 h-4 text-[#737373]" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-[#B8FF3D] group-hover:translate-y-0.5 transition-transform" />
+                  <ChevronDown className="w-4 h-4 text-[#737373]" />
                 )}
               </button>
             </div>

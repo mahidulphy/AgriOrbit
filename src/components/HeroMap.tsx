@@ -92,8 +92,8 @@ export const HeroMap: React.FC<HeroMapProps> = ({ children }) => {
       <div ref={containerRef} className="absolute inset-0" />
       {/* Orbit-to-field arc: satellite pass suggestion, top-center to Rangpur */}
       <div className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2">
-        <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#00E5FF]/50 bg-[#050B14]/80">
-          <div className="h-2 w-2 rounded-full bg-[#00E5FF]" />
+        <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#262626] bg-[#0A0A0A]/80">
+          <div className="h-2 w-2 rounded-full bg-[#22C55E]" />
         </div>
       </div>
       <svg

@@ -7,8 +7,7 @@ import {
   AlertTriangle,
   RefreshCw,
   X,
-  Sparkles,
-} from 'lucide-react';
+  } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { BrandLogo } from '../common/BrandLogo';
@@ -639,8 +638,8 @@ export const OnboardingWizardPage: React.FC = () => {
 
   if (loadingInitial) {
     return (
-      <div className="min-h-screen bg-[#050B14] text-white flex flex-col items-center justify-center p-4">
-        <Loader2 className="w-8 h-8 animate-spin text-[#00E5FF] mb-3" />
+      <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-4">
+        <Loader2 className="w-8 h-8 animate-spin text-[#22C55E] mb-3" />
         <span className="font-mono text-xs text-slate-400">
           {isBn ? 'অনবোর্ডিং তথ্য প্রস্তুত হচ্ছে...' : 'Loading Onboarding Setup...'}
         </span>
@@ -653,13 +652,13 @@ export const OnboardingWizardPage: React.FC = () => {
   const isFinalStep = step === totalSteps;
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col font-editorial selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col font-editorial selection:bg-[#22C55E] selection:text-black">
       {/* 1. Navbar Header */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050B14]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-[#262626] bg-[#0A0A0A]/90 backdrop-blur-xl">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <BrandLogo />
-            <span className="hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">
+            <span className="hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#141414] text-[#A3A3A3] border border-[#262626]">
               {isBn ? 'প্রাথমিক খামার নিবন্ধন' : 'Farm Setup Wizard'}
             </span>
           </div>
@@ -672,11 +671,11 @@ export const OnboardingWizardPage: React.FC = () => {
       </header>
 
       {/* 2. Unified Progress Bar ("ধাপ X / Y" and step name) */}
-      <div className="w-full bg-[#07101D] border-b border-white/10 px-4 sm:px-6 py-3.5 sticky top-16 z-40">
+      <div className="w-full bg-[#0A0A0A] border-b border-[#262626] px-4 sm:px-6 py-3.5 sticky top-16 z-40">
         <div className="max-w-4xl mx-auto space-y-2">
           <div className="flex items-center justify-between text-xs sm:text-sm font-mono">
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-[#B8FF3D]/15 text-[#B8FF3D] font-bold border border-[#B8FF3D]/30">
+              <span className="px-2 py-0.5 rounded bg-[#141414] text-[#FAFAFA] font-medium border border-[#262626]">
                 {isBn
                   ? `ধাপ ${toBnDigit(step)} / ${toBnDigit(totalSteps)}`
                   : `Step ${step} / ${totalSteps}`}
@@ -685,14 +684,14 @@ export const OnboardingWizardPage: React.FC = () => {
                 {getStepTitle(step, isGuestMode, isBn)}
               </span>
             </div>
-            <span className="text-[#00E5FF] font-bold">
+            <span className="text-[#22C55E] font-medium">
               {isBn ? `${toBnDigit(progressPercent)}%` : `${progressPercent}%`}
             </span>
           </div>
 
           <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] rounded-full transition-all duration-300"
+              className="h-full bg-[#22C55E] rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -730,7 +729,7 @@ export const OnboardingWizardPage: React.FC = () => {
 
       {/* 4. Wizard Step Form Body */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-8 pb-[max(2rem,calc(1.5rem+env(safe-area-inset-bottom,0px)))]">
-        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl space-y-6">
+        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-xl bg-[#141414] border border-[#262626] shadow-none space-y-6">
           {/* STEP: Personal Info (Signed-in only, Step 1) */}
           {!isGuestMode && step === 1 && (
             <PersonalInfoSection
@@ -804,7 +803,7 @@ export const OnboardingWizardPage: React.FC = () => {
           )}
 
           {/* Bottom Actions Bar */}
-          <div className="pt-5 sm:pt-6 border-t border-white/10">
+          <div className="pt-5 sm:pt-6 border-t border-[#262626]">
             {/* 1. Mobile Action Layout (< 640px) */}
             <div className="flex flex-col gap-3 sm:hidden w-full">
               {/* Row 1: Full-Width Primary Action */}
@@ -813,7 +812,7 @@ export const OnboardingWizardPage: React.FC = () => {
                   type="button"
                   onClick={handleNext}
                   disabled={savingStep}
-                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2  transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                 >
                   {savingStep ? (
                     <>
@@ -840,7 +839,7 @@ export const OnboardingWizardPage: React.FC = () => {
                   type="button"
                   onClick={handleFinishWithHazards}
                   disabled={savingStep}
-                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] hover:opacity-95 active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#00E5FF]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#22C55E] hover:opacity-95 active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2  transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                 >
                   {savingStep ? (
                     <>
@@ -865,7 +864,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleBack}
                     disabled={savingStep}
-                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 border border-[#262626] transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
                   >
                     <ArrowLeft className="w-4 h-4 shrink-0" />
                     <span className="whitespace-nowrap">{isBn ? 'আগের ধাপ' : 'Back'}</span>
@@ -881,7 +880,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleSkipHazards}
                     disabled={savingStep}
-                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-medium flex items-center gap-1 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap ml-auto"
+                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-medium flex items-center gap-1 border border-[#262626] transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap ml-auto"
                   >
                     <span className="whitespace-nowrap">{isBn ? 'এখন না, পরে করব' : 'Skip this step'}</span>
                   </button>
@@ -897,7 +896,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleBack}
                     disabled={savingStep}
-                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-mono text-sm font-semibold flex items-center justify-center gap-2 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-mono text-sm font-semibold flex items-center justify-center gap-2 border border-[#262626] transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
                   >
                     <ArrowLeft className="w-4 h-4 shrink-0" />
                     <span className="whitespace-nowrap">{isBn ? 'পূর্ববর্তী ধাপ' : 'Back'}</span>
@@ -916,7 +915,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleSkipHazards}
                     disabled={savingStep}
-                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-mono text-sm border border-white/15 transition-colors cursor-pointer whitespace-nowrap"
+                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-mono text-sm border border-[#262626] transition-colors cursor-pointer whitespace-nowrap"
                   >
                     <span className="whitespace-nowrap">{isBn ? 'এখন না, পরে করব' : 'Skip this step'}</span>
                   </button>
@@ -931,7 +930,7 @@ export const OnboardingWizardPage: React.FC = () => {
                       handleSkipHazards();
                     }}
                     disabled={savingStep}
-                    className="hidden md:inline-flex min-h-[48px] items-center px-4 py-2.5 rounded-xl text-xs font-mono text-[#00E5FF] hover:bg-white/5 cursor-pointer whitespace-nowrap"
+                    className="hidden md:inline-flex min-h-[48px] items-center px-4 py-2.5 rounded-xl text-xs font-mono text-[#22C55E] hover:bg-white/5 cursor-pointer whitespace-nowrap"
                   >
                     <span className="whitespace-nowrap">{isBn ? 'এখনই ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Go to Dashboard'}</span>
                   </button>
@@ -943,7 +942,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleNext}
                     disabled={savingStep}
-                    className="min-h-[48px] px-6 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                    className="min-h-[48px] px-6 py-3 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-mono font-bold text-sm flex items-center justify-center gap-2  transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                   >
                     {savingStep ? (
                       <>
@@ -970,7 +969,7 @@ export const OnboardingWizardPage: React.FC = () => {
                     type="button"
                     onClick={handleFinishWithHazards}
                     disabled={savingStep}
-                    className="min-h-[48px] px-7 py-3 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] hover:opacity-90 text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#00E5FF]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                    className="min-h-[48px] px-7 py-3 rounded-xl bg-[#22C55E] hover:opacity-90 text-black font-mono font-bold text-sm flex items-center justify-center gap-2  transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                   >
                     {savingStep ? (
                       <>

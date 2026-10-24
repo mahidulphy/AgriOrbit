@@ -12,8 +12,7 @@ export interface LanguageToggleProps {
 
 /**
  * 1. Language Toggle (EN / BN)
- * A sleek, modern toggle switch for the top Navbar.
- * Smoothly switches between 'English' and 'বাংলা' with glowing neon accents.
+ * Clean, subtle toggle switch.
  */
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   language,
@@ -36,11 +35,11 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
     <div
       role="group"
       aria-label="Language selector"
-      className={`relative inline-flex items-center rounded-xl bg-[#0B1626]/95 p-1 border border-white/20 backdrop-blur-md shadow-md transition-all duration-300 ${className}`}
+      className={`relative inline-flex items-center rounded-lg bg-[#141414] p-1 border border-[#262626] transition-colors ${className}`}
     >
       {showIcon && (
-        <span className="pl-2 pr-1 text-[#8FA3B8] hidden sm:inline-flex items-center">
-          <Globe className="w-3.5 h-3.5 text-[#00E5FF]/80" />
+        <span className="pl-1.5 pr-1 text-[#737373] hidden sm:inline-flex items-center">
+          <Globe className="w-3.5 h-3.5" />
         </span>
       )}
 
@@ -49,12 +48,12 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
         type="button"
         onClick={() => handleToggle('en')}
         aria-pressed={isEnglish}
-        className={`relative z-10 rounded-lg transition-all duration-300 font-mono font-bold tracking-tight cursor-pointer ${
-          isSmall ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-1.5 text-xs'
+        className={`relative z-10 rounded-md transition-colors font-mono text-xs cursor-pointer ${
+          isSmall ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'
         } ${
           isEnglish
-            ? 'bg-[#B8FF3D] text-[#050B14] shadow-[0_0_12px_rgba(184,255,61,0.35)] font-bold'
-            : 'text-slate-200 hover:text-white hover:bg-white/10 font-medium'
+            ? 'bg-[#FAFAFA] text-[#0A0A0A] font-medium'
+            : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
         }`}
       >
         English
@@ -65,12 +64,12 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
         type="button"
         onClick={() => handleToggle('bn')}
         aria-pressed={!isEnglish}
-        className={`relative z-10 rounded-lg transition-all duration-300 font-semibold cursor-pointer ${
-          isSmall ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-1.5 text-xs'
+        className={`relative z-10 rounded-md transition-colors text-xs cursor-pointer ${
+          isSmall ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'
         } ${
           !isEnglish
-            ? 'bg-[#B8FF3D] text-[#050B14] shadow-[0_0_12px_rgba(184,255,61,0.35)] font-bold'
-            : 'text-slate-200 hover:text-white hover:bg-white/10 font-medium'
+            ? 'bg-[#FAFAFA] text-[#0A0A0A] font-medium'
+            : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
         }`}
       >
         বাংলা

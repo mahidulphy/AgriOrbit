@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, HelpCircle, Droplet, Sparkles, CheckCircle2, ShieldCheck, Printer, Share2, Compass, ArrowRight, Layers, Leaf } from 'lucide-react';
+import { ArrowDown, HelpCircle, Droplet, CheckCircle2, ShieldCheck, Printer, Share2, Compass, ArrowRight, Layers, Leaf } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../types';
 import { ROTATION_PLANS, CROPS_DATABASE } from '../data/agriData';
 import { getDistrictAdmin } from '../data/bdAdmin';
@@ -153,7 +153,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
         {/* Editorial Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#00E5FF] font-mono font-semibold mb-2">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#FAFAFA] font-mono font-semibold mb-2">
               <span>04</span>
               <span aria-hidden="true">·</span>
               <span>{language === 'en' ? 'ANNUAL AGRO-CYCLE' : 'বার্ষিক শস্য পরিক্রমা'}</span>
@@ -170,12 +170,12 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
 
           {/* Strategy Impact Badges */}
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-[#0B1626] border border-white/10 flex items-center gap-3">
-              <span className="font-mono text-xl font-bold text-[#00E5FF]">~{rotationPlan.estimatedWaterSavingPct}%</span>
+            <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] flex items-center gap-3">
+              <span className="font-mono text-xl font-bold text-[#FAFAFA]">~{rotationPlan.estimatedWaterSavingPct}%</span>
               <span className="text-[11px] text-[#8FA3B8] font-mono uppercase">Water Saved</span>
             </div>
-            <div className="p-3 rounded-xl bg-[#0B1626] border border-white/10 flex items-center gap-3">
-              <span className="font-mono text-xl font-bold text-[#B8FF3D]">+{rotationPlan.soilHealthGainPct}%</span>
+            <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] flex items-center gap-3">
+              <span className="font-mono text-xl font-bold text-[#22C55E]">+{rotationPlan.soilHealthGainPct}%</span>
               <span className="text-[11px] text-[#8FA3B8] font-mono uppercase">Soil Gain</span>
             </div>
           </div>
@@ -183,18 +183,18 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
 
         {/* Verified Agronomic Rotation Rules Badges */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30 text-xs font-mono font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0A0A0A] text-[#22C55E] border border-[#262626] text-xs font-mono font-semibold">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>{language === 'en' ? 'Rule A: Botanical Family Alternation Verified' : 'নিয়ম ১: একই ফসল বারবার নয়'}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 text-xs font-mono font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0A0A0A] text-[#FAFAFA] border border-[#262626] text-xs font-mono font-semibold">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>{language === 'en' ? 'Rule B: Biological Nitrogen Balance Active' : 'নিয়ম ২: মাটিতে নাইট্রোজেন যোগ'}</span>
           </div>
           {engineResult?.nutrientTrail && (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/5 text-slate-300 border border-[#262626] text-xs font-mono">
               <span className="text-[#8FA3B8]">{language === 'en' ? 'Running Soil N Trail' : 'মাটির নাইট্রোজেন প্রবাহ'}:</span>
-              <span className="text-[#B8FF3D] font-bold">
+              <span className="text-[#22C55E] font-bold">
                 {engineResult.nutrientTrail.map((n) => (n > 0 ? `+${n}` : `${n}`)).join(' → ')} N
               </span>
             </div>
@@ -210,12 +210,12 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             return (
               <React.Fragment key={`${season.seasonEn}-${crop.id}`}>
                 <div
-                  className="p-6 sm:p-8 rounded-2xl bg-[#0B1626] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between relative group"
+                  className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] hover:border-[#404040] transition-all flex flex-col justify-between relative group"
                 >
                 <div>
                   {/* Top Season Number & Months */}
                   <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                    <span className="text-[#B8FF3D] font-bold uppercase">
+                    <span className="text-[#22C55E] font-bold uppercase">
                       0{index + 1} · {language === 'en' ? season.seasonEn : season.seasonBn}
                     </span>
                     <span>{language === 'en' ? season.monthsEn : season.monthsBn}</span>
@@ -224,7 +224,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                   {/* Botanical Family Badge if available */}
                   {season.cropModel && (
                     <div className="mb-2">
-                      <span className="inline-block text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-[#00E5FF] border border-white/10">
+                      <span className="inline-block text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-[#FAFAFA] border border-[#262626]">
                         {language === 'en'
                           ? FAMILY_LABEL[season.cropModel.family]?.en
                           : FAMILY_LABEL[season.cropModel.family]?.bn}
@@ -237,7 +237,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                     <h3 className="font-display text-2xl font-bold text-white">
                       {language === 'en' ? crop.nameEn : crop.nameBn}
                     </h3>
-                    <span className="font-mono text-sm font-bold text-[#B8FF3D]">
+                    <span className="font-mono text-sm font-bold text-[#22C55E]">
                       {season.score}%
                     </span>
                   </div>
@@ -247,7 +247,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                   </span>
 
                   {/* Agronomic Role in Cycle */}
-                  <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 text-xs text-slate-300 leading-relaxed mb-6">
+                  <div className="p-4 rounded-lg bg-[#0A0A0A] border border-[#262626] text-xs text-slate-300 leading-relaxed mb-6">
                     <span className="text-[10px] uppercase font-mono text-white block mb-1">
                       {language === 'en' ? 'Agronomic Function' : 'পরিক্রমায় ভূমিকা'}:
                     </span>
@@ -256,14 +256,14 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs font-mono text-[#00E5FF]">
+                <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
+                  <span className="text-xs font-mono text-[#FAFAFA]">
                     {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn} Water
                   </span>
 
                   <button
                     onClick={() => onExplainCrop(crop)}
-                    className="text-xs font-semibold text-[#B8FF3D] hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-semibold text-[#22C55E] hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <span>{language === 'en' ? 'Explain Why' : 'কারণ দেখুন'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -272,7 +272,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               </div>
               {!isLast && (
                 <div className="flex md:hidden justify-center items-center -my-2 text-slate-500">
-                  <ArrowDown className="w-5 h-5 text-[#B8FF3D]/70 animate-bounce" />
+                  <ArrowDown className="w-5 h-5 text-[#22C55E]/70 " />
                 </div>
               )}
             </React.Fragment>
@@ -281,10 +281,10 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
       </div>
 
         {/* Actionable Editorial Decision Support Certificate */}
-        <div className="rounded-3xl bg-[#0B1626] border border-[#B8FF3D]/40 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div className="rounded-xl bg-[#141414] border border-[#262626] p-8 sm:p-10 shadow-none relative overflow-hidden">
           <div className="max-w-4xl">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-3">
-              <CheckCircle2 className="w-4 h-4 text-[#B8FF3D]" />
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#22C55E] font-mono font-semibold mb-3">
+              <CheckCircle2 className="w-4 h-4 text-[#22C55E]" />
               <span>{language === 'en' ? 'AgriOrbit Decision Support Advisory' : 'এগ্রিঅরবিটের শস্য পরামর্শ'}</span>
             </div>
 
@@ -292,9 +292,9 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               {language === 'en' ? (
                 <>
                   "Based on field observations in{' '}
-                  <span className="text-[#00E5FF]">{district.nameEn}</span>, your priority to{' '}
-                  <span className="text-[#B8FF3D]">{formatPriorityLabel(selectedPriority, 'en')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
-                  <span className="text-white underline decoration-[#B8FF3D]">
+                  <span className="text-[#FAFAFA]">{district.nameEn}</span>, your priority to{' '}
+                  <span className="text-[#22C55E]">{formatPriorityLabel(selectedPriority, 'en')}</span>, and NASA Earth observations, AgriOrbit recommends considering the sequence{' '}
+                  <span className="text-white underline decoration-[#22C55E]">
                     {sequenceNamesEn}
                   </span>{' '}
                   for the upcoming annual cycle."
@@ -302,9 +302,9 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               ) : (
                 <>
                   "বর্তমান{' '}
-                  <span className="text-[#00E5FF]">{district.nameBn}</span>{' '}
+                  <span className="text-[#FAFAFA]">{district.nameBn}</span>{' '}
                   এলাকার বর্তমান পরিস্থিতি, আপনার{' '}
-                  <span className="text-[#B8FF3D]">
+                  <span className="text-[#22C55E]">
                     {selectedPriority === 'save_water' && 'পানি বাঁচানো'}
                     {selectedPriority === 'improve_soil' && 'মাটির শক্তি ফেরানো'}
                     {selectedPriority === 'maximize_profit' && 'বেশি লাভ'}
@@ -313,7 +313,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                     {selectedPriority === 'reduce_risk' && 'আবহাওয়ার ঝুঁকি কমানো'}
                   </span>{' '}
                   -র চাহিদা ও নাসার তথ্যের ভিত্তিতে এগ্রিঅরবিট{' '}
-                  <span className="text-white underline decoration-[#B8FF3D]">
+                  <span className="text-white underline decoration-[#22C55E]">
                     {sequenceNamesBn}
                   </span>{' '}
                   -এই ৩ মৌসুমের শস্য পর্যায় সাজিয়ে দেখার পরামর্শ দিচ্ছে।"
@@ -326,9 +326,9 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             </p>
 
             {/* Print & Share Actions */}
-            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="pt-6 border-t border-[#262626] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs text-[#8FA3B8]">
-                <ShieldCheck className="w-4 h-4 text-[#B8FF3D] shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[#22C55E] shrink-0" />
                 <span>
                   {language === 'en'
                     ? 'AgriOrbit provides explainable decision support. Farmers make the final decision.'
@@ -343,14 +343,14 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 />
                 <button
                   onClick={handlePrint}
-                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
+                  className="px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
                 >
                   <Printer className="w-3.5 h-3.5" />
                   <span>{language === 'en' ? 'Print Advisory' : 'প্রিন্ট'}</span>
                 </button>
                 <button
                   onClick={handleShare}
-                  className="px-5 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none shadow-md"
+                  className="px-5 py-2.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none shadow-none"
                 >
                   <Share2 className="w-3.5 h-3.5" />
                   <span>{language === 'en' ? 'Share Plan' : 'শেয়ার'}</span>

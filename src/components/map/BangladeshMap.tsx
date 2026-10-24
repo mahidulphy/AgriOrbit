@@ -129,13 +129,13 @@ export const BangladeshMap: React.FC<BangladeshMapProps> = ({
         id: 'nasa-context-fill',
         type: 'fill',
         source: 'nasa-context',
-        paint: { 'fill-color': '#B8FF3D', 'fill-opacity': 0.1 },
+        paint: { 'fill-color': '#22C55E', 'fill-opacity': 0.1 },
       });
       map.addLayer({
         id: 'nasa-context-line',
         type: 'line',
         source: 'nasa-context',
-        paint: { 'line-color': '#B8FF3D', 'line-opacity': 0.8, 'line-width': 2 },
+        paint: { 'line-color': '#22C55E', 'line-opacity': 0.8, 'line-width': 2 },
       });
 
       const el = document.createElement('div');

@@ -19,7 +19,7 @@ export const PrivacyPolicyPage: React.FC = () => {
       {/* 1. Introduction */}
       <section className="space-y-3">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Shield className="w-4 h-4 text-[#00E5FF]" />
+          <Shield className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '১. পরিচিতি ও উদ্দেশ্য' : '1. Overview & Commitment'}</h2>
         </div>
         <p>
@@ -35,45 +35,45 @@ export const PrivacyPolicyPage: React.FC = () => {
       </section>
 
       {/* 2. Information We Collect */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Database className="w-4 h-4 text-[#B8FF3D]" />
+          <Database className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '২. আমরা যেসব তথ্য সংগ্রহ করি' : '2. Information We Collect'}</h2>
         </div>
         
         <div className="space-y-3">
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <h3 className="font-bold text-white text-xs font-mono uppercase mb-1">
               {isBn ? 'ক. অ্যাকাউন্ট ও পরিচয় সংক্রান্ত তথ্য' : 'A. Account & Identification Information'}
             </h3>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-[#A3A3A3]">
               {isBn
                 ? 'যখন আপনি গুগল সাইন-ইন বা ইমেইলের মাধ্যমে একাউন্ট তৈরি করেন, আমরা আপনার নাম, ইমেইল ঠিকানা এবং প্রোফাইল ছবি গ্রহণ করি। এছাড়া কৃষকের যোগাযোগের জন্য ঐচ্ছিক মোবাইল নম্বর সংরক্ষিত হতে পারে।'
                 : 'When you sign in using Google OAuth or create an email account, we collect your display name, email address, profile avatar, and optional contact phone number.'}
             </p>
-            <p className="text-xs text-[#00E5FF] mt-2 font-mono">
+            <p className="text-xs text-[#22C55E] mt-2 font-mono">
               {isBn
                 ? 'আপনার ইমেইল কেবলমাত্র আবহাওয়া ও মাঠ সতর্কতার জন্য ব্যবহৃত হয় এবং প্রোফাইল সেটিংস থেকে যেকোনো সময় এটি বন্ধ করা যায়।'
                 : 'Your email is used only for field alerts and can be turned off anytime in your profile settings.'}
             </p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <h3 className="font-bold text-white text-xs font-mono uppercase mb-1">
               {isBn ? 'খ. খামার ও কৃষি প্রোফাইল তথ্য' : 'B. Field & Agronomic Specifications'}
             </h3>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-[#A3A3A3]">
               {isBn
                 ? 'আপনার খামারের অবস্থান (জেলা, উপজেলা, গ্রাম), জমির আকার, জমির উচ্চতা, মাটির ধরন, প্রধান সেচ সুবিধা, অতীতে চাষকৃত ফসলের তালিকা এবং অতীতের প্রাকৃতিক দুর্যোগজনিত ক্ষতির বিবরণ।'
                 : 'Geographic location (district, upazila, village), land size and elevation, soil classification, primary irrigation source, historically cultivated crops, and past natural disaster loss experiences.'}
             </p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">
+          <div className="p-3.5 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <h3 className="font-bold text-white text-xs font-mono uppercase mb-1">
               {isBn ? 'গ. স্যাটেলাইট পর্যবেক্ষণ ও কৃত্রিম দৃশ্যকল্প প্যারামিটার' : 'C. Environmental Simulation Parameters'}
             </h3>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-[#A3A3A3]">
               {isBn
                 ? 'কৃষক যখন "What-If" এনভায়রনমেন্টাল সিমুলেটরে তাপমাত্রা, বৃষ্টিপাত বা মাটির আর্দ্রতার মান পরিবর্তন করেন, সেই প্যারামিটারগুলো সাময়িকভাবে রিয়েল-টাইম হিসাবের জন্য ব্রাউজারে ব্যবহৃত হয়।'
                 : 'Any hypothetical overrides you apply in the Environmental Simulator (e.g. rainfall deficits, temperature shifts) are computed locally to evaluate crop scoring sensitivity.'}
@@ -83,9 +83,9 @@ export const PrivacyPolicyPage: React.FC = () => {
       </section>
 
       {/* 3. Google API User Data Policy Compliance */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Lock className="w-4 h-4 text-[#00E5FF]" />
+          <Lock className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '৩. গুগল ইউজার ডেটা ও নিরাপত্তা মানদণ্ড' : '3. Google User Data Policy Compliance'}</h2>
         </div>
         <p>
@@ -93,7 +93,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             ? 'এগ্রিঅরবিটের গুগল সাইন-ইন ও গুগল এপিআই ব্যবহার সম্পূর্ণরূপে "Google API Services User Data Policy" (Limited Use requirements সহ) মেনে চলে:'
             : 'AgriOrbit’s use of information received from Google APIs adheres strictly to the Google API Services User Data Policy, including the Limited Use requirements:'}
         </p>
-        <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-300">
+        <ul className="list-disc pl-5 space-y-1.5 text-xs text-[#A3A3A3]">
           <li>
             {isBn
               ? 'আমরা গুগল অ্যাকাউন্ট থেকে কেবলমাত্র মৌলিক পরিচয় (ইমেইল ও নাম) গ্রহণ করি যাতে কৃষক নিরাপদে লগইন করতে পারেন।'
@@ -113,9 +113,9 @@ export const PrivacyPolicyPage: React.FC = () => {
       </section>
 
       {/* 4. How We Use and Share Information */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Eye className="w-4 h-4 text-[#B8FF3D]" />
+          <Eye className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '৪. তথ্যের ব্যবহার ও বাহ্যিক সেবা' : '4. How Data Is Processed & Shared'}</h2>
         </div>
         <p>
@@ -124,22 +124,22 @@ export const PrivacyPolicyPage: React.FC = () => {
             : 'Your data is solely processed for the following functional purposes:'}
         </p>
         <div className="grid sm:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <strong className="text-white block mb-1">
               {isBn ? '১. নাসা আর্থ অবজারভেশন পর্যবেক্ষণ' : '1. NASA Telemetry Fetching'}
             </strong>
-            <p className="text-slate-400">
+            <p className="text-[#737373]">
               {isBn
                 ? 'নাসা পাওয়ার (POWER) এপিআইতে কেবল আপনার নির্বাচিত এলাকার অক্ষাংশ ও দ্রাঘিমাংশ পাঠানো হয়। কোনো ব্যক্তিগত তথ্য নাসায় পাঠানো হয় না।'
                 : 'Only geographic coordinates (latitude and longitude) are queried against NASA POWER APIs. No personally identifiable information is transmitted to NASA.'}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <strong className="text-white block mb-1">
               {isBn ? '২. ৩-মৌসুমী বৈজ্ঞানিক ফসল সুপারিশ' : '2. Explainable Crop Recommendations'}
             </strong>
-            <p className="text-slate-400">
+            <p className="text-[#737373]">
               {isBn
                 ? 'আপনার মাটির ধরন ও অতীত ফসলের তথ্যের ওপর ভিত্তি করে বিএআরআই ও বিআরআরআই নির্দেশিকা অনুযায়ী নাইট্রোজেন ভারসাম্য রক্ষা করা হয়।'
                 : 'Crop rotation algorithms cross-reference your soil type and previous crops to prevent consecutive monoculture and replenish soil nutrients.'}
@@ -149,7 +149,7 @@ export const PrivacyPolicyPage: React.FC = () => {
       </section>
 
       {/* 5. Data Storage and Retention */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
           <UserCheck className="w-4 h-4 text-purple-400" />
           <h2>{isBn ? '৫. সংরক্ষণ ও কৃষকের নিয়ন্ত্রণ অধিকার' : '5. Storage & Farmer Rights'}</h2>
@@ -159,7 +159,7 @@ export const PrivacyPolicyPage: React.FC = () => {
             ? 'আমাদের সিস্টেমে আপনার তথ্যের ওপর আপনার পূর্ণ নিয়ন্ত্রণ রয়েছে:'
             : 'You retain full ownership and control over your information:'}
         </p>
-        <ul className="list-disc pl-5 space-y-1 text-xs text-slate-300">
+        <ul className="list-disc pl-5 space-y-1 text-xs text-[#A3A3A3]">
           <li>
             <strong>{isBn ? 'সংশোধন ও হালনাগাদ:' : 'Modification:'}</strong>{' '}
             {isBn
@@ -182,11 +182,11 @@ export const PrivacyPolicyPage: React.FC = () => {
       </section>
 
       {/* 6. Contact Information */}
-      <section className="p-4 rounded-2xl bg-[#050B14] border border-[#00E5FF]/20 space-y-2 text-xs">
-        <strong className="text-[#00E5FF] font-mono uppercase block">
+      <section className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2 text-xs">
+        <strong className="text-[#22C55E] font-mono uppercase block">
           {isBn ? 'যোগাযোগ ও প্রশ্ন' : 'Contact & Privacy Inquiries'}
         </strong>
-        <p className="text-slate-300">
+        <p className="text-[#A3A3A3]">
           {isBn
             ? 'এই গোপনীয়তা নীতি সম্পর্কে যেকোনো প্রশ্ন থাকলে যোগাযোগ করুন: team@agriorbit.space অথবা আমাদের গিটহাব রিপোজিটরিতে ইস্যু তৈরি করুন।'
             : 'If you have any questions or requests regarding this Privacy Policy, please contact Team Bay of Orbits at team@agriorbit.space or open an issue on our GitHub repository.'}

@@ -19,7 +19,7 @@ export const TermsPage: React.FC = () => {
       {/* 1. Acceptance of Terms */}
       <section className="space-y-3">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Scale className="w-4 h-4 text-[#B8FF3D]" />
+          <Scale className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '১. শর্তাবলীর গ্রহণযোগ্যতা' : '1. Acceptance of Terms'}</h2>
         </div>
         <p>
@@ -30,13 +30,13 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 2. Platform Nature & Agricultural Disclaimer */}
-      <section className="space-y-4 pt-4 border-t border-white/10">
+      <section className="space-y-4 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
           <AlertTriangle className="w-4 h-4 text-amber-400" />
           <h2>{isBn ? '২. কৃষি সিদ্ধান্ত-সহায়তা ও সতর্কবার্তা (গুরুত্বপূর্ণ)' : '2. Agronomic Decision-Support Disclaimer (Important)'}</h2>
         </div>
 
-        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-100 text-xs space-y-2">
+        <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 text-amber-100 text-xs space-y-2">
           <div className="flex items-center gap-2 font-mono font-bold text-amber-300 uppercase">
             <Info className="w-4 h-4 text-amber-400" />
             <span>{isBn ? 'পরামর্শমূলক চরিত্র — ফলনের নিশ্চয়তা নয়' : 'Advisory Nature — No Harvest Guarantee'}</span>
@@ -55,9 +55,9 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 3. NASA Data Provenance & Attribution */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
+          <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '৩. নাসা ডেটা ও অনুমোদন সংক্রান্ত স্পষ্টীকরণ' : '3. NASA Earth Observations & Endorsement Notice'}</h2>
         </div>
         <p>
@@ -65,7 +65,7 @@ export const TermsPage: React.FC = () => {
             ? 'এগ্রিঅরবিট নাসা পাওয়ার (NASA POWER), এসএমএপি (SMAP) এবং মডিস (MODIS)-এর উন্মুক্ত বৈজ্ঞানিক আর্থ অবজারভেশন ডেটাসেট ব্যবহার করে। তবে:'
             : 'AgriOrbit relies on publicly accessible scientific datasets provided by NASA Earth science programs (including NASA POWER, SMAP soil moisture, and MODIS):'}
         </p>
-        <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-300">
+        <ul className="list-disc pl-5 space-y-1.5 text-xs text-[#A3A3A3]">
           <li>
             {isBn
               ? 'নাসা কেবল উন্মুক্ত বৈজ্ঞানিক উপগ্রহ ডেটা সরবরাহ করে। নাসা কোনো নির্দিষ্ট ফসল, সার বা ব্র্যান্ড সুপারিশ বা অনুমোদন করে না।'
@@ -80,9 +80,9 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 4. User Accounts and Fair Use */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <CheckCircle2 className="w-4 h-4 text-[#B8FF3D]" />
+          <CheckCircle2 className="w-4 h-4 text-[#22C55E]" />
           <h2>{isBn ? '৪. কৃষকের অ্যাকাউন্টের দায়িত্বশীল ব্যবহার' : '4. User Accounts & Responsibilities'}</h2>
         </div>
         <p>
@@ -91,22 +91,22 @@ export const TermsPage: React.FC = () => {
             : 'When using AgriOrbit, you agree to the following responsibilities:'}
         </p>
         <div className="grid sm:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <strong className="text-white block mb-1">
               {isBn ? 'সঠিক খামার তথ্য প্রদান' : 'Accurate Field Information'}
             </strong>
-            <p className="text-slate-400">
+            <p className="text-[#737373]">
               {isBn
                 ? 'সঠিক জেলা, মাটির ধরন ও অতীত ফসল নির্বাচন করুন যাতে অ্যালগরিদম বাস্তবসম্মত সুপারিশ দিতে পারে।'
                 : 'Provide truthful geographic and field characteristics to ensure accurate mathematical rotation modeling.'}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/5 border border-white/5">
+          <div className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626]">
             <strong className="text-white block mb-1">
               {isBn ? 'অ্যাকাউন্টের গোপনীয়তা' : 'Account Security'}
             </strong>
-            <p className="text-slate-400">
+            <p className="text-[#737373]">
               {isBn
                 ? 'আপনার গুগল অ্যাকাউন্ট বা লগইন ক্রেডেনশিয়াল সুরক্ষিত রাখা আপনার দায়িত্ব।'
                 : 'You are responsible for keeping your credentials and connected Google authentication secure.'}
@@ -116,7 +116,7 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 5. Intellectual Property & Open Source */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
           <FileText className="w-4 h-4 text-purple-400" />
           <h2>{isBn ? '৫. মেধাস্বত্ব ও ওপেন সায়েন্স' : '5. Intellectual Property & Open Science'}</h2>
@@ -129,12 +129,12 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 6. Limitation of Liability */}
-      <section className="space-y-3 pt-4 border-t border-white/10">
+      <section className="space-y-3 pt-4 border-t border-[#262626]">
         <div className="flex items-center gap-2 text-base font-bold text-white">
-          <Scale className="w-4 h-4 text-slate-400" />
+          <Scale className="w-4 h-4 text-[#737373]" />
           <h2>{isBn ? '৬. দায়বদ্ধতার সীমাবদ্ধতা' : '6. Limitation of Liability'}</h2>
         </div>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-[#737373]">
           {isBn
             ? 'আইনের অনুমোদিত সর্বোচ্চ সীমা পর্যন্ত, এগ্রিঅরবিট, এর ডেভেলপার বা টিম সদস্যরা কোনো প্রকার অপ্রত্যাশিত প্রাকৃতিক দুর্যোগ, ফসলের ক্ষতি, সেচ ব্যর্থতা বা আর্থিক ক্ষতির জন্য প্রত্যক্ষ বা পরোক্ষভাবে দায়ী থাকবে না। প্ল্যাটফর্মটি "যেমন আছে" (AS IS) ভিত্তিতে ব্যবহারের জন্য উন্মুক্ত।'
             : 'To the fullest extent permitted by applicable law, AgriOrbit, Team Bay of Orbits, and its contributors shall not be held liable for any direct, indirect, incidental, or consequential crop loss, financial deficits, or farming disruptions resulting from platform advisories or third-party satellite data latency. The service is provided on an "AS IS" and "AS AVAILABLE" basis.'}
@@ -142,11 +142,11 @@ export const TermsPage: React.FC = () => {
       </section>
 
       {/* 7. Contact */}
-      <section className="p-4 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/20 space-y-2 text-xs">
-        <strong className="text-[#B8FF3D] font-mono uppercase block">
+      <section className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2 text-xs">
+        <strong className="text-[#22C55E] font-mono uppercase block">
           {isBn ? 'আইনগত যোগাযোগ' : 'Legal Contact'}
         </strong>
-        <p className="text-slate-300">
+        <p className="text-[#A3A3A3]">
           {isBn
             ? 'ব্যবহারের নিয়মাবলী সংক্রান্ত অনুসন্ধানের জন্য আমাদের সাথে যোগাযোগ করুন: legal@agriorbit.space অথবা team@agriorbit.space।'
             : 'For legal or terms inquiries, contact Team Bay of Orbits at legal@agriorbit.space or team@agriorbit.space.'}

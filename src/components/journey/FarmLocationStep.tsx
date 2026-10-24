@@ -122,21 +122,21 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D] font-editorial relative">
-      <div className="w-full max-w-6xl bg-[#0B1626] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative z-10">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 selection:bg-[#22C55E]/20 selection:text-[#22C55E] font-editorial relative">
+      <div className="w-full max-w-6xl bg-[#141414] border border-[#262626] rounded-xl p-6 sm:p-10 shadow-2xl relative z-10">
         {/* Navigation / Progress Header */}
-        <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
+        <div className="flex items-center justify-between pb-6 mb-8 border-b border-[#262626]">
           <button
             onClick={onBack}
-            className="text-xs font-semibold text-[#8FA3B8] hover:text-white flex items-center gap-2 cursor-pointer transition-colors"
+            className="text-xs font-semibold text-[#A3A3A3] hover:text-white flex items-center gap-2 cursor-pointer transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{language === 'en' ? 'Back to Overview' : 'পূর্ববর্তী পাতা'}</span>
           </button>
 
-          <div className="flex items-center gap-2 font-mono text-xs text-[#00E5FF]">
-            <span className="font-bold text-[#050B14] bg-[#B8FF3D] px-2.5 py-0.5 rounded text-xs">01</span>
-            <span className="text-[#8FA3B8]">/ 03</span>
+          <div className="flex items-center gap-2 font-mono text-xs text-[#737373]">
+            <span className="font-semibold text-black bg-[#22C55E] px-2.5 py-0.5 rounded text-xs">01</span>
+            <span className="text-[#A3A3A3]">/ 03</span>
             <span className="font-sans font-semibold text-white ml-1">
               {language === 'en' ? 'Farm Location' : 'খামারের অবস্থান'}
             </span>
@@ -145,14 +145,14 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
 
         {/* Title */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-2">
-            <MapPin className="w-3.5 h-3.5 text-[#B8FF3D]" />
+          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#22C55E] font-mono font-semibold mb-2">
+            <MapPin className="w-3.5 h-3.5 text-[#22C55E]" />
             <span>{language === 'en' ? 'LOCATION SELECTION' : 'এলাকা নির্বাচন'}</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
             {language === 'en' ? 'Pinpoint Your Farm Location' : 'আপনার জমির এলাকা বেছে নিন'}
           </h2>
-          <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#A3A3A3] mt-1 max-w-2xl leading-relaxed">
             {language === 'en'
               ? 'Select your district and upazila, or click directly on the interactive map. The 5 km observation circle synchronizes with NASA datasets.'
               : 'জেলা ও উপজেলা বেছে নিন, অথবা মানচিত্রে আপনার জমি দেখিয়ে দিন। নাসার স্যাটেলাইট তথ্য অনুযায়ী এই এলাকার আবহাওয়া যাচাই করা হবে।'}
@@ -171,7 +171,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 <select
                   value={location.district}
                   onChange={(e) => handleDistrictChange(e.target.value as DistrictId)}
-                  className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#B8FF3D]/60 cursor-pointer appearance-none"
+                  className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm font-medium focus:outline-none focus:border-[#404040] cursor-pointer appearance-none"
                 >
                   {BD_DIVISIONS.map((div) => (
                     <optgroup
@@ -181,14 +181,14 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                       {(BD_DISTRICTS as readonly { id: string; nameEn: string; nameBn: string; division: string }[])
                         .filter((d) => d.division === div.nameEn)
                         .map((d) => (
-                          <option key={d.id} value={d.id} className="bg-[#050B14] text-white">
+                          <option key={d.id} value={d.id} className="bg-[#0A0A0A] text-white">
                             {language === 'en' ? d.nameEn : d.nameBn}
                           </option>
                         ))}
                     </optgroup>
                   ))}
                 </select>
-                <div className="pointer-events-none absolute right-4 top-3.5 text-[#00E5FF] text-xs">▼</div>
+                <div className="pointer-events-none absolute right-4 top-3.5 text-[#737373] text-xs">▼</div>
               </div>
             </div>
 
@@ -201,31 +201,31 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 <select
                   value={location.upazila}
                   onChange={(e) => handleUpazilaChange(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-[#B8FF3D]/60 cursor-pointer appearance-none"
+                  className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm font-medium focus:outline-none focus:border-[#404040] cursor-pointer appearance-none"
                 >
                   {upazilas.length > 0 ? (
                     upazilas.map((upz) => (
-                      <option key={upz.id} value={upz.id} className="bg-[#050B14] text-white">
+                      <option key={upz.id} value={upz.id} className="bg-[#0A0A0A] text-white">
                         {language === 'en' ? upz.nameEn : upz.nameBn}
                       </option>
                     ))
                   ) : (
-                    <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#050B14] text-white">
+                    <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#0A0A0A] text-white">
                       {language === 'en' ? 'District-wide' : 'সমগ্র জেলা'}
                     </option>
                   )}
                 </select>
-                <div className="pointer-events-none absolute right-4 top-3.5 text-[#00E5FF] text-xs">▼</div>
+                <div className="pointer-events-none absolute right-4 top-3.5 text-[#737373] text-xs">▼</div>
               </div>
             </div>
 
             {/* Selected Location Summary Card */}
-            <div className="p-5 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/30 space-y-2">
+            <div className="p-5 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs uppercase font-mono text-[#B8FF3D] font-bold">
+                <span className="text-xs uppercase font-mono text-[#22C55E] font-bold">
                   {language === 'en' ? 'Selected Field Coordinates' : 'জমির অবস্থান ও স্থানাঙ্ক'}
                 </span>
-                <span className="text-[10px] font-mono text-[#8FA3B8]">
+                <span className="text-[10px] font-mono text-[#A3A3A3]">
                   {language === 'en' ? sourceLabel.en : sourceLabel.bn}
                 </span>
               </div>
@@ -234,14 +234,14 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 {names.upazila !== (language === 'en' ? 'District-wide' : 'সমগ্র জেলা') &&
                   (language === 'en' ? ' Upazila' : ' উপজেলা')}
               </p>
-              <div className="flex items-center gap-4 font-mono text-xs text-[#8FA3B8]">
+              <div className="flex items-center gap-4 font-mono text-xs text-[#A3A3A3]">
                 <span>
                   LAT <strong className="text-white font-bold">{location.latitude}° N</strong>
                 </span>
                 <span>
                   LNG <strong className="text-white font-bold">{location.longitude}° E</strong>
                 </span>
-                {resolving && <span className="text-[#00E5FF] animate-pulse">{language === 'en' ? 'Resolving…' : 'যাচাই করা হচ্ছে…'}</span>}
+                {resolving && <span className="text-[#737373] ">{language === 'en' ? 'Resolving…' : 'যাচাই করা হচ্ছে…'}</span>}
               </div>
               {outsideMessage && (
                 <p className="text-xs text-[#FF5C5C] font-semibold pt-1">
@@ -254,7 +254,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
 
             {/* Quick Plot Presets */}
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#8FA3B8] block mb-2">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#A3A3A3] block mb-2">
                 {language === 'en' ? 'Demo Plot Presets:' : 'ডেমো প্লট নির্বাচন:'}
               </span>
               <div className="flex flex-wrap gap-2">
@@ -262,9 +262,9 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                   <button
                     key={preset.name}
                     onClick={() => handlePreset(preset)}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-[#8FA3B8] hover:text-white font-medium transition cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-xs text-[#A3A3A3] hover:text-white font-medium transition cursor-pointer"
                   >
-                    📍 {preset.name}
+                    {preset.name}
                   </button>
                 ))}
               </div>
@@ -275,15 +275,15 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
 
           {/* RIGHT: Map Canvas (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-[#050B14]">
+            <div className="rounded-2xl overflow-hidden border border-[#262626] shadow-2xl bg-[#0A0A0A]">
               <BangladeshMap
                 latitude={location.latitude}
                 longitude={location.longitude}
                 onSelect={handleMapSelect}
                 flyTarget={flyTarget}
               >
-                <div className="absolute top-4 left-4 z-10 bg-[#050B14]/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-xs font-mono flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#B8FF3D] animate-pulse" />
+                <div className="absolute top-4 left-4 z-10 bg-[#141414] px-3 py-1.5 rounded-lg border border-[#262626] text-xs font-mono flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] " />
                   <span>{language === 'en' ? 'Click anywhere in Bangladesh to reposition pin' : 'পিন সরাতে মানচিত্রের যেকোনো জায়গায় চাপ দিন'}</span>
                 </div>
               </BangladeshMap>
@@ -293,7 +293,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
             <div className="flex items-center justify-end gap-4 pt-2">
               <button
                 onClick={onContinue}
-                className="px-8 py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm tracking-tight transition-all duration-150 transform hover:-translate-y-0.5 shadow-xl shadow-[#B8FF3D]/20 flex items-center gap-2 cursor-pointer"
+                className="px-8 py-3 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-sm transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <span>{language === 'en' ? 'Continue to Priorities' : 'পরবর্তী ধাপ'}</span>
                 <ArrowRight className="w-4 h-4" />

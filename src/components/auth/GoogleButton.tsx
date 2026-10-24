@@ -133,7 +133,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = ({ onError, onSuccess }
           type="button"
           onClick={handleClick}
           disabled={loading}
-          className="w-full py-3 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200 shadow-md shadow-black/20 hover:shadow-lg disabled:opacity-60 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+          className="w-full py-3 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-200 shadow-md shadow-black/20 hover:shadow-lg disabled:opacity-60 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22C55E]"
         >
           {loading ? (
             <Loader2 className="w-5 h-5 animate-spin text-slate-700" />
@@ -163,8 +163,8 @@ export const GoogleButton: React.FC<GoogleButtonProps> = ({ onError, onSuccess }
 
       {/* Loading overlay for GIS token verification */}
       {loading && gisReady && (
-        <div className="absolute inset-0 bg-[#0B1626]/80 rounded-xl flex items-center justify-center gap-2 text-white text-xs font-mono">
-          <Loader2 className="w-4 h-4 animate-spin text-[#00E5FF]" />
+        <div className="absolute inset-0 bg-[#141414]/90 rounded-xl flex items-center justify-center gap-2 text-white text-xs font-mono">
+          <Loader2 className="w-4 h-4 animate-spin text-[#22C55E]" />
           <span>{lang === 'en' ? 'Verifying with Google...' : 'যাচাই করা হচ্ছে...'}</span>
         </div>
       )}

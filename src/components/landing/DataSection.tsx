@@ -8,13 +8,25 @@ export function DataSection() {
   const { t } = useLang();
 
   const status = {
-    live: { label: t.data.live, cls: 'border-lime-300/30 bg-lime-300/10 text-lime-200', dot: <span className="live-dot" /> },
-    snapshot: { label: t.data.snapshot, cls: 'border-cyan-300/30 bg-cyan-300/10 text-cyan-200', dot: <span className="h-2 w-2 rounded-full bg-cyan-300" /> },
-    guidance: { label: t.data.guidance, cls: 'border-white/15 bg-white/5 text-slate-300', dot: <span className="h-2 w-2 rounded-full bg-slate-400" /> },
+    live: {
+      label: t.data.live,
+      cls: 'border-[#22C55E]/30 bg-[#22C55E]/10 text-[#22C55E]',
+      dot: <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />,
+    },
+    snapshot: {
+      label: t.data.snapshot,
+      cls: 'border-[#262626] bg-[#0A0A0A] text-[#A3A3A3]',
+      dot: <span className="h-1.5 w-1.5 rounded-full bg-[#A3A3A3]" />,
+    },
+    guidance: {
+      label: t.data.guidance,
+      cls: 'border-[#262626] bg-[#0A0A0A] text-[#737373]',
+      dot: <span className="h-1.5 w-1.5 rounded-full bg-[#737373]" />,
+    },
   };
 
   return (
-    <section id="data" className="relative py-20 md:py-28">
+    <section id="data" className="relative py-20 md:py-28 border-b border-[#262626]">
       <div className="container-x">
         <SectionHeader eyebrow={t.data.eyebrow} title={t.data.title} sub={t.data.sub} />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -22,19 +34,24 @@ export function DataSection() {
             const Icon = ICONS[i];
             const s = status[item.status];
             return (
-              <article key={item.name} className="glass group p-6 transition hover:border-white/20">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-white/[0.06] text-cyan-300 transition group-hover:text-lime-300">
-                    <Icon className="h-5 w-5" strokeWidth={1.7} />
+              <article
+                key={item.name}
+                className="rounded-xl border border-[#262626] bg-[#141414] p-6 transition-colors duration-150 hover:border-[#404040] flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="grid h-10 w-10 place-items-center rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#A3A3A3]">
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    </div>
+                    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-mono font-medium border ${s.cls}`}>
+                      {s.dot}
+                      {s.label}
+                    </span>
                   </div>
-                  <span className={`chip ${s.cls}`}>
-                    {s.dot}
-                    {s.label}
-                  </span>
+                  <h3 className="mt-5 font-display text-base font-semibold text-[#FAFAFA]">{item.name}</h3>
+                  <p className="mt-1 text-sm font-medium text-[#A3A3A3]">{item.what}</p>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-white">{item.name}</h3>
-                <p className="mt-1 text-sm font-medium text-slate-200">{item.what}</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.how}</p>
+                <p className="mt-3 text-xs leading-relaxed text-[#737373]">{item.how}</p>
               </article>
             );
           })}

@@ -195,7 +195,7 @@ export function buildBilingualEmailHtml(
         : 'পরামর্শ · Field advisory';
 
       return `
-        <div style="margin-bottom: 24px; padding: 20px; border-radius: 12px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.12);">
+        <div style="margin-bottom: 24px; padding: 20px; border-radius: 12px; background-color: #0a0a0a; border: 1px solid #262626;">
           <!-- Header Tag & Meta -->
           <div style="margin-bottom: 12px;">
             <span style="display: inline-block; padding: 3px 8px; font-size: 11px; font-weight: 600; border-radius: 4px; background-color: ${badgeBg}; color: #ffffff;">
@@ -214,15 +214,15 @@ export function buildBilingualEmailHtml(
             <p style="margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; color: #cbd5e1;">
               ${alert.body_bn}
             </p>
-            <div style="padding: 10px 12px; background-color: rgba(184, 255, 61, 0.08); border-left: 3px solid #b8ff3d; border-radius: 4px;">
-              <span style="color: #b8ff3d; font-size: 13px; font-weight: bold;">করণীয়:</span>
+            <div style="padding: 10px 12px; background-color: rgba(34, 197, 94, 0.08); border-left: 3px solid #22c55e; border-radius: 4px;">
+              <span style="color: #22c55e; font-size: 13px; font-weight: bold;">করণীয়:</span>
               <span style="color: #f1f5f9; font-size: 13px; margin-left: 4px;">${actionBn}</span>
             </div>
           </div>
 
           <!-- DIVIDER LINE -->
-          <div style="margin: 18px 0; border-top: 1px dashed rgba(255,255,255,0.18); text-align: center;">
-            <span style="display: inline-block; background-color: #0b1626; padding: 0 8px; position: relative; top: -9px; font-size: 10px; font-weight: 600; color: #64748b; font-family: monospace;">
+          <div style="margin: 18px 0; border-top: 1px dashed #262626; text-align: center;">
+            <span style="display: inline-block; background-color: #0a0a0a; padding: 0 8px; position: relative; top: -9px; font-size: 10px; font-weight: 600; color: #64748b; font-family: monospace;">
               English Summary
             </span>
           </div>
@@ -258,14 +258,14 @@ export function buildBilingualEmailHtml(
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #050b14; color: #f1f5f9; -webkit-font-smoothing: antialiased;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #050b14; padding: 24px 12px;">
+<body style="margin: 0; padding: 0; background-color: #0a0a0a; color: #f1f5f9; -webkit-font-smoothing: antialiased;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #0a0a0a; padding: 24px 12px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" style="max-width: 600px; background-color: #070d18; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden;" cellspacing="0" cellpadding="0">
+        <table role="presentation" width="100%" style="max-width: 600px; background-color: #141414; border: 1px solid #262626; border-radius: 14px; overflow: hidden;" cellspacing="0" cellpadding="0">
           <!-- App Header -->
           <tr>
-            <td style="padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
+            <td style="padding: 22px 24px; border-bottom: 1px solid #262626; background-color: #141414;">
               <a href="${appUrl}" target="_blank" style="text-decoration: none; display: inline-block;">
                 <img
                   src="${appUrl}/logo.png"
@@ -289,7 +289,7 @@ export function buildBilingualEmailHtml(
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 20px;">
                 <tr>
                   <td align="center">
-                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-weight: 700; font-size: 13px; border-radius: 8px;">
+                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #22c55e; color: #000000; text-decoration: none; font-weight: 700; font-size: 13px; border-radius: 8px;">
                       ড্যাশবোর্ড দেখুন / Open AgriOrbit Dashboard
                     </a>
                   </td>
@@ -300,7 +300,7 @@ export function buildBilingualEmailHtml(
 
           <!-- Clear Unsubscribe and Explanation Footer -->
           <tr>
-            <td style="padding: 18px 24px; background-color: #081120; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+            <td style="padding: 18px 24px; background-color: #141414; border-top: 1px solid #262626; text-align: center;">
               <p style="margin: 0 0 6px 0; font-size: 11px; color: #94a3b8; line-height: 1.5;">
                 আপনি এই ইমেইলটি পেয়েছেন কারণ আপনার অ্যাগ্রিঅরবিট প্রোফাইলে ইমেইল সতর্কতা চালু রয়েছে। বন্ধ করতে প্রোফাইল → সতর্কতায় যান।
               </p>

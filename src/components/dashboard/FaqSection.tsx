@@ -33,17 +33,17 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
     <section
       id="faq-section"
       aria-labelledby="faq-heading"
-      className={`rounded-3xl bg-[#0B1626] border border-white/10 p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden font-editorial ${className}`}
+      className={`rounded-xl bg-[#141414] border border-[#262626] p-6 sm:p-8 lg:p-10 relative overflow-hidden font-editorial ${className}`}
     >
       {/* Background Ambient Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#00E5FF]/5 rounded-full blur-3xl pointer-events-none -mr-24 -mt-24" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#B8FF3D]/5 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20" />
+      
+      
 
       {/* Header Row */}
-      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/10">
+      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#262626]">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/25 text-xs font-mono font-semibold uppercase tracking-wider mb-2">
-            <HelpCircle className="w-3.5 h-3.5 text-[#00E5FF]" />
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#A3A3A3] mb-2">
+            <HelpCircle className="w-3.5 h-3.5 text-[#22C55E]" />
             <span>{strings.eyebrow}</span>
           </div>
           <h3
@@ -52,7 +52,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
           >
             {strings.heading}
           </h3>
-          <p className="text-sm sm:text-base text-slate-300 mt-1 max-w-2xl">
+          <p className="text-sm sm:text-base text-[#A3A3A3] mt-1 max-w-2xl">
             {strings.subheading}
           </p>
         </div>
@@ -62,7 +62,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
           <button
             type="button"
             onClick={allOpen ? collapseAll : expandAll}
-            className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="px-3.5 py-1.5 rounded-lg bg-[#0A0A0A] hover:bg-[#1a1a1a] border border-[#262626] text-xs font-mono text-[#A3A3A3] hover:text-[#FAFAFA] transition-colors cursor-pointer"
           >
             {allOpen
               ? language === 'en'
@@ -86,10 +86,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
           return (
             <div
               key={item.id}
-              className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                isOpen
-                  ? 'bg-[#050B14] border-[#B8FF3D]/40 shadow-lg shadow-black/40'
-                  : 'bg-[#050B14]/70 border-white/5 hover:border-white/20'
+              className={`rounded-xl border transition-all duration-150 overflow-hidden ${
+                isOpen ? 'bg-[#0A0A0A] border-[#404040]' : 'bg-[#0A0A0A] border-[#262626] hover:border-[#404040]'
               }`}
             >
               {/* Question Trigger Button */}
@@ -99,21 +97,19 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggleItem(item.id)}
-                className="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8FF3D] transition-colors"
+                className="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#22C55E] transition-colors"
               >
                 <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
                   <span
                     className={`font-mono text-xs sm:text-sm font-bold shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center border transition-colors ${
-                      isOpen
-                        ? 'bg-[#B8FF3D]/15 text-[#B8FF3D] border-[#B8FF3D]/40'
-                        : 'bg-white/5 text-[#00E5FF] border-white/10'
+                      isOpen ? 'bg-[#141414] text-[#22C55E] border-[#22C55E]/40' : 'bg-[#141414] text-[#A3A3A3] border-[#262626]'
                     }`}
                   >
                     {indexFormatted}
                   </span>
                   <span
                     className={`font-display text-sm sm:text-base font-semibold leading-snug transition-colors ${
-                      isOpen ? 'text-white' : 'text-slate-200 hover:text-white'
+                      isOpen ? 'text-white' : 'text-[#FAFAFA] hover:text-white'
                     }`}
                   >
                     {item.question}
@@ -122,9 +118,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
 
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-200 ${
-                    isOpen
-                      ? 'bg-[#B8FF3D]/15 text-[#B8FF3D] border-[#B8FF3D]/30 rotate-180'
-                      : 'bg-white/5 text-slate-400 border-white/10'
+                    isOpen ? 'bg-[#141414] text-[#22C55E] border-[#22C55E]/30 rotate-180' : 'bg-[#141414] text-[#737373] border-[#262626]'
                   }`}
                   aria-hidden="true"
                 >
@@ -138,7 +132,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
                   id={panelId}
                   role="region"
                   aria-labelledby={buttonId}
-                  className="px-4 pb-4 sm:px-6 sm:pb-5 pt-1 text-slate-300 border-t border-white/5 animate-fadeIn"
+                  className="px-4 pb-4 sm:px-6 sm:pb-5 pt-1 text-[#A3A3A3] border-t border-[#262626] animate-fadeIn"
                 >
                   <div className="pl-10 sm:pl-12">
                     <p className="text-xs sm:text-sm leading-relaxed text-slate-200">
@@ -153,9 +147,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
       </div>
 
       {/* Footer Trust Callout */}
-      <div className="relative z-10 mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-400 font-mono">
+      <div className="relative z-10 mt-8 pt-6 border-t border-[#262626] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-400 font-mono">
         <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#B8FF3D]" />
+          <CheckCircle2 className="w-4 h-4 text-[#22C55E]" />
           <span>
             {language === 'en'
               ? '100% Rule-Based & Transparent Agronomic Logic'
@@ -163,7 +157,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
           </span>
         </div>
         <div className="flex items-center gap-2 text-slate-400">
-          <MessageSquareQuote className="w-4 h-4 text-[#00E5FF]" />
+          <MessageSquareQuote className="w-4 h-4 text-[#FAFAFA]" />
           <span>
             {language === 'en'
               ? 'Have questions? Connect with your Upazila Agriculture Officer (DAE).'

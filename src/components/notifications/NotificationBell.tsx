@@ -162,10 +162,10 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
         };
       default:
         return {
-          icon: <Info className="w-4 h-4 text-[#00E5FF] shrink-0" />,
-          border: 'border-cyan-500/30',
-          bg: 'bg-cyan-950/20',
-          badge: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+          icon: <Info className="w-4 h-4 text-[#FAFAFA] shrink-0" />,
+          border: 'border-[#262626]',
+          bg: 'bg-[#0A0A0A]',
+          badge: 'bg-white/5 text-[#A3A3A3] border border-[#262626]',
         };
     }
   };
@@ -181,17 +181,17 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
           : { right: buttonRect ? Math.max(12, window.innerWidth - buttonRect.right) : 16 }),
         zIndex: 99999,
       }}
-      className="w-auto sm:w-[420px] max-h-[80vh] flex flex-col rounded-2xl bg-[#070D18]/98 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/80 text-white animate-fadeIn overflow-hidden"
+      className="w-auto sm:w-[420px] max-h-[80vh] flex flex-col rounded-xl bg-[#141414] border border-[#262626] shadow-2xl text-[#FAFAFA] overflow-hidden"
     >
       {/* Header */}
-      <div className="p-4 border-b border-white/10 bg-[#0B1626]/90 flex items-center justify-between">
+      <div className="p-4 border-b border-[#262626] bg-[#141414] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Bell className="w-4 h-4 text-[#B8FF3D]" />
+          <Bell className="w-4 h-4 text-[#22C55E]" />
           <h3 className="font-display font-bold text-sm tracking-tight text-white">
             {isBn ? 'কৃষি ও আবহাওয়া সতর্কতা' : 'Field Alerts & Advisories'}
           </h3>
           {unreadCount > 0 && (
-            <span className="px-1.5 py-0.5 rounded-full bg-[#B8FF3D] text-[#050B14] font-mono text-[10px] font-bold">
+            <span className="px-1.5 py-0.5 rounded-full bg-[#22C55E] text-black font-mono text-[10px] font-bold">
               {unreadCount} {isBn ? 'নতুন' : 'new'}
             </span>
           )}
@@ -202,7 +202,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
             <button
               onClick={handleMarkAllAsRead}
               disabled={markingAll}
-              className="text-[11px] font-mono text-[#00E5FF] hover:text-[#00E5FF]/80 flex items-center gap-1 cursor-pointer transition-colors"
+              className="text-[11px] font-mono text-[#22C55E] hover:underline flex items-center gap-1 cursor-pointer transition-colors"
             >
               <CheckCheck className="w-3.5 h-3.5" />
               <span>{isBn ? 'সবগুলো পঠিত' : 'Mark all read'}</span>
@@ -225,8 +225,8 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
           </div>
         ) : notifications.length === 0 ? (
           <div className="p-10 text-center space-y-2">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
-              <CheckCheck className="w-5 h-5 text-[#B8FF3D]" />
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-[#262626] flex items-center justify-center mx-auto text-slate-400">
+              <CheckCheck className="w-5 h-5 text-[#22C55E]" />
             </div>
             <p className="text-sm font-semibold text-slate-200">
               {isBn ? 'এখন কোনো সতর্কতা নেই' : 'No alerts right now'}
@@ -269,7 +269,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
                     </span>
                   </div>
                   {isUnread && (
-                    <span className="w-2 h-2 rounded-full bg-[#B8FF3D] shrink-0" title="Unread" />
+                    <span className="w-2 h-2 rounded-full bg-[#22C55E] shrink-0" title="Unread" />
                   )}
                 </div>
 
@@ -280,10 +280,10 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
                   {isBn ? n.body_bn : n.body_en}
                 </p>
 
-                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1.5 border-t border-white/5">
+                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1.5 border-t border-[#262626]">
                   <span>{isBn ? 'তথ্যের তারিখ:' : 'Observed:'} {n.data_date}</span>
                   {isUnread && (
-                    <span className="text-[#B8FF3D] text-[10px]">
+                    <span className="text-[#22C55E] text-[10px]">
                       {isBn ? 'পড়া হয়েছে চিহ্নিত করতে চাপ দিন' : 'Click to mark read'}
                     </span>
                   )}
@@ -295,7 +295,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
       </div>
 
       {/* Footer */}
-      <div className="p-2.5 bg-[#050B14] border-t border-white/10 text-center text-[10px] font-mono text-slate-400">
+      <div className="p-2.5 bg-[#0A0A0A] border-t border-[#262626] text-center text-[10px] font-mono text-slate-400">
         <span>AgriOrbit Rule-Based System · NASA POWER & Open-Meteo</span>
       </div>
     </div>
@@ -307,7 +307,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
         ref={buttonRef}
         onClick={handleToggle}
         aria-label="Alerts"
-        className={`relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all cursor-pointer flex items-center justify-center ${className}`}
+        className={`relative p-2 rounded-lg bg-[#141414] hover:bg-[#1a1a1a] border border-[#262626] text-[#A3A3A3] hover:text-[#FAFAFA] transition-colors cursor-pointer flex items-center justify-center ${className}`}
       >
         <Bell className="w-4 h-4" />
         {unreadCount > 0 && (

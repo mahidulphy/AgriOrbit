@@ -171,20 +171,20 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md p-3 sm:p-6 flex min-h-full items-center justify-center animate-fadeIn font-editorial">
-      <div className="relative w-full max-w-2xl my-auto rounded-3xl bg-[#0B1626] border border-white/15 shadow-2xl text-white overflow-hidden max-h-[92vh] flex flex-col">
+      <div className="relative w-full max-w-2xl my-auto rounded-xl bg-[#141414] border border-[#262626] shadow-none text-white overflow-hidden max-h-[92vh] flex flex-col">
         
         {/* Sticky Header */}
-        <div className="p-4 sm:p-5 border-b border-white/10 bg-[#07101D] flex-shrink-0 flex items-center justify-between">
+        <div className="p-4 sm:p-5 border-b border-[#262626] bg-[#0A0A0A] flex-shrink-0 flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt={profile.fullName || displayName}
-                className="w-10 h-10 rounded-xl object-cover border border-[#B8FF3D]/50 shadow-sm flex-shrink-0"
+                className="w-10 h-10 rounded-xl object-cover border border-[#262626] shadow-sm flex-shrink-0"
                 loading="lazy"
               />
             ) : (
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-sm font-bold font-mono text-[#B8FF3D] flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-center text-sm font-bold font-mono text-[#22C55E] flex-shrink-0">
                 {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : 'F'}
               </div>
             )}
@@ -194,7 +194,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                   {profile.fullName || displayName || (isBn ? 'কৃষক প্রোফাইল' : 'Farmer Profile')}
                 </h3>
                 {emailConfirmed && !isGuest && (
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
+                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/20">
                     <CheckCircle2 className="w-2.5 h-2.5" />
                     <span>{isBn ? 'ইমেইল নিশ্চিত' : 'Email Verified'}</span>
                   </span>
@@ -216,13 +216,13 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-white/10 bg-[#050B14]/70 px-4 pt-2 gap-2 flex-shrink-0 text-xs font-mono overflow-x-auto scrollbar-none">
+        <div className="flex border-b border-[#262626] bg-[#0A0A0A]/70 px-4 pt-2 gap-2 flex-shrink-0 text-xs font-mono overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveTab('profile')}
             className={`pb-2.5 px-3 border-b-2 font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'profile'
-                ? 'border-[#B8FF3D] text-[#B8FF3D]'
+                ? 'border-[#22C55E] text-[#22C55E]'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -235,7 +235,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
             onClick={() => setActiveTab('history')}
             className={`pb-2.5 px-3 border-b-2 font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'history'
-                ? 'border-[#00E5FF] text-[#00E5FF]'
+                ? 'border-[#FAFAFA] text-[#FAFAFA]'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -276,7 +276,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       value={profile.fullName}
                       onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
                       placeholder={isBn ? 'নাম লিখুন' : 'Enter full name'}
-                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:border-[#B8FF3D] focus:outline-none transition-colors"
+                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-[#262626] text-white text-sm focus:border-[#22C55E] focus:outline-none transition-colors"
                       required
                     />
                   </div>
@@ -294,15 +294,15 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       value={profile.phone}
                       onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                       placeholder="017XX-XXXXXX"
-                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:border-[#B8FF3D] focus:outline-none transition-colors"
+                      className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/5 border border-[#262626] text-white text-sm focus:border-[#22C55E] focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Location: District, Upazila, Village */}
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/5 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#00E5FF] font-bold">
+              <div className="p-4 rounded-2xl bg-[#0A0A0A] border border-[#262626] space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#FAFAFA] font-bold">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{isBn ? 'খামারের ভৌগোলিক অবস্থান' : 'Farm Geographic Location'}</span>
                 </div>
@@ -316,10 +316,10 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     <select
                       value={profile.districtId}
                       onChange={(e) => setProfile({ ...profile, districtId: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#00E5FF] focus:outline-none cursor-pointer"
+                      className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none cursor-pointer"
                     >
                       {BD_DISTRICTS.map((d) => (
-                        <option key={d.id} value={d.id} className="bg-[#0B1626] text-white">
+                        <option key={d.id} value={d.id} className="bg-[#141414] text-white">
                           {isBn ? d.nameBn : d.nameEn} ({isBn ? d.divisionBn : d.division})
                         </option>
                       ))}
@@ -336,7 +336,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       value={profile.upazila}
                       onChange={(e) => setProfile({ ...profile, upazila: e.target.value })}
                       placeholder={isBn ? 'যেমন: কাহারোল / বীরগঞ্জ' : 'e.g. Sadar'}
-                      className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#00E5FF] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none"
                     />
                   </div>
 
@@ -350,7 +350,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       value={profile.village}
                       onChange={(e) => setProfile({ ...profile, village: e.target.value })}
                       placeholder={isBn ? 'গ্রামের নাম' : 'Village name'}
-                      className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#00E5FF] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -370,12 +370,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       min="0"
                       value={profile.landSize}
                       onChange={(e) => setProfile({ ...profile, landSize: parseFloat(e.target.value) || 0 })}
-                      className="w-2/3 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:border-[#B8FF3D] focus:outline-none"
+                      className="w-2/3 px-3 py-2 rounded-xl bg-white/5 border border-[#262626] text-white text-sm focus:border-[#22C55E] focus:outline-none"
                     />
                     <select
                       value={profile.landUnit}
                       onChange={(e) => setProfile({ ...profile, landUnit: e.target.value as any })}
-                      className="w-1/3 px-2 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#B8FF3D] focus:outline-none cursor-pointer"
+                      className="w-1/3 px-2 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
                     >
                       <option value="bigha">{isBn ? 'বিঘা' : 'Bigha'}</option>
                       <option value="acre">{isBn ? 'একর' : 'Acre'}</option>
@@ -392,7 +392,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                   <select
                     value={profile.landElevation}
                     onChange={(e) => setProfile({ ...profile, landElevation: e.target.value as any })}
-                    className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#B8FF3D] focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
                   >
                     {LAND_ELEVATION_OPTIONS.map((opt) => (
                       <option key={opt.id} value={opt.id}>
@@ -410,7 +410,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                   <select
                     value={profile.soilType}
                     onChange={(e) => setProfile({ ...profile, soilType: e.target.value as any })}
-                    className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#B8FF3D] focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
                   >
                     {SOIL_TYPE_OPTIONS.map((opt) => (
                       <option key={opt.id} value={opt.id}>
@@ -428,7 +428,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                   <select
                     value={profile.irrigation}
                     onChange={(e) => setProfile({ ...profile, irrigation: e.target.value as any })}
-                    className="w-full px-3 py-2 rounded-xl bg-[#0B1626] border border-white/15 text-white text-xs focus:border-[#B8FF3D] focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
                   >
                     {IRRIGATION_OPTIONS.map((opt) => (
                       <option key={opt.id} value={opt.id}>
@@ -447,7 +447,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               {/* Previous Crops Cultivated */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <Sprout className="w-4 h-4 text-[#B8FF3D]" />
+                  <Sprout className="w-4 h-4 text-[#22C55E]" />
                   <label className="text-xs font-mono text-white font-bold">
                     {isBn ? 'অতীতে আপনি কি কি ফসল চাষ করেছেন?' : 'What crops have you cultivated earlier?'}
                   </label>
@@ -463,8 +463,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     const catCrops = CROPS.filter((c) => c.category_id === cat.id);
                     if (catCrops.length === 0) return null;
                     return (
-                      <div key={cat.id} className="p-3 rounded-xl bg-[#050B14] border border-white/5">
-                        <div className="text-[11px] font-mono font-bold text-[#00E5FF] mb-2 uppercase tracking-wider">
+                      <div key={cat.id} className="p-3 rounded-xl bg-[#0A0A0A] border border-[#262626]">
+                        <div className="text-[11px] font-mono font-bold text-[#FAFAFA] mb-2 uppercase tracking-wider">
                           {isBn ? cat.name_bn : cat.name_en}
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -477,8 +477,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                                 onClick={() => toggleCrop(crop.id)}
                                 className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer border ${
                                   selected
-                                    ? 'bg-[#B8FF3D]/15 border-[#B8FF3D] text-[#B8FF3D] font-bold shadow-sm'
-                                    : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                                    ? 'bg-[#22C55E]/15 border-[#22C55E] text-[#22C55E] font-bold shadow-sm'
+                                    : 'bg-white/5 border-[#262626] text-slate-300 hover:bg-white/10'
                                 }`}
                               >
                                 {selected ? '✓ ' : '+ '}
@@ -494,7 +494,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               </div>
 
               {/* Past Disasters / Damages Experienced */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-[#262626]">
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle className="w-4 h-4 text-amber-400" />
                   <label className="text-xs font-mono text-white font-bold">
@@ -522,7 +522,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                             ? opt.id === 'none'
                               ? 'bg-emerald-500/15 border-emerald-400 text-emerald-300 font-bold'
                               : 'bg-amber-500/15 border-amber-400 text-amber-200 font-bold'
-                            : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                            : 'bg-white/5 border-[#262626] text-slate-300 hover:bg-white/10'
                         }`}
                       >
                         <span className={`w-3.5 h-3.5 rounded flex items-center justify-center text-[10px] border ${
@@ -553,14 +553,14 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       ? 'যেমন: গত বছর খরার কারণে ফলন কম হয়েছিল, বা বৃষ্টির অভাবে সেচ খরচ বেড়েছিল...'
                       : 'e.g. Drought lowered mustard yields last winter, or excessive monsoon delayed sowing...'
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:border-[#00E5FF] focus:outline-none transition-colors"
+                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Primary Farming Goal */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-[#262626]">
                 <div className="flex items-center gap-2 mb-2">
-                  <Target className="w-4 h-4 text-[#00E5FF]" />
+                  <Target className="w-4 h-4 text-[#FAFAFA]" />
                   <label className="text-xs font-mono text-white font-bold">
                     {isBn ? 'চাষে আপনার প্রধান চাহিদা কী?' : 'Your Primary Farming Goal'}
                   </label>
@@ -575,12 +575,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                         onClick={() => setProfile({ ...profile, primaryGoal: goal.id as any })}
                         className={`flex items-center gap-2 p-2.5 rounded-xl text-xs font-mono text-left transition-all cursor-pointer border ${
                           selected
-                            ? 'bg-[#00E5FF]/15 border-[#00E5FF] text-[#00E5FF] font-bold shadow-sm'
-                            : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
+                            ? 'bg-[#22C55E]/10 border-[#22C55E]/40 text-[#22C55E] font-semibold'
+                            : 'bg-white/5 border-[#262626] text-slate-300 hover:bg-white/10'
                         }`}
                       >
                         <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center border ${
-                          selected ? 'bg-[#00E5FF] border-[#00E5FF]' : 'border-white/30'
+                          selected ? 'bg-[#22C55E] border-[#22C55E]' : 'border-[#404040]'
                         }`}>
                           {selected && <span className="w-1.5 h-1.5 rounded-full bg-black" />}
                         </span>
@@ -596,10 +596,10 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
           {/* TAB 3: ACCOUNT & SESSION */}
           {activeTab === 'account' && (
             <div className="space-y-4 animate-fadeIn">
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/5 space-y-3 text-xs font-mono">
+              <div className="p-4 rounded-2xl bg-[#0A0A0A] border border-[#262626] space-y-3 text-xs font-mono">
                 <div className="flex items-center justify-between text-slate-300">
                   <div className="flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-[#00E5FF]" />
+                    <Shield className="w-4 h-4 text-[#FAFAFA]" />
                     <span className="text-slate-400">{isBn ? 'অথেনটিকেশন প্রদানকারী' : 'Auth Provider'}:</span>
                   </div>
                   <span className="text-white font-bold capitalize">
@@ -609,10 +609,10 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
 
                 <div className="flex items-center justify-between text-slate-300">
                   <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-[#B8FF3D]" />
+                    <Mail className="w-4 h-4 text-[#22C55E]" />
                     <span className="text-slate-400">{isBn ? 'অ্যাকাউন্ট স্ট্যাটাস' : 'Account Status'}:</span>
                   </div>
-                  <span className="text-[#B8FF3D] font-bold">
+                  <span className="text-[#22C55E] font-bold">
                     {isGuest
                       ? isBn ? 'গেস্ট এক্সেস' : 'Guest Access'
                       : emailConfirmed
@@ -633,7 +633,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               </div>
 
               {/* Automated Alert Toggles */}
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/5 space-y-3">
+              <div className="p-4 rounded-2xl bg-[#0A0A0A] border border-[#262626] space-y-3">
                 <span className="text-xs font-mono font-bold text-white uppercase tracking-wider block">
                   {isBn ? 'স্বয়ংক্রিয় কৃষি সতর্কতা সেটিংস' : 'Field Alert Notifications'}
                 </span>
@@ -653,7 +653,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                         type="button"
                         onClick={handleSendTestAlert}
                         disabled={sendingTestAlert}
-                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] hover:text-cyan-200 text-xs font-mono font-bold transition-all disabled:opacity-50 cursor-pointer shadow-sm"
+                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[#262626] bg-[#0A0A0A] hover:bg-[#1a1a1a] text-[#FAFAFA] text-xs font-mono font-medium transition-colors disabled:opacity-50 cursor-pointer"
                       >
                         {sendingTestAlert ? (
                           <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -676,8 +676,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               </div>
 
               {/* Data Safety & Explanatory Banner */}
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-400 flex items-start gap-2.5">
-                <FileText className="w-4 h-4 text-[#B8FF3D] flex-shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-xl bg-white/5 border border-[#262626] text-xs text-slate-400 flex items-start gap-2.5">
+                <FileText className="w-4 h-4 text-[#22C55E] flex-shrink-0 mt-0.5" />
                 <p>
                   {isBn
                     ? 'আপনার খামারের তথ্য, অতীত ফসল ও দুর্যোগের অভিজ্ঞতা আপনার ডিভাইসে ও সেশনে নিরাপদে সংরক্ষিত থাকে। এটি সরাসরি নাসা আর্থ অবজারভেশন ও মৃত্তিকা ডেটার সাথে যুক্ত হয়ে সর্বোত্তম ফসল সুপারিশে ব্যবহৃত হয়।'
@@ -686,7 +686,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               </div>
 
               {/* Sign out section */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
                 <div>
                   <span className="text-xs font-mono font-bold text-white block">
                     {isBn ? 'অ্যাকাউন্ট সেশন বন্ধ' : 'Session Management'}
@@ -709,10 +709,10 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
           )}
 
           {/* Sticky Form Save Footer */}
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between bg-[#0B1626]">
+          <div className="pt-4 border-t border-[#262626] flex items-center justify-between bg-[#141414]">
             <div className="flex items-center gap-2">
               {savedToast && (
-                <span className="inline-flex items-center gap-1 text-xs font-mono text-[#B8FF3D] animate-fadeIn">
+                <span className="inline-flex items-center gap-1 text-xs font-mono text-[#22C55E] animate-fadeIn">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>{isBn ? 'প্রোফাইল সফলভাবে সংরক্ষিত!' : 'Profile saved successfully!'}</span>
                 </span>
@@ -723,7 +723,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
               <a
                 href="#/profile"
                 onClick={onClose}
-                className="px-3 py-2 rounded-xl bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-xs font-mono text-[#00E5FF] transition-colors border border-[#00E5FF]/30 hidden sm:inline-flex items-center gap-1"
+                className="px-3 py-2 rounded-xl bg-[#0A0A0A] hover:bg-[#1a1a1a] text-xs font-mono text-[#A3A3A3] hover:text-[#FAFAFA] transition-colors border border-[#262626] hidden sm:inline-flex items-center gap-1"
               >
                 <span>{isBn ? 'সম্পূর্ণ পৃষ্ঠা ↗' : 'Full Page ↗'}</span>
               </a>
@@ -738,7 +738,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
 
               <button
                 type="submit"
-                className="px-4 sm:px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer"
+                className="px-4 sm:px-5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-1.5 transition-all  cursor-pointer"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{isBn ? 'সংরক্ষণ' : 'Save'}</span>

@@ -50,12 +50,12 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="border-b border-white/10 pb-4">
-        <h2 className="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5 text-amber-400" />
+      <div className="border-b border-[#262626] pb-4">
+        <h2 className="font-display text-lg font-semibold text-[#FAFAFA] flex items-center gap-2">
+          <AlertTriangle className="w-5 h-5 text-[#F59E0B]" />
           <span>{isBn ? 'অতীতের প্রাকৃতিক দুর্যোগ ও ক্ষতি' : 'Past Hazard Exposure & Crop Loss'}</span>
         </h2>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs text-[#737373] mt-1">
           {isBn
             ? 'অতীতে আপনার এলাকায় যেসব প্রাকৃতিক দুর্যোগের শিকার হয়েছেন তা চিহ্নিত করুন। আমাদের ঝুঁকি অ্যালগরিদম এই অভিজ্ঞতা বিবেচনায় রাখবে।'
             : 'Select environmental hazards that previously damaged your crops so AgriOrbit factors vulnerability into recommendations.'}
@@ -63,7 +63,7 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
       </div>
 
       {/* Hazard Chips Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
         {PAST_DAMAGE_OPTIONS.map((opt) => {
           const isSelected =
             pastDamages.includes(opt.id) ||
@@ -72,7 +72,6 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
             (opt.id === 'pest_outbreak' && pastDamages.includes('pest_attack'));
 
           const IconComponent = HAZARD_ICONS[opt.id] || AlertTriangle;
-          const isNone = opt.id === 'none';
 
           return (
             <button
@@ -81,39 +80,27 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
               role="checkbox"
               aria-checked={isSelected}
               onClick={() => onToggleDamage(opt.id)}
-              className={`min-h-[52px] px-4 py-3 rounded-2xl flex items-center justify-between text-left transition-all cursor-pointer border select-none ${
+              className={`min-h-[48px] px-3.5 py-2.5 rounded-lg flex items-center justify-between text-left transition-colors cursor-pointer border select-none ${
                 isSelected
-                  ? isNone
-                    ? 'bg-emerald-500/15 border-emerald-400 text-emerald-200 font-bold shadow-lg shadow-emerald-500/10'
-                    : 'bg-amber-500/15 border-amber-400 text-amber-200 font-bold shadow-lg shadow-amber-500/10'
-                  : 'bg-[#0B1626] border-white/10 text-slate-300 hover:border-white/20 hover:bg-white/[0.04]'
+                  ? 'bg-[#141414] border-[#22C55E] text-[#FAFAFA]'
+                  : 'bg-[#0A0A0A] border-[#262626] text-[#A3A3A3] hover:border-[#404040] hover:text-[#FAFAFA]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                    isSelected
-                      ? isNone
-                        ? 'bg-emerald-400/20 text-emerald-300'
-                        : 'bg-amber-400/20 text-amber-300'
-                      : 'bg-white/5 text-slate-400'
-                  }`}
-                >
-                  <IconComponent className="w-4 h-4" />
+              <div className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded flex items-center justify-center shrink-0 bg-[#141414] border border-[#262626] text-[#737373]">
+                  <IconComponent className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-sm font-medium">{isBn ? opt.bn : opt.en}</span>
+                <span className="text-xs font-medium">{isBn ? opt.bn : opt.en}</span>
               </div>
 
               <div
-                className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 text-xs transition-all border ${
+                className={`w-4 h-4 rounded flex items-center justify-center shrink-0 text-xs transition-colors border ${
                   isSelected
-                    ? isNone
-                      ? 'bg-emerald-400 text-black border-emerald-400'
-                      : 'bg-amber-400 text-black border-amber-400'
-                    : 'border-white/20 bg-white/5 text-transparent'
+                    ? 'bg-[#22C55E] text-black border-[#22C55E]'
+                    : 'border-[#262626] bg-transparent text-transparent'
                 }`}
               >
-                {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
               </div>
             </button>
           );
@@ -122,7 +109,7 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
 
       {/* Notes Box */}
       <div>
-        <label className="block text-xs font-mono font-semibold text-slate-300 mb-2 uppercase tracking-wider">
+        <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
           {isBn ? 'ক্ষতির অতিরিক্ত বিবরণ বা স্মৃতিকথা (ঐচ্ছিক)' : 'Past Experience & Notes (Optional)'}
         </label>
         <textarea
@@ -132,9 +119,9 @@ export const PastHazardsSection: React.FC<PastHazardsSectionProps> = ({
           placeholder={
             isBn
               ? 'যেমন: গত বছর খরার কারণে বোরো মৌসুমে সেচ খরচ বেড়েছিল, অথবা আগাম বন্যায় আমনের চারা নষ্ট হয়েছিল...'
-              : 'e.g. In 2024, unexpected drought increased irrigation bills by 30% during the Boro season...'
+              : 'e.g. In 2024, unexpected drought increased irrigation bills during the Boro season...'
           }
-          className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white text-base focus:border-[#00E5FF] focus:outline-none transition-colors"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none transition-colors placeholder:text-[#737373]"
         />
       </div>
     </div>

@@ -79,11 +79,11 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="px-4 py-2.5 rounded-xl bg-[#0B1626] hover:bg-[#00E5FF]/10 border border-[#00E5FF]/40 hover:border-[#00E5FF] text-[#00E5FF] hover:text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md group whitespace-nowrap"
+        className="px-4 py-2.5 rounded-lg bg-[#0A0A0A] hover:bg-[#1a1a1a] border border-[#262626] text-[#FAFAFA] font-medium text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer group whitespace-nowrap"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >
-        <MessageSquare className="w-3.5 h-3.5 text-[#00E5FF] group-hover:scale-110 transition-transform" />
+        <MessageSquare className="w-3.5 h-3.5 text-[#22C55E]" />
         <span>{isEn ? 'Send via SMS' : 'এসএমএস পাঠান'}</span>
       </button>
 
@@ -92,37 +92,37 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
         <div
           role="dialog"
           aria-label={isEn ? 'SMS Advisory Preview' : 'এসএমএস পরামর্শ প্রাকদর্শন'}
-          className="absolute bottom-full mb-3 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-50 w-80 max-w-[92vw] rounded-2xl border border-white/20 bg-[#0B1626]/95 backdrop-blur-xl p-4 shadow-2xl shadow-black/80 animate-in fade-in zoom-in-95 duration-200"
+          className="absolute bottom-full mb-3 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-50 w-80 max-w-[92vw] rounded-xl border border-[#262626] bg-[#141414] p-4 shadow-xl"
         >
           {/* Header */}
-          <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10">
+          <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#262626]">
             <div className="flex items-center gap-2 text-xs font-mono font-bold text-white">
-              <Smartphone className="w-4 h-4 text-[#00E5FF]" />
+              <Smartphone className="w-4 h-4 text-[#FAFAFA]" />
               <span>{isEn ? 'CELLULAR DISPATCH (SMS)' : 'সেলুলার এসএমএস বার্তা'}</span>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-lg hover:bg-white/10 text-[#8FA3B8] hover:text-white transition-colors"
+              className="p-1 rounded-lg hover:bg-white/10 text-[#A3A3A3] hover:text-white transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
           </div>
 
           {/* SMS Body Bubble (Mock Mobile Phone Screen Preview) */}
-          <div className="relative rounded-xl bg-[#050B14] p-3.5 border border-white/10 text-xs font-mono text-slate-200 leading-relaxed shadow-inner">
-            <div className="flex items-center justify-between text-[10px] text-[#8FA3B8] mb-1.5 pb-1 border-b border-white/5">
-              <span className="text-[#B8FF3D] font-bold">AgriOrbit Advisory</span>
+          <div className="relative rounded-lg bg-[#0A0A0A] p-3 border border-[#262626] text-xs font-mono text-[#FAFAFA] leading-relaxed">
+            <div className="flex items-center justify-between text-[10px] text-[#A3A3A3] mb-1.5 pb-1 border-b border-[#262626]">
+              <span className="text-[#22C55E] font-bold">AgriOrbit Advisory</span>
               <span>12:00 PM</span>
             </div>
 
-            <p className="font-editorial text-xs text-white selection:bg-[#B8FF3D]/40">
+            <p className="font-editorial text-xs text-white selection:bg-[#22C55E]/20">
               "{smsText}"
             </p>
 
             {/* Character counter bar */}
-            <div className="mt-2.5 pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] text-[#8FA3B8]">
-              <span className="text-[#00E5FF]">
+            <div className="mt-2.5 pt-1.5 border-t border-[#262626] flex items-center justify-between text-[10px] text-[#A3A3A3]">
+              <span className="text-[#FAFAFA]">
                 {charCount}/{maxChars} chars
               </span>
               <span className="text-emerald-400 font-bold">
@@ -139,16 +139,16 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="+8801XXXXXXXXX"
-                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono placeholder:text-[#8FA3B8]/60 focus:outline-none focus:border-[#00E5FF]"
+                className="flex-1 bg-[#0A0A0A] border border-[#262626] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono placeholder:text-[#737373] focus:outline-none focus:border-[#404040]"
               />
               <button
                 type="submit"
                 disabled={sentStatus === 'sent'}
-                className="px-3 py-1.5 rounded-lg bg-[#00E5FF] hover:bg-[#00E5FF]/80 text-[#050B14] font-bold text-xs flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                className="px-3 py-1.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-xs flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
               >
                 {sentStatus === 'sent' ? (
                   <>
-                    <Check className="w-3 h-3 text-[#050B14]" />
+                    <Check className="w-3 h-3 text-black" />
                     <span>{isEn ? 'Sent!' : 'প্রেরিত!'}</span>
                   </>
                 ) : (
@@ -163,12 +163,12 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
             <button
               type="button"
               onClick={handleCopy}
-              className="w-full py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-[#8FA3B8] hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer font-mono"
+              className="w-full py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-xs text-[#A3A3A3] hover:text-white transition-colors flex items-center justify-center gap-1.5 cursor-pointer font-mono"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-[#B8FF3D]" />
-                  <span className="text-[#B8FF3D]">{isEn ? 'Copied to Clipboard!' : 'কপি সম্পন্ন!'}</span>
+                  <Check className="w-3.5 h-3.5 text-[#22C55E]" />
+                  <span className="text-[#22C55E]">{isEn ? 'Copied to Clipboard!' : 'কপি সম্পন্ন!'}</span>
                 </>
               ) : (
                 <>
@@ -180,7 +180,7 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
           </form>
 
           {/* Pointer tail for popup */}
-          <div className="absolute -bottom-2 sm:left-1/2 right-6 sm:-translate-x-1/2 w-3 h-3 bg-[#0B1626] border-r border-b border-white/20 rotate-45" />
+          <div className="absolute -bottom-2 sm:left-1/2 right-6 sm:-translate-x-1/2 w-3 h-3 bg-[#141414] border-r border-b border-[#262626] rotate-45" />
         </div>
       )}
     </div>

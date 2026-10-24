@@ -1,51 +1,59 @@
 @import "tailwindcss";
 
 /* ───────────── Design tokens ─────────────
-   Deep Navy base #050B14 · Surface #0B1626 · Lime #B8FF3D · Cyan #00E5FF */
+   Modern minimalist dark theme (Vercel / Linear / Apple style)
+   Background: #0A0A0A · Surface: #141414 · Border: #262626
+   Text: #FAFAFA (main) · #A3A3A3 (secondary) · #737373 (muted)
+   Accent: #22C55E (calm green)
+   Radius: 12px cards · 8px buttons/inputs */
 @theme {
   --font-sans: "Inter", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Inter", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --color-ink-950: #050b14;
-  --color-ink-900: #0b1626;
-  --color-ink-800: #101f36;
-  --color-ink-700: #182c4d;
-  --color-line: rgb(255 255 255 / 0.1);
+  --color-bg-base: #0a0a0a;
+  --color-bg-surface: #141414;
+  --color-bg-elevated: #1a1a1a;
+  --color-border-subtle: #262626;
+  --color-border-hover: #404040;
 
-  --color-orbit-bg: #050b14;
-  --color-orbit-surface: #0b1626;
-  --color-orbit-lime: #b8ff3d;
-  --color-orbit-cyan: #00e5ff;
-  --color-orbit-muted: #8fa3b8;
-  --color-orbit-danger: #ff5c5c;
+  --color-text-main: #fafafa;
+  --color-text-muted: #a3a3a3;
+  --color-text-dim: #737373;
 
-  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-pulse-dot: pulse-dot 2s ease-out infinite;
+  --color-accent: #22c55e;
+  --color-accent-hover: #16a34a;
+  --color-accent-amber: #f59e0b;
+  --color-accent-red: #ef4444;
+
+  /* Legacy mappings mapped to new clean tokens */
+  --color-orbit-bg: #0a0a0a;
+  --color-orbit-surface: #141414;
+  --color-orbit-lime: #22c55e;
+  --color-orbit-cyan: #22c55e;
+  --color-orbit-muted: #a3a3a3;
+  --color-orbit-danger: #ef4444;
+
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #141414;
+  --color-ink-800: #1a1a1a;
+  --color-ink-700: #262626;
+  --color-line: #262626;
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes pulse-dot {
-  0% { box-shadow: 0 0 0 0 rgb(184 255 61 / 0.6); }
-  100% { box-shadow: 0 0 0 8px rgb(184 255 61 / 0); }
-}
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ───────────── Base ───────────── */
 @layer base {
   html {
-    background: #050b14;
-    color: #ffffff;
+    background: #0a0a0a;
+    color: #fafafa;
     color-scheme: dark;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -56,11 +64,11 @@
   body {
     min-height: 100vh;
     font-family: var(--font-sans);
-    background-color: #050b14;
-    color: #ffffff;
+    background-color: #0a0a0a;
+    color: #fafafa;
     overflow-x: hidden;
     max-width: 100vw;
-    font-size: 1rem;
+    font-size: 0.9375rem; /* 15px */
     line-height: 1.5;
   }
   * {
@@ -69,7 +77,7 @@
   /* Bengali script typographical spacing */
   html:lang(bn) body { line-height: 1.55; }
   html:lang(bn) h1, html:lang(bn) h2 { line-height: 1.25; letter-spacing: 0; }
-  ::selection { background: rgb(184 255 61 / 0.3); color: #b8ff3d; }
+  ::selection { background: #22c55e; color: #000000; }
   section[id] { scroll-margin-top: 5rem; }
 
   /* Prevent auto-zooming on focus in iOS and mobile browsers */
@@ -79,37 +87,37 @@
     }
   }
 
-  /* ───────────── Native Select Dropdown Readability ───────────── */
+  /* Native Select Dropdown Readability */
   select {
     color-scheme: dark;
   }
 
   select option,
   select optgroup {
-    background-color: var(--color-orbit-surface, #0b1626);
-    color: #ffffff;
+    background-color: #141414;
+    color: #fafafa;
     font-family: var(--font-sans);
   }
 
   select optgroup {
-    font-weight: 700;
-    color: var(--color-orbit-muted, #8fa3b8);
-    background-color: var(--color-orbit-bg, #050b14);
+    font-weight: 600;
+    color: #737373;
+    background-color: #0a0a0a;
   }
 
   select option:checked {
-    background-color: var(--color-ink-800, #101f36);
-    color: var(--color-orbit-lime, #b8ff3d);
+    background-color: #1a1a1a;
+    color: #22c55e;
   }
 
   select option:hover,
   select option:focus {
-    background-color: var(--color-ink-700, #182c4d);
-    color: var(--color-orbit-cyan, #00e5ff);
+    background-color: #262626;
+    color: #fafafa;
   }
 
   select option:disabled {
-    color: var(--color-orbit-muted, #8fa3b8);
+    color: #737373;
   }
 }
 
@@ -117,7 +125,7 @@
 @layer components {
   .container-x {
     width: 100%;
-    max-width: 1240px;
+    max-width: 1160px;
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -128,17 +136,17 @@
     .container-x { padding-inline: 2rem; }
   }
 
-  /* Editorial dark surface */
+  /* Clean dark surface: 12px radius, #141414 background, #262626 border */
   .glass {
-    background: #0b1626;
-    border: 1px solid var(--color-line);
-    border-radius: 1.5rem;
-    box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.7);
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: none;
   }
   .tile {
-    background: #050b14;
-    border: 1px solid var(--color-line);
-    border-radius: 1rem;
+    background: #0a0a0a;
+    border: 1px solid #262626;
+    border-radius: 0.5rem; /* 8px */
   }
 
   .btn {
@@ -146,32 +154,33 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 0.75rem;
-    padding: 0.8rem 1.4rem;
-    font-weight: 700;
-    font-size: 0.92rem;
+    border-radius: 0.5rem; /* 8px */
+    padding: 0.6rem 1.15rem;
+    font-weight: 500;
+    font-size: 0.875rem;
     letter-spacing: -0.01em;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     white-space: nowrap;
+    cursor: pointer;
   }
-  .btn:hover { transform: translateY(-1.5px); }
   .btn-primary {
-    background: #b8ff3d;
-    color: #050b14;
-    box-shadow: 0 10px 25px -8px rgb(184 255 61 / 0.4);
+    background: #22c55e;
+    color: #000000;
+    font-weight: 600;
+    box-shadow: none;
   }
   .btn-primary:hover {
-    background: #c7ff5c;
-    box-shadow: 0 14px 30px -8px rgb(184 255 61 / 0.6);
+    background: #16a34a;
+    box-shadow: none;
   }
   .btn-ghost {
-    border: 1px solid rgb(255 255 255 / 0.14);
-    background: #0b1626;
-    color: #ffffff;
+    border: 1px solid #262626;
+    background: transparent;
+    color: #fafafa;
   }
   .btn-ghost:hover {
-    border-color: rgb(255 255 255 / 0.3);
-    background: #101f36;
+    border-color: #404040;
+    background: #1a1a1a;
   }
 
   .eyebrow {
@@ -179,46 +188,48 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     font-family: var(--font-mono);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #00e5ff;
+    color: #22c55e;
   }
-  html:lang(bn) .eyebrow { letter-spacing: 0.02em; font-size: 0.85rem; }
+  html:lang(bn) .eyebrow { letter-spacing: 0.02em; font-size: 0.8125rem; }
 
   .chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    border-radius: 999px;
-    padding: 0.3rem 0.75rem;
+    gap: 0.35rem;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.6rem;
     font-size: 0.75rem;
     font-weight: 500;
-    border: 1px solid var(--color-line);
-    background: rgb(255 255 255 / 0.04);
+    border: 1px solid #262626;
+    background: #141414;
+    color: #a3a3a3;
   }
 
+  /* No gradient headings — clean main text */
   .text-gradient {
-    background: linear-gradient(95deg, #ffffff 0%, #b8ff3d 50%, #00e5ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: #fafafa;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
   }
 
   .section-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.65rem, 5vw, 2.75rem);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: #ffffff;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: #fafafa;
   }
   .section-sub {
-    color: #cbd5e1;
-    font-size: 1.05rem;
-    line-height: 1.65;
-    max-width: 40rem;
+    color: #a3a3a3;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 38rem;
   }
 
   .font-display {
@@ -229,60 +240,29 @@
     font-family: var(--font-sans);
   }
 
-  /* Scrim overlays for authentic imagery with high contrast text protection */
+  /* Authentic photography scrim without heavy gradients */
   .scrim-hero {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(5, 11, 20, 0.96) 0%,
-        rgba(5, 11, 20, 0.90) 42%,
-        rgba(5, 11, 20, 0.65) 60%,
-        rgba(5, 11, 20, 0.25) 80%,
-        rgba(5, 11, 20, 0.12) 100%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(5, 11, 20, 0.75) 0%,
-        rgba(5, 11, 20, 0.20) 25%,
-        rgba(5, 11, 20, 0.30) 65%,
-        rgba(5, 11, 20, 0.85) 80%,
-        #050b14 100%
-      );
-  }
-
-  @media (max-width: 1023px) {
-    .scrim-hero {
-      background:
-        linear-gradient(
-          180deg,
-          rgba(5, 11, 20, 0.94) 0%,
-          rgba(5, 11, 20, 0.88) 45%,
-          rgba(5, 11, 20, 0.65) 70%,
-          rgba(5, 11, 20, 0.92) 90%,
-          #050b14 100%
-        );
-    }
+    background: rgba(10, 10, 10, 0.88);
   }
 
   .scrim-editorial-card {
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(5, 11, 20, 0.6) 40%,
-      rgba(5, 11, 20, 0.95) 100%
+      rgba(10, 10, 10, 0.75) 50%,
+      #0a0a0a 100%
     );
   }
 
   .live-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: #b8ff3d;
-    animation: var(--animate-pulse-dot);
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: #22c55e;
   }
 }
 
-/* Real Bangladesh map canvas */
+/* MapLibre Container */
 .agriorbit-map-container {
   width: 100%;
   height: 520px;
@@ -306,54 +286,49 @@
 }
 
 .agriorbit-field-marker {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 9999px;
-  background: #b8ff3d;
-  border: 3px solid #050b14;
-  box-shadow:
-    0 0 0 3px rgba(184, 255, 61, 0.35),
-    0 0 16px rgba(184, 255, 61, 0.6);
+  background: #22c55e;
+  border: 2px solid #0a0a0a;
   cursor: pointer;
 }
 
-/* MapLibre chrome tuned to the dark AgriOrbit UI */
+/* MapLibre controls */
 .maplibregl-ctrl-attrib {
-  background: rgba(5, 11, 20, 0.8) !important;
-  color: #8fa3b8 !important;
+  background: rgba(10, 10, 10, 0.85) !important;
+  color: #737373 !important;
   font-size: 10px;
 }
 .maplibregl-ctrl-attrib a {
-  color: #00e5ff !important;
+  color: #a3a3a3 !important;
 }
 .maplibregl-ctrl-group {
-  background: #0b1626 !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #141414 !important;
+  border: 1px solid #262626 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
 }
 .maplibregl-ctrl-group button {
-  background-color: #0b1626 !important;
+  background-color: #141414 !important;
 }
 .maplibregl-ctrl-group button span {
-  filter: invert(0.8);
+  filter: invert(0.85);
 }
 
-/* Editorial body font (modals, journey screens, advisories) */
 .font-editorial {
   font-family: var(--font-sans);
 }
 
-/* Horizontal scrim for side-by-side imagery + text */
 .scrim-horizontal {
   background: linear-gradient(
     90deg,
-    #050b14 0%,
-    rgba(5, 11, 20, 0.85) 45%,
+    #0a0a0a 0%,
+    rgba(10, 10, 10, 0.85) 50%,
     transparent 100%
   );
 }
 
-/* Hero minimap: explicit height, same deterministic sizing */
 .agriorbit-hero-map {
   width: 100%;
   height: 480px;
@@ -374,54 +349,14 @@
   height: 100% !important;
 }
 
-/* Quiet secondary district dots on the hero map */
 .agriorbit-hero-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 9999px;
-  background: #00e5ff;
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+  background: #22c55e;
   position: relative;
 }
-.agriorbit-hero-dot::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 9999px;
-  border: 1px solid rgba(0, 229, 255, 0.5);
-  animation: agriorbit-ping 2.8s ease-out infinite;
-}
-@keyframes agriorbit-ping {
-  0% {
-    transform: scale(0.5);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
 
-/* Orbit-to-field arc drawing */
-.agriorbit-orbit-arc .orbit-path {
-  stroke: rgba(0, 229, 255, 0.55);
-  stroke-dasharray: 3 4;
-  animation: agriorbit-dash 6s linear infinite;
-}
-@keyframes agriorbit-dash {
-  to {
-    stroke-dashoffset: -28;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .agriorbit-hero-dot::after,
-  .agriorbit-orbit-arc .orbit-path {
-    animation: none;
-  }
-}
-
-/* Mobile scrollbar utilities */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

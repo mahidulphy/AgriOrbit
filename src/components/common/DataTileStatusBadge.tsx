@@ -61,7 +61,7 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
   const statusStyles = {
     live: {
       badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-      dot: 'bg-emerald-400 animate-pulse',
+      dot: 'bg-emerald-400 ',
     },
     cached: {
       badge: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
@@ -73,7 +73,7 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
     },
     simulated: {
       badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-      dot: 'bg-purple-400 animate-pulse',
+      dot: 'bg-purple-400 ',
     },
     unavailable: {
       badge: 'bg-slate-500/15 text-slate-400 border-slate-500/30',

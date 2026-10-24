@@ -69,30 +69,29 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="border-b border-white/10 pb-4">
-        <h2 className="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-          <User className="w-5 h-5 text-[#00E5FF]" />
-          <span>{isBn ? 'ব্যক্তিগত ও যোগাযোগ তথ্য' : 'Personal & Contact Information'}</span>
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+      <div>
+        <h3 className="font-display font-semibold text-lg text-[#FAFAFA]">
+          {isBn ? 'ব্যক্তিগত তথ্য ও যোগাযোগের মাধ্যম' : 'Personal & Contact Information'}
+        </h3>
+        <p className="text-xs text-[#737373] mt-1">
           {isBn
-            ? 'আপনার পরিচিতি ও যোগাযোগের তথ্য হালনাগাদ রাখুন।'
+            ? 'আপনার পরিচিতি ও সরাসরি যোগাযোগের মাধ্যমগুলো হালনাগাদ রাখুন।'
             : 'Keep your identity and direct communication channels up to date.'}
         </p>
       </div>
 
       {/* Avatar Upload (If enabled) */}
       {showAvatarUpload && (
-        <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#262626]">
           <div className="relative group">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
                 alt={fullName || 'Avatar'}
-                className="w-16 h-16 rounded-2xl object-cover border-2 border-[#B8FF3D]/50 shadow-md"
+                className="w-14 h-14 rounded-lg object-cover border border-[#262626]"
               />
             ) : (
-              <div className="w-16 h-16 rounded-2xl bg-[#00E5FF]/10 border-2 border-[#00E5FF]/40 flex items-center justify-center text-xl font-bold font-mono text-[#00E5FF]">
+              <div className="w-14 h-14 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-lg font-bold font-mono text-[#FAFAFA]">
                 {fullName ? fullName.charAt(0).toUpperCase() : 'F'}
               </div>
             )}
@@ -100,13 +99,13 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingAvatar}
-              className="absolute inset-0 bg-black/60 rounded-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer disabled:opacity-50"
+              className="absolute inset-0 bg-black/60 rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer disabled:opacity-50"
               title={isBn ? 'ছবি পরিবর্তন করুন' : 'Change avatar'}
             >
               {uploadingAvatar ? (
-                <Loader2 className="w-5 h-5 text-white animate-spin" />
+                <Loader2 className="w-4 h-4 text-white animate-spin" />
               ) : (
-                <Camera className="w-5 h-5 text-white" />
+                <Camera className="w-4 h-4 text-white" />
               )}
             </button>
             <input
@@ -118,87 +117,82 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
             />
           </div>
           <div>
-            <span className="text-sm font-semibold text-white block">
+            <span className="text-sm font-semibold text-[#FAFAFA] block">
               {isBn ? 'প্রোফাইল ছবি' : 'Profile Photo'}
             </span>
-            <span className="text-xs text-slate-400 block mt-0.5">
+            <span className="text-xs text-[#737373] block mt-0.5">
               {isBn ? 'ছবি পরিবর্তন করতে ট্যাপ করুন' : 'Click the avatar to upload a new photo'}
             </span>
           </div>
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+      <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
         {/* Full Name */}
         <div>
-          <label className="block text-xs font-mono font-semibold text-slate-300 mb-2 uppercase tracking-wider">
-            {isBn ? 'কৃষকের পূর্ণ নাম' : 'Full Name'} <span className="text-[#00E5FF]">*</span>
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+            {isBn ? 'কৃষকের পূর্ণ নাম' : 'Full Name'} <span className="text-[#22C55E]">*</span>
           </label>
           <div className="relative">
-            <User className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400 pointer-events-none" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] pointer-events-none" />
             <input
               type="text"
               value={fullName}
               onChange={(e) => onFullNameChange(e.target.value)}
               placeholder={isBn ? 'যেমন: মোহাম্মদ শহিদুল ইসলাম' : 'e.g. Mohammad Shahidul Islam'}
-              className={`w-full min-h-[48px] pl-11 pr-4 py-3 rounded-xl bg-white/5 border text-white text-base focus:border-[#B8FF3D] focus:outline-none transition-colors ${
-                errors?.fullName ? 'border-red-400 bg-red-500/5' : 'border-white/15'
+              className={`w-full min-h-[44px] pl-9 pr-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none transition-colors ${
+                errors?.fullName ? 'border-[#EF4444] bg-[#EF4444]/5' : 'border-[#262626]'
               }`}
               required
             />
           </div>
           {errors?.fullName && (
-            <p className="text-xs text-red-400 mt-1.5 font-mono">{errors.fullName}</p>
+            <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.fullName}</p>
           )}
         </div>
 
         {/* Account Email (Read-only) */}
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider">
               {isBn ? 'ইমেইল ঠিকানা' : 'Account Email'}
             </label>
-            <span className="text-[10px] font-mono text-[#00E5FF] bg-[#00E5FF]/10 px-2 py-0.5 rounded border border-[#00E5FF]/20">
-              {isBn ? 'সুরক্ষিত' : 'Locked'}
+            <span className="text-[10px] font-mono text-[#737373]">
+              {isBn ? 'নিবন্ধিত অ্যাকাউন্ট' : 'Verified'}
             </span>
           </div>
           <div className="relative">
-            <Mail className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400 pointer-events-none" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] pointer-events-none" />
             <input
               type="email"
-              value={email}
+              value={email || (isBn ? 'গেস্ট হিসেবে সক্রিয়' : 'active_guest@agriorbit.local')}
               readOnly
-              disabled
-              className="w-full min-h-[48px] pl-11 pr-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-slate-400 text-base cursor-not-allowed"
-              placeholder="farmer@example.com"
+              className="w-full min-h-[44px] pl-9 pr-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#737373] text-sm cursor-not-allowed font-mono"
             />
           </div>
-          <p className="text-[11px] text-slate-500 mt-1 font-mono">
-            {isBn ? 'গুগল বা অথ অ্যাকাউন্টের সাথে যুক্ত' : 'Linked to your Google / Auth account'}
-          </p>
         </div>
 
         {/* Phone Number */}
         <div>
-          <label className="block text-xs font-mono font-semibold text-slate-300 mb-2 uppercase tracking-wider">
-            {isBn ? 'মোবাইল নম্বর (ঐচ্ছিক)' : 'Contact Phone (Optional)'}
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+            {isBn ? 'মোবাইল নম্বর' : 'Mobile Number'}
           </label>
           <div className="relative">
-            <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400 pointer-events-none" />
+            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] pointer-events-none" />
             <input
               type="tel"
               value={phone}
               onChange={(e) => onPhoneChange(e.target.value)}
-              placeholder="017XX-XXXXXX"
-              className={`w-full min-h-[48px] pl-11 pr-4 py-3 rounded-xl bg-white/5 border text-white text-base focus:border-[#B8FF3D] focus:outline-none transition-colors ${
-                errors?.phone ? 'border-red-400 bg-red-500/5' : 'border-white/15'
+              placeholder="01XXXXXXXXX"
+              className={`w-full min-h-[44px] pl-9 pr-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border text-[#FAFAFA] text-sm font-mono focus:border-[#22C55E] focus:outline-none transition-colors ${
+                errors?.phone ? 'border-[#EF4444] bg-[#EF4444]/5' : 'border-[#262626]'
               }`}
             />
           </div>
           {errors?.phone ? (
-            <p className="text-xs text-red-400 mt-1.5 font-mono">{errors.phone}</p>
+            <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.phone}</p>
           ) : (
-            <p className="text-[11px] text-slate-500 mt-1 font-mono">
+            <p className="text-[11px] text-[#737373] mt-1 font-mono">
               {isBn ? 'জরুরি আবহাওয়া সতর্কতার জন্য' : 'Used for urgent weather broadcast alerts'}
             </p>
           )}
@@ -206,31 +200,31 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
 
         {/* Preferred Communication Method */}
         <div>
-          <label className="block text-xs font-mono font-semibold text-slate-300 mb-2 uppercase tracking-wider">
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
             {isBn ? 'আবহাওয়া সতর্কতার মাধ্যম' : 'Preferred Alert Channel'}
           </label>
           <div className="relative">
-            <Bell className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-400 pointer-events-none" />
+            <Bell className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373] pointer-events-none" />
             <select
               value={communicationMethod}
               onChange={(e) => onCommunicationMethodChange(e.target.value as any)}
-              className="w-full min-h-[48px] pl-11 pr-4 py-3 rounded-xl bg-[#0B1626] border border-white/15 text-white text-base focus:border-[#B8FF3D] focus:outline-none cursor-pointer"
+              className="w-full min-h-[44px] pl-9 pr-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none cursor-pointer"
             >
               {COMMUNICATION_METHODS.map((method) => (
-                <option key={method.id} value={method.id}>
+                <option key={method.id} value={method.id} className="bg-[#141414] text-[#FAFAFA]">
                   {isBn ? method.bn : method.en}
                 </option>
               ))}
             </select>
           </div>
-          <p className="text-[11px] text-slate-500 mt-1 font-mono">
+          <p className="text-[11px] text-[#737373] mt-1 font-mono">
             {isBn ? 'কীভাবে কৃষি সতর্কতা পেতে চান' : 'How you prefer receiving farming updates'}
           </p>
         </div>
 
         {/* Automated Alert Toggles */}
-        <div className="sm:col-span-2 pt-4 border-t border-white/10 space-y-3">
-          <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+        <div className="sm:col-span-2 pt-4 border-t border-[#262626] space-y-3">
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider">
             {isBn ? 'স্বয়ংক্রিয় কৃষি সতর্কতা সেটিংস' : 'Automated Field Alert Settings'}
           </label>
 
@@ -252,22 +246,22 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
                 type="button"
                 onClick={handleSendTestAlert}
                 disabled={sendingTestAlert}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] hover:text-cyan-200 text-xs font-mono font-bold transition-all disabled:opacity-50 cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#262626] bg-[#0A0A0A] hover:bg-[#1A1A1A] text-[#FAFAFA] text-xs font-mono font-medium transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {sendingTestAlert ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-[#FAFAFA]" />
                 ) : (
-                  <Send className="w-4 h-4" />
+                  <Send className="w-3.5 h-3.5 text-[#22C55E]" />
                 )}
                 <span>{isBn ? 'আমাকে একটি পরীক্ষামূলক সতর্কতা পাঠান' : 'Send me a test alert'}</span>
               </button>
 
               {testAlertFeedback && (
                 <div
-                  className={`mt-2 p-2.5 rounded-xl border text-xs font-mono ${
+                  className={`mt-2 p-2.5 rounded-lg border text-xs font-mono ${
                     testAlertFeedback.ok
-                      ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300'
-                      : 'bg-amber-950/40 border-amber-500/40 text-amber-300'
+                      ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]'
+                      : 'bg-[#F59E0B]/10 border-[#F59E0B]/30 text-[#F59E0B]'
                   }`}
                 >
                   {testAlertFeedback.message}

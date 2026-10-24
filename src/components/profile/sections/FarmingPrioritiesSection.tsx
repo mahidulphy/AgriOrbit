@@ -26,15 +26,14 @@ export interface FarmingPrioritiesSectionProps {
 const ORDERED_PRIORITIES: {
   id: FarmerPriorityId;
   icon: React.ComponentType<{ className?: string }>;
-  color: string;
 }[] = [
-  { id: 'save_water', icon: Droplets, color: '#00E5FF' },
-  { id: 'improve_soil', icon: Sprout, color: '#B8FF3D' },
-  { id: 'lower_cost', icon: Coins, color: '#FCD34D' },
-  { id: 'reduce_risk', icon: ShieldCheck, color: '#A78BFA' },
-  { id: 'higher_income', icon: TrendingUp, color: '#34D399' },
-  { id: 'quick_harvest', icon: Clock, color: '#F472B6' },
-  { id: 'family_food', icon: Sprout, color: '#38BDF8' },
+  { id: 'save_water', icon: Droplets },
+  { id: 'improve_soil', icon: Sprout },
+  { id: 'lower_cost', icon: Coins },
+  { id: 'reduce_risk', icon: ShieldCheck },
+  { id: 'higher_income', icon: TrendingUp },
+  { id: 'quick_harvest', icon: Clock },
+  { id: 'family_food', icon: Sprout },
 ];
 
 export const FarmingPrioritiesSection: React.FC<FarmingPrioritiesSectionProps> = ({
@@ -49,37 +48,37 @@ export const FarmingPrioritiesSection: React.FC<FarmingPrioritiesSectionProps> =
   return (
     <div className="space-y-6">
       {/* Header & Counter */}
-      <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="border-b border-[#262626] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-            <Star className="w-5 h-5 text-[#B8FF3D]" />
+          <h2 className="font-display text-lg font-semibold text-[#FAFAFA] flex items-center gap-2">
+            <Star className="w-5 h-5 text-[#22C55E]" />
             <span>{isBn ? 'চাষের প্রধান চাহিদা' : 'Farming Goals & Priorities'}</span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs text-[#737373] mt-1">
             {isBn
               ? `আপনার প্রধান চাহিদাগুলো বেছে নিন (সর্বোচ্চ ${maxSelectable}টি)। আমাদের নিয়মগুলো সে অনুযায়ী ফসল সাজাবে।`
               : `Select your key goals (up to ${maxSelectable}). Our engine steers recommendations to match your targets.`}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
-          <span className="text-slate-400">{isBn ? 'নির্বাচিত:' : 'Selected:'}</span>
-          <span className={`font-bold ${selectedPriorities.length > 0 ? 'text-[#B8FF3D]' : 'text-slate-500'}`}>
+        <div className="flex items-center gap-2 self-start sm:self-auto px-3 py-1 rounded-md bg-[#0A0A0A] border border-[#262626] text-xs font-mono">
+          <span className="text-[#737373]">{isBn ? 'নির্বাচিত:' : 'Selected:'}</span>
+          <span className={`font-semibold ${selectedPriorities.length > 0 ? 'text-[#FAFAFA]' : 'text-[#737373]'}`}>
             {selectedPriorities.length} / {maxSelectable}
           </span>
         </div>
       </div>
 
       {error && (
-        <div className="p-3.5 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center gap-2 text-xs sm:text-sm text-red-200">
-          <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
+        <div className="p-3 rounded-lg bg-[#EF4444]/10 border border-[#EF4444]/30 flex items-center gap-2 text-xs text-[#EF4444]">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {/* Priority Cards Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {ORDERED_PRIORITIES.map(({ id, icon: Icon, color }) => {
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        {ORDERED_PRIORITIES.map(({ id, icon: Icon }) => {
           const meta = PRIORITY_META[id];
           const influence = PRIORITY_INFLUENCE[id];
           const isSelected = selectedPriorities.includes(id);
@@ -99,53 +98,46 @@ export const FarmingPrioritiesSection: React.FC<FarmingPrioritiesSectionProps> =
                   onTogglePriority(id);
                 }
               }}
-              className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between min-h-[140px] select-none text-left ${
+              className={`p-4 rounded-xl border transition-colors cursor-pointer flex flex-col justify-between min-h-[130px] select-none text-left ${
                 isPrimary
-                  ? 'bg-[#B8FF3D]/10 border-[#B8FF3D] shadow-lg shadow-[#B8FF3D]/10 ring-1 ring-[#B8FF3D]/40'
+                  ? 'bg-[#141414] border-[#22C55E]'
                   : isSecondary
-                  ? 'bg-[#00E5FF]/10 border-[#00E5FF] shadow-lg shadow-[#00E5FF]/10'
-                  : 'bg-[#0B1626] border-white/10 hover:border-white/20 hover:bg-white/[0.03]'
+                  ? 'bg-[#141414] border-[#A3A3A3]'
+                  : 'bg-[#0A0A0A] border-[#262626] hover:border-[#404040]'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: `${color}15`, color }}
-                    >
-                      <Icon className="w-4 h-4" />
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 bg-[#141414] border border-[#262626] text-[#A3A3A3]">
+                      <Icon className="w-3.5 h-3.5" />
                     </div>
-                    <span
-                      className={`text-sm sm:text-base font-bold font-display ${
-                        isPrimary ? 'text-[#B8FF3D]' : isSecondary ? 'text-[#00E5FF]' : 'text-white'
-                      }`}
-                    >
+                    <span className="text-sm font-semibold text-[#FAFAFA]">
                       {isBn ? meta.titleBn : meta.titleEn}
                     </span>
                   </div>
 
                   <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold transition-all border ${
+                    className={`w-5 h-5 rounded flex items-center justify-center shrink-0 text-xs transition-colors border ${
                       isPrimary
-                        ? 'bg-[#B8FF3D] text-black border-[#B8FF3D]'
+                        ? 'bg-[#22C55E] text-black border-[#22C55E]'
                         : isSecondary
-                        ? 'bg-[#00E5FF] text-black border-[#00E5FF]'
-                        : 'border-white/20 bg-white/5 text-transparent'
+                        ? 'bg-[#FAFAFA] text-black border-[#FAFAFA]'
+                        : 'border-[#262626] bg-transparent text-transparent'
                     }`}
                   >
-                    {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                    {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed mt-2 line-clamp-3">
+                <p className="text-xs text-[#737373] leading-relaxed line-clamp-3">
                   {isBn ? influence.bn : influence.en}
                 </p>
               </div>
 
               {isSelected && (
-                <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
-                  <span className={isPrimary ? 'text-[#B8FF3D] font-bold' : 'text-[#00E5FF]'}>
+                <div className="mt-3 pt-2 border-t border-[#262626] flex items-center justify-between text-[11px] font-mono">
+                  <span className={isPrimary ? 'text-[#22C55E] font-medium' : 'text-[#A3A3A3]'}>
                     {isPrimary
                       ? isBn
                         ? '★ প্রধান লক্ষ্য'
@@ -162,7 +154,7 @@ export const FarmingPrioritiesSection: React.FC<FarmingPrioritiesSectionProps> =
                         e.stopPropagation();
                         onSetPrimaryPriority(id);
                       }}
-                      className="text-xs text-[#00E5FF] hover:underline cursor-pointer py-0.5"
+                      className="text-xs text-[#737373] hover:text-[#FAFAFA] underline cursor-pointer"
                     >
                       {isBn ? 'প্রধান করুন' : 'Make Primary'}
                     </button>

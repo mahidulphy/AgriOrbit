@@ -70,63 +70,42 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
       top,
       left,
       right,
-      width: Math.min(dropdownWidth, viewportWidth - 16),
+      width: dropdownWidth,
     });
   };
 
-  // Recalculate on open, resize, scroll
-  useEffect(() => {
-    if (dropdownOpen) {
-      updatePosition();
-      window.addEventListener('resize', updatePosition);
-      window.addEventListener('scroll', updatePosition, true);
-      return () => {
-        window.removeEventListener('resize', updatePosition);
-        window.removeEventListener('scroll', updatePosition, true);
-      };
-    }
-  }, [dropdownOpen]);
-
-  // Close dropdown on outside click
   useEffect(() => {
     if (!dropdownOpen) return;
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node;
+
+    updatePosition();
+    const handleScrollOrResize = () => updatePosition();
+    window.addEventListener('resize', handleScrollOrResize);
+    window.addEventListener('scroll', handleScrollOrResize, true);
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
       if (
-        triggerButtonRef.current &&
-        !triggerButtonRef.current.contains(target) &&
         dropdownRef.current &&
-        !dropdownRef.current.contains(target)
+        !dropdownRef.current.contains(target) &&
+        triggerButtonRef.current &&
+        !triggerButtonRef.current.contains(target)
       ) {
         setDropdownOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+
     return () => {
+      window.removeEventListener('resize', handleScrollOrResize);
+      window.removeEventListener('scroll', handleScrollOrResize, true);
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, [dropdownOpen]);
 
-  // Close on Escape key
+  // Close dropdown on route change
   useEffect(() => {
-    if (!dropdownOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setDropdownOpen(false);
-        triggerButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [dropdownOpen]);
-
-  // Close on route change
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setDropdownOpen(false);
-    };
+    const handleRouteChange = () => setDropdownOpen(false);
     window.addEventListener('hashchange', handleRouteChange);
     window.addEventListener('popstate', handleRouteChange);
     return () => {
@@ -141,9 +120,9 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
     return (
       <a
         href="#/login"
-        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0B1626]/90 hover:bg-[#0B1626] border border-white/20 text-white text-xs font-mono font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer hover:border-[#00E5FF]/50"
+        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141414] hover:bg-[#1A1A1A] border border-[#262626] text-[#FAFAFA] text-xs font-mono font-medium transition-colors cursor-pointer"
       >
-        <LogIn className="w-3.5 h-3.5 text-[#00E5FF]" />
+        <LogIn className="w-3.5 h-3.5" />
         <span>{lang === 'en' ? 'Sign In' : 'লগইন'}</span>
       </a>
     );
@@ -161,10 +140,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
         ref={triggerButtonRef}
         type="button"
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className={`flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border transition-all cursor-pointer ${
+        className={`flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border transition-colors cursor-pointer ${
           dropdownOpen
-            ? 'bg-[#0B1626] border-[#B8FF3D]/50 text-white shadow-md shadow-black/30'
-            : 'bg-[#0B1626]/90 hover:bg-[#0B1626] border-white/20 text-slate-100 hover:text-white backdrop-blur-md shadow-sm'
+            ? 'bg-[#1A1A1A] border-[#404040] text-[#FAFAFA]'
+            : 'bg-[#141414] hover:bg-[#1A1A1A] border-[#262626] text-[#FAFAFA]'
         }`}
         aria-expanded={dropdownOpen}
         aria-haspopup="true"
@@ -173,29 +152,29 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
           <img
             src={avatarUrl}
             alt={farmerName}
-            className="w-7 h-7 rounded-lg object-cover border border-[#B8FF3D]/40"
+            className="w-6 h-6 rounded-md object-cover border border-[#262626]"
             loading="lazy"
           />
         ) : (
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center text-xs font-bold font-mono text-[#B8FF3D]">
+          <div className="w-6 h-6 rounded-md bg-[#0A0A0A] border border-[#262626] flex items-center justify-center text-[11px] font-mono font-medium text-[#FAFAFA]">
             {getInitials(farmerName)}
           </div>
         )}
 
         {!compact && (
-          <span className="text-xs font-medium text-slate-200 max-w-[120px] truncate hidden sm:inline">
+          <span className="text-xs font-medium text-[#FAFAFA] max-w-[120px] truncate hidden sm:inline">
             {farmerName}
           </span>
         )}
 
         <ChevronDown
-          className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
-            dropdownOpen ? 'rotate-180 text-[#B8FF3D]' : ''
+          className={`w-3.5 h-3.5 text-[#737373] transition-transform duration-200 ${
+            dropdownOpen ? 'rotate-180' : ''
           }`}
         />
       </button>
 
-      {/* Dropdown Menu attached to document.body via Portal (z-9999 ensures it floats above all page content) */}
+      {/* Dropdown Menu attached to document.body via Portal */}
       {dropdownOpen && typeof document !== 'undefined' && createPortal(
         <div
           ref={dropdownRef}
@@ -207,25 +186,25 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
             width: `${coords.width}px`,
             zIndex: 9999,
           }}
-          className="rounded-2xl bg-[#0B1626] border border-white/20 shadow-2xl p-2 text-xs animate-fadeIn backdrop-blur-2xl ring-1 ring-black/50"
+          className="rounded-xl bg-[#141414] border border-[#262626] shadow-xl p-1.5 text-xs animate-fadeIn"
           role="menu"
           aria-orientation="vertical"
         >
           {/* User info banner */}
-          <div className="p-2.5 pb-3 border-b border-white/10">
-            <span className="font-display font-bold text-white block truncate text-sm">
+          <div className="p-2.5 pb-3 border-b border-[#262626]">
+            <span className="font-display font-semibold text-[#FAFAFA] block truncate text-sm">
               {farmerName}
             </span>
-            <span className="text-[11px] font-mono text-slate-400 block truncate mt-0.5">
+            <span className="text-[11px] font-mono text-[#737373] block truncate mt-0.5">
               {user?.email || (isGuest ? (isBn ? 'গেস্ট মোড' : 'Guest Mode') : '')}
             </span>
             <div className="mt-2 flex items-center gap-1.5 flex-wrap">
-              <span className="inline-block text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[#00E5FF]">
+              <span className="inline-block text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#0A0A0A] border border-[#262626] text-[#737373]">
                 {provider === 'google' ? 'Google OAuth' : provider === 'email' ? 'Email Auth' : 'Guest'}
               </span>
               {districtName && (
-                <span className="inline-block text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#B8FF3D]/10 border border-[#B8FF3D]/25 text-[#B8FF3D]">
-                  📍 {districtName}
+                <span className="inline-block text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#0A0A0A] border border-[#262626] text-[#A3A3A3]">
+                  {districtName}
                 </span>
               )}
             </div>
@@ -236,10 +215,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
             <a
               href="#/profile"
               onClick={() => setDropdownOpen(false)}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#B8FF3D] hover:text-white hover:bg-[#B8FF3D]/10 font-bold transition-colors text-left cursor-pointer"
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#FAFAFA] hover:bg-[#1A1A1A] transition-colors text-left cursor-pointer"
               role="menuitem"
             >
-              <User className="w-4 h-4 text-[#B8FF3D]" />
+              <User className="w-4 h-4 text-[#A3A3A3]" />
               <span>{isBn ? 'সম্পূর্ণ প্রোফাইল ও জমি' : 'Farmer Profile & Fields'}</span>
             </a>
 
@@ -249,17 +228,17 @@ export const UserMenu: React.FC<UserMenuProps> = ({ compact = false }) => {
                 setDropdownOpen(false);
                 setProfileModalOpen(true);
               }}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-left cursor-pointer text-xs"
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#A3A3A3] hover:text-[#FAFAFA] hover:bg-[#1A1A1A] transition-colors text-left cursor-pointer text-xs"
               role="menuitem"
             >
-              <ShieldCheck className="w-4 h-4 text-[#00E5FF]" />
+              <ShieldCheck className="w-4 h-4 text-[#737373]" />
               <span>{isBn ? 'দ্রুত ওভারভিউ (Modal)' : 'Quick Overview Modal'}</span>
             </button>
 
             <button
               type="button"
               onClick={handleSignOut}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-red-300 hover:text-red-200 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors text-left cursor-pointer"
               role="menuitem"
             >
               <LogOut className="w-4 h-4" />

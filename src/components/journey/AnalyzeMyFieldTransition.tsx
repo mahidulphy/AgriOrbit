@@ -43,18 +43,18 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
   }, [streams.length]);
 
   return (
-    <div className="min-h-screen bg-[#050B14] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 font-editorial relative selection:bg-[#B8FF3D]/30 selection:text-[#B8FF3D]">
+    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col justify-center items-center p-4 sm:p-6 lg:p-8 font-editorial relative selection:bg-[#22C55E]/20 selection:text-[#22C55E]">
       {/* Editorial Card */}
-      <div className="w-full max-w-xl bg-[#0B1626] border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl relative z-10 text-center">
+      <div className="w-full max-w-xl bg-[#141414] border border-[#262626] rounded-xl p-8 sm:p-12 shadow-2xl relative z-10 text-center">
         {/* Orbit Icon */}
         <div className="relative w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center">
-            <Satellite className="w-7 h-7 text-[#00E5FF] animate-pulse" />
+          <div className="w-16 h-16 rounded-full bg-[#0A0A0A] border border-[#262626] flex items-center justify-center">
+            <Satellite className="w-7 h-7 text-[#FAFAFA] " />
           </div>
         </div>
 
         {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#00E5FF] font-mono font-semibold mb-3">
+        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[#FAFAFA] font-mono font-semibold mb-3">
           <span>{fieldLat.toFixed(2)}° N · {fieldLng.toFixed(2)}° E</span>
         </div>
 
@@ -62,7 +62,7 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
           {language === 'en' ? 'Calibrating Observations' : 'স্যাটেলাইটের তথ্য যাচাই করা হচ্ছে'}
         </h2>
 
-        <p className="text-xs sm:text-sm text-[#8FA3B8] max-w-md mx-auto mb-8 leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#A3A3A3] max-w-md mx-auto mb-8 leading-relaxed">
           {language === 'en'
             ? `Pairing Earth observations for ${district.nameEn} with your selected farming priority.`
             : `${district.nameBn}-এর স্যাটেলাইট তথ্যের সাথে আপনার চাহিদা মেলানো হচ্ছে।`}
@@ -79,33 +79,33 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
                 key={stream.name}
                 className={`p-3.5 rounded-xl border transition-all flex items-center justify-between gap-3 ${
                   isCompleted
-                    ? 'bg-[#050B14] border-[#B8FF3D]/30 text-white'
+                    ? 'bg-[#0A0A0A] border-[#22C55E]/40 text-[#FAFAFA]'
                     : isProcessing
-                    ? 'bg-[#050B14] border-[#00E5FF]/50 text-white'
-                    : 'bg-[#050B14] border-white/5 text-[#8FA3B8] opacity-60'
+                    ? 'bg-[#0A0A0A] border-[#404040] text-[#FAFAFA]'
+                    : 'bg-[#0A0A0A] border-[#262626] text-[#A3A3A3] opacity-60'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${
                       isCompleted
-                        ? 'bg-[#B8FF3D] text-[#050B14]'
+                        ? 'bg-[#22C55E] text-black'
                         : isProcessing
-                        ? 'bg-[#00E5FF] text-[#050B14]'
-                        : 'bg-white/10 text-[#8FA3B8]'
+                        ? 'bg-[#404040] text-white'
+                        : 'bg-white/10 text-[#A3A3A3]'
                     }`}
                   >
                     {isCompleted ? <Check className="w-3 h-3 stroke-[3]" /> : idx + 1}
                   </div>
                   <div>
                     <strong className="block text-xs font-bold text-white">{stream.name}</strong>
-                    <span className="text-[11px] text-[#8FA3B8]">
+                    <span className="text-[11px] text-[#A3A3A3]">
                       {language === 'en' ? stream.labelEn : stream.labelBn}
                     </span>
                   </div>
                 </div>
 
-                <span className="text-[10px] font-mono shrink-0 uppercase tracking-wider text-[#8FA3B8]">
+                <span className="text-[10px] font-mono shrink-0 uppercase tracking-wider text-[#A3A3A3]">
                   {isCompleted ? '✓' : isProcessing ? 'Reading…' : 'Queued'}
                 </span>
               </div>
@@ -116,7 +116,7 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
         {/* View Field Analysis Button */}
         <button
           onClick={onViewDashboard}
-          className="w-full py-4 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm tracking-tight transition-all duration-150 transform hover:-translate-y-0.5 shadow-xl shadow-[#B8FF3D]/20 flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full py-3.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-sm tracking-tight transition-colors flex items-center justify-center gap-2 cursor-pointer"
         >
           <span>{language === 'en' ? 'Open Field Analysis' : 'ফিল্ড অ্যানালাইসিস দেখুন'}</span>
           <ArrowRight className="w-4 h-4" />

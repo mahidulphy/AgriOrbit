@@ -169,36 +169,36 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   // Severity-dependent styling
   const severityColors = {
     danger: {
-      border: 'border-red-500/30',
-      bgGradient: 'from-red-950/40 via-[#0B1626]/95 to-red-950/30',
-      text: 'text-red-200',
+      border: 'border-[#262626]',
+      bgGradient: 'bg-[#0A0A0A]',
+      text: 'text-red-400',
       accent: 'text-red-400',
       ping: 'bg-red-400',
-      badge: 'bg-red-500/20 text-red-300 border-red-500/30',
+      badge: 'bg-red-500/10 text-red-400 border-red-500/20',
     },
     warning: {
-      border: 'border-amber-500/30',
-      bgGradient: 'from-amber-950/40 via-[#0B1626]/95 to-amber-950/30',
-      text: 'text-amber-200',
+      border: 'border-[#262626]',
+      bgGradient: 'bg-[#0A0A0A]',
+      text: 'text-amber-400',
       accent: 'text-amber-400',
       ping: 'bg-amber-400',
-      badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+      badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
     },
     info: {
-      border: 'border-[#00E5FF]/30',
-      bgGradient: 'from-cyan-950/40 via-[#0B1626]/95 to-cyan-950/30',
-      text: 'text-cyan-200',
-      accent: 'text-[#00E5FF]',
-      ping: 'bg-[#00E5FF]',
-      badge: 'bg-[#00E5FF]/20 text-cyan-300 border-[#00E5FF]/30',
+      border: 'border-[#262626]',
+      bgGradient: 'bg-[#0A0A0A]',
+      text: 'text-[#A3A3A3]',
+      accent: 'text-[#FAFAFA]',
+      ping: 'bg-[#737373]',
+      badge: 'bg-white/5 text-[#A3A3A3] border-[#262626]',
     },
     success: {
-      border: 'border-[#B8FF3D]/30',
-      bgGradient: 'from-emerald-950/30 via-[#0B1626]/95 to-emerald-950/20',
-      text: 'text-emerald-200',
-      accent: 'text-[#B8FF3D]',
-      ping: 'bg-[#B8FF3D]',
-      badge: 'bg-[#B8FF3D]/20 text-emerald-300 border-[#B8FF3D]/30',
+      border: 'border-[#262626]',
+      bgGradient: 'bg-[#0A0A0A]',
+      text: 'text-[#22C55E]',
+      accent: 'text-[#22C55E]',
+      ping: 'bg-[#22C55E]',
+      badge: 'bg-[#22C55E]/10 text-[#22C55E] border-[#22C55E]/20',
     },
   }[activeAdvisory.severity];
 
@@ -206,7 +206,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
     <div
       role="region"
       aria-label="Weather Advisory"
-      className={`relative w-full border-b ${severityColors.border} bg-gradient-to-r ${severityColors.bgGradient} backdrop-blur-md transition-all duration-300 ${className}`}
+      className={`relative w-full border-b border-[#262626] bg-[#0A0A0A] transition-all duration-200 ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         {/* COLLAPSED VIEW */}
@@ -214,12 +214,12 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
           <div className="flex items-start sm:items-center gap-3 flex-1 min-w-0">
             {/* Live Radar Pulse Indicator */}
             <div className="relative flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-              <span className={`absolute inline-flex h-3 w-3 rounded-full ${severityColors.ping} opacity-75 animate-ping`} />
+              
               <span className={`relative inline-flex items-center justify-center rounded-lg p-1.5 ${severityColors.badge} border`}>
                 {activeAdvisory.severity === 'danger' || activeAdvisory.severity === 'warning' ? (
                   <AlertTriangle className="w-4 h-4 text-amber-300 shrink-0" />
                 ) : (
-                  <CloudRain className="w-4 h-4 text-[#00E5FF] shrink-0" />
+                  <CloudRain className="w-4 h-4 text-[#FAFAFA] shrink-0" />
                 )}
               </span>
             </div>
@@ -230,7 +230,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${severityColors.badge}`}>
                   {isEn ? 'WEATHER ADVISORY' : 'আবহাওয়া বার্তা'}
                 </span>
-                <span className="text-[11px] font-mono text-[#8FA3B8] hidden md:inline">
+                <span className="text-[11px] font-mono text-[#A3A3A3] hidden md:inline">
                   {upazilaName} · {activeAdvisory.dataSourceStatus.isLive ? 'Live' : 'Cached Snapshot'}
                 </span>
               </div>
@@ -245,7 +245,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
             <button
               type="button"
               onClick={() => setIsExpanded((prev) => !prev)}
-              className="text-xs font-mono font-bold text-[#00E5FF] hover:text-white px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+              className="text-xs font-mono font-semibold text-[#FAFAFA] hover:text-white px-3 py-1.5 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] border border-[#262626] transition-colors inline-flex items-center gap-1.5 cursor-pointer"
             >
               <span>{isExpanded ? (isEn ? 'Collapse ↑' : 'সংক্ষেপ করুন ↑') : (isEn ? 'View Details →' : 'বিস্তারিত দেখুন →')}</span>
               {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -256,7 +256,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               onClick={handleDismiss}
               aria-label={isEn ? 'Dismiss alert' : 'সতর্কতা বাতিল করুন'}
               title={isEn ? 'Dismiss alert' : 'সতর্কতা বাতিল করুন'}
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#8FA3B8] hover:text-white transition-colors cursor-pointer border border-white/10"
+              className="p-1.5 rounded-lg bg-[#141414] hover:bg-[#1f1f1f] text-[#737373] hover:text-[#FAFAFA] transition-colors cursor-pointer border border-[#262626]"
             >
               <X className="w-4 h-4" />
             </button>
@@ -265,18 +265,18 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
         {/* EXPANDED SCIENTIFIC VIEW */}
         {isExpanded && (
-          <div className="mt-4 pt-4 border-t border-white/10 space-y-4 animate-in fade-in duration-300">
+          <div className="mt-4 pt-4 border-t border-[#262626] space-y-4 animate-in fade-in duration-300">
             {/* Header Title with Field Coordinates Context */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2">
               <div>
-                <span className="text-[10px] font-mono text-[#00E5FF] uppercase tracking-wider font-bold block mb-0.5">
+                <span className="text-[10px] font-mono text-[#FAFAFA] uppercase tracking-wider font-bold block mb-0.5">
                   {isEn ? 'FIELD ACTION ADVISORY' : 'জমির জন্য করণীয় পরামর্শ'}
                 </span>
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white">
                   {isEn ? activeAdvisory.titleEn : activeAdvisory.titleBn}
                 </h3>
               </div>
-              <div className="text-[11px] font-mono text-[#8FA3B8] bg-[#050B14]/80 px-3 py-1 rounded-lg border border-white/10 self-start sm:self-center">
+              <div className="text-[11px] font-mono text-[#737373] bg-[#0A0A0A] px-3 py-1 rounded-lg border border-[#262626] self-start sm:self-center">
                 <span>{upazilaName}</span>
                 <span className="mx-1.5 text-white/30">·</span>
                 <span>{lat.toFixed(2)}°N, {lng.toFixed(2)}°E</span>
@@ -286,7 +286,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
             {/* 3 SCIENTIFIC TILES */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
               {/* TILE 1: NASA POWER (precipitation) Observation */}
-              <div className="p-4 rounded-2xl bg-[#0B1626]/90 border border-white/10 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
@@ -295,18 +295,18 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                       date={activeAdvisory.gpm.updatedAt}
                       language={language}
                     />
-                    <span className="text-[10px] font-mono text-[#8FA3B8]">
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">
                       {activeAdvisory.gpm.spatialResolution}
                     </span>
                   </div>
 
-                  <span className="text-xs text-[#8FA3B8] block font-mono">
+                  <span className="text-xs text-[#A3A3A3] block font-mono">
                     {isEn ? 'Recent Observed Rainfall' : 'সাম্প্রতিক বৃষ্টিপাত পর্যবেক্ষণ'}
                   </span>
 
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="font-mono text-2xl font-bold text-white">
-                      {activeAdvisory.gpm.recentRain7dMm} <span className="text-xs font-normal text-[#8FA3B8]">mm</span>
+                      {activeAdvisory.gpm.recentRain7dMm} <span className="text-xs font-normal text-[#A3A3A3]">mm</span>
                     </span>
                     <span
                       className={`text-xs font-bold font-mono px-2 py-0.5 rounded ${
@@ -321,19 +321,19 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#8FA3B8] mt-2 leading-relaxed">
+                  <p className="text-xs text-[#A3A3A3] mt-2 leading-relaxed">
                     {isEn ? activeAdvisory.gpm.observedSummaryEn : activeAdvisory.gpm.observedSummaryBn}
                   </p>
                 </div>
 
-                <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
+                <div className="pt-2.5 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#A3A3A3]">
                   <span>NASA POWER (precipitation)</span>
                   <span>{activeAdvisory.gpm.observationWindow.daysCount} days</span>
                 </div>
               </div>
 
               {/* TILE 2: Open-Meteo 7-Day Forecast */}
-              <div className="p-4 rounded-2xl bg-[#0B1626]/90 border border-white/10 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
@@ -342,32 +342,32 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                       date={activeAdvisory.forecast.updatedAt}
                       language={language}
                     />
-                    <span className="text-[10px] font-mono text-[#8FA3B8]">7-Day ECMWF/GFS</span>
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">7-Day ECMWF/GFS</span>
                   </div>
 
-                  <span className="text-xs text-[#8FA3B8] block font-mono">
+                  <span className="text-xs text-[#A3A3A3] block font-mono">
                     {isEn ? '7-Day Precipitation Forecast' : '৭ দিনের বৃষ্টিপাত পূর্বাভাস'}
                   </span>
 
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="font-mono text-2xl font-bold text-white">
-                      {activeAdvisory.forecast.totalRain7dMm} <span className="text-xs font-normal text-[#8FA3B8]">mm expected</span>
+                      {activeAdvisory.forecast.totalRain7dMm} <span className="text-xs font-normal text-[#A3A3A3]">mm expected</span>
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#8FA3B8] mt-2 leading-relaxed">
+                  <p className="text-xs text-[#A3A3A3] mt-2 leading-relaxed">
                     {isEn ? activeAdvisory.forecast.forecastSummaryEn : activeAdvisory.forecast.forecastSummaryBn}
                   </p>
                 </div>
 
-                <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
+                <div className="pt-2.5 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#A3A3A3]">
                   <span>Peak: {activeAdvisory.forecast.peakRainMm} mm</span>
                   <span>{activeAdvisory.forecast.rainDaysCount} rain days</span>
                 </div>
               </div>
 
               {/* TILE 3: Field Condition (Soil Moisture) */}
-              <div className="p-4 rounded-2xl bg-[#0B1626]/90 border border-white/10 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
@@ -380,10 +380,10 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                       }
                       language={language}
                     />
-                    <span className="text-[10px] font-mono text-[#8FA3B8]">SPL3SMP_E (9km)</span>
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">SPL3SMP_E (9km)</span>
                   </div>
 
-                  <span className="text-xs text-[#8FA3B8] block font-mono">
+                  <span className="text-xs text-[#A3A3A3] block font-mono">
                     {isEn ? 'Root-Zone Soil Moisture' : 'মাটির গভীরের রস'}
                   </span>
 
@@ -402,20 +402,20 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                     )}
                   </div>
 
-                  <p className="text-xs text-[#8FA3B8] mt-2 leading-relaxed">
+                  <p className="text-xs text-[#A3A3A3] mt-2 leading-relaxed">
                     {smapRecord
                       ? (isEn ? activeAdvisory.fieldCondition.rootZoneInsightEn : activeAdvisory.fieldCondition.rootZoneInsightBn)
                       : (isEn ? 'No recommended quality observation in the last 14 days (water fraction, dense vegetation, or RFI).' : 'বিগত ১৪ দিনে কোনো গ্রহণযোগ্য মানের পর্যবেক্ষণ পাওয়া যায়নি (অতিরিক্ত জলাশয় বা ঘন বনায়ন)।')}
                   </p>
 
-                  <p className="text-[10px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-white/5 pt-2">
+                  <p className="text-[10px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-[#262626] pt-2">
                     {isEn
                       ? 'Measured at the district HQ point (SMAP 9 km).'
                       : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি)।'}
                   </p>
                 </div>
 
-                <div className="pt-2.5 mt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#8FA3B8]">
+                <div className="pt-2.5 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#A3A3A3]">
                   <span>{isEn ? 'Status' : 'অবস্থা'}</span>
                   <span className={isSoilFlaggedWater ? 'text-amber-400 font-semibold' : 'text-white'}>
                     {!smapRecord
@@ -429,13 +429,13 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
             </div>
 
             {/* AGRIORBIT ADVISORY CARD */}
-            <div className="p-5 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/40 shadow-xl relative overflow-hidden">
+            <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] relative overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] font-bold text-[#050B14] bg-[#B8FF3D] px-2.5 py-0.5 rounded uppercase tracking-wider">
+                  <span className="font-mono text-[10px] font-bold text-black bg-[#22C55E] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                     AGRIORBIT ADVISORY
                   </span>
-                  <span className="text-xs font-mono text-[#8FA3B8]">
+                  <span className="text-xs font-mono text-[#A3A3A3]">
                     {isEn ? 'Rule-Based Agronomic Action' : 'কৃষি নিয়ম অনুযায়ী করণীয়'}
                   </span>
                 </div>
@@ -443,7 +443,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowWhyModal(true)}
-                  className="inline-flex items-center gap-1.5 text-xs text-[#00E5FF] hover:text-white font-mono hover:underline cursor-pointer self-start sm:self-auto"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#22C55E] hover:underline font-mono cursor-pointer self-start sm:self-auto"
                 >
                   <HelpCircle className="w-3.5 h-3.5" />
                   <span>{isEn ? 'Why am I seeing this?' : 'কেন এই পরামর্শ দেওয়া হলো?'}</span>
@@ -452,7 +452,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
               {/* Core Farmer Action Callout */}
               <div className="my-2.5">
-                <p className="font-editorial text-base sm:text-lg font-bold text-[#B8FF3D] leading-snug">
+                <p className="font-editorial text-base sm:text-lg font-bold text-[#22C55E] leading-snug">
                   "{isEn ? activeAdvisory.advisory.recommendedActionEn : activeAdvisory.advisory.recommendedActionBn}"
                 </p>
                 <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
@@ -462,7 +462,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
               {/* Crop-Specific Operation Note */}
               {activeAdvisory.advisory.cropSpecificNoteEn && (
-                <div className="mt-3 p-3 rounded-xl bg-white/5 border border-white/10 flex items-start gap-2.5 text-xs text-amber-200">
+                <div className="mt-3 p-3 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-start gap-2.5 text-xs text-amber-200">
                   <Info className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-amber-300 mr-1.5">
@@ -476,7 +476,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               )}
 
               {/* Provenance Footer */}
-              <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#8FA3B8]">
+              <div className="mt-3 pt-3 border-t border-[#262626] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#A3A3A3]">
                 <span>{isEn ? activeAdvisory.dataSourceStatus.provenanceLabelEn : activeAdvisory.dataSourceStatus.provenanceLabelBn}</span>
                 <span className="text-white/50">Rule ID: {activeAdvisory.ruleId}</span>
               </div>
@@ -492,10 +492,10 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
         >
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0B1626] border border-white/20 p-6 sm:p-8 shadow-2xl text-white font-editorial">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl bg-[#141414] border border-[#262626] p-6 sm:p-8 text-[#FAFAFA] font-editorial">
+            <div className="flex items-center justify-between pb-4 border-b border-[#262626] mb-4">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#B8FF3D]" />
+                <ShieldCheck className="w-5 h-5 text-[#22C55E]" />
                 <h4 className="font-display text-lg sm:text-xl font-bold">
                   {isEn ? 'Transparent Advisory Reasoning' : 'পরামর্শ নির্ধারণের স্বচ্ছ তথ্য ও নিয়ম'}
                 </h4>
@@ -503,16 +503,16 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               <button
                 type="button"
                 onClick={() => setShowWhyModal(false)}
-                className="p-1.5 rounded-xl hover:bg-white/10 text-[#8FA3B8] hover:text-white transition-colors cursor-pointer"
+                className="p-1.5 rounded-xl hover:bg-white/10 text-[#A3A3A3] hover:text-white transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Scientific Architecture Explanation */}
-            <div className="space-y-4 text-xs sm:text-sm text-[#8FA3B8]">
-              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10 space-y-2">
-                <span className="font-mono text-xs text-[#00E5FF] font-bold block uppercase tracking-wider">
+            <div className="space-y-4 text-xs sm:text-sm text-[#A3A3A3]">
+              <div className="p-4 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2">
+                <span className="font-mono text-xs text-[#FAFAFA] font-bold block uppercase tracking-wider">
                   {isEn ? 'Scientific Provenance Chain' : 'তথ্যের উৎস ও দায়িত্বের বিভাজন'}
                 </span>
                 <div className="space-y-1.5 text-xs text-slate-300">
@@ -535,8 +535,8 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 </span>
                 <ul className="space-y-1.5 font-mono text-xs">
                   {activeAdvisory.whyExplanation.rulesTriggered.map((rule, idx) => (
-                    <li key={idx} className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#B8FF3D] flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#B8FF3D] shrink-0" />
+                    <li key={idx} className="p-2 rounded-lg bg-white/5 border border-[#262626] text-[#22C55E] flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E] shrink-0" />
                       <span>{rule}</span>
                     </li>
                   ))}
@@ -548,9 +548,9 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <span className="font-mono text-xs text-white font-bold block mb-2">
                   {isEn ? 'Evaluated Parameters vs Thresholds:' : 'মূল্যায়নকৃত প্যারামিটার ও সীমা:'}
                 </span>
-                <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#050B14]">
+                <div className="overflow-x-auto rounded-lg border border-[#262626] bg-[#0A0A0A]">
                   <table className="w-full text-left text-xs font-mono">
-                    <thead className="bg-white/5 border-b border-white/10 text-[#8FA3B8]">
+                    <thead className="bg-white/5 border-b border-[#262626] text-[#A3A3A3]">
                       <tr>
                         <th className="p-2.5">Parameter</th>
                         <th className="p-2.5">Observed</th>
@@ -562,10 +562,10 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                       {activeAdvisory.whyExplanation.thresholdsEvaluated.map((item, idx) => (
                         <tr key={idx}>
                           <td className="p-2.5 font-semibold text-white">{item.parameter}</td>
-                          <td className="p-2.5 text-[#00E5FF]">{item.observedValue}</td>
-                          <td className="p-2.5 text-[#8FA3B8]">{item.thresholdCondition}</td>
+                          <td className="p-2.5 text-[#FAFAFA]">{item.observedValue}</td>
+                          <td className="p-2.5 text-[#A3A3A3]">{item.thresholdCondition}</td>
                           <td className="p-2.5">
-                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${item.satisfied ? 'bg-amber-500/20 text-amber-300' : 'bg-white/10 text-[#8FA3B8]'}`}>
+                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${item.satisfied ? 'bg-amber-500/20 text-amber-300' : 'bg-white/10 text-[#A3A3A3]'}`}>
                               {item.satisfied ? 'Active' : 'Normal'}
                             </span>
                           </td>
@@ -577,7 +577,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               </div>
 
               {/* Honest Scientific Disclaimer */}
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-[11px] text-[#8FA3B8] leading-relaxed">
+              <div className="p-3.5 rounded-xl bg-white/5 border border-[#262626] text-[11px] text-[#A3A3A3] leading-relaxed">
                 <span className="font-bold text-white block mb-0.5">
                   {isEn ? 'Scientific Integrity Note:' : 'সঠিক তথ্যের নিশ্চয়তা:'}
                 </span>
@@ -585,11 +585,11 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
+            <div className="mt-6 pt-4 border-t border-[#262626] flex justify-end">
               <button
                 type="button"
                 onClick={() => setShowWhyModal(false)}
-                className="px-5 py-2 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-xs cursor-pointer"
+                className="px-5 py-2 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold text-xs cursor-pointer"
               >
                 {isEn ? 'Close Explanation' : 'বন্ধ করুন'}
               </button>
