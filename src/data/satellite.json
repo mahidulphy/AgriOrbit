@@ -13,7 +13,8 @@
       "insat": "ISRO MOSDAC INSAT-3DR (Imager LST & HE Rain)",
       "nisar": "NASA-ISRO NISAR L3 Provisional Soil Moisture (200m)"
     },
-    "generatedAt": "2026-10-24T13:44:12.783Z"
+    "generatedAt": "2026-10-24T17:23:17.427Z",
+    "lastSentinel1Sync": "2026-10-24T17:20:03.638Z"
   },
   "dhaka": {
     "smap": null,
@@ -32,7 +33,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7.5,
+      "floodedCroplandPct": 3.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -41,23 +42,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7.5% normal cropland drainage",
-      "statusBn": "7.5% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "3.1% normal cropland drainage",
+      "statusBn": "3.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.41,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.32,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "vegetation_stress",
-      "statusEn": "0.41 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.41 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.32 10m NDVI (-17.9% vs baseline · vegetation stress)",
+      "statusBn": "0.32 ১০মি NDVI (স্বাভাবিকের চেয়ে 17.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.39,
-      "anomalyPct": 5.1
+      "anomalyPct": -17.9
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -104,7 +105,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 8.2,
+      "floodedCroplandPct": 3.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -113,23 +114,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "8.2% normal cropland drainage",
-      "statusBn": "8.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "3.8% normal cropland drainage",
+      "statusBn": "3.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.52,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.56,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.52 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.52 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.56 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.56 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.5,
-      "anomalyPct": 4
+      "anomalyPct": 12
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -176,7 +177,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 5.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -185,23 +186,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "5.9% normal cropland drainage",
+      "statusBn": "5.9% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.6,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.41,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.6 10m field NDVI (healthy canopy)",
-      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.41 10m NDVI (-29.3% vs baseline · vegetation stress)",
+      "statusBn": "0.41 ১০মি NDVI (স্বাভাবিকের চেয়ে 29.3% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
-      "anomalyPct": 3.4
+      "anomalyPct": -29.3
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -248,7 +249,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 14.8,
+      "floodedCroplandPct": 9.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -256,24 +257,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "14.8% cropland waterlogged / flooded",
-      "statusBn": "14.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "9.8% normal cropland drainage",
+      "statusBn": "9.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.45,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.44,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.45 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.45 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "vegetation_stress",
+      "statusEn": "0.44 10m NDVI (2.3% vs baseline · vegetation stress)",
+      "statusBn": "0.44 ১০মি NDVI (স্বাভাবিকের চেয়ে 2.3% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.43,
-      "anomalyPct": 4.7
+      "anomalyPct": 2.3
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -325,7 +326,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 4.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -334,23 +335,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "4.5% normal cropland drainage",
+      "statusBn": "4.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.58,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.58 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.58 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
-      "anomalyPct": 3.6
+      "anomalyPct": 5.5
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -402,7 +403,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 11.6,
+      "floodedCroplandPct": 4.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -410,24 +411,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "11.6% cropland waterlogged / flooded",
-      "statusBn": "11.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "4.2% normal cropland drainage",
+      "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.73,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.6,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.73 10m field NDVI (healthy canopy)",
-      "statusBn": "0.73 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.6 10m NDVI (-15.5% vs baseline · vegetation stress)",
+      "statusBn": "0.6 ১০মি NDVI (স্বাভাবিকের চেয়ে 15.5% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.71,
-      "anomalyPct": 2.8
+      "anomalyPct": -15.5
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -479,7 +480,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 6.3,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -488,23 +489,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "6.3% normal cropland drainage",
+      "statusBn": "6.3% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.4,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.65,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.4 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.4 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.38,
-      "anomalyPct": 5.3
+      "anomalyPct": 71.1
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -551,7 +552,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 18.2,
+      "floodedCroplandPct": 1.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -559,24 +560,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "18.2% cropland waterlogged / flooded",
-      "statusBn": "18.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "1.8% normal cropland drainage",
+      "statusBn": "1.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.75,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.67,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.75 10m field NDVI (healthy canopy)",
-      "statusBn": "0.75 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.67 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.67 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.73,
-      "anomalyPct": 2.7
+      "anomalyPct": -8.2
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -623,7 +624,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 15.2,
+      "floodedCroplandPct": 9.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -631,24 +632,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "15.2% cropland waterlogged / flooded",
-      "statusBn": "15.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "9.9% normal cropland drainage",
+      "statusBn": "9.9% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.63,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.55,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.63 10m field NDVI (healthy canopy)",
-      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "moderate",
+      "statusEn": "0.55 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.55 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
-      "anomalyPct": 3.3
+      "anomalyPct": -9.8
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -695,7 +696,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 10.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -703,24 +704,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "status": "moderate_waterlogging",
+      "statusEn": "10.5% cropland waterlogged / flooded",
+      "statusBn": "10.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.8,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.64,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.8 10m field NDVI (healthy canopy)",
-      "statusBn": "0.8 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.64 10m NDVI (-17.9% vs baseline · vegetation stress)",
+      "statusBn": "0.64 ১০মি NDVI (স্বাভাবিকের চেয়ে 17.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.78,
-      "anomalyPct": 2.6
+      "anomalyPct": -17.9
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -767,7 +768,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 15.9,
+      "floodedCroplandPct": 10.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -776,23 +777,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "moderate_waterlogging",
-      "statusEn": "15.9% cropland waterlogged / flooded",
-      "statusBn": "15.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "statusEn": "10.7% cropland waterlogged / flooded",
+      "statusBn": "10.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.78,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.78 10m field NDVI (healthy canopy)",
-      "statusBn": "0.78 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.61 10m NDVI (-19.7% vs baseline · vegetation stress)",
+      "statusBn": "0.61 ১০মি NDVI (স্বাভাবিকের চেয়ে 19.7% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.76,
-      "anomalyPct": 2.6
+      "anomalyPct": -19.7
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -844,7 +845,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 16.1,
+      "floodedCroplandPct": 1.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -852,24 +853,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.1% cropland waterlogged / flooded",
-      "statusBn": "16.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "1.8% normal cropland drainage",
+      "statusBn": "1.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.62,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.62 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.62 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
-      "anomalyPct": 3.7
+      "anomalyPct": 14.8
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -922,7 +923,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 22.4,
+      "floodedCroplandPct": 4.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -930,24 +931,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "severe_inundation",
-      "statusEn": "22.4% cropland inundated / severe flood",
-      "statusBn": "22.4% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "status": "normal",
+      "statusEn": "4.1% normal cropland drainage",
+      "statusBn": "4.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.57 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.57 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
-      "anomalyPct": 3.7
+      "anomalyPct": 5.6
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -994,7 +995,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 9.1,
+      "floodedCroplandPct": 40.6,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1002,24 +1003,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.1% normal cropland drainage",
-      "statusBn": "9.1% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "status": "severe_inundation",
+      "statusEn": "40.6% cropland waterlogged / flooded",
+      "statusBn": "40.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.43,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.13,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "vegetation_stress",
-      "statusEn": "0.43 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.43 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.13 10m NDVI (-68.3% vs baseline · vegetation stress)",
+      "statusBn": "0.13 ১০মি NDVI (স্বাভাবিকের চেয়ে 68.3% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.41,
-      "anomalyPct": 4.9
+      "anomalyPct": -68.3
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -1066,7 +1067,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 11.4,
+      "floodedCroplandPct": 39,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1074,24 +1075,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "11.4% cropland waterlogged / flooded",
-      "statusBn": "11.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "severe_inundation",
+      "statusEn": "39% cropland waterlogged / flooded",
+      "statusBn": "39% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.74,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.32,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.74 10m field NDVI (healthy canopy)",
-      "statusBn": "0.74 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.32 10m NDVI (-55.6% vs baseline · vegetation stress)",
+      "statusBn": "0.32 ১০মি NDVI (স্বাভাবিকের চেয়ে 55.6% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.72,
-      "anomalyPct": 2.8
+      "anomalyPct": -55.6
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -1145,7 +1146,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 10.8,
+      "floodedCroplandPct": 0.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1153,24 +1154,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "10.8% cropland waterlogged / flooded",
-      "statusBn": "10.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "0.2% normal cropland drainage",
+      "statusBn": "0.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.6,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.65,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.6 10m field NDVI (healthy canopy)",
-      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
-      "anomalyPct": 3.4
+      "anomalyPct": 12.1
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -1217,7 +1218,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 17.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1225,24 +1226,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "status": "moderate_waterlogging",
+      "statusEn": "17.7% cropland waterlogged / flooded",
+      "statusBn": "17.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.54,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.32,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.54 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.54 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "vegetation_stress",
+      "statusEn": "0.32 10m NDVI (-38.5% vs baseline · vegetation stress)",
+      "statusBn": "0.32 ১০মি NDVI (স্বাভাবিকের চেয়ে 38.5% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.52,
-      "anomalyPct": 3.8
+      "anomalyPct": -38.5
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -1294,7 +1295,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 17.9,
+      "floodedCroplandPct": 0.3,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1302,24 +1303,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "17.9% cropland waterlogged / flooded",
-      "statusBn": "17.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "0.3% normal cropland drainage",
+      "statusBn": "0.3% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.66,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.66 10m field NDVI (healthy canopy)",
-      "statusBn": "0.66 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.64,
-      "anomalyPct": 3.1
+      "anomalyPct": 7.8
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -1371,7 +1372,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 14.5,
+      "floodedCroplandPct": 0.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1379,24 +1380,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "14.5% cropland waterlogged / flooded",
-      "statusBn": "14.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "0.7% normal cropland drainage",
+      "statusBn": "0.7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.5,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.76,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.5 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.5 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.76 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.76 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.48,
-      "anomalyPct": 4.2
+      "anomalyPct": 58.3
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -1443,7 +1444,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 6.4,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1452,23 +1453,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "6.4% normal cropland drainage",
+      "statusBn": "6.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
-      "anomalyPct": 3.6
+      "anomalyPct": 25.5
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -1515,7 +1516,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 6.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1524,23 +1525,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "6.7% normal cropland drainage",
+      "statusBn": "6.7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.63,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.55,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.63 10m field NDVI (healthy canopy)",
-      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "moderate",
+      "statusEn": "0.55 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.55 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
-      "anomalyPct": 3.3
+      "anomalyPct": -9.8
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -1587,7 +1588,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 17,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1595,24 +1596,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "status": "moderate_waterlogging",
+      "statusEn": "17% cropland waterlogged / flooded",
+      "statusBn": "17% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.38,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.5,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.38 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.38 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "moderate",
+      "statusEn": "0.5 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.5 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.36,
-      "anomalyPct": 5.6
+      "anomalyPct": 38.9
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -1664,7 +1665,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1673,19 +1674,19 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0% normal cropland drainage",
+      "statusBn": "0% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
       "ndvi10m": 0.82,
-      "periodStart": "2026-10-10",
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.82 10m field NDVI (healthy canopy)",
-      "statusBn": "0.82 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.82 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.82 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.8,
@@ -1736,7 +1737,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1745,23 +1746,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.1% normal cropland drainage",
+      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.69,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.82,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.69 10m field NDVI (healthy canopy)",
-      "statusBn": "0.69 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.82 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.82 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.67,
-      "anomalyPct": 3
+      "anomalyPct": 22.4
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -1808,7 +1809,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 3.4,
+      "floodedCroplandPct": 9.3,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1817,23 +1818,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "3.4% normal cropland drainage",
-      "statusBn": "3.4% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "9.3% normal cropland drainage",
+      "statusBn": "9.3% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.73,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.44,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.73 10m field NDVI (healthy canopy)",
-      "statusBn": "0.73 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.44 10m NDVI (-38% vs baseline · vegetation stress)",
+      "statusBn": "0.44 ১০মি NDVI (স্বাভাবিকের চেয়ে 38% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.71,
-      "anomalyPct": 2.8
+      "anomalyPct": -38
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -1885,7 +1886,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 6.8,
+      "floodedCroplandPct": 1.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1894,23 +1895,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "6.8% normal cropland drainage",
-      "statusBn": "6.8% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "1.1% normal cropland drainage",
+      "statusBn": "1.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.42,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.42 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.42 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.4,
-      "anomalyPct": 5
+      "anomalyPct": 72.5
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -1957,7 +1958,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 12.9,
+      "floodedCroplandPct": 8.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -1965,24 +1966,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "12.9% cropland waterlogged / flooded",
-      "statusBn": "12.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "8.5% normal cropland drainage",
+      "statusBn": "8.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.66,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.65 10m field NDVI (healthy canopy)",
-      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.66 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.66 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
-      "anomalyPct": 3.2
+      "anomalyPct": 4.8
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -2029,7 +2030,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 16.7,
+      "floodedCroplandPct": 12.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2038,23 +2039,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "moderate_waterlogging",
-      "statusEn": "16.7% cropland waterlogged / flooded",
-      "statusBn": "16.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "statusEn": "12.8% cropland waterlogged / flooded",
+      "statusBn": "12.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.61,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.71,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.61 10m field NDVI (healthy canopy)",
-      "statusBn": "0.61 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.59,
-      "anomalyPct": 3.4
+      "anomalyPct": 20.3
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -2106,7 +2107,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 13.8,
+      "floodedCroplandPct": 4.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2114,24 +2115,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "13.8% cropland waterlogged / flooded",
-      "statusBn": "13.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "4.2% normal cropland drainage",
+      "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.6,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.68,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.6 10m field NDVI (healthy canopy)",
-      "statusBn": "0.6 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.68 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.68 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.58,
-      "anomalyPct": 3.4
+      "anomalyPct": 17.2
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -2183,7 +2184,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7.2,
+      "floodedCroplandPct": 1.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2192,23 +2193,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7.2% normal cropland drainage",
-      "statusBn": "7.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "1.5% normal cropland drainage",
+      "statusBn": "1.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.74,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.74 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.74 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
-      "anomalyPct": 3.6
+      "anomalyPct": 34.5
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -2255,7 +2256,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 9.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2264,23 +2265,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "9.1% normal cropland drainage",
+      "statusBn": "9.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.61,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.59,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.61 10m field NDVI (healthy canopy)",
-      "statusBn": "0.61 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "moderate",
+      "statusEn": "0.59 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.59 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.59,
-      "anomalyPct": 3.4
+      "anomalyPct": 0
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -2327,7 +2328,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 4.5,
+      "floodedCroplandPct": 2.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2336,23 +2337,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "4.5% normal cropland drainage",
-      "statusBn": "4.5% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "2.1% normal cropland drainage",
+      "statusBn": "2.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.8,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.8 10m field NDVI (healthy canopy)",
-      "statusBn": "0.8 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.78,
-      "anomalyPct": 2.6
+      "anomalyPct": -7.7
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -2399,7 +2400,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 15.6,
+      "floodedCroplandPct": 3.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2407,24 +2408,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "15.6% cropland waterlogged / flooded",
-      "statusBn": "15.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "3.2% normal cropland drainage",
+      "statusBn": "3.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.48,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.48 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.48 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
-      "anomalyPct": 3.7
+      "anomalyPct": -11.1
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -2476,7 +2477,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 8.4,
+      "floodedCroplandPct": 1.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2485,23 +2486,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "8.4% normal cropland drainage",
-      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "1.8% normal cropland drainage",
+      "statusBn": "1.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.7,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.65 10m field NDVI (healthy canopy)",
-      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.7 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.7 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
-      "anomalyPct": 3.2
+      "anomalyPct": 11.1
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -2548,7 +2549,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 17.2,
+      "floodedCroplandPct": 15.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2557,23 +2558,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "moderate_waterlogging",
-      "statusEn": "17.2% cropland waterlogged / flooded",
-      "statusBn": "17.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "statusEn": "15.9% cropland waterlogged / flooded",
+      "statusBn": "15.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.7,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.47,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.7 10m field NDVI (healthy canopy)",
-      "statusBn": "0.7 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.47 10m NDVI (-30.9% vs baseline · vegetation stress)",
+      "statusBn": "0.47 ১০মি NDVI (স্বাভাবিকের চেয়ে 30.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.68,
-      "anomalyPct": 2.9
+      "anomalyPct": -30.9
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -2620,7 +2621,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 16.4,
+      "floodedCroplandPct": 8.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2628,24 +2629,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.4% cropland waterlogged / flooded",
-      "statusBn": "16.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "8.8% normal cropland drainage",
+      "statusBn": "8.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.76,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.43,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.76 10m field NDVI (healthy canopy)",
-      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.43 10m NDVI (-41.9% vs baseline · vegetation stress)",
+      "statusBn": "0.43 ১০মি NDVI (স্বাভাবিকের চেয়ে 41.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
-      "anomalyPct": 2.7
+      "anomalyPct": -41.9
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -2692,7 +2693,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 8.4,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2701,23 +2702,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "8.4% normal cropland drainage",
+      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.71,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.71 10m field NDVI (healthy canopy)",
-      "statusBn": "0.71 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.61 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.61 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.69,
-      "anomalyPct": 2.9
+      "anomalyPct": -11.6
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -2769,7 +2770,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 1.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2778,23 +2779,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "1.2% normal cropland drainage",
+      "statusBn": "1.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.79,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.78,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.79 10m field NDVI (healthy canopy)",
-      "statusBn": "0.79 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.78 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.78 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.77,
-      "anomalyPct": 2.6
+      "anomalyPct": 1.3
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -2846,7 +2847,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 2.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2855,23 +2856,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "2.9% normal cropland drainage",
+      "statusBn": "2.9% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.7,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.7 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.7 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
-      "anomalyPct": 3.7
+      "anomalyPct": 29.6
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -2923,7 +2924,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 3,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -2932,23 +2933,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "3% normal cropland drainage",
+      "statusBn": "3% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.69,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.69 10m field NDVI (healthy canopy)",
-      "statusBn": "0.69 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.61 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.61 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.67,
-      "anomalyPct": 3
+      "anomalyPct": -9
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -3000,7 +3001,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.6,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3009,23 +3010,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.6% normal cropland drainage",
+      "statusBn": "0.6% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.82,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.63,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.82 10m field NDVI (healthy canopy)",
-      "statusBn": "0.82 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.63 10m NDVI (-21.3% vs baseline · vegetation stress)",
+      "statusBn": "0.63 ১০মি NDVI (স্বাভাবিকের চেয়ে 21.3% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.8,
-      "anomalyPct": 2.5
+      "anomalyPct": -21.3
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -3077,7 +3078,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3086,23 +3087,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.9% normal cropland drainage",
+      "statusBn": "0.9% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.58,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.53,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.58 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.58 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.53 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.53 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.56,
-      "anomalyPct": 3.6
+      "anomalyPct": -5.4
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -3149,7 +3150,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 18.7,
+      "floodedCroplandPct": 7.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3157,24 +3158,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "18.7% cropland waterlogged / flooded",
-      "statusBn": "18.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "7.7% normal cropland drainage",
+      "statusBn": "7.7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.76,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.6,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.76 10m field NDVI (healthy canopy)",
-      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.6 10m NDVI (-18.9% vs baseline · vegetation stress)",
+      "statusBn": "0.6 ১০মি NDVI (স্বাভাবিকের চেয়ে 18.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
-      "anomalyPct": 2.7
+      "anomalyPct": -18.9
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -3221,7 +3222,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 17.8,
+      "floodedCroplandPct": 6.6,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3229,24 +3230,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "17.8% cropland waterlogged / flooded",
-      "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "6.6% normal cropland drainage",
+      "statusBn": "6.6% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.68,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.64 10m field NDVI (healthy canopy)",
-      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.68 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.68 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
-      "anomalyPct": 3.2
+      "anomalyPct": 9.7
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -3293,7 +3294,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 19.5,
+      "floodedCroplandPct": 21.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3301,24 +3302,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "19.5% cropland waterlogged / flooded",
-      "statusBn": "19.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "severe_inundation",
+      "statusEn": "21.5% cropland waterlogged / flooded",
+      "statusBn": "21.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.85,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.7,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.85 10m field NDVI (healthy canopy)",
-      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.7 10m NDVI (-15.7% vs baseline · vegetation stress)",
+      "statusBn": "0.7 ১০মি NDVI (স্বাভাবিকের চেয়ে 15.7% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
-      "anomalyPct": 2.4
+      "anomalyPct": -15.7
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -3367,7 +3368,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 16.3,
+      "floodedCroplandPct": 4.6,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3375,24 +3376,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.3% cropland waterlogged / flooded",
-      "statusBn": "16.3% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "4.6% normal cropland drainage",
+      "statusBn": "4.6% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.85,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.85 10m field NDVI (healthy canopy)",
-      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "vegetation_stress",
+      "statusEn": "0.69 10m NDVI (-16.9% vs baseline · vegetation stress)",
+      "statusBn": "0.69 ১০মি NDVI (স্বাভাবিকের চেয়ে 16.9% কম · ফসলে ধকল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
-      "anomalyPct": 2.4
+      "anomalyPct": -16.9
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -3444,7 +3445,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 3.4,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3453,23 +3454,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "3.4% normal cropland drainage",
+      "statusBn": "3.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.65 10m field NDVI (healthy canopy)",
-      "statusBn": "0.65 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.63,
-      "anomalyPct": 3.2
+      "anomalyPct": 14.3
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -3516,7 +3517,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 11.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3524,24 +3525,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "status": "moderate_waterlogging",
+      "statusEn": "11.8% cropland waterlogged / flooded",
+      "statusBn": "11.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.67,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.72 10m field NDVI (healthy canopy)",
-      "statusBn": "0.72 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.67 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.67 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.7,
-      "anomalyPct": 2.9
+      "anomalyPct": -4.3
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,
@@ -3588,7 +3589,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 19.1,
+      "floodedCroplandPct": 2.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3596,24 +3597,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "19.1% cropland waterlogged / flooded",
-      "statusBn": "19.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "2.5% normal cropland drainage",
+      "statusBn": "2.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-10",
-      "cloudCoverPct": 8.4,
+      "ndvi10m": 0.61,
+      "periodStart": "2026-10-09",
+      "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.56 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.56 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.61 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.61 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.54,
-      "anomalyPct": 3.7
+      "anomalyPct": 13
     },
     "jaxa": {
       "gsmapRain30dMm": 112.5,
@@ -3665,7 +3666,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 13.5,
+      "floodedCroplandPct": 9.6,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3673,24 +3674,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "13.5% cropland waterlogged / flooded",
-      "statusBn": "13.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "9.6% normal cropland drainage",
+      "statusBn": "9.6% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.76,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.76 10m field NDVI (healthy canopy)",
-      "statusBn": "0.76 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.74,
-      "anomalyPct": 2.7
+      "anomalyPct": -6.8
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -3742,7 +3743,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 17.4,
+      "floodedCroplandPct": 3.2,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3750,24 +3751,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "17.4% cropland waterlogged / flooded",
-      "statusBn": "17.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "3.2% normal cropland drainage",
+      "statusBn": "3.2% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.68,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.57,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.68 10m field NDVI (healthy canopy)",
-      "statusBn": "0.68 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "status": "moderate",
+      "statusEn": "0.57 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.57 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.66,
-      "anomalyPct": 3
+      "anomalyPct": -13.6
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -3814,7 +3815,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 24.5,
+      "floodedCroplandPct": 14.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3822,24 +3823,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "severe_inundation",
-      "statusEn": "24.5% cropland inundated / severe flood",
-      "statusBn": "24.5% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "status": "moderate_waterlogging",
+      "statusEn": "14.1% cropland waterlogged / flooded",
+      "statusBn": "14.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.52,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.46,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "moderate",
-      "statusEn": "0.52 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.52 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "statusEn": "0.46 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.46 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.5,
-      "anomalyPct": 4
+      "anomalyPct": -8
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -3891,7 +3892,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 14.2,
+      "floodedCroplandPct": 2.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3899,24 +3900,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "14.2% cropland waterlogged / flooded",
-      "statusBn": "14.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "2.5% normal cropland drainage",
+      "statusBn": "2.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.71,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.73,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
+      "statusEn": "0.73 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.73 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.69,
-      "anomalyPct": 2.9
+      "anomalyPct": 5.8
     },
     "jaxa": {
       "gsmapRain30dMm": 32.4,
@@ -3963,7 +3964,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 5.6,
+      "floodedCroplandPct": 0.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -3972,23 +3973,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "5.6% normal cropland drainage",
-      "statusBn": "5.6% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.7% normal cropland drainage",
+      "statusBn": "0.7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.67,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.64 10m field NDVI (healthy canopy)",
-      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.67 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.67 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
-      "anomalyPct": 3.2
+      "anomalyPct": 8.1
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -4035,7 +4036,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 17.8,
+      "floodedCroplandPct": 11.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4044,23 +4045,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "moderate_waterlogging",
-      "statusEn": "17.8% cropland waterlogged / flooded",
-      "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "statusEn": "11.1% cropland waterlogged / flooded",
+      "statusBn": "11.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.48,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.7,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.48 10m NDVI (-22.6% below baseline · delayed canopy)",
-      "statusBn": "0.48 ১০মি NDVI (স্বাভাবিকের চেয়ে ২২.৬% কম · ফসলে বৃদ্ধি বিলম্ব)",
+      "status": "optimal",
+      "statusEn": "0.7 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.7 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
-      "anomalyPct": -22.6
+      "anomalyPct": 12.9
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -4107,7 +4108,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 16.5,
+      "floodedCroplandPct": 8.4,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4115,24 +4116,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.5% cropland waterlogged / flooded",
-      "statusBn": "16.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "8.4% normal cropland drainage",
+      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.67,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.75,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.67 10m field NDVI (healthy canopy)",
-      "statusBn": "0.67 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.75 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.75 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.65,
-      "anomalyPct": 3.1
+      "anomalyPct": 15.4
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -4179,7 +4180,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 15.1,
+      "floodedCroplandPct": 3.5,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4187,24 +4188,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "15.1% cropland waterlogged / flooded",
-      "statusBn": "15.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "3.5% normal cropland drainage",
+      "statusBn": "3.5% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.85,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.78,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.85 10m field NDVI (healthy canopy)",
-      "statusBn": "0.85 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.78 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.78 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.83,
-      "anomalyPct": 2.4
+      "anomalyPct": -6
     },
     "jaxa": {
       "gsmapRain30dMm": 35.2,
@@ -4251,7 +4252,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 11.2,
+      "floodedCroplandPct": 1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4259,24 +4260,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "11.2% cropland waterlogged / flooded",
-      "statusBn": "11.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "status": "normal",
+      "statusEn": "1% normal cropland drainage",
+      "statusBn": "1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.69,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.64 10m field NDVI (healthy canopy)",
-      "statusBn": "0.64 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.62,
-      "anomalyPct": 3.2
+      "anomalyPct": 11.3
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -4328,7 +4329,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 4.2,
+      "floodedCroplandPct": 0.4,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4337,23 +4338,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "4.2% normal cropland drainage",
-      "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.4% normal cropland drainage",
+      "statusBn": "0.4% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.68,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.68 10m field NDVI (healthy canopy)",
-      "statusBn": "0.68 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.66,
-      "anomalyPct": 3
+      "anomalyPct": 9.1
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -4400,7 +4401,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 4.8,
+      "floodedCroplandPct": 0.1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4409,23 +4410,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "4.8% normal cropland drainage",
-      "statusBn": "4.8% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.1% normal cropland drainage",
+      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.74,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.71,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.74 10m field NDVI (healthy canopy)",
-      "statusBn": "0.74 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.72,
-      "anomalyPct": 2.8
+      "anomalyPct": -1.4
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -4477,7 +4478,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.9,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4486,23 +4487,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.9% normal cropland drainage",
+      "statusBn": "0.9% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.41,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.64,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.41 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.41 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.64 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.64 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.39,
-      "anomalyPct": 5.1
+      "anomalyPct": 64.1
     },
     "jaxa": {
       "gsmapRain30dMm": 28.2,
@@ -4554,7 +4555,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.8,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4563,23 +4564,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.8% normal cropland drainage",
+      "statusBn": "0.8% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.67,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.72 10m field NDVI (healthy canopy)",
-      "statusBn": "0.72 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.67 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.67 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.7,
-      "anomalyPct": 2.9
+      "anomalyPct": -4.3
     },
     "jaxa": {
       "gsmapRain30dMm": 49.2,
@@ -4631,7 +4632,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 21.3,
+      "floodedCroplandPct": 1,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4639,24 +4640,24 @@
       },
       "polarization": "VV",
       "resolutionMeters": 10,
-      "status": "severe_inundation",
-      "statusEn": "21.3% cropland inundated / severe flood",
-      "statusBn": "21.3% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "status": "normal",
+      "statusEn": "1% normal cropland drainage",
+      "statusBn": "1% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.63,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
       "status": "optimal",
-      "statusEn": "0.63 10m field NDVI (healthy canopy)",
-      "statusBn": "0.63 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (সুস্থ ফসল)",
+      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.61,
-      "anomalyPct": 3.3
+      "anomalyPct": 18
     },
     "jaxa": {
       "gsmapRain30dMm": 56.2,
@@ -4708,7 +4709,7 @@
       "periodStart": "2026-10-08"
     },
     "sentinel1": {
-      "floodedCroplandPct": 7,
+      "floodedCroplandPct": 0.7,
       "observationWindow": {
         "startDate": "2026-10-12",
         "endDate": "2026-10-24",
@@ -4717,23 +4718,23 @@
       "polarization": "VV",
       "resolutionMeters": 10,
       "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "statusEn": "0.7% normal cropland drainage",
+      "statusBn": "0.7% স্বাভাবিক নিষ্কাশন অবস্থা",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-1 C-SAR"
     },
     "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-10",
+      "ndvi10m": 0.72,
+      "periodStart": "2026-10-09",
       "cloudCoverPct": 2.1,
       "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.57 10m field NDVI (moderate vegetation)",
-      "statusBn": "0.57 ১০মি রেজ্যুলুশনে সবুজের মাত্রা (মাঝারি সবুজায়ন)",
+      "status": "optimal",
+      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
+      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
       "observedAt": "2026-10-24",
       "source": "ESA Sentinel-2 MSI",
       "baselineNdvi": 0.55,
-      "anomalyPct": 3.6
+      "anomalyPct": 30.9
     },
     "jaxa": {
       "gsmapRain30dMm": 42.2,

@@ -14,9 +14,22 @@
  *   CDSE_CLIENT_SECRET or SENTINEL_HUB_CLIENT_SECRET
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { BD_DISTRICTS } from '../src/data/districts.ts';
 import type { Sentinel1Record } from '../src/data/satellite.ts';
+
+if (existsSync('.env.local')) {
+  for (const line of readFileSync('.env.local', 'utf8').split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const idx = trimmed.indexOf('=');
+    if (idx > 0) {
+      const k = trimmed.slice(0, idx).trim();
+      const v = trimmed.slice(idx + 1).trim();
+      if (!process.env[k]) process.env[k] = v;
+    }
+  }
+}
 
 const CDSE_TOKEN_URL = 'https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token';
 const CDSE_STATS_URL = 'https://sh.dataspace.copernicus.eu/api/v1/statistics';
@@ -51,6 +64,20 @@ export async function fetchCdseToken(creds: CdseCredentials): Promise<string> {
 
   const data = (await res.json()) as { access_token: string };
   return data.access_token;
+}
+
+async function fetchWithRetry(url: string, options: RequestInit, retries = 3): Promise<Response> {
+  for (let i = 0; i < retries; i++) {
+    const res = await fetch(url, options);
+    if (res.status === 429) {
+      const waitTime = (i + 1) * 3500;
+      console.log(`    [CDSE] Rate limit 429 hit. Backing off ${waitTime / 1000}s...`);
+      await new Promise((r) => setTimeout(r, waitTime));
+      continue;
+    }
+    return res;
+  }
+  return fetch(url, options);
 }
 
 export async function querySentinel1FloodedCroplandPct(
@@ -113,7 +140,7 @@ function evaluatePixel(samples) {
     },
   };
 
-  const res = await fetch(CDSE_STATS_URL, {
+  const res = await fetchWithRetry(CDSE_STATS_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -190,6 +217,7 @@ export async function runSentinel1Sync(targets: readonly any[] = BD_DISTRICTS) {
         if (!sat[d.id]) sat[d.id] = {};
         sat[d.id].sentinel1 = rec;
         console.log(`✓ ${d.nameEn}: ${floodedPct}% flooded (Sentinel-1 SAR)`);
+        await new Promise((r) => setTimeout(r, 800));
       } catch (err) {
         console.warn(`✗ ${d.nameEn} Sentinel-1 sync skipped: ${(err as Error).message}`);
       }

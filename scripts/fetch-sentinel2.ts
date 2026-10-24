@@ -21,6 +21,20 @@ import { getCdseCredentials, fetchCdseToken } from './fetch-sentinel1.ts';
 
 const CDSE_STATS_URL = 'https://sh.dataspace.copernicus.eu/api/v1/statistics';
 
+async function fetchWithRetry(url: string, options: RequestInit, retries = 3): Promise<Response> {
+  for (let i = 0; i < retries; i++) {
+    const res = await fetch(url, options);
+    if (res.status === 429) {
+      const waitTime = (i + 1) * 3500;
+      console.log(`    [CDSE] Rate limit 429 hit. Backing off ${waitTime / 1000}s...`);
+      await new Promise((r) => setTimeout(r, waitTime));
+      continue;
+    }
+    return res;
+  }
+  return fetch(url, options);
+}
+
 export async function querySentinel2Ndvi(
   token: string,
   lat: number,
@@ -89,12 +103,10 @@ function evaluatePixel(sample) {
       },
       aggregationInterval: { of: 'P15D' },
       evalscript,
-      resx: 10,
-      resy: 10,
     },
   };
 
-  const res = await fetch(CDSE_STATS_URL, {
+  const res = await fetchWithRetry(CDSE_STATS_URL, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -182,6 +194,7 @@ export async function runSentinel2Sync(targets: readonly any[] = BD_DISTRICTS) {
         if (!sat[d.id]) sat[d.id] = {};
         sat[d.id].sentinel2 = record;
         console.log(`  ✓ ${d.nameEn || d.id}: 10m NDVI = ${ndvi10m} (${status})`);
+        await new Promise((r) => setTimeout(r, 800));
       } catch (err) {
         console.warn(`  ⚠ ${d.nameEn || d.id} query failed: ${(err as Error).message}`);
       }
