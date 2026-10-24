@@ -11,6 +11,7 @@
 
 import type { MonthlyData } from './power.ts';
 import { largestRemainderRound, calcRoundedDelta } from '../utils/rounding.ts';
+import { getSeasonEsaCci, type EsaCciSeasonStats } from '../data/esaCciSoilMoisture.ts';
 
 export type SeasonId = 'rabi' | 'kharif1' | 'kharif2';
 
@@ -37,6 +38,7 @@ export interface SeasonShift {
   thenShare: number; // % of the year's rain that falls in this season (integers summing to 100)
   nowShare: number;
   dShare: number; // percentage points (strictly nowShare - thenShare)
+  soil?: EsaCciSeasonStats;
 }
 
 export interface FieldShift {
@@ -44,6 +46,7 @@ export interface FieldShift {
   nowRange: [number, number];
   seasons: SeasonShift[];
   yearly: { year: number; temp: number }[]; // annual mean temp, from THEN_RANGE start
+  districtId?: string;
 }
 
 const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : NaN);
@@ -72,7 +75,7 @@ function windowStats(m: MonthlyData, range: [number, number]) {
 }
 
 /** Compares THEN_RANGE with the latest 10 complete years available. */
-export function computeFieldShift(m: MonthlyData): FieldShift {
+export function computeFieldShift(m: MonthlyData, districtId = "rangpur"): FieldShift {
   const years = Object.keys(m.T2M)
     .filter((k) => k.endsWith('13')) // POWER's "month 13" = annual value
     .map((k) => Number(k.slice(0, 4)));
@@ -94,6 +97,7 @@ export function computeFieldShift(m: MonthlyData): FieldShift {
     const nowShare = nowRoundedShares[i];
     const dShare = nowShare - thenShare;
 
+    const cci = getSeasonEsaCci(districtId, season);
     return {
       season,
       thenTemp: tStats.roundedThen,
@@ -105,6 +109,7 @@ export function computeFieldShift(m: MonthlyData): FieldShift {
       thenShare,
       nowShare,
       dShare,
+      soil: cci ?? undefined,
     };
   });
 
@@ -113,7 +118,7 @@ export function computeFieldShift(m: MonthlyData): FieldShift {
     .sort((x, y) => x - y)
     .map((year) => ({ year, temp: m.T2M[`${year}13`] }));
 
-  return { thenRange: THEN_RANGE, nowRange, seasons, yearly };
+  return { thenRange: THEN_RANGE, nowRange, seasons, yearly, districtId };
 }
 
 /** The season with the biggest warming, for a headline. */

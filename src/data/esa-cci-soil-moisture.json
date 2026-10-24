@@ -1,0 +1,2462 @@
+{
+  "_meta": {
+    "dataset": "ESA CCI Soil Moisture (COMBINED)",
+    "product": "ESA CCI SM v09.1 COMBINED",
+    "version": "v09.1",
+    "spatialResolution": "0.25 degree (~27 km)",
+    "unit": "m3/m3",
+    "boundingBox": {
+      "latMin": 20.5,
+      "latMax": 26.7,
+      "lngMin": 88,
+      "lngMax": 92.7
+    },
+    "periods": {
+      "then": [
+        2001,
+        2010
+      ],
+      "now": [
+        2016,
+        2025
+      ]
+    },
+    "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "citation": "Dorigo et al. (2017) / Gruber et al. (2019) ESA CCI Soil Moisture Combined product",
+    "generatedAt": "2026-10-24"
+  },
+  "districts": {
+    "dhaka": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "gazipur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "narayanganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "munshiganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "narsingdi": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "manikganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "tangail": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "kishoreganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "faridpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "rajbari": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "shariatpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "madaripur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "gopalganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "chattogram": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "coxsbazar": {
+      "rabi": {
+        "thenSoil": null,
+        "nowSoil": null,
+        "dSoil": null,
+        "dSoilPct": null,
+        "thenDryDaysShare": null,
+        "nowDryDaysShare": null,
+        "dDryDaysShare": null,
+        "status": "not_enough_data",
+        "takeawayEn": "Insufficient valid microwave soundings due to coastal tidal water interference.",
+        "takeawayBn": "উপকূলীয় জোয়ার-ভাটা ও লবণাক্ত পানির কারণে পর্যাপ্ত নির্ভরযোগ্য উপগ্রহ পর্যবেক্ষণ নেই।"
+      },
+      "kharif1": {
+        "thenSoil": null,
+        "nowSoil": null,
+        "dSoil": null,
+        "dSoilPct": null,
+        "thenDryDaysShare": null,
+        "nowDryDaysShare": null,
+        "dDryDaysShare": null,
+        "status": "not_enough_data",
+        "takeawayEn": "Insufficient valid microwave soundings due to coastal tidal water interference.",
+        "takeawayBn": "উপকূলীয় জোয়ার-ভাটা ও লবণাক্ত পানির কারণে পর্যাপ্ত নির্ভরযোগ্য উপগ্রহ পর্যবেক্ষণ নেই।"
+      },
+      "kharif2": {
+        "thenSoil": null,
+        "nowSoil": null,
+        "dSoil": null,
+        "dSoilPct": null,
+        "thenDryDaysShare": null,
+        "nowDryDaysShare": null,
+        "dDryDaysShare": null,
+        "status": "not_enough_data",
+        "takeawayEn": "Insufficient valid microwave soundings due to coastal tidal water interference.",
+        "takeawayBn": "উপকূলীয় জোয়ার-ভাটা ও লবণাক্ত পানির কারণে পর্যাপ্ত নির্ভরযোগ্য উপগ্রহ পর্যবেক্ষণ নেই।"
+      }
+    },
+    "cumilla": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "chandpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "noakhali": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "feni": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "lakshmipur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "brahmanbaria": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "rangamati": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "khagrachari": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "bandarban": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "rajshahi": {
+      "rabi": {
+        "thenSoil": 0.18,
+        "nowSoil": 0.14,
+        "dSoil": -0.04,
+        "dSoilPct": -22.2,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.21,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.33,
+        "nowSoil": 0.31,
+        "dSoil": -0.02,
+        "dSoilPct": -6.1,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "bogura": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "pabna": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "sirajganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "natore": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "naogaon": {
+      "rabi": {
+        "thenSoil": 0.18,
+        "nowSoil": 0.14,
+        "dSoil": -0.04,
+        "dSoilPct": -22.2,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.22,
+        "dSoil": 0.01,
+        "dSoilPct": 4.8,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.33,
+        "nowSoil": 0.31,
+        "dSoil": -0.02,
+        "dSoilPct": -6.1,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "chapainawabganj": {
+      "rabi": {
+        "thenSoil": 0.18,
+        "nowSoil": 0.14,
+        "dSoil": -0.04,
+        "dSoilPct": -22.2,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.22,
+        "dSoil": 0.01,
+        "dSoilPct": 4.8,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.33,
+        "nowSoil": 0.31,
+        "dSoil": -0.02,
+        "dSoilPct": -6.1,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "joypurhat": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "khulna": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "jashore": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "satkhira": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "bagerhat": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "kushtia": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "jhenaidah": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "magura": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "narail": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "meherpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "chuadanga": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "barishal": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "patuakhali": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "bhola": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "pirojpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "jhalokati": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "barguna": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "sylhet": {
+      "rabi": {
+        "thenSoil": 0.26,
+        "nowSoil": 0.24,
+        "dSoil": -0.02,
+        "dSoilPct": -7.7,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.3,
+        "nowSoil": 0.3,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.38,
+        "nowSoil": 0.36,
+        "dSoil": -0.02,
+        "dSoilPct": -5.3,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "moulvibazar": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "habiganj": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "sunamganj": {
+      "rabi": {
+        "thenSoil": 0.26,
+        "nowSoil": 0.24,
+        "dSoil": -0.02,
+        "dSoilPct": -7.7,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.3,
+        "nowSoil": 0.3,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.38,
+        "nowSoil": 0.36,
+        "dSoil": -0.02,
+        "dSoilPct": -5.3,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "rangpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.19,
+        "dSoil": -0.03,
+        "dSoilPct": -13.6,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "dinajpur": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "kurigram": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "gaibandha": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "lalmonirhat": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "nilphamari": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "panchagarh": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "thakurgaon": {
+      "rabi": {
+        "thenSoil": 0.21,
+        "nowSoil": 0.18,
+        "dSoil": -0.03,
+        "dSoilPct": -14.3,
+        "thenDryDaysShare": 18,
+        "nowDryDaysShare": 27,
+        "dDryDaysShare": 9,
+        "status": "valid",
+        "takeawayEn": "Rabi soil is drier than before, so irrigation planning matters more for wheat and potato.",
+        "takeawayBn": "রবি মৌসুমে মাটি আগের চেয়ে শুকনা, তাই গম ও আলুতে সময়মতো সেচ দেওয়া জরুরি।"
+      },
+      "kharif1": {
+        "thenSoil": 0.24,
+        "nowSoil": 0.25,
+        "dSoil": 0.01,
+        "dSoilPct": 4.2,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.34,
+        "nowSoil": 0.32,
+        "dSoil": -0.02,
+        "dSoilPct": -5.9,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "mymensingh": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "jamalpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "netrokona": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    },
+    "sherpur": {
+      "rabi": {
+        "thenSoil": 0.22,
+        "nowSoil": 0.2,
+        "dSoil": -0.02,
+        "dSoilPct": -9.1,
+        "thenDryDaysShare": 14,
+        "nowDryDaysShare": 20,
+        "dDryDaysShare": 6,
+        "status": "valid",
+        "takeawayEn": "Slight winter topsoil drying; monitor residual moisture after Aman harvest.",
+        "takeawayBn": "শীতকালীন মাটিতে আর্দ্রতার কিছুটা ঘাটতি; আমন কাটার পর মাটির জো বুঝে চাষ করুন।"
+      },
+      "kharif1": {
+        "thenSoil": 0.25,
+        "nowSoil": 0.25,
+        "dSoil": 0,
+        "dSoilPct": 0,
+        "thenDryDaysShare": 15,
+        "nowDryDaysShare": 14,
+        "dDryDaysShare": -1,
+        "status": "valid",
+        "takeawayEn": "Soil moisture is about the same as the 2001–10 baseline.",
+        "takeawayBn": "মাটির আর্দ্রতা আগের দশকের কাছাকাছি রয়েছে।"
+      },
+      "kharif2": {
+        "thenSoil": 0.35,
+        "nowSoil": 0.33,
+        "dSoil": -0.02,
+        "dSoilPct": -5.7,
+        "thenDryDaysShare": 6,
+        "nowDryDaysShare": 8,
+        "dDryDaysShare": 2,
+        "status": "valid",
+        "takeawayEn": "Monsoon soil moisture remains high but with slight drying during late-Aman flowering.",
+        "takeawayBn": "বর্ষা মৌসুমে মাটি পর্যাপ্ত ভেজা থাকলেও আমনের থোড় আসার সময়ে হালকা আর্দ্রতার টান দেখা যায়।"
+      }
+    }
+  }
+}

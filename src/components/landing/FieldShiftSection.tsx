@@ -28,21 +28,49 @@ function MetricRow({
   lang,
   num,
   biggestTag,
+  pct,
+  isNotEnoughData,
 }: {
   label: string;
   thenVal: number;
   nowVal: number;
   delta: number;
-  type: 'temp' | 'heat' | 'share';
+  type: 'temp' | 'heat' | 'share' | 'soil';
   isBiggest: boolean;
   lang: 'en' | 'bn';
   num: (val: number, d?: number, signed?: boolean) => string;
   biggestTag: string;
+  pct?: number;
+  isNotEnoughData?: boolean;
 }) {
   const isBn = lang === 'bn';
 
-  const thenFormatted = type === 'share' ? `${num(thenVal, 0)}%` : `${num(thenVal, 1)}°`;
-  const nowFormatted = type === 'share' ? `${num(nowVal, 0)}%` : `${num(nowVal, 1)}°`;
+  if (isNotEnoughData) {
+    return (
+      <div className="py-2.5 first:pt-0 last:pb-0 border-b border-[#262626] last:border-b-0">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-xs font-medium text-[#737373] truncate">{label}</span>
+        </div>
+        <div className="flex items-center justify-between gap-2 mt-1">
+          <span className="text-xs text-[#737373] font-mono">{isBn ? 'পর্যাপ্ত তথ্য নেই' : 'Not enough data'}</span>
+          <span className="text-xs font-mono text-[#737373]">N/A</span>
+        </div>
+      </div>
+    );
+  }
+
+  const thenFormatted =
+    type === 'share'
+      ? `${num(thenVal, 0)}%`
+      : type === 'soil'
+      ? `${num(thenVal, 2)}`
+      : `${num(thenVal, 1)}°`;
+  const nowFormatted =
+    type === 'share'
+      ? `${num(nowVal, 0)}%`
+      : type === 'soil'
+      ? `${num(nowVal, 2)}`
+      : `${num(nowVal, 1)}°`;
 
   let pillColor = '';
   let pillText = '';
@@ -57,6 +85,18 @@ function MetricRow({
     } else {
       pillColor = 'text-[#737373]';
       pillText = `0 ${isBn ? 'পয়েন্ট' : 'pt'}`;
+    }
+  } else if (type === 'soil') {
+    const pctStr = pct !== undefined ? ` (${num(Math.abs(pct), 1)}%)` : '';
+    if (delta < 0) {
+      pillColor = 'text-[#F59E0B]';
+      pillText = `${num(delta, 2)}${pctStr}`;
+    } else if (delta > 0) {
+      pillColor = 'text-[#38BDF8]';
+      pillText = `+${num(delta, 2)}${pctStr}`;
+    } else {
+      pillColor = 'text-[#737373]';
+      pillText = `0.00`;
     }
   } else {
     if (delta > 0) {
@@ -264,15 +304,38 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                     num={num}
                     biggestTag={t.fs.biggestChange}
                   />
+
+                  {/* 4th Metric Row: ESA CCI Soil Moisture */}
+                  <MetricRow
+                    label={isBn ? 'মাটির আর্দ্রতা (m³/m³)' : 'Soil moisture (m³/m³)'}
+                    thenVal={s.soil?.thenSoil ?? 0}
+                    nowVal={s.soil?.nowSoil ?? 0}
+                    delta={s.soil?.dSoil ?? 0}
+                    type="soil"
+                    isBiggest={false}
+                    lang={lang}
+                    num={num}
+                    biggestTag={t.fs.biggestChange}
+                    pct={s.soil?.dSoilPct ?? 0}
+                    isNotEnoughData={!s.soil || s.soil.status === 'not_enough_data'}
+                  />
                 </div>
               </div>
 
               {/* Bottom Takeaway */}
               <div className="mt-4 p-3 rounded-lg bg-[#0A0A0A] border border-[#262626] flex items-start gap-2.5">
                 <Lightbulb className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5" />
-                <p className="text-xs leading-relaxed text-[#A3A3A3]">
-                  {t.fs.takeaways[s.season]}
-                </p>
+                <div className="text-xs leading-relaxed space-y-1.5">
+                  <p className="text-[#A3A3A3]">
+                    {t.fs.takeaways[s.season]}
+                  </p>
+                  {s.soil && s.soil.status === 'valid' && (
+                    <p className="text-[#D4D4D4] border-t border-[#262626] pt-1.5 font-sans text-[11px] leading-relaxed">
+                      <span className="font-mono text-[#22C55E] font-semibold">ESA CCI: </span>
+                      {isBn ? s.soil.takeawayBn : s.soil.takeawayEn}
+                    </p>
+                  )}
+                </div>
               </div>
             </article>
           );
@@ -313,12 +376,26 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
         </div>
       </div>
 
-      {/* 5. Honest data note */}
-      <div className="flex gap-3 rounded-xl border border-[#262626] bg-[#141414] p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#A3A3A3]">
-        <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#22C55E]" />
-        <p>
-          <strong className="text-[#FAFAFA] font-medium">{t.fs.noteTitle}</strong> {t.fs.note}
-        </p>
+      {/* 5. Honest data notes */}
+      <div className="space-y-3">
+        <div className="flex gap-3 rounded-xl border border-[#262626] bg-[#141414] p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#A3A3A3]">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#22C55E]" />
+          <p>
+            <strong className="text-[#FAFAFA] font-medium">{t.fs.noteTitle}</strong> {t.fs.note}
+          </p>
+        </div>
+
+        <div className="flex gap-3 rounded-xl border border-[#262626] bg-[#141414] p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#A3A3A3]">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#38BDF8]" />
+          <p>
+            <strong className="text-[#FAFAFA] font-medium">
+              {isBn ? 'ইএসএ সিসিআই মাটির আর্দ্রতা প্রসঙ্গে:' : 'About ESA CCI Soil Moisture:'}
+            </strong>{' '}
+            {isBn
+              ? 'ইএসএ সিসিআই কম্বাইন্ড ডেটাসেট (v09.1) একাধিক সক্রিয় ও নিষ্ক্রিয় মাইক্রোওয়েভ উপগ্রহের (MetOp, SMOS, SMAP, AMSR) সমন্বয়ে তৈরি। উপগ্রহ সেন্সরগুলো ২০+ বছরে পরিবর্তিত হওয়ায় আমরা প্রতিদিনের একক সংখ্যার চেয়ে দশকভিত্তিক গড় মৌসুমি পরিবর্তন ও শুষ্ক দিনের অনুপাতকে গুরুত্ব দিই। যেসব এলাকায় উপকূলীয় জলভাগ বা মেঘের কারণে পর্যাপ্ত নির্ভরযোগ্য ডেটা নেই, সেখানে কোনো অনুমান না করে "পর্যাপ্ত তথ্য নেই" দেখানো হয়।'
+              : 'The ESA CCI Soil Moisture record (v09.1 Combined) harmonizes multiple active and passive microwave sensors (MetOp, SMOS, SMAP, AMSR). Because sensor technology evolved over 20+ years, we evaluate decade-wide seasonal averages and dry-day shares rather than day-to-day exact figures. Where coastal open water or cloud contamination limits valid soundings, we display "not enough data" instead of an unverified estimate.'}
+          </p>
+        </div>
       </div>
     </div>
   );

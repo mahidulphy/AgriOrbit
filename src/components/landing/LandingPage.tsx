@@ -40,7 +40,7 @@ export function LandingPage() {
     [locationData.daily, locationData.lat]
   );
   const shift = useMemo(
-    () => computeFieldShift(locationData.monthly),
+    () => computeFieldShift(locationData.monthly, 'rangpur'),
     [locationData.monthly]
   );
 

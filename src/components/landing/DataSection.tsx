@@ -2,7 +2,7 @@ import { BookOpen, CloudRain, CloudSun, Droplets, Globe, History, Leaf, Radar, S
 import { useLang } from '../../lang.tsx';
 import { SectionHeader } from '../ui/ui.tsx';
 
-const ICONS = [CloudRain, History, Droplets, Leaf, Radar, Scan, Globe, CloudSun, BookOpen];
+const ICONS = [CloudRain, History, Droplets, Leaf, Radar, Scan, Globe, Droplets, CloudSun, BookOpen];
 
 export function DataSection() {
   const { t } = useLang();

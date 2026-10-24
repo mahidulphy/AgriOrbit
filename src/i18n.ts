@@ -112,6 +112,7 @@ const en = {
       { name: 'ESA Sentinel-1 · C-SAR', what: '10 m radar flood & waterlogging detection', how: 'Copernicus Data Space SAR penetrates clouds to map waterlogged cropland (Rule SAR-01).', status: 'snapshot' },
       { name: 'ESA Sentinel-2 · MSI', what: '10 m field-level vegetation index (NDVI)', how: 'Copernicus optical sensor with SCL cloud-masking resolves individual farm plots (10 m vs 250 m MODIS).', status: 'snapshot' },
       { name: 'JAXA Earth API · GSMaP & AMSR2', what: 'GSMaP v8 operational rain & AMSR2 soil moisture', how: 'Cross-verifies NASA precipitation and soil drought index (SPI) across independent microwave sensors.', status: 'snapshot' },
+      { name: 'ESA CCI Soil Moisture · Combined', what: 'Decadal soil moisture history, 2001 → 2025', how: '0.25° microwave satellite climate data record powers the Field Shift soil comparison.', status: 'snapshot' },
       { name: 'Open-Meteo', what: '7-day weather forecast', how: 'Not NASA, credited separately. Fills the 2–3 day gap and looks ahead.', status: 'live' },
       { name: 'BARI & BRRI guidelines', what: 'Crop rules for Bangladesh', how: 'Published crop guidance from BARI and BRRI (no partnership).', status: 'guidance' },
     ] as { name: string; what: string; how: string; status: 'live' | 'snapshot' | 'guidance' }[],
@@ -141,7 +142,7 @@ const en = {
     built: 'Built by Bay of Orbits for the NASA Space Apps Challenge 2026',
     challenge: 'Challenge: Field Shift: Adapting Farms with NASA Data',
     team: 'Team',
-    credits: 'Data: NASA (POWER, SMAP, MODIS), ESA Copernicus (Sentinel-1, 2), JAXA Earth API (GSMaP v8, AMSR2) · Forecast: Open-Meteo · Crop guidance: BARI & BRRI',
+    credits: 'Data: NASA (POWER, SMAP, MODIS), ESA Copernicus (Sentinel-1, 2), ESA CCI (Soil Moisture), JAXA Earth API (GSMaP v8, AMSR2) · Forecast: Open-Meteo · Crop guidance: BARI & BRRI',
     disclaimer: 'A student project. Not affiliated with or endorsed by NASA, BARI, or BRRI.',
   },
 
@@ -368,6 +369,7 @@ const bn: Dict = {
       { name: 'ইএসএ সেন্টিনেল-১ · সি-সার', what: '১০ মিটার রেজ্যুলুশনে বন্যা ও জলাবদ্ধতা শনাক্তকরণ', how: 'কোপার্নিকাস রাডার মেঘ ভেদ করে ফসলি জমিতে জলাবদ্ধতা শনাক্ত করে (নিয়ম SAR-01)।', status: 'snapshot' },
       { name: 'ইএসএ সেন্টিনেল-২ · এমএসআই', what: '১০ মিটার রেজ্যুলুশনে ফসলের সবুজায়ন সূচক (NDVI)', how: 'কোপার্নিকাস অপটিক্যাল সেন্সর মেঘমুক্ত অ্যালগরিদমে একক ফসলি জমি বিশ্লেষণ করে (১০মি বনাম ২৫০মি মোডিস)।', status: 'snapshot' },
       { name: 'জাক্সা আর্থ এপিআই · জিএসএমএপি ও এএমএসআর২', what: 'জিএসএমএপি ৮ বৃষ্টিপাত ও এএমএসআর২ মাটির আর্দ্রতা', how: 'নাসার বৃষ্টি ও মাটির আর্দ্রতার সাথে জাক্সার উপগ্রহ তথ্যের সরাসরি অমিল বা মিল যাচাই (SPI খরা সূচক)।', status: 'snapshot' },
+      { name: 'ইএসএ সিসিআই মাটির আর্দ্রতা · কম্বাইন্ড', what: 'মাটির আর্দ্রতার ২০ বছরের ইতিহাস, ২০০১ → ২০২৫', how: '০.২৫ ডিগ্রি গ্রিডের জলবায়ু উপগ্রহ ডেটাসেট দ্বারা আবহাওয়া বদলের মাটির পরিবর্তন বিশ্লেষণ করা হয়।', status: 'snapshot' },
       { name: 'ওপেন-মেটিও', what: '৭ দিনের আবহাওয়া পূর্বাভাস', how: 'নাসার নয়, আলাদাভাবে নেওয়া। ২–৩ দিনের ফাঁক পূরণ করে সামনের পূর্বাভাস দেয়।', status: 'live' },
       { name: 'বারি ও ব্রি নির্দেশিকা', what: 'বাংলাদেশের ফসলের নিয়ম', how: 'বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (বারি) ও বাংলাদেশ ধান গবেষণা ইনস্টিটিউটের (ব্রি) গবেষণা নির্দেশিকা (কোনো প্রাতিষ্ঠানিক চুক্তি নেই)।', status: 'guidance' },
     ],
@@ -397,7 +399,7 @@ const bn: Dict = {
     built: 'নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর জন্য বে অফ অরবিটস দলের তৈরি',
     challenge: 'চ্যালেঞ্জ: ফিল্ড শিফট: নাসার তথ্য দিয়ে খামারকে মানিয়ে নেওয়া',
     team: 'টিম',
-    credits: 'তথ্যসূত্র: নাসা (পাওয়ার, স্ম্যাপ, মোডিস), ইএসএ কোপার্নিকাস (সেন্টিনেল-১, ২), জাক্সা আর্থ এপিআই (জিএসএমএপি ৮, এএমএসআর২) · পূর্বাভাস: ওপেন-মেটিও · ফসলের নিয়ম: বারি ও ব্রি',
+    credits: 'তথ্যসূত্র: নাসা (পাওয়ার, স্ম্যাপ, মোডিস), ইএসএ কোপার্নিকাস (সেন্টিনেল-১, ২), ইএসএ সিসিআই (মাটির আর্দ্রতা), জাক্সা আর্থ এপিআই (জিএসএমএপি ৮, এএমএসআর২) · পূর্বাভাস: ওপেন-মেটিও · ফসলের নিয়ম: বারি ও ব্রি',
     disclaimer: 'শিক্ষার্থীদের তৈরি একটি প্রকল্প। নাসা, বারি বা ব্রির সাথে কোনো আনুষ্ঠানিক চুক্তি নেই।',
   },
 

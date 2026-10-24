@@ -144,7 +144,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   );
 
   const fieldShift = useMemo(
-    () => hasData ? computeFieldShift(loaded.data.monthly) : computeFieldShift(BUNDLED_RANGPUR.monthly),
+    () => hasData ? computeFieldShift(loaded.data.monthly, district.id) : computeFieldShift(BUNDLED_RANGPUR.monthly, district.id),
     [loaded.data.monthly]
   );
 

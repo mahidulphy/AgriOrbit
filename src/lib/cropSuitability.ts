@@ -310,6 +310,18 @@ function evaluateCropWithNasa(
       }
     }
 
+
+    // RULE CCI-01: ESA CCI DECADAL TOPSOIL DRYING IMPACT
+    // ─────────────────────────────────────────────────────────────
+    if (crop.id === 'wheat' || crop.id === 'potato') {
+      dynamicRulesEn.push(
+        'Rule CCI-01: ESA CCI: Rabi soil moisture −13.6% vs 2001–10 baseline → supplemental irrigation plan required for wheat and potato.'
+      );
+      dynamicRulesBn.push(
+        'নিয়ম CCI-01: ইএসএ সিসিআই: ২০০১–১০ এর চেয়ে রবি মৌসুমে মাটির রস ১৩.৬% কমেছে → গম ও আলুর জন্য সময়মতো সেচ পরিকল্পনা নিশ্চিত করুন।'
+      );
+    }
+
     // RULE 4: EVAPOTRANSPIRATION DEFICIT (Rainfall - ET₀ < -50 mm)
     // ─────────────────────────────────────────────────────────────
     if (wBal < -50 && crop.waterRequirementEn === 'High') {
