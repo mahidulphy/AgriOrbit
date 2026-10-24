@@ -147,15 +147,15 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
         <div className="mb-8">
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-2">
             <MapPin className="w-3.5 h-3.5 text-[#B8FF3D]" />
-            <span>{language === 'en' ? 'LOCATION SELECTION' : 'অবস্থান নির্ধারণ'}</span>
+            <span>{language === 'en' ? 'LOCATION SELECTION' : 'এলাকা নির্বাচন'}</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            {language === 'en' ? 'Pinpoint Your Farm Location' : 'আপনার খামারের অবস্থান নির্ধারণ করুন'}
+            {language === 'en' ? 'Pinpoint Your Farm Location' : 'আপনার জমির এলাকা বেছে নিন'}
           </h2>
           <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-2xl leading-relaxed">
             {language === 'en'
               ? 'Select your district and upazila, or click directly on the interactive map. The 5 km observation circle synchronizes with NASA datasets.'
-              : 'জেলা ও উপজেলা নির্বাচন করুন অথবা মানচিত্রে সরাসরি জমিতে ক্লিক করুন। ৫ কিমি ব্যাসার্ধের বৃত্তটি নাসার উপগ্রহ তথ্যের সাথে সংযুক্ত।'}
+              : 'জেলা ও উপজেলা বেছে নিন, অথবা মানচিত্রে আপনার জমি দেখিয়ে দিন। নাসার স্যাটেলাইট তথ্য অনুযায়ী এই এলাকার আবহাওয়া যাচাই করা হবে।'}
           </p>
         </div>
 
@@ -223,7 +223,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
             <div className="p-5 rounded-2xl bg-[#050B14] border border-[#B8FF3D]/30 space-y-2">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs uppercase font-mono text-[#B8FF3D] font-bold">
-                  {language === 'en' ? 'Selected Field Coordinates' : 'নির্বাচিত জমির স্থানাঙ্ক'}
+                  {language === 'en' ? 'Selected Field Coordinates' : 'জমির অবস্থান ও স্থানাঙ্ক'}
                 </span>
                 <span className="text-[10px] font-mono text-[#8FA3B8]">
                   {language === 'en' ? sourceLabel.en : sourceLabel.bn}
@@ -241,7 +241,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 <span>
                   LNG <strong className="text-white font-bold">{location.longitude}° E</strong>
                 </span>
-                {resolving && <span className="text-[#00E5FF] animate-pulse">Resolving…</span>}
+                {resolving && <span className="text-[#00E5FF] animate-pulse">{language === 'en' ? 'Resolving…' : 'যাচাই করা হচ্ছে…'}</span>}
               </div>
               {outsideMessage && (
                 <p className="text-xs text-[#FF5C5C] font-semibold pt-1">
@@ -284,7 +284,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
               >
                 <div className="absolute top-4 left-4 z-10 bg-[#050B14]/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-xs font-mono flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#B8FF3D] animate-pulse" />
-                  <span>Click anywhere in Bangladesh to reposition pin</span>
+                  <span>{language === 'en' ? 'Click anywhere in Bangladesh to reposition pin' : 'পিন সরাতে মানচিত্রের যেকোনো জায়গায় চাপ দিন'}</span>
                 </div>
               </BangladeshMap>
             </div>
@@ -295,7 +295,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 onClick={onContinue}
                 className="px-8 py-3.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-sm tracking-tight transition-all duration-150 transform hover:-translate-y-0.5 shadow-xl shadow-[#B8FF3D]/20 flex items-center gap-2 cursor-pointer"
               >
-                <span>{language === 'en' ? 'Continue to Priorities' : 'পরবর্তী ধাপ: লক্ষ্য নির্বাচন'}</span>
+                <span>{language === 'en' ? 'Continue to Priorities' : 'পরবর্তী ধাপ'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

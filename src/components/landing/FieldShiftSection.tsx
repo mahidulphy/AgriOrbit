@@ -5,7 +5,7 @@ import { SEASON_COLOR, SectionHeader } from '../ui/ui.tsx';
 
 /** Reusable: shows the Field Shift for any district (landing uses Rangpur). */
 export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
-  const { t, num, range } = useLang();
+  const { t, num, range, lang } = useLang();
   const warm = warmestShift(shift);
   const rain = rainTimingShift(shift);
 
@@ -54,7 +54,7 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                 nowLabel={nowLabel}
                 then={`${num(s.thenTemp, 1)}°`}
                 now={`${num(s.nowTemp, 1)}°`}
-                delta={`${num(s.dTemp, 1, true)}°C`}
+                delta={`${num(s.dTemp, 1, true)}${lang === 'bn' ? '°সে' : '°C'}`}
                 warm={s.dTemp >= 0}
               />
               <Row
@@ -63,7 +63,7 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                 nowLabel={nowLabel}
                 then={`${num(s.thenHeat, 1)}°`}
                 now={`${num(s.nowHeat, 1)}°`}
-                delta={`${num(s.dHeat, 1, true)}°C`}
+                delta={`${num(s.dHeat, 1, true)}${lang === 'bn' ? '°সে' : '°C'}`}
                 warm={s.dHeat >= 0}
               />
               <Row
@@ -72,7 +72,7 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                 nowLabel={nowLabel}
                 then={`${num(s.thenShare, 0)}%`}
                 now={`${num(s.nowShare, 0)}%`}
-                delta={`${num(s.dShare, 0, true)} pt`}
+                delta={`${num(s.dShare, 0, true)} ${lang === 'bn' ? 'পয়েন্ট' : 'pt'}`}
                 neutral
               />
             </dl>

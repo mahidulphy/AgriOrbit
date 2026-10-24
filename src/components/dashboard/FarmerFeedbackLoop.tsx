@@ -38,7 +38,7 @@ export const FarmerFeedbackLoop: React.FC<FarmerFeedbackLoopProps> = ({
         'Pre-committed contract farming agreement',
       ]
     : [
-        'স্থানীয় ঐতিহ্যবাহী জাত চাষের অগ্রাধিকার',
+        'স্থানীয় জাত চাষ করার ইচ্ছা',
         'ডাল ফসলের বাজার দর সংক্রান্ত অনিশ্চয়তা',
         'সেচ বা পাম্প সুবিধার অপ্রতুলতা',
         'পূর্ব নির্ধারিত চুক্তিবদ্ধ চাষাবাদ',
@@ -227,7 +227,7 @@ export const FarmerFeedbackLoop: React.FC<FarmerFeedbackLoopProps> = ({
         <p>
           {isEn
             ? "Your feedback helps us improve AgriOrbit's recommendations. Recommendations are advisory based on NASA Earth observations and BARI/BRRI guidelines. Always verify with your local Upazila Agriculture Officer."
-            : "আপনার মতামত এগ্রিঅরবিটের সুপারিশ আরও নিখুঁত করতে সহায়তা করে। সুপারিশসমূহ নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই নির্দেশিকার ভিত্তিতে প্রণীত। চূড়ান্ত বাস্তবায়নে স্থানীয় উপজেলা কৃষি কর্মকর্তার পরামর্শ নিন।"}
+            : "আপনার মতামত আমাদের পরামর্শ আরও ভালো করতে সাহায্য করে। এই পরামর্শগুলো নাসার স্যাটেলাইট তথ্য আর বারি ও ব্রি-এর নিয়ম মিলিয়ে তৈরি। শেষ সিদ্ধান্তের আগে স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন।"}
         </p>
       </div>
     </section>

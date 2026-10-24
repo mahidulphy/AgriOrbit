@@ -56,7 +56,7 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
               href="#/dashboard"
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black font-mono font-bold text-xs transition-all shadow-md shadow-[#B8FF3D]/20"
             >
-              <span>{isBn ? 'মাঠ বিশ্লেষণ' : 'Analyze Field'}</span>
+              <span>{isBn ? 'আমার জমি যাচাই' : 'Analyze Field'}</span>
             </a>
           </div>
         </div>

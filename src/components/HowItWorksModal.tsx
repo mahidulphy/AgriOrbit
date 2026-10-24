@@ -42,7 +42,7 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
             </div>
             <div>
               <h4 className="font-display font-bold text-white text-base mb-1">
-                {language === 'en' ? '1. NASA Observes' : '১. নাসা উপগ্রহ পর্যবেক্ষণ'}
+                {language === 'en' ? '1. NASA Observes' : '১. নাসা নজর রাখে'}
               </h4>
               <p className="leading-relaxed">
                 {language === 'en'
@@ -58,12 +58,12 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
             </div>
             <div>
               <h4 className="font-display font-bold text-white text-base mb-1">
-                {language === 'en' ? '2. AgriOrbit Explains' : '২. এগ্রিঅরবিট যৌক্তিক ব্যাখ্যা দেয়'}
+                {language === 'en' ? '2. AgriOrbit Explains' : '২. অ্যাগ্রিঅরবিট বুঝিয়ে বলে'}
               </h4>
               <p className="leading-relaxed">
                 {language === 'en'
                   ? 'A deterministic agronomic rule engine pairs observation metrics with local soil types and farmer objectives (water savings, soil health). No black-box AI.'
-                  : 'একটি স্বচ্ছ কৃষি নিয়মাবলী ব্যবস্থা এই উপগ্রহ তথ্যকে কৃষকের অগ্রাধিকার ও মাটির বৈশিষ্ট্যের সাথে মিলিয়ে উপযোগী ফসল নির্ধারণ করে।'}
+                  : 'আমাদের নিয়মগুলো এই স্যাটেলাইট তথ্যকে আপনার চাহিদা ও মাটির বৈশিষ্ট্যের সাথে মিলিয়ে উপযুক্ত ফসল খুঁজে বের করে। কোনো মনগড়া হিসাব নয়।'}
               </p>
             </div>
           </div>
@@ -74,12 +74,12 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
             </div>
             <div>
               <h4 className="font-display font-bold text-white text-base mb-1">
-                {language === 'en' ? '3. Farmers Decide' : '৩. চূড়ান্ত সিদ্ধান্ত কৃষকের'}
+                {language === 'en' ? '3. Farmers Decide' : '৩. শেষ সিদ্ধান্ত কৃষকের'}
               </h4>
               <p className="leading-relaxed">
                 {language === 'en'
                   ? 'The farmer reviews the transparent 3-season crop rotation (Rabi → Kharif-1 → Kharif-2), checks "Explain Why", and makes the informed choice for their field.'
-                  : 'কৃষক প্রতিটি সুপারিশের পেছনের কারণ যাচাই করেন এবং নিজের জমিতে রবি, খরিফ-১ ও খরিফ-২ এর জন্য সঠিক সিদ্ধান্ত নেন।'}
+                  : 'আমরা শুধু পথ আর কারণ দেখাই, হুকুম দিই না। নিজের জমি আপনিই সবচেয়ে ভালো চেনেন।'}
               </p>
             </div>
           </div>

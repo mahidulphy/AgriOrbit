@@ -28,11 +28,11 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
   const [activeStep, setActiveStep] = useState(0);
 
   const streams = [
-    { name: 'NASA POWER', labelEn: 'Precipitation & Temperature profile ingested', labelBn: 'বৃষ্টিপাত ও তাপমাত্রা তথ্য বিশ্লেষণ' },
-    { name: 'NASA SMAP', labelEn: 'Root-zone and surface soil moisture assessed', labelBn: 'মাটির পৃষ্ঠ ও মূলস্তরের আর্দ্রতা নিরীক্ষা' },
-    { name: 'NASA MODIS', labelEn: 'Vegetation health index (NDVI) & LST verified', labelBn: 'উদ্ভিদের সজীবতা সূচক ও ভূপৃষ্ঠের তাপমাত্রা যাচাই' },
-    { name: 'BARI Agronomy', labelEn: 'Agro-ecological calendar rules cross-referenced', labelBn: 'কৃষি গবেষণা নির্দেশিকার সাথে সমন্বয়' },
-    { name: 'Farmer Priority', labelEn: `Weighted filter applied: ${selectedPriority.replace('_', ' ')}`, labelBn: 'কৃষকের অগ্রাধিকার নিয়মে প্রয়োগ' },
+    { name: 'NASA POWER', labelEn: 'Precipitation & Temperature profile ingested', labelBn: 'বৃষ্টিপাত ও তাপমাত্রার তথ্য দেখা হচ্ছে' },
+    { name: 'NASA SMAP', labelEn: 'Root-zone and surface soil moisture assessed', labelBn: 'মাটির ওপর ও গভীরে রসের পরিমাণ যাচাই' },
+    { name: 'NASA MODIS', labelEn: 'Vegetation health index (NDVI) & LST verified', labelBn: 'গাছের সজীবতা ও জমির তাপমাত্রা যাচাই' },
+    { name: 'BARI Agronomy', labelEn: 'Agro-ecological calendar rules cross-referenced', labelBn: 'বারি (BARI) ও ব্রি (BRRI)-এর কৃষি নিয়মের সাথে মেলানো' },
+    { name: 'Farmer Priority', labelEn: `Weighted filter applied: ${selectedPriority.replace('_', ' ')}`, labelBn: 'আপনার চাহিদা মেলানো হচ্ছে' },
   ];
 
   useEffect(() => {
@@ -59,13 +59,13 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
         </div>
 
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
-          {language === 'en' ? 'Calibrating Observations' : 'উপগ্রহ উপাত্ত বিশ্লেষণ করা হচ্ছে'}
+          {language === 'en' ? 'Calibrating Observations' : 'স্যাটেলাইটের তথ্য যাচাই করা হচ্ছে'}
         </h2>
 
         <p className="text-xs sm:text-sm text-[#8FA3B8] max-w-md mx-auto mb-8 leading-relaxed">
           {language === 'en'
             ? `Pairing Earth observations for ${district.nameEn} with your selected farming priority.`
-            : `${district.nameBn}-এর জন্য উপগ্রহ তথ্য ও আপনার অগ্রাধিকার সমন্বয় করা হচ্ছে।`}
+            : `${district.nameBn}-এর স্যাটেলাইট তথ্যের সাথে আপনার চাহিদা মেলানো হচ্ছে।`}
         </p>
 
         {/* Pipeline Step List */}

@@ -84,7 +84,7 @@ export function computeForecastMetrics(
 
   const cacheDateStr = updatedAtIso ? updatedAtIso.split('T')[0] : '';
   const cachePrefixEn = dataStatus === 'cached' ? `Cached NASA POWER data from ${cacheDateStr}. ` : '';
-  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${cacheDateStr})। ` : '';
+  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার তথ্য (${cacheDateStr})। ` : '';
 
   let summaryEn: string;
   let summaryBn: string;
@@ -205,7 +205,7 @@ export async function getWeatherForecast(
     hasHeavyRainRisk: false,
     forecastDays: [],
     forecastSummaryEn: `Data unavailable for ${distName}`,
-    forecastSummaryBn: `${distNameBn}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+    forecastSummaryBn: `${distNameBn}-এর জন্য তথ্য পাওয়া যায়নি`,
     dataStatus: 'unavailable',
     updatedAt: '',
   };

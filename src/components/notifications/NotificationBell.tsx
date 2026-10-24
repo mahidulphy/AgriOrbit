@@ -279,10 +279,10 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ className = 
                 </p>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1.5 border-t border-white/5">
-                  <span>{isBn ? 'উপাত্ত তারিখ:' : 'Observed:'} {n.data_date}</span>
+                  <span>{isBn ? 'তথ্যের তারিখ:' : 'Observed:'} {n.data_date}</span>
                   {isUnread && (
                     <span className="text-[#B8FF3D] text-[10px]">
-                      {isBn ? 'পঠিত চিহ্নিত করতে ক্লিক করুন' : 'Click to mark read'}
+                      {isBn ? 'পড়া হয়েছে চিহ্নিত করতে চাপ দিন' : 'Click to mark read'}
                     </span>
                   )}
                 </div>

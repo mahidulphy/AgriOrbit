@@ -73,7 +73,7 @@ export const SignUpPage: React.FC = () => {
       subtitle={
         lang === 'en'
           ? 'Join Bangladeshi farmers using NASA satellite data for climate-resilient crop planning.'
-          : 'জলবায়ু-সহনশীল শস্য পরিকল্পনায় নাসার উপগ্রহ তথ্যের সুবিধা নিন।'
+          : 'বদলানো আবহাওয়ায় সঠিক ফসল বেছে নিতে আপনার অ্যাকাউন্ট খুলুন।'
       }
       error={error}
       success={success}
@@ -96,7 +96,7 @@ export const SignUpPage: React.FC = () => {
               href="#/login"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#B8FF3D] text-[#050B14] font-bold text-xs shadow-md shadow-[#B8FF3D]/20 cursor-pointer"
             >
-              <span>{lang === 'en' ? 'Return to Sign In' : 'লগইন পাতায় ফিরে যান'}</span>
+              <span>{lang === 'en' ? 'Return to Sign In' : 'লগইন করুন'}</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

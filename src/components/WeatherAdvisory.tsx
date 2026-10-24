@@ -99,7 +99,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
           anomalyPct: 0,
           observationWindow: { startDate: 'N/A', endDate: 'N/A', daysCount: 0 },
           observedSummaryEn: `Data unavailable for ${admin?.nameEn ?? districtId}`,
-          observedSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+          observedSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য তথ্য পাওয়া যায়নি`,
           dataStatus: 'unavailable' as const,
           updatedAt: '',
         };
@@ -115,7 +115,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
           hasHeavyRainRisk: false,
           forecastDays: [],
           forecastSummaryEn: `Data unavailable for ${admin?.nameEn ?? districtId}`,
-          forecastSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+          forecastSummaryBn: `${admin?.nameBn ?? districtId}-এর জন্য তথ্য পাওয়া যায়নি`,
           dataStatus: 'unavailable' as const,
           updatedAt: '',
         };
@@ -228,7 +228,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
             <div className="flex-1 min-w-0 text-xs sm:text-sm font-medium leading-snug">
               <div className="flex flex-wrap items-center gap-2 mb-1">
                 <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${severityColors.badge}`}>
-                  {isEn ? 'WEATHER ADVISORY' : 'আবহাওয়া উপদেষ্টা'}
+                  {isEn ? 'WEATHER ADVISORY' : 'আবহাওয়া বার্তা'}
                 </span>
                 <span className="text-[11px] font-mono text-[#8FA3B8] hidden md:inline">
                   {upazilaName} · {activeAdvisory.dataSourceStatus.isLive ? 'Live' : 'Cached Snapshot'}
@@ -270,7 +270,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2">
               <div>
                 <span className="text-[10px] font-mono text-[#00E5FF] uppercase tracking-wider font-bold block mb-0.5">
-                  {isEn ? 'FIELD ACTION ADVISORY' : 'মাঠ পর্যায়ের কার্যকারী পরামর্শ'}
+                  {isEn ? 'FIELD ACTION ADVISORY' : 'জমির জন্য করণীয় পরামর্শ'}
                 </span>
                 <h3 className="font-display text-lg sm:text-xl font-bold text-white">
                   {isEn ? activeAdvisory.titleEn : activeAdvisory.titleBn}
@@ -384,7 +384,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                   </div>
 
                   <span className="text-xs text-[#8FA3B8] block font-mono">
-                    {isEn ? 'Root-Zone Soil Moisture' : 'মাটির মূলস্তরের আর্দ্রতা'}
+                    {isEn ? 'Root-Zone Soil Moisture' : 'মাটির গভীরের রস'}
                   </span>
 
                   <div className="mt-1 flex items-baseline gap-2">
@@ -436,7 +436,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                     AGRIORBIT ADVISORY
                   </span>
                   <span className="text-xs font-mono text-[#8FA3B8]">
-                    {isEn ? 'Rule-Based Agronomic Action' : 'নিয়মভিত্তিক কৃষি সিদ্ধান্ত'}
+                    {isEn ? 'Rule-Based Agronomic Action' : 'কৃষি নিয়ম অনুযায়ী করণীয়'}
                   </span>
                 </div>
 
@@ -446,7 +446,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                   className="inline-flex items-center gap-1.5 text-xs text-[#00E5FF] hover:text-white font-mono hover:underline cursor-pointer self-start sm:self-auto"
                 >
                   <HelpCircle className="w-3.5 h-3.5" />
-                  <span>{isEn ? 'Why am I seeing this?' : 'আমি কেন এটি দেখছি?'}</span>
+                  <span>{isEn ? 'Why am I seeing this?' : 'কেন এই পরামর্শ দেওয়া হলো?'}</span>
                 </button>
               </div>
 
@@ -579,7 +579,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               {/* Honest Scientific Disclaimer */}
               <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-[11px] text-[#8FA3B8] leading-relaxed">
                 <span className="font-bold text-white block mb-0.5">
-                  {isEn ? 'Scientific Integrity Note:' : 'বৈজ্ঞানিক সততা সম্পর্কিত বিজ্ঞপ্তি:'}
+                  {isEn ? 'Scientific Integrity Note:' : 'সঠিক তথ্যের নিশ্চয়তা:'}
                 </span>
                 {isEn ? activeAdvisory.whyExplanation.scientificNotesEn : activeAdvisory.whyExplanation.scientificNotesBn}
               </div>

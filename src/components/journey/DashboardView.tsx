@@ -232,10 +232,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   const DASHBOARD_NAV_ITEMS = [
     { id: 'overview' as const, en: 'Overview', bn: 'সারসংক্ষেপ', icon: LayoutDashboard },
-    { id: 'conditions' as const, en: 'Field Conditions', bn: 'মাঠের পরিস্থিতি', icon: Droplets },
+    { id: 'conditions' as const, en: 'Field Conditions', bn: 'মাঠের অবস্থা', icon: Droplets },
     { id: 'crops' as const, en: 'Crop Plan', bn: 'ফসলের পরিকল্পনা', icon: Sprout },
-    { id: 'shift' as const, en: 'Climate Shift', bn: 'জলবায়ু রূপান্তর', icon: TrendingUp },
-    { id: 'explain' as const, en: 'Explain Why', bn: 'স্বচ্ছ নিয়ম ও ব্যাখ্যা', icon: HelpCircle },
+    { id: 'shift' as const, en: 'Climate Shift', bn: 'আবহাওয়া বদল', icon: TrendingUp },
+    { id: 'explain' as const, en: 'Explain Why', bn: 'পরামর্শের কারণ', icon: HelpCircle },
   ];
 
   const handleTabClick = (tabId: DashboardTab) => {
@@ -260,12 +260,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Selected Field Context Card */}
           <div className="p-3.5 rounded-2xl bg-[#0B1626] border border-white/10 space-y-2">
             <div className="flex items-center justify-between text-[11px] font-mono text-[#8FA3B8]">
-              <span className="uppercase">{language === 'en' ? 'Active Field' : 'নির্বাচিত জমি'}</span>
+              <span className="uppercase">{language === 'en' ? 'Active Field' : 'আপনার জমি'}</span>
               <button
                 onClick={onChangeFieldLocation}
                 className="text-[#00E5FF] hover:underline font-bold text-[10px] uppercase cursor-pointer"
               >
-                {language === 'en' ? 'Change' : 'পরিবর্তন'}
+                {language === 'en' ? 'Change' : 'বদলান'}
               </button>
             </div>
 
@@ -323,7 +323,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#00E5FF] hover:text-white hover:bg-[#00E5FF]/10 transition-all text-left cursor-pointer border border-[#00E5FF]/25 mt-2"
             >
               <User className="w-4 h-4 shrink-0 text-[#00E5FF]" />
-              <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'কৃষক প্রোফাইল ও জমি'}</span>
+              <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'প্রোফাইল ও জমি'}</span>
             </a>
           </nav>
 
@@ -354,11 +354,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
             <button
               onClick={onLogout}
-              title={language === 'en' ? 'Exit to Public Website' : 'মূল ওয়েবসাইটে ফিরে যান'}
+              title={language === 'en' ? 'Exit to Public Website' : 'হোমে ফিরুন'}
               className="p-2 rounded-xl bg-white/5 hover:bg-[#FF5C5C]/20 border border-white/10 text-[#8FA3B8] hover:text-[#FF5C5C] transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-mono"
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span className="text-[10px] uppercase font-bold">{language === 'en' ? 'Exit' : 'প্রস্থান'}</span>
+              <span className="text-[10px] uppercase font-bold">{language === 'en' ? 'Exit' : 'হোমে ফিরুন'}</span>
             </button>
           </div>
         </div>
@@ -383,7 +383,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <UserMenu compact />
           <button
             onClick={onLogout}
-            title={language === 'en' ? 'Exit to Website' : 'মূল ওয়েবসাইটে প্রস্থান'}
+            title={language === 'en' ? 'Exit to Website' : 'হোমে ফিরুন'}
             className="p-1.5 rounded-lg bg-white/5 text-[#8FA3B8] hover:text-white border border-white/10 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
@@ -414,7 +414,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   onClick={() => { setMobileMenuOpen(false); onChangeFieldLocation(); }}
                   className="text-[11px] text-[#00E5FF] underline mt-1 block"
                 >
-                  {language === 'en' ? 'Change Location' : 'স্থান পরিবর্তন'}
+                  {language === 'en' ? 'Change Location' : 'এলাকা বদলান'}
                 </button>
               </div>
 
@@ -450,7 +450,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 onClick={onLogout}
                 className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-center text-[#FF5C5C]"
               >
-                {language === 'en' ? 'Exit to Website' : 'মূল সাইটে প্রস্থান'}
+                {language === 'en' ? 'Exit to Website' : 'হোমে ফিরুন'}
               </button>
             </div>
           </div>
@@ -482,15 +482,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   ? (language === 'en' ? 'Simulation Active' : 'সিমুলেশন চলছে')
                   : (() => {
                       if (loaded.mode === 'unavailable') {
-                        return language === 'en' ? `Data unavailable for ${districtName.split(' ')[0]}` : `${districtName.split(' ')[0]}-এর উপাত্ত পাওয়া যায়নি`;
+                        return language === 'en' ? `Data unavailable for ${districtName.split(' ')[0]}` : `${districtName.split(' ')[0]}-এর তথ্য পাওয়া যায়নি`;
                       }
                       const rawDate = loaded?.data?.fetchedAt || conditions?.to;
                       if (!rawDate) {
-                        return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+                        return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
                       }
                       const dateObj = new Date(rawDate);
                       if (isNaN(dateObj.getTime())) {
-                        return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+                        return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
                       }
                       const dateStr = dateObj.toLocaleDateString(language === 'bn' ? 'bn-BD' : 'en-GB', {
                         day: 'numeric',
@@ -498,9 +498,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         year: 'numeric',
                       });
                       if (loaded.mode === 'cache') {
-                        return language === 'en' ? `Cached NASA POWER data from ${dateStr}` : `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${dateStr})`;
+                        return language === 'en' ? `Cached NASA POWER data from ${dateStr}` : `সংরক্ষিত নাসা পাওয়ার তথ্য (${dateStr})`;
                       }
-                      return language === 'en' ? `NASA data · ${dateStr}` : `নাসা উপাত্ত · ${dateStr}`;
+                      return language === 'en' ? `NASA data · ${dateStr}` : `নাসা তথ্য · ${dateStr}`;
                     })()}
               </span>
             </div>
@@ -577,7 +577,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <div className="flex flex-wrap items-center gap-3 text-xs">
                   {/* Priority Badge */}
                   <div className="px-3 py-1.5 rounded-xl bg-[#050B14] border border-white/10 flex items-center gap-2">
-                    <span className="text-slate-400 font-medium">{language === 'en' ? 'Priority:' : 'লক্ষ্য:'}</span>
+                    <span className="text-slate-400 font-medium">{language === 'en' ? 'Priority:' : 'চাহিদা:'}</span>
                     <span className="font-bold text-[#B8FF3D] capitalize">
                       {formatPriorityLabel(selectedPriority, language)}
                     </span>
@@ -617,9 +617,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-400 font-medium">{language === 'en' ? 'Suitability Score:' : 'উপযোগিতা:'}</span>
+                    <span className="text-xs text-slate-400 font-medium">{language === 'en' ? 'Suitability Score:' : 'স্কোর:'}</span>
                     <span className="px-3 py-1 rounded-xl bg-[#050B14] border border-[#B8FF3D]/40 text-sm font-bold text-[#B8FF3D]">
-                      {(rankedCrops[0] ?? { suitabilityScore: 88 }).suitabilityScore}/100 ({language === 'en' ? 'Match' : 'উপযোগিতা'})
+                      {(rankedCrops[0] ?? { suitabilityScore: 88 }).suitabilityScore}/100 ({language === 'en' ? 'Match' : 'উপযুক্ত'})
                     </span>
                   </div>
                 </div>
@@ -692,7 +692,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {conditions.rainUnavailable ? (
                         <span className="text-amber-400 text-sm font-sans font-medium">
-                          {language === 'en' ? 'Data Unavailable' : 'উপাত্ত অনুপস্থিত'}
+                          {language === 'en' ? 'Data Unavailable' : 'তথ্য নেই'}
                         </span>
                       ) : (
                         <>
@@ -969,7 +969,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="pt-3 border-t border-white/5 space-y-1.5 text-xs font-mono text-slate-300">
                       <div className="flex items-center gap-1.5 text-[#B8FF3D]">
                         <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                        <span>{language === 'en' ? 'Rule A: Family Alternation Verified' : 'রুল ক: গোত্র আবর্তন নিশ্চিত'}</span>
+                        <span>{language === 'en' ? 'Rule A: Family Alternation Verified' : 'নিয়ম ১: একই ফসল বারবার নয়'}</span>
                       </div>
                       <div className="flex items-center gap-1.5 text-[#00E5FF]">
                         <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
@@ -1011,7 +1011,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-bold">
-                          {language === 'en' ? 'Advanced Decision Tool' : 'উন্নত বিশ্লেষণ টুল'}
+                          {language === 'en' ? 'Advanced Decision Tool' : 'কৃষি সিদ্ধান্ত নেওয়ার টুল'}
                         </span>
                         {whatIfActive && (
                           <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-mono border border-purple-500/30">
@@ -1042,7 +1042,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <p className="text-xs text-slate-300">
                           {language === 'en'
                             ? 'Adjust environmental variables below to test how different drought or heatwave conditions impact crop suitability scores and rotation plans in real time.'
-                            : 'নিচের স্লাইডারগুলো পরিবর্তন করে দেখুন কীভাবে খরা বা অতিরিক্ত তাপমাত্রা ফসলের উপযোগিতা স্কোর এবং ৩-মৌসুমী আবর্তন পরিবর্তন করে।'}
+                            : 'নিচের স্লাইডারগুলো পরিবর্তন করে দেখুন কীভাবে খরা বা অতিরিক্ত তাপমাত্রা ফসলের সম্ভাবনা এবং ৩-মৌসুমের শস্য পর্যায় বদলে দেয়।'} 
                         </p>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
@@ -1193,7 +1193,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="space-y-8 animate-fadeIn">
               <div className="pb-4 border-b border-white/10">
                 <span className="text-xs font-mono uppercase text-[#00E5FF] tracking-wider font-bold block mb-1">
-                  {language === 'en' ? 'Environmental Field Data' : 'পরিবেশগত উপাত্ত'}
+                  {language === 'en' ? 'Environmental Field Data' : 'জমির পরিবেশের তথ্য'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
                   {language === 'en' ? `Field Observations for ${upazilaName}` : `${upazilaName}-এর উপগ্রহ পর্যবেক্ষণ`}
@@ -1201,7 +1201,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="text-xs sm:text-sm text-slate-300 mt-1">
                   {language === 'en'
                     ? 'NASA Earth observation radiometers and weather forecast data monitoring soil rootzone, moisture balance, and thermal levels.'
-                    : 'নাসার উপগ্রহ পর্যবেক্ষণ ও পূর্বাভাস উপাত্ত যা মাটির আর্দ্রতা, বাষ্পীভবন ও তাপমাত্রা পরিমাপ করে।'}
+                    : 'নাসার স্যাটেলাইট তথ্য ও পূর্বাভাস, যা মাটির রস, বাষ্পীভবন ও তাপমাত্রা জানায়।'} 
                 </p>
               </div>
 
@@ -1406,27 +1406,27 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="leading-relaxed">
                   {language === 'en'
                     ? `Spatial resolution note: NASA SMAP (9 km), GPM/POWER (10 km to 0.5°), and MODIS (250m–1km) observations represent regional agro-climatic conditions across ${upazilaName}, providing broad environmental indicators rather than direct in-situ sensor probes buried in this specific field.`
-                    : `স্থানিক সূক্ষ্মতা বিজ্ঞপ্তি: নাসা স্ম্যাপ (৯ কিমি), জিপিএম/পাওয়ার (১০ কিমি) এবং মডিস (২৫০মি-১কিমি) উপাত্তসমূহ ${upazilaName}-এর পুরো অঞ্চলের পরিবেশগত নির্দেশক, কোনো নির্দিষ্ট জমির গভীরে সরাসরি বসানো সেন্সরের একক পরিমাপ নয়।`}
+                    : `তথ্যের পরিধি: নাসা স্ম্যাপ (৯ কিমি), জিপিএম/পাওয়ার (১০ কিমি) ও মডিস (২৫০মি–১কিমি)-এর তথ্য পুরো ${upazilaName} এলাকার সাধারণ অবস্থা দেখায়, কোনো একক জমিতে বসানো মিটারের মাপ নয়।`}
                 </p>
               </div>
 
               {/* Agronomic Reasoning */}
               <div className="p-6 rounded-2xl bg-[#0B1626] border border-white/10 space-y-4">
                 <h3 className="font-display font-bold text-lg text-white">
-                  {language === 'en' ? 'Agronomic Reasoning for your Soil & Weather' : 'মাটি ও আবহাওয়ার কৃষিগত বিশ্লেষণ'}
+                  {language === 'en' ? 'Agronomic Reasoning for your Soil & Weather' : 'মাটি ও আবহাওয়ার বাস্তব অবস্থা'}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-[#00E5FF] font-bold block">01 · Water Conservation</span>
-                    <p>{language === 'en' ? 'Because subsurface moisture is low and rainfall anomaly is negative, continuous flood-irrigated Boro rice substantially increases fuel pumping demands and strains local groundwater aquifers.' : 'যেহেতু বৃষ্টিপাত ও মাটির রস কম, টানা সেচ নির্ভর বোরো ধান চাষ করলে পাম্পিং জ্বালানির চাহিদা এবং ভূগর্ভস্থ পানির ওপর অতিরিক্ত চাপ বহুগুণ বেড়ে যায়।'}</p>
+                    <p>{language === 'en' ? 'Because subsurface moisture is low and rainfall anomaly is negative, continuous flood-irrigated Boro rice substantially increases fuel pumping demands and strains local groundwater aquifers.' : 'বৃষ্টিপাত ও মাটির রস কম থাকলে সেচ নির্ভর বোরো ধান চাষে পাম্পের খরচ ও পানির অপচয় অনেক বেড়ে যায়।'}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-[#B8FF3D] font-bold block">02 · Tap-Root Advantage</span>
-                    <p>{language === 'en' ? 'Lentil and Mustard possess tap roots that exploit deeper subsoil moisture, requiring only 1–2 light irrigations to reach full maturity.' : 'মসুর ও সরিষার শিকড় মাটির গভীরে প্রবেশ করে রস টানতে পারে, ফলে মাত্র ১-২টি হালকা সেচেই কাঙ্ক্ষিত ফলন পাওয়া যায়।'}</p>
+                    <p>{language === 'en' ? 'Lentil and Mustard possess tap roots that exploit deeper subsoil moisture, requiring only 1–2 light irrigations to reach full maturity.' : 'মসুর ও সরিষা মাটির গভীর থেকে রস টানতে পারে, তাই মাত্র ১–২টি হালকা সেচেই ভালো ফলন পাওয়া যায়।'}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-[#050B14] border border-white/5 space-y-1">
                     <span className="font-mono text-white font-bold block">03 · Biological Soil Recovery</span>
-                    <p>{language === 'en' ? 'A summer Mungbean catch-crop fixes biological Rhizobium nitrogen into the plow layer, naturally conditioning soil for the subsequent monsoon T. Aman rice according to BARI guidelines.' : 'গ্রীষ্মকালীন মুগডাল চাষ করলে মাটিতে প্রাকৃতিকভাবে রাইজোবিয়াম নাইট্রোজেন সংবন্ধন ঘটে, যা পরবর্তী আমন ধানের জন্য মাটির উর্বরতা বাড়ায়।'}</p>
+                    <p>{language === 'en' ? 'A summer Mungbean catch-crop fixes biological Rhizobium nitrogen into the plow layer, naturally conditioning soil for the subsequent monsoon T. Aman rice according to BARI guidelines.' : 'গ্রীষ্মে মুগ ডাল চাষ করলে মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন বাড়ে, যা পরের আমন ধানের ফলনে সাহায্য করে।'}</p>
                   </div>
                 </div>
               </div>
@@ -1464,15 +1464,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="space-y-8 animate-fadeIn">
               <div className="pb-4 border-b border-white/10">
                 <span className="text-xs font-mono uppercase text-[#00E5FF] tracking-wider font-bold block mb-1">
-                  {language === 'en' ? 'Decadal Climate Shift' : 'জলবায়ুর দীর্ঘমেয়াদী পরিবর্তন'}
+                  {language === 'en' ? 'Decadal Climate Shift' : 'দীর্ঘমেয়াদী আবহাওয়া বদল'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
-                  {language === 'en' ? `Climate Shift in ${districtName}` : `${districtName}-এর আবহাওয়া রূপান্তর (ফিল্ড শিফট)`}
+                  {language === 'en' ? `Climate Shift in ${districtName}` : `${districtName}-এর আবহাওয়া বদল`}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1">
                   {language === 'en'
                     ? 'Comparing NASA POWER 2001–2010 historical baseline with the recent decadal period (2016–2025).'
-                    : 'নাসা পাওয়ার উপাত্ত থেকে ২০০১-২০১০ ভিত্তি বর্ষের সাথে সাম্প্রতিক ২০১৬-২০২৫ মৌসুমের তুলনা।'}
+                    : 'নাসার তথ্য অনুযায়ী ২০০১–২০১০ সালের তুলনায় সাম্প্রতিক ২০১৬–২০২৫ মৌসুমের আবহাওয়ার পরিবর্তন।'} 
                 </p>
               </div>
 
@@ -1491,7 +1491,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <span>{language === 'en' ? 'Core Scientific Methodology' : 'মৌলিক বৈজ্ঞানিক নীতিমালা'}</span>
                 </div>
                 <h2 className="font-display text-2xl font-bold text-white">
-                  {language === 'en' ? 'Transparent, 100% Rule-Based Decision Architecture' : 'স্বচ্ছ, শতভাগ নিয়ম-ভিত্তিক সিদ্ধান্ত কাঠামো'}
+                  {language === 'en' ? 'Transparent, 100% Rule-Based Decision Architecture' : 'সম্পূর্ণ স্বচ্ছ ও নিয়ম-ভিত্তিক পরামর্শ ব্যবস্থা'}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {language === 'en'
@@ -1549,12 +1549,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     Rule 4 · Botanical Alternation & Nitrogen Triggers
                   </span>
                   <h4 className="text-sm font-bold text-white">
-                    {language === 'en' ? 'Rotation Rule A & Rule B' : 'আবর্তন নীতি ক ও খ'}
+                    {language === 'en' ? 'Rotation Rule A & Rule B' : 'শস্য পর্যায় নীতি ১ ও ২'}
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     {language === 'en'
                       ? 'Rule A prevents repeating identical plant families consecutively. Rule B forces a legume (Mungbean/Lentil) when the soil nutrient trail drops below zero.'
-                      : 'পরপর দুই মৌসুমে একই গোত্রের ফসল নিষিদ্ধ করে রোগ দমন করা হয় এবং মাটির নাইট্রোজেন কমে গেলে বাধ্যতামূলক ডাল জাতীয় ফসল অন্তর্ভুক্ত করা হয়।'}
+                      : 'পরপর দুই মৌসুমে একই জাতের ফসল না লাগিয়ে রোগবালাই কমানো হয়, আর মাটিতে নাইট্রোজেন কমলে ডাল জাতীয় ফসল বেছে নেওয়া হয়।'}
                   </p>
                 </div>
               </div>
@@ -1563,12 +1563,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="p-6 rounded-2xl bg-[#0B1626] border border-[#B8FF3D]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h4 className="font-display text-lg font-bold text-white">
-                    {language === 'en' ? `Inspect Score Breakdown: ${rankedCrops[0]?.nameEn}` : `স্কোর গণনা দেখুন: ${rankedCrops[0]?.nameBn}`}
+                    {language === 'en' ? `Inspect Score Breakdown: ${rankedCrops[0]?.nameEn}` : `স্কোরের কারণ দেখুন: ${rankedCrops[0]?.nameBn}`}
                   </h4>
                   <p className="text-xs text-slate-300 mt-0.5">
                     {language === 'en'
                       ? 'Open the full mathematical table showing every point delta from BARI, SMAP, POWER, and your priorities.'
-                      : 'নাসার প্রতিটি স্যাটেলাইট উপাত্তের জন্য কীভাবে পয়েন্ট যোগ বা বিয়োগ হয়েছে তার বিশদ টেবিল দেখুন।'}
+                      : 'নাসার প্রতিটি স্যাটেলাইট তথ্যের জন্য কীভাবে নম্বর যোগ বা কাটা হয়েছে তার বিস্তারিত টেবিল দেখুন।'} 
                   </p>
                 </div>
                 <button
@@ -1577,7 +1577,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   className="px-5 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#B8FF3D]/90 text-[#050B14] font-bold text-xs cursor-pointer flex items-center gap-2 shrink-0"
                 >
                   <Calculator className="w-4 h-4" />
-                  <span>{language === 'en' ? 'Open Mathematical Table' : 'গাণিতিক গণনা দেখুন'}</span>
+                  <span>{language === 'en' ? 'Open Mathematical Table' : 'হিসাবের বিস্তারিত দেখুন'}</span>
                 </button>
               </div>
 

@@ -61,7 +61,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
             <span className="text-[11px] font-mono text-[#00E5FF] uppercase font-bold tracking-widest block mb-2">
               {lang === 'en'
                 ? 'NASA Earth Observations × Bangladesh Agriculture'
-                : 'নাসা উপগ্রহ পর্যবেক্ষণ × বাংলাদেশ কৃষি'}
+                : 'নাসার স্যাটেলাইট পর্যবেক্ষণ × বাংলাদেশ কৃষি'}
             </span>
             <h1 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
               {title}
@@ -76,7 +76,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
             <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-2">
               <div className="flex items-center gap-2 font-bold text-amber-300">
                 <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{lang === 'en' ? 'Supabase Credentials Pending' : 'সুভাব্যাস কনফিগারেশন বাকি'}</span>
+                <span>{lang === 'en' ? 'Supabase Credentials Pending' : 'ডাটাবেজ সংযোগ বাকি'}</span>
               </div>
               <p className="leading-relaxed text-slate-300">
                 {lang === 'en'

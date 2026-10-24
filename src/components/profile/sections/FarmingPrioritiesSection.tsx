@@ -53,11 +53,11 @@ export const FarmingPrioritiesSection: React.FC<FarmingPrioritiesSectionProps> =
         <div>
           <h2 className="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2">
             <Star className="w-5 h-5 text-[#B8FF3D]" />
-            <span>{isBn ? 'চাষের লক্ষ্য ও অগ্রাধিকার' : 'Farming Goals & Priorities'}</span>
+            <span>{isBn ? 'চাষের প্রধান চাহিদা' : 'Farming Goals & Priorities'}</span>
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
             {isBn
-              ? `আপনার প্রধান চাষের লক্ষ্য নির্বাচন করুন (সর্বোচ্চ ${maxSelectable}টি)। আমাদের ইঞ্জিন পয়েন্ট সমন্বয় করবে।`
+              ? `আপনার প্রধান চাহিদাগুলো বেছে নিন (সর্বোচ্চ ${maxSelectable}টি)। আমাদের নিয়মগুলো সে অনুযায়ী ফসল সাজাবে।`
               : `Select your key goals (up to ${maxSelectable}). Our engine steers recommendations to match your targets.`}
           </p>
         </div>

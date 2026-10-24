@@ -27,7 +27,7 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
       titleEn: 'Decision Priority',
       titleBn: 'কৃষকের লক্ষ্য',
       descEn: 'Set Water, Soil, Cost or Yield Goal',
-      descBn: 'পানি, মাটি বা ব্যয়ের অগ্রাধিকার',
+      descBn: 'পানি বাঁচানো, মাটির শক্তি বা কম খরচের চাহিদা',
       icon: <Sliders className="w-5 h-5 text-[#B8FF3D]" />,
     },
     {
@@ -56,7 +56,7 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
         <p className="text-sm sm:text-base text-[#8FA3B8] max-w-lg mx-auto mb-10 leading-relaxed">
           {language === 'en'
             ? "Let's inspect your field's NASA satellite observations before designing your 3-season crop cycle."
-            : 'ফসল পরিক্রমা তৈরির পূর্বে নাসার উপগ্রহ তথ্যের সাহায্যে আপনার জমির অবস্থা বিশ্লেষণ করা যাক।'}
+            : 'ফসল পরিকল্পনা করার আগে নাসার স্যাটেলাইট তথ্য দেখে আপনার জমি যাচাই করা যাক।'} 
         </p>
 
         {/* 3-Step Preview Cards */}

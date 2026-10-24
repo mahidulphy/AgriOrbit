@@ -126,7 +126,7 @@ export function computeGpmMetricsFromDaily(
 
   const cacheDateStr = fetchedAtIso ? fetchedAtIso.split('T')[0] : '';
   const cachePrefixEn = dataStatus === 'cached' ? `Cached NASA POWER data from ${cacheDateStr}. ` : '';
-  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার উপাত্ত (${cacheDateStr})। ` : '';
+  const cachePrefixBn = dataStatus === 'cached' ? `সংরক্ষিত নাসা পাওয়ার তথ্য (${cacheDateStr})। ` : '';
 
   const summaryEn = cachePrefixEn + (
     comparison === 'Elevated'
@@ -261,7 +261,7 @@ export async function getGpmObservation(
       daysCount: 0,
     },
     observedSummaryEn: `Data unavailable for ${distName}`,
-    observedSummaryBn: `${distNameBn}-এর জন্য উপাত্ত পাওয়া যায়নি`,
+    observedSummaryBn: `${distNameBn}-এর জন্য তথ্য পাওয়া যায়নি`,
     dataStatus: 'unavailable',
     updatedAt: '',
   };

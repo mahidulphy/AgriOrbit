@@ -20,6 +20,12 @@ import { CROPS_DATABASE } from '../../data/agriData.ts';
 
 type SeasonFilter = 'all' | 'rabi' | 'kharif1' | 'kharif2';
 
+function toBn(val: any, isBn: boolean = true): string {
+  if (val == null) return '';
+  const s = String(val);
+  return isBn ? s.replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[+d]) : s;
+}
+
 export function EditorialCropAtlas() {
   const { lang, t } = useLang();
   const isBn = lang === 'bn';
@@ -109,11 +115,11 @@ export function EditorialCropAtlas() {
               <span>{isBn ? `${totalCrops}টি ফসলের পূর্ণ জ্ঞানভাণ্ডার` : `FULL ${totalCrops} CROP KNOWLEDGE BASE`}</span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-              {isBn ? 'বাংলাদেশের প্রধান ফসল ও জলবায়ু উপযোগিতা' : 'Bangladesh Crop Atlas & Climate Suitability'}
+              {isBn ? 'বাংলাদেশের প্রধান ফসল ও আবহাওয়া সহনশীলতা' : 'Bangladesh Crop Atlas & Climate Suitability'}
             </h2>
             <p className="mt-4 text-base sm:text-lg text-[#8FA3B8] leading-relaxed">
               {isBn
-                ? `বারি (BARI) ও ব্রি (BRRI) গবেষণা নির্দেশিকা এবং নাসার স্যাটেলাইট পর্যবেক্ষণ অনুযায়ী ${totalCrops}টি ফসলের তাপমাত্রা, পানির চাহিদা ও বাস্তব কৃষি উপযোগিতা।`
+                ? `বারি (BARI) ও ব্রি (BRRI)-এর কৃষি নির্দেশিকা এবং নাসার স্যাটেলাইট তথ্য অনুযায়ী ${toBn(totalCrops)}টি ফসলের তাপমাত্রা, পানির চাহিদা ও বাস্তব সম্ভাবনা।`
                 : `Comprehensive agro-climatic database of ${totalCrops} Bangladeshi crops combining BARI & BRRI scientific research with NASA Earth observation parameters.`}
             </p>
           </div>
@@ -122,10 +128,10 @@ export function EditorialCropAtlas() {
           <div className="flex flex-col items-start md:items-end gap-2">
             <div className="text-xs font-mono text-[#8FA3B8] flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0B1626] border border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#B8FF3D] animate-pulse" />
-              <span>{isBn ? 'রংপুর অঞ্চলের উদাহরণ স্কোর' : 'Example scores for Rangpur'}</span>
+              <span>{isBn ? 'রংপুরের জন্য নমুনা স্কোর' : 'Example scores for Rangpur'}</span>
             </div>
             <span className="text-[11px] font-mono text-slate-400">
-              {isBn ? 'কার্ডে ট্যাপ করে বিস্তারিত দেখুন' : 'Click any card to inspect full field data'}
+              {isBn ? 'যেকোনো ফসলে চাপ দিয়ে বিস্তারিত দেখুন' : 'Click any card to inspect full field data'}
             </span>
           </div>
         </div>
@@ -283,7 +289,7 @@ export function EditorialCropAtlas() {
 
                               {isNonRecommendable ? (
                                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/15 text-red-400 border border-red-500/30">
-                                  {isBn ? 'প্রস্তাবযোগ্য নয়' : 'Not Recommendable'}
+                                  {isBn ? 'আমরা সুপারিশ করি না' : 'Not Recommendable'}
                                 </span>
                               ) : (
                                 <div className="text-right">
@@ -300,7 +306,7 @@ export function EditorialCropAtlas() {
                               <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-[#B8FF3D] group-hover:translate-x-0.5 transition-all" />
                             </h4>
                             <p className="text-xs text-[#8FA3B8] italic mt-0.5 mb-3">
-                              {crop.scientific_name || (isBn ? 'দ্বিপদ নাম অনুপস্থিত' : 'Scientific name not recorded')}
+                              {crop.scientific_name || (isBn ? 'তথ্য নেই' : 'Scientific name not recorded')}
                             </p>
 
                             {/* Estimated Badge */}
@@ -320,7 +326,7 @@ export function EditorialCropAtlas() {
                                 </span>
                                 <span className="text-white font-mono">
                                   {crop.duration_days
-                                    ? `${crop.duration_days.min}–${crop.duration_days.max} ${isBn ? 'দিন' : 'days'}`
+                                    ? `${toBn(crop.duration_days.min, isBn)}–${toBn(crop.duration_days.max, isBn)} ${isBn ? 'দিন' : 'days'}`
                                     : (isBn ? 'তথ্য নেই' : 'No data')}
                                 </span>
                               </div>
@@ -331,7 +337,7 @@ export function EditorialCropAtlas() {
                                 </span>
                                 <span className="text-white font-mono">
                                   {crop.water_need_mm
-                                    ? `${crop.water_need_mm.min}–${crop.water_need_mm.max} mm`
+                                    ? `${toBn(crop.water_need_mm.min, isBn)}–${toBn(crop.water_need_mm.max, isBn)} ${isBn ? 'মিমি' : 'mm'}`
                                     : (isBn ? 'তথ্য নেই' : 'No data')}
                                 </span>
                               </div>
@@ -342,7 +348,7 @@ export function EditorialCropAtlas() {
                                 </span>
                                 <span className="text-white font-mono">
                                   {crop.temperature_c.optimal_min != null && crop.temperature_c.optimal_max != null
-                                    ? `${crop.temperature_c.optimal_min}–${crop.temperature_c.optimal_max}°C`
+                                    ? `${toBn(crop.temperature_c.optimal_min, isBn)}–${toBn(crop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে.' : 'C'}`
                                     : (isBn ? 'তথ্য নেই' : 'No data')}
                                 </span>
                               </div>
@@ -385,7 +391,7 @@ export function EditorialCropAtlas() {
             <Database className="w-5 h-5 text-[#B8FF3D] flex-shrink-0 mt-0.5" />
             <div className="text-xs sm:text-sm text-slate-300">
               <span className="font-bold text-white block mb-0.5">
-                {isBn ? 'স্বচ্ছ গবেষণা ও তথ্যভাণ্ডার কাঠামো' : 'Transparent Agronomic Data Provenance'}
+                {isBn ? 'তথ্যের নির্ভরযোগ্য উৎস' : 'Transparent Agronomic Data Provenance'}
               </span>
               <p className="text-slate-400">
                 {isBn
@@ -432,7 +438,7 @@ export function EditorialCropAtlas() {
                   )}
                   {!detailCrop.recommendable && (
                     <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
-                      {isBn ? 'প্রস্তাবযোগ্য নয়' : 'Non-Recommendable'}
+                      {isBn ? 'আমরা সুপারিশ করি না' : 'Non-Recommendable'}
                     </span>
                   )}
                 </div>
@@ -441,7 +447,7 @@ export function EditorialCropAtlas() {
                   {isBn ? detailCrop.name_bn : detailCrop.name_en}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#8FA3B8] italic mt-0.5">
-                  {detailCrop.scientific_name || (isBn ? 'দ্বিপদ নাম অনুপস্থিত' : 'No scientific name')}
+                  {detailCrop.scientific_name || (isBn ? 'তথ্য নেই' : 'No scientific name')}
                   {detailCrop.plant_family && (
                     <span className="ml-2 font-mono text-[11px] text-[#00E5FF]">
                       ({isBn ? 'গোত্র:' : 'Family:'} {detailCrop.plant_family})
@@ -496,7 +502,7 @@ export function EditorialCropAtlas() {
               <div className="p-4 rounded-2xl bg-[#050B14] border border-white/10 space-y-3">
                 <span className="text-xs font-mono font-bold text-[#B8FF3D] uppercase tracking-wider flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
-                  {isBn ? 'ধাপভিত্তিক সময়কাল ও জীবনচক্র' : 'Growth Stages Timeline'}
+                  {isBn ? 'ফসলের বিভিন্ন ধাপ ও সময়কাল' : 'Growth Stages Timeline'}
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
                   {detailCrop.growth_stages.map((stg, i) => (
@@ -521,11 +527,11 @@ export function EditorialCropAtlas() {
                 </span>
                 <p className="font-mono font-bold text-sm text-white">
                   {detailCrop.temperature_c.optimal_min != null
-                    ? `${detailCrop.temperature_c.optimal_min}–${detailCrop.temperature_c.optimal_max}°C`
+                    ? `${toBn(detailCrop.temperature_c.optimal_min, isBn)}–${toBn(detailCrop.temperature_c.optimal_max, isBn)}°${isBn ? 'সে.' : 'C'}`
                     : (isBn ? 'তথ্য নেই' : 'No data')}
                 </p>
                 <span className="text-[10px] text-slate-400 block">
-                  {isBn ? `বেস: ${detailCrop.temperature_c.base ?? 'নেই'}°C` : `Base: ${detailCrop.temperature_c.base ?? 'N/A'}°C`}
+                  {isBn ? `ন্যূনতম: ${toBn(detailCrop.temperature_c.base ?? 'নেই', isBn)}°সে.` : `Base: ${detailCrop.temperature_c.base ?? 'N/A'}°C`}
                   {detailCrop.temperature_c.critical_max && ` · সংকট: ${detailCrop.temperature_c.critical_max}°C`}
                 </span>
               </div>
@@ -538,7 +544,7 @@ export function EditorialCropAtlas() {
                 </span>
                 <p className="font-mono font-bold text-sm text-white">
                   {detailCrop.water_need_mm
-                    ? `${detailCrop.water_need_mm.min}–${detailCrop.water_need_mm.max} mm`
+                    ? `${toBn(detailCrop.water_need_mm.min, isBn)}–${toBn(detailCrop.water_need_mm.max, isBn)} ${isBn ? 'মিমি' : 'mm'}`
                     : (isBn ? 'তথ্য নেই' : 'No data')}
                 </p>
                 <span className="text-[10px] text-slate-400 block line-clamp-1">
@@ -550,7 +556,7 @@ export function EditorialCropAtlas() {
               <div className="p-3.5 rounded-xl bg-[#050B14] border border-white/10 space-y-1">
                 <span className="text-[10px] font-mono text-slate-400 uppercase block flex items-center gap-1">
                   <Satellite className="w-3 h-3 text-[#B8FF3D]" />
-                  {isBn ? 'SMAP আর্দ্রতা' : 'SMAP Moisture'}
+                  {isBn ? 'মাটির রস (SMAP)' : 'SMAP Moisture'}
                 </span>
                 <p className="font-mono font-bold text-sm text-white">
                   {detailCrop.smap_optimal.min != null
@@ -568,7 +574,7 @@ export function EditorialCropAtlas() {
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                   <AlertTriangle className="w-3.5 h-3.5" />
-                  {isBn ? 'প্রধান জলবায়ু ও উৎপাদন ঝুঁকি' : 'Key Climate & Agronomic Risks'}
+                  {isBn ? 'প্রধান ঝুঁকি ও সতর্কতা' : 'Key Climate & Agronomic Risks'}
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {detailCrop.key_risks_bn.map((risk, i) => (

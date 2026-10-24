@@ -9,7 +9,7 @@ import { IMAGES } from '../../data/assets.ts';
 const SOURCES = ['NASA POWER', 'SMAP', 'MODIS', 'Open-Meteo', 'BARI & BRRI'];
 
 export function Hero({ conditions, shift, isLive = false }: { conditions: Conditions; shift: FieldShift; isLive?: boolean }) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   return (
     <section className="relative isolate overflow-hidden min-h-[90vh] flex flex-col justify-center pt-28 pb-20 md:pt-36 md:pb-28 border-b border-white/10">
@@ -28,9 +28,9 @@ export function Hero({ conditions, shift, isLive = false }: { conditions: Condit
         <div className="animate-rise max-w-2xl">
           {/* Eyebrow badge with subtle translucent glass */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#050B14]/85 border border-white/15 backdrop-blur-md shadow-sm mb-6 text-xs font-mono font-semibold tracking-wider text-[#00E5FF] uppercase">
-            <span>NASA Earth Observations</span>
+            <span>{lang === 'bn' ? 'নাসার স্যাটেলাইট পর্যবেক্ষণ' : 'NASA Earth Observations'}</span>
             <span aria-hidden="true" className="text-white/40">×</span>
-            <span>Bangladesh Agriculture</span>
+            <span>{lang === 'bn' ? 'বাংলাদেশ কৃষি' : 'Bangladesh Agriculture'}</span>
           </div>
 
           {/* Clean Modern Editorial Headline with enhanced text shadow */}

@@ -77,7 +77,7 @@ export const LoginPage: React.FC = () => {
       subtitle={
         lang === 'en'
           ? 'Sign in to access your satellite field observations, crop plans, and decision advisories.'
-          : 'উপগ্রহ পর্যবেক্ষণ, ফসলের পরিক্রমা ও সিদ্ধান্ত গ্রহণের জন্য প্রবেশ করুন।'
+          : 'আপনার জমির আবহাওয়া, ফসলের হিসাব ও পরামর্শ দেখতে লগইন করুন।'
       }
       error={error}
     >
@@ -167,7 +167,7 @@ export const LoginPage: React.FC = () => {
               <Loader2 className="w-4 h-4 animate-spin text-[#050B14]" />
             ) : (
               <>
-                <span>{lang === 'en' ? 'Sign In to Dashboard' : 'ড্যাশবোর্ডে প্রবেশ করুন'}</span>
+                <span>{lang === 'en' ? 'Sign In to Dashboard' : 'লগইন করুন'}</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}

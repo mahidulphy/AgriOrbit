@@ -519,7 +519,7 @@ export const FarmerProfilePage: React.FC = () => {
             }`}
           >
             <Star className="w-4 h-4" />
-            <span>{isBn ? '৩. কৃষি অগ্রাধিকার' : '3. Farming Priorities'}</span>
+            <span>{isBn ? '৩. আপনার চাহিদা' : '3. Farming Priorities'}</span>
           </button>
 
           <button
@@ -588,7 +588,7 @@ export const FarmerProfilePage: React.FC = () => {
                 </h2>
                 <p className="text-xs text-slate-400 mt-0.5">
                   {isBn
-                    ? 'আপনার একাধিক জমি যুক্ত করুন। যে জমিটি সক্রিয় রাখবেন, ড্যাশবোর্ডে সেই জমির নাসা স্যাটেলাইট উপাত্ত প্রদর্শিত হবে।'
+                    ? 'আপনার একাধিক জমি যুক্ত করতে পারেন। যে জমিটি বেছে রাখবেন, ড্যাশবোর্ডে সেই জমির স্যাটেলাইট তথ্য দেখা যাবে।'
                     : 'Manage multiple plots. The active field powers your dashboard field data and 3-season crop planner.'}
                 </p>
               </div>
@@ -758,7 +758,7 @@ export const FarmerProfilePage: React.FC = () => {
                   className="px-6 py-2.5 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-md shadow-[#B8FF3D]/20 cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                  <span>{isBn ? 'অগ্রাধিকার সংরক্ষণ করুন' : 'Save Priorities'}</span>
+                  <span>{isBn ? 'সংরক্ষণ করুন' : 'Save Priorities'}</span>
                 </button>
               </div>
             </div>

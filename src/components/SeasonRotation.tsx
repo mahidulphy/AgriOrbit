@@ -159,7 +159,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <span>{language === 'en' ? 'ANNUAL AGRO-CYCLE' : 'বার্ষিক শস্য পরিক্রমা'}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {language === 'en' ? 'Recommended 3-Season Rotation' : '৩-মৌসুমী টেকসই শস্য পরিক্রমা'}
+              {language === 'en' ? 'Recommended 3-Season Rotation' : '৩-মৌসুমের সেরা শস্য পর্যায়'}
             </h2>
             <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
               {language === 'en'
@@ -185,11 +185,11 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
         <div className="flex flex-wrap items-center gap-3 mb-6">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/30 text-xs font-mono font-semibold">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>{language === 'en' ? 'Rule A: Botanical Family Alternation Verified' : 'রুল ক: গোত্র আবর্তন নিশ্চিত (একক ফসল পরিহার)'}</span>
+            <span>{language === 'en' ? 'Rule A: Botanical Family Alternation Verified' : 'নিয়ম ১: একই ফসল বারবার নয়'}</span>
           </div>
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 text-xs font-mono font-semibold">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>{language === 'en' ? 'Rule B: Biological Nitrogen Balance Active' : 'রুল খ: প্রাকৃতিক নাইট্রোজেন সংবন্ধন সক্রিয়'}</span>
+            <span>{language === 'en' ? 'Rule B: Biological Nitrogen Balance Active' : 'নিয়ম ২: মাটিতে নাইট্রোজেন যোগ'}</span>
           </div>
           {engineResult?.nutrientTrail && (
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 text-slate-300 border border-white/10 text-xs font-mono">
@@ -279,7 +279,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           <div className="max-w-4xl">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-3">
               <CheckCircle2 className="w-4 h-4 text-[#B8FF3D]" />
-              <span>{language === 'en' ? 'AgriOrbit Decision Support Advisory' : 'এগ্রিঅরবিট চূড়ান্ত কৃষি পরামর্শ'}</span>
+              <span>{language === 'en' ? 'AgriOrbit Decision Support Advisory' : 'এগ্রিঅরবিটের শস্য পরামর্শ'}</span>
             </div>
 
             <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-4 leading-snug">
@@ -297,20 +297,20 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 <>
                   "বর্তমান{' '}
                   <span className="text-[#00E5FF]">{district.nameBn}</span>{' '}
-                  জেলার উপগ্রহ পরিস্থিতি, আপনার{' '}
+                  এলাকার বর্তমান পরিস্থিতি, আপনার{' '}
                   <span className="text-[#B8FF3D]">
-                    {selectedPriority === 'save_water' && 'পানি সাশ্রয়'}
-                    {selectedPriority === 'improve_soil' && 'মাটির উর্বরতা বৃদ্ধি'}
-                    {selectedPriority === 'maximize_profit' && 'সর্বোচ্চ লাভ'}
-                    {selectedPriority === 'maximize_yield' && 'সর্বোচ্চ ফলন'}
+                    {selectedPriority === 'save_water' && 'পানি বাঁচানো'}
+                    {selectedPriority === 'improve_soil' && 'মাটির শক্তি ফেরানো'}
+                    {selectedPriority === 'maximize_profit' && 'বেশি লাভ'}
+                    {selectedPriority === 'maximize_yield' && 'ভালো ফলন'}
                     {selectedPriority === 'lower_cost' && 'কম খরচ'}
-                    {selectedPriority === 'reduce_risk' && 'জলবায়ু ঝুঁকি হ্রাস'}
+                    {selectedPriority === 'reduce_risk' && 'আবহাওয়ার ঝুঁকি কমানো'}
                   </span>{' '}
-                  অগ্রাধিকার এবং নাসার পর্যবেক্ষণ অনুযায়ী, এগ্রিঅরবিট{' '}
+                  -র চাহিদা ও নাসার তথ্যের ভিত্তিতে এগ্রিঅরবিট{' '}
                   <span className="text-white underline decoration-[#B8FF3D]">
                     {sequenceNamesBn}
                   </span>{' '}
-                  শস্য আবর্তন বিবেচনা করার পরামর্শ দিচ্ছে।"
+                  -এই ৩ মৌসুমের শস্য পর্যায় সাজিয়ে দেখার পরামর্শ দিচ্ছে।"
                 </>
               )}
             </h3>

@@ -440,7 +440,7 @@ export const OnboardingWizardPage: React.FC = () => {
               },
               user.id
             );
-            if (!pRes.success) throw new Error(pRes.error || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+            if (!pRes.success) throw new Error(pRes.error || (isBn ? 'চাহিদাগুলো সংরক্ষণ করা যায়নি' : 'Failed to save priorities'));
 
             if (setOnboardingCompleted) {
               setOnboardingCompleted(true);
@@ -455,7 +455,7 @@ export const OnboardingWizardPage: React.FC = () => {
           localStorage.setItem(stepStorageKey, '5');
           setStep(5);
         } catch (err: any) {
-          setSaveError(err?.message || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+          setSaveError(err?.message || (isBn ? 'চাহিদাগুলো সংরক্ষণ করা যায়নি' : 'Failed to save priorities'));
         } finally {
           setSavingStep(false);
         }
@@ -542,7 +542,7 @@ export const OnboardingWizardPage: React.FC = () => {
           localStorage.setItem(stepStorageKey, '4');
           setStep(4);
         } catch (err: any) {
-          setSaveError(err?.message || (isBn ? 'অগ্রাধিকার সংরক্ষণে সমস্যা হয়েছে' : 'Failed to save priorities'));
+          setSaveError(err?.message || (isBn ? 'চাহিদাগুলো সংরক্ষণ করা যায়নি' : 'Failed to save priorities'));
         } finally {
           setSavingStep(false);
         }

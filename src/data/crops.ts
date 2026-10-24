@@ -3741,10 +3741,10 @@ export const CROPS: Crop[] = [
       "আর্দ্রতার ওঠানামায় কন্দ ফেটে যাওয়া"
     ],
     "decision_rules_en": [
-      "উঁচু বেলে-দোআঁশ জমিতে সেচ ও ড্রেনেজের সুব্যবস্থা থাকলে উচ্চমূল্যের মসলা হিসেবে অ্যালগরিদম পেঁয়াজ চাষের অগ্রাধিকার দেবে।"
+      "Well-drained sandy-loam soils with reliable irrigation favor onion as a high-value spice crop."
     ],
     "decision_rules_bn": [
-      "উঁচু বেলে-দোআঁশ জমিতে সেচ ও ড্রেনেজের সুব্যবস্থা থাকলে উচ্চমূল্যের মসলা হিসেবে অ্যালগরিদম পেঁয়াজ চাষের অগ্রাধিকার দেবে।"
+      "পানি নিষ্কাশনের সুবিধাযুক্ত উঁচু বেলে-দোআঁশ জমিতে সেচের ব্যবস্থা থাকলে লাভজনক মসলা হিসেবে পেঁয়াজ চাষের ভালো সম্ভাবনা থাকে।"
     ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -4796,24 +4796,24 @@ export const CROPS: Crop[] = [
 ];
 
 export const FAMILY_LABEL: Record<string, { en: string; bn: string }> = {
-  poaceae: { en: 'Grass family (cereals & sugarcane)', bn: 'ঘাস গোত্র (দানাশস্য ও আখ)' },
-  grass: { en: 'Grass family (cereals & sugarcane)', bn: 'ঘাস গোত্র (দানাশস্য ও আখ)' },
-  fabaceae: { en: 'Legume · fixes atmospheric nitrogen', bn: 'ডাল জাতীয় · নাইট্রোজেন যোগ করে' },
-  legume: { en: 'Legume · fixes atmospheric nitrogen', bn: 'ডাল জাতীয় · নাইট্রোজেন যোগ করে' },
-  brassicaceae: { en: 'Mustard family (Brassicaceae)', bn: 'সরিষা গোত্র' },
-  mustard: { en: 'Mustard family (Brassicaceae)', bn: 'সরিষা গোত্র' },
-  solanaceae: { en: 'Nightshade family (Solanaceae)', bn: 'আলু ও বেগুন গোত্র' },
-  nightshade: { en: 'Nightshade family (Solanaceae)', bn: 'আলু ও বেগুন গোত্র' },
-  malvaceae: { en: 'Mallow family (fiber crops)', bn: 'পাট ও তুলা গোত্র' },
-  mallow: { en: 'Mallow family (fiber crops)', bn: 'পাট ও তুলা গোত্র' },
-  araceae: { en: 'Arum family (Taro species)', bn: 'কচু গোত্র' },
-  convolvulaceae: { en: 'Morning glory family (Sweet potato)', bn: 'মিষ্টি আলু গোত্র' },
-  dioscoreaceae: { en: 'Yam family (Dioscoreaceae)', bn: 'মেটে আলু গোত্র' },
-  euphorbiaceae: { en: 'Spurge family (Cassava)', bn: 'কাসাভা গোত্র' },
-  amaryllidaceae: { en: 'Allium family (Onion & Garlic)', bn: 'পেঁয়াজ ও রসুন গোত্র' },
-  zingiberaceae: { en: 'Ginger family (Zingiberaceae)', bn: 'আদা ও হলুদ গোত্র' },
-  pedaliaceae: { en: 'Sesame family (Pedaliaceae)', bn: 'তিল গোত্র' },
-  asteraceae: { en: 'Sunflower family (Asteraceae)', bn: 'সূর্যমুখী গোত্র' },
+  poaceae: { en: 'Grass family (cereals & sugarcane)', bn: 'ধান জাতীয়' },
+  grass: { en: 'Grass family (cereals & sugarcane)', bn: 'ধান জাতীয়' },
+  fabaceae: { en: 'Legume · fixes atmospheric nitrogen', bn: 'ডাল জাতীয় · মাটিতে নাইট্রোজেন যোগ করে' },
+  legume: { en: 'Legume · fixes atmospheric nitrogen', bn: 'ডাল জাতীয় · মাটিতে নাইট্রোজেন যোগ করে' },
+  brassicaceae: { en: 'Mustard family (Brassicaceae)', bn: 'সরিষা জাতীয়' },
+  mustard: { en: 'Mustard family (Brassicaceae)', bn: 'সরিষা জাতীয়' },
+  solanaceae: { en: 'Nightshade family (Solanaceae)', bn: 'আলু ও বেগুন জাতীয়' },
+  nightshade: { en: 'Nightshade family (Solanaceae)', bn: 'আলু ও বেগুন জাতীয়' },
+  malvaceae: { en: 'Mallow family (fiber crops)', bn: 'পাট ও তুলা জাতীয়' },
+  mallow: { en: 'Mallow family (fiber crops)', bn: 'পাট ও তুলা জাতীয়' },
+  araceae: { en: 'Arum family (Taro species)', bn: 'কচু জাতীয়' },
+  convolvulaceae: { en: 'Morning glory family (Sweet potato)', bn: 'মিষ্টি আলু জাতীয়' },
+  dioscoreaceae: { en: 'Yam family (Dioscoreaceae)', bn: 'মেটে আলু জাতীয়' },
+  euphorbiaceae: { en: 'Spurge family (Cassava)', bn: 'কাসাভা জাতীয়' },
+  amaryllidaceae: { en: 'Allium family (Onion & Garlic)', bn: 'পেঁয়াজ ও রসুন জাতীয়' },
+  zingiberaceae: { en: 'Ginger family (Zingiberaceae)', bn: 'আদা ও হলুদ জাতীয়' },
+  pedaliaceae: { en: 'Sesame family (Pedaliaceae)', bn: 'তিল জাতীয়' },
+  asteraceae: { en: 'Sunflower family (Asteraceae)', bn: 'সূর্যমুখী জাতীয়' },
 };
 
 export const CROP_ID_MAP: Record<string, string> = {

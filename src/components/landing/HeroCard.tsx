@@ -19,10 +19,10 @@ export function HeroCard({ conditions: c, isLive = false }: { conditions: Condit
   const headerLabel = isLive ? liveDateLabel : snapshotDateLabel;
 
   const tiles = [
-    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: 'mm', desc: t.heroCard.rainDesc, tint: 'text-cyan-300' },
-    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: '°C', desc: t.heroCard.heatDesc, tint: 'text-amber-300' },
+    { icon: CloudRain, label: t.heroCard.rain, value: num(c.rain30, 0), unit: lang === 'bn' ? 'মিমি' : 'mm', desc: t.heroCard.rainDesc, tint: 'text-cyan-300' },
+    { icon: Thermometer, label: t.heroCard.heat, value: num(c.tMax30, 1), unit: lang === 'bn' ? '°সে' : '°C', desc: t.heroCard.heatDesc, tint: 'text-amber-300' },
     { icon: Droplets, label: t.heroCard.humidity, value: num(c.rh, 0), unit: '%', desc: t.heroCard.humidityDesc, tint: 'text-sky-300' },
-    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: 'mm/d', desc: t.heroCard.et0Desc, tint: 'text-lime-300' },
+    { icon: Sprout, label: t.heroCard.et0, value: num(c.et0, 1), unit: lang === 'bn' ? 'মিমি/দিন' : 'mm/d', desc: t.heroCard.et0Desc, tint: 'text-lime-300' },
   ];
 
   return (
@@ -74,7 +74,7 @@ export function HeroCard({ conditions: c, isLive = false }: { conditions: Condit
 
       <div className="mt-4 flex items-center justify-between text-xs text-slate-400 gap-2">
         <span className="truncate">{t.heroCard.source(date(c.from), date(c.to))}</span>
-        <span className="font-mono text-cyan-300/90 text-[11px] whitespace-nowrap shrink-0">{num(c.rain30, 0)} mm Rain · {num(c.rh, 0)}% RH</span>
+        <span className="font-mono text-cyan-300/90 text-[11px] whitespace-nowrap shrink-0">{num(c.rain30, 0)} {lang === 'bn' ? 'মিমি বৃষ্টি' : 'mm Rain'} · {num(c.rh, 0)}% {lang === 'bn' ? 'আর্দ্রতা' : 'RH'}</span>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ function evaluateCropWithNasa(
 
   const cropMeta = cropById(crop.id);
   if (cropMeta?.data_confidence === 'estimated') {
-    dynamicObservationsBn.push('এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।');
+    dynamicObservationsBn.push('এই ফসলের তথ্য এখনো পুরোপুরি যাচাই করা হয়নি, কৃষি অফিসের পরামর্শ নিয়ে চাষ করুন।');
     dynamicObservationsEn.push('Estimated data: preliminary parameters; confirm with local upazila agriculture office.');
   }
 
@@ -87,25 +87,25 @@ function evaluateCropWithNasa(
           `NASA POWER rainfall (${rain.toFixed(0)} mm < 50 mm) & SMAP soil moisture (${soil.toFixed(2)} < 0.15 m³/m³) confirm severe moisture deficit.`,
         );
         dynamicObservationsBn.push(
-          `নাসা পাওয়ার বৃষ্টিপাত (${rain.toFixed(0)} মিমি < ৫০ মিমি) ও স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} < ০.১৫) তীব্র পানির ঘাটতি নিশ্চিত করে।`,
+          `নাসার তথ্য অনুযায়ী বৃষ্টি কম (${rain.toFixed(0)} মিমি < ৫০ মিমি) ও মাটিতে রস কম (${soil.toFixed(2)} < ০.১৫), পানির ঘাটতি রয়েছে।`,
         );
         dynamicRulesEn.push(
           `Rule DRY-01: High-water crops face heavy -20 penalty due to low rainfall (<50 mm) and dry rootzone (<0.15 m³/m³).`,
         );
         dynamicRulesBn.push(
-          `রুল DRY-01: বৃষ্টি ঘাটতি (<৫০ মিমি) ও শুষ্ক মাটির (<০.১৫) কারণে উচ্চ সেচ নির্ভর ফসলে ২০ পয়েন্ট কর্তন।`,
+          `নিয়ম DRY-01: বৃষ্টি কম (<৫০ মিমি) ও মাটিতে রস কম (<০.১৫) থাকায় বেশি সেচের ফসলে ২০ নম্বর কাটা হয়েছে।`,
         );
       } else if (crop.waterRequirementEn === 'Medium') {
         const penalty = -8;
         score += penalty;
         deltas.dryPenalty = penalty;
         dynamicRulesEn.push(`Rule DRY-02: Moderate-water crop absorbs light -8 penalty under water-deficit conditions.`);
-        dynamicRulesBn.push(`রুল DRY-02: পানি ঘাটতির পরিবেশে মাঝারি পানির ফসলে ৮ পয়েন্ট কর্তন।`);
+        dynamicRulesBn.push(`নিয়ম DRY-02: পানির ঘাটতির কারণে মাঝারি সেচের ফসলে ৮ নম্বর কাটা হয়েছে।`);
       } else if (crop.waterRequirementEn === 'Low') {
         score += 4;
         deltas.dryPenalty = 4;
         dynamicRulesEn.push(`Rule DRY-03: Low-water crop awarded +4 water-saver resilience bonus under dry conditions.`);
-        dynamicRulesBn.push(`রুল DRY-03: শুষ্ক পরিবেশে স্বল্প পানির সহনশীল ফসলে +৪ পয়েন্ট বোনাস।`);
+        dynamicRulesBn.push(`নিয়ম DRY-03: শুকনা আবহাওয়ায় কম পানির সহনশীল ফসলে +৪ নম্বর যোগ হয়েছে।`);
       }
     }
   
@@ -120,10 +120,10 @@ function evaluateCropWithNasa(
         `SMAP surface moisture (${soil.toFixed(2)} m³/m³) matches the optimal 0.25–0.30 seed germination range.`,
       );
       dynamicObservationsBn.push(
-        `স্ম্যাপ আর্দ্রতা (${soil.toFixed(2)} m³/m³) বীজ গজানোর জন্য সবচেয়ে আদর্শ ০.২৫–০.৩০ সীমার মধ্যে রয়েছে।`,
+        `মাটিতে রসের পরিমাণ (${soil.toFixed(2)}) বীজ গজানোর উপযোগী ভালো অবস্থায় (০.২৫–০.৩০) আছে।`,
       );
       dynamicRulesEn.push(`Rule SOW-01: Optimal sowing moisture verified (+5 bonus) for rapid seedling emergence.`);
-      dynamicRulesBn.push(`রুল SOW-01: দ্রুত চারা গজানোর অনুকূল আর্দ্রতার জন্য বপন প্রস্তুতি বোনাস (+৫ পয়েন্ট)।`);
+      dynamicRulesBn.push(`নিয়ম SOW-01: বীজ গজানোর উপযোগী ভালো রস থাকায় +৫ নম্বর যোগ হয়েছে।`);
     }
   
     // ─────────────────────────────────────────────────────────────
@@ -138,10 +138,10 @@ function evaluateCropWithNasa(
           `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
         );
         dynamicObservationsBn.push(
-          `নাসা পাওয়ার পরিমাপে সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}° সে. (> ৩৫° সে. সীমা), তাপজনিত ফলন বিপর্যয়ের ঝুঁকি।`,
+          `সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}°সে (> ৩৫°সে), অতিরিক্ত গরমে ফসল নষ্ট হওয়ার ঝুঁকি।`,
         );
         dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
-        dynamicRulesBn.push(`রুল HEAT-02: তাপ-সংবেদনশীল ফসলে সতর্কতা ও ১০ পয়েন্ট কর্তন।`);
+        dynamicRulesBn.push(`নিয়ম HEAT-02: গরম সহ্য করতে না পারা ফসলে ১০ নম্বর কাটা হয়েছে।`);
       }
     }
   
@@ -156,7 +156,7 @@ function evaluateCropWithNasa(
         `Rule ET-04: High evapotranspiration deficit (${wBal.toFixed(0)} mm) penalizes flood irrigation overhead (-5 pts).`,
       );
       dynamicRulesBn.push(
-        `রুল ET-04: পানির অতিরিক্ত বাষ্পীভবন ঘাটতির (${wBal.toFixed(0)} মিমি) কারণে সেচনির্ভর ফসলে ৫ পয়েন্ট কর্তন।`,
+        `নিয়ম ET-04: বেশি বাষ্পীভবনের (${wBal.toFixed(0)} মিমি) কারণে সেচনির্ভর ফসলে ৫ নম্বর কাটা হয়েছে।`,
       );
     }
   
@@ -179,15 +179,15 @@ function evaluateCropWithNasa(
     // Priority-specific explain-why rule annotations
   if (primary === 'higher_income' && (crop.valueCategory === 'high' || ['potato', 'maize', 'mustard', 'lentil'].includes(crop.id))) {
     dynamicRulesEn.push('Rule INC-01: High commercial value crop (+5 pts) approximate value category, not live market price.');
-    dynamicRulesBn.push('রুল INC-01: উচ্চ বাণিজ্যিক মূল্যের সম্ভাবনা (+৫ পয়েন্ট) আনুমানিক শ্রেণী, তাৎক্ষণিক বাজারদর নয়।');
+    dynamicRulesBn.push('নিয়ম INC-01: ভালো বাজারমূল্যের সম্ভাবনা থাকায় +৫ নম্বর (আনুমানিক হিসাব, তাৎক্ষণিক বাজারদর নয়)।');
   }
   if (primary === 'quick_harvest' && crop.durationDays <= 85) {
     dynamicRulesEn.push(`Rule HARV-01: Quick turnaround crop (${crop.durationDays} days <= 85) frees field early (+4 to +6 pts).`);
-    dynamicRulesBn.push(`রুল HARV-01: দ্রুত ফসল ঘরে তোলার সুবিধা (${crop.durationDays} দিন) জমি দ্রুত খালি করে (+৪ থেকে +৬ পয়েন্ট)।`);
+    dynamicRulesBn.push(`নিয়ম HARV-01: দ্রুত ফসল ওঠায় (${crop.durationDays} দিন) জমি তাড়াতাড়ি খালি হয় (+৪ থেকে +৬ নম্বর)।`);
   }
   if (primary === 'family_food' && (crop.isStaple || ['boro_rice', 'aman_rice', 'aus_rice', 'wheat', 'lentil'].includes(crop.id))) {
     dynamicRulesEn.push('Rule STAPLE-01: Essential staple food crop awarded +5 nutritional security bonus.');
-    dynamicRulesBn.push('রুল STAPLE-01: পরিবারের মৌলিক খাদ্য ও পুষ্টি নিরাপত্তার প্রধান ফসল হিসেবে +৫ পয়েন্ট বোনাস।');
+    dynamicRulesBn.push('নিয়ম STAPLE-01: পরিবারের মূল খোরাকির ফসল হিসেবে +৫ নম্বর যোগ হয়েছে।');
   }
 
   // Final score — stop artificial 98% clamping, allow real dynamic score
@@ -293,23 +293,23 @@ export function getRankedCrops(
 export function formatPriorityLabel(priority: FarmerPriorityId, lang: 'en' | 'bn'): string {
   switch (priority) {
     case 'save_water':
-      return lang === 'en' ? 'Save Water' : 'পানি সাশ্রয়';
+      return lang === 'en' ? 'Save Water' : 'পানি বাঁচানো';
     case 'lower_cost':
       return lang === 'en' ? 'Lower Cost' : 'কম খরচ';
     case 'improve_soil':
-      return lang === 'en' ? 'Improve Soil Health' : 'মাটির উর্বরতা বৃদ্ধি';
+      return lang === 'en' ? 'Improve Soil Health' : 'মাটির শক্তি ফেরানো';
     case 'reduce_risk':
       return lang === 'en' ? 'Reduce Climate Risk' : 'আবহাওয়ার ঝুঁকি কমানো';
     case 'higher_income':
-      return lang === 'en' ? 'Higher Income' : 'বেশি আয়ের সম্ভাবনা';
+      return lang === 'en' ? 'Higher Income' : 'বেশি লাভ';
     case 'quick_harvest':
       return lang === 'en' ? 'Quick Harvest' : 'দ্রুত ফসল তোলা';
     case 'family_food':
-      return lang === 'en' ? 'Family Food Security' : 'পারিবারিক খাদ্য নিরাপত্তা';
+      return lang === 'en' ? 'Family Food Security' : 'পারিবারিক খোরাকি';
     case 'maximize_profit':
-      return lang === 'en' ? 'Higher Income' : 'বেশি আয়ের সম্ভাবনা';
+      return lang === 'en' ? 'Higher Income' : 'বেশি লাভ';
     case 'maximize_yield':
-      return lang === 'en' ? 'Reduce Climate Risk' : 'আবহাওয়ার ঝুঁকি কমানো';
+      return lang === 'en' ? 'Good Yield' : 'ভালো ফলন';
     default:
       return String(priority).replace('_', ' ');
   }
@@ -319,53 +319,53 @@ export const PRIORITY_META: Record<
   FarmerPriorityId,
   { titleEn: string; titleBn: string }
 > = {
-  save_water: { titleEn: 'Save Water', titleBn: 'পানি সাশ্রয়' },
+  save_water: { titleEn: 'Save Water', titleBn: 'পানি বাঁচানো' },
   lower_cost: { titleEn: 'Lower Cost', titleBn: 'কম খরচ' },
-  improve_soil: { titleEn: 'Improve Soil Health', titleBn: 'মাটির উর্বরতা বৃদ্ধি' },
+  improve_soil: { titleEn: 'Improve Soil Health', titleBn: 'মাটির শক্তি ফেরানো' },
   reduce_risk: { titleEn: 'Reduce Climate Risk', titleBn: 'আবহাওয়ার ঝুঁকি কমানো' },
-  higher_income: { titleEn: 'Higher Income', titleBn: 'বেশি আয়ের সম্ভাবনা' },
+  higher_income: { titleEn: 'Higher Income', titleBn: 'বেশি লাভ' },
   quick_harvest: { titleEn: 'Quick Harvest', titleBn: 'দ্রুত ফসল তোলা' },
-  family_food: { titleEn: 'Family Food Security', titleBn: 'পারিবারিক খাদ্য নিরাপত্তা' },
-  maximize_profit: { titleEn: 'Higher Income', titleBn: 'বেশি আয়ের সম্ভাবনা' },
-  maximize_yield: { titleEn: 'Reduce Climate Risk', titleBn: 'আবহাওয়ার ঝুঁকি কমানো' },
+  family_food: { titleEn: 'Family Food Security', titleBn: 'পারিবারিক খোরাকি' },
+  maximize_profit: { titleEn: 'Higher Income', titleBn: 'বেশি লাভ' },
+  maximize_yield: { titleEn: 'Good Yield', titleBn: 'ভালো ফলন' },
 };
 
 export const PRIORITY_INFLUENCE: Record<FarmerPriorityId, { en: string; bn: string }> = {
   save_water: {
     en: 'Save Water boost: low-water crops gain up to +4 match points; flood-irrigated Boro rice is penalized by up to 18 points when water is limited.',
-    bn: 'পানি সাশ্রয় প্রভাব: স্বল্প পানির ফসল সর্বোচ্চ +৪ পয়েন্ট পায়; পানি সীমিত থাকলে বোরো ধান ১৮ পয়েন্ট পর্যন্ত কর্তন পায়।',
+    bn: 'পানি বাঁচানোর প্রভাব: কম পানির ফসল সর্বোচ্চ +৪ নম্বর পায়; পানি কম থাকলে সেচনির্ভর বোরো ধান ১৮ নম্বর পর্যন্ত হারায়।',
   },
   lower_cost: {
     en: 'Lower Cost boost: low-input Mustard, Lentil, and Jute gain up to +4; diesel-heavy Boro and capital-heavy Potato lose up to 12.',
-    bn: 'কম খরচ প্রভাব: সাশ্রয়ী সরিষা, মসুর ও পাট সর্বোচ্চ +৪ পায়; ব্যয়বহুল বোরো ও আলু সর্বোচ্চ ১২ হারায়।',
+    bn: 'কম খরচের প্রভাব: কম খরচের সরিষা, মসুর ও পাট সর্বোচ্চ +৪ পায়; বেশি খরচের বোরো ও আলুর নম্বর ১২ পর্যন্ত কমে যায়।',
   },
   improve_soil: {
     en: 'Soil Health boost: nitrogen-fixing Mungbean, Jute, and Lentil gain up to +5 match points for rebuilding soil fertility.',
-    bn: 'মাটির উর্বরতা প্রভাব: নাইট্রোজেন সংবন্ধনকারী মুগ, পাট ও মসুর সর্বোচ্চ +৫ পয়েন্ট পায়।',
+    bn: 'মাটির শক্তি ফেরানোর প্রভাব: মাটিতে নাইট্রোজেন যোগ করা মুগ, পাট ও মসুর সর্বোচ্চ +৫ নম্বর পায়।',
   },
   reduce_risk: {
     en: 'Climate Risk boost: short-duration crops gain up to +6 for escaping heatwaves and erratic storms.',
-    bn: 'ঝুঁকি হ্রাস প্রভাব: দুর্যোগ এড়াতে স্বল্পমেয়াদী সহনশীল ফসল সর্বোচ্চ +৬ পয়েন্ট পায়।',
+    bn: 'ঝুঁকি কমানোর প্রভাব: দুর্যোগ এড়াতে কম সময়ে ওঠা সহনশীল ফসল সর্বোচ্চ +৬ নম্বর পায়।',
   },
   higher_income: {
     en: 'Higher Income boost (approximate, not live market prices): high commercial value crops (Potato, Maize, Mustard, Lentil) gain +5 points.',
-    bn: 'বেশি আয় প্রভাব (আনুমানিক, বাজারদর নয়): উচ্চ বাণিজ্যিক মূল্যের ফসল (আলু, ভুট্টা, সরিষা, মসুর) সর্বোচ্চ +৫ পয়েন্ট পায়।',
+    bn: 'বেশি লাভের প্রভাব (আনুমানিক, বাজারদর নয়): বেশি দামের ফসল (আলু, ভুট্টা, সরিষা, মসুর) সর্বোচ্চ +৫ নম্বর পায়।',
   },
   quick_harvest: {
     en: 'Quick Harvest boost: ultra-fast turnaround crops (<=75 days like Mungbean, Mustard) gain up to +6 to free land rapidly.',
-    bn: 'দ্রুত ফসল তোলার প্রভাব: দ্রুততম ফসল (মুগ ডাল, সরিষা) দ্রুত জমি খালি করতে সর্বোচ্চ +৬ পয়েন্ট পায়।',
+    bn: 'দ্রুত ফসল তোলার প্রভাব: খুব কম সময়ে ওঠা ফসল (মুগ ডাল, সরিষা) জমি তাড়াতাড়ি খালি করার জন্য সর্বোচ্চ +৬ নম্বর পায়।',
   },
   family_food: {
     en: 'Food Security boost: daily household staples (rice, wheat, pulses) gain +5 points for securing family nutrition.',
-    bn: 'খাদ্য নিরাপত্তা প্রভাব: পারিবারিক পুষ্টি ও খোরাকি মেটাতে প্রধান দানা ও ডাল শস্য সর্বোচ্চ +৫ পয়েন্ট পায়।',
+    bn: 'পারিবারিক খোরাকির প্রভাব: পরিবারের খাওয়ার জন্য প্রধান দানা ও ডাল জাতীয় ফসল সর্বোচ্চ +৫ নম্বর পায়।',
   },
   maximize_profit: {
     en: 'Higher Income boost (approximate, not live market prices): high commercial value crops gain +5 points.',
-    bn: 'বেশি আয় প্রভাব (আনুমানিক, বাজারদর নয়): উচ্চ বাণিজ্যিক মূল্যের ফসল সর্বোচ্চ +৫ পয়েন্ট পায়।',
+    bn: 'বেশি লাভের প্রভাব (আনুমানিক, বাজারদর নয়): বেশি দামের ফসল সর্বোচ্চ +৫ নম্বর পায়।',
   },
   maximize_yield: {
-    en: 'Climate Risk boost: short-duration and resilient crops gain up to +6 points.',
-    bn: 'ঝুঁকি হ্রাস প্রভাব: স্বল্পমেয়াদী সহনশীল ফসল সর্বোচ্চ +৬ পয়েন্ট পায়।',
+    en: 'Good Yield boost: reliable, proven crops gain up to +6 points under favorable conditions.',
+    bn: 'ভালো ফলনের প্রভাব: নিয়মমাফিক ভালো ফলন দেয় এমন নির্ভরযোগ্য ফসল সর্বোচ্চ +৬ নম্বর পায়।',
   },
 };
 
@@ -381,6 +381,6 @@ export function priorityInfluenceText(
   const prefix =
     language === 'en'
       ? 'Secondary priority applies the same rules at half strength: '
-      : 'সহায়ক অগ্রাধিকার একই নিয়ম অর্ধেক মাত্রায় প্রয়োগ করে: ';
+      : 'দ্বিতীয় পছন্দের ক্ষেত্রে নিয়মগুলো অর্ধেক গুরুত্ব পায়: ';
   return `${main} ${prefix}${sub}`;
 }

@@ -561,7 +561,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 <div className="flex items-center gap-2 mb-2">
                   <Target className="w-4 h-4 text-[#00E5FF]" />
                   <label className="text-xs font-mono text-white font-bold">
-                    {isBn ? 'আপনার প্রধান কৃষি অগ্রাধিকার কি?' : 'Your Primary Farming Goal'}
+                    {isBn ? 'চাষে আপনার প্রধান চাহিদা কী?' : 'Your Primary Farming Goal'}
                   </label>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">

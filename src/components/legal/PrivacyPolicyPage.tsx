@@ -169,7 +169,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           <li>
             <strong>{isBn ? 'অফলাইন ও লোকাল সংরক্ষণ:' : 'Offline & Local Resilience:'}</strong>{' '}
             {isBn
-              ? 'কৃষকের সুবিধার্থে ডেটা ব্রাউজারের লোকাল স্টোরেজে ক্যাশ থাকে, যাতে ইন্টারনেট দুর্বল হলেও মাঠ বিশ্লেষণ সচল থাকে।'
+              ? 'কৃষকের সুবিধার্থে তথ্য ব্রাউজারের লোকাল স্টোরেজে জমা থাকে, যাতে ইন্টারনেট দুর্বল হলেও জমি যাচাইয়ের কাজ চালানো যায়।'
               : 'Data is securely cached in local browser storage so that farmers can review advisories even in low-connectivity rural fields.'}
           </li>
           <li>

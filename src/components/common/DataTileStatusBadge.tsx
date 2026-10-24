@@ -16,7 +16,7 @@ export interface DataTileStatusBadgeProps {
  * Formats a date into "06 Oct 2026" (English) or "০৬ অক্টো ২০২৬" (Bangla).
  */
 export function formatBadgeDate(dateVal?: string | Date, language: Language = 'en'): string {
-  if (!dateVal) return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+  if (!dateVal) return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
   try {
     const d = typeof dateVal === 'string' ? new Date(dateVal) : dateVal;
     if (isNaN(d.getTime())) {
@@ -29,7 +29,7 @@ export function formatBadgeDate(dateVal?: string | Date, language: Language = 'e
       year: 'numeric',
     });
   } catch {
-    return language === 'en' ? 'Data unavailable' : 'উপাত্ত পাওয়া যায়নি';
+    return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
   }
 }
 
@@ -51,11 +51,11 @@ export const DataTileStatusBadge: React.FC<DataTileStatusBadgeProps> = ({
   const formattedDate = formatBadgeDate(date, language);
 
   const statusLabel = {
-    live: isEn ? 'LIVE' : 'লাইভ',
+    live: isEn ? 'LIVE' : 'সরাসরি',
     cached: isEn ? 'CACHED' : 'সংরক্ষিত',
-    snapshot: isEn ? 'SNAPSHOT' : 'স্ন্যাপশট',
+    snapshot: isEn ? 'SNAPSHOT' : 'সাম্প্রতিক',
     simulated: isEn ? 'SIMULATED' : 'সিমুলেশন',
-    unavailable: isEn ? 'UNAVAILABLE' : 'অনুপলব্ধ',
+    unavailable: isEn ? 'UNAVAILABLE' : 'তথ্য নেই',
   }[status];
 
   const statusStyles = {

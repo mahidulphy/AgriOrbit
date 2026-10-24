@@ -126,7 +126,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
         {/* Pillar 1: Field Conditions */}
         <div className="p-5 rounded-2xl bg-[#050B14] print:bg-gray-50 border border-white/10 print:border-gray-200">
           <span className="text-xs font-mono uppercase text-[#00E5FF] print:text-blue-600 font-bold block mb-3">
-            01 · {isEn ? 'Key Field Conditions' : 'মাঠের প্রধান উপাত্ত'}
+            01 · {isEn ? 'Key Field Conditions' : 'মাঠের বর্তমান অবস্থা'}
           </span>
           <div className="space-y-2.5 text-xs">
             <div className="flex justify-between items-center">
@@ -153,7 +153,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
         {/* Pillar 2: Recommended 3-Season Rotation */}
         <div className="p-5 rounded-2xl bg-[#050B14] print:bg-gray-50 border border-white/10 print:border-gray-200">
           <span className="text-xs font-mono uppercase text-[#B8FF3D] print:text-emerald-700 font-bold block mb-3">
-            02 · {isEn ? 'Recommended 3-Season Cycle' : 'প্রস্তাবিত ৩-মৌসুমী পরিক্রমা'}
+            02 · {isEn ? 'Recommended 3-Season Cycle' : '৩-মৌসুমের শস্য পর্যায়'}
           </span>
           <div className="space-y-2 text-xs">
             {engineResult.picks.map((pick, i) => {
@@ -179,15 +179,15 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
           <div className="space-y-2 text-xs text-[#8FA3B8] print:text-gray-700">
             <div className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#B8FF3D] print:text-emerald-600 shrink-0 mt-0.5" />
-              <span>{isEn ? 'Disrupts pest and pathogen cycles via botanical family alternation.' : 'গোত্র পরিবর্তন করে ক্ষতিকর পোকা ও রোগবালাইয়ের চক্র ভেঙে দেয়।'}</span>
+              <span>{isEn ? 'Disrupts pest and pathogen cycles via botanical family alternation.' : 'একই ফসল বারবার না লাগিয়ে পোকা ও রোগবালাইয়ের উপদ্রব কমায়।'}</span>
             </div>
             <div className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5FF] print:text-blue-600 shrink-0 mt-0.5" />
-              <span>{isEn ? 'Enriches soil with biological Rhizobium nitrogen fixation for subsequent crops.' : 'রাইজোবিয়াম ব্যাকটেরিয়ার সাহায্যে জমিতে প্রাকৃতিক নাইট্রোজেন সংবন্ধন ঘটিয়ে মাটির উর্বরতা বাড়ায়।'}</span>
+              <span>{isEn ? 'Enriches soil with biological Rhizobium nitrogen fixation for subsequent crops.' : 'মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন যোগ করে মাটির উর্বরতা বাড়ায়।'}</span>
             </div>
             <div className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-white print:text-black shrink-0 mt-0.5" />
-              <span>{isEn ? 'Substantially lowers irrigation fuel and groundwater pumping requirements compared to continuous-flooded cereals.' : 'টানা জলাবদ্ধ ফসলের তুলনায় সেচ জ্বালানি ও ভূগর্ভস্থ পানি উত্তোলনের প্রয়োজনীয়তা উল্লেখযোগ্যভাবে হ্রাস করে।'}</span>
+              <span>{isEn ? 'Substantially lowers irrigation fuel and groundwater pumping requirements compared to continuous-flooded cereals.' : 'টানা সেচ দেওয়া ফসলের তুলনায় পাম্পের খরচ ও পানির অপচয় অনেক কমায়।'}</span>
             </div>
           </div>
         </div>
@@ -204,19 +204,19 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
             </>
           ) : (
             <>
-              "বর্তমান <span className="text-[#00E5FF] print:text-blue-600">{districtName}</span> জেলার উপগ্রহ পরিস্থিতি, আপনার{' '}
+              "বর্তমান <span className="text-[#00E5FF] print:text-blue-600">{districtName}</span> জেলার আবহাওয়া, আপনার{' '}
               <span className="text-[#B8FF3D] print:text-emerald-700">
                 {formatPriorityLabel(selectedPriority, 'bn')}
               </span>{' '}
-              অগ্রাধিকার এবং নাসার পর্যবেক্ষণ অনুযায়ী, এগ্রিঅরবিট{' '}
-              <span className="underline decoration-[#B8FF3D] text-white print:text-black">{rotationSequenceBn}</span> শস্য আবর্তন বিবেচনা করার পরামর্শ দিচ্ছে।"
+              চাহিদা এবং নাসার স্যাটেলাইট তথ্য মিলিয়ে, এগ্রিঅরবিট{' '}
+              <span className="underline decoration-[#B8FF3D] text-white print:text-black">{rotationSequenceBn}</span> ফসল সাজানোর পরামর্শ দিচ্ছে।"
             </>
           )}
         </h4>
         <p className="text-xs sm:text-sm text-[#8FA3B8] print:text-gray-600 leading-relaxed">
           {isEn
             ? 'This plan protects groundwater levels during dry winter months while maximizing food harvest and biological soil health across all three seasons.'
-            : 'এই পরিকল্পনাটি শুষ্ক শীতের মাসগুলোতে ভূগর্ভস্থ পানির স্তর রক্ষা করার পাশাপাশি খাদ্য উৎপাদন ও মাটির স্বাস্থ্য সুনিশ্চিত করে।'}
+            : 'এই পরিকল্পনা অনুযায়ী চাষ করলে শীতের দিনে সেচের পানি বাঁচে এবং মাটির শক্তি ঠিক রেখে ভালো ফলন পাওয়া যায়।'}
         </p>
       </div>
 
@@ -224,7 +224,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
       <div className="mt-2 text-[11px] text-slate-400 print:text-gray-600 leading-relaxed border-t border-white/10 print:border-black/20 pt-3">
         {isEn
           ? "Your feedback helps us improve AgriOrbit's recommendations. Recommendations are advisory based on NASA Earth observations and BARI/BRRI guidelines. Always verify with your local Upazila Agriculture Officer."
-          : "আপনার মতামত এগ্রিঅরবিটের সুপারিশ আরও নিখুঁত করতে সহায়তা করে। সুপারিশসমূহ নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই নির্দেশিকার ভিত্তিতে প্রণীত। চূড়ান্ত বাস্তবায়নে স্থানীয় উপজেলা কৃষি কর্মকর্তার পরামর্শ নিন।"}
+          : "আপনার মতামত এগ্রিঅরবিটের পরামর্শ আরও উপযোগী করতে সাহায্য করে। এই পরামর্শ নাসার স্যাটেলাইট তথ্য ও বারি/ব্রির নির্দেশিকা অনুযায়ী তৈরি। মাঠে চূড়ান্ত সিদ্ধান্ত নেওয়ার আগে স্থানীয় কৃষি কর্মকর্তার সাথেও কথা বলুন।"}
       </div>
 
       {/* Provenance & Action Cluster */}

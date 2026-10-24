@@ -43,7 +43,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
           <div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#00E5FF] font-mono font-semibold mb-2">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00E5FF]" />
-              <span>{language === 'en' ? 'TRANSPARENT SCIENTIFIC REASONING' : 'স্বচ্ছ বৈজ্ঞানিক ভিত্তি'}</span>
+              <span>{language === 'en' ? 'TRANSPARENT SCIENTIFIC REASONING' : 'স্বচ্ছ বৈজ্ঞানিক কারণ'}</span>
             </div>
             <h3 className="font-display text-2xl sm:text-3xl font-bold text-white flex items-baseline gap-3">
               <span>{language === 'en' ? `Why ${crop.nameEn}?` : `কেন ${crop.nameBn}?`}</span>
@@ -88,17 +88,17 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold">
                 <Calculator className="w-3.5 h-3.5 text-[#B8FF3D]" />
-                <span>{language === 'en' ? 'Deterministic Score Breakdown' : 'স্বচ্ছ গাণিতিক স্কোর গণনা'}</span>
+                <span>{language === 'en' ? 'Deterministic Score Breakdown' : 'স্কোরের হিসাব'}</span>
               </div>
               <span className="text-[10px] font-mono text-[#8FA3B8] px-2 py-0.5 rounded bg-white/5 border border-white/10">
-                {language === 'en' ? 'Pure Rule-Based · Transparent Logic' : 'স্বচ্ছ নিয়ম-ভিত্তিক · প্রত্যক্ষ যুক্তি'}
+                {language === 'en' ? 'Pure Rule-Based · Transparent Logic' : 'সম্পূর্ণ নিয়ম-ভিত্তিক · কোনো লুকানো হিসাব নেই'}
               </span>
             </div>
 
             <p className="text-xs text-[#8FA3B8] mb-4">
               {language === 'en'
                 ? 'AgriOrbit evaluates empirical agronomic rules against NASA Earth observations to determine final suitability based on BARI/BRRI guidance and NASA data.'
-                : 'এগ্রিঅরবিট নাসার উপগ্রহ উপাত্ত ও বিএআরআই/বিআরআরআই কৃষি গবেষণা নির্দেশিকার ভিত্তিতে স্পষ্ট নিয়মে উপযোগিতা মূল্যায়ন করে।'}
+                : 'নাসার স্যাটেলাইট তথ্য আর বারি (BARI) ও ব্রি (BRRI)-এর কৃষি নিয়মের ওপর ভিত্তি করে এগ্রিঅরবিট এই হিসাব করে।'} 
             </p>
 
             <div className="overflow-x-auto">
@@ -107,7 +107,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   <tr className="border-b border-white/10 text-[#8FA3B8] text-[11px]">
                     <th className="py-2 pr-3">{language === 'en' ? 'Rule / Factor' : 'মানদণ্ড / নিয়ম'}</th>
                     <th className="py-2 px-3">{language === 'en' ? 'Source' : 'উৎস'}</th>
-                    <th className="py-2 px-3 text-right">{language === 'en' ? 'Points' : 'পয়েন্ট'}</th>
+                    <th className="py-2 px-3 text-right">{language === 'en' ? 'Points' : 'নম্বর'}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-slate-300">
@@ -115,7 +115,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   <tr>
                     <td className="py-2.5 pr-3">
                       <span className="text-white font-medium block">
-                        {language === 'en' ? 'Baseline Agronomic Potential' : 'মৌলিক কৃষি উপযোগিতা'}
+                        {language === 'en' ? 'Baseline Agronomic Potential' : 'ফসলের ভিত্তি নম্বর'}
                       </span>
                       <span className="text-[11px] text-[#8FA3B8]">
                         {language === 'en' ? 'Published BARI/BRRI seasonal crop guidelines' : 'বিএআরআই/বিআরআরআই মৌসুমী নির্দেশিকা'}
@@ -129,14 +129,14 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   <tr>
                     <td className="py-2.5 pr-3">
                       <span className="text-white font-medium block">
-                        {language === 'en' ? 'NASA SMAP Soil Moisture Adjustment' : 'নাসা স্ম্যাপ মাটির আর্দ্রতা সমন্বয়'}
+                        {language === 'en' ? 'NASA SMAP Soil Moisture Adjustment' : 'মাটির রস অনুযায়ী সমন্বয় (নাসা)'}
                       </span>
                       <span className="text-[11px] text-[#8FA3B8]">
                         {deltas.dryPenalty < 0
-                          ? (language === 'en' ? 'Severe moisture deficit penalty (rain < 50mm & soil < 0.15)' : 'শুষ্ক মাটির ঘাটতি কর্তন (বৃষ্টি < ৫০মিমি ও আর্দ্রতা < ০.১৫)')
+                          ? (language === 'en' ? 'Severe moisture deficit penalty (rain < 50mm & soil < 0.15)' : 'মাটি বেশি শুকনা থাকায় নম্বর কাটা হয়েছে')
                           : deltas.dryPenalty > 0
-                          ? (language === 'en' ? 'Drought-resilient crop bonus awarded' : 'স্বল্প পানির সহনশীল ফসলে বোনাস')
-                          : (language === 'en' ? 'Rootzone soil moisture within standard tolerance' : 'মাটির আর্দ্রতা সহনশীল মাত্রায় আছে')}
+                          ? (language === 'en' ? 'Drought-resilient crop bonus awarded' : 'কম পানির সহনশীল ফসলে বাড়তি নম্বর যোগ')
+                          : (language === 'en' ? 'Rootzone soil moisture within standard tolerance' : 'মাটিতে স্বাভাবিক রস রয়েছে')}
                       </span>
                     </td>
                     <td className="py-2.5 px-3 whitespace-nowrap text-[#00E5FF]">NASA SMAP</td>
@@ -152,7 +152,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <tr>
                       <td className="py-2.5 pr-3">
                         <span className="text-white font-medium block">
-                          {language === 'en' ? 'Optimal Sowing Window Bonus' : 'আদর্শ বপন আর্দ্রতা বোনাস'}
+                          {language === 'en' ? 'Optimal Sowing Window Bonus' : 'বপনের জন্য আদর্শ রস থাকায় বোনাস'}
                         </span>
                         <span className="text-[11px] text-[#8FA3B8]">
                           {language === 'en' ? 'Soil moisture matches 0.25–0.30 m³/m³ seed germination zone' : 'মাটির রস ০.২৫–০.৩০ m³/m³ দ্রুত চারা গজানোর অনুকূল'}
@@ -168,10 +168,10 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <tr>
                       <td className="py-2.5 pr-3">
                         <span className="text-white font-medium block">
-                          {language === 'en' ? 'Thermal Stress Avoidance Penalty' : 'উচ্চ তাপমাত্রা ঝুঁকি কর্তন'}
+                          {language === 'en' ? 'Thermal Stress Avoidance Penalty' : 'অতিরিক্ত গরমের ঝুঁকিতে নম্বর কাটা হয়েছে'}
                         </span>
                         <span className="text-[11px] text-[#8FA3B8]">
-                          {language === 'en' ? 'Max daily temperature exceeded 35°C on heat-sensitive crop' : 'তাপমাত্রা ৩৫° সে. অতিক্রম করায় তাপ-সংবেদনশীল ফসলে কর্তন'}
+                          {language === 'en' ? 'Max daily temperature exceeded 35°C on heat-sensitive crop' : 'তাপমাত্রা ৩৫°সে অতিক্রম করায় বেশি গরমে ফলন নষ্টের ঝুঁকিতে নম্বর কাটা হয়েছে'}
                         </span>
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#00E5FF]">NASA POWER</td>
@@ -184,7 +184,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <tr>
                       <td className="py-2.5 pr-3">
                         <span className="text-white font-medium block">
-                          {language === 'en' ? 'Evapotranspiration Deficit (ET₀)' : 'বাষ্পীভবন পানি ঘাটতি (ET₀)'}
+                          {language === 'en' ? 'Evapotranspiration Deficit (ET₀)' : 'পানির ঘাটতি (ET₀)'}
                         </span>
                         <span className="text-[11px] text-[#8FA3B8]">
                           {language === 'en' ? 'Rainfall − ET₀ balance < -50mm increases pumping diesel overhead' : 'বৃষ্টি − বাষ্পীভবন ঘাটতির কারণে সেচ খরচের বোঝা'}
@@ -199,12 +199,12 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   <tr>
                     <td className="py-2.5 pr-3">
                       <span className="text-white font-medium block">
-                        {language === 'en' ? 'Farmer Priority Alignment' : 'কৃষকের লক্ষ্য অগ্রাধিকার প্রভাব'}
+                        {language === 'en' ? 'Farmer Priority Alignment' : 'আপনার চাহিদার প্রভাব'}
                       </span>
                       <span className="text-[11px] text-[#8FA3B8]">
                         {language === 'en'
                           ? `Steering based on primary target: ${selectedPriority.replace('_', ' ')}`
-                          : `নির্বাচিত অগ্রাধিকার লক্ষ্যের ভিত্তিতে প্রাপ্ত পয়েন্ট`}
+                          : `আপনার পছন্দের চাহিদার ভিত্তিতে প্রাপ্ত নম্বর`}
                       </span>
                     </td>
                     <td className="py-2.5 px-3 whitespace-nowrap text-[#B8FF3D]">
@@ -222,7 +222,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <tr>
                       <td className="py-2.5 pr-3">
                         <span className="text-white font-medium block">
-                          {language === 'en' ? 'Secondary Priority Alignment (50% wt)' : 'দ্বিতীয় অগ্রাধিকার (৫০% প্রভাব)'}
+                          {language === 'en' ? 'Secondary Priority Alignment (50% wt)' : 'সহায়ক চাহিদার প্রভাব'}
                         </span>
                         <span className="text-[11px] text-[#8FA3B8]">
                           {secondaryPriority ? secondaryPriority.replace('_', ' ') : ''}
@@ -242,7 +242,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                   {/* Final Clamped Match Score */}
                   <tr className="bg-white/5 font-bold">
                     <td className="py-3 pr-3 text-white">
-                      <span>{language === 'en' ? 'FINAL SUITABILITY SCORE' : 'চূড়ান্ত উপযোগিতা স্কোর'}</span>
+                      <span>{language === 'en' ? 'FINAL SUITABILITY SCORE' : 'মোট স্কোর'}</span>
                     </td>
                     <td className="py-3 px-3 text-[#8FA3B8] text-[11px]">AgriOrbit Engine</td>
                     <td className="py-3 px-3 text-right text-base text-[#B8FF3D] font-display">
@@ -258,7 +258,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
           <div className="p-6 rounded-2xl bg-[#050B14] border border-white/10">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#00E5FF] font-mono font-semibold mb-3">
               <Database className="w-3.5 h-3.5 text-[#00E5FF]" />
-              <span>{language === 'en' ? '01 · NASA Observations Evaluated' : '০১ · উপগ্রহ তথ্য নিরীক্ষা'}</span>
+              <span>{language === 'en' ? '01 · NASA Observations Evaluated' : '০১ · স্যাটেলাইট থেকে পাওয়া তথ্য'}</span>
             </div>
             <ul className="space-y-3 text-xs sm:text-sm text-[#8FA3B8]">
               {(language === 'en'
@@ -279,7 +279,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
           <div className="p-6 rounded-2xl bg-[#050B14] border border-white/10">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#B8FF3D] font-mono font-semibold mb-3">
               <Compass className="w-3.5 h-3.5 text-[#B8FF3D]" />
-              <span>{language === 'en' ? '02 · Farmer Priority Alignment' : '০২ · কৃষকের লক্ষ্যের সাথে সামঞ্জস্য'}</span>
+              <span>{language === 'en' ? '02 · Farmer Priority Alignment' : '০২ · আপনার চাহিদার সাথে মিল'}</span>
             </div>
             <div className="flex items-start gap-3 text-xs sm:text-sm text-[#8FA3B8] mb-3">
               <div className="w-4 h-4 rounded-full bg-[#B8FF3D]/10 text-[#B8FF3D] flex items-center justify-center shrink-0 mt-0.5">
@@ -303,7 +303,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
           <div className="p-6 rounded-2xl bg-[#050B14] border border-white/10">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white font-mono font-semibold mb-3">
               <Layers className="w-3.5 h-3.5 text-white" />
-              <span>{language === 'en' ? '03 · BARI Agronomic Rules Satisfied' : '০৩ · কৃষি গবেষণা মানদণ্ড'}</span>
+              <span>{language === 'en' ? '03 · BARI Agronomic Rules Satisfied' : '০৩ · বারি ও ব্রির কৃষি নিয়মাবলী'}</span>
             </div>
             <ul className="space-y-3 text-xs sm:text-sm text-[#8FA3B8]">
               {(language === 'en'
