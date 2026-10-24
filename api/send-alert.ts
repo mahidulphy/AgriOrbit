@@ -1,11 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
-
-// Helper to convert Western digits to Bengali digits
-function toBnDigits(str: string | number): string {
-  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-  return String(str).replace(/[0-9]/g, (d) => bnDigits[parseInt(d, 10)] ?? d);
-}
+import {
+  toBnDigits,
+  getDistrictNames,
+  buildBilingualSubject,
+  buildBilingualEmailHtml,
+  buildBilingualEmailText,
+  type AlertEmailItem,
+} from '../src/lib/bilingualEmailTemplate.ts';
 
 // Fetch live NASA POWER daily max temperature with 6s timeout
 async function getLiveNasaObservation(lat: number, lon: number): Promise<{ maxTemp: number; dataDate: string }> {
@@ -40,87 +42,6 @@ async function getLiveNasaObservation(lat: number, lon: number): Promise<{ maxTe
   return { maxTemp: 31.8, dataDate: fallbackDate };
 }
 
-// Self-contained responsive HTML email builder
-function buildHtmlEmail(alert: {
-  title_en: string;
-  title_bn: string;
-  body_en: string;
-  body_bn: string;
-  data_source: string;
-  data_date: string;
-}, appUrl: string): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${alert.title_en}</title>
-</head>
-<body style="margin: 0; padding: 0; background-color: #050b14; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #f1f5f9;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #050b14; padding: 32px 16px;">
-    <tr>
-      <td align="center">
-        <table role="presentation" width="100%" style="max-width: 600px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden;" cellspacing="0" cellpadding="0">
-          <tr>
-            <td style="padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
-              <h1 style="margin: 0; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
-                Agri<span style="color: #b8ff3d;">Orbit</span>
-              </h1>
-              <p style="margin: 4px 0 0; font-size: 11px; color: #94a3b8; font-family: ui-monospace, monospace;">
-                NASA Earth Observations &bull; Automated Field Alert
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 24px;">
-              <div style="margin-bottom: 20px; padding: 18px; border-radius: 12px; background-color: #0d1e33; border: 1px solid rgba(184,255,61,0.25);">
-                <div style="margin-bottom: 10px;">
-                  <span style="display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 9999px; background-color: #b8ff3d; color: #050b14; text-transform: uppercase;">
-                    TEST ALERT &bull; পরীক্ষামূলক
-                  </span>
-                  <span style="display: inline-block; margin-left: 8px; font-size: 11px; color: #94a3b8; font-family: ui-monospace, monospace;">
-                    ${alert.data_date} &bull; ${alert.data_source}
-                  </span>
-                </div>
-                <h2 style="margin: 0 0 10px; font-size: 16px; color: #ffffff; line-height: 1.4;">
-                  ${alert.title_en}
-                </h2>
-                <h3 style="margin: 0 0 14px; font-size: 15px; color: #b8ff3d; font-weight: 600; line-height: 1.4;">
-                  ${alert.title_bn}
-                </h3>
-                <p style="margin: 0 0 12px; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
-                  ${alert.body_en}
-                </p>
-                <p style="margin: 0; font-size: 13px; color: #e2e8f0; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;">
-                  ${alert.body_bn}
-                </p>
-              </div>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td align="center">
-                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-weight: 700; font-size: 13px; border-radius: 10px; font-family: ui-monospace, monospace;">
-                      Open AgriOrbit Dashboard &rarr;
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 16px 24px; background-color: #081120; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
-              <p style="margin: 0; font-size: 11px; color: #64748b; font-family: ui-monospace, monospace;">
-                You received this alert because you requested a test from AgriOrbit Profile Settings.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
-}
-
 export default async function handler(req: any, res?: any) {
   // Helper to respond with JSON across both Vercel Serverless (res.json) and Web Standard (Response)
   const sendJson = (status: number, data: any) => {
@@ -129,7 +50,7 @@ export default async function handler(req: any, res?: any) {
     }
     return new Response(JSON.stringify(data), {
       status,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     });
   };
 
@@ -224,7 +145,7 @@ export default async function handler(req: any, res?: any) {
     const firstField = fields && fields.length > 0 ? fields[0] : null;
     const lat = firstField?.latitude || 25.63;
     const lon = firstField?.longitude || 88.64;
-    const distName = firstField?.district || 'Dinajpur';
+    const { nameEn: distNameEn, nameBn: distNameBn } = getDistrictNames(firstField?.district || 'Dinajpur');
 
     // 7. Fetch live NASA POWER observation
     const { maxTemp, dataDate } = await getLiveNasaObservation(lat, lon);
@@ -232,11 +153,13 @@ export default async function handler(req: any, res?: any) {
     const maxTempFormatted = maxTemp.toFixed(1);
     const maxTempBn = toBnDigits(maxTempFormatted);
 
-    // 8. Construct test alert notification payload
-    const title_en = 'Test alert – AgriOrbit';
-    const title_bn = 'পরীক্ষামূলক সতর্কতা – অ্যাগ্রিঅরবিট';
-    const body_en = `This is a test alert requested from your profile settings. Real NASA POWER observation for ${distName}: maximum temperature was ${maxTempFormatted}°C on ${dataDate}. Normal alerts arrive automatically when temperature, rainfall, or soil moisture cross critical thresholds.`;
-    const body_bn = `এটি আপনার প্রোফাইল সেটিংস থেকে পাঠানো একটি পরীক্ষামূলক সতর্কতা। ${distName} জেলার জন্য নাসা পাওয়ারের বাস্তব পর্যবেক্ষণ: ${dataDateBn} তারিখে সর্বোচ্চ তাপমাত্রা ছিল ${maxTempBn}° সে.। মাঠের তাপমাত্রা, বৃষ্টি বা মাটির রস ঝুঁকিপূর্ণ মাত্রায় পৌঁছালে স্বয়ংক্রিয়ভাবে সতর্কবার্তা আসবে।`;
+    // 8. Construct test alert notification payload with clear actions & numbers in both languages
+    const title_bn = `পরীক্ষামূলক ফসল সতর্কতা: ${distNameBn} (${maxTempBn}° সে.)`;
+    const title_en = `Test Crop Alert: ${distNameEn} (${maxTempFormatted}°C)`;
+    const body_bn = `এটি আপনার প্রোফাইল সেটিংস থেকে পাঠানো একটি পরীক্ষামূলক সতর্কতা। ${distNameBn} জেলার জন্য নাসা পাওয়ারের বাস্তব পর্যবেক্ষণ: ${dataDateBn} তারিখে সর্বোচ্চ তাপমাত্রা ছিল ${maxTempBn}° সে.। নিয়মিত আবহাওয়া, খরা বা মাটির আর্দ্রতা ঝুঁকিপূর্ণ সীমায় পৌঁছালে স্বয়ংক্রিয়ভাবে সতর্কবার্তা আসবে।`;
+    const body_en = `This is a test alert requested from your profile settings. Real NASA POWER observation for ${distNameEn}: maximum temperature was ${maxTempFormatted}°C on ${dataDate}. Normal alerts arrive automatically when temperature, rainfall, or soil moisture cross critical thresholds.`;
+    const action_bn = 'মাঠের তাপমাত্রা ও আর্দ্রতা পর্যবেক্ষণ করুন এবং স্বাভাবিক সেচ চালিয়ে যান।';
+    const action_en = 'Monitor field conditions and maintain standard irrigation schedule.';
 
     const notificationPayload = {
       user_id: user.id,
@@ -290,9 +213,18 @@ export default async function handler(req: any, res?: any) {
       });
     }
 
-    // 11. Send email via Gmail SMTP (port 465, secure: true)
+    // 11. Build bilingual subject and multipart email (HTML + Plain-Text)
     const appUrl = process.env.VITE_APP_URL || process.env.APP_URL || 'https://agri-orbit.vercel.app';
-    const emailHtml = buildHtmlEmail(inserted, appUrl);
+    const subject = buildBilingualSubject(distNameBn, distNameEn, true);
+
+    const alertItem: AlertEmailItem = {
+      ...inserted,
+      action_bn,
+      action_en,
+    };
+
+    const emailHtml = buildBilingualEmailHtml([alertItem], appUrl, true);
+    const emailText = buildBilingualEmailText([alertItem], appUrl, true);
 
     try {
       const transporter = nodemailer.createTransport({
@@ -308,11 +240,16 @@ export default async function handler(req: any, res?: any) {
       const info = await transporter.sendMail({
         from: `"AgriOrbit Alerts" <${smtpUser}>`,
         to: user.email,
-        subject: `${title_en} / ${title_bn}`,
+        subject,
+        text: emailText,
         html: emailHtml,
+        encoding: 'utf-8',
+        headers: {
+          'Content-Type': 'text/html; charset=UTF-8',
+        },
       });
 
-      console.log(`[send-alert] Email sent successfully to ${user.email}, messageId: ${info.messageId}`);
+      console.log(`[send-alert] Bilingual email sent successfully to ${user.email}, messageId: ${info.messageId}`);
 
       // 12. Mark emailed_at in database
       await supabaseAdmin
@@ -325,7 +262,7 @@ export default async function handler(req: any, res?: any) {
         success: true,
         emailed: true,
         recipientEmail: user.email,
-        message: `Test alert created and email sent successfully to ${user.email}!`,
+        message: `Bilingual test alert created and email sent successfully to ${user.email}!`,
         notification: inserted,
         testsRemainingToday: Math.max(0, 2 - currentCount),
       });

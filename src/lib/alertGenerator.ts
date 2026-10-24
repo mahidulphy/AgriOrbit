@@ -118,6 +118,14 @@ export function formatAlertContent(
   }
 }
 
+import {
+  buildBilingualEmailHtml,
+  buildBilingualEmailText,
+  buildBilingualSubject,
+  getDistrictNames,
+  type AlertEmailItem,
+} from './bilingualEmailTemplate.ts';
+
 /**
  * Sends alert email via Gmail SMTP (port 465, secure: true).
  * If SMTP_USER or SMTP_PASS is missing, logs and skips cleanly without failing.
@@ -126,6 +134,7 @@ export async function sendAlertEmailViaSmtp(params: {
   to: string;
   subject: string;
   html: string;
+  text?: string;
   smtpUser?: string;
   smtpPass?: string;
 }): Promise<{ ok: boolean; error?: string }> {
@@ -154,13 +163,18 @@ export async function sendAlertEmailViaSmtp(params: {
       from: `"AgriOrbit Alerts" <${user}>`,
       to: params.to,
       subject: params.subject,
+      text: params.text,
       html: params.html,
+      encoding: 'utf-8',
+      headers: {
+        'Content-Type': 'text/html; charset=UTF-8',
+      },
     });
 
     return { ok: true };
   } catch (err: any) {
-    console.error('[SMTP] Failed to send email via Gmail SMTP:', err?.message);
-    return { ok: false, error: err?.message };
+    console.error('[SMTP] Failed to send email via Gmail SMTP:', err?.message || err);
+    return { ok: false, error: err?.message || String(err) };
   }
 }
 
@@ -168,81 +182,11 @@ export async function sendAlertEmailViaSmtp(params: {
  * Builds responsive, clean HTML email combining Bangla and English.
  */
 export function buildAlertEmailHtml(alerts: GeneratedAlertRow[], appUrl: string): string {
-  const alertCards = alerts
-    .map((a) => {
-      const badgeBg = a.severity === 'danger' ? '#ef4444' : a.severity === 'warning' ? '#f59e0b' : '#06b6d4';
-      return `
-        <div style="margin-bottom: 20px; padding: 16px; border-radius: 12px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.12);">
-          <div style="margin-bottom: 8px;">
-            <span style="display: inline-block; padding: 3px 8px; font-size: 11px; font-weight: bold; border-radius: 4px; background-color: ${badgeBg}; color: #050b14; text-transform: uppercase;">
-              ${a.severity}
-            </span>
-            <span style="margin-left: 8px; font-size: 12px; color: #8fa3b8; font-family: monospace;">
-              ${a.data_source} · ${a.data_date}
-            </span>
-          </div>
-          <h3 style="margin: 0 0 6px 0; font-size: 16px; color: #ffffff;">${a.title_bn}</h3>
-          <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: normal; color: #94a3b8;">${a.title_en}</h4>
-          <p style="margin: 0 0 8px 0; font-size: 13px; line-height: 1.5; color: #cbd5e1;">${a.body_bn}</p>
-          <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #94a3b8; font-style: italic;">${a.body_en}</p>
-        </div>
-      `;
-    })
-    .join('');
+  return buildBilingualEmailHtml(alerts, appUrl, false);
+}
 
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AgriOrbit Field Alerts</title>
-      </head>
-      <body style="margin: 0; padding: 24px; background-color: #050b14; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #e2e8f0;">
-        <div style="max-width: 600px; margin: 0 auto; background-color: #070d18; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px;">
-          <!-- Header -->
-          <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px;">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">AgriOrbit</h1>
-                <p style="margin: 4px 0 0 0; font-size: 12px; color: #b8ff3d; font-family: monospace; font-weight: bold;">
-                  NASA Earth Observations for Bangladesh Agriculture
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Intro -->
-          <div style="margin-bottom: 20px;">
-            <h2 style="margin: 0 0 6px 0; font-size: 18px; color: #ffffff;">নতুন কৃষি ও আবহাওয়া সতর্কতা</h2>
-            <p style="margin: 0; font-size: 13px; color: #94a3b8;">
-              Your registered farm field has ${alerts.length} new environmental advisory alert${alerts.length > 1 ? 's' : ''} based on real satellite telemetry.
-            </p>
-          </div>
-
-          <!-- Alert Cards -->
-          ${alertCards}
-
-          <!-- CTA Button -->
-          <div style="text-align: center; margin: 28px 0 20px 0;">
-            <a href="${appUrl}" style="display: inline-block; padding: 12px 28px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-size: 14px; font-weight: bold; border-radius: 10px;">
-              ড্যাশবোর্ড দেখুন / View Dashboard
-            </a>
-          </div>
-
-          <!-- Footer & Privacy Notice -->
-          <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; font-size: 11px; line-height: 1.5; color: #64748b; font-family: monospace;">
-            <p style="margin: 0 0 6px 0;">
-              Measured from NASA POWER (~10km grid), NASA SMAP (9km), and Open-Meteo numerical weather forecasts. Never invented or synthetic.
-            </p>
-            <p style="margin: 0;">
-              Your email is used solely for field alerts and can be turned off anytime in your profile settings. Max 1 email per user per day.
-            </p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
+export function buildAlertEmailText(alerts: GeneratedAlertRow[], appUrl: string): string {
+  return buildBilingualEmailText(alerts, appUrl, false);
 }
 
 /**
@@ -494,12 +438,20 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
       continue;
     }
 
-    // Dispatch via Gmail SMTP
-    const emailHtml = buildAlertEmailHtml(alerts, appUrl);
+    // Dispatch bilingual email via Gmail SMTP
+    const firstAlert = alerts[0];
+    const userField = userFields.find((f) => f.id === firstAlert?.field_id);
+    const dist = userField?.district || firstAlert?.district_en || 'Rangpur';
+    const { nameEn, nameBn } = getDistrictNames(dist);
+    const subject = buildBilingualSubject(nameBn, nameEn, false);
+    const emailHtml = buildBilingualEmailHtml(alerts, appUrl, false);
+    const emailText = buildBilingualEmailText(alerts, appUrl, false);
+
     const sendResult = await sendAlertEmailViaSmtp({
       to: userEmail,
-      subject: `AgriOrbit Alert: ${alerts.length} new field alert${alerts.length > 1 ? 's' : ''} / নতুন কৃষি সতর্কতা`,
+      subject,
       html: emailHtml,
+      text: emailText,
       smtpUser,
       smtpPass,
     });

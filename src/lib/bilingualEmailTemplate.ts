@@ -1,0 +1,355 @@
+/**
+ * src/lib/bilingualEmailTemplate.ts
+ *
+ * Dedicated bilingual (Bangla + English) email generator for AgriOrbit alerts.
+ * Used for both daily automated cron alerts and user-requested test alerts.
+ * Guaranteed dependency-free so it runs cleanly across both Node ESM and browser.
+ */
+
+export interface AlertEmailItem {
+  id?: string;
+  severity: 'info' | 'warning' | 'danger';
+  alert_type?: string;
+  data_source: string;
+  data_date: string;
+  title_bn: string;
+  title_en: string;
+  body_bn: string;
+  body_en: string;
+  district_bn?: string;
+  district_en?: string;
+  action_bn?: string;
+  action_en?: string;
+}
+
+// Convert Western digits (0-9) to Bengali digits (০-৯)
+export function toBnDigits(str: string | number): string {
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(str).replace(/[0-9]/g, (d) => bnDigits[parseInt(d, 10)] ?? d);
+}
+
+// Comprehensive 64 Bangladesh districts map (English -> Bengali)
+const DISTRICT_BN_MAP: Record<string, string> = {
+  dhaka: 'ঢাকা',
+  gazipur: 'গাজীপুর',
+  narayanganj: 'নারায়ণগঞ্জ',
+  munshiganj: 'মুন্সীগঞ্জ',
+  narsingdi: 'নরসিংদী',
+  manikganj: 'মানিকগঞ্জ',
+  tangail: 'টাঙ্গাইল',
+  kishoreganj: 'কিশোরগঞ্জ',
+  faridpur: 'ফরিদপুর',
+  rajbari: 'রাজবাড়ী',
+  shariatpur: 'শরীয়তপুর',
+  madaripur: 'মাদারীপুর',
+  gopalganj: 'গোপালগঞ্জ',
+  chattogram: 'চট্টগ্রাম',
+  chittagong: 'চট্টগ্রাম',
+  coxsbazar: 'কক্সবাজার',
+  cumilla: 'কুমিল্লা',
+  comilla: 'কুমিল্লা',
+  feni: 'ফেনী',
+  brahmanbaria: 'ব্রাহ্মণবাড়িয়া',
+  noakhali: 'নোয়াখালী',
+  chandpur: 'চাঁদপুর',
+  lakshmipur: 'লক্ষ্মীপুর',
+  rangamati: 'রাঙ্গামাটি',
+  khagrachhari: 'খাগড়াছড়ি',
+  bandarban: 'বান্দরবান',
+  rajshahi: 'রাজশাহী',
+  bogura: 'বগুড়া',
+  bogra: 'বগুড়া',
+  pabna: 'পাবনা',
+  sirajganj: 'সিরাজগঞ্জ',
+  naogaon: 'নওগাঁ',
+  natore: 'নাটোর',
+  joypurhat: 'জয়পুরহাট',
+  chapai_nawabganj: 'চাঁপাইনবাবগঞ্জ',
+  chapainawabganj: 'চাঁপাইনবাবগঞ্জ',
+  khulna: 'খুলনা',
+  jashore: 'যশোর',
+  jessore: 'যশোর',
+  satkhira: 'সাতক্ষীরা',
+  bagerhat: 'বাগেরহাট',
+  jhenaidah: 'ঝিনাইদহ',
+  kushtia: 'কুষ্টিয়া',
+  magura: 'মাগুরা',
+  meherpur: 'মেহেরপুর',
+  chuadanga: 'চুয়াডাঙ্গা',
+  narail: 'নড়াইল',
+  barishal: 'বরিশাল',
+  barisal: 'বরিশাল',
+  patuakhali: 'পটুয়াখালী',
+  bhola: 'ভোলা',
+  pirojpur: 'পিরোজপুর',
+  barguna: 'বরগুনা',
+  jhalokati: 'ঝালকাঠি',
+  sylhet: 'সিলেট',
+  moulvibazar: 'মৌলভীবাজার',
+  habiganj: 'হবিগঞ্জ',
+  sunamganj: 'সুনামগঞ্জ',
+  rangpur: 'রংপুর',
+  dinajpur: 'দিনাজপুর',
+  kurigram: 'কুড়িগ্রাম',
+  gaibandha: 'গাইবান্ধা',
+  nilphamari: 'নীলফামারী',
+  panchagarh: 'পঞ্চগড়',
+  thakurgaon: 'ঠাকুরগাঁও',
+  lalmonirhat: 'লালমনিরহাট',
+  mymensingh: 'ময়মনসিংহ',
+  jamalpur: 'জামালপুর',
+  netrokona: 'নেত্রকোণা',
+  sherpur: 'শেরপুর',
+};
+
+export function getDistrictNames(rawDistrict?: string): { nameEn: string; nameBn: string } {
+  if (!rawDistrict) return { nameEn: 'Bangladesh', nameBn: 'বাংলাদেশ' };
+  const key = rawDistrict.toLowerCase().replace(/[\s'-]/g, '');
+  const bn = DISTRICT_BN_MAP[key] || rawDistrict;
+  const en = rawDistrict.charAt(0).toUpperCase() + rawDistrict.slice(1);
+  return { nameEn: en, nameBn: bn };
+}
+
+/**
+ * Derives a short, clear, farmer-friendly action from the alert type.
+ */
+export function getAlertAction(alert: AlertEmailItem): { actionBn: string; actionEn: string } {
+  if (alert.action_bn && alert.action_en) {
+    return { actionBn: alert.action_bn, actionEn: alert.action_en };
+  }
+
+  const type = (alert.alert_type || '').toLowerCase();
+  if (type === 'heat' || alert.title_en.toLowerCase().includes('heat')) {
+    return {
+      actionBn: 'মাটি ভেজা রাখতে সন্ধ্যায় হালকা সেচ দিন অথবা খড় বিছিয়ে দিন।',
+      actionEn: 'Give light evening irrigation or mulch to protect roots from high heat.',
+    };
+  }
+  if (type === 'lowwater' || type === 'drought' || alert.title_en.toLowerCase().includes('deficit') || alert.title_en.toLowerCase().includes('moisture')) {
+    return {
+      actionBn: 'আগামী ৩ দিনের মধ্যে জমিতে হালকা সেচ দিন অথবা খড় দিয়ে মাটির রস ধরে রাখুন।',
+      actionEn: 'Irrigate within the next 3 days or use straw mulch to retain root moisture.',
+    };
+  }
+  if (type === 'flood' || alert.title_en.toLowerCase().includes('rain') || alert.title_en.toLowerCase().includes('waterlogging')) {
+    return {
+      actionBn: 'জমিতে পানি জমে শিকড় পচে যাওয়া ঠেকাতে এখনই নিষ্কাশন নালা পরিষ্কার করুন।',
+      actionEn: 'Clear drainage ditches immediately to prevent standing water and root rot.',
+    };
+  }
+  if (type === 'test' || alert.title_en.toLowerCase().includes('test')) {
+    return {
+      actionBn: 'মাঠের তাপমাত্রা ও আর্দ্রতা স্বাভাবিক থাকলে সাধারণ পরিচর্যা চালিয়ে যান।',
+      actionEn: 'Maintain regular field management while temperature and moisture remain normal.',
+    };
+  }
+  return {
+    actionBn: 'মাঠ পর্যবেক্ষণ করুন এবং আবহাওয়া অনুযায়ী প্রয়োজনীয় পদক্ষেপ নিন।',
+    actionEn: 'Monitor your field conditions and take action based on local weather.',
+  };
+}
+
+/**
+ * Builds the bilingual email subject line.
+ * Format: "আজকের ফসল সতর্কতা – রংপুর | AgriOrbit Daily Alert – Rangpur"
+ */
+export function buildBilingualSubject(districtBn: string, districtEn: string, isTest = false): string {
+  if (isTest) {
+    return `পরীক্ষামূলক ফসল সতর্কতা – ${districtBn} | AgriOrbit Test Alert – ${districtEn}`;
+  }
+  return `আজকের ফসল সতর্কতা – ${districtBn} | AgriOrbit Daily Alert – ${districtEn}`;
+}
+
+/**
+ * Builds responsive, clean HTML email with:
+ *  - Bangla on top, followed by a clear divider, then English below
+ *  - UTF-8 and Noto Sans Bengali / SolaimanLipi / Kalpurush fonts
+ *  - Action box, source provenance, and dashboard button
+ */
+export function buildBilingualEmailHtml(
+  alerts: AlertEmailItem[],
+  appUrl: string,
+  isTest = false
+): string {
+  const cardsHtml = alerts
+    .map((alert) => {
+      const { actionBn, actionEn } = getAlertAction(alert);
+      const dataDateBn = toBnDigits(alert.data_date);
+      const isDanger = alert.severity === 'danger';
+      const isWarning = alert.severity === 'warning';
+      const badgeBg = isDanger ? '#ef4444' : isWarning ? '#f59e0b' : '#10b981';
+      const badgeText = isTest
+        ? 'পরীক্ষামূলক সতর্কতা · TEST ALERT'
+        : isDanger
+        ? 'জরুরি সতর্কতা · DANGER'
+        : isWarning
+        ? 'সতর্কতা · WARNING'
+        : 'পরামর্শ · ADVISORY';
+
+      return `
+        <div style="margin-bottom: 24px; padding: 20px; border-radius: 14px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.12);">
+          <!-- Header Badge & Meta -->
+          <div style="margin-bottom: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+            <span style="display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 6px; background-color: ${badgeBg}; color: #050b14; letter-spacing: 0.5px;">
+              ${badgeText}
+            </span>
+            <span style="font-size: 11px; color: #94a3b8; font-family: monospace;">
+              উৎস: ${alert.data_source} &bull; তারিখ: ${dataDateBn} (${alert.data_date})
+            </span>
+          </div>
+
+          <!-- 1. BANGLA SECTION (TOP) -->
+          <div style="margin-bottom: 16px;">
+            <h2 style="margin: 0 0 10px 0; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.4;">
+              ${alert.title_bn}
+            </h2>
+            <p style="margin: 0 0 12px 0; font-size: 14px; line-height: 1.6; color: #cbd5e1;">
+              ${alert.body_bn}
+            </p>
+            <div style="padding: 10px 14px; background-color: rgba(184, 255, 61, 0.08); border-left: 3px solid #b8ff3d; border-radius: 6px;">
+              <strong style="color: #b8ff3d; font-size: 13px;">📌 করণীয়:</strong>
+              <span style="color: #f1f5f9; font-size: 13px; margin-left: 4px;">${actionBn}</span>
+            </div>
+          </div>
+
+          <!-- DIVIDER LINE -->
+          <div style="margin: 20px 0; border-top: 1px dashed rgba(255,255,255,0.18); position: relative; text-align: center;">
+            <span style="display: inline-block; background-color: #0b1626; padding: 0 10px; position: relative; top: -10px; font-size: 10px; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase; font-family: monospace;">
+              English Summary
+            </span>
+          </div>
+
+          <!-- 2. ENGLISH SECTION (BELOW) -->
+          <div>
+            <h3 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 600; color: #e2e8f0; line-height: 1.4;">
+              ${alert.title_en}
+            </h3>
+            <p style="margin: 0 0 12px 0; font-size: 13px; line-height: 1.6; color: #94a3b8;">
+              ${alert.body_en}
+            </p>
+            <div style="padding: 10px 14px; background-color: rgba(255, 255, 255, 0.04); border-left: 3px solid #00e5ff; border-radius: 6px;">
+              <strong style="color: #00e5ff; font-size: 12px;">📌 Recommended Action:</strong>
+              <span style="color: #cbd5e1; font-size: 12px; margin-left: 4px;">${actionEn}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+
+  return `<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriOrbit Alert</title>
+  <style>
+    body, table, td, p, h1, h2, h3, h4, span, a, div {
+      font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Kalpurush', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #050b14; color: #f1f5f9; -webkit-font-smoothing: antialiased;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #050b14; padding: 24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" style="max-width: 600px; background-color: #070d18; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden;" cellspacing="0" cellpadding="0">
+          <!-- App Header -->
+          <tr>
+            <td style="padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
+              <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
+                Agri<span style="color: #b8ff3d;">Orbit</span>
+              </h1>
+              <p style="margin: 4px 0 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">
+                নাসা উপগ্রহ পর্যবেক্ষণ &bull; NASA Earth Observations for Bangladesh Agriculture
+              </p>
+            </td>
+          </tr>
+
+          <!-- Main Alert Body -->
+          <tr>
+            <td style="padding: 24px;">
+              ${cardsHtml}
+
+              <!-- Call to Action -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 24px;">
+                <tr>
+                  <td align="center">
+                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-weight: 700; font-size: 14px; border-radius: 10px; letter-spacing: 0.3px;">
+                      ড্যাশবোর্ড দেখুন / Open AgriOrbit Dashboard &rarr;
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 24px; background-color: #081120; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+              <p style="margin: 0 0 6px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
+                তথ্যসূত্র: নাসা পাওয়ার (~১০ কিমি), নাসা এসএমএপি (৯ কিমি) ও ওপেন-মেটিও। কোনো কৃত্রিম বা কাল্পনিক তথ্য নেই।
+              </p>
+              <p style="margin: 0 0 6px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
+                Source: NASA POWER (~10km grid), NASA SMAP (9km), and Open-Meteo models. Never invented or synthetic.
+              </p>
+              <p style="margin: 0 0 8px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
+                Your email is used solely for field alerts and can be turned off anytime in your profile settings. Max 1 email per user per day.
+              </p>
+              <p style="margin: 0; font-size: 11px; color: #475569; font-family: monospace;">
+                AgriOrbit &bull; <a href="${appUrl}" style="color: #64748b; text-decoration: underline;">${appUrl}</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+/**
+ * Builds clean plain-text multipart counterpart.
+ * Suitable for basic mobile devices, feature phones, and text-only email clients.
+ */
+export function buildBilingualEmailText(
+  alerts: AlertEmailItem[],
+  appUrl: string,
+  isTest = false
+): string {
+  const sections = alerts.map((alert, idx) => {
+    const { actionBn, actionEn } = getAlertAction(alert);
+    const dataDateBn = toBnDigits(alert.data_date);
+    return `
+------------------------------------------------------------
+[সতর্কতা #${idx + 1}] ${isTest ? '(পরীক্ষামূলক / TEST)' : alert.severity.toUpperCase()}
+উৎস / Source: ${alert.data_source} | তারিখ / Date: ${dataDateBn} (${alert.data_date})
+------------------------------------------------------------
+
+[বাংলা]
+শিরোনাম: ${alert.title_bn}
+বিস্তারিত: ${alert.body_bn}
+করণীয়: ${actionBn}
+
+============================================================
+
+[ENGLISH]
+Title: ${alert.title_en}
+Details: ${alert.body_en}
+Action: ${actionEn}
+`;
+  }).join('\n');
+
+  return `AgriOrbit — ফসল ও আবহাওয়া সতর্কতা / Field Alerts
+নাসা উপগ্রহ পর্যবেক্ষণ / NASA Earth Observations
+============================================================
+${sections}
+============================================================
+বিস্তারিত দেখতে ড্যাশবোর্ডে প্রবেশ করুন / View details on dashboard:
+${appUrl}
+
+AgriOrbit • Bangladesh Agriculture Telemetry
+`;
+}
