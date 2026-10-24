@@ -74,7 +74,7 @@ const en = {
     legendRainUp: 'Rain share up',
     legendRainDown: 'Rain share down',
     takeaways: {
-      rabi: 'Winter is slightly warmer; early heat stress risk is rising for wheat and potato.',
+      rabi: 'Winter is slightly warmer; late-season heat stress risk is rising for wheat and potato.',
       kharif1: 'Pre-monsoon rain share surged; lower irrigation demand for Aus and summer crops.',
       kharif2: 'Monsoon rain share softened; keep supplemental irrigation ready during early Aman.',
     } as Record<SeasonId, string>,
@@ -327,7 +327,7 @@ const bn: Dict = {
     legendRainUp: 'বৃষ্টির ভাগ বৃদ্ধি',
     legendRainDown: 'বৃষ্টির ভাগ হ্রাস',
     takeaways: {
-      rabi: 'শীত আগের চেয়ে একটু উষ্ণ, গম ও আলুতে আগাম তাপের ঝুঁকি বাড়ছে।',
+      rabi: 'শীত আগের চেয়ে একটু উষ্ণ, গম ও আলুতে শেষ মৌসুমে তাপের ঝুঁকি বাড়ছে।',
       kharif1: 'প্রাক-বর্ষায় বৃষ্টির ভাগ অনেক বেড়েছে, আউশ ও গ্রীষ্মকালীন শাকসবজিতে সেচের চাপ কমবে।',
       kharif2: 'মূল বর্ষায় বৃষ্টির ভাগ কিছুটা কমেছে, আমন রোপণের শুরুতে সম্পূরক সেচের প্রস্তুতি জরুরি।',
     } as Record<SeasonId, string>,
