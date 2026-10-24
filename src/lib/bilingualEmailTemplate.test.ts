@@ -30,18 +30,24 @@ test('2. getDistrictNames: resolves English and Bengali names accurately', () =>
   assert.strictEqual(fallback.nameBn, 'বাংলাদেশ');
 });
 
-test('3. buildBilingualSubject: builds correct subject lines for daily and test alerts', () => {
+test('3. buildBilingualSubject: builds non-spammy subject lines without ALL CAPS, TEST, or emojis', () => {
   const dailySubject = buildBilingualSubject('রংপুর', 'Rangpur', false);
   assert.strictEqual(
     dailySubject,
-    'আজকের ফসল সতর্কতা – রংপুর | AgriOrbit Daily Alert – Rangpur'
+    'আজকের ফসল পরামর্শ – রংপুর | AgriOrbit daily update – Rangpur'
   );
 
   const testSubject = buildBilingualSubject('দিনাজপুর', 'Dinajpur', true);
   assert.strictEqual(
     testSubject,
-    'পরীক্ষামূলক ফসল সতর্কতা – দিনাজপুর | AgriOrbit Test Alert – Dinajpur'
+    'পরীক্ষামূলক ফসল পরামর্শ – দিনাজপুর | AgriOrbit sample update – Dinajpur'
   );
+
+  // Guarantee absence of spam trigger words and shouting
+  assert.doesNotMatch(dailySubject, /TEST/);
+  assert.doesNotMatch(dailySubject, /!/);
+  assert.doesNotMatch(testSubject, /TEST/);
+  assert.doesNotMatch(testSubject, /!/);
 });
 
 test('4. buildBilingualEmailHtml: enforces UTF-8, Bengali font stack, Bangla first, divider, and actions', () => {
@@ -78,15 +84,19 @@ test('4. buildBilingualEmailHtml: enforces UTF-8, Bengali font stack, Bangla fir
   assert.match(html, /English Summary/);
 
   // 4. Action boxes in both languages
-  assert.match(html, /📌 করণীয়:/);
+  assert.match(html, /করণীয়:/);
   assert.match(html, /মাটি ভেজা রাখতে সন্ধ্যায় হালকা সেচ দিন/);
-  assert.match(html, /📌 Recommended Action:/);
+  assert.match(html, /Recommended Action:/);
   assert.match(html, /Give light evening irrigation/);
 
   // 5. Data provenance and links
   assert.match(html, /উৎস: NASA POWER/);
   assert.match(html, /২০২৬-১০-২৪/);
   assert.match(html, /https:\/\/agri-orbit\.vercel\.app/);
+
+  // 6. Unsubscribe explanations
+  assert.match(html, /আপনি এই ইমেইলটি পেয়েছেন কারণ আপনার অ্যাগ্রিঅরবিট প্রোফাইলে ইমেইল সতর্কতা চালু রয়েছে/);
+  assert.match(html, /You receive this because Email alerts are on in your AgriOrbit profile/);
 });
 
 test('5. buildBilingualEmailText: generates clean multipart text counterpart', () => {
@@ -108,4 +118,5 @@ test('5. buildBilingualEmailText: generates clean multipart text counterpart', (
   assert.match(text, /\[ENGLISH\]/);
   assert.match(text, /Heavy Rainfall & Waterlogging Alert: Sylhet/);
   assert.match(text, /https:\/\/agri-orbit\.vercel\.app/);
+  assert.match(text, /You receive this because Email alerts are on in your AgriOrbit profile/);
 });

@@ -3,7 +3,12 @@
  *
  * Dedicated bilingual (Bangla + English) email generator for AgriOrbit alerts.
  * Used for both daily automated cron alerts and user-requested test alerts.
- * Guaranteed dependency-free so it runs cleanly across both Node ESM and browser.
+ * Formatted specifically for high email deliverability (avoids Spam folder triggers):
+ *  - No ALL CAPS, no emojis, no spam trigger words like "TEST" or "!!!"
+ *  - Simple, clean HTML with high text-to-code ratio and at most 1-2 official links
+ *  - Always provides plain-text multipart counterpart
+ *  - Includes clear unsubscribe explanations and headers
+ *  - Uses UTF-8 with standard Bangla font stack
  */
 
 export interface AlertEmailItem {
@@ -111,7 +116,7 @@ export function getDistrictNames(rawDistrict?: string): { nameEn: string; nameBn
 }
 
 /**
- * Derives a short, clear, farmer-friendly action from the alert type.
+ * Derives a short, clean, farmer-friendly action from the alert type (no emojis).
  */
 export function getAlertAction(alert: AlertEmailItem): { actionBn: string; actionEn: string } {
   if (alert.action_bn && alert.action_en) {
@@ -139,32 +144,35 @@ export function getAlertAction(alert: AlertEmailItem): { actionBn: string; actio
   }
   if (type === 'test' || alert.title_en.toLowerCase().includes('test')) {
     return {
-      actionBn: 'মাঠের তাপমাত্রা ও আর্দ্রতা স্বাভাবিক থাকলে সাধারণ পরিচর্যা চালিয়ে যান।',
-      actionEn: 'Maintain regular field management while temperature and moisture remain normal.',
+      actionBn: 'মাঠের তাপমাত্রা ও আর্দ্রতা স্বাভাবিক থাকলে নিয়মিত পরিচর্যা বজায় রাখুন।',
+      actionEn: 'Maintain standard field management while temperature and moisture remain normal.',
     };
   }
   return {
     actionBn: 'মাঠ পর্যবেক্ষণ করুন এবং আবহাওয়া অনুযায়ী প্রয়োজনীয় পদক্ষেপ নিন।',
-    actionEn: 'Monitor your field conditions and take action based on local weather.',
+    actionEn: 'Monitor field conditions and take action based on local weather.',
   };
 }
 
 /**
- * Builds the bilingual email subject line.
- * Format: "আজকের ফসল সতর্কতা – রংপুর | AgriOrbit Daily Alert – Rangpur"
+ * Builds polite, low-spam-score subject line:
+ *  - Daily: "আজকের ফসল পরামর্শ – রংপুর | AgriOrbit daily update – Rangpur"
+ *  - Test:  "পরীক্ষামূলক ফসল পরামর্শ – দিনাজপুর | AgriOrbit sample update – Dinajpur"
+ * Avoids ALL CAPS, emojis, "TEST", and exclamation marks.
  */
 export function buildBilingualSubject(districtBn: string, districtEn: string, isTest = false): string {
   if (isTest) {
-    return `পরীক্ষামূলক ফসল সতর্কতা – ${districtBn} | AgriOrbit Test Alert – ${districtEn}`;
+    return `পরীক্ষামূলক ফসল পরামর্শ – ${districtBn} | AgriOrbit sample update – ${districtEn}`;
   }
-  return `আজকের ফসল সতর্কতা – ${districtBn} | AgriOrbit Daily Alert – ${districtEn}`;
+  return `আজকের ফসল পরামর্শ – ${districtBn} | AgriOrbit daily update – ${districtEn}`;
 }
 
 /**
  * Builds responsive, clean HTML email with:
- *  - Bangla on top, followed by a clear divider, then English below
- *  - UTF-8 and Noto Sans Bengali / SolaimanLipi / Kalpurush fonts
- *  - Action box, source provenance, and dashboard button
+ *  - Bangla on top, clear divider, English below
+ *  - UTF-8 charset and standard Bangla font stack
+ *  - No large images, no emojis, at most 1-2 links to dashboard
+ *  - Complete bilingual unsubscribe footer explaining why they receive this email
  */
 export function buildBilingualEmailHtml(
   alerts: AlertEmailItem[],
@@ -177,58 +185,58 @@ export function buildBilingualEmailHtml(
       const dataDateBn = toBnDigits(alert.data_date);
       const isDanger = alert.severity === 'danger';
       const isWarning = alert.severity === 'warning';
-      const badgeBg = isDanger ? '#ef4444' : isWarning ? '#f59e0b' : '#10b981';
+      const badgeBg = isDanger ? '#dc2626' : isWarning ? '#d97706' : '#16a34a';
       const badgeText = isTest
-        ? 'পরীক্ষামূলক সতর্কতা · TEST ALERT'
+        ? 'পরীক্ষামূলক পরামর্শ · Sample advisory'
         : isDanger
-        ? 'জরুরি সতর্কতা · DANGER'
+        ? 'জরুরি পরামর্শ · Priority advisory'
         : isWarning
-        ? 'সতর্কতা · WARNING'
-        : 'পরামর্শ · ADVISORY';
+        ? 'সতর্কতা · Advisory notice'
+        : 'পরামর্শ · Field advisory';
 
       return `
-        <div style="margin-bottom: 24px; padding: 20px; border-radius: 14px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.12);">
-          <!-- Header Badge & Meta -->
-          <div style="margin-bottom: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
-            <span style="display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: bold; border-radius: 6px; background-color: ${badgeBg}; color: #050b14; letter-spacing: 0.5px;">
+        <div style="margin-bottom: 24px; padding: 20px; border-radius: 12px; background-color: #0b1626; border: 1px solid rgba(255,255,255,0.12);">
+          <!-- Header Tag & Meta -->
+          <div style="margin-bottom: 12px;">
+            <span style="display: inline-block; padding: 3px 8px; font-size: 11px; font-weight: 600; border-radius: 4px; background-color: ${badgeBg}; color: #ffffff;">
               ${badgeText}
             </span>
-            <span style="font-size: 11px; color: #94a3b8; font-family: monospace;">
-              উৎস: ${alert.data_source} &bull; তারিখ: ${dataDateBn} (${alert.data_date})
+            <span style="margin-left: 8px; font-size: 11px; color: #94a3b8; font-family: monospace;">
+              উৎস: ${alert.data_source} · তারিখ: ${dataDateBn} (${alert.data_date})
             </span>
           </div>
 
           <!-- 1. BANGLA SECTION (TOP) -->
           <div style="margin-bottom: 16px;">
-            <h2 style="margin: 0 0 10px 0; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.4;">
+            <h2 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #ffffff; line-height: 1.4;">
               ${alert.title_bn}
             </h2>
-            <p style="margin: 0 0 12px 0; font-size: 14px; line-height: 1.6; color: #cbd5e1;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; line-height: 1.6; color: #cbd5e1;">
               ${alert.body_bn}
             </p>
-            <div style="padding: 10px 14px; background-color: rgba(184, 255, 61, 0.08); border-left: 3px solid #b8ff3d; border-radius: 6px;">
-              <strong style="color: #b8ff3d; font-size: 13px;">📌 করণীয়:</strong>
+            <div style="padding: 10px 12px; background-color: rgba(184, 255, 61, 0.08); border-left: 3px solid #b8ff3d; border-radius: 4px;">
+              <span style="color: #b8ff3d; font-size: 13px; font-weight: bold;">করণীয়:</span>
               <span style="color: #f1f5f9; font-size: 13px; margin-left: 4px;">${actionBn}</span>
             </div>
           </div>
 
           <!-- DIVIDER LINE -->
-          <div style="margin: 20px 0; border-top: 1px dashed rgba(255,255,255,0.18); position: relative; text-align: center;">
-            <span style="display: inline-block; background-color: #0b1626; padding: 0 10px; position: relative; top: -10px; font-size: 10px; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase; font-family: monospace;">
+          <div style="margin: 18px 0; border-top: 1px dashed rgba(255,255,255,0.18); text-align: center;">
+            <span style="display: inline-block; background-color: #0b1626; padding: 0 8px; position: relative; top: -9px; font-size: 10px; font-weight: 600; color: #64748b; font-family: monospace;">
               English Summary
             </span>
           </div>
 
           <!-- 2. ENGLISH SECTION (BELOW) -->
           <div>
-            <h3 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 600; color: #e2e8f0; line-height: 1.4;">
+            <h3 style="margin: 0 0 6px 0; font-size: 14px; font-weight: 600; color: #e2e8f0; line-height: 1.4;">
               ${alert.title_en}
             </h3>
-            <p style="margin: 0 0 12px 0; font-size: 13px; line-height: 1.6; color: #94a3b8;">
+            <p style="margin: 0 0 10px 0; font-size: 13px; line-height: 1.6; color: #94a3b8;">
               ${alert.body_en}
             </p>
-            <div style="padding: 10px 14px; background-color: rgba(255, 255, 255, 0.04); border-left: 3px solid #00e5ff; border-radius: 6px;">
-              <strong style="color: #00e5ff; font-size: 12px;">📌 Recommended Action:</strong>
+            <div style="padding: 10px 12px; background-color: rgba(255, 255, 255, 0.04); border-left: 3px solid #38bdf8; border-radius: 4px;">
+              <span style="color: #38bdf8; font-size: 12px; font-weight: bold;">Recommended Action:</span>
               <span style="color: #cbd5e1; font-size: 12px; margin-left: 4px;">${actionEn}</span>
             </div>
           </div>
@@ -254,15 +262,15 @@ export function buildBilingualEmailHtml(
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #050b14; padding: 24px 12px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" style="max-width: 600px; background-color: #070d18; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden;" cellspacing="0" cellpadding="0">
+        <table role="presentation" width="100%" style="max-width: 600px; background-color: #070d18; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden;" cellspacing="0" cellpadding="0">
           <!-- App Header -->
           <tr>
-            <td style="padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
-              <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
+            <td style="padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
+              <h1 style="margin: 0; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
                 Agri<span style="color: #b8ff3d;">Orbit</span>
               </h1>
               <p style="margin: 4px 0 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">
-                নাসা উপগ্রহ পর্যবেক্ষণ &bull; NASA Earth Observations for Bangladesh Agriculture
+                নাসা উপগ্রহ পর্যবেক্ষণ · NASA Earth Observations for Bangladesh
               </p>
             </td>
           </tr>
@@ -272,12 +280,12 @@ export function buildBilingualEmailHtml(
             <td style="padding: 24px;">
               ${cardsHtml}
 
-              <!-- Call to Action -->
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 24px;">
+              <!-- Call to Action (clean direct link) -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 20px;">
                 <tr>
                   <td align="center">
-                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 14px 32px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-weight: 700; font-size: 14px; border-radius: 10px; letter-spacing: 0.3px;">
-                      ড্যাশবোর্ড দেখুন / Open AgriOrbit Dashboard &rarr;
+                    <a href="${appUrl}" target="_blank" style="display: inline-block; padding: 12px 28px; background-color: #b8ff3d; color: #050b14; text-decoration: none; font-weight: 700; font-size: 13px; border-radius: 8px;">
+                      ড্যাশবোর্ড দেখুন / Open AgriOrbit Dashboard
                     </a>
                   </td>
                 </tr>
@@ -285,20 +293,20 @@ export function buildBilingualEmailHtml(
             </td>
           </tr>
 
-          <!-- Footer -->
+          <!-- Clear Unsubscribe and Explanation Footer -->
           <tr>
-            <td style="padding: 20px 24px; background-color: #081120; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
-              <p style="margin: 0 0 6px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
-                তথ্যসূত্র: নাসা পাওয়ার (~১০ কিমি), নাসা এসএমএপি (৯ কিমি) ও ওপেন-মেটিও। কোনো কৃত্রিম বা কাল্পনিক তথ্য নেই।
+            <td style="padding: 18px 24px; background-color: #081120; border-top: 1px solid rgba(255,255,255,0.06); text-align: center;">
+              <p style="margin: 0 0 6px 0; font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                আপনি এই ইমেইলটি পেয়েছেন কারণ আপনার অ্যাগ্রিঅরবিট প্রোফাইলে ইমেইল সতর্কতা চালু রয়েছে। বন্ধ করতে প্রোফাইল → সতর্কতায় যান।
               </p>
-              <p style="margin: 0 0 6px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
-                Source: NASA POWER (~10km grid), NASA SMAP (9km), and Open-Meteo models. Never invented or synthetic.
+              <p style="margin: 0 0 8px 0; font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                You receive this because Email alerts are on in your AgriOrbit profile. Turn off in Profile &rarr; Alerts.
               </p>
-              <p style="margin: 0 0 8px 0; font-size: 11px; color: #64748b; line-height: 1.5; font-family: monospace;">
+              <p style="margin: 0 0 6px 0; font-size: 10px; color: #64748b; line-height: 1.5; font-family: monospace;">
                 Your email is used solely for field alerts and can be turned off anytime in your profile settings. Max 1 email per user per day.
               </p>
-              <p style="margin: 0; font-size: 11px; color: #475569; font-family: monospace;">
-                AgriOrbit &bull; <a href="${appUrl}" style="color: #64748b; text-decoration: underline;">${appUrl}</a>
+              <p style="margin: 0; font-size: 10px; color: #475569; font-family: monospace;">
+                AgriOrbit · <a href="${appUrl}" style="color: #64748b; text-decoration: underline;">${appUrl}</a>
               </p>
             </td>
           </tr>
@@ -324,7 +332,7 @@ export function buildBilingualEmailText(
     const dataDateBn = toBnDigits(alert.data_date);
     return `
 ------------------------------------------------------------
-[সতর্কতা #${idx + 1}] ${isTest ? '(পরীক্ষামূলক / TEST)' : alert.severity.toUpperCase()}
+[পরামর্শ #${idx + 1}] ${isTest ? '(নমুনা / Sample)' : alert.severity}
 উৎস / Source: ${alert.data_source} | তারিখ / Date: ${dataDateBn} (${alert.data_date})
 ------------------------------------------------------------
 
@@ -342,13 +350,18 @@ Action: ${actionEn}
 `;
   }).join('\n');
 
-  return `AgriOrbit — ফসল ও আবহাওয়া সতর্কতা / Field Alerts
+  return `AgriOrbit — ফসল ও আবহাওয়া পরামর্শ / Field Advisory
 নাসা উপগ্রহ পর্যবেক্ষণ / NASA Earth Observations
 ============================================================
 ${sections}
 ============================================================
 বিস্তারিত দেখতে ড্যাশবোর্ডে প্রবেশ করুন / View details on dashboard:
 ${appUrl}
+
+------------------------------------------------------------
+আপনি এই ইমেইলটি পেয়েছেন কারণ আপনার অ্যাগ্রিঅরবিট প্রোফাইলে ইমেইল সতর্কতা চালু রয়েছে। বন্ধ করতে প্রোফাইল -> সতর্কতায় যান।
+You receive this because Email alerts are on in your AgriOrbit profile. Turn off in Profile -> Alerts.
+Your email is used solely for field alerts and can be turned off anytime in your profile settings. Max 1 email per user per day.
 
 AgriOrbit • Bangladesh Agriculture Telemetry
 `;

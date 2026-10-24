@@ -154,10 +154,10 @@ export default async function handler(req: any, res?: any) {
     const maxTempBn = toBnDigits(maxTempFormatted);
 
     // 8. Construct test alert notification payload with clear actions & numbers in both languages
-    const title_bn = `পরীক্ষামূলক ফসল সতর্কতা: ${distNameBn} (${maxTempBn}° সে.)`;
-    const title_en = `Test Crop Alert: ${distNameEn} (${maxTempFormatted}°C)`;
-    const body_bn = `এটি আপনার প্রোফাইল সেটিংস থেকে পাঠানো একটি পরীক্ষামূলক সতর্কতা। ${distNameBn} জেলার জন্য নাসা পাওয়ারের বাস্তব পর্যবেক্ষণ: ${dataDateBn} তারিখে সর্বোচ্চ তাপমাত্রা ছিল ${maxTempBn}° সে.। নিয়মিত আবহাওয়া, খরা বা মাটির আর্দ্রতা ঝুঁকিপূর্ণ সীমায় পৌঁছালে স্বয়ংক্রিয়ভাবে সতর্কবার্তা আসবে।`;
-    const body_en = `This is a test alert requested from your profile settings. Real NASA POWER observation for ${distNameEn}: maximum temperature was ${maxTempFormatted}°C on ${dataDate}. Normal alerts arrive automatically when temperature, rainfall, or soil moisture cross critical thresholds.`;
+    const title_bn = `ফসল পরামর্শ: ${distNameBn} (${maxTempBn}° সে.)`;
+    const title_en = `Crop advisory: ${distNameEn} (${maxTempFormatted}°C)`;
+    const body_bn = `এটি আপনার প্রোফাইল সেটিংস থেকে পাঠানো একটি পরীক্ষামূলক পরামর্শ। ${distNameBn} জেলার জন্য নাসা পাওয়ারের বাস্তব পর্যবেক্ষণ: ${dataDateBn} তারিখে সর্বোচ্চ তাপমাত্রা ছিল ${maxTempBn}° সে.। নিয়মিত আবহাওয়া, খরা বা মাটির আর্দ্রতা ঝুঁকিপূর্ণ সীমায় পৌঁছালে স্বয়ংক্রিয়ভাবে সতর্কবার্তা আসবে।`;
+    const body_en = `This is a sample advisory requested from your profile settings. Real NASA POWER observation for ${distNameEn}: maximum temperature was ${maxTempFormatted}°C on ${dataDate}. Normal alerts arrive automatically when temperature, rainfall, or soil moisture cross critical thresholds.`;
     const action_bn = 'মাঠের তাপমাত্রা ও আর্দ্রতা পর্যবেক্ষণ করুন এবং স্বাভাবিক সেচ চালিয়ে যান।';
     const action_en = 'Monitor field conditions and maintain standard irrigation schedule.';
 
@@ -238,7 +238,8 @@ export default async function handler(req: any, res?: any) {
       });
 
       const info = await transporter.sendMail({
-        from: `"AgriOrbit Alerts" <${smtpUser}>`,
+        from: `"AgriOrbit" <${smtpUser}>`,
+        replyTo: smtpUser,
         to: user.email,
         subject,
         text: emailText,
@@ -246,6 +247,8 @@ export default async function handler(req: any, res?: any) {
         encoding: 'utf-8',
         headers: {
           'Content-Type': 'text/html; charset=UTF-8',
+          'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${smtpUser}?subject=unsubscribe>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
         },
       });
 

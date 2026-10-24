@@ -137,10 +137,12 @@ export async function sendAlertEmailViaSmtp(params: {
   text?: string;
   smtpUser?: string;
   smtpPass?: string;
+  appUrl?: string;
 }): Promise<{ ok: boolean; error?: string }> {
   const user = params.smtpUser || process.env.SMTP_USER || process.env.GMAIL_USER;
   const rawPass = params.smtpPass || process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || process.env.GMAIL_PASS;
   const pass = rawPass ? rawPass.replace(/\s+/g, '') : undefined;
+  const appUrl = params.appUrl || process.env.VITE_APP_URL || process.env.APP_URL || 'https://agri-orbit.vercel.app';
 
   if (!user || !pass) {
     const errorMsg = 'SMTP credentials missing. Please set SMTP_USER / SMTP_PASS or GMAIL_USER / GMAIL_APP_PASSWORD in Vercel environment variables.';
@@ -160,7 +162,8 @@ export async function sendAlertEmailViaSmtp(params: {
     });
 
     await transporter.sendMail({
-      from: `"AgriOrbit Alerts" <${user}>`,
+      from: `"AgriOrbit" <${user}>`,
+      replyTo: user,
       to: params.to,
       subject: params.subject,
       text: params.text,
@@ -168,6 +171,8 @@ export async function sendAlertEmailViaSmtp(params: {
       encoding: 'utf-8',
       headers: {
         'Content-Type': 'text/html; charset=UTF-8',
+        'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${user}?subject=unsubscribe>`,
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
     });
 
@@ -454,6 +459,7 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
       text: emailText,
       smtpUser,
       smtpPass,
+      appUrl,
     });
 
     if (sendResult.ok) {
@@ -478,6 +484,9 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
         status: sendResult.error || 'smtp_error',
       });
     }
+
+    // Pacing delay between individual farmer sends to maintain high deliverability
+    await new Promise((resolve) => setTimeout(resolve, 600));
   }
 
   return {
