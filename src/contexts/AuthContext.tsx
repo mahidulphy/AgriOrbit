@@ -202,9 +202,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       // Use window.location.origin directly (e.g. https://agri-orbit.vercel.app or http://localhost:5173)
-      const redirectUrl = typeof window !== 'undefined' && window.location?.origin
-        ? window.location.origin
-        : (import.meta.env.VITE_APP_URL || getAppOrigin());
+      const redirectUrl = getAppOrigin();
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -305,9 +303,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         sessionStorage.setItem('agriorbit_fresh_signin', 'true');
       }
 
-      const emailRedirectTo = typeof window !== 'undefined' && window.location?.origin
-        ? window.location.origin
-        : getAppOrigin();
+      const emailRedirectTo = getAppOrigin();
 
       const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
@@ -339,9 +335,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     try {
-      const redirectTo = typeof window !== 'undefined' && window.location?.origin
-        ? window.location.origin
-        : getAppOrigin();
+      const redirectTo = getAppOrigin();
 
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
         redirectTo,
