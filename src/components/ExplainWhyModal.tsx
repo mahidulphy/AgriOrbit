@@ -1,8 +1,9 @@
 import React from 'react';
 import { X, Check, Database, AlertCircle, ShieldCheck, Droplet, Layers, Compass, Calculator } from 'lucide-react';
-import { CropData, FarmerPriorityId, Language } from '../types';
+import { CropData, FarmerPriorityId, Language, ScoreDeltas } from '../types';
 import { priorityInfluenceText } from '../lib/cropSuitability';
 import { cropById } from '../data/crops';
+import { toBnDigits } from '../lib/bilingualEmailTemplate';
 
 interface ExplainWhyModalProps {
   crop: CropData | null;
@@ -22,21 +23,45 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
   if (!crop) return null;
 
   const isEstimated = cropById(crop.id)?.data_confidence === 'estimated';
+  const isBn = language === 'bn';
 
-  const deltas = crop.deltas ?? {
-    base: Math.max(60, crop.suitabilityScore - (crop.suitabilityScore >= 80 ? 15 : 5)),
-    dryPenalty: crop.waterRequirementEn === 'Low' ? 4 : crop.waterRequirementEn === 'High' ? -15 : 0,
-    optimalSowingBonus: crop.suitabilityScore >= 85 ? 5 : 0,
-    heatPenalty: crop.id === 'wheat' || crop.id === 'potato' ? -5 : 0,
-    waterDeficitPenalty: crop.waterRequirementEn === 'High' ? -5 : 0,
-    primaryPriorityDelta: crop.suitabilityScore >= 80 ? 12 : crop.suitabilityScore >= 70 ? 4 : -8,
-    secondaryPriorityDelta: 0,
-    finalScore: crop.suitabilityScore,
+  const fmtPt = (num: number, signed = true) => {
+    if (isBn) {
+      const bn = toBnDigits(Math.abs(num));
+      if (num < 0) return `−${bn}`;
+      if (signed && num > 0) return `+${bn}`;
+      return bn;
+    }
+    if (num < 0) return `${num}`;
+    if (signed && num > 0) return `+${num}`;
+    return `${num}`;
   };
 
+  const fallbackDeltas: ScoreDeltas = {
+    base: 70,
+    dryPenalty: 0,
+    heatPenalty: 0,
+    waterDeficitPenalty: 0,
+    optimalSowingBonus: 0,
+    primaryPriorityDelta: 0,
+    secondaryPriorityDelta: 0,
+    finalScore: 70,
+  };
+
+  const deltas: ScoreDeltas = crop.deltas ?? fallbackDeltas;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#141414] border border-[#262626] rounded-xl w-full max-w-2xl max-h-[85vh] overflow-y-auto shadow-2xl text-[#FAFAFA] relative">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={language === 'en' ? `Scientific reasoning for ${crop.nameEn}` : `${crop.nameBn}-এর বৈজ্ঞানিক কারণ`}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl rounded-2xl bg-[#141414] border border-[#262626] shadow-2xl overflow-hidden my-8"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Modal Header */}
         <div className="sticky top-0 bg-[#141414] p-5 sm:p-6 border-b border-[#262626] flex items-start justify-between z-10">
           <div>
@@ -47,7 +72,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
             <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#FAFAFA] flex items-baseline gap-3">
               <span>{language === 'en' ? `Why ${crop.nameEn}?` : `কেন ${crop.nameBn}?`}</span>
               <span className="font-mono text-sm font-semibold text-[#22C55E]">
-                {crop.suitabilityScore}% Match
+                {isBn ? `${toBnDigits(crop.suitabilityScore)}% উপযুক্ত` : `${crop.suitabilityScore}% Match`}
               </span>
             </h3>
             <p className="text-xs text-[#737373] italic mt-0.5">
@@ -122,7 +147,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                       </span>
                     </td>
                     <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">BARI/BRRI</td>
-                    <td className="py-2.5 px-3 text-right font-semibold text-[#FAFAFA]">+{deltas.base}</td>
+                    <td className="py-2.5 px-3 text-right font-semibold text-[#FAFAFA]">{fmtPt(deltas.base)}</td>
                   </tr>
 
                   {/* SMAP Soil Moisture Adjustment */}
@@ -143,7 +168,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <td className={`py-2.5 px-3 text-right font-semibold ${
                       deltas.dryPenalty < 0 ? 'text-[#EF4444]' : deltas.dryPenalty > 0 ? 'text-[#22C55E]' : 'text-[#737373]'
                     }`}>
-                      {deltas.dryPenalty > 0 ? `+${deltas.dryPenalty}` : deltas.dryPenalty}
+                      {fmtPt(deltas.dryPenalty)}
                     </td>
                   </tr>
 
@@ -159,7 +184,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                         </span>
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">NASA SMAP</td>
-                      <td className="py-2.5 px-3 text-right font-semibold text-[#22C55E]">+{deltas.optimalSowingBonus}</td>
+                      <td className="py-2.5 px-3 text-right font-semibold text-[#22C55E]">{fmtPt(deltas.optimalSowingBonus)}</td>
                     </tr>
                   )}
 
@@ -179,7 +204,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                           ? 'NASA + ISRO INSAT'
                           : 'NASA POWER'}
                       </td>
-                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{deltas.heatPenalty}</td>
+                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{fmtPt(deltas.heatPenalty)}</td>
                     </tr>
                   )}
 
@@ -195,11 +220,11 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                         </span>
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">NASA POWER</td>
-                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{deltas.waterDeficitPenalty}</td>
+                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{fmtPt(deltas.waterDeficitPenalty)}</td>
                     </tr>
                   )}
 
-                                                      {/* JAXA AMSR2 / SPI Drought Confirmation */}
+                  {/* JAXA AMSR2 / SPI Drought Confirmation */}
                   {deltas.jaxaDroughtPenalty !== undefined && deltas.jaxaDroughtPenalty !== 0 && (
                     <tr>
                       <td className="py-2.5 pr-3">
@@ -219,7 +244,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">JAXA Earth API</td>
                       <td className={`py-2.5 px-3 text-right font-semibold ${deltas.jaxaDroughtPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
-                        {deltas.jaxaDroughtPenalty > 0 ? `+${deltas.jaxaDroughtPenalty}` : deltas.jaxaDroughtPenalty}
+                        {fmtPt(deltas.jaxaDroughtPenalty)}
                       </td>
                     </tr>
                   )}
@@ -244,7 +269,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">ESA Sentinel-2</td>
                       <td className={`py-2.5 px-3 text-right font-semibold ${deltas.sentinel2StressPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
-                        {deltas.sentinel2StressPenalty > 0 ? `+${deltas.sentinel2StressPenalty}` : deltas.sentinel2StressPenalty}
+                        {fmtPt(deltas.sentinel2StressPenalty)}
                       </td>
                     </tr>
                   )}
@@ -263,7 +288,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                         </span>
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">ESA Sentinel-1</td>
-                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{deltas.sentinel1FloodPenalty}</td>
+                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{fmtPt(deltas.sentinel1FloodPenalty)}</td>
                     </tr>
                   )}
 
@@ -285,7 +310,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     <td className={`py-2.5 px-3 text-right font-semibold ${
                       deltas.primaryPriorityDelta > 0 ? 'text-[#22C55E]' : deltas.primaryPriorityDelta < 0 ? 'text-[#EF4444]' : 'text-[#737373]'
                     }`}>
-                      {deltas.primaryPriorityDelta > 0 ? `+${deltas.primaryPriorityDelta}` : deltas.primaryPriorityDelta}
+                      {fmtPt(deltas.primaryPriorityDelta)}
                     </td>
                   </tr>
 
@@ -306,7 +331,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                       <td className={`py-2.5 px-3 text-right font-semibold ${
                         deltas.secondaryPriorityDelta > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'
                       }`}>
-                        {deltas.secondaryPriorityDelta > 0 ? `+${deltas.secondaryPriorityDelta}` : deltas.secondaryPriorityDelta}
+                        {fmtPt(deltas.secondaryPriorityDelta)}
                       </td>
                     </tr>
                   )}
@@ -318,7 +343,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     </td>
                     <td className="py-3 px-3 text-[#737373] text-[11px]">AgriOrbit Engine</td>
                     <td className="py-3 px-3 text-right text-sm text-[#22C55E] font-display">
-                      {crop.suitabilityScore}%
+                      {isBn ? `${toBnDigits(crop.suitabilityScore)}%` : `${crop.suitabilityScore}%`}
                     </td>
                   </tr>
                 </tbody>

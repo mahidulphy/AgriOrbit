@@ -16,6 +16,7 @@ import {
 import type { CropData, DistrictId, FarmerPriorityId, Language } from '../../types';
 import type { EngineResult } from '../../lib/engine';
 import { formatPriorityLabel, type TelemetryContext } from '../../lib/cropSuitability';
+import { toBnDigits } from '../../lib/bilingualEmailTemplate';
 import { SmsAdvisoryButton } from './SmsAdvisoryButton';
 
 export interface FarmerAdvisoryCardProps {
@@ -85,9 +86,6 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
       id="farmer-advisory-card"
       className={`rounded-xl bg-[#141414] border border-[#262626] p-6 sm:p-8 relative overflow-hidden print:border-black print:bg-white print:text-black ${className}`}
     >
-      {/* Decorative Watermark / Accent Glow */}
-      
-
       {/* Card Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#262626] print:border-black/20">
         <div>
@@ -99,8 +97,12 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
             {isEn ? `Field Advisory: ${upazilaName}, ${districtName}` : `${upazilaName}, ${districtName} কৃষি পরামর্শ কার্ড`}
           </h3>
           <div className="flex items-center gap-2 text-xs font-mono text-[#A3A3A3] print:text-gray-600 mt-1">
-            <MapPin className="w-3.5 h-3.5 text-[#FAFAFA] print:text-blue-600" />
-            <span>{fieldLat.toFixed(2)}° N · {fieldLng.toFixed(2)}° E</span>
+            <MapPin className="w-3.5 h-3.5 text-[#22C55E] print:text-blue-600" />
+            <span>
+              {isEn
+                ? `${fieldLat.toFixed(2)}° N · ${fieldLng.toFixed(2)}° E`
+                : `${toBnDigits(fieldLat.toFixed(2))}° উ · ${toBnDigits(fieldLng.toFixed(2))}° পূ`}
+            </span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>{new Date().toLocaleDateString(isEn ? 'en-US' : 'bn-BD', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
@@ -130,20 +132,45 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
           <div className="space-y-2.5 text-xs">
             <div className="flex justify-between items-center">
               <span className="text-[#A3A3A3] print:text-gray-600">{isEn ? '30-Day Rainfall' : '৩০ দিনের বৃষ্টি'}:</span>
-              <span className="font-mono font-bold text-white print:text-black">{Math.round(telemetry.rainfall30d ?? 38)} mm</span>
+              <span className="font-mono font-bold text-white print:text-black">
+                {telemetry.rainfall30d != null
+                  ? (isEn ? `${Math.round(telemetry.rainfall30d)} mm` : `${toBnDigits(Math.round(telemetry.rainfall30d))} মিমি`)
+                  : (isEn ? 'Data unavailable' : 'তথ্য নেই')}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#A3A3A3] print:text-gray-600">{isEn ? 'Soil Moisture' : 'মাটির আর্দ্রতা'}:</span>
-              <span className="font-mono font-bold text-[#FAFAFA] print:text-blue-700">{Math.round((telemetry.soilMoisture ?? 0.22) * 100)}% <span className="text-xs font-normal text-slate-400">({(telemetry.soilMoisture ?? 0.22).toFixed(2)} m³/m³)</span></span>
+              <span className="font-mono font-bold text-[#FAFAFA] print:text-emerald-600">
+                {telemetry.soilMoisture != null ? (
+                  <>
+                    {isEn ? `${Math.round(telemetry.soilMoisture * 100)}%` : `${toBnDigits(Math.round(telemetry.soilMoisture * 100))}%`}{' '}
+                    <span className="text-xs font-normal text-[#A3A3A3]">
+                      ({isEn ? `${telemetry.soilMoisture.toFixed(2)} m³/m³` : `${toBnDigits(telemetry.soilMoisture.toFixed(2))} m³/m³`})
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-[#A3A3A3]">{isEn ? 'Data unavailable' : 'তথ্য নেই'}</span>
+                )}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#A3A3A3] print:text-gray-600">{isEn ? 'Daily Max Temp' : 'সর্বোচ্চ তাপমাত্রা'}:</span>
-              <span className="font-mono font-bold text-white print:text-black">{(telemetry.maxTemp ?? 32).toFixed(1)}°C</span>
+              <span className="font-mono font-bold text-white print:text-black">
+                {telemetry.maxTemp != null
+                  ? (isEn ? `${telemetry.maxTemp.toFixed(1)}°C` : `${toBnDigits(telemetry.maxTemp.toFixed(1))}° সে.`)
+                  : (isEn ? 'Data unavailable' : 'তথ্য নেই')}
+              </span>
             </div>
-            <div className="flex justify-between items-center" title={`Net Water Balance = Rain (${Math.round(telemetry.rainfall30d ?? 38)} mm) - ET0. Deficit if negative.`}>
+            <div className="flex justify-between items-center" title={`Net Water Balance = Rain (${Math.round(telemetry.rainfall30d ?? 0)} mm) - ET0. Deficit if negative.`}>
               <span className="text-[#A3A3A3] print:text-gray-600">{isEn ? 'Net Water Balance' : 'নিট পানি অবস্থা'}:</span>
               <span className={`font-mono font-bold ${(telemetry.waterBalance ?? 0) < -50 ? 'text-[#FF5C5C] print:text-red-600' : 'text-[#22C55E] print:text-emerald-600'}`}>
-                {(telemetry.waterBalance ?? 0) < 0 ? `${Math.round(telemetry.waterBalance ?? 0)} mm` : `+${Math.round(telemetry.waterBalance ?? 0)} mm`}
+                {telemetry.waterBalance != null ? (
+                  isEn
+                    ? (telemetry.waterBalance < 0 ? `${Math.round(telemetry.waterBalance)} mm` : `+${Math.round(telemetry.waterBalance)} mm`)
+                    : (telemetry.waterBalance < 0 ? `−${toBnDigits(Math.abs(Math.round(telemetry.waterBalance)))} মিমি` : `+${toBnDigits(Math.round(telemetry.waterBalance))} মিমি`)
+                ) : (
+                  isEn ? 'Data unavailable' : 'তথ্য নেই'
+                )}
               </span>
             </div>
           </div>
@@ -160,10 +187,14 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
               return (
                 <div key={pick.season} className="flex items-center justify-between p-2 rounded-lg bg-[#141414] print:bg-white border border-[#262626] print:border-gray-200">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-[#A3A3A3] print:text-gray-500 font-bold">0{i + 1}</span>
+                    <span className="text-[10px] font-mono text-[#A3A3A3] print:text-gray-500 font-bold">
+                      {isEn ? `0${i + 1}` : `০${toBnDigits(i + 1)}`}
+                    </span>
                     <span className="font-bold text-white print:text-black">{isEn ? pick.crop.nameEn : pick.crop.nameBn}</span>
                   </div>
-                  <span className="font-mono text-[11px] text-[#22C55E] print:text-emerald-700 font-bold">{seasonName} ({pick.score}%)</span>
+                  <span className="font-mono text-[11px] text-[#22C55E] print:text-emerald-700 font-bold">
+                    {seasonName} ({isEn ? pick.score : toBnDigits(pick.score)}%)
+                  </span>
                 </div>
               );
             })}
@@ -220,7 +251,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
       </div>
 
       {/* Constructive Advisory Disclaimer */}
-      <div className="mt-2 text-[11px] text-slate-400 print:text-gray-600 leading-relaxed border-t border-[#262626] print:border-black/20 pt-3">
+      <div className="mt-2 text-[11px] text-[#A3A3A3] print:text-gray-600 leading-relaxed border-t border-[#262626] print:border-black/20 pt-3">
         {isEn
           ? "Your feedback helps us improve AgriOrbit's recommendations. Recommendations are advisory based on NASA Earth observations and BARI/BRRI guidelines. Always verify with your local Upazila Agriculture Officer."
           : "আপনার মতামত এগ্রিঅরবিটের পরামর্শ আরও উপযোগী করতে সাহায্য করে। এই পরামর্শ নাসার স্যাটেলাইট তথ্য ও বারি/ব্রির নির্দেশিকা অনুযায়ী তৈরি। মাঠে চূড়ান্ত সিদ্ধান্ত নেওয়ার আগে স্থানীয় কৃষি কর্মকর্তার সাথেও কথা বলুন।"}
@@ -237,7 +268,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
           </span>
         </div>
 
-        {/* Print, Share, SMS buttons */}
+        {/* Print, Share, SMS/Email buttons */}
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto print:hidden">
           <SmsAdvisoryButton
             district={districtName}

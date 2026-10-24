@@ -32,10 +32,10 @@ export type SeasonFilter = 'All' | 'Rabi' | 'Kharif-1' | 'Kharif-2';
 const SECONDARY_WEIGHT = 0.5;
 
 export interface TelemetryContext {
-  rainfall30d?: number; // mm
+  rainfall30d?: number | null; // mm
   soilMoisture?: number | null; // m³/m³
   maxTemp?: number; // °C
-  waterBalance?: number; // rain30 - ET0 in mm
+  waterBalance?: number | null; // rain30 - ET0 in mm
   sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
   sentinel2Ndvi10m?: number | null; // 10m field NDVI (ESA Sentinel-2 MSI)
   sentinel2AnomalyPct?: number | null; // % deviation from baseline NDVI
@@ -96,7 +96,7 @@ function evaluateCropWithNasa(
   const soil = telemetry?.soilMoisture;
   const maxT = telemetry?.maxTemp;
   const wBal = telemetry?.waterBalance;
-  const hasTelemetry = rain !== undefined && soil !== undefined && maxT !== undefined && wBal !== undefined;
+  const hasTelemetry = rain !== undefined && rain !== null && soil !== undefined && maxT !== undefined && wBal !== undefined && wBal !== null;
 
   if (!hasTelemetry) {
     crop.notEnoughData = true;

@@ -7,6 +7,7 @@ import { SmsAdvisoryButton } from './dashboard/SmsAdvisoryButton';
 import type { EngineResult } from '../lib/engine';
 import { formatPriorityLabel, type TelemetryContext } from '../lib/cropSuitability';
 import { FAMILY_LABEL } from '../data/crops';
+import { toBnDigits } from '../lib/bilingualEmailTemplate';
 
 interface SeasonRotationProps {
   selectedDistrict: DistrictId;
@@ -25,6 +26,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
   engineResult,
   telemetry,
 }) => {
+  const isBn = language === 'bn';
   const district = getDistrictAdmin(selectedDistrict) ?? {
     nameEn: selectedDistrict,
     nameBn: selectedDistrict,
@@ -42,31 +44,34 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             : pick.crop.id === 'aman'
             ? 't_aman_rice'
             : pick.crop.id;
-        const dbCrop = CROPS_DATABASE[cropKey] || {
-          id: pick.crop.id,
-          nameEn: pick.crop.nameEn,
-          nameBn: pick.crop.nameBn,
-          scientificName: '',
-          seasonEn: pick.season === 'rabi' ? 'Rabi' : pick.season === 'kharif1' ? 'Kharif-1' : 'Kharif-2',
-          seasonBn: pick.season === 'rabi' ? 'রবি' : pick.season === 'kharif1' ? 'খরিফ-১' : 'খরিফ-২',
-          suitabilityScore: pick.score,
-          suitabilityTier: pick.score >= 85 ? 'high' : pick.score >= 70 ? 'moderate' : 'marginal',
-          waterRequirementEn: pick.crop.water === 'low' ? 'Low' : pick.crop.water === 'high' ? 'High' : 'Moderate',
-          waterRequirementBn: pick.crop.water === 'low' ? 'কম' : pick.crop.water === 'high' ? 'বেশি' : 'মাঝারি',
-          waterDetailEn: `${pick.crop.days} days cycle`,
-          waterDetailBn: `${pick.crop.days} দিনের চক্র`,
-          durationDays: pick.crop.days,
-          shortWhyEn: '',
-          shortWhyBn: '',
-          explanation: {
-            observationsTriggered: [],
-            observationsTriggeredBn: [],
-            priorityAlignment: '',
-            priorityAlignmentBn: '',
-            rulesSatisfied: [],
-            rulesSatisfiedBn: [],
-          },
-        };
+        const dbCrop =
+          CROPS_DATABASE[cropKey] ||
+          CROPS_DATABASE[pick.crop.id] || {
+            id: pick.crop.id,
+            nameEn: pick.crop.nameEn,
+            nameBn: pick.crop.nameBn,
+            scientificName: '',
+            category: 'Cereals',
+            seasonEn: pick.season === 'rabi' ? 'Rabi' : pick.season === 'kharif1' ? 'Kharif-1' : 'Kharif-2',
+            seasonBn: pick.season === 'rabi' ? 'রবি' : pick.season === 'kharif1' ? 'খরিফ-১' : 'খরিফ-২',
+            suitabilityScore: pick.score,
+            suitabilityTier: pick.score >= 85 ? 'high' : pick.score >= 70 ? 'moderate' : 'marginal',
+            waterRequirementEn: pick.crop.water === 'low' ? 'Low' : pick.crop.water === 'high' ? 'High' : 'Moderate',
+            waterRequirementBn: pick.crop.water === 'low' ? 'কম' : pick.crop.water === 'high' ? 'বেশি' : 'মাঝারি',
+            waterDetailEn: `${pick.crop.days} days cycle`,
+            waterDetailBn: `${toBnDigits(pick.crop.days)} দিনের চক্র`,
+            durationDays: pick.crop.days,
+            shortWhyEn: '',
+            shortWhyBn: '',
+            explanation: {
+              observationsTriggered: [],
+              observationsTriggeredBn: [],
+              priorityAlignment: '',
+              priorityAlignmentBn: '',
+              rulesSatisfied: [],
+              rulesSatisfiedBn: [],
+            },
+          };
 
         const richCrop: CropData = {
           ...dbCrop,
@@ -161,7 +166,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
               {language === 'en' ? 'Recommended 3-Season Rotation' : '৩-মৌসুমের সেরা শস্য পর্যায়'}
             </h2>
-            <p className="text-xs sm:text-sm text-[#8FA3B8] mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#A3A3A3] mt-1 max-w-xl">
               {language === 'en'
                 ? 'An aligned annual strategy replacing high-draw monoculture with moisture-efficient pulse rotations.'
                 : 'একক ফসলের ক্ষতি রোধ করে ৩টি মৌসুমের একটি ধারাবাহিক ও সুষম খাদ্য-শস্য চক্র।'}
@@ -171,12 +176,20 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           {/* Strategy Impact Badges */}
           <div className="flex items-center gap-3">
             <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] flex items-center gap-3">
-              <span className="font-mono text-xl font-bold text-[#FAFAFA]">~{rotationPlan.estimatedWaterSavingPct}%</span>
-              <span className="text-[11px] text-[#8FA3B8] font-mono uppercase">Water Saved</span>
+              <span className="font-mono text-xl font-bold text-[#FAFAFA]">
+                ~{isBn ? toBnDigits(rotationPlan.estimatedWaterSavingPct) : rotationPlan.estimatedWaterSavingPct}%
+              </span>
+              <span className="text-[11px] text-[#A3A3A3] font-mono uppercase">
+                {isBn ? 'পানি সাশ্রয়' : 'Water Saved'}
+              </span>
             </div>
             <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] flex items-center gap-3">
-              <span className="font-mono text-xl font-bold text-[#22C55E]">+{rotationPlan.soilHealthGainPct}%</span>
-              <span className="text-[11px] text-[#8FA3B8] font-mono uppercase">Soil Gain</span>
+              <span className="font-mono text-xl font-bold text-[#22C55E]">
+                +{isBn ? toBnDigits(rotationPlan.soilHealthGainPct) : rotationPlan.soilHealthGainPct}%
+              </span>
+              <span className="text-[11px] text-[#A3A3A3] font-mono uppercase">
+                {isBn ? 'মাটির পুষ্টি' : 'Soil Gain'}
+              </span>
             </div>
           </div>
         </div>
@@ -193,9 +206,9 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           </div>
           {engineResult?.nutrientTrail && (
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/5 text-slate-300 border border-[#262626] text-xs font-mono">
-              <span className="text-[#8FA3B8]">{language === 'en' ? 'Running Soil N Trail' : 'মাটির নাইট্রোজেন প্রবাহ'}:</span>
+              <span className="text-[#A3A3A3]">{language === 'en' ? 'Running Soil N Trail' : 'মাটির নাইট্রোজেন প্রবাহ'}:</span>
               <span className="text-[#22C55E] font-bold">
-                {engineResult.nutrientTrail.map((n) => (n > 0 ? `+${n}` : `${n}`)).join(' → ')} N
+                {engineResult.nutrientTrail.map((n) => (n > 0 ? `+${isBn ? toBnDigits(n) : n}` : `${isBn ? `−${toBnDigits(Math.abs(n))}` : n}`)).join(' → ')} N
               </span>
             </div>
           )}
@@ -212,73 +225,73 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 <div
                   className="p-6 sm:p-8 rounded-xl bg-[#141414] border border-[#262626] hover:border-[#404040] transition-all flex flex-col justify-between relative group"
                 >
-                <div>
-                  {/* Top Season Number & Months */}
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                    <span className="text-[#22C55E] font-bold uppercase">
-                      0{index + 1} · {language === 'en' ? season.seasonEn : season.seasonBn}
-                    </span>
-                    <span>{language === 'en' ? season.monthsEn : season.monthsBn}</span>
-                  </div>
+                  <div>
+                    {/* Top Season Number & Months */}
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                      <span className="text-[#22C55E] font-bold uppercase">
+                        {isBn ? `০${toBnDigits(index + 1)}` : `0${index + 1}`} · {language === 'en' ? season.seasonEn : season.seasonBn}
+                      </span>
+                      <span>{language === 'en' ? season.monthsEn : season.monthsBn}</span>
+                    </div>
 
-                  {/* Botanical Family Badge if available */}
-                  {season.cropModel && (
-                    <div className="mb-2">
-                      <span className="inline-block text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-[#FAFAFA] border border-[#262626]">
-                        {language === 'en'
-                          ? FAMILY_LABEL[season.cropModel.family]?.en
-                          : FAMILY_LABEL[season.cropModel.family]?.bn}
+                    {/* Botanical Family Badge if available */}
+                    {season.cropModel && (
+                      <div className="mb-2">
+                        <span className="inline-block text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/5 text-[#FAFAFA] border border-[#262626]">
+                          {language === 'en'
+                            ? FAMILY_LABEL[season.cropModel.family]?.en
+                            : FAMILY_LABEL[season.cropModel.family]?.bn}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Crop Name & Score */}
+                    <div className="flex items-baseline justify-between gap-2 mb-1">
+                      <h3 className="font-display text-2xl font-bold text-white">
+                        {language === 'en' ? crop.nameEn : crop.nameBn}
+                      </h3>
+                      <span className="font-mono text-sm font-bold text-[#22C55E]">
+                        {isBn ? toBnDigits(season.score) : season.score}%
                       </span>
                     </div>
-                  )}
 
-                  {/* Crop Name & Score */}
-                  <div className="flex items-baseline justify-between gap-2 mb-1">
-                    <h3 className="font-display text-2xl font-bold text-white">
-                      {language === 'en' ? crop.nameEn : crop.nameBn}
-                    </h3>
-                    <span className="font-mono text-sm font-bold text-[#22C55E]">
-                      {season.score}%
+                    <span className="text-xs text-slate-400 font-mono block mb-4">
+                      {isBn ? toBnDigits(crop.durationDays) : crop.durationDays} {language === 'en' ? 'Days growth duration' : 'দিন সময়কাল'}
                     </span>
+
+                    {/* Agronomic Role in Cycle */}
+                    <div className="p-4 rounded-lg bg-[#0A0A0A] border border-[#262626] text-xs text-slate-300 leading-relaxed mb-6">
+                      <span className="text-[10px] uppercase font-mono text-white block mb-1">
+                        {language === 'en' ? 'Agronomic Function' : 'পরিক্রমায় ভূমিকা'}:
+                      </span>
+                      {language === 'en' ? season.agronomicRoleEn : season.agronomicRoleBn}
+                    </div>
                   </div>
 
-                  <span className="text-xs text-slate-400 font-mono block mb-4">
-                    {crop.durationDays} {language === 'en' ? 'Days growth duration' : 'দিন সময়কাল'}
-                  </span>
-
-                  {/* Agronomic Role in Cycle */}
-                  <div className="p-4 rounded-lg bg-[#0A0A0A] border border-[#262626] text-xs text-slate-300 leading-relaxed mb-6">
-                    <span className="text-[10px] uppercase font-mono text-white block mb-1">
-                      {language === 'en' ? 'Agronomic Function' : 'পরিক্রমায় ভূমিকা'}:
+                  {/* Bottom Actions */}
+                  <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
+                    <span className="text-xs font-mono text-[#FAFAFA]">
+                      {language === 'en' ? `${crop.waterRequirementEn} Water` : `${crop.waterRequirementBn} পানির চাহিদা`}
                     </span>
-                    {language === 'en' ? season.agronomicRoleEn : season.agronomicRoleBn}
+
+                    <button
+                      onClick={() => onExplainCrop(crop)}
+                      className="text-xs font-semibold text-[#22C55E] hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>{language === 'en' ? 'Explain Why' : 'কারণ দেখুন'}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
-
-                {/* Bottom Actions */}
-                <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
-                  <span className="text-xs font-mono text-[#FAFAFA]">
-                    {language === 'en' ? crop.waterRequirementEn : crop.waterRequirementBn} Water
-                  </span>
-
-                  <button
-                    onClick={() => onExplainCrop(crop)}
-                    className="text-xs font-semibold text-[#22C55E] hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>{language === 'en' ? 'Explain Why' : 'কারণ দেখুন'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-              {!isLast && (
-                <div className="flex md:hidden justify-center items-center -my-2 text-slate-500">
-                  <ArrowDown className="w-5 h-5 text-[#22C55E]/70 " />
-                </div>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </div>
+                {!isLast && (
+                  <div className="flex md:hidden justify-center items-center -my-2 text-slate-500">
+                    <ArrowDown className="w-5 h-5 text-[#22C55E]/70" />
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
 
         {/* Actionable Editorial Decision Support Certificate */}
         <div className="rounded-xl bg-[#141414] border border-[#262626] p-8 sm:p-10 shadow-none relative overflow-hidden">
@@ -321,13 +334,13 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               )}
             </h3>
 
-            <p className="text-xs sm:text-sm text-[#8FA3B8] leading-relaxed mb-8">
+            <p className="text-xs sm:text-sm text-[#A3A3A3] leading-relaxed mb-8">
               {language === 'en' ? rotationPlan.summaryEn : rotationPlan.summaryBn}
             </p>
 
             {/* Print & Share Actions */}
             <div className="pt-6 border-t border-[#262626] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-xs text-[#8FA3B8]">
+              <div className="flex items-center gap-2 text-xs text-[#A3A3A3]">
                 <ShieldCheck className="w-4 h-4 text-[#22C55E] shrink-0" />
                 <span>
                   {language === 'en'

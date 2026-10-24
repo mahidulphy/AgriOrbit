@@ -21,9 +21,8 @@ export function Nav() {
     { href: '#field-shift', label: t.nav.fieldShift },
     { href: '#crops', label: t.nav.crops },
     { href: '#how', label: t.nav.how },
-    { href: '#data', label: t.nav.data },
     { href: '#rotation', label: t.nav.rotation },
-    { href: '#data', label: t.nav.materials },
+    { href: '#data', label: t.nav.data },
   ];
 
   return (
