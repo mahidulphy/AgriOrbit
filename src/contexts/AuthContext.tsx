@@ -204,7 +204,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Use window.location.origin directly (e.g. https://agri-orbit.vercel.app or http://localhost:5173)
       const redirectUrl = typeof window !== 'undefined' && window.location?.origin
         ? window.location.origin
-        : getAppOrigin();
+        : (import.meta.env.VITE_APP_URL || getAppOrigin());
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
