@@ -152,6 +152,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const districtSat = getDistrictSatellite(district.id);
   const sentinel2Data = districtSat?.sentinel2 ?? null;
   const jaxaData = districtSat?.jaxa ?? null;
+  const insatData = districtSat?.insat ?? null;
+  const nisarData = districtSat?.nisar ?? null;
   const smapData = districtSat?.smap ?? null;
   const ndviData = districtSat?.ndvi ?? null;
   const lstDayData = districtSat?.lstDay ?? null;
@@ -193,8 +195,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       jaxaRain30dMm: jaxaData?.gsmapRain30dMm ?? null,
       jaxaSoilMoisture: jaxaData?.amsr2SoilMoisture ?? null,
       jaxaSpi30dIndex: jaxaData?.spi30dIndex ?? null,
+      insatLstC: insatData?.lstC ?? null,
+      insatHeatConfirmed: insatData?.heatSpikeConfirmed ?? false,
+      nisarSoilMoisture200m: nisarData?.soilMoisture200m ?? null,
     }),
-    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex]
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex, insatData?.lstC, insatData?.heatSpikeConfirmed, nisarData?.soilMoisture200m]
   );
 
   // Pure mathematical rule engine execution
@@ -1338,9 +1343,23 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি)।'}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-[#262626] flex justify-between text-xs font-mono text-slate-400">
-                    <span>{language === 'en' ? 'Relative Humidity' : 'বাতাসের আপেক্ষিক আর্দ্রতা'}</span>
-                    <span className="text-white font-semibold">{Math.round(conditions.rh)}% RH</span>
+                  <div className="pt-4 mt-6 border-t border-[#262626] space-y-1.5 text-xs font-mono text-slate-400">
+                    <div className="flex justify-between">
+                      <span>{language === 'en' ? 'Relative Humidity' : 'বাতাসের আপেক্ষিক আর্দ্রতা'}</span>
+                      <span className="text-white font-semibold">{Math.round(conditions.rh)}% RH</span>
+                    </div>
+                    {jaxaData && (
+                      <div className="flex justify-between">
+                        <span>{language === 'en' ? 'Cross-Check: JAXA AMSR2' : 'যাচাই: জাক্সা এএমএসআর২'}</span>
+                        <span className="text-white font-semibold">{jaxaData.amsr2SoilMoisture.toFixed(2)} m³/m³</span>
+                      </div>
+                    )}
+                    {nisarData && (
+                      <div className="flex justify-between">
+                        <span>{language === 'en' ? 'NASA-ISRO NISAR (200m SAR)' : 'নাসা-ইসরো নিসার (২০০মি)'}</span>
+                        <span className="text-white font-semibold">{nisarData.soilMoisture200m.toFixed(2)} m³/m³</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -1369,6 +1388,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           }
                           language={language}
                         />
+                        <DataTileStatusBadge
+                          sourceName="ISRO INSAT"
+                          status={insatData ? 'snapshot' : 'unavailable'}
+                          customLabel={
+                            insatData
+                              ? `ISRO INSAT-3DR · ${insatData.lstC}°C`
+                              : (language === 'en' ? 'ISRO INSAT · No data' : 'ইসরো ইনস্যাট · তথ্য নেই')
+                          }
+                          language={language}
+                        />
                       </div>
                       <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#22C55E]'}`}>
                         {activeMaxTemp > 35
@@ -1392,11 +1421,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-[#262626] flex justify-between text-xs font-mono text-slate-400">
-                    <span>MODIS Surface Temp (Day / Night)</span>
-                    <span className="text-white font-semibold">
-                      {lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'N/A'} / {lstNightData ? `${lstNightData.value.toFixed(1)}°C` : 'N/A'}
-                    </span>
+                  <div className="pt-4 mt-6 border-t border-[#262626] space-y-1.5 text-xs font-mono text-slate-400">
+                    <div className="flex justify-between">
+                      <span>{language === 'en' ? 'Cross-Check: ISRO INSAT-3DR LST' : 'যাচাই: ইসরো ইনস্যাট-৩ডিআর LST'}</span>
+                      <span className="text-white font-semibold">{insatData ? `${insatData.lstC}°C` : 'N/A'}</span>
+                    </div>
+                    {insatData && insatData.heatSpikeConfirmed && (
+                      <div className="text-[11px] text-amber-300 font-sans leading-tight">
+                        {language === 'en'
+                          ? '✓ Heat stress confirmed by 2 space agencies (NASA + ISRO INSAT-3DR).'
+                          : '✓ দুই মহাকাশ সংস্থা (নাসা ও ইসরো) দ্বারা তাপপ্রবাহ নিশ্চিত।'}
+                      </div>
+                    )}
+                    {insatData && insatData.divergenceNoticeEn && (
+                      <div className="text-[11px] text-[#A3A3A3] font-sans leading-tight">
+                        {language === 'en' ? insatData.divergenceNoticeEn : insatData.divergenceNoticeBn}
+                      </div>
+                    )}
+                    <div className="flex justify-between pt-1 border-t border-[#262626]/60">
+                      <span>MODIS Surface Temp (Day / Night)</span>
+                      <span className="text-white font-semibold">
+                        {lstDayData ? `${lstDayData.value.toFixed(1)}°C` : 'N/A'} / {lstNightData ? `${lstNightData.value.toFixed(1)}°C` : 'N/A'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

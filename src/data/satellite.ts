@@ -86,6 +86,25 @@ export interface JaxaRecord {
   rainDiscrepancyPct?: number;
 }
 
+export interface InsatRecord {
+  lstC: number;
+  rain24hMm: number;
+  heatSpikeConfirmed: boolean;
+  divergenceNoticeEn?: string;
+  divergenceNoticeBn?: string;
+  observedAt: string;
+  source: 'ISRO MOSDAC (INSAT-3DR)';
+}
+
+export interface NisarRecord {
+  soilMoisture200m: number;
+  observationDate: string;
+  pass: 'Ascending' | 'Descending';
+  resolutionMeters: 200;
+  status: 'provisional_release';
+  source: 'NASA-ISRO NISAR (L3 Provisional)';
+}
+
 export interface DistrictSatelliteRecord {
   smap: SmapRecord | null;
   ndvi: NdviRecord | null;
@@ -94,6 +113,8 @@ export interface DistrictSatelliteRecord {
   sentinel1?: Sentinel1Record | null;
   sentinel2?: Sentinel2Record | null;
   jaxa?: JaxaRecord | null;
+  insat?: InsatRecord | null;
+  nisar?: NisarRecord | null;
 }
 
 export interface SatelliteDatasetMeta {
@@ -107,6 +128,8 @@ export interface SatelliteDatasetMeta {
     sentinel1?: string;
     sentinel2?: string;
     jaxa?: string;
+    insat?: string;
+    nisar?: string;
   };
   generatedAt: string;
 }

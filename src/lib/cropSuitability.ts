@@ -42,6 +42,9 @@ export interface TelemetryContext {
   jaxaRain30dMm?: number | null; // 30-day rain from JAXA GSMaP v8
   jaxaSoilMoisture?: number | null; // soil moisture m³/m³ from JAXA AMSR2
   jaxaSpi30dIndex?: number | null; // JAXA 30-day Standardized Precipitation Index
+  insatLstC?: number | null; // ISRO INSAT-3DR geostationary LST (°C)
+  insatHeatConfirmed?: boolean | null; // true if both NASA & ISRO confirm >35°C
+  nisarSoilMoisture200m?: number | null; // NASA-ISRO NISAR 200m soil moisture (m³/m³)
 }
 
 export interface ScoreDeltas {
@@ -163,21 +166,67 @@ function evaluateCropWithNasa(
     }
   
     // ─────────────────────────────────────────────────────────────
-    // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C)
+    // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C) & ISRO INSAT-3DR CROSS-CHECK
     // ─────────────────────────────────────────────────────────────
-    if (maxT > 35) {
+    const insatLst = telemetry?.insatLstC;
+    const isInsatHeat = insatLst !== undefined && insatLst !== null && insatLst > 35;
+    const isNasaHeat = maxT > 35;
+
+    if (isNasaHeat || isInsatHeat) {
       if (crop.id === 'wheat' || crop.id === 'potato') {
         const penalty = -10;
         score += penalty;
         deltas.heatPenalty = penalty;
+
+        if (isNasaHeat && isInsatHeat) {
+          dynamicObservationsEn.push(
+            `Extreme heat alert: NASA POWER (${maxT.toFixed(1)}°C) and ISRO INSAT-3DR (${insatLst.toFixed(1)}°C) both confirm canopy heat (>35°C).`,
+          );
+          dynamicObservationsBn.push(
+            `তীব্র তাপদাহ সতর্কতা: নাসা (${maxT.toFixed(1)}° সে.) এবং ইসরো ইনস্যাট-৩ডিআর (${toBnDigits(insatLst.toFixed(1))}° সে.) উভয়েই ৩৫° সে.-এর বেশি তাপপ্রবাহ নিশ্চিত করেছে।`,
+          );
+          dynamicRulesEn.push(
+            'Rule HEAT-ISRO-01: Heat stress confirmed by 2 space agencies (NASA + ISRO INSAT-3DR) → -10 penalty on heat-vulnerable crops.',
+          );
+          dynamicRulesBn.push(
+            'নিয়ম HEAT-ISRO-01: দুই মহাকাশ সংস্থা (নাসা ও ইসরো ইনস্যাট-৩ডিআর) দ্বারা তাপপ্রবাহ নিশ্চিত → সংবেদনশীল ফসলে ১০ নম্বর কাটা হয়েছে।',
+          );
+        } else if (isNasaHeat && !isInsatHeat && insatLst !== undefined && insatLst !== null) {
+          dynamicObservationsEn.push(
+            `Heat divergence: NASA flags ${maxT.toFixed(1)}°C, but ISRO INSAT-3DR geostationary LST is ${insatLst.toFixed(1)}°C (moderated by river breeze or passing cloud).`,
+          );
+          dynamicObservationsBn.push(
+            `তাপমাত্রার অমিল: নাসার তথ্যে ${maxT.toFixed(1)}° সে. দেখালেও ইসরো ইনস্যাট-৩ডিআর ভূ-পৃষ্ঠের তাপমাত্রা ${toBnDigits(insatLst.toFixed(1))}° সে. নির্দেশ করছে।`,
+          );
+          dynamicRulesEn.push(
+            `Rule HEAT-ISRO-01: Heat flagged by NASA but tempered in ISRO geostationary soundings (${insatLst.toFixed(1)}°C) → -10 penalty retained with divergence notice.`,
+          );
+          dynamicRulesBn.push(
+            `নিয়ম HEAT-ISRO-01: নাসার তাপপ্রবাহ ইসরো ইনস্যাটে কম দেখালেও সতর্কতামূলকভাবে নম্বর কাটা হয়েছে।`,
+          );
+        } else {
+          dynamicObservationsEn.push(
+            `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
+          );
+          dynamicObservationsBn.push(
+            `সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}°সে (> ৩৫°সে), অতিরিক্ত গরমে ফসল নষ্ট হওয়ার ঝুঁকি।`,
+          );
+          dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
+          dynamicRulesBn.push(`নিয়ম HEAT-02: গরম সহ্য করতে না পারা ফসলে ১০ নম্বর কাটা হয়েছে।`);
+        }
+      }
+    }
+
+    // NASA-ISRO NISAR 200m SAR Radar Soil Moisture Cross-Check
+    const nisarSm = telemetry?.nisarSoilMoisture200m;
+    if (nisarSm !== undefined && nisarSm !== null && soil !== null && soil !== undefined) {
+      if (soil < 0.20 && nisarSm < 0.20) {
         dynamicObservationsEn.push(
-          `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
+          `High-resolution radar cross-check: NASA-ISRO NISAR 200m SAR (${nisarSm.toFixed(2)} m³/m³) confirms SMAP root-zone moisture deficit.`,
         );
         dynamicObservationsBn.push(
-          `সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}°সে (> ৩৫°সে), অতিরিক্ত গরমে ফসল নষ্ট হওয়ার ঝুঁকি।`,
+          `উচ্চ রেজ্যুলুশন রাডার নিশ্চিতকরণ: নাসা-ইসরো নিসার ২০০মি রাডার (${toBnDigits(nisarSm.toFixed(2))} m³/m³) মাটিতে রসের ঘাটতি নিশ্চিত করেছে।`,
         );
-        dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
-        dynamicRulesBn.push(`নিয়ম HEAT-02: গরম সহ্য করতে না পারা ফসলে ১০ নম্বর কাটা হয়েছে।`);
       }
     }
   

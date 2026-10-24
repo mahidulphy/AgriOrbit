@@ -174,7 +174,11 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                           {language === 'en' ? 'Max daily temperature exceeded 35°C on sensitive crop' : 'তাপমাত্রা ৩৫°সে অতিক্রম করায় নম্বর কাটা হয়েছে'}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">NASA POWER</td>
+                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">
+                        {crop.explanation?.rulesSatisfied?.some((r) => r.includes('ISRO'))
+                          ? 'NASA + ISRO INSAT'
+                          : 'NASA POWER'}
+                      </td>
                       <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{deltas.heatPenalty}</td>
                     </tr>
                   )}

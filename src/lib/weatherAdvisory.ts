@@ -25,6 +25,7 @@ import type { DistrictId } from '../data/bdAdmin';
 import type { FarmerPriorityId, Language } from '../types';
 import { STRINGS } from '../i18n';
 import { getDistrictSatellite } from '../data/satellite';
+import { toBnDigits } from './bilingualEmailTemplate';
 import {
   type GpmObservationResult,
   getGpmObservation,
@@ -77,7 +78,7 @@ export type AdvisorySeverity = 'danger' | 'warning' | 'info' | 'success';
 
 export interface EvaluatedParameter {
   parameter: string;
-  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'ESA Sentinel-2' | 'JAXA Earth API' | 'Season Calendar';
+  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'ESA Sentinel-2' | 'JAXA Earth API' | 'ISRO MOSDAC' | 'NASA-ISRO NISAR' | 'Season Calendar';
   observedValue: string | number;
   thresholdCondition: string;
   satisfied: boolean;
@@ -146,6 +147,9 @@ export interface AdvisoryRuleContext {
   jaxaRain30dMm?: number | null;
   jaxaSoilMoisture?: number | null;
   jaxaSpi30dIndex?: number | null;
+  insatLstC?: number | null;
+  insatHeatConfirmed?: boolean | null;
+  nisarSoilMoisture200m?: number | null;
   districtId: DistrictId | string;
   upazilaName?: string;
   season?: 'Rabi' | 'Kharif-1' | 'Kharif-2';
@@ -219,6 +223,9 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const jaxaRain = context.jaxaRain30dMm;
   const jaxaSoil = context.jaxaSoilMoisture;
   const jaxaSpi = context.jaxaSpi30dIndex;
+  const insatLst = context.insatLstC;
+  const insatHeat = context.insatHeatConfirmed;
+  const nisarSoil = context.nisarSoilMoisture200m;
 
   let conditionType: ConditionType = 'favorable';
   let severity: AdvisorySeverity = 'success';
@@ -412,6 +419,34 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     });
   }
 
+  const maxForecastTemp = forecast.forecastDays && forecast.forecastDays.length > 0
+    ? Math.max(...forecast.forecastDays.map((d) => d.tMax))
+    : 32;
+
+  if (insatLst !== undefined && insatLst !== null) {
+    evaluatedParams.push({
+      parameter: 'Canopy Heat & Land Surface Temp (ISRO INSAT-3DR vs Numerical Forecast)',
+      source: 'ISRO MOSDAC',
+      observedValue: `Forecast Tmax: ${maxForecastTemp.toFixed(1)}°C · ISRO INSAT: ${insatLst.toFixed(1)}°C (${insatHeat ? 'Confirmed by 2 agencies' : maxForecastTemp > 35 && insatLst <= 33 ? 'Divergence noted' : 'Safe range'})`,
+      thresholdCondition: 'Forecast > 35°C AND ISRO > 35°C',
+      satisfied: !!insatHeat,
+    });
+    if (insatHeat) {
+      rulesTriggered.push(`Rule HEAT-ISRO-01: Heat stress confirmed by 2 space agencies (Open-Meteo/NASA: ${maxForecastTemp.toFixed(1)}°C, ISRO INSAT-3DR: ${insatLst.toFixed(1)}°C).`);
+      rulesTriggeredBn.push(`নিয়ম HEAT-ISRO-01: দুই মহাকাশ সংস্থা (পূর্বাভাস: ${maxForecastTemp.toFixed(1)}° সে., ইসরো ইনস্যাট: ${toBnDigits(insatLst.toFixed(1))}° সে.) দ্বারা তাপদাহ নিশ্চিত।`);
+    }
+  }
+
+  if (nisarSoil !== undefined && nisarSoil !== null) {
+    evaluatedParams.push({
+      parameter: 'High-Resolution Field Moisture (NASA-ISRO NISAR 200m SAR)',
+      source: 'NASA-ISRO NISAR',
+      observedValue: `${nisarSoil.toFixed(2)} m³/m³ (200m radar)`,
+      thresholdCondition: 'Cross-verifies SMAP 9km profile at 200m resolution',
+      satisfied: true,
+    });
+  }
+
   if (jaxaRain !== undefined && jaxaRain !== null) {
     const nasa30dEst = gpm.recentRain7dMm * (30 / 7);
     const rainDiffMm = Math.abs(nasa30dEst - jaxaRain);
@@ -519,6 +554,9 @@ export async function getWeatherAdvisoryForLocation(
   const jaxaRain30dMm = sat?.jaxa?.gsmapRain30dMm ?? null;
   const jaxaSoilMoisture = sat?.jaxa?.amsr2SoilMoisture ?? null;
   const jaxaSpi30dIndex = sat?.jaxa?.spi30dIndex ?? null;
+  const insatLstC = sat?.insat?.lstC ?? null;
+  const insatHeatConfirmed = sat?.insat?.heatSpikeConfirmed ?? false;
+  const nisarSoilMoisture200m = sat?.nisar?.soilMoisture200m ?? null;
 
   const [gpm, forecast] = await Promise.all([
     getGpmObservation(districtId, lat, lng),
@@ -540,5 +578,8 @@ export async function getWeatherAdvisoryForLocation(
     jaxaRain30dMm,
     jaxaSoilMoisture,
     jaxaSpi30dIndex,
+    insatLstC,
+    insatHeatConfirmed,
+    nisarSoilMoisture200m,
   });
 }

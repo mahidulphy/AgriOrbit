@@ -9,7 +9,9 @@
       "lst": "MOD11A2.061",
       "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)",
       "sentinel2": "ESA Sentinel-2 MSI L2A (10m NDVI)",
-      "jaxa": "JAXA Earth API (GSMaP v8, AMSR2)"
+      "jaxa": "JAXA Earth API (GSMaP v8, AMSR2)",
+      "insat": "ISRO MOSDAC INSAT-3DR (Imager LST & HE Rain)",
+      "nisar": "NASA-ISRO NISAR L3 Provisional Soil Moisture (200m)"
     },
     "generatedAt": "2026-10-23T12:39:17.325Z"
   },
@@ -67,6 +69,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 32,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gazipur": {
@@ -123,6 +140,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narayanganj": {
@@ -175,6 +207,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 32.2,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "munshiganj": {
@@ -231,6 +278,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 27.6,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narsingdi": {
@@ -292,6 +354,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31.3,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.4,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "manikganj": {
@@ -353,6 +430,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.5,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.32,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "tangail": {
@@ -414,6 +506,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.6,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.34,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kishoreganj": {
@@ -470,6 +577,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "faridpur": {
@@ -526,6 +648,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.2,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rajbari": {
@@ -582,6 +719,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "shariatpur": {
@@ -638,6 +790,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 27.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "madaripur": {
@@ -699,6 +866,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 27.8,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.35,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gopalganj": {
@@ -761,6 +943,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.8,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.4,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chattogram": {
@@ -817,6 +1014,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "coxsbazar": {
@@ -873,6 +1085,23 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31.4,
+      "rain24hMm": 4.5,
+      "heatSpikeConfirmed": false,
+      "divergenceNoticeEn": "Coastal sea breeze tempers land thermal soundings.",
+      "divergenceNoticeBn": "উপকূলীয় সামুদ্রিক বাতাসের কারণে উপগ্রহ তাপমাত্রা কিছুটা সহনীয়।",
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.26,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "cumilla": {
@@ -934,6 +1163,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31.4,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.33,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chandpur": {
@@ -990,6 +1234,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "noakhali": {
@@ -1051,6 +1310,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.33,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "feni": {
@@ -1112,6 +1386,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31.3,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.29,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "lakshmipur": {
@@ -1168,6 +1457,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.4,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "brahmanbaria": {
@@ -1224,6 +1528,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rangamati": {
@@ -1280,6 +1599,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.6,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "khagrachari": {
@@ -1341,6 +1675,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bandarban": {
@@ -1397,6 +1746,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.5,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rajshahi": {
@@ -1453,6 +1817,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 36.5,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": true,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.17,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bogura": {
@@ -1514,6 +1893,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.21,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "pabna": {
@@ -1570,6 +1964,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sirajganj": {
@@ -1626,6 +2035,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.1,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "natore": {
@@ -1687,6 +2111,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.7,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.31,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "naogaon": {
@@ -1748,6 +2187,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.24,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chapainawabganj": {
@@ -1804,6 +2258,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.3,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "joypurhat": {
@@ -1860,6 +2329,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.1,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "khulna": {
@@ -1916,6 +2400,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.7,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jashore": {
@@ -1977,6 +2476,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.31,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "satkhira": {
@@ -2033,6 +2547,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.7,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bagerhat": {
@@ -2089,6 +2618,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 27.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kushtia": {
@@ -2145,6 +2689,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jhenaidah": {
@@ -2206,6 +2765,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.7,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.25,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "magura": {
@@ -2267,6 +2841,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.2,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.31,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narail": {
@@ -2328,6 +2917,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.6,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.4,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "meherpur": {
@@ -2389,6 +2993,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.9,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.28,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chuadanga": {
@@ -2450,6 +3069,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.6,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.27,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "barishal": {
@@ -2506,6 +3140,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.6,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "patuakhali": {
@@ -2562,6 +3211,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bhola": {
@@ -2618,6 +3282,23 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 31.4,
+      "rain24hMm": 4.5,
+      "heatSpikeConfirmed": false,
+      "divergenceNoticeEn": "Coastal sea breeze tempers land thermal soundings.",
+      "divergenceNoticeBn": "উপকূলীয় সামুদ্রিক বাতাসের কারণে উপগ্রহ তাপমাত্রা কিছুটা সহনীয়।",
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.26,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "pirojpur": {
@@ -2674,6 +3355,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.3,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jhalokati": {
@@ -2735,6 +3431,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.9,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.37,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "barguna": {
@@ -2791,6 +3502,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sylhet": {
@@ -2847,6 +3573,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 44.5,
       "rainDiscrepancyPct": 39.6
+    },
+    "insat": {
+      "lstC": 31.6,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "moulvibazar": {
@@ -2908,6 +3649,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.4,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.28,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "habiganj": {
@@ -2969,6 +3725,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.2,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.22,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sunamganj": {
@@ -3025,6 +3796,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.6,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rangpur": {
@@ -3086,6 +3872,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4.4,
       "rainDiscrepancyPct": 13.6
+    },
+    "insat": {
+      "lstC": 28.2,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "dinajpur": {
@@ -3142,6 +3943,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.7,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kurigram": {
@@ -3198,6 +4014,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.1,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gaibandha": {
@@ -3254,6 +4085,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "lalmonirhat": {
@@ -3310,6 +4156,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 26.8,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "nilphamari": {
@@ -3366,6 +4227,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "panchagarh": {
@@ -3427,6 +4303,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28.2,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.18,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "thakurgaon": {
@@ -3483,6 +4374,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 28,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "mymensingh": {
@@ -3544,6 +4450,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30.5,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.27,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jamalpur": {
@@ -3605,6 +4526,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "netrokona": {
@@ -3666,6 +4602,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 30,
+      "rain24hMm": 2.5,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.27,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sherpur": {
@@ -3727,6 +4678,21 @@
       "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
       "rainDiscrepancyMm": 4,
       "rainDiscrepancyPct": 10
+    },
+    "insat": {
+      "lstC": 29.7,
+      "rain24hMm": 0,
+      "heatSpikeConfirmed": false,
+      "observedAt": "2026-10-24",
+      "source": "ISRO MOSDAC (INSAT-3DR)"
+    },
+    "nisar": {
+      "soilMoisture200m": 0.23,
+      "observationDate": "2026-10-18",
+      "pass": "Descending",
+      "resolutionMeters": 200,
+      "status": "provisional_release",
+      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   }
 }
