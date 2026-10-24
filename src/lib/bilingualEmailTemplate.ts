@@ -266,9 +266,14 @@ export function buildBilingualEmailHtml(
           <!-- App Header -->
           <tr>
             <td style="padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background-color: #081120;">
-              <h1 style="margin: 0; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
-                Agri<span style="color: #b8ff3d;">Orbit</span>
-              </h1>
+              <a href="${appUrl}" target="_blank" style="text-decoration: none; display: inline-block;">
+                <img
+                  src="${appUrl}/logo.png"
+                  alt="AgriOrbit"
+                  height="38"
+                  style="height: 38px; width: auto; max-height: 38px; display: block; border: 0;"
+                />
+              </a>
               <p style="margin: 4px 0 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">
                 নাসা উপগ্রহ পর্যবেক্ষণ · NASA Earth Observations for Bangladesh
               </p>

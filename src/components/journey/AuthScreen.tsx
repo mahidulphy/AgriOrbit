@@ -42,15 +42,18 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
       <div className="w-full max-w-md bg-[#0B1626] border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <picture className="block mx-auto mb-3">
-            <source srcSet="/assets/agriorbit-logo.webp" type="image/webp" />
-            <img
-              src="/assets/agriorbit-logo.png"
-              alt="AgriOrbit"
-              className="h-12 w-auto object-contain mix-blend-screen mx-auto"
-              draggable={false}
-            />
-          </picture>
+          <a href="#" aria-label="AgriOrbit" className="inline-block mx-auto mb-3">
+            <picture className="block mx-auto">
+              <source srcSet="/logo.webp" type="image/webp" />
+              <source srcSet="/agriorbit-logo.webp" type="image/webp" />
+              <img
+                src="/logo.png"
+                alt="AgriOrbit"
+                className="h-10 sm:h-12 w-auto object-contain mix-blend-screen mx-auto"
+                draggable={false}
+              />
+            </picture>
+          </a>
           <h2 className="font-display text-2xl font-bold text-white">
             {language === 'en' ? 'Field Advisory Engine' : 'ফিল্ড অ্যাডভাইজরি ইঞ্জিন'}
           </h2>

@@ -2,31 +2,30 @@ import { useLang } from '../../lang.tsx';
 import type { SeasonId } from '../../lib/fieldShift.ts';
 import { LanguageToggle } from '../dashboard/LanguageToggle.tsx';
 
-/** Planet + orbit ring + leaf. Same artwork as public/favicon.svg. */
-export function Logo({ className = 'h-8 w-8' }: { className?: string }) {
+/** AgriOrbit brand logo image */
+export function Logo({ className = 'h-8 sm:h-9 md:h-10 w-auto' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="logo-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#d9f99d" />
-          <stop offset="1" stopColor="#22d3ee" />
-        </linearGradient>
-      </defs>
-      <ellipse cx="16" cy="16" rx="14" ry="5.6" transform="rotate(-28 16 16)" fill="none" stroke="url(#logo-g)" strokeWidth="1.6" />
-      <circle cx="16" cy="16" r="7" fill="url(#logo-g)" />
-      <path d="M16 20.8c-.2-3.8 1.4-6.8 4.7-8.4-.2 3.7-1.8 6.5-4.7 8.4Z" fill="#050913" />
-      <path d="M15.6 20.5c-2.6-1-4-2.9-4.1-5.6 2.4.6 3.8 2.6 4.1 5.6Z" fill="#050913" opacity=".7" />
-    </svg>
+    <picture className="shrink-0 flex items-center">
+      <source srcSet="/logo.webp" type="image/webp" />
+      <source srcSet="/agriorbit-logo.webp" type="image/webp" />
+      <img
+        src="/logo.png"
+        alt="AgriOrbit"
+        className={`${className} object-contain mix-blend-screen shrink-0`}
+        draggable={false}
+      />
+    </picture>
   );
 }
 
-export function Wordmark() {
+export function Wordmark({ className }: { className?: string }) {
   return (
-    <a href="#" className="flex items-center gap-2.5" aria-label="AgriOrbit home">
+    <a
+      href="#"
+      className={`inline-flex items-center shrink-0 group ${className || ''}`}
+      aria-label="AgriOrbit"
+    >
       <Logo />
-      <span className="font-display text-lg font-semibold tracking-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-        Agri<span className="text-lime-300">Orbit</span>
-      </span>
     </a>
   );
 }

@@ -251,19 +251,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <div className="p-5 flex flex-col gap-6 overflow-y-auto">
           {/* App Brand Header */}
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#B8FF3D]/20 border border-[#B8FF3D]/40 flex items-center justify-center">
-                <Sprout className="w-5 h-5 text-[#B8FF3D]" />
-              </div>
-              <div>
-                <span className="font-display font-bold text-lg text-white tracking-tight block leading-tight">
-                  AgriOrbit
-                </span>
-                <span className="text-[10px] font-mono text-[#00E5FF] uppercase font-bold tracking-wider">
-                  {language === 'en' ? 'Decision Dashboard' : 'কৃষি ড্যাশবোর্ড'}
-                </span>
-              </div>
-            </div>
+            <BrandLogo />
+            <span className="text-[10px] font-mono text-[#00E5FF] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/20">
+              {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
+            </span>
           </div>
 
           {/* Selected Field Context Card */}
@@ -383,10 +374,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
-          <span className="font-display font-bold text-base text-white">AgriOrbit</span>
-          <span className="text-[10px] font-mono text-[#B8FF3D] uppercase font-bold px-1.5 py-0.5 rounded bg-[#B8FF3D]/10 border border-[#B8FF3D]/30">
-            {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-          </span>
+          <BrandLogo imgClassName="h-8 w-auto object-contain mix-blend-screen shrink-0" />
         </div>
 
         <div className="flex items-center gap-2">
@@ -409,7 +397,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="w-72 bg-[#070D18] h-full p-5 flex flex-col justify-between border-r border-white/10">
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <span className="font-display font-bold text-lg text-white">AgriOrbit Menu</span>
+                <BrandLogo imgClassName="h-7 w-auto object-contain mix-blend-screen shrink-0" />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-1.5 rounded-lg hover:bg-white/10 text-[#8FA3B8] hover:text-white"

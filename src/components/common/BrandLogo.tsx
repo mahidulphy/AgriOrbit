@@ -2,28 +2,25 @@ import React from 'react';
 
 interface BrandLogoProps {
   badge?: string;
+  className?: string;
+  imgClassName?: string;
 }
 
-export const BrandLogo: React.FC<BrandLogoProps> = ({ badge }) => (
-  <a href="#" className="flex items-center gap-3 shrink-0 group">
+export const BrandLogo: React.FC<BrandLogoProps> = ({ className, imgClassName }) => (
+  <a
+    href="#"
+    aria-label="AgriOrbit"
+    className={`inline-flex items-center shrink-0 group ${className || ''}`}
+  >
     <picture className="shrink-0 flex items-center">
-      <source srcSet="/assets/agriorbit-logo.webp" type="image/webp" />
+      <source srcSet="/logo.webp" type="image/webp" />
+      <source srcSet="/agriorbit-logo.webp" type="image/webp" />
       <img
-        src="/assets/agriorbit-logo.png"
+        src="/logo.png"
         alt="AgriOrbit"
-        className="h-9 w-auto object-contain mix-blend-screen shrink-0"
+        className={imgClassName || 'h-8 sm:h-9 md:h-10 w-auto object-contain mix-blend-screen shrink-0'}
         draggable={false}
       />
     </picture>
-    <div className="flex items-center gap-2">
-      <span className="font-display font-bold text-xl tracking-tight text-white group-hover:text-[#B8FF3D] transition-colors">
-        AgriOrbit
-      </span>
-      {badge && (
-        <span className="text-[10px] uppercase font-mono font-bold tracking-wider px-2 py-0.5 rounded bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 whitespace-nowrap hidden sm:inline-block">
-          {badge}
-        </span>
-      )}
-    </div>
   </a>
 );

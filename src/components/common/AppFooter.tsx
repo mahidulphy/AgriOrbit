@@ -17,7 +17,18 @@ export const AppFooter: React.FC<AppFooterProps> = ({
   <footer className="mt-auto border-t border-white/10 bg-[#050B14] py-10 px-4 sm:px-6 lg:px-8 text-xs text-[#8FA3B8] font-editorial">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-center sm:text-left">
-        <span className="font-display font-bold text-white text-base tracking-tight">AGRIORBIT</span>
+        <a href="#" aria-label="AgriOrbit" className="inline-flex items-center shrink-0">
+          <picture className="shrink-0 flex items-center">
+            <source srcSet="/logo.webp" type="image/webp" />
+            <source srcSet="/agriorbit-logo.webp" type="image/webp" />
+            <img
+              src="/logo.png"
+              alt="AgriOrbit"
+              className="h-7 w-auto object-contain mix-blend-screen shrink-0"
+              draggable={false}
+            />
+          </picture>
+        </a>
         <span className="text-[#8FA3B8]/50 hidden sm:inline">|</span>
         <span className="text-[11px] font-mono">
           NASA Earth Observations for Bangladesh Agriculture
