@@ -1,0 +1,101 @@
+[
+  {
+    "id": "bagerhat_bagerhat-sadar",
+    "pcode": "BD40010008",
+    "district_id": "bagerhat",
+    "name_en": "Bagerhat Sadar",
+    "name_bn": "বাগেরহাট সদর",
+    "lat": 22.676129,
+    "lon": 89.762675,
+    "area_sqkm": 315.44,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_chitalmari",
+    "pcode": "BD40010014",
+    "district_id": "bagerhat",
+    "name_en": "Chitalmari",
+    "name_bn": "চিতলমারী",
+    "lat": 22.81114,
+    "lon": 89.865254,
+    "area_sqkm": 194.34,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_fakirhat",
+    "pcode": "BD40010034",
+    "district_id": "bagerhat",
+    "name_en": "Fakirhat",
+    "name_bn": "ফকিরহাট",
+    "lat": 22.742619,
+    "lon": 89.666103,
+    "area_sqkm": 159.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_kachua",
+    "pcode": "BD40010038",
+    "district_id": "bagerhat",
+    "name_en": "Kachua",
+    "name_bn": "কচুয়া",
+    "lat": 22.652138,
+    "lon": 89.873945,
+    "area_sqkm": 125.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_mollahat",
+    "pcode": "BD40010056",
+    "district_id": "bagerhat",
+    "name_en": "Mollahat",
+    "name_bn": "মোল্লাহাট",
+    "lat": 22.884178,
+    "lon": 89.772989,
+    "area_sqkm": 180.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_mongla",
+    "pcode": "BD40010058",
+    "district_id": "bagerhat",
+    "name_en": "Mongla",
+    "name_bn": "মোংলা",
+    "lat": 22.116537,
+    "lon": 89.659665,
+    "area_sqkm": 1467.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_morelganj",
+    "pcode": "BD40010060",
+    "district_id": "bagerhat",
+    "name_en": "Morelganj",
+    "name_bn": "মোরেলগঞ্জ",
+    "lat": 22.483321,
+    "lon": 89.834225,
+    "area_sqkm": 442.75,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_rampal",
+    "pcode": "BD40010073",
+    "district_id": "bagerhat",
+    "name_en": "Rampal",
+    "name_bn": "রামপাল",
+    "lat": 22.590313,
+    "lon": 89.651358,
+    "area_sqkm": 277.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bagerhat_sharankhola",
+    "pcode": "BD40010077",
+    "district_id": "bagerhat",
+    "name_en": "Sharankhola",
+    "name_bn": "শরণখোলা",
+    "lat": 22.063085,
+    "lon": 89.82172,
+    "area_sqkm": 909.92,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

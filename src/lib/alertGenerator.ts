@@ -6,6 +6,7 @@ import { getDistrictSatellite } from '../data/satellite.ts';
 import { computeAlerts, type Alert } from './engine.ts';
 import { BD_DISTRICTS } from '../data/districts.ts';
 import { getDistrictAdmin, nearestDistrict } from '../data/bdAdmin.ts';
+import { getUpazilaName, DISTRICT_WIDE_UPAZILA } from './location.ts';
 import type { AlertSeverity } from '../types.ts';
 
 export interface AlertGeneratorOptions {
@@ -304,8 +305,19 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
         districtId = matchedDist?.id || districtId;
       }
 
-      const distNameEn = matchedDist?.nameEn || field.district || 'Bangladesh Field';
-      const distNameBn = matchedDist?.nameBn || distNameEn;
+      let distNameEn = matchedDist?.nameEn || field.district || 'Bangladesh Field';
+      let distNameBn = matchedDist?.nameBn || distNameEn;
+
+      if (field.upazila && field.upazila !== DISTRICT_WIDE_UPAZILA) {
+        const uEn = getUpazilaName(districtId as any, field.upazila, 'en');
+        const uBn = getUpazilaName(districtId as any, field.upazila, 'bn');
+        if (uEn && uEn !== field.upazila) {
+          distNameEn = `${distNameEn} › ${uEn}`;
+        }
+        if (uBn && uBn !== field.upazila) {
+          distNameBn = `${distNameBn} › ${uBn}`;
+        }
+      }
 
       // Real API calls with 8-second timeout. If it fails, SKIP field (Never invent values).
       const daily = await fetchPowerDaily(lat, lng, 60, 8000);

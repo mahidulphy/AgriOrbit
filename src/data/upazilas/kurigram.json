@@ -1,0 +1,101 @@
+[
+  {
+    "id": "kurigram_bhurungamari",
+    "pcode": "BD55490006",
+    "district_id": "kurigram",
+    "name_en": "Bhurungamari",
+    "name_bn": "ভুরুঙ্গামারী",
+    "lat": 26.115526,
+    "lon": 89.693409,
+    "area_sqkm": 230.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_chilmari",
+    "pcode": "BD55490009",
+    "district_id": "kurigram",
+    "name_en": "Chilmari",
+    "name_bn": "চিলমারী",
+    "lat": 25.563938,
+    "lon": 89.71821,
+    "area_sqkm": 243.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_kurigram-sadar",
+    "pcode": "BD55490052",
+    "district_id": "kurigram",
+    "name_en": "Kurigram Sadar",
+    "name_bn": "কুড়িগ্রাম সদর",
+    "lat": 25.827258,
+    "lon": 89.691464,
+    "area_sqkm": 274.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_nageshwari",
+    "pcode": "BD55490061",
+    "district_id": "kurigram",
+    "name_en": "Nageshwari",
+    "name_bn": "নাগেশ্বরী",
+    "lat": 25.959922,
+    "lon": 89.739544,
+    "area_sqkm": 416.27,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_phulbari",
+    "pcode": "BD55490018",
+    "district_id": "kurigram",
+    "name_en": "Phulbari",
+    "name_bn": "ফুলবাড়ী",
+    "lat": 25.94769,
+    "lon": 89.571724,
+    "area_sqkm": 160.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_rajarhat",
+    "pcode": "BD55490077",
+    "district_id": "kurigram",
+    "name_en": "Rajarhat",
+    "name_bn": "রাজারহাট",
+    "lat": 25.787414,
+    "lon": 89.541597,
+    "area_sqkm": 163.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_rajibpur",
+    "pcode": "BD55490008",
+    "district_id": "kurigram",
+    "name_en": "Rajibpur",
+    "name_bn": "চর রাজিবপুর",
+    "lat": 25.444292,
+    "lon": 89.764208,
+    "area_sqkm": 113.69,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_roumari",
+    "pcode": "BD55490079",
+    "district_id": "kurigram",
+    "name_en": "Roumari",
+    "name_bn": "রৌমারী",
+    "lat": 25.593067,
+    "lon": 89.828081,
+    "area_sqkm": 200.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kurigram_ulipur",
+    "pcode": "BD55490094",
+    "district_id": "kurigram",
+    "name_en": "Ulipur",
+    "name_bn": "উলিপুর",
+    "lat": 25.689708,
+    "lon": 89.668734,
+    "area_sqkm": 465.14,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

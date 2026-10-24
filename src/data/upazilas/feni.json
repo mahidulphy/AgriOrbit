@@ -1,0 +1,68 @@
+[
+  {
+    "id": "feni_chhagalnaiya",
+    "pcode": "BD20300014",
+    "district_id": "feni",
+    "name_en": "Chhagalnaiya",
+    "name_bn": "ছাগলনাইয়া",
+    "lat": 23.020169,
+    "lon": 91.506511,
+    "area_sqkm": 135.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "feni_daganbhuiyan",
+    "pcode": "BD20300025",
+    "district_id": "feni",
+    "name_en": "Daganbhuiyan",
+    "name_bn": "দাগনভূঞা",
+    "lat": 22.972026,
+    "lon": 91.299971,
+    "area_sqkm": 141.08,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "feni_feni-sadar",
+    "pcode": "BD20300029",
+    "district_id": "feni",
+    "name_en": "Feni Sadar",
+    "name_bn": "ফেনী সদর",
+    "lat": 22.990713,
+    "lon": 91.415857,
+    "area_sqkm": 214.26,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "feni_fulgazi",
+    "pcode": "BD20300041",
+    "district_id": "feni",
+    "name_en": "Fulgazi",
+    "name_bn": "ফুলগাজী",
+    "lat": 23.118465,
+    "lon": 91.441644,
+    "area_sqkm": 102.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "feni_parashuram",
+    "pcode": "BD20300051",
+    "district_id": "feni",
+    "name_en": "Parashuram",
+    "name_bn": "পরশুরাম",
+    "lat": 23.202442,
+    "lon": 91.438492,
+    "area_sqkm": 101.51,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "feni_sonagazi",
+    "pcode": "BD20300094",
+    "district_id": "feni",
+    "name_en": "Sonagazi",
+    "name_bn": "সোনাগাজী",
+    "lat": 22.85375,
+    "lon": 91.396878,
+    "area_sqkm": 234.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "bogura_adamdighi",
+    "pcode": "BD50100006",
+    "district_id": "bogura",
+    "name_en": "Adamdighi",
+    "name_bn": "আদমদিঘি",
+    "lat": 24.80009,
+    "lon": 89.059681,
+    "area_sqkm": 170.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_bogura-sadar",
+    "pcode": "BD50100020",
+    "district_id": "bogura",
+    "name_en": "Bogura Sadar",
+    "name_bn": "বগুড়া সদর",
+    "lat": 24.895399,
+    "lon": 89.356055,
+    "area_sqkm": 178.09,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_dhunat",
+    "pcode": "BD50100027",
+    "district_id": "bogura",
+    "name_en": "Dhunat",
+    "name_bn": "ধুনট",
+    "lat": 24.682603,
+    "lon": 89.550157,
+    "area_sqkm": 251.89,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_dupchachia",
+    "pcode": "BD50100033",
+    "district_id": "bogura",
+    "name_en": "Dupchachia",
+    "name_bn": "দুপচাঁচিয়া",
+    "lat": 24.882366,
+    "lon": 89.13984,
+    "area_sqkm": 165.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_gabtali",
+    "pcode": "BD50100040",
+    "district_id": "bogura",
+    "name_en": "Gabtali",
+    "name_bn": "গাবতলী",
+    "lat": 24.887241,
+    "lon": 89.46483,
+    "area_sqkm": 244.01,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_kahaloo",
+    "pcode": "BD50100054",
+    "district_id": "bogura",
+    "name_en": "Kahaloo",
+    "name_bn": "কাহালু",
+    "lat": 24.832509,
+    "lon": 89.251424,
+    "area_sqkm": 237.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_nandigram",
+    "pcode": "BD50100067",
+    "district_id": "bogura",
+    "name_en": "Nandigram",
+    "name_bn": "নন্দীগ্রাম",
+    "lat": 24.681185,
+    "lon": 89.227157,
+    "area_sqkm": 271.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_sariakandi",
+    "pcode": "BD50100081",
+    "district_id": "bogura",
+    "name_en": "Sariakandi",
+    "name_bn": "সারিয়াকান্দি",
+    "lat": 24.878908,
+    "lon": 89.616563,
+    "area_sqkm": 416.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_shajahanpur",
+    "pcode": "BD50100085",
+    "district_id": "bogura",
+    "name_en": "Shajahanpur",
+    "name_bn": "শাজাহানপুর",
+    "lat": 24.760217,
+    "lon": 89.37556,
+    "area_sqkm": 221.31,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_sherpur",
+    "pcode": "BD50100088",
+    "district_id": "bogura",
+    "name_en": "Sherpur",
+    "name_bn": "শেরপুর",
+    "lat": 24.628676,
+    "lon": 89.422571,
+    "area_sqkm": 297.0,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_shibganj",
+    "pcode": "BD50100094",
+    "district_id": "bogura",
+    "name_en": "Shibganj",
+    "name_bn": "শিবগঞ্জ",
+    "lat": 25.016835,
+    "lon": 89.306493,
+    "area_sqkm": 315.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bogura_sonatala",
+    "pcode": "BD50100095",
+    "district_id": "bogura",
+    "name_en": "Sonatala",
+    "name_bn": "সোনাতলা",
+    "lat": 24.997365,
+    "lon": 89.51418,
+    "area_sqkm": 159.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

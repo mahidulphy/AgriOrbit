@@ -1,0 +1,79 @@
+[
+  {
+    "id": "gaibandha_fulchhari",
+    "pcode": "BD55320021",
+    "district_id": "gaibandha",
+    "name_en": "Fulchhari",
+    "name_bn": "ফুলছড়ি",
+    "lat": 25.253785,
+    "lon": 89.653259,
+    "area_sqkm": 310.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_gaibandha-sadar",
+    "pcode": "BD55320024",
+    "district_id": "gaibandha",
+    "name_en": "Gaibandha Sadar",
+    "name_bn": "গাইবান্ধা সদর",
+    "lat": 25.350016,
+    "lon": 89.565615,
+    "area_sqkm": 324.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_gobindaganj",
+    "pcode": "BD55320030",
+    "district_id": "gaibandha",
+    "name_en": "Gobindaganj",
+    "name_bn": "গোবিন্দগঞ্জ",
+    "lat": 25.157732,
+    "lon": 89.369727,
+    "area_sqkm": 461.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_palashbari",
+    "pcode": "BD55320067",
+    "district_id": "gaibandha",
+    "name_en": "Palashbari",
+    "name_bn": "পলাশবাড়ী",
+    "lat": 25.265065,
+    "lon": 89.391751,
+    "area_sqkm": 185.53,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_sadullapur",
+    "pcode": "BD55320082",
+    "district_id": "gaibandha",
+    "name_en": "Sadullapur",
+    "name_bn": "সাদুল্লাপুর",
+    "lat": 25.394855,
+    "lon": 89.42569,
+    "area_sqkm": 228.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_saghata",
+    "pcode": "BD55320088",
+    "district_id": "gaibandha",
+    "name_en": "Saghata",
+    "name_bn": "সাঘাটা",
+    "lat": 25.125192,
+    "lon": 89.563451,
+    "area_sqkm": 233.36,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gaibandha_sundarganj",
+    "pcode": "BD55320091",
+    "district_id": "gaibandha",
+    "name_en": "Sundarganj",
+    "name_bn": "সুন্দরগঞ্জ",
+    "lat": 25.510163,
+    "lon": 89.561826,
+    "area_sqkm": 406.38,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

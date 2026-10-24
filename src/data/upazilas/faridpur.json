@@ -1,0 +1,101 @@
+[
+  {
+    "id": "faridpur_alfadanga",
+    "pcode": "BD30290003",
+    "district_id": "faridpur",
+    "name_en": "Alfadanga",
+    "name_bn": "আলফাডাঙ্গা",
+    "lat": 23.295135,
+    "lon": 89.67033,
+    "area_sqkm": 130.13,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_bhanga",
+    "pcode": "BD30290010",
+    "district_id": "faridpur",
+    "name_en": "Bhanga",
+    "name_bn": "ভাঙ্গা",
+    "lat": 23.3891,
+    "lon": 90.010002,
+    "area_sqkm": 218.43,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_boalmari",
+    "pcode": "BD30290018",
+    "district_id": "faridpur",
+    "name_en": "Boalmari",
+    "name_bn": "বোয়ালমারী",
+    "lat": 23.398676,
+    "lon": 89.692422,
+    "area_sqkm": 262.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_char-bhadrasan",
+    "pcode": "BD30290021",
+    "district_id": "faridpur",
+    "name_en": "Char Bhadrasan",
+    "name_bn": "চরভদ্রাসন",
+    "lat": 23.590051,
+    "lon": 89.980127,
+    "area_sqkm": 136.93,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_faridpur-sadar",
+    "pcode": "BD30290047",
+    "district_id": "faridpur",
+    "name_en": "Faridpur Sadar",
+    "name_bn": "ফরিদপুর সদর",
+    "lat": 23.597431,
+    "lon": 89.812724,
+    "area_sqkm": 394.41,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_madhukhali",
+    "pcode": "BD30290056",
+    "district_id": "faridpur",
+    "name_en": "Madhukhali",
+    "name_bn": "মধুখালী",
+    "lat": 23.5411,
+    "lon": 89.611128,
+    "area_sqkm": 236.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_nagarkanda",
+    "pcode": "BD30290062",
+    "district_id": "faridpur",
+    "name_en": "Nagarkanda",
+    "name_bn": "নগরকান্দা",
+    "lat": 23.434332,
+    "lon": 89.895622,
+    "area_sqkm": 193.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_sadarpur",
+    "pcode": "BD30290084",
+    "district_id": "faridpur",
+    "name_en": "Sadarpur",
+    "name_bn": "সদরপুর",
+    "lat": 23.498412,
+    "lon": 90.050925,
+    "area_sqkm": 274.03,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "faridpur_saltha",
+    "pcode": "BD30290090",
+    "district_id": "faridpur",
+    "name_en": "Saltha",
+    "name_bn": "সালথা",
+    "lat": 23.418045,
+    "lon": 89.800786,
+    "area_sqkm": 190.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

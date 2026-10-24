@@ -1,0 +1,145 @@
+[
+  {
+    "id": "dinajpur_birampur",
+    "pcode": "BD55270010",
+    "district_id": "dinajpur",
+    "name_en": "Birampur",
+    "name_bn": "বিরামপুর",
+    "lat": 25.379938,
+    "lon": 88.963402,
+    "area_sqkm": 214.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_birganj",
+    "pcode": "BD55270012",
+    "district_id": "dinajpur",
+    "name_en": "Birganj",
+    "name_bn": "বীরগঞ্জ",
+    "lat": 25.929422,
+    "lon": 88.625782,
+    "area_sqkm": 414.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_birol",
+    "pcode": "BD55270017",
+    "district_id": "dinajpur",
+    "name_en": "Birol",
+    "name_bn": "বিরল",
+    "lat": 25.646891,
+    "lon": 88.547226,
+    "area_sqkm": 350.95,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_bochaganj",
+    "pcode": "BD55270021",
+    "district_id": "dinajpur",
+    "name_en": "Bochaganj",
+    "name_bn": "বোচাগঞ্জ",
+    "lat": 25.786215,
+    "lon": 88.453324,
+    "area_sqkm": 223.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_chirirbandar",
+    "pcode": "BD55270030",
+    "district_id": "dinajpur",
+    "name_en": "Chirirbandar",
+    "name_bn": "চিরিরবন্দর",
+    "lat": 25.666732,
+    "lon": 88.783257,
+    "area_sqkm": 315.59,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_dinajpur-sadar",
+    "pcode": "BD55270064",
+    "district_id": "dinajpur",
+    "name_en": "Dinajpur Sadar",
+    "name_bn": "দিনাজপুর সদর",
+    "lat": 25.608209,
+    "lon": 88.675718,
+    "area_sqkm": 355.41,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_fulbari",
+    "pcode": "BD55270038",
+    "district_id": "dinajpur",
+    "name_en": "Fulbari",
+    "name_bn": "ফুলবাড়ী",
+    "lat": 25.471379,
+    "lon": 88.900737,
+    "area_sqkm": 233.39,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_ghoraghat",
+    "pcode": "BD55270043",
+    "district_id": "dinajpur",
+    "name_en": "Ghoraghat",
+    "name_bn": "ঘোড়াঘাট",
+    "lat": 25.287333,
+    "lon": 89.214751,
+    "area_sqkm": 152.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_hakimpur",
+    "pcode": "BD55270047",
+    "district_id": "dinajpur",
+    "name_en": "Hakimpur",
+    "name_bn": "হাকিমপুর",
+    "lat": 25.292767,
+    "lon": 89.061204,
+    "area_sqkm": 101.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_kaharole",
+    "pcode": "BD55270056",
+    "district_id": "dinajpur",
+    "name_en": "Kaharole",
+    "name_bn": "কাহারোল",
+    "lat": 25.802457,
+    "lon": 88.5985,
+    "area_sqkm": 205.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_khansama",
+    "pcode": "BD55270060",
+    "district_id": "dinajpur",
+    "name_en": "Khansama",
+    "name_bn": "খানসামা",
+    "lat": 25.871701,
+    "lon": 88.7646,
+    "area_sqkm": 179.88,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_nababganj",
+    "pcode": "BD55270069",
+    "district_id": "dinajpur",
+    "name_en": "Nababganj",
+    "name_bn": "নবাবগঞ্জ",
+    "lat": 25.42089,
+    "lon": 89.090557,
+    "area_sqkm": 316.71,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dinajpur_parbatipur",
+    "pcode": "BD55270077",
+    "district_id": "dinajpur",
+    "name_en": "Parbatipur",
+    "name_bn": "পার্বতীপুর",
+    "lat": 25.619768,
+    "lon": 88.922969,
+    "area_sqkm": 396.51,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

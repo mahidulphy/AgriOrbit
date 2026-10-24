@@ -30,7 +30,7 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../../types';
-import { getDistrictProfile, getUpazilaName } from '../../lib/location';
+import { getDistrictProfile, getUpazilaName, DISTRICT_WIDE_UPAZILA } from '../../lib/location';
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
 import { ExplainWhyModal } from '../ExplainWhyModal';
@@ -47,7 +47,7 @@ import {
 } from '../dashboard';
 import { UserMenu } from '../auth/UserMenu';
 import { NotificationBell } from '../notifications/NotificationBell';
-import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
+import { loadLocationData, loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
 import { runEngine, type Priority } from '../../lib/engine';
@@ -110,10 +110,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [explainCrop, setExplainCrop] = useState<CropData | null>(null);
 
   const district = getDistrictProfile(selectedDistrict);
+  const isDistrictWide = !selectedUpazila || selectedUpazila === DISTRICT_WIDE_UPAZILA;
   const upazilaName = getUpazilaName(selectedDistrict, selectedUpazila, language);
   const districtName = language === 'en' ? district.nameEn : district.nameBn;
+  const locationBreadcrumb = isDistrictWide ? districtName : `${districtName} › ${upazilaName}`;
 
-  // NASA POWER & Open-Meteo 3-level safety net (Live -> Cache -> Bundled)
+  // NASA POWER & Open-Meteo 4-level safety net (Client 24h Cache -> Live -> Public Cache -> Bundled)
   const [loaded, setLoaded] = useState<LoadedData>({
     data: BUNDLED_RANGPUR,
     mode: 'bundled',
@@ -123,7 +125,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   useEffect(() => {
     let active = true;
     setIsLoadingData(true);
-    loadDistrict(selectedDistrict)
+    loadLocationData(selectedDistrict, selectedUpazila, fieldLat, fieldLng)
       .then((res) => {
         if (!active) return;
         setLoaded(res);
@@ -142,7 +144,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     return () => {
       active = false;
     };
-  }, [selectedDistrict]);
+  }, [selectedDistrict, selectedUpazila, fieldLat, fieldLng]);
 
   // Derived baseline conditions & climate shift from real NASA POWER records
   const hasData = loaded.mode !== 'unavailable' && !!loaded.data;
@@ -151,10 +153,27 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     [loaded.data.daily, loaded.data.lat]
   );
 
-  const fieldShift = useMemo(
-    () => hasData ? computeFieldShift(loaded.data.monthly, district.id) : computeFieldShift(BUNDLED_RANGPUR.monthly, district.id),
-    [loaded.data.monthly]
-  );
+  const fieldShift = useMemo(() => {
+    const dMonthly = hasData ? loaded.data.monthly : BUNDLED_RANGPUR.monthly;
+    const shiftCacheKey = selectedUpazila && selectedUpazila !== DISTRICT_WIDE_UPAZILA
+      ? `agriorbit_field_shift_${selectedDistrict}_${selectedUpazila}`
+      : `agriorbit_field_shift_${selectedDistrict}`;
+
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem(shiftCacheKey);
+        if (cached) return JSON.parse(cached);
+      } catch {}
+    }
+
+    const computed = computeFieldShift(dMonthly, district.id);
+    if (typeof window !== 'undefined' && hasData) {
+      try {
+        localStorage.setItem(shiftCacheKey, JSON.stringify(computed));
+      } catch {}
+    }
+    return computed;
+  }, [hasData, loaded.data?.monthly, district.id, selectedDistrict, selectedUpazila]);
 
   // Real NASA Earthdata observations for the active district (updated dynamically from Supabase/cache)
   const {
@@ -307,8 +326,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="flex items-start gap-2">
               <MapPin className="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" />
               <div className="min-w-0">
-                <h4 className="font-display font-bold text-sm text-white truncate">
-                  {upazilaName}, {districtName.split(' ')[0]}
+                <h4 className="font-display font-bold text-sm text-white truncate" title={locationBreadcrumb}>
+                  {locationBreadcrumb}
                 </h4>
                 <p className="text-[10px] font-mono text-[#A3A3A3]">
                   {language === 'bn'
@@ -414,7 +433,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </button>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-[#A3A3A3]">{upazilaName}</span>
+          <span className="text-xs font-mono text-[#A3A3A3] truncate max-w-[150px]">{locationBreadcrumb}</span>
           <button
             onClick={() => setWhatIfActive(!whatIfActive)}
             className={`px-2.5 py-1 rounded-lg border text-xs font-mono cursor-pointer flex items-center gap-1 ${
@@ -445,7 +464,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* Location Context */}
               <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] text-xs">
                 <span className="text-[10px] text-[#A3A3A3] font-mono uppercase block">{language === 'en' ? 'Active Field' : 'নির্বাচিত জমি'}</span>
-                <span className="font-bold text-white block mt-0.5">{upazilaName}, {districtName}</span>
+                <span className="font-bold text-white block mt-0.5">{locationBreadcrumb}</span>
                 <button
                   onClick={() => { setMobileMenuOpen(false); onChangeFieldLocation(); }}
                   className="text-[11px] text-[#FAFAFA] underline mt-1 block cursor-pointer"
@@ -510,7 +529,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex items-center gap-3 text-xs font-mono">
             <span className="text-[#A3A3A3]">{language === 'en' ? 'AgriOrbit' : 'এগ্রিঅরবিট'}</span>
             <span className="text-white/30">/</span>
-            <span className="text-white font-bold">{upazilaName}, {districtName}</span>
+            <span className="text-white font-bold">{locationBreadcrumb}</span>
             <span className="text-white/30">/</span>
             <span className="text-[#22C55E] capitalize">
               {DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}
@@ -612,7 +631,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       </span>
                     </div>
                     <h3 className="font-display text-lg sm:text-xl font-bold text-white mt-0.5">
-                      {upazilaName}, {districtName}
+                      {locationBreadcrumb}
                     </h3>
                   </div>
                 </div>
@@ -730,7 +749,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? '30-Day Rain' : '৩০ দিনের বৃষ্টি'}</span>
-                      <span className="text-[#FAFAFA] font-semibold text-[11px]">NASA POWER</span>
+                      <span
+                        className="text-[#FAFAFA] font-semibold text-[11px] border-b border-dotted border-white/30 cursor-help"
+                        title={language === 'en' ? 'NASA POWER ~50 km grid; neighboring upazilas may show similar values.' : 'NASA POWER ~৫০ কিমি গ্রিড; পাশের উপজেলায় একই মান আসতে পারে।'}
+                      >
+                        NASA POWER <span className="text-[10px] text-[#A3A3A3] font-normal">(~50km)</span>
+                      </span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {conditions.rainUnavailable ? (
@@ -818,7 +842,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     )}
                   </div>
                   <div className="mt-2 text-xs text-slate-400 flex items-center justify-between">
-                    <span>{language === 'en' ? 'Status:' : 'অবস্থা:'}</span>
+                    <span className="flex items-center gap-1.5">
+                      <span>{language === 'en' ? 'Status:' : 'অবস্থা:'}</span>
+                      <span className="text-[10px] font-mono text-[#737373] bg-white/5 px-1 py-0.5 rounded border border-[#262626]">
+                        {language === 'en' ? '9 km' : '৯ কিমি'}
+                      </span>
+                    </span>
                     <span
                       className={`font-semibold ${
                         !whatIfActive && !smapData
@@ -850,7 +879,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Max Day Temp' : 'সর্বোচ্চ তাপমাত্রা'}</span>
-                      <span className="text-[#FAFAFA] font-semibold text-[11px]">NASA POWER</span>
+                      <span
+                        className="text-[#FAFAFA] font-semibold text-[11px] border-b border-dotted border-white/30 cursor-help"
+                        title={language === 'en' ? 'NASA POWER ~50 km grid; neighboring upazilas may show similar values.' : 'NASA POWER ~৫০ কিমি গ্রিড; পাশের উপজেলায় একই মান আসতে পারে।'}
+                      >
+                        NASA POWER <span className="text-[10px] text-[#A3A3A3] font-normal">(~50km)</span>
+                      </span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {language === 'bn' ? toBnDigits(activeMaxTemp.toFixed(1)) : activeMaxTemp.toFixed(1)}{' '}
@@ -872,7 +906,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                       <span className="font-medium">{language === 'en' ? 'Air Humidity' : 'বাতাসের আর্দ্রতা'}</span>
-                      <span className="text-sky-300 font-semibold text-[11px]">NASA POWER</span>
+                      <span
+                        className="text-sky-300 font-semibold text-[11px] border-b border-dotted border-sky-300/30 cursor-help"
+                        title={language === 'en' ? 'NASA POWER ~50 km grid; neighboring upazilas may show similar values.' : 'NASA POWER ~৫০ কিমি গ্রিড; পাশের উপজেলায় একই মান আসতে পারে।'}
+                      >
+                        NASA POWER <span className="text-[10px] text-sky-400/80 font-normal">(~50km)</span>
+                      </span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {language === 'bn' ? toBnDigits(Math.round(conditions.rh)) : Math.round(conditions.rh)}{' '}
@@ -1528,9 +1567,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </p>
 
                     <p className="text-[11px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-[#262626] pt-2">
-                      {language === 'en'
-                        ? 'Measured at the district HQ point (SMAP 9 km, MODIS 250 m / 1 km). Urban or water areas can lower NDVI.'
-                        : 'জেলা সদর দফতর বিন্দুতে পরিমাপকৃত (SMAP ৯ কিমি, MODIS ২৫০ মি / ১ কিমি)। শহুরে বা জলাভূমি এলাকা NDVI মান কমাতে পারে।'}
+                      {isDistrictWide
+                        ? (language === 'en'
+                            ? 'SMAP: 9 km resolution · MODIS: 250 m resolution. Measured at district HQ.'
+                            : 'SMAP: ৯ কিমি রেজোলিউশন · MODIS: ২৫০ মি রেজোলিউশন। জেলা সদর দফতরে পরিমাপকৃত।')
+                        : (language === 'en'
+                            ? 'SMAP: 9 km resolution · MODIS: 250 m resolution. Measured for active field point (fallback to district value if cloudy).'
+                            : 'SMAP: ৯ কিমি রেজোলিউশন · MODIS: ২৫০ মি রেজোলিউশন। নির্বাচিত জমির জন্য পরিমাপকৃত (মেঘলা থাকলে জেলা মান ব্যবহৃত হয়)।')}
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-[#262626] space-y-1.5 text-xs font-mono text-slate-400">

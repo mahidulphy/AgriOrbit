@@ -1,0 +1,200 @@
+[
+  {
+    "id": "cumilla_adarsha-sadar",
+    "pcode": "BD20190067",
+    "district_id": "cumilla",
+    "name_en": "Adarsha Sadar",
+    "name_bn": "কুমিল্লা সদর",
+    "lat": 23.479775,
+    "lon": 91.156745,
+    "area_sqkm": 111.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_barura",
+    "pcode": "BD20190009",
+    "district_id": "cumilla",
+    "name_en": "Barura",
+    "name_bn": "বরুড়া",
+    "lat": 23.356885,
+    "lon": 91.040026,
+    "area_sqkm": 246.52,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_brahmanpara",
+    "pcode": "BD20190015",
+    "district_id": "cumilla",
+    "name_en": "Brahmanpara",
+    "name_bn": "ব্রাহ্মণপাড়া",
+    "lat": 23.647011,
+    "lon": 91.095958,
+    "area_sqkm": 128.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_burichang",
+    "pcode": "BD20190018",
+    "district_id": "cumilla",
+    "name_en": "Burichang",
+    "name_bn": "বুড়িচং",
+    "lat": 23.535183,
+    "lon": 91.116872,
+    "area_sqkm": 167.8,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_chandina",
+    "pcode": "BD20190027",
+    "district_id": "cumilla",
+    "name_en": "Chandina",
+    "name_bn": "চান্দিনা",
+    "lat": 23.446279,
+    "lon": 90.944815,
+    "area_sqkm": 200.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_chauddagram",
+    "pcode": "BD20190031",
+    "district_id": "cumilla",
+    "name_en": "Chauddagram",
+    "name_bn": "চৌদ্দগ্রাম",
+    "lat": 23.221837,
+    "lon": 91.279694,
+    "area_sqkm": 273.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_daudkandi",
+    "pcode": "BD20190036",
+    "district_id": "cumilla",
+    "name_en": "Daudkandi",
+    "name_bn": "দাউদকান্দি",
+    "lat": 23.502938,
+    "lon": 90.773102,
+    "area_sqkm": 218.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_debidwar",
+    "pcode": "BD20190040",
+    "district_id": "cumilla",
+    "name_en": "Debidwar",
+    "name_bn": "দেবিদ্বার",
+    "lat": 23.579748,
+    "lon": 90.998086,
+    "area_sqkm": 239.27,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_homna",
+    "pcode": "BD20190054",
+    "district_id": "cumilla",
+    "name_en": "Homna",
+    "name_bn": "হোমনা",
+    "lat": 23.680002,
+    "lon": 90.811499,
+    "area_sqkm": 124.14,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_laksam",
+    "pcode": "BD20190072",
+    "district_id": "cumilla",
+    "name_en": "Laksam",
+    "name_bn": "লাকসাম",
+    "lat": 23.231444,
+    "lon": 91.104876,
+    "area_sqkm": 140.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_lalmai",
+    "pcode": "BD20190073",
+    "district_id": "cumilla",
+    "name_en": "Lalmai",
+    "name_bn": "লালমাই",
+    "lat": 23.297666,
+    "lon": 91.159441,
+    "area_sqkm": 120.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_manoharganj",
+    "pcode": "BD20190074",
+    "district_id": "cumilla",
+    "name_en": "Manoharganj",
+    "name_bn": "মনোহরগঞ্জ",
+    "lat": 23.13847,
+    "lon": 91.066707,
+    "area_sqkm": 163.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_meghna",
+    "pcode": "BD20190075",
+    "district_id": "cumilla",
+    "name_en": "Meghna",
+    "name_bn": "মেঘনা",
+    "lat": 23.62584,
+    "lon": 90.690212,
+    "area_sqkm": 110.01,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_muradnagar",
+    "pcode": "BD20190081",
+    "district_id": "cumilla",
+    "name_en": "Muradnagar",
+    "name_bn": "মুরাদনগর",
+    "lat": 23.678096,
+    "lon": 90.942812,
+    "area_sqkm": 341.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_nangalkot",
+    "pcode": "BD20190087",
+    "district_id": "cumilla",
+    "name_en": "Nangalkot",
+    "name_bn": "নাঙ্গলকোট",
+    "lat": 23.140252,
+    "lon": 91.209099,
+    "area_sqkm": 235.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_sadar-dakkhin",
+    "pcode": "BD20190033",
+    "district_id": "cumilla",
+    "name_en": "Sadar Dakkhin",
+    "name_bn": "সদর দক্ষিণ",
+    "lat": 23.388335,
+    "lon": 91.202211,
+    "area_sqkm": 112.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_titas",
+    "pcode": "BD20190094",
+    "district_id": "cumilla",
+    "name_en": "Titas",
+    "name_bn": "তিতাস",
+    "lat": 23.590906,
+    "lon": 90.79551,
+    "area_sqkm": 110.82,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "cumilla_cumilla-city-corporation",
+    "pcode": "BD20195000",
+    "district_id": "cumilla",
+    "name_en": "Cumilla City Corporation",
+    "name_bn": "কুমিল্লা সিটি কর্পোরেশন",
+    "lat": 23.43375,
+    "lon": 91.183351,
+    "area_sqkm": 52.31,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

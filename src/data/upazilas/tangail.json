@@ -1,0 +1,134 @@
+[
+  {
+    "id": "tangail_basail",
+    "pcode": "BD30930009",
+    "district_id": "tangail",
+    "name_en": "Basail",
+    "name_bn": "বাসাইল",
+    "lat": 24.23384,
+    "lon": 90.040242,
+    "area_sqkm": 156.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_bhuanpur",
+    "pcode": "BD30930019",
+    "district_id": "tangail",
+    "name_en": "Bhuanpur",
+    "name_bn": "ভূঞাপুর",
+    "lat": 24.477201,
+    "lon": 89.815889,
+    "area_sqkm": 228.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_delduar",
+    "pcode": "BD30930023",
+    "district_id": "tangail",
+    "name_en": "Delduar",
+    "name_bn": "দেলদুয়ার",
+    "lat": 24.147509,
+    "lon": 89.938957,
+    "area_sqkm": 171.78,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_dhanbari",
+    "pcode": "BD30930025",
+    "district_id": "tangail",
+    "name_en": "Dhanbari",
+    "name_bn": "ধনবাড়ী",
+    "lat": 24.687534,
+    "lon": 89.933502,
+    "area_sqkm": 135.89,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_ghatail",
+    "pcode": "BD30930028",
+    "district_id": "tangail",
+    "name_en": "Ghatail",
+    "name_bn": "ঘাটাইল",
+    "lat": 24.4737,
+    "lon": 90.053046,
+    "area_sqkm": 453.1,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_gopalpur",
+    "pcode": "BD30930038",
+    "district_id": "tangail",
+    "name_en": "Gopalpur",
+    "name_bn": "গোপালপুর",
+    "lat": 24.572416,
+    "lon": 89.901816,
+    "area_sqkm": 192.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_kalihati",
+    "pcode": "BD30930047",
+    "district_id": "tangail",
+    "name_en": "Kalihati",
+    "name_bn": "কালিহাতী",
+    "lat": 24.359688,
+    "lon": 89.946736,
+    "area_sqkm": 299.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_madhupur",
+    "pcode": "BD30930057",
+    "district_id": "tangail",
+    "name_en": "Madhupur",
+    "name_bn": "মধুপুর",
+    "lat": 24.650129,
+    "lon": 90.062281,
+    "area_sqkm": 374.52,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_mirzapur",
+    "pcode": "BD30930066",
+    "district_id": "tangail",
+    "name_en": "Mirzapur",
+    "name_bn": "মির্জাপুর",
+    "lat": 24.118059,
+    "lon": 90.107201,
+    "area_sqkm": 370.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_nagarpur",
+    "pcode": "BD30930076",
+    "district_id": "tangail",
+    "name_en": "Nagarpur",
+    "name_bn": "নাগরপুর",
+    "lat": 24.050627,
+    "lon": 89.875471,
+    "area_sqkm": 256.44,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_sakhipur",
+    "pcode": "BD30930085",
+    "district_id": "tangail",
+    "name_en": "Sakhipur",
+    "name_bn": "সখিপুর",
+    "lat": 24.306262,
+    "lon": 90.174861,
+    "area_sqkm": 435.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "tangail_tangail-sadar",
+    "pcode": "BD30930095",
+    "district_id": "tangail",
+    "name_en": "Tangail Sadar",
+    "name_bn": "টাঙ্গাইল সদর",
+    "lat": 24.259623,
+    "lon": 89.867051,
+    "area_sqkm": 298.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "id": "mymensingh_bhaluka",
+    "pcode": "BD45610013",
+    "district_id": "mymensingh",
+    "name_en": "Bhaluka",
+    "name_bn": "ভালুকা",
+    "lat": 24.381617,
+    "lon": 90.353902,
+    "area_sqkm": 446.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_dhobaura",
+    "pcode": "BD45610016",
+    "district_id": "mymensingh",
+    "name_en": "Dhobaura",
+    "name_bn": "ধোবাউড়া",
+    "lat": 25.101224,
+    "lon": 90.52558,
+    "area_sqkm": 257.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_fulbaria",
+    "pcode": "BD45610020",
+    "district_id": "mymensingh",
+    "name_en": "Fulbaria",
+    "name_bn": "ফুলবাড়ীয়া",
+    "lat": 24.586845,
+    "lon": 90.256158,
+    "area_sqkm": 396.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_fulpur",
+    "pcode": "BD45610081",
+    "district_id": "mymensingh",
+    "name_en": "Fulpur",
+    "name_bn": "ফুলপুর",
+    "lat": 24.952939,
+    "lon": 90.352944,
+    "area_sqkm": 284.83,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_gafargaon",
+    "pcode": "BD45610022",
+    "district_id": "mymensingh",
+    "name_en": "Gafargaon",
+    "name_bn": "গফরগাঁও",
+    "lat": 24.393656,
+    "lon": 90.549927,
+    "area_sqkm": 397.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_gouripur",
+    "pcode": "BD45610023",
+    "district_id": "mymensingh",
+    "name_en": "Gouripur",
+    "name_bn": "গৌরীপুর",
+    "lat": 24.756539,
+    "lon": 90.586149,
+    "area_sqkm": 282.91,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_haluaghat",
+    "pcode": "BD45610024",
+    "district_id": "mymensingh",
+    "name_en": "Haluaghat",
+    "name_bn": "হালুয়াঘাট",
+    "lat": 25.084136,
+    "lon": 90.352083,
+    "area_sqkm": 349.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_ishwarganj",
+    "pcode": "BD45610031",
+    "district_id": "mymensingh",
+    "name_en": "Ishwarganj",
+    "name_bn": "ঈশ্বরগঞ্জ",
+    "lat": 24.644754,
+    "lon": 90.599509,
+    "area_sqkm": 278.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_muktagachha",
+    "pcode": "BD45610065",
+    "district_id": "mymensingh",
+    "name_en": "Muktagachha",
+    "name_bn": "মুক্তাগাছা",
+    "lat": 24.744266,
+    "lon": 90.205544,
+    "area_sqkm": 313.56,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_mymensingh-sadar",
+    "pcode": "BD45610052",
+    "district_id": "mymensingh",
+    "name_en": "Mymensingh Sadar",
+    "name_bn": "ময়মনসিংহ সদর",
+    "lat": 24.846137,
+    "lon": 90.264154,
+    "area_sqkm": 282.34,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_nandail",
+    "pcode": "BD45610072",
+    "district_id": "mymensingh",
+    "name_en": "Nandail",
+    "name_bn": "নান্দাইল",
+    "lat": 24.549474,
+    "lon": 90.676778,
+    "area_sqkm": 327.16,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_tarakanda",
+    "pcode": "BD45610088",
+    "district_id": "mymensingh",
+    "name_en": "Tarakanda",
+    "name_bn": "তারাকান্দা",
+    "lat": 24.864131,
+    "lon": 90.463397,
+    "area_sqkm": 281.0,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_trishal",
+    "pcode": "BD45610094",
+    "district_id": "mymensingh",
+    "name_en": "Trishal",
+    "name_bn": "ত্রিশাল",
+    "lat": 24.563704,
+    "lon": 90.410441,
+    "area_sqkm": 336.14,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "mymensingh_mymensingh-city-corporation",
+    "pcode": "BD45614000",
+    "district_id": "mymensingh",
+    "name_en": "Mymensingh City Corporation",
+    "name_bn": "ময়মনসিংহ সিটি কর্পোরেশন",
+    "lat": 24.749811,
+    "lon": 90.405808,
+    "area_sqkm": 99.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

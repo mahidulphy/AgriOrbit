@@ -1,0 +1,79 @@
+[
+  {
+    "id": "bandarban_alikadam",
+    "pcode": "BD20030004",
+    "district_id": "bandarban",
+    "name_en": "Alikadam",
+    "name_bn": "আলীকদম",
+    "lat": 21.596186,
+    "lon": 92.403371,
+    "area_sqkm": 785.03,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_bandarban-sadar",
+    "pcode": "BD20030014",
+    "district_id": "bandarban",
+    "name_en": "Bandarban Sadar",
+    "name_bn": "বান্দরবান সদর",
+    "lat": 22.065455,
+    "lon": 92.232666,
+    "area_sqkm": 523.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_lama",
+    "pcode": "BD20030051",
+    "district_id": "bandarban",
+    "name_en": "Lama",
+    "name_bn": "লামা",
+    "lat": 21.810288,
+    "lon": 92.211562,
+    "area_sqkm": 703.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_naikkhongchhari",
+    "pcode": "BD20030073",
+    "district_id": "bandarban",
+    "name_en": "Naikkhongchhari",
+    "name_bn": "নাইক্ষ্যংছড়ি",
+    "lat": 21.471396,
+    "lon": 92.242977,
+    "area_sqkm": 517.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_rowangchhari",
+    "pcode": "BD20030089",
+    "district_id": "bandarban",
+    "name_en": "Rowangchhari",
+    "name_bn": "রোয়াংছড়ি",
+    "lat": 22.199403,
+    "lon": 92.35191,
+    "area_sqkm": 440.71,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_ruma",
+    "pcode": "BD20030091",
+    "district_id": "bandarban",
+    "name_en": "Ruma",
+    "name_bn": "রুমা",
+    "lat": 22.007778,
+    "lon": 92.448552,
+    "area_sqkm": 634.44,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bandarban_thanchi",
+    "pcode": "BD20030095",
+    "district_id": "bandarban",
+    "name_en": "Thanchi",
+    "name_bn": "থানচি",
+    "lat": 21.642617,
+    "lon": 92.533262,
+    "area_sqkm": 986.38,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

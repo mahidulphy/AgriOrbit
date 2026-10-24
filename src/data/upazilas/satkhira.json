@@ -1,0 +1,79 @@
+[
+  {
+    "id": "satkhira_ashashuni",
+    "pcode": "BD40870004",
+    "district_id": "satkhira",
+    "name_en": "Ashashuni",
+    "name_bn": "আশাশুনি",
+    "lat": 22.519247,
+    "lon": 89.187432,
+    "area_sqkm": 378.46,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_debhata",
+    "pcode": "BD40870025",
+    "district_id": "satkhira",
+    "name_en": "Debhata",
+    "name_bn": "দেবহাটা",
+    "lat": 22.596522,
+    "lon": 89.013463,
+    "area_sqkm": 173.46,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_kalaroa",
+    "pcode": "BD40870043",
+    "district_id": "satkhira",
+    "name_en": "Kalaroa",
+    "name_bn": "কলারোয়া",
+    "lat": 22.88034,
+    "lon": 89.030191,
+    "area_sqkm": 233.45,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_kaliganj",
+    "pcode": "BD40870047",
+    "district_id": "satkhira",
+    "name_en": "Kaliganj",
+    "name_bn": "কালিগঞ্জ",
+    "lat": 22.447436,
+    "lon": 89.062381,
+    "area_sqkm": 330.11,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_satkhira-sadar",
+    "pcode": "BD40870082",
+    "district_id": "satkhira",
+    "name_en": "Satkhira Sadar",
+    "name_bn": "সাতক্ষীরা সদর",
+    "lat": 22.72029,
+    "lon": 89.038269,
+    "area_sqkm": 399.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_shyamnagar",
+    "pcode": "BD40870086",
+    "district_id": "satkhira",
+    "name_en": "Shyamnagar",
+    "name_bn": "শ্যামনগর",
+    "lat": 22.012177,
+    "lon": 89.180602,
+    "area_sqkm": 2109.41,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "satkhira_tala",
+    "pcode": "BD40870090",
+    "district_id": "satkhira",
+    "name_en": "Tala",
+    "name_bn": "তালা",
+    "lat": 22.739896,
+    "lon": 89.210591,
+    "area_sqkm": 338.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

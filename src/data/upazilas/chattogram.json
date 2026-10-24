@@ -1,0 +1,178 @@
+[
+  {
+    "id": "chattogram_anwara",
+    "pcode": "BD20150004",
+    "district_id": "chattogram",
+    "name_en": "Anwara",
+    "name_bn": "আনোয়ারা",
+    "lat": 22.197574,
+    "lon": 91.878693,
+    "area_sqkm": 160.82,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_banshkhali",
+    "pcode": "BD20150008",
+    "district_id": "chattogram",
+    "name_en": "Banshkhali",
+    "name_bn": "বাঁশখালী",
+    "lat": 22.017271,
+    "lon": 91.938099,
+    "area_sqkm": 362.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_boalkhali",
+    "pcode": "BD20150012",
+    "district_id": "chattogram",
+    "name_en": "Boalkhali",
+    "name_bn": "বোয়ালখালী",
+    "lat": 22.377295,
+    "lon": 91.966221,
+    "area_sqkm": 139.41,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_chandanaish",
+    "pcode": "BD20150018",
+    "district_id": "chattogram",
+    "name_en": "Chandanaish",
+    "name_bn": "চন্দনাইশ",
+    "lat": 22.212399,
+    "lon": 92.06454,
+    "area_sqkm": 199.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_fatikchhari",
+    "pcode": "BD20150033",
+    "district_id": "chattogram",
+    "name_en": "Fatikchhari",
+    "name_bn": "ফটিকছড়ি",
+    "lat": 22.755458,
+    "lon": 91.748867,
+    "area_sqkm": 758.97,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_hathazari",
+    "pcode": "BD20150037",
+    "district_id": "chattogram",
+    "name_en": "Hathazari",
+    "name_bn": "হাটহাজারী",
+    "lat": 22.526199,
+    "lon": 91.79785,
+    "area_sqkm": 228.09,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_karnaphuli",
+    "pcode": "BD20150039",
+    "district_id": "chattogram",
+    "name_en": "Karnaphuli",
+    "name_bn": "কর্ণফুলী",
+    "lat": 22.287196,
+    "lon": 91.846012,
+    "area_sqkm": 50.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_lohagara",
+    "pcode": "BD20150047",
+    "district_id": "chattogram",
+    "name_en": "Lohagara",
+    "name_bn": "লোহাগাড়া",
+    "lat": 21.986074,
+    "lon": 92.112049,
+    "area_sqkm": 260.08,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_mirsarai",
+    "pcode": "BD20150053",
+    "district_id": "chattogram",
+    "name_en": "Mirsarai",
+    "name_bn": "মীরসরাই",
+    "lat": 22.80385,
+    "lon": 91.547561,
+    "area_sqkm": 508.42,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_patiya",
+    "pcode": "BD20150061",
+    "district_id": "chattogram",
+    "name_en": "Patiya",
+    "name_bn": "পটিয়া",
+    "lat": 22.293142,
+    "lon": 91.987421,
+    "area_sqkm": 253.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_rangunia",
+    "pcode": "BD20150070",
+    "district_id": "chattogram",
+    "name_en": "Rangunia",
+    "name_bn": "রাঙ্গুনিয়া",
+    "lat": 22.466178,
+    "lon": 92.068347,
+    "area_sqkm": 354.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_raozan",
+    "pcode": "BD20150074",
+    "district_id": "chattogram",
+    "name_en": "Raozan",
+    "name_bn": "রাউজান",
+    "lat": 22.519651,
+    "lon": 91.917279,
+    "area_sqkm": 243.84,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_sandwip",
+    "pcode": "BD20150078",
+    "district_id": "chattogram",
+    "name_en": "Sandwip",
+    "name_bn": "সন্দ্বীপ",
+    "lat": 22.510617,
+    "lon": 91.457879,
+    "area_sqkm": 390.78,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_satkania",
+    "pcode": "BD20150082",
+    "district_id": "chattogram",
+    "name_en": "Satkania",
+    "name_bn": "সাতকানিয়া",
+    "lat": 22.105926,
+    "lon": 92.059509,
+    "area_sqkm": 276.31,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_sitakunda",
+    "pcode": "BD20150086",
+    "district_id": "chattogram",
+    "name_en": "Sitakunda",
+    "name_bn": "সীতাকুন্ড",
+    "lat": 22.543032,
+    "lon": 91.656901,
+    "area_sqkm": 492.92,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chattogram_chattogram-city-corporation",
+    "pcode": "BD20151600",
+    "district_id": "chattogram",
+    "name_en": "Chattogram City Corporation",
+    "name_bn": "চট্টগ্রাম সিটি কর্পোরেশন",
+    "lat": 22.345521,
+    "lon": 91.808973,
+    "area_sqkm": 198.54,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

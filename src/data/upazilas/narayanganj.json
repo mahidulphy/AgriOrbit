@@ -1,0 +1,68 @@
+[
+  {
+    "id": "narayanganj_araihazar",
+    "pcode": "BD30670002",
+    "district_id": "narayanganj",
+    "name_en": "Araihazar",
+    "name_bn": "আড়াইহাজার",
+    "lat": 23.764323,
+    "lon": 90.669362,
+    "area_sqkm": 179.11,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narayanganj_bandar",
+    "pcode": "BD30670006",
+    "district_id": "narayanganj",
+    "name_en": "Bandar",
+    "name_bn": "বন্দর",
+    "lat": 23.640942,
+    "lon": 90.545506,
+    "area_sqkm": 44.84,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narayanganj_narayanganj-sadar",
+    "pcode": "BD30670058",
+    "district_id": "narayanganj",
+    "name_en": "Narayanganj Sadar",
+    "name_bn": "নারায়নগঞ্জ সদর",
+    "lat": 23.612703,
+    "lon": 90.469672,
+    "area_sqkm": 68.64,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narayanganj_rupganj",
+    "pcode": "BD30670068",
+    "district_id": "narayanganj",
+    "name_en": "Rupganj",
+    "name_bn": "রূপগঞ্জ",
+    "lat": 23.812425,
+    "lon": 90.540029,
+    "area_sqkm": 184.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narayanganj_sonargaon",
+    "pcode": "BD30670004",
+    "district_id": "narayanganj",
+    "name_en": "Sonargaon",
+    "name_bn": "সোনারগাঁ",
+    "lat": 23.674654,
+    "lon": 90.594301,
+    "area_sqkm": 180.21,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narayanganj_narayanganj-city-corporation",
+    "pcode": "BD30674400",
+    "district_id": "narayanganj",
+    "name_en": "Narayanganj City Corporation",
+    "name_bn": "নারায়ণগঞ্জ সিটি কর্পোরেশন",
+    "lat": 23.652714,
+    "lon": 90.510362,
+    "area_sqkm": 48.71,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

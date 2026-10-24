@@ -1,0 +1,57 @@
+[
+  {
+    "id": "thakurgaon_baliadangi",
+    "pcode": "BD55940008",
+    "district_id": "thakurgaon",
+    "name_en": "Baliadangi",
+    "name_bn": "বালিয়াডাঙ্গী",
+    "lat": 26.108197,
+    "lon": 88.263477,
+    "area_sqkm": 280.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "thakurgaon_haripur",
+    "pcode": "BD55940051",
+    "district_id": "thakurgaon",
+    "name_en": "Haripur",
+    "name_bn": "হরিপুর",
+    "lat": 25.878819,
+    "lon": 88.154522,
+    "area_sqkm": 200.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "thakurgaon_pirganj",
+    "pcode": "BD55940082",
+    "district_id": "thakurgaon",
+    "name_en": "Pirganj",
+    "name_bn": "পীরগঞ্জ",
+    "lat": 25.842453,
+    "lon": 88.367902,
+    "area_sqkm": 353.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "thakurgaon_ranishankail",
+    "pcode": "BD55940086",
+    "district_id": "thakurgaon",
+    "name_en": "Ranishankail",
+    "name_bn": "রাণীশংকৈল",
+    "lat": 25.940768,
+    "lon": 88.245873,
+    "area_sqkm": 291.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "thakurgaon_thakurgaon-sadar",
+    "pcode": "BD55940094",
+    "district_id": "thakurgaon",
+    "name_en": "Thakurgaon Sadar",
+    "name_bn": "ঠাকুরগাঁও সদর",
+    "lat": 26.071732,
+    "lon": 88.463754,
+    "area_sqkm": 680.56,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

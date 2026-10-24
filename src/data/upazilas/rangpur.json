@@ -1,0 +1,101 @@
+[
+  {
+    "id": "rangpur_badarganj",
+    "pcode": "BD55850003",
+    "district_id": "rangpur",
+    "name_en": "Badarganj",
+    "name_bn": "বদরগঞ্জ",
+    "lat": 25.667769,
+    "lon": 89.054924,
+    "area_sqkm": 301.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_gangachara",
+    "pcode": "BD55850027",
+    "district_id": "rangpur",
+    "name_en": "Gangachara",
+    "name_bn": "গংগাচড়া",
+    "lat": 25.880151,
+    "lon": 89.20096,
+    "area_sqkm": 245.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_kaunia",
+    "pcode": "BD55850042",
+    "district_id": "rangpur",
+    "name_en": "Kaunia",
+    "name_bn": "কাউনিয়া",
+    "lat": 25.766381,
+    "lon": 89.393716,
+    "area_sqkm": 148.01,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_mithapukur",
+    "pcode": "BD55850058",
+    "district_id": "rangpur",
+    "name_en": "Mithapukur",
+    "name_bn": "মিঠাপুকুর",
+    "lat": 25.57212,
+    "lon": 89.260919,
+    "area_sqkm": 518.09,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_pirgachha",
+    "pcode": "BD55850073",
+    "district_id": "rangpur",
+    "name_en": "Pirgachha",
+    "name_bn": "পীরগাছা",
+    "lat": 25.665022,
+    "lon": 89.422271,
+    "area_sqkm": 264.31,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_pirganj",
+    "pcode": "BD55850076",
+    "district_id": "rangpur",
+    "name_en": "Pirganj",
+    "name_bn": "পীরগঞ্জ",
+    "lat": 25.425799,
+    "lon": 89.274702,
+    "area_sqkm": 411.97,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_rangpur-sadar",
+    "pcode": "BD55850049",
+    "district_id": "rangpur",
+    "name_en": "Rangpur Sadar",
+    "name_bn": "রংপুর সদর",
+    "lat": 25.75122,
+    "lon": 89.150608,
+    "area_sqkm": 137.91,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_taraganj",
+    "pcode": "BD55850092",
+    "district_id": "rangpur",
+    "name_en": "Taraganj",
+    "name_bn": "তারাগঞ্জ",
+    "lat": 25.783366,
+    "lon": 89.033312,
+    "area_sqkm": 129.17,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangpur_rangpur-city-corporation",
+    "pcode": "BD55857500",
+    "district_id": "rangpur",
+    "name_en": "Rangpur City Corporation",
+    "name_bn": "রংপুর সিটি কর্পোরেশন",
+    "lat": 25.753226,
+    "lon": 89.244234,
+    "area_sqkm": 207.3,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

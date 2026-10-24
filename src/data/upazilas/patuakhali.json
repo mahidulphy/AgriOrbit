@@ -1,0 +1,90 @@
+[
+  {
+    "id": "patuakhali_bauphal",
+    "pcode": "BD10780038",
+    "district_id": "patuakhali",
+    "name_en": "Bauphal",
+    "name_bn": "বাউফল",
+    "lat": 22.437347,
+    "lon": 90.546485,
+    "area_sqkm": 487.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_dashmina",
+    "pcode": "BD10780052",
+    "district_id": "patuakhali",
+    "name_en": "Dashmina",
+    "name_bn": "দশমিনা",
+    "lat": 22.250761,
+    "lon": 90.554286,
+    "area_sqkm": 301.38,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_dumki",
+    "pcode": "BD10780055",
+    "district_id": "patuakhali",
+    "name_en": "Dumki",
+    "name_bn": "দুমকি",
+    "lat": 22.448255,
+    "lon": 90.37305,
+    "area_sqkm": 94.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_galachipa",
+    "pcode": "BD10780057",
+    "district_id": "patuakhali",
+    "name_en": "Galachipa",
+    "name_bn": "গলাচিপা",
+    "lat": 22.147805,
+    "lon": 90.460518,
+    "area_sqkm": 528.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_kalapara",
+    "pcode": "BD10780066",
+    "district_id": "patuakhali",
+    "name_en": "Kalapara",
+    "name_bn": "কলাপাড়া",
+    "lat": 21.933709,
+    "lon": 90.221687,
+    "area_sqkm": 490.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_mirzaganj",
+    "pcode": "BD10780076",
+    "district_id": "patuakhali",
+    "name_en": "Mirzaganj",
+    "name_bn": "মির্জাগঞ্জ",
+    "lat": 22.355509,
+    "lon": 90.217406,
+    "area_sqkm": 176.44,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_patuakhali-sadar",
+    "pcode": "BD10780095",
+    "district_id": "patuakhali",
+    "name_en": "Patuakhali Sadar",
+    "name_bn": "পটুয়াখালী সদর",
+    "lat": 22.334533,
+    "lon": 90.329315,
+    "area_sqkm": 366.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "patuakhali_rangabali",
+    "pcode": "BD10780097",
+    "district_id": "patuakhali",
+    "name_en": "Rangabali",
+    "name_bn": "রাঙ্গাবালী",
+    "lat": 21.93162,
+    "lon": 90.430461,
+    "area_sqkm": 680.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

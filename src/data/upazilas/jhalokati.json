@@ -1,0 +1,46 @@
+[
+  {
+    "id": "jhalokati_jhalokathi-sadar",
+    "pcode": "BD10420040",
+    "district_id": "jhalokati",
+    "name_en": "Jhalokathi Sadar",
+    "name_bn": "ঝালকাঠি সদর",
+    "lat": 22.679779,
+    "lon": 90.192753,
+    "area_sqkm": 203.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhalokati_kanthalia",
+    "pcode": "BD10420043",
+    "district_id": "jhalokati",
+    "name_en": "Kanthalia",
+    "name_bn": "কাঠালিয়া",
+    "lat": 22.419413,
+    "lon": 90.102061,
+    "area_sqkm": 158.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhalokati_nalchhity",
+    "pcode": "BD10420073",
+    "district_id": "jhalokati",
+    "name_en": "Nalchhity",
+    "name_bn": "নলছিটি",
+    "lat": 22.601028,
+    "lon": 90.27149,
+    "area_sqkm": 209.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhalokati_rajapur",
+    "pcode": "BD10420084",
+    "district_id": "jhalokati",
+    "name_en": "Rajapur",
+    "name_bn": "রাজাপুর",
+    "lat": 22.549658,
+    "lon": 90.130944,
+    "area_sqkm": 163.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

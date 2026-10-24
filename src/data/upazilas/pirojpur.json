@@ -1,0 +1,79 @@
+[
+  {
+    "id": "pirojpur_bhandaria",
+    "pcode": "BD10790014",
+    "district_id": "pirojpur",
+    "name_en": "Bhandaria",
+    "name_bn": "ভান্ডারিয়া",
+    "lat": 22.451824,
+    "lon": 90.019748,
+    "area_sqkm": 165.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_indurkani",
+    "pcode": "BD10790090",
+    "district_id": "pirojpur",
+    "name_en": "Indurkani",
+    "name_bn": "ইন্দুরকানী",
+    "lat": 22.46621,
+    "lon": 89.965249,
+    "area_sqkm": 100.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_kawkhali",
+    "pcode": "BD10790047",
+    "district_id": "pirojpur",
+    "name_en": "Kawkhali",
+    "name_bn": "কাউখালী",
+    "lat": 22.606251,
+    "lon": 90.05726,
+    "area_sqkm": 80.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_mathbaria",
+    "pcode": "BD10790058",
+    "district_id": "pirojpur",
+    "name_en": "Mathbaria",
+    "name_bn": "মঠবাড়ীয়া",
+    "lat": 22.282909,
+    "lon": 89.94928,
+    "area_sqkm": 351.69,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_nazirpur",
+    "pcode": "BD10790076",
+    "district_id": "pirojpur",
+    "name_en": "Nazirpur",
+    "name_bn": "নাজিরপুর",
+    "lat": 22.769937,
+    "lon": 89.974825,
+    "area_sqkm": 227.93,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_nesarabad-swarupkathi",
+    "pcode": "BD10790087",
+    "district_id": "pirojpur",
+    "name_en": "Nesarabad (Swarupkathi)",
+    "name_bn": "নেছারাবাদ",
+    "lat": 22.721425,
+    "lon": 90.085644,
+    "area_sqkm": 182.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pirojpur_pirojpur-sadar",
+    "pcode": "BD10790080",
+    "district_id": "pirojpur",
+    "name_en": "Pirojpur Sadar",
+    "name_bn": "পিরোজপুর সদর",
+    "lat": 22.609202,
+    "lon": 89.979347,
+    "area_sqkm": 163.64,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

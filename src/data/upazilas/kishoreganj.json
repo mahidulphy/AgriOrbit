@@ -1,0 +1,145 @@
+[
+  {
+    "id": "kishoreganj_austagram",
+    "pcode": "BD30480002",
+    "district_id": "kishoreganj",
+    "name_en": "Austagram",
+    "name_bn": "অষ্টগ্রাম",
+    "lat": 24.323587,
+    "lon": 91.122496,
+    "area_sqkm": 303.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_bajitpur",
+    "pcode": "BD30480006",
+    "district_id": "kishoreganj",
+    "name_en": "Bajitpur",
+    "name_bn": "বাজিতপুর",
+    "lat": 24.226622,
+    "lon": 90.948464,
+    "area_sqkm": 188.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_bhairab",
+    "pcode": "BD30480011",
+    "district_id": "kishoreganj",
+    "name_en": "Bhairab",
+    "name_bn": "ভৈরব",
+    "lat": 24.102211,
+    "lon": 90.981204,
+    "area_sqkm": 118.9,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_hossainpur",
+    "pcode": "BD30480027",
+    "district_id": "kishoreganj",
+    "name_en": "Hossainpur",
+    "name_bn": "হোসেনপুর",
+    "lat": 24.448328,
+    "lon": 90.663354,
+    "area_sqkm": 120.78,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_itna",
+    "pcode": "BD30480033",
+    "district_id": "kishoreganj",
+    "name_en": "Itna",
+    "name_bn": "ইটনা",
+    "lat": 24.550933,
+    "lon": 91.08405,
+    "area_sqkm": 390.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_karimganj",
+    "pcode": "BD30480042",
+    "district_id": "kishoreganj",
+    "name_en": "Karimganj",
+    "name_bn": "করিমগঞ্জ",
+    "lat": 24.45434,
+    "lon": 90.896353,
+    "area_sqkm": 199.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_katiadi",
+    "pcode": "BD30480045",
+    "district_id": "kishoreganj",
+    "name_en": "Katiadi",
+    "name_bn": "কটিয়াদী",
+    "lat": 24.295219,
+    "lon": 90.820847,
+    "area_sqkm": 215.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_kishoreganj-sadar",
+    "pcode": "BD30480049",
+    "district_id": "kishoreganj",
+    "name_en": "Kishoreganj Sadar",
+    "name_bn": "কিশোরগঞ্জ সদর",
+    "lat": 24.42595,
+    "lon": 90.783256,
+    "area_sqkm": 177.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_kuliarchar",
+    "pcode": "BD30480054",
+    "district_id": "kishoreganj",
+    "name_en": "Kuliarchar",
+    "name_bn": "কুলিয়ারচর",
+    "lat": 24.153111,
+    "lon": 90.886613,
+    "area_sqkm": 105.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_mithamain",
+    "pcode": "BD30480059",
+    "district_id": "kishoreganj",
+    "name_en": "Mithamain",
+    "name_bn": "মিঠামইন",
+    "lat": 24.433149,
+    "lon": 91.110901,
+    "area_sqkm": 221.87,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_nikli",
+    "pcode": "BD30480076",
+    "district_id": "kishoreganj",
+    "name_en": "Nikli",
+    "name_bn": "নিকলী",
+    "lat": 24.338281,
+    "lon": 90.960938,
+    "area_sqkm": 201.31,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_pakundia",
+    "pcode": "BD30480079",
+    "district_id": "kishoreganj",
+    "name_en": "Pakundia",
+    "name_bn": "পাকুন্দিয়া",
+    "lat": 24.321489,
+    "lon": 90.693661,
+    "area_sqkm": 176.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kishoreganj_tarail",
+    "pcode": "BD30480092",
+    "district_id": "kishoreganj",
+    "name_en": "Tarail",
+    "name_bn": "তাড়াইল",
+    "lat": 24.550871,
+    "lon": 90.890539,
+    "area_sqkm": 144.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

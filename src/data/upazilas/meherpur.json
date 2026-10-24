@@ -1,0 +1,35 @@
+[
+  {
+    "id": "meherpur_gangni",
+    "pcode": "BD40570047",
+    "district_id": "meherpur",
+    "name_en": "Gangni",
+    "name_bn": "গাংনী",
+    "lat": 23.857424,
+    "lon": 88.770696,
+    "area_sqkm": 340.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "meherpur_meherpur-sadar",
+    "pcode": "BD40570087",
+    "district_id": "meherpur",
+    "name_en": "Meherpur Sadar",
+    "name_bn": "মেহেরপুর সদর",
+    "lat": 23.765279,
+    "lon": 88.661406,
+    "area_sqkm": 264.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "meherpur_mujibnagar",
+    "pcode": "BD40570060",
+    "district_id": "meherpur",
+    "name_en": "Mujibnagar",
+    "name_bn": "মুজিবনগর",
+    "lat": 23.668042,
+    "lon": 88.620669,
+    "area_sqkm": 113.93,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

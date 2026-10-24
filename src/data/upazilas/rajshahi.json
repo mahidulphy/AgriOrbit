@@ -1,0 +1,112 @@
+[
+  {
+    "id": "rajshahi_bagha",
+    "pcode": "BD50810010",
+    "district_id": "rajshahi",
+    "name_en": "Bagha",
+    "name_bn": "বাঘা",
+    "lat": 24.205945,
+    "lon": 88.833999,
+    "area_sqkm": 185.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_bagmara",
+    "pcode": "BD50810012",
+    "district_id": "rajshahi",
+    "name_en": "Bagmara",
+    "name_bn": "বাগমারা",
+    "lat": 24.593641,
+    "lon": 88.809231,
+    "area_sqkm": 366.15,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_charghat",
+    "pcode": "BD50810025",
+    "district_id": "rajshahi",
+    "name_en": "Charghat",
+    "name_bn": "চারঘাট",
+    "lat": 24.301192,
+    "lon": 88.775107,
+    "area_sqkm": 174.43,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_durgapur",
+    "pcode": "BD50810031",
+    "district_id": "rajshahi",
+    "name_en": "Durgapur",
+    "name_bn": "দুর্গাপুর",
+    "lat": 24.468277,
+    "lon": 88.760895,
+    "area_sqkm": 199.52,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_godagari",
+    "pcode": "BD50810034",
+    "district_id": "rajshahi",
+    "name_en": "Godagari",
+    "name_bn": "গোদাগাড়ী",
+    "lat": 24.483149,
+    "lon": 88.414924,
+    "area_sqkm": 489.97,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_mohanpur",
+    "pcode": "BD50810053",
+    "district_id": "rajshahi",
+    "name_en": "Mohanpur",
+    "name_bn": "মোহনপুর",
+    "lat": 24.554751,
+    "lon": 88.640786,
+    "area_sqkm": 161.87,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_paba",
+    "pcode": "BD50810072",
+    "district_id": "rajshahi",
+    "name_en": "Paba",
+    "name_bn": "পবা",
+    "lat": 24.338134,
+    "lon": 88.590744,
+    "area_sqkm": 305.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_puthia",
+    "pcode": "BD50810082",
+    "district_id": "rajshahi",
+    "name_en": "Puthia",
+    "name_bn": "পুঠিয়া",
+    "lat": 24.411487,
+    "lon": 88.827357,
+    "area_sqkm": 196.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_tanore",
+    "pcode": "BD50810094",
+    "district_id": "rajshahi",
+    "name_en": "Tanore",
+    "name_bn": "তানোর",
+    "lat": 24.619859,
+    "lon": 88.530907,
+    "area_sqkm": 297.15,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajshahi_rajshahi-city-corporation",
+    "pcode": "BD50816600",
+    "district_id": "rajshahi",
+    "name_en": "Rajshahi City Corporation",
+    "name_bn": "রাজশাহী সিটি কর্পোরেশন",
+    "lat": 24.380773,
+    "lon": 88.608748,
+    "area_sqkm": 46.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "pabna_atgharia",
+    "pcode": "BD50760005",
+    "district_id": "pabna",
+    "name_en": "Atgharia",
+    "name_bn": "আটঘরিয়া",
+    "lat": 24.107416,
+    "lon": 89.282746,
+    "area_sqkm": 181.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_bera",
+    "pcode": "BD50760016",
+    "district_id": "pabna",
+    "name_en": "Bera",
+    "name_bn": "বেড়া",
+    "lat": 23.942519,
+    "lon": 89.657185,
+    "area_sqkm": 266.89,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_bhangura",
+    "pcode": "BD50760019",
+    "district_id": "pabna",
+    "name_en": "Bhangura",
+    "name_bn": "ভাঙ্গুড়া",
+    "lat": 24.238927,
+    "lon": 89.396387,
+    "area_sqkm": 134.75,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_chatmohar",
+    "pcode": "BD50760022",
+    "district_id": "pabna",
+    "name_en": "Chatmohar",
+    "name_bn": "চাটমোহর",
+    "lat": 24.224102,
+    "lon": 89.303219,
+    "area_sqkm": 305.42,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_faridpur",
+    "pcode": "BD50760033",
+    "district_id": "pabna",
+    "name_en": "Faridpur",
+    "name_bn": "ফরিদপুর",
+    "lat": 24.15813,
+    "lon": 89.449478,
+    "area_sqkm": 139.77,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_ishwardi",
+    "pcode": "BD50760039",
+    "district_id": "pabna",
+    "name_en": "Ishwardi",
+    "name_bn": "ঈশ্বরদী",
+    "lat": 24.080171,
+    "lon": 89.094338,
+    "area_sqkm": 269.2,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_pabna-sadar",
+    "pcode": "BD50760055",
+    "district_id": "pabna",
+    "name_en": "Pabna Sadar",
+    "name_bn": "পাবনা সদর",
+    "lat": 23.994894,
+    "lon": 89.281122,
+    "area_sqkm": 429.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_santhia",
+    "pcode": "BD50760072",
+    "district_id": "pabna",
+    "name_en": "Santhia",
+    "name_bn": "সাঁথিয়া",
+    "lat": 24.043428,
+    "lon": 89.5159,
+    "area_sqkm": 330.75,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "pabna_sujanagar",
+    "pcode": "BD50760083",
+    "district_id": "pabna",
+    "name_en": "Sujanagar",
+    "name_bn": "সুজানগর",
+    "lat": 23.89783,
+    "lon": 89.514014,
+    "area_sqkm": 333.11,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

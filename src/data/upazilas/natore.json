@@ -1,0 +1,79 @@
+[
+  {
+    "id": "natore_bagatipara",
+    "pcode": "BD50690009",
+    "district_id": "natore",
+    "name_en": "Bagatipara",
+    "name_bn": "বাগাতিপাড়া",
+    "lat": 24.31325,
+    "lon": 88.947902,
+    "area_sqkm": 139.26,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_baraigram",
+    "pcode": "BD50690015",
+    "district_id": "natore",
+    "name_en": "Baraigram",
+    "name_bn": "বড়াইগ্রাম",
+    "lat": 24.273237,
+    "lon": 89.149973,
+    "area_sqkm": 307.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_gurudaspur",
+    "pcode": "BD50690041",
+    "district_id": "natore",
+    "name_en": "Gurudaspur",
+    "name_bn": "গুরুদাসপুর",
+    "lat": 24.373727,
+    "lon": 89.205388,
+    "area_sqkm": 200.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_lalpur",
+    "pcode": "BD50690044",
+    "district_id": "natore",
+    "name_en": "Lalpur",
+    "name_bn": "লালপুর",
+    "lat": 24.199787,
+    "lon": 88.985719,
+    "area_sqkm": 323.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_naldanga",
+    "pcode": "BD50690055",
+    "district_id": "natore",
+    "name_en": "Naldanga",
+    "name_bn": "নলডাঙ্গা",
+    "lat": 24.506002,
+    "lon": 88.975608,
+    "area_sqkm": 175.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_natore-sadar",
+    "pcode": "BD50690063",
+    "district_id": "natore",
+    "name_en": "Natore Sadar",
+    "name_bn": "নাটোর সদর",
+    "lat": 24.397098,
+    "lon": 88.989964,
+    "area_sqkm": 229.36,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "natore_singra",
+    "pcode": "BD50690091",
+    "district_id": "natore",
+    "name_en": "Singra",
+    "name_bn": "সিংড়া",
+    "lat": 24.524408,
+    "lon": 89.184307,
+    "area_sqkm": 529.37,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

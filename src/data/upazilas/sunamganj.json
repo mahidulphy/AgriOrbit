@@ -1,0 +1,134 @@
+[
+  {
+    "id": "sunamganj_bishwambharpur",
+    "pcode": "BD60900018",
+    "district_id": "sunamganj",
+    "name_en": "Bishwambharpur",
+    "name_bn": "বিশ্বম্ভরপুর",
+    "lat": 25.108884,
+    "lon": 91.315238,
+    "area_sqkm": 190.0,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_chhatak",
+    "pcode": "BD60900023",
+    "district_id": "sunamganj",
+    "name_en": "Chhatak",
+    "name_bn": "ছাতক",
+    "lat": 24.948922,
+    "lon": 91.614542,
+    "area_sqkm": 438.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_derai",
+    "pcode": "BD60900029",
+    "district_id": "sunamganj",
+    "name_en": "Derai",
+    "name_bn": "দিরাই",
+    "lat": 24.787423,
+    "lon": 91.336081,
+    "area_sqkm": 399.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_dharmapasha",
+    "pcode": "BD60900032",
+    "district_id": "sunamganj",
+    "name_en": "Dharmapasha",
+    "name_bn": "ধর্মপাশা",
+    "lat": 24.944252,
+    "lon": 91.0638,
+    "area_sqkm": 273.97,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_dowarabazar",
+    "pcode": "BD60900033",
+    "district_id": "sunamganj",
+    "name_en": "Dowarabazar",
+    "name_bn": "দোয়ারাবাজার",
+    "lat": 25.071647,
+    "lon": 91.561195,
+    "area_sqkm": 274.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_jagannathpur",
+    "pcode": "BD60900047",
+    "district_id": "sunamganj",
+    "name_en": "Jagannathpur",
+    "name_bn": "জগন্নাথপুর",
+    "lat": 24.750168,
+    "lon": 91.556723,
+    "area_sqkm": 368.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_jamalganj",
+    "pcode": "BD60900050",
+    "district_id": "sunamganj",
+    "name_en": "Jamalganj",
+    "name_bn": "জামালগঞ্জ",
+    "lat": 24.955894,
+    "lon": 91.203257,
+    "area_sqkm": 334.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_madhyanagar",
+    "pcode": "BD60900063",
+    "district_id": "sunamganj",
+    "name_en": "Madhyanagar",
+    "name_bn": "মধ্যনগর",
+    "lat": 25.090202,
+    "lon": 91.013266,
+    "area_sqkm": 227.53,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_shalla",
+    "pcode": "BD60900086",
+    "district_id": "sunamganj",
+    "name_en": "Shalla",
+    "name_bn": "শাল্লা",
+    "lat": 24.687471,
+    "lon": 91.258863,
+    "area_sqkm": 258.12,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_shantiganj",
+    "pcode": "BD60900087",
+    "district_id": "sunamganj",
+    "name_en": "Shantiganj",
+    "name_bn": "শান্তিগঞ্জ",
+    "lat": 24.91238,
+    "lon": 91.407776,
+    "area_sqkm": 311.51,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_sunamganj-sadar",
+    "pcode": "BD60900089",
+    "district_id": "sunamganj",
+    "name_en": "Sunamganj Sadar",
+    "name_bn": "সুনামগঞ্জ সদর",
+    "lat": 25.053876,
+    "lon": 91.399982,
+    "area_sqkm": 276.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sunamganj_tahirpur",
+    "pcode": "BD60900092",
+    "district_id": "sunamganj",
+    "name_en": "Tahirpur",
+    "name_bn": "তাহিরপুর",
+    "lat": 25.129014,
+    "lon": 91.163696,
+    "area_sqkm": 313.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

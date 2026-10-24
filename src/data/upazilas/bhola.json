@@ -1,0 +1,79 @@
+[
+  {
+    "id": "bhola_bhola-sadar",
+    "pcode": "BD10090018",
+    "district_id": "bhola",
+    "name_en": "Bhola Sadar",
+    "name_bn": "ভোলা সদর",
+    "lat": 22.707235,
+    "lon": 90.63054,
+    "area_sqkm": 435.53,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_borhanuddin",
+    "pcode": "BD10090021",
+    "district_id": "bhola",
+    "name_en": "Borhanuddin",
+    "name_bn": "বোরহানউদ্দিন",
+    "lat": 22.485409,
+    "lon": 90.71538,
+    "area_sqkm": 286.8,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_charfasson",
+    "pcode": "BD10090025",
+    "district_id": "bhola",
+    "name_en": "Charfasson",
+    "name_bn": "চরফ্যাশন",
+    "lat": 22.044862,
+    "lon": 90.724599,
+    "area_sqkm": 1221.7,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_daulatkhan",
+    "pcode": "BD10090029",
+    "district_id": "bhola",
+    "name_en": "Daulatkhan",
+    "name_bn": "দৌলতখান",
+    "lat": 22.642087,
+    "lon": 90.745479,
+    "area_sqkm": 306.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_lalmohan",
+    "pcode": "BD10090054",
+    "district_id": "bhola",
+    "name_en": "Lalmohan",
+    "name_bn": "লালমোহন",
+    "lat": 22.302344,
+    "lon": 90.77137,
+    "area_sqkm": 381.92,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_monpura",
+    "pcode": "BD10090065",
+    "district_id": "bhola",
+    "name_en": "Monpura",
+    "name_bn": "মনপুরা",
+    "lat": 22.222165,
+    "lon": 90.943081,
+    "area_sqkm": 513.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "bhola_tazumuddin",
+    "pcode": "BD10090091",
+    "district_id": "bhola",
+    "name_en": "Tazumuddin",
+    "name_bn": "তজুমদ্দিন",
+    "lat": 22.452548,
+    "lon": 90.859818,
+    "area_sqkm": 325.92,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

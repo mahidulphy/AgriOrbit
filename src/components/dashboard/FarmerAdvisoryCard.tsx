@@ -53,6 +53,8 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
   className = '',
 }) => {
   const isEn = language === 'en';
+  const isDistrictWide = !upazilaName || upazilaName === 'District-wide' || upazilaName === 'সমগ্র জেলা';
+  const locationLabel = isDistrictWide ? districtName : `${districtName} › ${upazilaName}`;
 
   const rotationSequenceEn = engineResult.picks.map((p) => p.crop.nameEn).join(' → ');
   const rotationSequenceBn = engineResult.picks.map((p) => p.crop.nameBn).join(' → ');
@@ -63,8 +65,8 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
 
   const handleShare = () => {
     const shareTitle = isEn
-      ? `AgriOrbit Advisory for ${upazilaName}, ${districtName}`
-      : `${upazilaName}, ${districtName}-এর এগ্রিঅরবিট কৃষি পরামর্শ`;
+      ? `AgriOrbit Advisory for ${locationLabel}`
+      : `${locationLabel}-এর এগ্রিঅরবিট কৃষি পরামর্শ`;
     const shareText = isEn
       ? `AgriOrbit Advisory: Recommended 3-Season Rotation: ${rotationSequenceEn}. Data: NASA POWER, SMAP & BARI.`
       : `এগ্রিঅরবিট কৃষি পরামর্শ: প্রস্তাবিত ৩-মৌসুমী পরিক্রমা: ${rotationSequenceBn}। তথ্যসূত্র: নাসা ও বিএআরআই।`;
@@ -94,7 +96,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
             <span>{isEn ? 'DECISION-SUPPORT ADVISORY CERTIFICATE' : 'কৃষি সিদ্ধান্ত সহায়তা সনদ'}</span>
           </div>
           <h3 className="font-display text-2xl sm:text-3xl font-bold text-white print:text-black">
-            {isEn ? `Field Advisory: ${upazilaName}, ${districtName}` : `${upazilaName}, ${districtName} কৃষি পরামর্শ কার্ড`}
+            {isEn ? `Field Advisory: ${locationLabel}` : `${locationLabel} কৃষি পরামর্শ কার্ড`}
           </h3>
           <div className="flex items-center gap-2 text-xs font-mono text-[#A3A3A3] print:text-gray-600 mt-1">
             <MapPin className="w-3.5 h-3.5 text-[#22C55E] print:text-blue-600" />

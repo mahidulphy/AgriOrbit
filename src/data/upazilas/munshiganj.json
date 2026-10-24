@@ -1,0 +1,68 @@
+[
+  {
+    "id": "munshiganj_gazaria",
+    "pcode": "BD30590024",
+    "district_id": "munshiganj",
+    "name_en": "Gazaria",
+    "name_bn": "গজারিয়া",
+    "lat": 23.547226,
+    "lon": 90.629019,
+    "area_sqkm": 137.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "munshiganj_louhajang",
+    "pcode": "BD30590044",
+    "district_id": "munshiganj",
+    "name_en": "Louhajang",
+    "name_bn": "লৌহজং",
+    "lat": 23.46916,
+    "lon": 90.343532,
+    "area_sqkm": 139.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "munshiganj_munshiganj-sadar",
+    "pcode": "BD30590056",
+    "district_id": "munshiganj",
+    "name_en": "Munshiganj Sadar",
+    "name_bn": "মুন্সিগঞ্জ সদর",
+    "lat": 23.487467,
+    "lon": 90.526072,
+    "area_sqkm": 162.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "munshiganj_sirajdikhan",
+    "pcode": "BD30590074",
+    "district_id": "munshiganj",
+    "name_en": "Sirajdikhan",
+    "name_bn": "সিরাজদিখান",
+    "lat": 23.597645,
+    "lon": 90.358025,
+    "area_sqkm": 179.36,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "munshiganj_sreenagar",
+    "pcode": "BD30590084",
+    "district_id": "munshiganj",
+    "name_en": "Sreenagar",
+    "name_bn": "শ্রীনগর",
+    "lat": 23.546373,
+    "lon": 90.263582,
+    "area_sqkm": 201.08,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "munshiganj_tongibari",
+    "pcode": "BD30590094",
+    "district_id": "munshiganj",
+    "name_en": "Tongibari",
+    "name_bn": "টংগীবাড়ি",
+    "lat": 23.474791,
+    "lon": 90.452755,
+    "area_sqkm": 113.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

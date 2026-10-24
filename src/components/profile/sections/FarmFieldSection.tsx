@@ -30,6 +30,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
   const [, setShowMap] = useState<boolean>(true);
   const [locating, setLocating] = useState<boolean>(false);
   const [mapFlyTarget, setMapFlyTarget] = useState<MapFlyTarget | null>(null);
+  const [upazilaSearch, setUpazilaSearch] = useState<string>('');
 
   const flyNonce = useRef(0);
   const requestSeq = useRef(0);
@@ -42,15 +43,25 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
   const currentDistrictId = (field.district || 'rangpur') as DistrictId;
   const upazilaList = getUpazilasFor(currentDistrictId);
 
+  const filteredUpazilas = upazilaSearch.trim()
+    ? upazilaList.filter(
+        (u) =>
+          u.nameEn.toLowerCase().includes(upazilaSearch.toLowerCase()) ||
+          u.nameBn.includes(upazilaSearch.trim())
+      )
+    : upazilaList;
+
   const handleDistrictChange = (dId: DistrictId) => {
     const admin = getDistrictAdmin(dId);
     const upazilas = getUpazilasFor(dId);
     const newUpazila = upazilas[0]?.id ?? DISTRICT_WIDE_UPAZILA;
+    const firstUpz = upazilas[0];
 
-    const lat = admin ? admin.lat : field.latitude;
-    const lng = admin ? admin.lng : field.longitude;
+    const lat = firstUpz?.lat ?? (admin ? admin.lat : field.latitude);
+    const lng = firstUpz?.lng ?? (admin ? admin.lng : field.longitude);
     const division = admin ? admin.division : field.division;
 
+    setUpazilaSearch('');
     onChange({
       district: dId,
       division,
@@ -60,6 +71,28 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
     });
 
     flyTo(lng, lat, 10);
+  };
+
+  const handleUpazilaChange = (upazilaId: string) => {
+    if (upazilaId === DISTRICT_WIDE_UPAZILA) {
+      const admin = getDistrictAdmin(currentDistrictId);
+      onChange({
+        upazila: DISTRICT_WIDE_UPAZILA,
+        latitude: admin ? admin.lat : field.latitude,
+        longitude: admin ? admin.lng : field.longitude,
+      });
+      if (admin) flyTo(admin.lng, admin.lat, 9);
+      return;
+    }
+    const upz = upazilaList.find((u) => u.id === upazilaId);
+    onChange({
+      upazila: upazilaId,
+      latitude: upz?.lat ?? field.latitude,
+      longitude: upz?.lng ?? field.longitude,
+    });
+    if (upz?.lat && upz?.lng) {
+      flyTo(upz.lng, upz.lat, 11);
+    }
   };
 
   const handleMapSelect = async (lat: number, lng: number) => {
@@ -211,20 +244,33 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
 
           {/* Upazila Selection */}
           <div>
-            <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
-              {isBn ? 'উপজেলা' : 'Upazila'}
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] uppercase tracking-wider">
+                {isBn ? 'উপজেলা' : 'Upazila'} ({upazilaList.length})
+              </label>
+            </div>
+            {upazilaList.length > 5 && (
+              <div className="mb-2">
+                <input
+                  type="text"
+                  value={upazilaSearch}
+                  onChange={(e) => setUpazilaSearch(e.target.value)}
+                  placeholder={isBn ? 'উপজেলা খুঁজুন (বাংলা / English)...' : 'Search upazila (English / বাংলা)...'}
+                  className="w-full min-h-[38px] px-3 py-1.5 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-xs focus:outline-none focus:border-[#22C55E] placeholder-[#737373]"
+                />
+              </div>
+            )}
             <select
               value={field.upazila || DISTRICT_WIDE_UPAZILA}
-              onChange={(e) => onChange({ upazila: e.target.value })}
+              onChange={(e) => handleUpazilaChange(e.target.value)}
               className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] transition-colors cursor-pointer"
             >
               <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#141414] text-[#FAFAFA]">
-                {isBn ? 'সমগ্র জেলা (গড় আবহাওয়া)' : 'District-wide (Average)'}
+                {isBn ? 'সমগ্র জেলা (জেলা-ভিত্তিক গড়)' : 'Entire District (District-wide)'}
               </option>
-              {upazilaList.map((u) => (
+              {filteredUpazilas.map((u) => (
                 <option key={u.id} value={u.id} className="bg-[#141414] text-[#FAFAFA]">
-                  {isBn ? u.nameBn : u.nameEn}
+                  {isBn ? `${u.nameBn} (${u.nameEn})` : `${u.nameEn} (${u.nameBn})`}
                 </option>
               ))}
             </select>

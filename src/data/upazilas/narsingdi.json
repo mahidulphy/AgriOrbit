@@ -1,0 +1,68 @@
+[
+  {
+    "id": "narsingdi_belabo",
+    "pcode": "BD30680007",
+    "district_id": "narsingdi",
+    "name_en": "Belabo",
+    "name_bn": "বেলাবো",
+    "lat": 24.101457,
+    "lon": 90.848732,
+    "area_sqkm": 120.24,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narsingdi_manohardi",
+    "pcode": "BD30680052",
+    "district_id": "narsingdi",
+    "name_en": "Manohardi",
+    "name_bn": "মনোহরদী",
+    "lat": 24.1608,
+    "lon": 90.730763,
+    "area_sqkm": 194.09,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narsingdi_narsingdi-sadar",
+    "pcode": "BD30680060",
+    "district_id": "narsingdi",
+    "name_en": "Narsingdi Sadar",
+    "name_bn": "নরসিংদী সদর",
+    "lat": 23.869119,
+    "lon": 90.708023,
+    "area_sqkm": 222.64,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narsingdi_palash",
+    "pcode": "BD30680063",
+    "district_id": "narsingdi",
+    "name_en": "Palash",
+    "name_bn": "পলাশ",
+    "lat": 23.95637,
+    "lon": 90.649908,
+    "area_sqkm": 95.01,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narsingdi_raipura",
+    "pcode": "BD30680064",
+    "district_id": "narsingdi",
+    "name_en": "Raipura",
+    "name_bn": "রায়পুরা",
+    "lat": 23.961946,
+    "lon": 90.872091,
+    "area_sqkm": 322.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narsingdi_shibpur",
+    "pcode": "BD30680076",
+    "district_id": "narsingdi",
+    "name_en": "Shibpur",
+    "name_bn": "শিবপুর",
+    "lat": 24.027648,
+    "lon": 90.747013,
+    "area_sqkm": 209.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

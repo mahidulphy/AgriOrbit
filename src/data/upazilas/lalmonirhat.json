@@ -1,0 +1,57 @@
+[
+  {
+    "id": "lalmonirhat_aditmari",
+    "pcode": "BD55520002",
+    "district_id": "lalmonirhat",
+    "name_en": "Aditmari",
+    "name_bn": "আদিতমারী",
+    "lat": 25.942959,
+    "lon": 89.368193,
+    "area_sqkm": 189.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lalmonirhat_hatibandha",
+    "pcode": "BD55520033",
+    "district_id": "lalmonirhat",
+    "name_en": "Hatibandha",
+    "name_bn": "হাতীবান্ধা",
+    "lat": 26.120267,
+    "lon": 89.143628,
+    "area_sqkm": 286.52,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lalmonirhat_kaliganj",
+    "pcode": "BD55520039",
+    "district_id": "lalmonirhat",
+    "name_en": "Kaliganj",
+    "name_bn": "কালীগঞ্জ",
+    "lat": 25.985613,
+    "lon": 89.241706,
+    "area_sqkm": 237.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lalmonirhat_lalmonirhat-sadar",
+    "pcode": "BD55520055",
+    "district_id": "lalmonirhat",
+    "name_en": "Lalmonirhat Sadar",
+    "name_bn": "লালমনিরহাট সদর",
+    "lat": 25.878702,
+    "lon": 89.453362,
+    "area_sqkm": 262.53,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lalmonirhat_patgram",
+    "pcode": "BD55520070",
+    "district_id": "lalmonirhat",
+    "name_en": "Patgram",
+    "name_bn": "পাটগ্রাম",
+    "lat": 26.343425,
+    "lon": 89.01952,
+    "area_sqkm": 259.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

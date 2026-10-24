@@ -26,6 +26,7 @@ import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { BD_DISTRICTS } from '../../data/districts';
+import { getUpazilasFor, DISTRICT_WIDE_UPAZILA } from '../../lib/location';
 import { CROPS } from '../../data/crops';
 import { CROP_CATEGORIES } from '../../data/cropCategories';
 import {
@@ -331,13 +332,20 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     <label className="block text-[11px] font-mono text-slate-400 mb-1">
                       {isBn ? 'উপজেলা' : 'Upazila'}
                     </label>
-                    <input
-                      type="text"
-                      value={profile.upazila}
+                    <select
+                      value={profile.upazila || DISTRICT_WIDE_UPAZILA}
                       onChange={(e) => setProfile({ ...profile, upazila: e.target.value })}
-                      placeholder={isBn ? 'যেমন: কাহারোল / বীরগঞ্জ' : 'e.g. Sadar'}
-                      className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none"
-                    />
+                      className="w-full px-3 py-2 rounded-xl bg-[#141414] border border-[#262626] text-white text-xs focus:border-[#FAFAFA] focus:outline-none cursor-pointer"
+                    >
+                      <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#141414] text-white">
+                        {isBn ? 'সমগ্র জেলা (জেলা-ভিত্তিক)' : 'Entire District'}
+                      </option>
+                      {getUpazilasFor(profile.districtId as any).map((u) => (
+                        <option key={u.id} value={u.id} className="bg-[#141414] text-white">
+                          {isBn ? `${u.nameBn} (${u.nameEn})` : `${u.nameEn} (${u.nameBn})`}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Village / Area */}

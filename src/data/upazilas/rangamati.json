@@ -1,0 +1,112 @@
+[
+  {
+    "id": "rangamati_baghaichhari",
+    "pcode": "BD20840007",
+    "district_id": "rangamati",
+    "name_en": "Baghaichhari",
+    "name_bn": "বাঘাইছড়ি",
+    "lat": 23.382807,
+    "lon": 92.237143,
+    "area_sqkm": 1490.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_barkal",
+    "pcode": "BD20840021",
+    "district_id": "rangamati",
+    "name_en": "Barkal",
+    "name_bn": "বরকল",
+    "lat": 22.830959,
+    "lon": 92.346133,
+    "area_sqkm": 665.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_belaichhari",
+    "pcode": "BD20840029",
+    "district_id": "rangamati",
+    "name_en": "Belaichhari",
+    "name_bn": "বিলাইছড়ি",
+    "lat": 22.257413,
+    "lon": 92.48314,
+    "area_sqkm": 750.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_jurachhari",
+    "pcode": "BD20840047",
+    "district_id": "rangamati",
+    "name_en": "Jurachhari",
+    "name_bn": "জুরাইছড়ি",
+    "lat": 22.559309,
+    "lon": 92.455496,
+    "area_sqkm": 644.7,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_kaptai",
+    "pcode": "BD20840036",
+    "district_id": "rangamati",
+    "name_en": "Kaptai",
+    "name_bn": "কাপ্তাই",
+    "lat": 22.462367,
+    "lon": 92.201663,
+    "area_sqkm": 252.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_kawkhali",
+    "pcode": "BD20840025",
+    "district_id": "rangamati",
+    "name_en": "Kawkhali",
+    "name_bn": "কাউখালী",
+    "lat": 22.623489,
+    "lon": 92.012271,
+    "area_sqkm": 237.91,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_langadu",
+    "pcode": "BD20840058",
+    "district_id": "rangamati",
+    "name_en": "Langadu",
+    "name_bn": "লংগদু",
+    "lat": 22.97009,
+    "lon": 92.216655,
+    "area_sqkm": 494.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_naniarchar",
+    "pcode": "BD20840075",
+    "district_id": "rangamati",
+    "name_en": "Naniarchar",
+    "name_bn": "নানিয়ারচর",
+    "lat": 22.833655,
+    "lon": 92.072635,
+    "area_sqkm": 336.54,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_rajasthali",
+    "pcode": "BD20840078",
+    "district_id": "rangamati",
+    "name_en": "Rajasthali",
+    "name_bn": "রাজস্থলী",
+    "lat": 22.371584,
+    "lon": 92.244579,
+    "area_sqkm": 148.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rangamati_rangamati-sadar",
+    "pcode": "BD20840087",
+    "district_id": "rangamati",
+    "name_en": "Rangamati Sadar",
+    "name_bn": "রাঙ্গামাটি সদর",
+    "lat": 22.645122,
+    "lon": 92.201364,
+    "area_sqkm": 621.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

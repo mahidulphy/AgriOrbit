@@ -1,0 +1,123 @@
+[
+  {
+    "id": "barishal_agailjhara",
+    "pcode": "BD10060002",
+    "district_id": "barishal",
+    "name_en": "Agailjhara",
+    "name_bn": "আগৈলঝাড়া",
+    "lat": 22.967643,
+    "lon": 90.140472,
+    "area_sqkm": 158.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_babuganj",
+    "pcode": "BD10060003",
+    "district_id": "barishal",
+    "name_en": "Babuganj",
+    "name_bn": "বাবুগঞ্জ",
+    "lat": 22.824616,
+    "lon": 90.312726,
+    "area_sqkm": 161.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_bakerganj",
+    "pcode": "BD10060007",
+    "district_id": "barishal",
+    "name_en": "Bakerganj",
+    "name_bn": "বাকেরগঞ্জ",
+    "lat": 22.554782,
+    "lon": 90.390075,
+    "area_sqkm": 404.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_banaripara",
+    "pcode": "BD10060010",
+    "district_id": "barishal",
+    "name_en": "Banaripara",
+    "name_bn": "বানারীপাড়া",
+    "lat": 22.811187,
+    "lon": 90.129167,
+    "area_sqkm": 134.08,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_barishal-sadar-kotwali",
+    "pcode": "BD10060051",
+    "district_id": "barishal",
+    "name_en": "Barishal Sadar (Kotwali)",
+    "name_bn": "বরিশাল সদর",
+    "lat": 22.714811,
+    "lon": 90.4096,
+    "area_sqkm": 242.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_gaurnadi",
+    "pcode": "BD10060032",
+    "district_id": "barishal",
+    "name_en": "Gaurnadi",
+    "name_bn": "গৌরনদী",
+    "lat": 22.969815,
+    "lon": 90.242853,
+    "area_sqkm": 147.9,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_hijla",
+    "pcode": "BD10060036",
+    "district_id": "barishal",
+    "name_en": "Hijla",
+    "name_bn": "হিজলা",
+    "lat": 22.962802,
+    "lon": 90.551824,
+    "area_sqkm": 363.34,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_mehendiganj",
+    "pcode": "BD10060062",
+    "district_id": "barishal",
+    "name_en": "Mehendiganj",
+    "name_bn": "মেহেন্দিগঞ্জ",
+    "lat": 22.815971,
+    "lon": 90.519015,
+    "area_sqkm": 406.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_muladi",
+    "pcode": "BD10060069",
+    "district_id": "barishal",
+    "name_en": "Muladi",
+    "name_bn": "মুলাদী",
+    "lat": 22.955149,
+    "lon": 90.376,
+    "area_sqkm": 229.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_ujirpur",
+    "pcode": "BD10060094",
+    "district_id": "barishal",
+    "name_en": "Ujirpur",
+    "name_bn": "উজিরপুর",
+    "lat": 22.865749,
+    "lon": 90.164973,
+    "area_sqkm": 246.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barishal_barishal-city-corporation",
+    "pcode": "BD10065000",
+    "district_id": "barishal",
+    "name_en": "Barishal City Corporation",
+    "name_bn": "বরিশাল সিটি কর্পোরেশন",
+    "lat": 22.70207,
+    "lon": 90.342336,
+    "area_sqkm": 58.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

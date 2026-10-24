@@ -1,0 +1,68 @@
+[
+  {
+    "id": "shariatpur_bhedarganj",
+    "pcode": "BD30860014",
+    "district_id": "shariatpur",
+    "name_en": "Bhedarganj",
+    "name_bn": "ভেদরগঞ্জ",
+    "lat": 23.247739,
+    "lon": 90.513567,
+    "area_sqkm": 278.38,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "shariatpur_damudya",
+    "pcode": "BD30860025",
+    "district_id": "shariatpur",
+    "name_en": "Damudya",
+    "name_bn": "ডামুড্যা",
+    "lat": 23.1399,
+    "lon": 90.422641,
+    "area_sqkm": 98.26,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "shariatpur_gosairhat",
+    "pcode": "BD30860036",
+    "district_id": "shariatpur",
+    "name_en": "Gosairhat",
+    "name_bn": "গোসাইরহাট",
+    "lat": 23.081678,
+    "lon": 90.456948,
+    "area_sqkm": 180.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "shariatpur_naria",
+    "pcode": "BD30860065",
+    "district_id": "shariatpur",
+    "name_en": "Naria",
+    "name_bn": "নড়িয়া",
+    "lat": 23.305756,
+    "lon": 90.427662,
+    "area_sqkm": 230.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "shariatpur_shariatpur-sadar",
+    "pcode": "BD30860069",
+    "district_id": "shariatpur",
+    "name_en": "Shariatpur Sadar",
+    "name_bn": "শরিয়তপুর সদর",
+    "lat": 23.218842,
+    "lon": 90.316701,
+    "area_sqkm": 174.03,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "shariatpur_zajira",
+    "pcode": "BD30860094",
+    "district_id": "shariatpur",
+    "name_en": "Zajira",
+    "name_bn": "জাজিরা",
+    "lat": 23.365584,
+    "lon": 90.323687,
+    "area_sqkm": 240.77,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

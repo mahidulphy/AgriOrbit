@@ -1,0 +1,112 @@
+[
+  {
+    "id": "khulna_batiaghata",
+    "pcode": "BD40470012",
+    "district_id": "khulna",
+    "name_en": "Batiaghata",
+    "name_bn": "বটিয়াঘাটা",
+    "lat": 22.71334,
+    "lon": 89.514915,
+    "area_sqkm": 237.38,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_dacope",
+    "pcode": "BD40470017",
+    "district_id": "khulna",
+    "name_en": "Dacope",
+    "name_bn": "দাকোপ",
+    "lat": 22.242031,
+    "lon": 89.526376,
+    "area_sqkm": 1103.69,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_dighalia",
+    "pcode": "BD40470040",
+    "district_id": "khulna",
+    "name_en": "Dighalia",
+    "name_bn": "দিঘলিয়া",
+    "lat": 22.921514,
+    "lon": 89.553779,
+    "area_sqkm": 86.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_dumuria",
+    "pcode": "BD40470030",
+    "district_id": "khulna",
+    "name_en": "Dumuria",
+    "name_bn": "ডুমুরিয়া",
+    "lat": 22.805763,
+    "lon": 89.398027,
+    "area_sqkm": 456.13,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_koyra",
+    "pcode": "BD40470053",
+    "district_id": "khulna",
+    "name_en": "Koyra",
+    "name_bn": "কয়রা",
+    "lat": 22.077883,
+    "lon": 89.395057,
+    "area_sqkm": 1762.95,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_paikgachha",
+    "pcode": "BD40470064",
+    "district_id": "khulna",
+    "name_en": "Paikgachha",
+    "name_bn": "পাইকগাছা",
+    "lat": 22.590067,
+    "lon": 89.340202,
+    "area_sqkm": 378.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_phultala",
+    "pcode": "BD40470069",
+    "district_id": "khulna",
+    "name_en": "Phultala",
+    "name_bn": "ফুলতলা",
+    "lat": 22.948309,
+    "lon": 89.454168,
+    "area_sqkm": 76.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_rupsa",
+    "pcode": "BD40470075",
+    "district_id": "khulna",
+    "name_en": "Rupsa",
+    "name_bn": "রূপসা",
+    "lat": 22.819227,
+    "lon": 89.636234,
+    "area_sqkm": 119.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_terokhada",
+    "pcode": "BD40470094",
+    "district_id": "khulna",
+    "name_en": "Terokhada",
+    "name_bn": "তেরখাদা",
+    "lat": 22.913974,
+    "lon": 89.655123,
+    "area_sqkm": 189.45,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khulna_khulna-city-corporation",
+    "pcode": "BD40473300",
+    "district_id": "khulna",
+    "name_en": "Khulna City Corporation",
+    "name_bn": "খুলনা সিটি কর্পোরেশন",
+    "lat": 22.837318,
+    "lon": 89.541144,
+    "area_sqkm": 46.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

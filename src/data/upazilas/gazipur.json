@@ -1,0 +1,68 @@
+[
+  {
+    "id": "gazipur_gazipur-sadar",
+    "pcode": "BD30330030",
+    "district_id": "gazipur",
+    "name_en": "Gazipur Sadar",
+    "name_bn": "গাজীপুর সদর",
+    "lat": 24.084861,
+    "lon": 90.424756,
+    "area_sqkm": 137.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gazipur_kaliakair",
+    "pcode": "BD30330032",
+    "district_id": "gazipur",
+    "name_en": "Kaliakair",
+    "name_bn": "কালিয়াকৈর",
+    "lat": 24.102214,
+    "lon": 90.265552,
+    "area_sqkm": 311.39,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gazipur_kaliganj",
+    "pcode": "BD30330034",
+    "district_id": "gazipur",
+    "name_en": "Kaliganj",
+    "name_bn": "কালীগঞ্জ",
+    "lat": 23.964818,
+    "lon": 90.555228,
+    "area_sqkm": 221.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gazipur_kapasia",
+    "pcode": "BD30330036",
+    "district_id": "gazipur",
+    "name_en": "Kapasia",
+    "name_bn": "কাপাসিয়া",
+    "lat": 24.147795,
+    "lon": 90.60046,
+    "area_sqkm": 361.83,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gazipur_sreepur",
+    "pcode": "BD30330086",
+    "district_id": "gazipur",
+    "name_en": "Sreepur",
+    "name_bn": "শ্রীপুর",
+    "lat": 24.205809,
+    "lon": 90.44363,
+    "area_sqkm": 462.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gazipur_gazipur-city-corporation",
+    "pcode": "BD30333300",
+    "district_id": "gazipur",
+    "name_en": "Gazipur City Corporation",
+    "name_bn": "গাজীপুর সিটি কর্পোরেশন",
+    "lat": 23.983191,
+    "lon": 90.38474,
+    "area_sqkm": 319.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

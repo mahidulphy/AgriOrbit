@@ -1,0 +1,46 @@
+[
+  {
+    "id": "magura_magura-sadar",
+    "pcode": "BD40550057",
+    "district_id": "magura",
+    "name_en": "Magura Sadar",
+    "name_bn": "মাগুরা সদর",
+    "lat": 23.451883,
+    "lon": 89.412427,
+    "area_sqkm": 401.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "magura_mohammadpur",
+    "pcode": "BD40550066",
+    "district_id": "magura",
+    "name_en": "Mohammadpur",
+    "name_bn": "মহম্মদপুর",
+    "lat": 23.400094,
+    "lon": 89.550691,
+    "area_sqkm": 226.42,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "magura_shalikha",
+    "pcode": "BD40550085",
+    "district_id": "magura",
+    "name_en": "Shalikha",
+    "name_bn": "শালিখা",
+    "lat": 23.347692,
+    "lon": 89.359268,
+    "area_sqkm": 229.21,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "magura_sreepur",
+    "pcode": "BD40550095",
+    "district_id": "magura",
+    "name_en": "Sreepur",
+    "name_bn": "শ্রীপুর",
+    "lat": 23.597662,
+    "lon": 89.424122,
+    "area_sqkm": 185.1,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "sherpur_jhenaigati",
+    "pcode": "BD45890037",
+    "district_id": "sherpur",
+    "name_en": "Jhenaigati",
+    "name_bn": "ঝিনাইগাতী",
+    "lat": 25.182411,
+    "lon": 90.054143,
+    "area_sqkm": 203.42,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sherpur_nakla",
+    "pcode": "BD45890067",
+    "district_id": "sherpur",
+    "name_en": "Nakla",
+    "name_bn": "নকলা",
+    "lat": 24.957981,
+    "lon": 90.184785,
+    "area_sqkm": 171.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sherpur_nalitabari",
+    "pcode": "BD45890070",
+    "district_id": "sherpur",
+    "name_en": "Nalitabari",
+    "name_bn": "নালিতাবাড়ী",
+    "lat": 25.117299,
+    "lon": 90.1844,
+    "area_sqkm": 333.43,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sherpur_sherpur-sadar",
+    "pcode": "BD45890088",
+    "district_id": "sherpur",
+    "name_en": "Sherpur Sadar",
+    "name_bn": "শেরপুর সদর",
+    "lat": 24.99084,
+    "lon": 90.021635,
+    "area_sqkm": 351.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sherpur_sreebardi",
+    "pcode": "BD45890090",
+    "district_id": "sherpur",
+    "name_en": "Sreebardi",
+    "name_bn": "শ্রীবরদী",
+    "lat": 25.164849,
+    "lon": 89.957134,
+    "area_sqkm": 268.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

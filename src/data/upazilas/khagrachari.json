@@ -1,0 +1,101 @@
+[
+  {
+    "id": "khagrachari_dighinala",
+    "pcode": "BD20460043",
+    "district_id": "khagrachari",
+    "name_en": "Dighinala",
+    "name_bn": "দিঘীনালা",
+    "lat": 23.415796,
+    "lon": 92.059004,
+    "area_sqkm": 881.89,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_guimara",
+    "pcode": "BD20460047",
+    "district_id": "khagrachari",
+    "name_en": "Guimara",
+    "name_bn": "গুইমারা",
+    "lat": 22.958161,
+    "lon": 91.922641,
+    "area_sqkm": 224.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_khagrachhari-sadar",
+    "pcode": "BD20460049",
+    "district_id": "khagrachari",
+    "name_en": "Khagrachhari Sadar",
+    "name_bn": "খাগড়াছড়ি সদর",
+    "lat": 23.158403,
+    "lon": 91.998341,
+    "area_sqkm": 271.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_lakkhichhari",
+    "pcode": "BD20460061",
+    "district_id": "khagrachari",
+    "name_en": "Lakkhichhari",
+    "name_bn": "লক্ষ্মীছড়ি",
+    "lat": 22.783616,
+    "lon": 91.931079,
+    "area_sqkm": 210.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_mahalchhari",
+    "pcode": "BD20460065",
+    "district_id": "khagrachari",
+    "name_en": "Mahalchhari",
+    "name_bn": "মহালছড়ি",
+    "lat": 22.983506,
+    "lon": 92.049455,
+    "area_sqkm": 234.11,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_manikchhari",
+    "pcode": "BD20460067",
+    "district_id": "khagrachari",
+    "name_en": "Manikchhari",
+    "name_bn": "মানিকছড়ি",
+    "lat": 22.851869,
+    "lon": 91.82678,
+    "area_sqkm": 181.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_matiranga",
+    "pcode": "BD20460070",
+    "district_id": "khagrachari",
+    "name_en": "Matiranga",
+    "name_bn": "মাটিরাঙ্গা",
+    "lat": 23.162685,
+    "lon": 91.854911,
+    "area_sqkm": 491.03,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_panchhari",
+    "pcode": "BD20460077",
+    "district_id": "khagrachari",
+    "name_en": "Panchhari",
+    "name_bn": "পানছড়ি",
+    "lat": 23.342187,
+    "lon": 91.924587,
+    "area_sqkm": 333.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "khagrachari_ramgarh",
+    "pcode": "BD20460080",
+    "district_id": "khagrachari",
+    "name_en": "Ramgarh",
+    "name_bn": "রামগড়",
+    "lat": 22.954037,
+    "lon": 91.77613,
+    "area_sqkm": 148.69,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

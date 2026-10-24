@@ -8,6 +8,8 @@ export interface FarmField {
   division: string;
   district: string;
   upazila: string;
+  upazilaId?: string;
+  districtId?: string;
   village: string;
   latitude: number;
   longitude: number;
@@ -40,6 +42,8 @@ export interface FarmerProfileData {
   priorities: FarmerPriorityId[];
   pastDamages: string[];
   pastDamageNotes: string;
+  upazilaId?: string;
+  districtId?: string;
   onboardingCompleted?: boolean;
   emailAlerts?: boolean;
   smsAlerts?: boolean;
@@ -206,6 +210,8 @@ export async function loadFarmerProfile(
           priorities: (profileRow.priorities as FarmerPriorityId[]) || ['save_water'],
           pastDamages: profileRow.past_damages || [],
           pastDamageNotes: profileRow.past_damage_notes || '',
+          upazilaId: profileRow.upazila_id || '',
+          districtId: profileRow.district_id || '',
           onboardingCompleted: Boolean(profileRow.onboarding_completed),
           emailAlerts: Boolean(profileRow.email_alerts),
           smsAlerts: Boolean(profileRow.sms_alerts),
@@ -220,7 +226,9 @@ export async function loadFarmerProfile(
           name: f.name,
           division: f.division,
           district: f.district,
-          upazila: f.upazila || '',
+          districtId: f.district_id || f.district || '',
+          upazila: f.upazila || f.upazila_id || '',
+          upazilaId: f.upazila_id || f.upazila || '',
           village: f.village || '',
           latitude: f.latitude,
           longitude: f.longitude,
@@ -330,6 +338,8 @@ export async function saveFarmerProfile(
         priorities: profile.priorities ?? existing.priorities,
         past_damages: profile.pastDamages ?? existing.pastDamages,
         past_damage_notes: profile.pastDamageNotes ?? existing.pastDamageNotes,
+        upazila_id: profile.upazilaId ?? existing.upazilaId ?? null,
+        district_id: profile.districtId ?? existing.districtId ?? null,
         onboarding_completed: profile.onboardingCompleted ?? existing.onboardingCompleted ?? false,
         email_alerts: profile.emailAlerts ?? existing.emailAlerts ?? false,
         sms_alerts: profile.smsAlerts ?? existing.smsAlerts ?? false,
@@ -398,7 +408,9 @@ export async function saveFarmField(
         name: fieldToSave.name,
         division: fieldToSave.division,
         district: fieldToSave.district,
+        district_id: fieldToSave.districtId || fieldToSave.district,
         upazila: fieldToSave.upazila,
+        upazila_id: fieldToSave.upazilaId || fieldToSave.upazila,
         village: fieldToSave.village,
         latitude: fieldToSave.latitude,
         longitude: fieldToSave.longitude,

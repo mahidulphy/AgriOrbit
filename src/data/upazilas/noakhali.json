@@ -1,0 +1,101 @@
+[
+  {
+    "id": "noakhali_begumganj",
+    "pcode": "BD20750007",
+    "district_id": "noakhali",
+    "name_en": "Begumganj",
+    "name_bn": "বেগমগঞ্জ",
+    "lat": 22.93091,
+    "lon": 91.094259,
+    "area_sqkm": 237.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_chatkhil",
+    "pcode": "BD20750010",
+    "district_id": "noakhali",
+    "name_en": "Chatkhil",
+    "name_bn": "চাটখিল",
+    "lat": 23.053334,
+    "lon": 90.963723,
+    "area_sqkm": 137.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_companiganj",
+    "pcode": "BD20750021",
+    "district_id": "noakhali",
+    "name_en": "Companiganj",
+    "name_bn": "কোম্পানীগঞ্জ",
+    "lat": 22.75866,
+    "lon": 91.300759,
+    "area_sqkm": 409.12,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_hatiya",
+    "pcode": "BD20750036",
+    "district_id": "noakhali",
+    "name_en": "Hatiya",
+    "name_bn": "হাতিয়া",
+    "lat": 22.348162,
+    "lon": 91.091405,
+    "area_sqkm": 1065.85,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_kabirhat",
+    "pcode": "BD20750047",
+    "district_id": "noakhali",
+    "name_en": "Kabirhat",
+    "name_bn": "কবিরহাট",
+    "lat": 22.810876,
+    "lon": 91.199332,
+    "area_sqkm": 136.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_noakhali-sadar",
+    "pcode": "BD20750087",
+    "district_id": "noakhali",
+    "name_en": "Noakhali Sadar",
+    "name_bn": "নোয়াখালী সদর",
+    "lat": 22.808327,
+    "lon": 91.048709,
+    "area_sqkm": 349.0,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_senbag",
+    "pcode": "BD20750080",
+    "district_id": "noakhali",
+    "name_en": "Senbag",
+    "name_bn": "সেনবাগ",
+    "lat": 22.990639,
+    "lon": 91.212674,
+    "area_sqkm": 165.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_sonaimuri",
+    "pcode": "BD20750083",
+    "district_id": "noakhali",
+    "name_en": "Sonaimuri",
+    "name_bn": "সোনাইমুড়ী",
+    "lat": 23.026294,
+    "lon": 91.077832,
+    "area_sqkm": 168.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "noakhali_subarnachar",
+    "pcode": "BD20750085",
+    "district_id": "noakhali",
+    "name_en": "Subarnachar",
+    "name_bn": "সুবর্ণচর",
+    "lat": 22.619235,
+    "lon": 91.156402,
+    "area_sqkm": 566.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

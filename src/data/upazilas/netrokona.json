@@ -1,0 +1,112 @@
+[
+  {
+    "id": "netrokona_atpara",
+    "pcode": "BD45720004",
+    "district_id": "netrokona",
+    "name_en": "Atpara",
+    "name_bn": "আটপাড়া",
+    "lat": 24.793959,
+    "lon": 90.877069,
+    "area_sqkm": 193.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_barhatta",
+    "pcode": "BD45720009",
+    "district_id": "netrokona",
+    "name_en": "Barhatta",
+    "name_bn": "বারহাট্টা",
+    "lat": 24.922341,
+    "lon": 90.885064,
+    "area_sqkm": 221.17,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_durgapur",
+    "pcode": "BD45720018",
+    "district_id": "netrokona",
+    "name_en": "Durgapur",
+    "name_bn": "দুর্গাপুর",
+    "lat": 25.08907,
+    "lon": 90.683343,
+    "area_sqkm": 277.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_kalmakanda",
+    "pcode": "BD45720040",
+    "district_id": "netrokona",
+    "name_en": "Kalmakanda",
+    "name_bn": "কলমাকান্দা",
+    "lat": 25.07759,
+    "lon": 90.857612,
+    "area_sqkm": 383.71,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_kendua",
+    "pcode": "BD45720047",
+    "district_id": "netrokona",
+    "name_en": "Kendua",
+    "name_bn": "কেন্দুয়া",
+    "lat": 24.678043,
+    "lon": 90.802169,
+    "area_sqkm": 311.2,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_khaliajuri",
+    "pcode": "BD45720038",
+    "district_id": "netrokona",
+    "name_en": "Khaliajuri",
+    "name_bn": "খালিয়াজুরী",
+    "lat": 24.704978,
+    "lon": 91.121817,
+    "area_sqkm": 292.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_madan",
+    "pcode": "BD45720056",
+    "district_id": "netrokona",
+    "name_en": "Madan",
+    "name_bn": "মদন",
+    "lat": 24.678291,
+    "lon": 90.966987,
+    "area_sqkm": 226.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_mohanganj",
+    "pcode": "BD45720063",
+    "district_id": "netrokona",
+    "name_en": "Mohanganj",
+    "name_bn": "মোহনগঞ্জ",
+    "lat": 24.827911,
+    "lon": 91.023361,
+    "area_sqkm": 242.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_netrakona-sadar",
+    "pcode": "BD45720074",
+    "district_id": "netrokona",
+    "name_en": "Netrakona Sadar",
+    "name_bn": "নেত্রকোণা সদর",
+    "lat": 24.887187,
+    "lon": 90.738112,
+    "area_sqkm": 334.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "netrokona_purbadhala",
+    "pcode": "BD45720083",
+    "district_id": "netrokona",
+    "name_en": "Purbadhala",
+    "name_bn": "পূর্বধলা",
+    "lat": 24.93402,
+    "lon": 90.602942,
+    "area_sqkm": 317.13,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

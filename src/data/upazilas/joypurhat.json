@@ -1,0 +1,57 @@
+[
+  {
+    "id": "joypurhat_akkelpur",
+    "pcode": "BD50380013",
+    "district_id": "joypurhat",
+    "name_en": "Akkelpur",
+    "name_bn": "আক্কেলপুর",
+    "lat": 24.933485,
+    "lon": 89.042027,
+    "area_sqkm": 140.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "joypurhat_joypurhat-sadar",
+    "pcode": "BD50380047",
+    "district_id": "joypurhat",
+    "name_en": "Joypurhat Sadar",
+    "name_bn": "জয়পুরহাট সদর",
+    "lat": 25.107655,
+    "lon": 89.021454,
+    "area_sqkm": 236.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "joypurhat_kalai",
+    "pcode": "BD50380058",
+    "district_id": "joypurhat",
+    "name_en": "Kalai",
+    "name_bn": "কালাই",
+    "lat": 25.078081,
+    "lon": 89.19884,
+    "area_sqkm": 166.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "joypurhat_khetlal",
+    "pcode": "BD50380061",
+    "district_id": "joypurhat",
+    "name_en": "Khetlal",
+    "name_bn": "ক্ষেতলাল",
+    "lat": 25.02339,
+    "lon": 89.117669,
+    "area_sqkm": 143.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "joypurhat_panchbibi",
+    "pcode": "BD50380074",
+    "district_id": "joypurhat",
+    "name_en": "Panchbibi",
+    "name_bn": "পাঁচবিবি",
+    "lat": 25.204984,
+    "lon": 89.071865,
+    "area_sqkm": 279.68,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

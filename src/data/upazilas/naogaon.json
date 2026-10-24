@@ -1,0 +1,123 @@
+[
+  {
+    "id": "naogaon_atrai",
+    "pcode": "BD50640003",
+    "district_id": "naogaon",
+    "name_en": "Atrai",
+    "name_bn": "আত্রাই",
+    "lat": 24.624783,
+    "lon": 88.989075,
+    "area_sqkm": 262.32,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_badalgachhi",
+    "pcode": "BD50640006",
+    "district_id": "naogaon",
+    "name_en": "Badalgachhi",
+    "name_bn": "বদলগাছী",
+    "lat": 24.967452,
+    "lon": 88.942538,
+    "area_sqkm": 212.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_dhamoirhat",
+    "pcode": "BD50640028",
+    "district_id": "naogaon",
+    "name_en": "Dhamoirhat",
+    "name_bn": "ধামইরহাট",
+    "lat": 25.130513,
+    "lon": 88.824158,
+    "area_sqkm": 301.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_mahadebpur",
+    "pcode": "BD50640050",
+    "district_id": "naogaon",
+    "name_en": "Mahadebpur",
+    "name_bn": "মহাদেবপুর",
+    "lat": 24.921842,
+    "lon": 88.76366,
+    "area_sqkm": 391.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_manda",
+    "pcode": "BD50640047",
+    "district_id": "naogaon",
+    "name_en": "Manda",
+    "name_bn": "মান্দা",
+    "lat": 24.746305,
+    "lon": 88.711987,
+    "area_sqkm": 413.74,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_naogaon-sadar",
+    "pcode": "BD50640060",
+    "district_id": "naogaon",
+    "name_en": "Naogaon Sadar",
+    "name_bn": "নওগাঁ সদর",
+    "lat": 24.812014,
+    "lon": 88.898034,
+    "area_sqkm": 277.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_niamatpur",
+    "pcode": "BD50640069",
+    "district_id": "naogaon",
+    "name_en": "Niamatpur",
+    "name_bn": "নিয়ামতপুর",
+    "lat": 24.830455,
+    "lon": 88.55021,
+    "area_sqkm": 450.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_patnitala",
+    "pcode": "BD50640075",
+    "district_id": "naogaon",
+    "name_en": "Patnitala",
+    "name_bn": "পত্নিতলা",
+    "lat": 25.077533,
+    "lon": 88.714593,
+    "area_sqkm": 379.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_porsha",
+    "pcode": "BD50640079",
+    "district_id": "naogaon",
+    "name_en": "Porsha",
+    "name_bn": "পোরশা",
+    "lat": 24.994976,
+    "lon": 88.517366,
+    "area_sqkm": 258.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_raninagar",
+    "pcode": "BD50640085",
+    "district_id": "naogaon",
+    "name_en": "Raninagar",
+    "name_bn": "রাণীনগর",
+    "lat": 24.711726,
+    "lon": 89.020149,
+    "area_sqkm": 246.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "naogaon_sapahar",
+    "pcode": "BD50640086",
+    "district_id": "naogaon",
+    "name_en": "Sapahar",
+    "name_bn": "সাপাহার",
+    "lat": 25.119359,
+    "lon": 88.530716,
+    "area_sqkm": 244.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

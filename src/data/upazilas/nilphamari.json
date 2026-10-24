@@ -1,0 +1,68 @@
+[
+  {
+    "id": "nilphamari_dimla",
+    "pcode": "BD55730012",
+    "district_id": "nilphamari",
+    "name_en": "Dimla",
+    "name_bn": "ডিমলা",
+    "lat": 26.17311,
+    "lon": 88.973856,
+    "area_sqkm": 333.13,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "nilphamari_domar",
+    "pcode": "BD55730015",
+    "district_id": "nilphamari",
+    "name_en": "Domar",
+    "name_bn": "ডোমার",
+    "lat": 26.159586,
+    "lon": 88.825431,
+    "area_sqkm": 251.37,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "nilphamari_jaldhaka",
+    "pcode": "BD55730036",
+    "district_id": "nilphamari",
+    "name_en": "Jaldhaka",
+    "name_bn": "জলঢাকা",
+    "lat": 26.031192,
+    "lon": 88.993622,
+    "area_sqkm": 308.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "nilphamari_kishoreganj",
+    "pcode": "BD55730045",
+    "district_id": "nilphamari",
+    "name_en": "Kishoreganj",
+    "name_bn": "কিশোরগঞ্জ",
+    "lat": 25.897999,
+    "lon": 89.033141,
+    "area_sqkm": 208.18,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "nilphamari_nilphamari-sadar",
+    "pcode": "BD55730064",
+    "district_id": "nilphamari",
+    "name_en": "Nilphamari Sadar",
+    "name_bn": "নীলফামারী সদর",
+    "lat": 25.942046,
+    "lon": 88.854741,
+    "area_sqkm": 373.82,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "nilphamari_saidpur",
+    "pcode": "BD55730085",
+    "district_id": "nilphamari",
+    "name_en": "Saidpur",
+    "name_bn": "সৈয়দপুর",
+    "lat": 25.803671,
+    "lon": 88.920505,
+    "area_sqkm": 121.7,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

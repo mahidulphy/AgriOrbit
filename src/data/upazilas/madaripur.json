@@ -1,0 +1,57 @@
+[
+  {
+    "id": "madaripur_dasar",
+    "pcode": "BD30540018",
+    "district_id": "madaripur",
+    "name_en": "Dasar",
+    "name_bn": "ডাসার",
+    "lat": 23.092038,
+    "lon": 90.160684,
+    "area_sqkm": 78.73,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "madaripur_kalkini",
+    "pcode": "BD30540040",
+    "district_id": "madaripur",
+    "name_en": "Kalkini",
+    "name_bn": "কালকিনি",
+    "lat": 23.067021,
+    "lon": 90.28068,
+    "area_sqkm": 208.87,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "madaripur_madaripur-sadar",
+    "pcode": "BD30540054",
+    "district_id": "madaripur",
+    "name_en": "Madaripur Sadar",
+    "name_bn": "মাদারীপুর সদর",
+    "lat": 23.19122,
+    "lon": 90.178397,
+    "area_sqkm": 263.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "madaripur_rajoir",
+    "pcode": "BD30540080",
+    "district_id": "madaripur",
+    "name_en": "Rajoir",
+    "name_bn": "রাজৈর",
+    "lat": 23.20208,
+    "lon": 90.03857,
+    "area_sqkm": 236.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "madaripur_shibchar",
+    "pcode": "BD30540087",
+    "district_id": "madaripur",
+    "name_en": "Shibchar",
+    "name_bn": "শিবচর",
+    "lat": 23.3732,
+    "lon": 90.17595,
+    "area_sqkm": 366.36,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

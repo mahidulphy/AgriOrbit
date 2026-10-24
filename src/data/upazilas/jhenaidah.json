@@ -1,0 +1,68 @@
+[
+  {
+    "id": "jhenaidah_harinakundu",
+    "pcode": "BD40440014",
+    "district_id": "jhenaidah",
+    "name_en": "Harinakundu",
+    "name_bn": "হরিণাকুন্ডু",
+    "lat": 23.643509,
+    "lon": 89.07687,
+    "area_sqkm": 228.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhenaidah_jhenaidah-sadar",
+    "pcode": "BD40440019",
+    "district_id": "jhenaidah",
+    "name_en": "Jhenaidah Sadar",
+    "name_bn": "ঝিনাইদহ সদর",
+    "lat": 23.516387,
+    "lon": 89.157535,
+    "area_sqkm": 466.93,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhenaidah_kaliganj",
+    "pcode": "BD40440033",
+    "district_id": "jhenaidah",
+    "name_en": "Kaliganj",
+    "name_bn": "কালীগঞ্জ",
+    "lat": 23.369595,
+    "lon": 89.152335,
+    "area_sqkm": 309.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhenaidah_kotchandpur",
+    "pcode": "BD40440042",
+    "district_id": "jhenaidah",
+    "name_en": "Kotchandpur",
+    "name_bn": "কোটচাঁদপুর",
+    "lat": 23.44497,
+    "lon": 89.001417,
+    "area_sqkm": 164.36,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhenaidah_maheshpur",
+    "pcode": "BD40440071",
+    "district_id": "jhenaidah",
+    "name_en": "Maheshpur",
+    "name_bn": "মহেশপুর",
+    "lat": 23.320172,
+    "lon": 88.8597,
+    "area_sqkm": 419.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jhenaidah_shailkupa",
+    "pcode": "BD40440080",
+    "district_id": "jhenaidah",
+    "name_en": "Shailkupa",
+    "name_bn": "শৈলকুপা",
+    "lat": 23.663621,
+    "lon": 89.242619,
+    "area_sqkm": 376.13,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

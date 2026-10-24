@@ -43,6 +43,10 @@ export interface UpazilaInfo {
   id: string;
   nameEn: string;
   nameBn: string;
+  lat?: number;
+  lng?: number;
+  pcode?: string;
+  area_sqkm?: number;
 }
 
 export interface DistrictInfo {

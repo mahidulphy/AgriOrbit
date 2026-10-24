@@ -1,0 +1,101 @@
+[
+  {
+    "id": "brahmanbaria_akhaura",
+    "pcode": "BD20120002",
+    "district_id": "brahmanbaria",
+    "name_en": "Akhaura",
+    "name_bn": "আখাউড়া",
+    "lat": 23.840669,
+    "lon": 91.190189,
+    "area_sqkm": 92.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_ashuganj",
+    "pcode": "BD20120033",
+    "district_id": "brahmanbaria",
+    "name_en": "Ashuganj",
+    "name_bn": "আশুগঞ্জ",
+    "lat": 24.018142,
+    "lon": 91.018337,
+    "area_sqkm": 77.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_banchharampur",
+    "pcode": "BD20120004",
+    "district_id": "brahmanbaria",
+    "name_en": "Banchharampur",
+    "name_bn": "বাঞ্ছারামপুর",
+    "lat": 23.780534,
+    "lon": 90.807323,
+    "area_sqkm": 206.06,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_bijoynagar",
+    "pcode": "BD20120007",
+    "district_id": "brahmanbaria",
+    "name_en": "Bijoynagar",
+    "name_bn": "বিজয়নগর",
+    "lat": 23.99153,
+    "lon": 91.227368,
+    "area_sqkm": 225.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_brahmanbaria-sadar",
+    "pcode": "BD20120013",
+    "district_id": "brahmanbaria",
+    "name_en": "Brahmanbaria Sadar",
+    "name_bn": "ব্রাহ্মণবাড়িয়া সদর",
+    "lat": 23.949931,
+    "lon": 91.115945,
+    "area_sqkm": 216.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_kasba",
+    "pcode": "BD20120063",
+    "district_id": "brahmanbaria",
+    "name_en": "Kasba",
+    "name_bn": "কসবা",
+    "lat": 23.760868,
+    "lon": 91.131324,
+    "area_sqkm": 209.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_nabinagar",
+    "pcode": "BD20120085",
+    "district_id": "brahmanbaria",
+    "name_en": "Nabinagar",
+    "name_bn": "নবীনগর",
+    "lat": 23.86327,
+    "lon": 90.979673,
+    "area_sqkm": 361.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_nasirnagar",
+    "pcode": "BD20120090",
+    "district_id": "brahmanbaria",
+    "name_en": "Nasirnagar",
+    "name_bn": "নাসিরনগর",
+    "lat": 24.18226,
+    "lon": 91.187125,
+    "area_sqkm": 315.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "brahmanbaria_sarail",
+    "pcode": "BD20120094",
+    "district_id": "brahmanbaria",
+    "name_en": "Sarail",
+    "name_bn": "সরাইল",
+    "lat": 24.102509,
+    "lon": 91.113238,
+    "area_sqkm": 223.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

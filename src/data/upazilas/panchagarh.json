@@ -1,0 +1,57 @@
+[
+  {
+    "id": "panchagarh_atowari",
+    "pcode": "BD55770004",
+    "district_id": "panchagarh",
+    "name_en": "Atowari",
+    "name_bn": "আটোয়ারী",
+    "lat": 26.250817,
+    "lon": 88.424599,
+    "area_sqkm": 208.2,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "panchagarh_boda",
+    "pcode": "BD55770025",
+    "district_id": "panchagarh",
+    "name_en": "Boda",
+    "name_bn": "বোদা",
+    "lat": 26.235026,
+    "lon": 88.618819,
+    "area_sqkm": 338.63,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "panchagarh_debiganj",
+    "pcode": "BD55770034",
+    "district_id": "panchagarh",
+    "name_en": "Debiganj",
+    "name_bn": "দেবীগঞ্জ",
+    "lat": 26.126952,
+    "lon": 88.717373,
+    "area_sqkm": 303.7,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "panchagarh_panchagarh-sadar",
+    "pcode": "BD55770073",
+    "district_id": "panchagarh",
+    "name_en": "Panchagarh Sadar",
+    "name_bn": "পঞ্চগড় সদর",
+    "lat": 26.36478,
+    "lon": 88.591095,
+    "area_sqkm": 362.71,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "panchagarh_tentulia",
+    "pcode": "BD55770090",
+    "district_id": "panchagarh",
+    "name_en": "Tentulia",
+    "name_bn": "তেঁতুলিয়া",
+    "lat": 26.512511,
+    "lon": 88.430577,
+    "area_sqkm": 190.59,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

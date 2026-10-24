@@ -1,0 +1,156 @@
+[
+  {
+    "id": "sylhet_balaganj",
+    "pcode": "BD60910008",
+    "district_id": "sylhet",
+    "name_en": "Balaganj",
+    "name_bn": "বালাগঞ্জ",
+    "lat": 24.688651,
+    "lon": 91.829921,
+    "area_sqkm": 170.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_beanibazar",
+    "pcode": "BD60910017",
+    "district_id": "sylhet",
+    "name_en": "Beanibazar",
+    "name_bn": "বিয়ানীবাজার",
+    "lat": 24.849348,
+    "lon": 92.159571,
+    "area_sqkm": 246.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_bishwanath",
+    "pcode": "BD60910020",
+    "district_id": "sylhet",
+    "name_en": "Bishwanath",
+    "name_bn": "বিশ্বনাথ",
+    "lat": 24.834708,
+    "lon": 91.728141,
+    "area_sqkm": 210.55,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_companiganj",
+    "pcode": "BD60910027",
+    "district_id": "sylhet",
+    "name_en": "Companiganj",
+    "name_bn": "কোম্পানীগঞ্জ",
+    "lat": 25.079918,
+    "lon": 91.773099,
+    "area_sqkm": 261.87,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_dakkhin-surma",
+    "pcode": "BD60910031",
+    "district_id": "sylhet",
+    "name_en": "Dakkhin Surma",
+    "name_bn": "দক্ষিণ সুরমা",
+    "lat": 24.81712,
+    "lon": 91.877129,
+    "area_sqkm": 189.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_fenchuganj",
+    "pcode": "BD60910035",
+    "district_id": "sylhet",
+    "name_en": "Fenchuganj",
+    "name_bn": "ফেঞ্চুগঞ্জ",
+    "lat": 24.693582,
+    "lon": 91.96304,
+    "area_sqkm": 112.26,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_golapganj",
+    "pcode": "BD60910038",
+    "district_id": "sylhet",
+    "name_en": "Golapganj",
+    "name_bn": "গোলাপগঞ্জ",
+    "lat": 24.810475,
+    "lon": 92.018385,
+    "area_sqkm": 273.0,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_gowainghat",
+    "pcode": "BD60910041",
+    "district_id": "sylhet",
+    "name_en": "Gowainghat",
+    "name_bn": "গোয়াইনঘাট",
+    "lat": 25.081455,
+    "lon": 91.958958,
+    "area_sqkm": 486.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_jaintapur",
+    "pcode": "BD60910053",
+    "district_id": "sylhet",
+    "name_en": "Jaintapur",
+    "name_bn": "জৈন্তাপুর",
+    "lat": 25.057995,
+    "lon": 92.104514,
+    "area_sqkm": 268.88,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_kanaighat",
+    "pcode": "BD60910059",
+    "district_id": "sylhet",
+    "name_en": "Kanaighat",
+    "name_bn": "কানাইঘাট",
+    "lat": 24.993222,
+    "lon": 92.219115,
+    "area_sqkm": 400.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_osmaninagar",
+    "pcode": "BD60910060",
+    "district_id": "sylhet",
+    "name_en": "Osmaninagar",
+    "name_bn": "ওসমানী নগর",
+    "lat": 24.703362,
+    "lon": 91.731946,
+    "area_sqkm": 215.14,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_sylhet-sadar",
+    "pcode": "BD60910062",
+    "district_id": "sylhet",
+    "name_en": "Sylhet Sadar",
+    "name_bn": "সিলেট সদর",
+    "lat": 24.94434,
+    "lon": 91.845862,
+    "area_sqkm": 295.66,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_zakiganj",
+    "pcode": "BD60910094",
+    "district_id": "sylhet",
+    "name_en": "Zakiganj",
+    "name_bn": "জকিগঞ্জ",
+    "lat": 24.925317,
+    "lon": 92.36786,
+    "area_sqkm": 264.1,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sylhet_sylhet-city-corporation",
+    "pcode": "BD60915000",
+    "district_id": "sylhet",
+    "name_en": "Sylhet City Corporation",
+    "name_bn": "সিলেট সিটি কর্পোরেশন",
+    "lat": 24.894932,
+    "lon": 91.871795,
+    "area_sqkm": 27.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

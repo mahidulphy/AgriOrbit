@@ -1,0 +1,79 @@
+[
+  {
+    "id": "jamalpur_bakshiganj",
+    "pcode": "BD45390007",
+    "district_id": "jamalpur",
+    "name_en": "Bakshiganj",
+    "name_bn": "বকশীগঞ্জ",
+    "lat": 25.214432,
+    "lon": 89.852166,
+    "area_sqkm": 205.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_dewanganj",
+    "pcode": "BD45390015",
+    "district_id": "jamalpur",
+    "name_en": "Dewanganj",
+    "name_bn": "দেওয়ানগঞ্জ",
+    "lat": 25.267971,
+    "lon": 89.766309,
+    "area_sqkm": 261.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_islampur",
+    "pcode": "BD45390029",
+    "district_id": "jamalpur",
+    "name_en": "Islampur",
+    "name_bn": "ইসলামপুর",
+    "lat": 25.075644,
+    "lon": 89.763064,
+    "area_sqkm": 342.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_jamalpur-sadar",
+    "pcode": "BD45390036",
+    "district_id": "jamalpur",
+    "name_en": "Jamalpur Sadar",
+    "name_bn": "জামালপুর সদর",
+    "lat": 24.842759,
+    "lon": 90.015241,
+    "area_sqkm": 488.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_madarganj",
+    "pcode": "BD45390058",
+    "district_id": "jamalpur",
+    "name_en": "Madarganj",
+    "name_bn": "মাদারগঞ্জ",
+    "lat": 24.885109,
+    "lon": 89.741789,
+    "area_sqkm": 223.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_melandaha",
+    "pcode": "BD45390061",
+    "district_id": "jamalpur",
+    "name_en": "Melandaha",
+    "name_bn": "মেলান্দহ",
+    "lat": 24.955993,
+    "lon": 89.827987,
+    "area_sqkm": 268.67,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jamalpur_sarishabari",
+    "pcode": "BD45390085",
+    "district_id": "jamalpur",
+    "name_en": "Sarishabari",
+    "name_bn": "সরিষাবাড়ী",
+    "lat": 24.721554,
+    "lon": 89.830614,
+    "area_sqkm": 261.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

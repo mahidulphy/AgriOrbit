@@ -1,0 +1,35 @@
+[
+  {
+    "id": "narail_kalia",
+    "pcode": "BD40650028",
+    "district_id": "narail",
+    "name_en": "Kalia",
+    "name_bn": "কালিয়া",
+    "lat": 23.029248,
+    "lon": 89.641631,
+    "area_sqkm": 300.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narail_lohagara",
+    "pcode": "BD40650052",
+    "district_id": "narail",
+    "name_en": "Lohagara",
+    "name_bn": "লোহাগড়া",
+    "lat": 23.204249,
+    "lon": 89.62418,
+    "area_sqkm": 292.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "narail_narail-sadar",
+    "pcode": "BD40650076",
+    "district_id": "narail",
+    "name_en": "Narail Sadar",
+    "name_bn": "নড়াইল সদর",
+    "lat": 23.154939,
+    "lon": 89.495096,
+    "area_sqkm": 390.95,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

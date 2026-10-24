@@ -1,0 +1,101 @@
+[
+  {
+    "id": "coxsbazar_chakaria",
+    "pcode": "BD20220016",
+    "district_id": "coxsbazar",
+    "name_en": "Chakaria",
+    "name_bn": "চকরিয়া",
+    "lat": 21.741109,
+    "lon": 92.051734,
+    "area_sqkm": 493.27,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_coxs-bazar-sadar",
+    "pcode": "BD20220024",
+    "district_id": "coxsbazar",
+    "name_en": "Coxs Bazar Sadar",
+    "name_bn": "কক্সবাজার সদর",
+    "lat": 21.466115,
+    "lon": 92.015643,
+    "area_sqkm": 120.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_eidgaon",
+    "pcode": "BD20220032",
+    "district_id": "coxsbazar",
+    "name_en": "Eidgaon",
+    "name_bn": "ঈদগাঁও",
+    "lat": 21.555821,
+    "lon": 92.059158,
+    "area_sqkm": 86.43,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_kutubdia",
+    "pcode": "BD20220045",
+    "district_id": "coxsbazar",
+    "name_en": "Kutubdia",
+    "name_bn": "কুতুবদিয়া",
+    "lat": 21.838007,
+    "lon": 91.862545,
+    "area_sqkm": 71.69,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_maheshkhali",
+    "pcode": "BD20220049",
+    "district_id": "coxsbazar",
+    "name_en": "Maheshkhali",
+    "name_bn": "মহেশখালী",
+    "lat": 21.607189,
+    "lon": 91.919559,
+    "area_sqkm": 400.35,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_pekua",
+    "pcode": "BD20220056",
+    "district_id": "coxsbazar",
+    "name_en": "Pekua",
+    "name_bn": "পেকুয়া",
+    "lat": 21.815939,
+    "lon": 91.944745,
+    "area_sqkm": 143.52,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_ramu",
+    "pcode": "BD20220066",
+    "district_id": "coxsbazar",
+    "name_en": "Ramu",
+    "name_bn": "রামু",
+    "lat": 21.438788,
+    "lon": 92.120364,
+    "area_sqkm": 384.1,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_teknaf",
+    "pcode": "BD20220090",
+    "district_id": "coxsbazar",
+    "name_en": "Teknaf",
+    "name_bn": "টেকনাফ",
+    "lat": 20.969251,
+    "lon": 92.237068,
+    "area_sqkm": 367.95,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "coxsbazar_ukhia",
+    "pcode": "BD20220094",
+    "district_id": "coxsbazar",
+    "name_en": "Ukhia",
+    "name_bn": "উখিয়া",
+    "lat": 21.228063,
+    "lon": 92.115336,
+    "area_sqkm": 258.77,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

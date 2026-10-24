@@ -1,0 +1,79 @@
+[
+  {
+    "id": "moulvibazar_baralekha",
+    "pcode": "BD60580014",
+    "district_id": "moulvibazar",
+    "name_en": "Baralekha",
+    "name_bn": "বড়লেখা",
+    "lat": 24.708546,
+    "lon": 92.176352,
+    "area_sqkm": 384.46,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_juri",
+    "pcode": "BD60580035",
+    "district_id": "moulvibazar",
+    "name_en": "Juri",
+    "name_bn": "জুড়ী",
+    "lat": 24.553922,
+    "lon": 92.145176,
+    "area_sqkm": 245.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_kamalganj",
+    "pcode": "BD60580056",
+    "district_id": "moulvibazar",
+    "name_en": "Kamalganj",
+    "name_bn": "কমলগঞ্জ",
+    "lat": 24.316852,
+    "lon": 91.860152,
+    "area_sqkm": 417.21,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_kulaura",
+    "pcode": "BD60580065",
+    "district_id": "moulvibazar",
+    "name_en": "Kulaura",
+    "name_bn": "কুলাউড়া",
+    "lat": 24.489965,
+    "lon": 92.015113,
+    "area_sqkm": 502.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_moulvibazar-sadar",
+    "pcode": "BD60580074",
+    "district_id": "moulvibazar",
+    "name_en": "Moulvibazar Sadar",
+    "name_bn": "মৌলভীবাজার সদর",
+    "lat": 24.499397,
+    "lon": 91.713168,
+    "area_sqkm": 345.3,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_rajnagar",
+    "pcode": "BD60580080",
+    "district_id": "moulvibazar",
+    "name_en": "Rajnagar",
+    "name_bn": "রাজনগর",
+    "lat": 24.565227,
+    "lon": 91.863523,
+    "area_sqkm": 347.25,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "moulvibazar_sreemangal",
+    "pcode": "BD60580083",
+    "district_id": "moulvibazar",
+    "name_en": "Sreemangal",
+    "name_bn": "শ্রীমঙ্গল",
+    "lat": 24.302205,
+    "lon": 91.699017,
+    "area_sqkm": 431.56,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

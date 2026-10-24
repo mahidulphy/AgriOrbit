@@ -1,0 +1,90 @@
+[
+  {
+    "id": "jashore_abhaynagar",
+    "pcode": "BD40410004",
+    "district_id": "jashore",
+    "name_en": "Abhaynagar",
+    "name_bn": "অভয়নগর",
+    "lat": 23.017704,
+    "lon": 89.419682,
+    "area_sqkm": 245.75,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_bagharpara",
+    "pcode": "BD40410009",
+    "district_id": "jashore",
+    "name_en": "Bagharpara",
+    "name_bn": "বাঘারপাড়া",
+    "lat": 23.24253,
+    "lon": 89.33539,
+    "area_sqkm": 272.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_chaugachha",
+    "pcode": "BD40410011",
+    "district_id": "jashore",
+    "name_en": "Chaugachha",
+    "name_bn": "চৌগাছা",
+    "lat": 23.263253,
+    "lon": 89.023287,
+    "area_sqkm": 271.77,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_jashore-sadar",
+    "pcode": "BD40410047",
+    "district_id": "jashore",
+    "name_en": "Jashore Sadar",
+    "name_bn": "যশোর সদর",
+    "lat": 23.182478,
+    "lon": 89.218856,
+    "area_sqkm": 436.65,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_jhikargachha",
+    "pcode": "BD40410023",
+    "district_id": "jashore",
+    "name_en": "Jhikargachha",
+    "name_bn": "ঝিকরগাছা",
+    "lat": 23.068731,
+    "lon": 89.054285,
+    "area_sqkm": 307.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_keshabpur",
+    "pcode": "BD40410038",
+    "district_id": "jashore",
+    "name_en": "Keshabpur",
+    "name_bn": "কেশবপুর",
+    "lat": 22.880374,
+    "lon": 89.231526,
+    "area_sqkm": 256.79,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_manirampur",
+    "pcode": "BD40410061",
+    "district_id": "jashore",
+    "name_en": "Manirampur",
+    "name_bn": "মণিরামপুর",
+    "lat": 23.006456,
+    "lon": 89.219861,
+    "area_sqkm": 444.84,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "jashore_sharsha",
+    "pcode": "BD40410090",
+    "district_id": "jashore",
+    "name_en": "Sharsha",
+    "name_bn": "শার্শা",
+    "lat": 23.044792,
+    "lon": 88.941097,
+    "area_sqkm": 340.57,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

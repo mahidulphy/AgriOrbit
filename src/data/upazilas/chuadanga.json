@@ -1,0 +1,46 @@
+[
+  {
+    "id": "chuadanga_alamdanga",
+    "pcode": "BD40180007",
+    "district_id": "chuadanga",
+    "name_en": "Alamdanga",
+    "name_bn": "আলমডাঙ্গা",
+    "lat": 23.729523,
+    "lon": 88.908246,
+    "area_sqkm": 366.03,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chuadanga_chuadanga-sadar",
+    "pcode": "BD40180023",
+    "district_id": "chuadanga",
+    "name_en": "Chuadanga Sadar",
+    "name_bn": "চুয়াডাঙ্গা সদর",
+    "lat": 23.589457,
+    "lon": 88.885448,
+    "area_sqkm": 296.39,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chuadanga_damurhuda",
+    "pcode": "BD40180031",
+    "district_id": "chuadanga",
+    "name_en": "Damurhuda",
+    "name_bn": "দামুড়হুদা",
+    "lat": 23.592016,
+    "lon": 88.739782,
+    "area_sqkm": 304.04,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chuadanga_jibannagar",
+    "pcode": "BD40180055",
+    "district_id": "chuadanga",
+    "name_en": "Jibannagar",
+    "name_bn": "জীবননগর",
+    "lat": 23.442976,
+    "lon": 88.850265,
+    "area_sqkm": 199.73,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

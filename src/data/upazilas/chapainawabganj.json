@@ -1,0 +1,57 @@
+[
+  {
+    "id": "chapainawabganj_bholahat",
+    "pcode": "BD50700018",
+    "district_id": "chapainawabganj",
+    "name_en": "Bholahat",
+    "name_bn": "ভোলাহাট",
+    "lat": 24.897217,
+    "lon": 88.209493,
+    "area_sqkm": 123.44,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chapainawabganj_chapainawabganj-sadar",
+    "pcode": "BD50700066",
+    "district_id": "chapainawabganj",
+    "name_en": "Chapainawabganj Sadar",
+    "name_bn": "চাঁপাইনবাবগঞ্জ সদর",
+    "lat": 24.565342,
+    "lon": 88.258065,
+    "area_sqkm": 438.27,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chapainawabganj_gomastapur",
+    "pcode": "BD50700037",
+    "district_id": "chapainawabganj",
+    "name_en": "Gomastapur",
+    "name_bn": "গোমস্তাপুর",
+    "lat": 24.858573,
+    "lon": 88.355447,
+    "area_sqkm": 318.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chapainawabganj_nachole",
+    "pcode": "BD50700056",
+    "district_id": "chapainawabganj",
+    "name_en": "Nachole",
+    "name_bn": "নাচোল",
+    "lat": 24.727063,
+    "lon": 88.396318,
+    "area_sqkm": 283.26,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chapainawabganj_shibganj",
+    "pcode": "BD50700088",
+    "district_id": "chapainawabganj",
+    "name_en": "Shibganj",
+    "name_bn": "শিবগঞ্জ",
+    "lat": 24.705016,
+    "lon": 88.154879,
+    "area_sqkm": 525.59,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

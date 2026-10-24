@@ -15,6 +15,7 @@ import {
   DISTRICT_WIDE_UPAZILA,
   formatLocation,
   getDistrictProfile,
+  getUpazila,
   getUpazilasFor,
   locationFromDistrict,
 } from '../../lib/location';
@@ -54,12 +55,21 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
   const [flyTarget, setFlyTarget] = useState<MapFlyTarget | null>(null);
   const [resolving, setResolving] = useState(false);
   const [outsideMessage, setOutsideMessage] = useState(false);
+  const [upazilaSearch, setUpazilaSearch] = useState('');
   const flyNonce = useRef(0);
   const requestSeq = useRef(0);
 
   const names = formatLocation(location, language);
   const upazilas = getUpazilasFor(location.district);
   const sourceLabel = SOURCE_LABEL[location.source];
+
+  const filteredUpazilas = upazilaSearch.trim()
+    ? upazilas.filter(
+        (u) =>
+          u.nameEn.toLowerCase().includes(upazilaSearch.toLowerCase()) ||
+          u.nameBn.includes(upazilaSearch.trim())
+      )
+    : upazilas;
 
   const flyTo = (lng: number, lat: number, zoom: number) => {
     flyNonce.current += 1;
@@ -70,12 +80,35 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
     const next = locationFromDistrict(districtId, undefined, 'district-selector');
     onChangeLocation(next);
     setOutsideMessage(false);
+    setUpazilaSearch('');
     const admin = getDistrictAdmin(districtId);
     if (admin) flyTo(admin.lng, admin.lat, 9);
   };
 
   const handleUpazilaChange = (upazilaId: string) => {
-    onChangeLocation({ ...location, upazila: upazilaId, source: 'upazila-selector' });
+    if (upazilaId === DISTRICT_WIDE_UPAZILA) {
+      const admin = getDistrictAdmin(location.district);
+      onChangeLocation({
+        ...location,
+        latitude: admin?.lat ?? location.latitude,
+        longitude: admin?.lng ?? location.longitude,
+        upazila: DISTRICT_WIDE_UPAZILA,
+        source: 'upazila-selector',
+      });
+      if (admin) flyTo(admin.lng, admin.lat, 9);
+      return;
+    }
+    const upz = getUpazila(location.district, upazilaId);
+    onChangeLocation({
+      ...location,
+      latitude: upz?.lat ?? location.latitude,
+      longitude: upz?.lng ?? location.longitude,
+      upazila: upz?.id ?? upazilaId,
+      source: 'upazila-selector',
+    });
+    if (upz?.lat && upz?.lng) {
+      flyTo(upz.lng, upz.lat, 11);
+    }
   };
 
   const handleMapSelect = async (lat: number, lng: number) => {
@@ -192,35 +225,52 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
               </div>
             </div>
 
-            {/* Upazila Dropdown */}
+            {/* Upazila Dropdown with Search */}
             <div>
-              <label className="block text-xs font-mono font-bold text-white mb-2 uppercase tracking-wider">
-                {language === 'en' ? 'Upazila' : 'উপজেলা'}
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-xs font-mono font-bold text-white uppercase tracking-wider">
+                  {language === 'en' ? 'Upazila' : 'উপজেলা'} ({upazilas.length})
+                </label>
+                {upazilas.length > 5 && (
+                  <span className="text-[10px] font-mono text-[#737373]">
+                    {language === 'en' ? 'Search available' : 'সার্চ সুবিধা'}
+                  </span>
+                )}
+              </div>
+
+              {upazilas.length > 5 && (
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    value={upazilaSearch}
+                    onChange={(e) => setUpazilaSearch(e.target.value)}
+                    placeholder={language === 'en' ? 'Search upazila (English / বাংলা)...' : 'উপজেলা খুঁজুন (বাংলা / English)...'}
+                    className="w-full px-3 py-2 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-xs placeholder-[#737373] focus:outline-none focus:border-[#404040]"
+                  />
+                </div>
+              )}
+
               <div className="relative">
                 <select
                   value={location.upazila}
                   onChange={(e) => handleUpazilaChange(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#262626] text-white text-sm font-medium focus:outline-none focus:border-[#404040] cursor-pointer appearance-none"
                 >
-                  {upazilas.length > 0 ? (
-                    upazilas.map((upz) => (
-                      <option key={upz.id} value={upz.id} className="bg-[#0A0A0A] text-white">
-                        {language === 'en' ? upz.nameEn : upz.nameBn}
-                      </option>
-                    ))
-                  ) : (
-                    <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#0A0A0A] text-white">
-                      {language === 'en' ? 'District-wide' : 'সমগ্র জেলা'}
+                  <option value={DISTRICT_WIDE_UPAZILA} className="bg-[#0A0A0A] text-white">
+                    {language === 'en' ? 'Entire District (District-wide)' : 'সমগ্র জেলা (জেলা-ভিত্তিক)'}
+                  </option>
+                  {filteredUpazilas.map((upz) => (
+                    <option key={upz.id} value={upz.id} className="bg-[#0A0A0A] text-white">
+                      {language === 'en' ? `${upz.nameEn} (${upz.nameBn})` : `${upz.nameBn} (${upz.nameEn})`}
                     </option>
-                  )}
+                  ))}
                 </select>
                 <div className="pointer-events-none absolute right-4 top-3.5 text-[#737373] text-xs">▼</div>
               </div>
             </div>
 
             {/* Selected Location Summary Card */}
-            <div className="p-5 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2">
+            <div className="p-5 rounded-xl bg-[#0A0A0A] border border-[#262626] space-y-2.5">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs uppercase font-mono text-[#22C55E] font-bold">
                   {language === 'en' ? 'Selected Field Coordinates' : 'জমির অবস্থান ও স্থানাঙ্ক'}
@@ -230,9 +280,7 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 </span>
               </div>
               <p className="text-base font-bold text-white">
-                {names.district} · {names.upazila}
-                {names.upazila !== (language === 'en' ? 'District-wide' : 'সমগ্র জেলা') &&
-                  (language === 'en' ? ' Upazila' : ' উপজেলা')}
+                {names.label}
               </p>
               <div className="flex items-center gap-4 font-mono text-xs text-[#A3A3A3]">
                 <span>
@@ -243,6 +291,27 @@ export const FarmLocationStep: React.FC<FarmLocationStepProps> = ({
                 </span>
                 {resolving && <span className="text-[#737373] ">{language === 'en' ? 'Resolving…' : 'যাচাই করা হচ্ছে…'}</span>}
               </div>
+
+              {/* Honest Resolution Badges */}
+              <div className="pt-2 text-[11px] text-[#A3A3A3] border-t border-[#262626] space-y-1">
+                <div className="flex items-center gap-1.5 font-mono text-[10px] text-[#737373]">
+                  <span className="px-1.5 py-0.5 rounded bg-white/5 border border-[#262626] text-[#A3A3A3]">
+                    {language === 'en' ? 'NASA POWER: ~50 km grid' : 'NASA POWER: ~৫০ কিমি গ্রিড'}
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-white/5 border border-[#262626] text-[#A3A3A3]">
+                    {language === 'en' ? 'SMAP: 9 km' : 'SMAP: ৯ কিমি'}
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-white/5 border border-[#262626] text-[#A3A3A3]">
+                    {language === 'en' ? 'MODIS: 250 m' : 'MODIS: ২৫০ মি'}
+                  </span>
+                </div>
+                <p className="text-[10px] text-[#737373] leading-relaxed pt-1">
+                  {language === 'en'
+                    ? 'NASA POWER ~50 km grid; neighboring upazilas may show similar values. Open-Meteo and satellite soil moisture evaluate at this centroid.'
+                    : 'NASA POWER ~৫০ কিমি গ্রিড; পাশের উপজেলায় একই মান আসতে পারে। ওপেন-মেটিও ও স্যাটেলাইট আর্দ্রতা এই স্থানাঙ্কে পরিমাপ করা হয়।'}
+                </p>
+              </div>
+
               {outsideMessage && (
                 <p className="text-xs text-[#FF5C5C] font-semibold pt-1">
                   {language === 'en'

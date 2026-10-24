@@ -1,0 +1,57 @@
+[
+  {
+    "id": "lakshmipur_kamalnagar",
+    "pcode": "BD20510033",
+    "district_id": "lakshmipur",
+    "name_en": "Kamalnagar",
+    "name_bn": "কমলনগর",
+    "lat": 22.757436,
+    "lon": 90.853751,
+    "area_sqkm": 237.19,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lakshmipur_lakshmipur-sadar",
+    "pcode": "BD20510043",
+    "district_id": "lakshmipur",
+    "name_en": "Lakshmipur Sadar",
+    "name_bn": "লক্ষ্মীপুর সদর",
+    "lat": 22.911274,
+    "lon": 90.843898,
+    "area_sqkm": 553.02,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lakshmipur_raipur",
+    "pcode": "BD20510058",
+    "district_id": "lakshmipur",
+    "name_en": "Raipur",
+    "name_bn": "রায়পুর",
+    "lat": 23.004694,
+    "lon": 90.731526,
+    "area_sqkm": 183.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lakshmipur_ramganj",
+    "pcode": "BD20510065",
+    "district_id": "lakshmipur",
+    "name_en": "Ramganj",
+    "name_bn": "রামগঞ্জ",
+    "lat": 23.096754,
+    "lon": 90.872726,
+    "area_sqkm": 169.42,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "lakshmipur_ramgati",
+    "pcode": "BD20510073",
+    "district_id": "lakshmipur",
+    "name_en": "Ramgati",
+    "name_bn": "রামগতি",
+    "lat": 22.624904,
+    "lon": 90.922237,
+    "area_sqkm": 359.86,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

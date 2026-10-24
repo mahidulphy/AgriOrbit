@@ -1,0 +1,68 @@
+[
+  {
+    "id": "kushtia_bheramara",
+    "pcode": "BD40500015",
+    "district_id": "kushtia",
+    "name_en": "Bheramara",
+    "name_bn": "ভেড়ামারা",
+    "lat": 24.056281,
+    "lon": 88.981155,
+    "area_sqkm": 151.16,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kushtia_daulatpur",
+    "pcode": "BD40500039",
+    "district_id": "kushtia",
+    "name_en": "Daulatpur",
+    "name_bn": "দৌলতপুর",
+    "lat": 24.03426,
+    "lon": 88.83554,
+    "area_sqkm": 483.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kushtia_khoksa",
+    "pcode": "BD40500063",
+    "district_id": "kushtia",
+    "name_en": "Khoksa",
+    "name_bn": "খোকসা",
+    "lat": 23.810843,
+    "lon": 89.300404,
+    "area_sqkm": 106.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kushtia_kumarkhali",
+    "pcode": "BD40500071",
+    "district_id": "kushtia",
+    "name_en": "Kumarkhali",
+    "name_bn": "কুমারখালী",
+    "lat": 23.858176,
+    "lon": 89.210338,
+    "area_sqkm": 267.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kushtia_kushtia-sadar",
+    "pcode": "BD40500079",
+    "district_id": "kushtia",
+    "name_en": "Kushtia Sadar",
+    "name_bn": "কুষ্টিয়া সদর",
+    "lat": 23.824477,
+    "lon": 89.089785,
+    "area_sqkm": 319.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "kushtia_mirpur",
+    "pcode": "BD40500094",
+    "district_id": "kushtia",
+    "name_en": "Mirpur",
+    "name_bn": "মিরপুর",
+    "lat": 23.897158,
+    "lon": 88.986172,
+    "area_sqkm": 310.14,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

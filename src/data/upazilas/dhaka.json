@@ -1,0 +1,79 @@
+[
+  {
+    "id": "dhaka_dhamrai",
+    "pcode": "BD30260014",
+    "district_id": "dhaka",
+    "name_en": "Dhamrai",
+    "name_bn": "ধামরাই",
+    "lat": 23.938978,
+    "lon": 90.140803,
+    "area_sqkm": 305.37,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_dohar",
+    "pcode": "BD30260018",
+    "district_id": "dhaka",
+    "name_en": "Dohar",
+    "name_bn": "দোহার",
+    "lat": 23.60158,
+    "lon": 90.108406,
+    "area_sqkm": 142.78,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_keraniganj",
+    "pcode": "BD30260038",
+    "district_id": "dhaka",
+    "name_en": "Keraniganj",
+    "name_bn": "কেরাণীগঞ্জ",
+    "lat": 23.694331,
+    "lon": 90.343658,
+    "area_sqkm": 183.81,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_nawabganj",
+    "pcode": "BD30260062",
+    "district_id": "dhaka",
+    "name_en": "Nawabganj",
+    "name_bn": "নবাবগঞ্জ",
+    "lat": 23.672426,
+    "lon": 90.160801,
+    "area_sqkm": 248.12,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_savar",
+    "pcode": "BD30260072",
+    "district_id": "dhaka",
+    "name_en": "Savar",
+    "name_bn": "সাভার",
+    "lat": 23.879951,
+    "lon": 90.280571,
+    "area_sqkm": 285.48,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_dhaka-north-city-corporation",
+    "pcode": "BD30262500",
+    "district_id": "dhaka",
+    "name_en": "Dhaka North City Corporation",
+    "name_bn": "ঢাকা উত্তর সিটি কর্পোরেশন",
+    "lat": 23.820778,
+    "lon": 90.406191,
+    "area_sqkm": 205.29,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "dhaka_dhaka-south-city-corporation",
+    "pcode": "BD30262000",
+    "district_id": "dhaka",
+    "name_en": "Dhaka South City Corporation",
+    "name_bn": "ঢাকা দক্ষিণ সিটি কর্পোরেশন",
+    "lat": 23.726755,
+    "lon": 90.437424,
+    "area_sqkm": 98.94,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

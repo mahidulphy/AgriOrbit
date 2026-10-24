@@ -1,0 +1,101 @@
+[
+  {
+    "id": "sirajganj_belkuchi",
+    "pcode": "BD50880011",
+    "district_id": "sirajganj",
+    "name_en": "Belkuchi",
+    "name_bn": "বেলকুচি",
+    "lat": 24.29793,
+    "lon": 89.701479,
+    "area_sqkm": 164.5,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_chouhali",
+    "pcode": "BD50880027",
+    "district_id": "sirajganj",
+    "name_en": "Chouhali",
+    "name_bn": "চৌহালী",
+    "lat": 24.139446,
+    "lon": 89.757439,
+    "area_sqkm": 253.43,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_kamarkhanda",
+    "pcode": "BD50880044",
+    "district_id": "sirajganj",
+    "name_en": "Kamarkhanda",
+    "name_bn": "কামারখন্দ",
+    "lat": 24.377508,
+    "lon": 89.64226,
+    "area_sqkm": 92.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_kazipur",
+    "pcode": "BD50880050",
+    "district_id": "sirajganj",
+    "name_en": "Kazipur",
+    "name_bn": "কাজীপুর",
+    "lat": 24.67159,
+    "lon": 89.688907,
+    "area_sqkm": 372.41,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_rayganj",
+    "pcode": "BD50880061",
+    "district_id": "sirajganj",
+    "name_en": "Rayganj",
+    "name_bn": "রায়গঞ্জ",
+    "lat": 24.492211,
+    "lon": 89.515264,
+    "area_sqkm": 264.98,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_shahjadpur",
+    "pcode": "BD50880067",
+    "district_id": "sirajganj",
+    "name_en": "Shahjadpur",
+    "name_bn": "শাহজাদপুর",
+    "lat": 24.162972,
+    "lon": 89.630721,
+    "area_sqkm": 324.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_sirajganj-sadar",
+    "pcode": "BD50880078",
+    "district_id": "sirajganj",
+    "name_en": "Sirajganj Sadar",
+    "name_bn": "সিরাজগঞ্জ সদর",
+    "lat": 24.49427,
+    "lon": 89.68961,
+    "area_sqkm": 325.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_tarash",
+    "pcode": "BD50880089",
+    "district_id": "sirajganj",
+    "name_en": "Tarash",
+    "name_bn": "তাড়াশ",
+    "lat": 24.445375,
+    "lon": 89.357803,
+    "area_sqkm": 300.1,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "sirajganj_ullapara",
+    "pcode": "BD50880094",
+    "district_id": "sirajganj",
+    "name_en": "Ullapara",
+    "name_bn": "উল্লাপাড়া",
+    "lat": 24.327849,
+    "lon": 89.518233,
+    "area_sqkm": 414.28,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

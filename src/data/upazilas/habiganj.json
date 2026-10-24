@@ -1,0 +1,101 @@
+[
+  {
+    "id": "habiganj_ajmiriganj",
+    "pcode": "BD60360002",
+    "district_id": "habiganj",
+    "name_en": "Ajmiriganj",
+    "name_bn": "আজমিরীগঞ্জ",
+    "lat": 24.553511,
+    "lon": 91.281394,
+    "area_sqkm": 179.59,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_bahubal",
+    "pcode": "BD60360005",
+    "district_id": "habiganj",
+    "name_en": "Bahubal",
+    "name_bn": "বাহুবল",
+    "lat": 24.361388,
+    "lon": 91.54464,
+    "area_sqkm": 263.78,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_baniachong",
+    "pcode": "BD60360011",
+    "district_id": "habiganj",
+    "name_en": "Baniachong",
+    "name_bn": "বানিয়াচং",
+    "lat": 24.49883,
+    "lon": 91.366856,
+    "area_sqkm": 514.11,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_chunarughat",
+    "pcode": "BD60360026",
+    "district_id": "habiganj",
+    "name_en": "Chunarughat",
+    "name_bn": "চুনারুঘাট",
+    "lat": 24.180004,
+    "lon": 91.515822,
+    "area_sqkm": 504.05,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_habiganj-sadar",
+    "pcode": "BD60360044",
+    "district_id": "habiganj",
+    "name_en": "Habiganj Sadar",
+    "name_bn": "হবিগঞ্জ সদর",
+    "lat": 24.350931,
+    "lon": 91.41578,
+    "area_sqkm": 188.6,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_lakhai",
+    "pcode": "BD60360068",
+    "district_id": "habiganj",
+    "name_en": "Lakhai",
+    "name_bn": "লাখাই",
+    "lat": 24.298515,
+    "lon": 91.260892,
+    "area_sqkm": 191.16,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_madhabpur",
+    "pcode": "BD60360071",
+    "district_id": "habiganj",
+    "name_en": "Madhabpur",
+    "name_bn": "মাধবপুর",
+    "lat": 24.120358,
+    "lon": 91.337394,
+    "area_sqkm": 280.46,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_nabiganj",
+    "pcode": "BD60360077",
+    "district_id": "habiganj",
+    "name_en": "Nabiganj",
+    "name_bn": "নবীগঞ্জ",
+    "lat": 24.570719,
+    "lon": 91.548185,
+    "area_sqkm": 441.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "habiganj_shayestaganj",
+    "pcode": "BD60360087",
+    "district_id": "habiganj",
+    "name_en": "Shayestaganj",
+    "name_bn": "শায়েস্তাগঞ্জ",
+    "lat": 24.274977,
+    "lon": 91.406819,
+    "area_sqkm": 47.46,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

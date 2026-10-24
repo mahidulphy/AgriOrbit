@@ -1,0 +1,57 @@
+[
+  {
+    "id": "gopalganj_gopalganj-sadar",
+    "pcode": "BD30350032",
+    "district_id": "gopalganj",
+    "name_en": "Gopalganj Sadar",
+    "name_bn": "গোপালগঞ্জ সদর",
+    "lat": 23.060562,
+    "lon": 89.847674,
+    "area_sqkm": 383.24,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gopalganj_kashiani",
+    "pcode": "BD30350043",
+    "district_id": "gopalganj",
+    "name_en": "Kashiani",
+    "name_bn": "কাশিয়ানী",
+    "lat": 23.191313,
+    "lon": 89.79519,
+    "area_sqkm": 291.53,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gopalganj_kotalipara",
+    "pcode": "BD30350051",
+    "district_id": "gopalganj",
+    "name_en": "Kotalipara",
+    "name_bn": "কোটালীপাড়া",
+    "lat": 23.010519,
+    "lon": 90.020199,
+    "area_sqkm": 368.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gopalganj_muksudpur",
+    "pcode": "BD30350058",
+    "district_id": "gopalganj",
+    "name_en": "Muksudpur",
+    "name_bn": "মুকসুদপুর",
+    "lat": 23.266149,
+    "lon": 89.915757,
+    "area_sqkm": 310.99,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "gopalganj_tungipara",
+    "pcode": "BD30350091",
+    "district_id": "gopalganj",
+    "name_en": "Tungipara",
+    "name_bn": "টুংগীপাড়া",
+    "lat": 22.923595,
+    "lon": 89.902235,
+    "area_sqkm": 131.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

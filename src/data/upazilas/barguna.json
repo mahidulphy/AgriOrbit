@@ -1,0 +1,68 @@
+[
+  {
+    "id": "barguna_amtali",
+    "pcode": "BD10040009",
+    "district_id": "barguna",
+    "name_en": "Amtali",
+    "name_bn": "আমতলী",
+    "lat": 22.146503,
+    "lon": 90.270037,
+    "area_sqkm": 309.91,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barguna_bamna",
+    "pcode": "BD10040019",
+    "district_id": "barguna",
+    "name_en": "Bamna",
+    "name_bn": "বামনা",
+    "lat": 22.27233,
+    "lon": 90.057296,
+    "area_sqkm": 99.62,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barguna_barguna-sadar",
+    "pcode": "BD10040028",
+    "district_id": "barguna",
+    "name_en": "Barguna Sadar",
+    "name_bn": "বরগুনা সদর",
+    "lat": 22.12685,
+    "lon": 90.101696,
+    "area_sqkm": 376.8,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barguna_betagi",
+    "pcode": "BD10040047",
+    "district_id": "barguna",
+    "name_en": "Betagi",
+    "name_bn": "বেতাগী",
+    "lat": 22.348185,
+    "lon": 90.14936,
+    "area_sqkm": 168.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barguna_patharghata",
+    "pcode": "BD10040085",
+    "district_id": "barguna",
+    "name_en": "Patharghata",
+    "name_bn": "পাথরঘাটা",
+    "lat": 22.08968,
+    "lon": 89.959429,
+    "area_sqkm": 299.07,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "barguna_taltali",
+    "pcode": "BD10040090",
+    "district_id": "barguna",
+    "name_en": "Taltali",
+    "name_bn": "তালতলি",
+    "lat": 21.967595,
+    "lon": 90.100588,
+    "area_sqkm": 280.96,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

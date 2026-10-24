@@ -1,0 +1,79 @@
+[
+  {
+    "id": "manikganj_daulatpur",
+    "pcode": "BD30560010",
+    "district_id": "manikganj",
+    "name_en": "Daulatpur",
+    "name_bn": "দৌলতপুর",
+    "lat": 23.956194,
+    "lon": 89.798638,
+    "area_sqkm": 210.61,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_ghior",
+    "pcode": "BD30560022",
+    "district_id": "manikganj",
+    "name_en": "Ghior",
+    "name_bn": "ঘিওর",
+    "lat": 23.874414,
+    "lon": 89.903882,
+    "area_sqkm": 145.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_harirampur",
+    "pcode": "BD30560028",
+    "district_id": "manikganj",
+    "name_en": "Harirampur",
+    "name_bn": "হরিরামপুর",
+    "lat": 23.720667,
+    "lon": 89.945878,
+    "area_sqkm": 263.47,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_manikganj-sadar",
+    "pcode": "BD30560046",
+    "district_id": "manikganj",
+    "name_en": "Manikganj Sadar",
+    "name_bn": "মানিকগঞ্জ সদর",
+    "lat": 23.836655,
+    "lon": 90.029953,
+    "area_sqkm": 217.76,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_saturia",
+    "pcode": "BD30560070",
+    "district_id": "manikganj",
+    "name_en": "Saturia",
+    "name_bn": "সাটুরিয়া",
+    "lat": 23.958479,
+    "lon": 90.001042,
+    "area_sqkm": 138.7,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_shibalay",
+    "pcode": "BD30560078",
+    "district_id": "manikganj",
+    "name_en": "Shibalay",
+    "name_bn": "শিবালয়",
+    "lat": 23.838374,
+    "lon": 89.810829,
+    "area_sqkm": 198.91,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "manikganj_singair",
+    "pcode": "BD30560082",
+    "district_id": "manikganj",
+    "name_en": "Singair",
+    "name_bn": "সিংগাইর",
+    "lat": 23.783363,
+    "lon": 90.154041,
+    "area_sqkm": 218.45,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "rajbari_baliakandi",
+    "pcode": "BD30820007",
+    "district_id": "rajbari",
+    "name_en": "Baliakandi",
+    "name_bn": "বালিয়াকান্দি",
+    "lat": 23.650638,
+    "lon": 89.551702,
+    "area_sqkm": 231.88,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajbari_goalanda",
+    "pcode": "BD30820029",
+    "district_id": "rajbari",
+    "name_en": "Goalanda",
+    "name_bn": "গোয়ালন্দ",
+    "lat": 23.755756,
+    "lon": 89.765185,
+    "area_sqkm": 145.39,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajbari_kalukhali",
+    "pcode": "BD30820047",
+    "district_id": "rajbari",
+    "name_en": "Kalukhali",
+    "name_bn": "কালুখালী",
+    "lat": 23.741885,
+    "lon": 89.475278,
+    "area_sqkm": 169.72,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajbari_pangsha",
+    "pcode": "BD30820073",
+    "district_id": "rajbari",
+    "name_en": "Pangsha",
+    "name_bn": "পাংশা",
+    "lat": 23.788992,
+    "lon": 89.387776,
+    "area_sqkm": 256.82,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "rajbari_rajbari-sadar",
+    "pcode": "BD30820076",
+    "district_id": "rajbari",
+    "name_en": "Rajbari Sadar",
+    "name_bn": "রাজবাড়ী সদর",
+    "lat": 23.717184,
+    "lon": 89.656064,
+    "area_sqkm": 325.84,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]

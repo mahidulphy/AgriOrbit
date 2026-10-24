@@ -1,0 +1,90 @@
+[
+  {
+    "id": "chandpur_chandpur-sadar",
+    "pcode": "BD20130022",
+    "district_id": "chandpur",
+    "name_en": "Chandpur Sadar",
+    "name_bn": "চাঁদপুর সদর",
+    "lat": 23.231752,
+    "lon": 90.65137,
+    "area_sqkm": 319.58,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_faridganj",
+    "pcode": "BD20130045",
+    "district_id": "chandpur",
+    "name_en": "Faridganj",
+    "name_bn": "ফরিদগঞ্জ",
+    "lat": 23.144155,
+    "lon": 90.761904,
+    "area_sqkm": 235.4,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_haimchar",
+    "pcode": "BD20130047",
+    "district_id": "chandpur",
+    "name_en": "Haimchar",
+    "name_bn": "হাইমচর",
+    "lat": 23.076609,
+    "lon": 90.617166,
+    "area_sqkm": 167.77,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_hajiganj",
+    "pcode": "BD20130049",
+    "district_id": "chandpur",
+    "name_en": "Hajiganj",
+    "name_bn": "হাজীগঞ্জ",
+    "lat": 23.257796,
+    "lon": 90.837478,
+    "area_sqkm": 191.49,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_kachua",
+    "pcode": "BD20130058",
+    "district_id": "chandpur",
+    "name_en": "Kachua",
+    "name_bn": "কচুয়া",
+    "lat": 23.359265,
+    "lon": 90.882893,
+    "area_sqkm": 237.8,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_matlab-dakkhin",
+    "pcode": "BD20130076",
+    "district_id": "chandpur",
+    "name_en": "Matlab Dakkhin",
+    "name_bn": "মতলব দক্ষিণ",
+    "lat": 23.348151,
+    "lon": 90.747309,
+    "area_sqkm": 130.22,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_matlab-uttar",
+    "pcode": "BD20130079",
+    "district_id": "chandpur",
+    "name_en": "Matlab Uttar",
+    "name_bn": "মতলব উত্তর",
+    "lat": 23.410135,
+    "lon": 90.641063,
+    "area_sqkm": 283.23,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  },
+  {
+    "id": "chandpur_shahrasti",
+    "pcode": "BD20130095",
+    "district_id": "chandpur",
+    "name_en": "Shahrasti",
+    "name_bn": "শাহরাস্তি",
+    "lat": 23.205879,
+    "lon": 90.956917,
+    "area_sqkm": 154.33,
+    "source": "HDX/OCHA COD-AB adm3 (centroid) x nuhil/bangladesh-geocode (Bangla)"
+  }
+]
