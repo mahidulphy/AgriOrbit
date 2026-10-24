@@ -548,6 +548,10 @@ export const FarmerProfilePage: React.FC = () => {
                 onPhoneChange={(val) => setProfile({ ...profile, phone: val })}
                 communicationMethod={profile.communicationMethod}
                 onCommunicationMethodChange={(val) => setProfile({ ...profile, communicationMethod: val })}
+                emailAlerts={Boolean(profile.emailAlerts)}
+                onEmailAlertsChange={(val) => setProfile({ ...profile, emailAlerts: val })}
+                smsAlerts={Boolean(profile.smsAlerts)}
+                onSmsAlertsChange={(val) => setProfile({ ...profile, smsAlerts: val })}
                 avatarUrl={profile.avatarUrl}
                 onAvatarSelect={(file) => {
                   const syntheticEvent = { target: { files: [file] } } as any;
@@ -556,6 +560,7 @@ export const FarmerProfilePage: React.FC = () => {
                 uploadingAvatar={uploadingAvatar}
                 isBn={isBn}
                 showAvatarUpload={false}
+                isLoggedIn={!isGuest && Boolean(user)}
               />
 
               {/* Save Button */}

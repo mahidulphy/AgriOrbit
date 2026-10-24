@@ -51,6 +51,11 @@ export const PrivacyPolicyPage: React.FC = () => {
                 ? 'যখন আপনি গুগল সাইন-ইন বা ইমেইলের মাধ্যমে একাউন্ট তৈরি করেন, আমরা আপনার নাম, ইমেইল ঠিকানা এবং প্রোফাইল ছবি গ্রহণ করি। এছাড়া কৃষকের যোগাযোগের জন্য ঐচ্ছিক মোবাইল নম্বর সংরক্ষিত হতে পারে।'
                 : 'When you sign in using Google OAuth or create an email account, we collect your display name, email address, profile avatar, and optional contact phone number.'}
             </p>
+            <p className="text-xs text-[#00E5FF] mt-2 font-mono">
+              {isBn
+                ? 'আপনার ইমেইল কেবলমাত্র আবহাওয়া ও মাঠ সতর্কতার জন্য ব্যবহৃত হয় এবং প্রোফাইল সেটিংস থেকে যেকোনো সময় এটি বন্ধ করা যায়।'
+                : 'Your email is used only for field alerts and can be turned off anytime in your profile settings.'}
+            </p>
           </div>
 
           <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5">

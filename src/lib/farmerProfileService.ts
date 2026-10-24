@@ -41,6 +41,8 @@ export interface FarmerProfileData {
   pastDamages: string[];
   pastDamageNotes: string;
   onboardingCompleted?: boolean;
+  emailAlerts?: boolean;
+  smsAlerts?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -89,6 +91,8 @@ export const DEFAULT_FARMER_PROFILE_DATA: FarmerProfileData = {
   priorities: ['save_water', 'improve_soil'],
   pastDamages: ['drought'],
   pastDamageNotes: 'গত বছর খরার কারণে বোরো মৌসুমে সেচ খরচ বেড়েছিল।',
+  emailAlerts: false,
+  smsAlerts: false,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 };
@@ -203,6 +207,8 @@ export async function loadFarmerProfile(
           pastDamages: profileRow.past_damages || [],
           pastDamageNotes: profileRow.past_damage_notes || '',
           onboardingCompleted: Boolean(profileRow.onboarding_completed),
+          emailAlerts: Boolean(profileRow.email_alerts),
+          smsAlerts: Boolean(profileRow.sms_alerts),
           createdAt: profileRow.created_at,
           updatedAt: profileRow.updated_at,
         };
@@ -325,6 +331,8 @@ export async function saveFarmerProfile(
         past_damages: profile.pastDamages ?? existing.pastDamages,
         past_damage_notes: profile.pastDamageNotes ?? existing.pastDamageNotes,
         onboarding_completed: profile.onboardingCompleted ?? existing.onboardingCompleted ?? false,
+        email_alerts: profile.emailAlerts ?? existing.emailAlerts ?? false,
+        sms_alerts: profile.smsAlerts ?? existing.smsAlerts ?? false,
         updated_at: new Date().toISOString(),
       };
 

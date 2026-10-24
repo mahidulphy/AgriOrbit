@@ -16,6 +16,8 @@ export interface FarmerProfile {
   pastDamages: string[];
   pastDamageNotes: string;
   primaryGoal: 'yield' | 'resilience' | 'low_cost' | 'soil_health';
+  emailAlerts?: boolean;
+  smsAlerts?: boolean;
   updatedAt: string;
 }
 

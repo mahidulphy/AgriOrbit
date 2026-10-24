@@ -45,6 +45,7 @@ import {
   FaqSection,
 } from '../dashboard';
 import { UserMenu } from '../auth/UserMenu';
+import { NotificationBell } from '../notifications/NotificationBell';
 import { loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
@@ -389,6 +390,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          <NotificationBell compact />
           <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
           <UserMenu compact />
           <button
@@ -535,6 +537,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF3D] animate-ping" />
               )}
             </button>
+
+            {/* Field Alerts Notification Bell */}
+            <NotificationBell />
 
             {/* Authenticated User Menu */}
             <UserMenu />

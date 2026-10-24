@@ -152,3 +152,24 @@ export interface RotationPlan {
     agronomicRoleBn: string;
   }[];
 }
+
+
+export type AlertSeverity = 'info' | 'warning' | 'danger';
+
+export interface AlertNotification {
+  id: string;
+  user_id: string;
+  field_id: string | null;
+  alert_type: string;
+  severity: AlertSeverity;
+  title_en: string;
+  title_bn: string;
+  body_en: string;
+  body_bn: string;
+  data_source: string;
+  data_date: string;
+  created_at: string;
+  read_at: string | null;
+  emailed_at: string | null;
+  sms_sent_at: string | null;
+}

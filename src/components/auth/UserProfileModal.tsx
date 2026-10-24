@@ -17,7 +17,10 @@ import {
   Home,
   Target,
   FileText,
+  Loader2,
+  Send,
 } from 'lucide-react';
+import { sendTestAlert } from '../../lib/testAlertClient';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLang } from '../../lang';
 import { BD_DISTRICTS } from '../../data/districts';
@@ -47,6 +50,19 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
   const [activeTab, setActiveTab] = useState<'profile' | 'history' | 'account'>('profile');
   const [profile, setProfile] = useState<FarmerProfile>(() => getFarmerProfile(user?.id));
   const [savedToast, setSavedToast] = useState(false);
+  const [sendingTestAlert, setSendingTestAlert] = useState(false);
+  const [testAlertFeedback, setTestAlertFeedback] = useState<{ ok: boolean; message: string } | null>(null);
+
+  const handleSendTestAlert = async () => {
+    setSendingTestAlert(true);
+    setTestAlertFeedback(null);
+    try {
+      const res = await sendTestAlert(isBn, user?.email);
+      setTestAlertFeedback({ ok: res.ok, message: res.message });
+    } finally {
+      setSendingTestAlert(false);
+    }
+  };
 
   // Sync profile when opened or user changes
   useEffect(() => {
@@ -570,6 +586,76 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                     <span className="text-white font-bold">{createdAt}</span>
                   </div>
                 )}
+              </div>
+
+              {/* Automated Alert Toggles */}
+              <div className="p-4 rounded-2xl bg-[#050B14] border border-white/5 space-y-3">
+                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider block">
+                  {isBn ? 'স্বয়ংক্রিয় কৃষি সতর্কতা সেটিংস' : 'Field Alert Notifications'}
+                </span>
+
+                <div className="space-y-2">
+                  <label className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(profile.emailAlerts)}
+                      onChange={(e) => setProfile({ ...profile, emailAlerts: e.target.checked })}
+                      className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-semibold text-white block">
+                        {isBn ? 'ইমেইলে সতর্কতা পাঠান' : 'Email me alerts'}
+                      </span>
+                      <span className="text-[11px] text-slate-400 block font-mono">
+                        {isBn ? 'চরম আবহাওয়া বা খরায় প্রতিদিন সর্বোচ্চ ১টি ইমেইল' : 'Max 1 email per day for extreme weather alerts'}
+                      </span>
+                    </div>
+                  </label>
+
+                  <div className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 opacity-60 cursor-not-allowed">
+                    <input
+                      type="checkbox"
+                      checked={false}
+                      disabled={true}
+                      className="mt-1 w-4 h-4 rounded text-slate-500 border-white/10 bg-black/40 cursor-not-allowed"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-semibold text-slate-300 block">
+                        {isBn ? 'এসএমএস সতর্কতা (শীঘ্রই আসছে, নিষ্ক্রিয়)' : 'SMS alerts (coming soon, disabled)'}
+                      </span>
+                      <span className="text-[11px] text-slate-500 block font-mono">
+                        {isBn ? 'টেলিকম গেটওয়ে ও মোবাইল ব্রডকাস্ট সংযোগাধীন' : 'Telecom SMS gateway integration in progress'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Test Alert Button for Logged-In Users */}
+                  {!isGuest && user && (
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={handleSendTestAlert}
+                        disabled={sendingTestAlert}
+                        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] hover:text-cyan-200 text-xs font-mono font-bold transition-all disabled:opacity-50 cursor-pointer shadow-sm"
+                      >
+                        {sendingTestAlert ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <Send className="w-3.5 h-3.5" />
+                        )}
+                        <span>{isBn ? 'আমাকে একটি পরীক্ষামূলক সতর্কতা পাঠান' : 'Send me a test alert'}</span>
+                      </button>
+
+                      {testAlertFeedback && (
+                        <div
+                          className={`mt-2 p-2.5 rounded-xl border text-xs font-mono ${testAlertFeedback.ok ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-300" : "bg-amber-950/40 border-amber-500/40 text-amber-300"}`}
+                        >
+                          {testAlertFeedback.message}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Data Safety & Explanatory Banner */}

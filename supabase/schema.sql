@@ -134,3 +134,58 @@ CREATE POLICY "Authenticated users can update own avatars"
   ON storage.objects FOR UPDATE
   TO authenticated
   USING (bucket_id = 'avatars' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+
+-- 8. Create public.notifications table & alert notification preferences
+CREATE TABLE IF NOT EXISTS public.notifications (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  field_id UUID NULL,
+  alert_type TEXT NOT NULL,
+  severity TEXT NOT NULL CHECK (severity IN ('info', 'warning', 'danger')),
+  title_en TEXT NOT NULL,
+  title_bn TEXT NOT NULL,
+  body_en TEXT NOT NULL,
+  body_bn TEXT NOT NULL,
+  data_source TEXT NOT NULL,
+  data_date DATE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  read_at TIMESTAMPTZ NULL,
+  emailed_at TIMESTAMPTZ NULL,
+  sms_sent_at TIMESTAMPTZ NULL,
+  -- Note: UNIQUE NULLS NOT DISTINCT requires PostgreSQL 15+ (standard in Supabase)
+  CONSTRAINT uq_notifications_user_field_alert_date UNIQUE NULLS NOT DISTINCT (user_id, field_id, alert_type, data_date)
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_user_created 
+  ON public.notifications (user_id, created_at DESC);
+
+ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own notifications"
+  ON public.notifications FOR SELECT
+  TO authenticated
+  USING ((select auth.uid()) = user_id);
+
+CREATE POLICY "Users can update read_at on own notifications"
+  ON public.notifications FOR UPDATE
+  TO authenticated
+  USING ((select auth.uid()) = user_id)
+  WITH CHECK ((select auth.uid()) = user_id);
+
+REVOKE ALL ON public.notifications FROM anon;
+REVOKE ALL ON public.notifications FROM authenticated;
+GRANT SELECT ON public.notifications TO authenticated;
+GRANT UPDATE (read_at) ON public.notifications TO authenticated;
+
+ALTER TABLE IF EXISTS public.profiles 
+  ADD COLUMN IF NOT EXISTS email_alerts BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE IF EXISTS public.profiles 
+  ADD COLUMN IF NOT EXISTS sms_alerts BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE IF EXISTS public.farmer_profiles 
+  ADD COLUMN IF NOT EXISTS email_alerts BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE IF EXISTS public.farmer_profiles 
+  ADD COLUMN IF NOT EXISTS sms_alerts BOOLEAN DEFAULT FALSE;

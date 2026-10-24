@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
-import { User, Mail, Phone, Bell, Camera, Loader2 } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { User, Mail, Phone, Bell, Camera, Loader2, Send } from 'lucide-react';
 import { COMMUNICATION_METHODS } from '../../../lib/farmerProfileService';
+import { sendTestAlert } from '../../../lib/testAlertClient';
 
 export interface PersonalInfoSectionProps {
   fullName: string;
@@ -10,12 +11,17 @@ export interface PersonalInfoSectionProps {
   onPhoneChange: (val: string) => void;
   communicationMethod: 'in_app' | 'sms' | 'whatsapp' | 'voice';
   onCommunicationMethodChange: (val: 'in_app' | 'sms' | 'whatsapp' | 'voice') => void;
+  emailAlerts?: boolean;
+  onEmailAlertsChange?: (val: boolean) => void;
+  smsAlerts?: boolean;
+  onSmsAlertsChange?: (val: boolean) => void;
   avatarUrl?: string;
   onAvatarSelect?: (file: File) => void;
   uploadingAvatar?: boolean;
   errors?: { fullName?: string; phone?: string };
   isBn: boolean;
   showAvatarUpload?: boolean;
+  isLoggedIn?: boolean;
 }
 
 export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
@@ -26,14 +32,32 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
   onPhoneChange,
   communicationMethod,
   onCommunicationMethodChange,
+  emailAlerts = false,
+  onEmailAlertsChange,
+  smsAlerts = false,
+  onSmsAlertsChange,
   avatarUrl,
   onAvatarSelect,
   uploadingAvatar,
   errors,
   isBn,
   showAvatarUpload = false,
+  isLoggedIn = false,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [sendingTestAlert, setSendingTestAlert] = useState(false);
+  const [testAlertFeedback, setTestAlertFeedback] = useState<{ ok: boolean; message: string } | null>(null);
+
+  const handleSendTestAlert = async () => {
+    setSendingTestAlert(true);
+    setTestAlertFeedback(null);
+    try {
+      const res = await sendTestAlert(isBn, email);
+      setTestAlertFeedback({ ok: res.ok, message: res.message });
+    } finally {
+      setSendingTestAlert(false);
+    }
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -51,23 +75,23 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
         </h2>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
           {isBn
-            ? 'আপনার সঠিক নাম এবং যোগাযোগের তথ্য দিন যাতে আবহাওয়া ও ফসল সতর্কতা সহজে পৌঁছাতে পারে।'
-            : 'Enter your personal details to receive accurate localized satellite advisories.'}
+            ? 'আপনার পরিচিতি ও যোগাযোগের তথ্য হালনাগাদ রাখুন।'
+            : 'Keep your identity and direct communication channels up to date.'}
         </p>
       </div>
 
-      {showAvatarUpload && onAvatarSelect && (
-        <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="relative group flex-shrink-0">
+      {/* Avatar Upload (If enabled) */}
+      {showAvatarUpload && (
+        <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div className="relative group">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
-                alt={fullName || 'Farmer'}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-[#B8FF3D]/40 shadow-lg"
-                loading="lazy"
+                alt={fullName || 'Avatar'}
+                className="w-16 h-16 rounded-2xl object-cover border-2 border-[#B8FF3D]/50 shadow-md"
               />
             ) : (
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#00E5FF]/20 to-[#B8FF3D]/20 border-2 border-[#B8FF3D]/40 flex items-center justify-center text-2xl font-bold font-mono text-[#B8FF3D]">
+              <div className="w-16 h-16 rounded-2xl bg-[#00E5FF]/10 border-2 border-[#00E5FF]/40 flex items-center justify-center text-xl font-bold font-mono text-[#00E5FF]">
                 {fullName ? fullName.charAt(0).toUpperCase() : 'F'}
               </div>
             )}
@@ -75,16 +99,13 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingAvatar}
-              className="absolute inset-0 rounded-2xl bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-[10px] font-mono text-white transition-opacity cursor-pointer border border-[#00E5FF]/40"
-              title={isBn ? 'ছবি পরিবর্তন' : 'Change avatar'}
+              className="absolute inset-0 bg-black/60 rounded-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer disabled:opacity-50"
+              title={isBn ? 'ছবি পরিবর্তন করুন' : 'Change avatar'}
             >
               {uploadingAvatar ? (
-                <Loader2 className="w-4 h-4 animate-spin text-[#00E5FF]" />
+                <Loader2 className="w-5 h-5 text-white animate-spin" />
               ) : (
-                <>
-                  <Camera className="w-4 h-4 text-[#B8FF3D] mb-0.5" />
-                  <span>{isBn ? 'ছবি' : 'Change'}</span>
-                </>
+                <Camera className="w-5 h-5 text-white" />
               )}
             </button>
             <input
@@ -204,6 +225,86 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
           <p className="text-[11px] text-slate-500 mt-1 font-mono">
             {isBn ? 'কীভাবে কৃষি সতর্কতা পেতে চান' : 'How you prefer receiving farming updates'}
           </p>
+        </div>
+
+        {/* Automated Alert Toggles */}
+        <div className="sm:col-span-2 pt-4 border-t border-white/10 space-y-3">
+          <label className="block text-xs font-mono font-semibold text-slate-300 uppercase tracking-wider">
+            {isBn ? 'স্বয়ংক্রিয় কৃষি সতর্কতা সেটিংস' : 'Automated Field Alert Settings'}
+          </label>
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            {/* Email Alerts Toggle */}
+            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
+              <input
+                type="checkbox"
+                checked={Boolean(emailAlerts)}
+                onChange={(e) => onEmailAlertsChange && onEmailAlertsChange(e.target.checked)}
+                className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
+              />
+              <div className="space-y-0.5">
+                <span className="text-sm font-semibold text-white block">
+                  {isBn ? 'ইমেইলে সতর্কতা পাঠান' : 'Email me alerts'}
+                </span>
+                <span className="text-[11px] text-slate-400 block leading-relaxed font-mono">
+                  {isBn
+                    ? 'চরম আবহাওয়া বা খরা সতর্কতায় প্রতিদিন সর্বোচ্চ ১টি ইমেইল'
+                    : 'Max 1 email per day for heat stress or drought warnings'}
+                </span>
+              </div>
+            </label>
+
+            {/* SMS Alerts Toggle (Coming soon, disabled) */}
+            <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/[0.02] border border-white/5 opacity-60 cursor-not-allowed">
+              <input
+                type="checkbox"
+                checked={false}
+                disabled={true}
+                className="mt-1 w-4 h-4 rounded text-slate-500 border-white/10 bg-black/40 cursor-not-allowed"
+              />
+              <div className="space-y-0.5">
+                <span className="text-sm font-semibold text-slate-300 block">
+                  {isBn ? 'এসএমএস সতর্কতা (শীঘ্রই আসছে, নিষ্ক্রিয়)' : 'SMS alerts (coming soon, disabled)'}
+                </span>
+                <span className="text-[11px] text-slate-500 block leading-relaxed font-mono">
+                  {isBn
+                    ? 'টেলিকম গেটওয়ে ও মোবাইল ব্রডকাস্ট সংযোগাধীন'
+                    : 'Telecom SMS gateway integration in progress'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Test Alert Button for Logged-In Users */}
+          {isLoggedIn && (
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={handleSendTestAlert}
+                disabled={sendingTestAlert}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#00E5FF]/40 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] hover:text-cyan-200 text-xs font-mono font-bold transition-all disabled:opacity-50 cursor-pointer shadow-sm"
+              >
+                {sendingTestAlert ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+                <span>{isBn ? 'আমাকে একটি পরীক্ষামূলক সতর্কতা পাঠান' : 'Send me a test alert'}</span>
+              </button>
+
+              {testAlertFeedback && (
+                <div
+                  className={`mt-2 p-2.5 rounded-xl border text-xs font-mono ${
+                    testAlertFeedback.ok
+                      ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300'
+                      : 'bg-amber-950/40 border-amber-500/40 text-amber-300'
+                  }`}
+                >
+                  {testAlertFeedback.message}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
