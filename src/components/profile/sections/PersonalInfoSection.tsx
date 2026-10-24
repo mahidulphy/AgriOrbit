@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { User, Mail, Phone, Bell, Camera, Loader2, Send, AlertTriangle } from 'lucide-react';
+import { User, Mail, Phone, Bell, Camera, Loader2, Send } from 'lucide-react';
 import { COMMUNICATION_METHODS } from '../../../lib/farmerProfileService';
 import { sendTestAlert } from '../../../lib/testAlertClient';
 
@@ -233,57 +233,34 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
             {isBn ? 'স্বয়ংক্রিয় কৃষি সতর্কতা সেটিংস' : 'Automated Field Alert Settings'}
           </label>
 
-          <div className="grid sm:grid-cols-2 gap-3">
-            {/* Email Alerts Toggle */}
-            <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
-              <input
-                type="checkbox"
-                checked={Boolean(emailAlerts)}
-                onChange={(e) => onEmailAlertsChange && onEmailAlertsChange(e.target.checked)}
-                className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
-              />
-              <div className="space-y-0.5">
+          {/* Email Alerts Toggle (SMS coming soon) */}
+          <label className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
+            <input
+              type="checkbox"
+              checked={Boolean(emailAlerts || smsAlerts)}
+              onChange={(e) => {
+                const val = e.target.checked;
+                onEmailAlertsChange && onEmailAlertsChange(val);
+                onSmsAlertsChange && onSmsAlertsChange(val);
+              }}
+              className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
+            />
+            <div className="space-y-1 flex-1">
+              <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-white block">
-                  {isBn ? 'ইমেইলে সতর্কতা পাঠান' : 'Email me alerts'}
+                  {isBn ? 'ইমেইল সতর্কতা (এসএমএস শীঘ্রই আসছে)' : 'Email alerts (SMS coming soon)'}
                 </span>
-                <span className="text-[11px] text-slate-400 block leading-relaxed font-mono">
-                  {isBn
-                    ? 'চরম আবহাওয়া বা খরা সতর্কতায় প্রতিদিন সর্বোচ্চ ১টি ইমেইল'
-                    : 'Max 1 email per day for heat stress or drought warnings'}
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
+                  EMAIL
                 </span>
               </div>
-            </label>
-
-            {/* SMS Alerts Toggle */}
-            <label className={`flex items-start gap-3 p-3.5 rounded-2xl border transition-all cursor-pointer ${
-              phone?.trim()
-                ? 'bg-white/5 border-white/10 hover:border-white/20'
-                : 'bg-white/[0.03] border-amber-500/30 hover:border-amber-500/40'
-            }`}>
-              <input
-                type="checkbox"
-                checked={Boolean(smsAlerts)}
-                onChange={(e) => onSmsAlertsChange && onSmsAlertsChange(e.target.checked)}
-                className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
-              />
-              <div className="space-y-1 flex-1">
-                <span className="text-sm font-semibold text-white block">
-                  {isBn ? 'এসএমএস সতর্কতা পাঠান' : 'SMS alerts'}
-                </span>
-                <span className="text-[11px] text-slate-400 block leading-relaxed font-mono">
-                  {isBn
-                    ? 'চরম আবহাওয়া বা দুর্যোগের তাৎক্ষণিক মোবাইল এসএমএস সতর্কতা'
-                    : 'Urgent mobile SMS alerts for extreme heat, drought, or storm warnings'}
-                </span>
-                {!phone?.trim() && (
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-amber-300 pt-1">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-amber-400" />
-                    {isBn ? 'এসএমএস সতর্কতা চালু করতে একটি মোবাইল নম্বর যোগ করুন' : 'Add a phone number to enable SMS alerts'}
-                  </span>
-                )}
-              </div>
-            </label>
-          </div>
+              <span className="text-[11px] text-slate-400 block leading-relaxed font-mono">
+                {isBn
+                  ? 'চরম আবহাওয়া, খরা বা আকস্মিক বন্যার বাস্তব নাসা উপগ্রহ ও আবহাওয়া সতর্কবার্তা সরাসরি আপনার নিবন্ধিত ইমেইলে পৌঁছাবে। (মোবাইল এসএমএস সম্প্রচার শীঘ্রই যুক্ত হবে)'
+                  : 'Real NASA satellite & weather alerts for extreme heat, drought, and heavy rainfall sent directly to your email. (Mobile SMS broadcast coming soon)'}
+              </span>
+            </div>
+          </label>
 
           {/* Test Alert Button for Logged-In Users */}
           {isLoggedIn && (

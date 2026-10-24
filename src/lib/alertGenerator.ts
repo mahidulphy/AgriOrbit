@@ -129,12 +129,14 @@ export async function sendAlertEmailViaSmtp(params: {
   smtpUser?: string;
   smtpPass?: string;
 }): Promise<{ ok: boolean; error?: string }> {
-  const user = params.smtpUser || process.env.SMTP_USER;
-  const pass = params.smtpPass || process.env.SMTP_PASS;
+  const user = params.smtpUser || process.env.SMTP_USER || process.env.GMAIL_USER;
+  const rawPass = params.smtpPass || process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || process.env.GMAIL_PASS;
+  const pass = rawPass ? rawPass.replace(/\s+/g, '') : undefined;
 
   if (!user || !pass) {
-    console.log('[SMTP] SMTP_USER or SMTP_PASS missing. Skipping email dispatch.');
-    return { ok: false, error: 'missing_smtp_credentials' };
+    const errorMsg = 'SMTP credentials missing. Please set SMTP_USER / SMTP_PASS or GMAIL_USER / GMAIL_APP_PASSWORD in Vercel environment variables.';
+    console.error('[SMTP]', errorMsg);
+    return { ok: false, error: errorMsg };
   }
 
   try {
@@ -253,8 +255,8 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
     cronSecret = process.env.CRON_SECRET,
     supabaseUrl = options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? 'https://qxlaaqfogzxqxzktsxjy.supabase.co',
     supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY,
-    smtpUser = process.env.SMTP_USER,
-    smtpPass = process.env.SMTP_PASS,
+    smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER,
+    smtpPass = (process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || process.env.GMAIL_PASS)?.replace(/\s+/g, ''),
     appUrl = process.env.VITE_APP_URL || process.env.APP_URL || 'https://agri-orbit.vercel.app',
     customFields,
   } = options;

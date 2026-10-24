@@ -638,49 +638,30 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 </span>
 
                 <div className="space-y-2">
-                  <label className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
+                  <label className="flex items-start gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={Boolean(profile.emailAlerts)}
-                      onChange={(e) => setProfile({ ...profile, emailAlerts: e.target.checked })}
-                      className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
-                    />
-                    <div className="space-y-0.5">
-                      <span className="text-xs font-semibold text-white block">
-                        {isBn ? 'ইমেইলে সতর্কতা পাঠান' : 'Email me alerts'}
-                      </span>
-                      <span className="text-[11px] text-slate-400 block font-mono">
-                        {isBn ? 'চরম আবহাওয়া বা খরায় প্রতিদিন সর্বোচ্চ ১টি ইমেইল' : 'Max 1 email per day for extreme weather alerts'}
-                      </span>
-                    </div>
-                  </label>
-
-                  <label className={`flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
-                    profile.phone?.trim()
-                      ? 'bg-white/5 border-white/10 hover:border-white/20'
-                      : 'bg-white/[0.03] border-amber-500/30 hover:border-amber-500/40'
-                  }`}>
-                    <input
-                      type="checkbox"
-                      checked={Boolean(profile.smsAlerts)}
-                      onChange={(e) => setProfile({ ...profile, smsAlerts: e.target.checked })}
+                      checked={Boolean(profile.emailAlerts || profile.smsAlerts)}
+                      onChange={(e) => {
+                        const val = e.target.checked;
+                        setProfile({ ...profile, emailAlerts: val, smsAlerts: val });
+                      }}
                       className="mt-1 w-4 h-4 rounded text-[#B8FF3D] focus:ring-[#B8FF3D] border-white/20 bg-black/40 cursor-pointer accent-[#B8FF3D]"
                     />
                     <div className="space-y-1 flex-1">
-                      <span className="text-xs font-semibold text-white block">
-                        {isBn ? 'এসএমএস সতর্কতা' : 'SMS alerts'}
-                      </span>
-                      <span className="text-[11px] text-slate-400 block font-mono">
-                        {isBn
-                          ? 'চরম আবহাওয়া বা দুর্যোগের তাৎক্ষণিক মোবাইল এসএমএস সতর্কতা'
-                          : 'Urgent mobile SMS alerts for extreme weather'}
-                      </span>
-                      {!profile.phone?.trim() && (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-amber-300 pt-0.5">
-                          <AlertTriangle className="w-3 h-3 shrink-0 text-amber-400" />
-                          {isBn ? 'এসএমএস সতর্কতার জন্য একটি মোবাইল নম্বর যোগ করুন' : 'Add a phone number to enable SMS alerts'}
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold text-white block">
+                          {isBn ? 'ইমেইল সতর্কতা (এসএমএস শীঘ্রই আসছে)' : 'Email alerts (SMS coming soon)'}
                         </span>
-                      )}
+                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#B8FF3D]/10 text-[#B8FF3D] border border-[#B8FF3D]/20">
+                          EMAIL
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-slate-400 block font-mono leading-relaxed">
+                        {isBn
+                          ? 'চরম আবহাওয়া বা খরায় সরাসরি আপনার নিবন্ধিত ইমেইলে সতর্কবার্তা পৌঁছাবে।'
+                          : 'Extreme weather, drought, and rain warnings sent directly to your email.'}
+                      </span>
                     </div>
                   </label>
 
