@@ -67,6 +67,17 @@ const en = {
     noteTitle: 'Why start in 2001?',
     note: 'NASA POWER rainfall for Bangladesh has processing breaks in 1997 and 2016. So we compare from 2001 and look at when rain falls, not the totals. We would rather show honest data than dramatic data.',
     cta: 'See it for your district',
+    biggestChange: 'Biggest change',
+    legendTitle: 'Legend',
+    legendTempUp: 'Temp increase',
+    legendTempDown: 'Temp decrease',
+    legendRainUp: 'Rain share up',
+    legendRainDown: 'Rain share down',
+    takeaways: {
+      rabi: 'Winter is slightly warmer; early heat stress risk is rising for wheat and potato.',
+      kharif1: 'Pre-monsoon rain share surged; lower irrigation demand for Aus and summer crops.',
+      kharif2: 'Monsoon rain share softened; keep supplemental irrigation ready during early Aman.',
+    } as Record<SeasonId, string>,
   },
 
   why: {
@@ -309,6 +320,17 @@ const bn: Dict = {
     noteTitle: 'কেন ২০০১ সাল থেকে?',
     note: 'বাংলাদেশের জন্য নাসা পাওয়ারের বৃষ্টির তথ্যে ১৯৯৭ ও ২০১৬ সালে প্রযুক্তিগত পরিবর্তন ছিল। তাই আমরা ২০০১ সাল থেকে হিসাব করি—বৃষ্টির মোট পরিমাণ নয়, কোন সময়ে বৃষ্টি নামে তা দেখি। চমক নয়, সঠিক তথ্য দেখানোই আমাদের লক্ষ্য।',
     cta: 'আপনার জেলার জন্য দেখুন',
+    biggestChange: 'সবচেয়ে বড় পরিবর্তন',
+    legendTitle: 'নির্দেশক',
+    legendTempUp: 'তাপমাত্রা বৃদ্ধি',
+    legendTempDown: 'তাপমাত্রা হ্রাস',
+    legendRainUp: 'বৃষ্টির ভাগ বৃদ্ধি',
+    legendRainDown: 'বৃষ্টির ভাগ হ্রাস',
+    takeaways: {
+      rabi: 'শীত আগের চেয়ে একটু উষ্ণ, গম ও আলুতে আগাম তাপের ঝুঁকি বাড়ছে।',
+      kharif1: 'প্রাক-বর্ষায় বৃষ্টির ভাগ অনেক বেড়েছে, আউশ ও গ্রীষ্মকালীন শাকসবজিতে সেচের চাপ কমবে।',
+      kharif2: 'মূল বর্ষায় বৃষ্টির ভাগ কিছুটা কমেছে, আমন রোপণের শুরুতে সম্পূরক সেচের প্রস্তুতি জরুরি।',
+    } as Record<SeasonId, string>,
   },
 
   why: {

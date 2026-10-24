@@ -37,7 +37,7 @@ export function LangToggle() {
 
 /** One color per season, used consistently in every chart. */
 export const SEASON_COLOR: Record<SeasonId, string> = {
-  rabi: '#93c5fd', // cool winter blue
+  rabi: '#38bdf8', // cool winter teal/blue
   kharif1: '#fbbf24', // hot pre-monsoon amber
   kharif2: '#22d3ee', // monsoon cyan
 };
