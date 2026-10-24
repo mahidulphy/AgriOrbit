@@ -11,6 +11,7 @@ import { EditorialCropAtlas } from './EditorialCropAtlas.tsx';
 import { WhySection } from './WhySection.tsx';
 import { DataSection } from './DataSection.tsx';
 import { RotationSection } from './RotationSection.tsx';
+import { StudyMaterialsSection } from './StudyMaterialsSection.tsx';
 import { FinalCta, Footer } from './FinalCta.tsx';
 
 export function LandingPage() {
@@ -55,6 +56,7 @@ export function LandingPage() {
         <WhySection />
         <DataSection />
         <RotationSection />
+        <StudyMaterialsSection />
         <FinalCta />
       </main>
       <Footer />

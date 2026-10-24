@@ -26,7 +26,7 @@ export function DataSection() {
   };
 
   return (
-    <section id="data" className="relative py-20 md:py-28 border-b border-[#262626]">
+    <section id="data" className="relative py-20 md:py-28 border-b border-[#262626] scroll-mt-16">
       <div className="container-x">
         <SectionHeader eyebrow={t.data.eyebrow} title={t.data.title} sub={t.data.sub} />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

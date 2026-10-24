@@ -102,7 +102,7 @@ export function EditorialCropAtlas() {
   };
 
   return (
-    <section id="crops" className="relative py-20 md:py-28 border-b border-[#262626]">
+    <section id="crops" className="relative py-20 md:py-28 border-b border-[#262626] scroll-mt-16">
       <div className="container-x">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">

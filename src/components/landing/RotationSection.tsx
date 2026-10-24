@@ -9,7 +9,7 @@ const RULE_ICONS = [Repeat, Sprout, SlidersHorizontal];
 export function RotationSection() {
   const { t, lang } = useLang();
   return (
-    <section id="rotation" className="relative py-20 md:py-28 border-b border-[#262626]">
+    <section id="rotation" className="relative py-20 md:py-28 border-b border-[#262626] scroll-mt-16">
       <div className="container-x grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <SectionHeader eyebrow={t.rot.eyebrow} title={t.rot.title} sub={t.rot.sub} />

@@ -8,7 +8,7 @@ const ICONS = [Satellite, ScrollText, UserCheck];
 export function WhySection() {
   const { t } = useLang();
   return (
-    <section id="how" className="relative py-20 md:py-28 border-b border-[#262626]">
+    <section id="how" className="relative py-20 md:py-28 border-b border-[#262626] scroll-mt-16">
       <div className="container-x">
         <SectionHeader eyebrow={t.why.eyebrow} title={t.why.title} center />
         <div className="mt-12 grid gap-5 md:grid-cols-3">

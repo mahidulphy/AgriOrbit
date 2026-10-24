@@ -424,7 +424,7 @@ function RainBar({ label, shares }: { label: string; shares: Record<SeasonId, nu
 export function FieldShiftSection({ shift }: { shift: FieldShift }) {
   const { t, range } = useLang();
   return (
-    <section id="field-shift" className="relative py-20 md:py-28 border-b border-[#262626]">
+    <section id="field-shift" className="relative py-20 md:py-28 border-b border-[#262626] scroll-mt-16">
       <div className="container-x">
         <SectionHeader eyebrow={t.fs.eyebrow} title={t.fs.title} sub={t.fs.sub(range(shift.thenRange), range(shift.nowRange))} />
         <div className="mt-12">

@@ -34,6 +34,7 @@ import { getDistrictProfile, getUpazilaName } from '../../lib/location';
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
 import { ExplainWhyModal } from '../ExplainWhyModal';
+import { Header } from '../common/Header';
 import { BrandLogo } from '../common/BrandLogo';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { DataTileStatusBadge, formatBadgeDate } from '../common/DataTileStatusBadge';
@@ -270,17 +271,26 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] flex flex-col lg:flex-row font-editorial selection:bg-[#22C55E] selection:text-black">
-      {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP - 1024px+) */}
-      <aside className="hidden lg:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 sticky top-0 h-[100dvh] z-30 justify-between overflow-y-auto">
-        <div className="p-5 flex flex-col gap-6">
-          {/* App Brand Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
-            <BrandLogo />
-            <span className="text-[10px] font-mono text-[#FAFAFA] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-[#262626]">
-              {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-            </span>
-          </div>
+    <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] flex flex-col font-editorial selection:bg-[#22C55E] selection:text-black">
+      {/* 0. Universal Unified Header across all pages */}
+      <Header />
+
+      <div className="flex-1 flex flex-col lg:flex-row min-h-[calc(100dvh-4rem)]">
+        {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP - 1024px+) */}
+        <aside className="hidden lg:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 sticky top-16 h-[calc(100dvh-4rem)] z-30 justify-between overflow-y-auto">
+          <div className="p-5 flex flex-col gap-6">
+            {/* App Brand Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
+              <div className="flex items-center gap-2">
+                <LayoutDashboard className="w-4 h-4 text-[#22C55E]" />
+                <span className="font-display font-semibold text-sm text-[#FAFAFA]">
+                  {language === 'en' ? 'Field Advisory' : 'কৃষি উপদেষ্টা'}
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-[#FAFAFA] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-[#262626]">
+                {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
+              </span>
+            </div>
 
           {/* Selected Field Context Card */}
           <div className="p-3.5 rounded-2xl bg-[#141414] border border-[#262626] space-y-2">
@@ -391,25 +401,31 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </aside>
 
-      {/* 2. MOBILE TOP BAR & DRAWER (<1024px) */}
-      <header className="lg:hidden sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#262626] px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl bg-white/5 border border-[#262626] text-white cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </button>
-          <BrandLogo imgClassName="h-8 w-auto object-contain mix-blend-screen shrink-0" />
-        </div>
+      {/* 2. MOBILE DASHBOARD SUB-BAR (<1024px) */}
+      <div className="lg:hidden sticky top-16 z-30 bg-[#0A0A0A] border-b border-[#262626] px-4 py-2.5 flex items-center justify-between">
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-xs font-medium text-[#FAFAFA] flex items-center gap-2 cursor-pointer hover:border-[#404040]"
+          aria-label="Open field sections"
+        >
+          <Menu className="w-3.5 h-3.5 text-[#22C55E]" />
+          <span className="font-semibold">{DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}</span>
+          <ChevronDown className="w-3 h-3 text-[#737373]" />
+        </button>
 
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <NotificationBell compact />
-          <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
-          <UserMenu compact />
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-mono text-[#A3A3A3]">{upazilaName}</span>
+          <button
+            onClick={() => setWhatIfActive(!whatIfActive)}
+            className={`px-2.5 py-1 rounded-lg border text-xs font-mono cursor-pointer flex items-center gap-1 ${
+              whatIfActive ? 'bg-purple-950/60 text-[#22C55E] border-[#262626]' : 'bg-[#141414] text-[#A3A3A3] border-[#262626]'
+            }`}
+          >
+            <Sliders className="w-3 h-3 text-[#22C55E]" />
+            <span>{whatIfActive ? (language === 'en' ? 'Sim on' : 'সিম চালু') : (language === 'en' ? 'Sim' : 'সিম')}</span>
+          </button>
         </div>
-      </header>
+      </div>
 
       {/* Mobile Slide-Over Drawer */}
       {mobileMenuOpen && (
@@ -488,8 +504,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Operational Header Bar (Desktop Sticky) */}
-        <header className="hidden lg:flex sticky top-0 z-20 h-16 border-b border-[#262626] bg-[#0A0A0A]/95 backdrop-blur-md px-6 items-center justify-between shrink-0">
+        {/* Top Operational Sub-Bar (Desktop Sticky below Universal Header) */}
+        <div className="hidden lg:flex sticky top-16 z-20 h-14 border-b border-[#262626] bg-[#0A0A0A] px-6 items-center justify-between shrink-0">
           {/* Breadcrumb & Field Identity */}
           <div className="flex items-center gap-3 text-xs font-mono">
             <span className="text-[#A3A3A3]">{language === 'en' ? 'AgriOrbit' : 'এগ্রিঅরবিট'}</span>
@@ -556,10 +572,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
               )}
             </button>
-
-            <UserMenu />
           </div>
-        </header>
+        </div>
 
         {/* Short Term Weather & Agronomic Risk Alert Banner */}
         <ShortTermRiskAlert
@@ -1735,6 +1749,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             selectedPriority={selectedPriority}
           />
         </main>
+      </div>
       </div>
 
       {/* 4. EXPLAIN WHY TRANSPARENCY MODAL */}

@@ -57,8 +57,8 @@ export function computeConditions(daily: DailyData, lat: number, days = 30): Con
   let isRainUnavailable = false;
 
   // Sanity check: If 30-day rain > 1200 mm, flag as data unavailable or log error
-  if (rawRain > 1200) {
-    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 1200 mm physical ceiling for period. Using district baseline.`);
+  if (rawRain > 2500) {
+    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 2500 mm physical ceiling for period. Using district baseline.`);
     isRainUnavailable = true;
     rawRain = 35; // typical winter baseline
   }
