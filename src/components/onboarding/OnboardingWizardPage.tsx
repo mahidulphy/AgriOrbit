@@ -608,8 +608,10 @@ export const OnboardingWizardPage: React.FC = () => {
 
   // Skip Final Step directly to dashboard
   const handleSkipHazards = async () => {
-    if (user?.id) {
-      try {
+    setSavingStep(true);
+    setSaveError(null);
+    try {
+      if (user?.id) {
         await saveFarmerProfile(
           {
             emailAlerts,
@@ -620,16 +622,19 @@ export const OnboardingWizardPage: React.FC = () => {
         );
         if (setOnboardingCompleted) setOnboardingCompleted(true);
         await refreshProfile();
-      } catch (e) {
-        console.warn('Error saving final status on skip:', e);
+      } else if (isGuestMode) {
+        sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
+        localStorage.setItem('agriorbit_guest_mode', 'true');
       }
-    } else if (isGuestMode) {
-      sessionStorage.setItem('agriorbit_guest_onboarding_completed', 'true');
-      localStorage.setItem('agriorbit_guest_mode', 'true');
+      sessionStorage.removeItem(stepStorageKey);
+      localStorage.removeItem(stepStorageKey);
+      window.location.hash = '#/dashboard';
+    } catch (e) {
+      console.warn('Error saving final status on skip:', e);
+      window.location.hash = '#/dashboard';
+    } finally {
+      setSavingStep(false);
     }
-    sessionStorage.removeItem(stepStorageKey);
-    localStorage.removeItem(stepStorageKey);
-    window.location.hash = '#/dashboard';
   };
 
   if (loadingInitial) {
@@ -724,8 +729,8 @@ export const OnboardingWizardPage: React.FC = () => {
       )}
 
       {/* 4. Wizard Step Form Body */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl space-y-6">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-8 pb-[max(2rem,calc(1.5rem+env(safe-area-inset-bottom,0px)))]">
+        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0B1626] border border-white/10 shadow-2xl space-y-6">
           {/* STEP: Personal Info (Signed-in only, Step 1) */}
           {!isGuestMode && step === 1 && (
             <PersonalInfoSection
@@ -799,69 +804,25 @@ export const OnboardingWizardPage: React.FC = () => {
           )}
 
           {/* Bottom Actions Bar */}
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              {step > 1 ? (
-                <button
-                  type="button"
-                  onClick={handleBack}
-                  disabled={savingStep}
-                  className="w-full sm:w-auto min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-mono text-sm font-semibold flex items-center justify-center gap-2 border border-white/15 transition-colors cursor-pointer disabled:opacity-50"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>{isBn ? 'পূর্ববর্তী ধাপ' : 'Back'}</span>
-                </button>
-              ) : (
-                <span className="text-xs font-mono text-slate-500 hidden sm:inline-block">
-                  {isBn ? 'ধাপ ১ বাধ্যতামূলক' : 'Step 1 is required'}
-                </span>
-              )}
-            </div>
-
-            <div className="w-full sm:w-auto flex items-center gap-3 justify-end">
-              {/* Skip button for Final Step */}
-              {isFinalStep && (
-                <button
-                  type="button"
-                  onClick={handleSkipHazards}
-                  disabled={savingStep}
-                  className="flex-1 sm:flex-initial min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-mono text-sm border border-white/15 transition-colors cursor-pointer"
-                >
-                  {isBn ? 'এড়িয়ে যান (Skip)' : 'Skip this step'}
-                </button>
-              )}
-
-              {/* Direct Skip to Dashboard on Priorities Step (optional shortcut) */}
-              {isPrioritiesStep && selectedPriorities.length >= 1 && (
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await handleNext();
-                    handleSkipHazards();
-                  }}
-                  disabled={savingStep}
-                  className="hidden md:inline-flex min-h-[48px] items-center px-4 py-2.5 rounded-xl text-xs font-mono text-[#00E5FF] hover:bg-white/5 cursor-pointer"
-                >
-                  {isBn ? 'এখনই ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Go to Dashboard'}
-                </button>
-              )}
-
-              {/* Primary Next / Finish Button */}
+          <div className="pt-5 sm:pt-6 border-t border-white/10">
+            {/* 1. Mobile Action Layout (< 640px) */}
+            <div className="flex flex-col gap-3 sm:hidden w-full">
+              {/* Row 1: Full-Width Primary Action */}
               {!isFinalStep ? (
                 <button
                   type="button"
                   onClick={handleNext}
                   disabled={savingStep}
-                  className="w-full sm:w-auto min-h-[48px] px-6 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all cursor-pointer disabled:opacity-50"
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                 >
                   {savingStep ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{isBn ? 'সংরক্ষণ হচ্ছে...' : 'Saving...'}</span>
+                      <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                      <span className="whitespace-nowrap">{isBn ? 'সংরক্ষণ হচ্ছে...' : 'Saving...'}</span>
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="truncate">
                         {isPrioritiesStep
                           ? isBn
                             ? 'পরবর্তী: দুর্যোগ তথ্য (ঐচ্ছিক)'
@@ -870,7 +831,7 @@ export const OnboardingWizardPage: React.FC = () => {
                           ? 'পরবর্তী ধাপ'
                           : 'Next Step'}
                       </span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 shrink-0" />
                     </>
                   )}
                 </button>
@@ -879,21 +840,152 @@ export const OnboardingWizardPage: React.FC = () => {
                   type="button"
                   onClick={handleFinishWithHazards}
                   disabled={savingStep}
-                  className="w-full sm:w-auto min-h-[48px] px-7 py-3 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] hover:opacity-90 text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#00E5FF]/20 transition-all cursor-pointer disabled:opacity-50"
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] hover:opacity-95 active:scale-[0.99] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#00E5FF]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
                 >
                   {savingStep ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>{isBn ? 'চূড়ান্ত সংরক্ষণ...' : 'Finalizing...'}</span>
+                      <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                      <span className="whitespace-nowrap">{isBn ? 'চূড়ান্ত সংরক্ষণ...' : 'Finalizing...'}</span>
                     </>
                   ) : (
                     <>
-                      <Check className="w-4 h-4 stroke-[3]" />
-                      <span>{isBn ? 'সম্পূর্ণ করুন ও ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Enter Dashboard'}</span>
+                      <Check className="w-4 h-4 stroke-[3] shrink-0" />
+                      <span className="truncate">
+                        {isBn ? 'সম্পূর্ণ করুন ও ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Enter Dashboard'}
+                      </span>
                     </>
                   )}
                 </button>
               )}
+
+              {/* Row 2: Secondary / Ghost Controls (Back on left, Skip on right) */}
+              <div className="flex items-center justify-between gap-2.5 w-full min-h-[44px]">
+                {step > 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    disabled={savingStep}
+                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-semibold flex items-center gap-1.5 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  >
+                    <ArrowLeft className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">{isBn ? 'আগের ধাপ' : 'Back'}</span>
+                  </button>
+                ) : (
+                  <span className="text-[11px] font-mono text-slate-500 py-2">
+                    {isBn ? 'ধাপ ১ বাধ্যতামূলক' : 'Step 1 is required'}
+                  </span>
+                )}
+
+                {isFinalStep && (
+                  <button
+                    type="button"
+                    onClick={handleSkipHazards}
+                    disabled={savingStep}
+                    className="min-h-[44px] px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 hover:text-white font-mono text-xs font-medium flex items-center gap-1 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap ml-auto"
+                  >
+                    <span className="whitespace-nowrap">{isBn ? 'এখন না, পরে করব' : 'Skip this step'}</span>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* 2. Desktop Action Layout (>= 640px) */}
+            <div className="hidden sm:flex items-center justify-between gap-4 w-full">
+              <div>
+                {step > 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    disabled={savingStep}
+                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-mono text-sm font-semibold flex items-center justify-center gap-2 border border-white/15 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  >
+                    <ArrowLeft className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">{isBn ? 'পূর্ববর্তী ধাপ' : 'Back'}</span>
+                  </button>
+                ) : (
+                  <span className="text-xs font-mono text-slate-500">
+                    {isBn ? 'ধাপ ১ বাধ্যতামূলক' : 'Step 1 is required'}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3 justify-end">
+                {/* Skip button for Final Step */}
+                {isFinalStep && (
+                  <button
+                    type="button"
+                    onClick={handleSkipHazards}
+                    disabled={savingStep}
+                    className="min-h-[48px] px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-mono text-sm border border-white/15 transition-colors cursor-pointer whitespace-nowrap"
+                  >
+                    <span className="whitespace-nowrap">{isBn ? 'এখন না, পরে করব' : 'Skip this step'}</span>
+                  </button>
+                )}
+
+                {/* Direct Skip to Dashboard on Priorities Step (optional shortcut) */}
+                {isPrioritiesStep && selectedPriorities.length >= 1 && (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await handleNext();
+                      handleSkipHazards();
+                    }}
+                    disabled={savingStep}
+                    className="hidden md:inline-flex min-h-[48px] items-center px-4 py-2.5 rounded-xl text-xs font-mono text-[#00E5FF] hover:bg-white/5 cursor-pointer whitespace-nowrap"
+                  >
+                    <span className="whitespace-nowrap">{isBn ? 'এখনই ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Go to Dashboard'}</span>
+                  </button>
+                )}
+
+                {/* Primary Next / Finish Button */}
+                {!isFinalStep ? (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={savingStep}
+                    className="min-h-[48px] px-6 py-3 rounded-xl bg-[#B8FF3D] hover:bg-[#a6ec2f] text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#B8FF3D]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  >
+                    {savingStep ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                        <span className="whitespace-nowrap">{isBn ? 'সংরক্ষণ হচ্ছে...' : 'Saving...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="whitespace-nowrap">
+                          {isPrioritiesStep
+                            ? isBn
+                              ? 'পরবর্তী: দুর্যোগ তথ্য (ঐচ্ছিক)'
+                              : 'Next: Past Hazards (Optional)'
+                            : isBn
+                            ? 'পরবর্তী ধাপ'
+                            : 'Next Step'}
+                        </span>
+                        <ArrowRight className="w-4 h-4 shrink-0" />
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleFinishWithHazards}
+                    disabled={savingStep}
+                    className="min-h-[48px] px-7 py-3 rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#B8FF3D] hover:opacity-90 text-black font-mono font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#00E5FF]/20 transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  >
+                    {savingStep ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                        <span className="whitespace-nowrap">{isBn ? 'চূড়ান্ত সংরক্ষণ...' : 'Finalizing...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Check className="w-4 h-4 stroke-[3] shrink-0" />
+                        <span className="whitespace-nowrap">{isBn ? 'সম্পূর্ণ করুন ও ড্যাশবোর্ডে প্রবেশ করুন' : 'Finish & Enter Dashboard'}</span>
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
