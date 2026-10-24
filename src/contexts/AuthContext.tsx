@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [onboardingCompleted, setOnboardingCompleted] = useState<boolean | null>(null);
   const configured = isSupabaseConfigured();
 
-      const fetchProfileDetails = async (userId: string) => {
+  const fetchProfileDetails = async (userId: string) => {
     try {
       let { data, error } = await supabase
         .from('profiles')
@@ -74,10 +74,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (data.full_name && data.full_name.trim()) {
           setProfileFullName(data.full_name.trim());
         }
-        const dbCompleted = data.onboarding_completed === true;
+
+        // Verify whether the user also has a saved farm field with a district
+        let { data: fieldsData, error: fieldsErr } = await supabase
+          .from('fields')
+          .select('id, district')
+          .eq('user_id', userId)
+          .limit(1);
+
+        if (fieldsErr && (fieldsErr.code === '42P01' || fieldsErr.message?.includes('does not exist') || fieldsErr.message?.includes('schema cache'))) {
+          const fbFields = await supabase
+            .from('farmer_fields')
+            .select('id, district')
+            .eq('user_id', userId)
+            .limit(1);
+          if (!fbFields.error && fbFields.data) {
+            fieldsData = fbFields.data;
+          }
+        }
+
+        const hasSavedField = Boolean(fieldsData && fieldsData.length > 0 && fieldsData[0].district);
+        const dbCompleted = data.onboarding_completed === true && hasSavedField;
         setOnboardingCompleted(dbCompleted);
 
-        // Requirement 3: If it differs from the localStorage cache, trust Supabase and update the cache
+        // If it differs from the localStorage cache, trust Supabase and update the cache
         try {
           const cacheKey = `agriorbit_farmer_profile_v2_${userId}`;
           const raw = localStorage.getItem(cacheKey);
@@ -437,6 +457,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     avatarUrl,
     provider,
     onboardingCompleted,
+    setOnboardingCompleted,
     setAsGuest,
     clearGuest,
     refreshProfile,

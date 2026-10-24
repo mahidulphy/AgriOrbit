@@ -11,9 +11,10 @@ export interface OnboardingStatusResult {
  * Checks the user's onboarding completion status from the database.
  * 
  * Rules:
- * - Uses the onboarding_completed boolean flag, not whether a profile row exists.
- * - If profiles query fails (for example, column does not exist or table missing),
- *   logs the error and treats the user as NOT onboarded. Never treats an error as "completed".
+ * - Uses BOTH the onboarding_completed boolean flag AND verifying that at least
+ *   one farm field with a valid district exists in the database.
+ * - If profiles query fails, logs the error and treats the user as NOT onboarded.
+ *   Never treats an error as "completed".
  * - Checks public.profiles first, falling back to public.farmer_profiles.
  */
 export async function getOnboardingStatus(userId: string): Promise<OnboardingStatusResult> {
@@ -51,10 +52,30 @@ export async function getOnboardingStatus(userId: string): Promise<OnboardingSta
       return { isOnboarded: false, profileExists: false };
     }
 
-    // Supabase is source of truth
-    const isOnboarded = profile.onboarding_completed === true;
+    // Verify whether the user also has a saved farm field with a district
+    let { data: fieldsData, error: fieldsErr } = await supabase
+      .from('fields')
+      .select('id, district')
+      .eq('user_id', userId)
+      .limit(1);
 
-    // Requirement 3: If it differs from the localStorage cache, trust Supabase and update the cache
+    if (fieldsErr && (fieldsErr.code === '42P01' || fieldsErr.message?.includes('does not exist') || fieldsErr.message?.includes('schema cache'))) {
+      const fbFields = await supabase
+        .from('farmer_fields')
+        .select('id, district')
+        .eq('user_id', userId)
+        .limit(1);
+      if (!fbFields.error && fbFields.data) {
+        fieldsData = fbFields.data;
+      }
+    }
+
+    const hasSavedField = Boolean(fieldsData && fieldsData.length > 0 && fieldsData[0].district);
+
+    // Supabase is source of truth: BOTH onboarding_completed AND saved field are required
+    const isOnboarded = profile.onboarding_completed === true && hasSavedField;
+
+    // If it differs from the localStorage cache, trust Supabase and update the cache
     try {
       const cacheKey = `agriorbit_farmer_profile_v2_${userId}`;
       const raw = localStorage.getItem(cacheKey);
@@ -82,16 +103,16 @@ export async function getOnboardingStatus(userId: string): Promise<OnboardingSta
  * 1. Only redirect right after a fresh sign-in (event SIGNED_IN coming from the OAuth return).
  * 2. If no profiles row exists for a new user, create one using upsert
  *    (id = user.id, full_name from user_metadata, onboarding_completed = false).
- * 3. Make the guard use the onboarding_completed flag, not "a profile row exists".
+ * 3. Make the guard use the onboarding_completed flag AND saved field existence.
  * 4. If the profiles query fails, log the error and treat user as NOT onboarded. Never treat error as "completed".
- * 5. Redirect: if no profile row exists, or onboarding_completed is not true, go to #/onboarding; otherwise go to #/dashboard.
+ * 5. Redirect: if no profile row exists, or onboarding is not completed, go to #/onboarding; otherwise go to #/dashboard.
  */
 export async function checkAndRedirectPostLogin(user: User): Promise<void> {
   if (!user) return;
 
   const status = await getOnboardingStatus(user.id);
 
-  // Requirement 2: If no profiles row exists for a new user, create one using upsert
+  // If no profiles row exists for a new user, create one using upsert
   if (!status.profileExists) {
     const meta = user.user_metadata || {};
     const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Farmer';
@@ -132,9 +153,12 @@ export async function checkAndRedirectPostLogin(user: User): Promise<void> {
     }
   }
 
-  // Clean the token hash from address bar without page reload
-  if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
-    window.history.replaceState(null, '', window.location.pathname);
+  // Clear guest mode from localStorage if user is signed in
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('agriorbit_guest_mode');
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
   }
 
   // Navigate:

@@ -172,8 +172,8 @@ export default function App() {
       return null;
     }
 
-    // Guest mode: skips onboarding and enters workspace directly
-    if (isGuest) {
+    // Guest mode: ONLY for logged-out visitors. Skips onboarding and enters workspace directly
+    if (isGuest && !user) {
       return (
         <Suspense fallback={<RouteLoading />}>
           <AnalyzePage />
@@ -194,8 +194,7 @@ export default function App() {
         );
       }
 
-      // Requirement 3 & 5: Guard uses the onboarding_completed flag.
-      // Redirect to #/onboarding if onboarding is not completed.
+      // Requirement 2: Logged-in user with no completed profile -> always goes to onboarding
       if (onboardingCompleted !== true) {
         window.location.hash = '#/onboarding';
         return null;
@@ -220,8 +219,8 @@ export default function App() {
 
   // Public authentication routes
   if (route === 'login') {
-    if (!loading && (user || isGuest)) {
-      if (isGuest || onboardingCompleted === true) {
+    if (!loading && user) {
+      if (onboardingCompleted === true) {
         window.location.hash = '#/dashboard';
         return null;
       }
@@ -229,6 +228,10 @@ export default function App() {
         window.location.hash = '#/onboarding';
         return null;
       }
+    }
+    if (!loading && !user && isGuest) {
+      window.location.hash = '#/dashboard';
+      return null;
     }
     return (
       <Suspense fallback={<RouteLoading />}>

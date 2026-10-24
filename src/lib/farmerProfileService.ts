@@ -129,10 +129,11 @@ export function calculateProfileCompletion(
  */
 export async function loadFarmerProfile(
   userId?: string
-): Promise<{ profile: FarmerProfileData; fields: FarmField[] }> {
+): Promise<{ profile: FarmerProfileData; fields: FarmField[]; error?: string }> {
   // 1. Check local cache first for instant UI response
   let cachedProfile: FarmerProfileData | null = null;
   let cachedFields: FarmField[] = [];
+  let queryError: string | undefined = undefined;
 
   try {
     const rawProfile = localStorage.getItem(`${PROFILE_CACHE_KEY}_${userId || 'default'}`);
@@ -182,7 +183,7 @@ export async function loadFarmerProfile(
         .eq('user_id', userId)
         .order('is_primary', { ascending: false });
 
-      if (!fRes.error && fRes.data && fRes.data.length > 0) {
+      if (!fRes.error && fRes.data) {
         fieldsRows = fRes.data;
       } else {
         const ffRes = await supabase
@@ -195,6 +196,10 @@ export async function loadFarmerProfile(
         } else {
           fieldsErr = fRes.error || ffRes.error;
         }
+      }
+
+      if (profileErr || fieldsErr) {
+        queryError = profileErr?.message || fieldsErr?.message || 'Failed to retrieve profile data';
       }
 
       if (profileRow && !profileErr) {
@@ -268,8 +273,9 @@ export async function loadFarmerProfile(
           }
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.warn('Database query error, using local fallback:', err);
+      queryError = err?.message || 'Database connection error';
     }
   }
 
@@ -327,7 +333,7 @@ export async function saveFarmerProfile(
         // non-critical warning
       }
 
-      const profilePayload = {
+      const basePayload: any = {
         id: userId,
         full_name: profile.fullName ?? existing.fullName,
         phone: profile.phone ?? existing.phone,
@@ -338,20 +344,34 @@ export async function saveFarmerProfile(
         priorities: profile.priorities ?? existing.priorities,
         past_damages: profile.pastDamages ?? existing.pastDamages,
         past_damage_notes: profile.pastDamageNotes ?? existing.pastDamageNotes,
-        upazila_id: profile.upazilaId ?? existing.upazilaId ?? null,
-        district_id: profile.districtId ?? existing.districtId ?? null,
         onboarding_completed: profile.onboardingCompleted ?? existing.onboardingCompleted ?? false,
         email_alerts: profile.emailAlerts ?? existing.emailAlerts ?? false,
         sms_alerts: profile.smsAlerts ?? existing.smsAlerts ?? false,
         updated_at: new Date().toISOString(),
       };
 
-      // 2. Upsert to public.profiles table
-      const { error: pErr } = await supabase.from('profiles').upsert(profilePayload);
+      const fullPayload = {
+        ...basePayload,
+        upazila_id: profile.upazilaId ?? existing.upazilaId ?? null,
+        district_id: profile.districtId ?? existing.districtId ?? null,
+      };
+
+      // 2. Upsert to public.profiles table (resilient to unmigrated upazila_id/district_id)
+      let { error: pErr } = await supabase.from('profiles').upsert(fullPayload);
+      if (pErr && (pErr.code === '42703' || pErr.message?.includes('upazila_id') || pErr.message?.includes('district_id') || pErr.message?.includes('schema cache'))) {
+        console.warn('AgriOrbit: Column upazila_id/district_id missing in profiles, retrying with base schema payload...');
+        const retryRes = await supabase.from('profiles').upsert(basePayload);
+        pErr = retryRes.error;
+      }
+
       if (pErr) {
         console.error('Failed to save profile to database:', pErr.message);
         // Try fallback table
-        const { error: fpErr } = await supabase.from('farmer_profiles').upsert(profilePayload);
+        let { error: fpErr } = await supabase.from('farmer_profiles').upsert(fullPayload);
+        if (fpErr && (fpErr.code === '42703' || fpErr.message?.includes('upazila_id') || fpErr.message?.includes('district_id') || fpErr.message?.includes('schema cache'))) {
+          const retryFp = await supabase.from('farmer_profiles').upsert(basePayload);
+          fpErr = retryFp.error;
+        }
         if (fpErr) {
           console.error('Failed to save profile to fallback database:', fpErr.message);
           return { success: false, error: pErr.message || fpErr.message };
@@ -402,15 +422,13 @@ export async function saveFarmField(
 
     // Sync to Supabase if configured (Supabase is source of truth)
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
-      const fieldPayload = {
+      const baseFieldPayload: any = {
         id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
         user_id: userId,
         name: fieldToSave.name,
         division: fieldToSave.division,
         district: fieldToSave.district,
-        district_id: fieldToSave.districtId || fieldToSave.district,
         upazila: fieldToSave.upazila,
-        upazila_id: fieldToSave.upazilaId || fieldToSave.upazila,
         village: fieldToSave.village,
         latitude: fieldToSave.latitude,
         longitude: fieldToSave.longitude,
@@ -430,10 +448,26 @@ export async function saveFarmField(
         updated_at: new Date().toISOString(),
       };
 
-      const { error: fErr } = await supabase.from('fields').upsert(fieldPayload);
+      const fullFieldPayload = {
+        ...baseFieldPayload,
+        district_id: fieldToSave.districtId || fieldToSave.district,
+        upazila_id: fieldToSave.upazilaId || fieldToSave.upazila,
+      };
+
+      let { error: fErr } = await supabase.from('fields').upsert(fullFieldPayload);
+      if (fErr && (fErr.code === '42703' || fErr.message?.includes('upazila_id') || fErr.message?.includes('district_id') || fErr.message?.includes('schema cache'))) {
+        console.warn('AgriOrbit: Column upazila_id/district_id missing in fields, retrying with base schema payload...');
+        const retryRes = await supabase.from('fields').upsert(baseFieldPayload);
+        fErr = retryRes.error;
+      }
+
       if (fErr) {
         console.error('Failed to save field to database:', fErr.message);
-        const { error: ffErr } = await supabase.from('farmer_fields').upsert(fieldPayload);
+        let { error: ffErr } = await supabase.from('farmer_fields').upsert(fullFieldPayload);
+        if (ffErr && (ffErr.code === '42703' || ffErr.message?.includes('upazila_id') || ffErr.message?.includes('district_id') || ffErr.message?.includes('schema cache'))) {
+          const retryFf = await supabase.from('farmer_fields').upsert(baseFieldPayload);
+          ffErr = retryFf.error;
+        }
         if (ffErr) {
           console.error('Failed to save field to fallback database:', ffErr.message);
           return { field, error: fErr.message || ffErr.message };
