@@ -195,6 +195,24 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     </tr>
                   )}
 
+                  {/* Sentinel-1 SAR Flooding / Waterlogging */}
+                  {deltas.sentinel1FloodPenalty !== undefined && deltas.sentinel1FloodPenalty !== 0 && (
+                    <tr>
+                      <td className="py-2.5 pr-3">
+                        <span className="text-[#FAFAFA] font-medium block">
+                          {language === 'en' ? 'Cropland Flooding / Waterlogging (SAR-01)' : 'জলাবদ্ধতা ঝুঁকি (SAR-01)'}
+                        </span>
+                        <span className="text-[11px] text-[#737373]">
+                          {language === 'en'
+                            ? 'ESA Sentinel-1 SAR radar detected standing water in cropland (>10%)'
+                            : 'সেন্টিনেল-১ রাডার চিত্রে ফসলি জমিতে অতিরিক্ত পানি ও জলাবদ্ধতা শনাক্ত (>১০%)'}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">ESA Sentinel-1</td>
+                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{deltas.sentinel1FloodPenalty}</td>
+                    </tr>
+                  )}
+
                   {/* Farmer Priority Steering */}
                   <tr>
                     <td className="py-2.5 pr-3">

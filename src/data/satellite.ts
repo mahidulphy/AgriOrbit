@@ -43,11 +43,28 @@ export interface LstRecord {
   periodStart: string;
 }
 
+export interface Sentinel1Record {
+  floodedCroplandPct: number;
+  observationWindow: {
+    startDate: string;
+    endDate: string;
+    daysCount: number;
+  };
+  polarization: 'VV' | 'VV+VH';
+  resolutionMeters: number;
+  status: 'normal' | 'moderate_waterlogging' | 'severe_inundation' | 'unavailable';
+  statusEn: string;
+  statusBn: string;
+  observedAt: string;
+  source: 'ESA Sentinel-1 C-SAR';
+}
+
 export interface DistrictSatelliteRecord {
   smap: SmapRecord | null;
   ndvi: NdviRecord | null;
   lstDay: LstRecord | null;
   lstNight: LstRecord | null;
+  sentinel1?: Sentinel1Record | null;
 }
 
 export interface SatelliteDatasetMeta {

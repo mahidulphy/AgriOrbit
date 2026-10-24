@@ -78,6 +78,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   const admin = getDistrictAdmin(districtId);
   const districtSat = getDistrictSatellite(districtId);
   const smapRecord = districtSat?.smap ?? null;
+  const sentinel1Record = districtSat?.sentinel1 ?? null;
   const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination';
   const effectiveSoilMoisture = (soilMoisture !== undefined && soilMoisture !== null) ? soilMoisture : (smapRecord?.value ?? 0.22);
 
@@ -126,8 +127,9 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
       districtId,
       upazilaName,
       farmerPriority: priority,
+      sentinel1FloodedCroplandPct: sentinel1Record?.floodedCroplandPct ?? null,
     });
-  }, [districtId, upazilaName, soilMoisture, priority]);
+  }, [districtId, upazilaName, soilMoisture, priority, sentinel1Record?.floodedCroplandPct]);
 
   // Dynamic field-specific update whenever district, upazila, coordinates, or soil moisture changes
   useEffect(() => {
@@ -283,8 +285,25 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
               </div>
             </div>
 
+            {/* Sentinel-1 SAR Flooding Banner */}
+            {sentinel1Record && sentinel1Record.floodedCroplandPct > 10 && (
+              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 flex items-start gap-3 text-xs font-mono">
+                <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <span className="font-semibold block text-amber-300">
+                    {isEn ? 'ESA Sentinel-1 SAR Waterlogging Alert (Rule SAR-01)' : 'ইএসএ সেন্টিনেল-১ জলাবদ্ধতা সতর্কতা (নিয়ম SAR-01)'}
+                  </span>
+                  <span className="text-[#D4D4D4] leading-relaxed block font-sans">
+                    {isEn
+                      ? `Copernicus SAR detected ${sentinel1Record.floodedCroplandPct.toFixed(1)}% flooded cropland in ${admin?.nameEn ?? districtId} (>10% threshold). Waterlogging-sensitive crops (sesame, chili, brinjal, lentil, chickpea, etc.) have received a -15 suitability penalty.`
+                      : `কোপার্নিকাস সেন্টিনেল-১ রাডারে ${admin?.nameBn ?? districtId} জেলার ${sentinel1Record.floodedCroplandPct.toFixed(1)}% ফসলি জমিতে জলাবদ্ধতা ধরা পড়েছে (>১০% সীমা)। জলাবদ্ধতা-সংবেদনশীল ফসলে (তিল, মরিচ, বেগুন, মসুর, ছোলা ইত্যাদি) ১৫ নম্বর কাটা হয়েছে।`}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* 3 SCIENTIFIC TILES */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
               {/* TILE 1: NASA POWER (precipitation) Observation */}
               <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
                 <div>
@@ -424,6 +443,69 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                       ? (isEn ? 'Uncertain' : 'অনিশ্চিত')
                       : (isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn)}
                   </span>
+                </div>
+              </div>
+
+              {/* TILE 4: ESA Sentinel-1 SAR Cropland Waterlogging */}
+              <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+                    <DataTileStatusBadge
+                      sourceName="ESA Sentinel-1"
+                      status={sentinel1Record ? 'snapshot' : 'unavailable'}
+                      customLabel={
+                        sentinel1Record
+                          ? `ESA Sentinel-1 · ${sentinel1Record.observationWindow?.daysCount ?? 12}d SAR`
+                          : (isEn ? 'Sentinel-1 · Not available today' : 'সেন্টিনেল-১ · আজকের তথ্য নেই')
+                      }
+                      language={language}
+                    />
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">10m SAR (VV)</span>
+                  </div>
+
+                  <span className="text-xs text-[#A3A3A3] block font-mono">
+                    {isEn ? 'Cropland Flooding / Waterlogging' : 'ফসলি জমিতে পানি / জলাবদ্ধতা'}
+                  </span>
+
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <span className="font-mono text-2xl font-bold text-white">
+                      {sentinel1Record ? (
+                        `${sentinel1Record.floodedCroplandPct.toFixed(1)}%`
+                      ) : (
+                        <span className="text-base text-slate-400 font-normal">{isEn ? 'Not available today' : 'আজকের তথ্য পাওয়া যায়নি'}</span>
+                      )}
+                    </span>
+                    {sentinel1Record && (
+                      <span
+                        className={`text-xs font-bold font-mono px-2 py-0.5 rounded ${
+                          sentinel1Record.floodedCroplandPct > 10
+                            ? 'bg-amber-500/20 text-amber-300'
+                            : 'bg-emerald-500/20 text-emerald-300'
+                        }`}
+                      >
+                        {sentinel1Record.floodedCroplandPct > 10
+                          ? (isEn ? '>10% Alert' : '>১০% সতর্কতা')
+                          : (isEn ? 'Safe Drainage' : 'স্বাভাবিক নিষ্কাশন')}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-xs text-[#A3A3A3] mt-2 leading-relaxed">
+                    {sentinel1Record
+                      ? (isEn ? sentinel1Record.statusEn : sentinel1Record.statusBn)
+                      : (isEn ? 'No quality microwave SAR observation in the last 12 days.' : 'বিগত ১২ দিনে কোনো গ্রহণযোগ্য রাডার পর্যবেক্ষণ পাওয়া যায়নি।')}
+                  </p>
+
+                  <p className="text-[10px] text-slate-400 mt-2 font-mono leading-relaxed border-t border-[#262626] pt-2">
+                    {isEn
+                      ? 'Copernicus SAR penetrates clouds to map waterlogged fields.'
+                      : 'কোপার্নিকাস রাডার মেঘ ভেদ করে ফসলি জমিতে জলাবদ্ধতা শনাক্ত করে।'}
+                  </p>
+                </div>
+
+                <div className="pt-2.5 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#A3A3A3]">
+                  <span>Rule SAR-01</span>
+                  <span>{sentinel1Record && sentinel1Record.floodedCroplandPct > 10 ? (isEn ? '-15 Sensitive' : '-১৫ সংবেদনশীল') : (isEn ? 'No penalty' : 'পেনাল্টি নেই')}</span>
                 </div>
               </div>
             </div>

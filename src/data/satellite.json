@@ -6,7 +6,8 @@
     "products": {
       "smap": "SPL3SMP_E.006",
       "ndvi": "MOD13Q1.061",
-      "lst": "MOD11A2.061"
+      "lst": "MOD11A2.061",
+      "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)"
     },
     "generatedAt": "2026-10-23T12:39:17.325Z"
   },
@@ -24,6 +25,21 @@
     "lstNight": {
       "value": 28.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7.5% normal cropland drainage",
+      "statusBn": "7.5% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "gazipur": {
@@ -40,6 +56,21 @@
     "lstNight": {
       "value": 26.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 8.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "8.2% normal cropland drainage",
+      "statusBn": "8.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "narayanganj": {
@@ -52,6 +83,21 @@
     "lstNight": {
       "value": 28.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "munshiganj": {
@@ -68,6 +114,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 14.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "14.8% cropland waterlogged / flooded",
+      "statusBn": "14.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "narsingdi": {
@@ -89,6 +150,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "manikganj": {
@@ -110,6 +186,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 11.6,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "11.6% cropland waterlogged / flooded",
+      "statusBn": "11.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "tangail": {
@@ -131,6 +222,21 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "kishoreganj": {
@@ -147,6 +253,21 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 18.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "18.2% cropland waterlogged / flooded",
+      "statusBn": "18.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "faridpur": {
@@ -163,6 +284,21 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 15.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "15.2% cropland waterlogged / flooded",
+      "statusBn": "15.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "rajbari": {
@@ -179,6 +315,21 @@
     "lstNight": {
       "value": 25.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "shariatpur": {
@@ -195,6 +346,21 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 15.9,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "15.9% cropland waterlogged / flooded",
+      "statusBn": "15.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "madaripur": {
@@ -216,6 +382,21 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 16.1,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "16.1% cropland waterlogged / flooded",
+      "statusBn": "16.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "gopalganj": {
@@ -238,6 +419,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 22.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "severe_inundation",
+      "statusEn": "22.4% cropland inundated / severe flood",
+      "statusBn": "22.4% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "chattogram": {
@@ -254,6 +450,21 @@
     "lstNight": {
       "value": 27,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 9.1,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "9.1% normal cropland drainage",
+      "statusBn": "9.1% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "coxsbazar": {
@@ -270,6 +481,21 @@
     "lstNight": {
       "value": 25.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 11.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "11.4% cropland waterlogged / flooded",
+      "statusBn": "11.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "cumilla": {
@@ -291,6 +517,21 @@
     "lstNight": {
       "value": 27.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 10.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "10.8% cropland waterlogged / flooded",
+      "statusBn": "10.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "chandpur": {
@@ -307,6 +548,21 @@
     "lstNight": {
       "value": 25,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "noakhali": {
@@ -328,6 +584,21 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 17.9,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "17.9% cropland waterlogged / flooded",
+      "statusBn": "17.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "feni": {
@@ -349,6 +620,21 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 14.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "14.5% cropland waterlogged / flooded",
+      "statusBn": "14.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "lakshmipur": {
@@ -365,6 +651,21 @@
     "lstNight": {
       "value": 25.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "brahmanbaria": {
@@ -381,6 +682,21 @@
     "lstNight": {
       "value": 26.9,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "rangamati": {
@@ -397,6 +713,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "khagrachari": {
@@ -418,6 +749,21 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "bandarban": {
@@ -434,6 +780,21 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "rajshahi": {
@@ -450,6 +811,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 3.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "3.4% normal cropland drainage",
+      "statusBn": "3.4% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "bogura": {
@@ -471,6 +847,21 @@
     "lstNight": {
       "value": 26.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 6.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "6.8% normal cropland drainage",
+      "statusBn": "6.8% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "pabna": {
@@ -487,6 +878,21 @@
     "lstNight": {
       "value": 25.9,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 12.9,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "12.9% cropland waterlogged / flooded",
+      "statusBn": "12.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "sirajganj": {
@@ -503,6 +909,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 16.7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "16.7% cropland waterlogged / flooded",
+      "statusBn": "16.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "natore": {
@@ -524,6 +945,21 @@
     "lstNight": {
       "value": 25.2,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 13.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "13.8% cropland waterlogged / flooded",
+      "statusBn": "13.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "naogaon": {
@@ -545,6 +981,21 @@
     "lstNight": {
       "value": 25.2,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7.2% normal cropland drainage",
+      "statusBn": "7.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "chapainawabganj": {
@@ -561,6 +1012,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "joypurhat": {
@@ -577,6 +1043,21 @@
     "lstNight": {
       "value": 24.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 4.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "4.5% normal cropland drainage",
+      "statusBn": "4.5% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "khulna": {
@@ -593,6 +1074,21 @@
     "lstNight": {
       "value": 27.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 15.6,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "15.6% cropland waterlogged / flooded",
+      "statusBn": "15.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "jashore": {
@@ -614,6 +1110,21 @@
     "lstNight": {
       "value": 25.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 8.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "8.4% normal cropland drainage",
+      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "satkhira": {
@@ -630,6 +1141,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 17.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "17.2% cropland waterlogged / flooded",
+      "statusBn": "17.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "bagerhat": {
@@ -646,6 +1172,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 16.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "16.4% cropland waterlogged / flooded",
+      "statusBn": "16.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "kushtia": {
@@ -662,6 +1203,21 @@
     "lstNight": {
       "value": 25.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "jhenaidah": {
@@ -683,6 +1239,21 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "magura": {
@@ -704,6 +1275,21 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "narail": {
@@ -725,6 +1311,21 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "meherpur": {
@@ -746,6 +1347,21 @@
     "lstNight": {
       "value": 25.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "chuadanga": {
@@ -767,6 +1383,21 @@
     "lstNight": {
       "value": 25.9,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "barishal": {
@@ -783,6 +1414,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 18.7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "18.7% cropland waterlogged / flooded",
+      "statusBn": "18.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "patuakhali": {
@@ -799,6 +1445,21 @@
     "lstNight": {
       "value": 27.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 17.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "17.8% cropland waterlogged / flooded",
+      "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "bhola": {
@@ -815,6 +1476,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 19.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "19.5% cropland waterlogged / flooded",
+      "statusBn": "19.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "pirojpur": {
@@ -831,6 +1507,21 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 16.3,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "16.3% cropland waterlogged / flooded",
+      "statusBn": "16.3% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "jhalokati": {
@@ -852,6 +1543,21 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "barguna": {
@@ -868,6 +1574,21 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "sylhet": {
@@ -884,6 +1605,21 @@
     "lstNight": {
       "value": 27.8,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 19.1,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "19.1% cropland waterlogged / flooded",
+      "statusBn": "19.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "moulvibazar": {
@@ -905,6 +1641,21 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 13.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "13.5% cropland waterlogged / flooded",
+      "statusBn": "13.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "habiganj": {
@@ -926,6 +1677,21 @@
     "lstNight": {
       "value": 26.8,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 17.4,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "17.4% cropland waterlogged / flooded",
+      "statusBn": "17.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "sunamganj": {
@@ -942,6 +1708,21 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 24.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "severe_inundation",
+      "statusEn": "24.5% cropland inundated / severe flood",
+      "statusBn": "24.5% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "rangpur": {
@@ -963,6 +1744,21 @@
     "lstNight": {
       "value": 23.8,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 14.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "14.2% cropland waterlogged / flooded",
+      "statusBn": "14.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "dinajpur": {
@@ -979,6 +1775,21 @@
     "lstNight": {
       "value": 24.8,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 5.6,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "5.6% normal cropland drainage",
+      "statusBn": "5.6% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "kurigram": {
@@ -995,6 +1806,21 @@
     "lstNight": {
       "value": 23.9,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 17.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "17.8% cropland waterlogged / flooded",
+      "statusBn": "17.8% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "gaibandha": {
@@ -1011,6 +1837,21 @@
     "lstNight": {
       "value": 25.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 16.5,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "16.5% cropland waterlogged / flooded",
+      "statusBn": "16.5% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "lalmonirhat": {
@@ -1027,6 +1868,21 @@
     "lstNight": {
       "value": 23.7,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 15.1,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "15.1% cropland waterlogged / flooded",
+      "statusBn": "15.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "nilphamari": {
@@ -1043,6 +1899,21 @@
     "lstNight": {
       "value": 24.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 11.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "moderate_waterlogging",
+      "statusEn": "11.2% cropland waterlogged / flooded",
+      "statusBn": "11.2% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "panchagarh": {
@@ -1064,6 +1935,21 @@
     "lstNight": {
       "value": 24.5,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 4.2,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "4.2% normal cropland drainage",
+      "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "thakurgaon": {
@@ -1080,6 +1966,21 @@
     "lstNight": {
       "value": 24.3,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 4.8,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "4.8% normal cropland drainage",
+      "statusBn": "4.8% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "mymensingh": {
@@ -1101,6 +2002,21 @@
     "lstNight": {
       "value": 26.9,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "jamalpur": {
@@ -1122,6 +2038,21 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "netrokona": {
@@ -1143,6 +2074,21 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 21.3,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "severe_inundation",
+      "statusEn": "21.3% cropland inundated / severe flood",
+      "statusBn": "21.3% জমিতে জলাবদ্ধতা / বন্যার প্রকোপ",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   },
   "sherpur": {
@@ -1164,6 +2110,21 @@
     "lstNight": {
       "value": 25.6,
       "periodStart": "2026-10-08"
+    },
+    "sentinel1": {
+      "floodedCroplandPct": 7,
+      "observationWindow": {
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-24",
+        "daysCount": 12
+      },
+      "polarization": "VV",
+      "resolutionMeters": 10,
+      "status": "normal",
+      "statusEn": "7% normal cropland drainage",
+      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
+      "observedAt": "2026-10-24",
+      "source": "ESA Sentinel-1 C-SAR"
     }
   }
 }

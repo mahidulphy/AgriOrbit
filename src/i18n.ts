@@ -109,6 +109,7 @@ const en = {
       { name: 'NASA POWER · monthly', what: 'Climate history, 2001 → today', how: 'Powers the Field Shift comparison.', status: 'live' },
       { name: 'NASA SMAP', what: 'Soil moisture (m³/m³)', how: 'NASA SMAP & MODIS, observed Sep–Oct 2026.', status: 'snapshot' },
       { name: 'NASA MODIS', what: 'Vegetation (NDVI) and land temperature', how: 'NASA SMAP & MODIS, observed Sep–Oct 2026.', status: 'snapshot' },
+      { name: 'ESA Sentinel-1 · C-SAR', what: '10 m radar flood & waterlogging detection', how: 'Copernicus Data Space SAR penetrates clouds to map waterlogged cropland (Rule SAR-01).', status: 'snapshot' },
       { name: 'Open-Meteo', what: '7-day weather forecast', how: 'Not NASA, credited separately. Fills the 2–3 day gap and looks ahead.', status: 'live' },
       { name: 'BARI & BRRI guidelines', what: 'Crop rules for Bangladesh', how: 'Published crop guidance from BARI and BRRI (no partnership).', status: 'guidance' },
     ] as { name: string; what: string; how: string; status: 'live' | 'snapshot' | 'guidance' }[],
@@ -138,7 +139,7 @@ const en = {
     built: 'Built by Bay of Orbits for the NASA Space Apps Challenge 2026',
     challenge: 'Challenge: Field Shift: Adapting Farms with NASA Data',
     team: 'Team',
-    credits: 'Data: NASA POWER, SMAP, MODIS · Forecast: Open-Meteo · Crop guidance: BARI & BRRI',
+    credits: 'Data: NASA (POWER, SMAP, MODIS), ESA Copernicus (Sentinel-1 SAR) · Forecast: Open-Meteo · Crop guidance: BARI & BRRI',
     disclaimer: 'A student project. Not affiliated with or endorsed by NASA, BARI, or BRRI.',
   },
 
@@ -362,6 +363,7 @@ const bn: Dict = {
       { name: 'নাসা পাওয়ার · মাসিক', what: 'আবহাওয়ার ইতিহাস, ২০০১ → আজ', how: 'আবহাওয়া বদল তুলনা এখান থেকেই করা।', status: 'live' },
       { name: 'নাসা স্ম্যাপ', what: 'মাটির আর্দ্রতা (m³/m³)', how: 'নাসা স্ম্যাপ ও মোডিস, পর্যবেক্ষণ সেপ্টেম্বর–অক্টোবর ২০২৬।', status: 'snapshot' },
       { name: 'নাসা মোডিস', what: 'সবুজায়ন (NDVI) ও মাটির তাপমাত্রা', how: 'নাসা স্ম্যাপ ও মোডিস, পর্যবেক্ষণ সেপ্টেম্বর–অক্টোবর ২০২৬।', status: 'snapshot' },
+      { name: 'ইএসএ সেন্টিনেল-১ · সি-সার', what: '১০ মিটার রেজ্যুলুশনে বন্যা ও জলাবদ্ধতা শনাক্তকরণ', how: 'কোপার্নিকাস রাডার মেঘ ভেদ করে ফসলি জমিতে জলাবদ্ধতা শনাক্ত করে (নিয়ম SAR-01)।', status: 'snapshot' },
       { name: 'ওপেন-মেটিও', what: '৭ দিনের আবহাওয়া পূর্বাভাস', how: 'নাসার নয়, আলাদাভাবে নেওয়া। ২–৩ দিনের ফাঁক পূরণ করে সামনের পূর্বাভাস দেয়।', status: 'live' },
       { name: 'বারি ও ব্রি নির্দেশিকা', what: 'বাংলাদেশের ফসলের নিয়ম', how: 'বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (বারি) ও বাংলাদেশ ধান গবেষণা ইনস্টিটিউটের (ব্রি) গবেষণা নির্দেশিকা (কোনো প্রাতিষ্ঠানিক চুক্তি নেই)।', status: 'guidance' },
     ],
@@ -391,7 +393,7 @@ const bn: Dict = {
     built: 'নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর জন্য বে অফ অরবিটস দলের তৈরি',
     challenge: 'চ্যালেঞ্জ: ফিল্ড শিফট: নাসার তথ্য দিয়ে খামারকে মানিয়ে নেওয়া',
     team: 'টিম',
-    credits: 'তথ্যসূত্র: নাসা পাওয়ার, স্ম্যাপ, মোডিস · পূর্বাভাস: ওপেন-মেটিও · ফসলের নিয়ম: বারি ও ব্রি',
+    credits: 'তথ্যসূত্র: নাসা (পাওয়ার, স্ম্যাপ, মোডিস), ইএসএ কোপার্নিকাস (সেন্টিনেল-১ সি-সার) · পূর্বাভাস: ওপেন-মেটিও · ফসলের নিয়ম: বারি ও ব্রি',
     disclaimer: 'শিক্ষার্থীদের তৈরি একটি প্রকল্প। নাসা, বারি বা ব্রির সাথে কোনো আনুষ্ঠানিক চুক্তি নেই।',
   },
 

@@ -24,6 +24,7 @@
 import type { DistrictId } from '../data/bdAdmin';
 import type { FarmerPriorityId, Language } from '../types';
 import { STRINGS } from '../i18n';
+import { getDistrictSatellite } from '../data/satellite';
 import {
   type GpmObservationResult,
   getGpmObservation,
@@ -76,7 +77,7 @@ export type AdvisorySeverity = 'danger' | 'warning' | 'info' | 'success';
 
 export interface EvaluatedParameter {
   parameter: string;
-  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'Season Calendar';
+  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'Season Calendar';
   observedValue: string | number;
   thresholdCondition: string;
   satisfied: boolean;
@@ -139,6 +140,7 @@ export interface AdvisoryRuleContext {
   gpm: GpmObservationResult;
   forecast: WeatherForecastResult;
   soilMoisture: number; // SMAP m³/m³ (e.g. 0.18, 0.26, 0.32)
+  sentinel1FloodedCroplandPct?: number | null;
   districtId: DistrictId | string;
   upazilaName?: string;
   season?: 'Rabi' | 'Kharif-1' | 'Kharif-2';
@@ -206,6 +208,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const isForecastDry = forecast.totalRain7dMm <= thresholds.drySpell7dMm;
   const isGpmElevated = gpm.recentRain7dMm >= thresholds.gpmElevatedRainMm || gpm.baselineComparison === 'Elevated';
   const isGpmDeficit = gpm.recentRain7dMm <= thresholds.gpmDeficitRainMm || gpm.baselineComparison === 'Deficit';
+  const sentinel1FloodPct = context.sentinel1FloodedCroplandPct;
 
   let conditionType: ConditionType = 'favorable';
   let severity: AdvisorySeverity = 'success';
@@ -364,6 +367,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
   // Rule transparency triggers list
   const rulesTriggered = [
+    ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`Rule SAR-01: Sentinel-1 SAR detected ${sentinel1FloodPct.toFixed(1)}% cropland flooded (>10% threshold).`] : []),
     `${ruleId}: ${titleEn}`,
     `Precipitation Condition: Forecast ${forecast.totalRain7dMm} mm (Threshold: ${isForecastHeavyRain ? '≥ ' + thresholds.heavyRain7dMm : 'Normal'} mm)`,
     `Field Moisture Condition: SMAP ${soilMoisture.toFixed(2)} m³/m³ classified as ${soilMoistureStatus}`,
@@ -371,6 +375,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   ];
 
   const rulesTriggeredBn = [
+    ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`নিয়ম SAR-01: সেন্টিনেল-১ রাডারে ${sentinel1FloodPct.toFixed(1)}% জমিতে জলাবদ্ধতা শনাক্ত হয়েছে (>১০% সীমা)।`] : []),
     `${ruleId}: ${titleBn}`,
     `বৃষ্টিপাত পরিস্থিতি: পূর্বাভাস ${forecast.totalRain7dMm} মিমি`,
     `মাটির আর্দ্রতা পরিস্থিতি: এসএমএপি ${soilMoisture.toFixed(2)} m³/m³ (${soilMoistureStatusBn})`,
@@ -385,6 +390,17 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const provenanceLabelBn = isLive
     ? 'সরাসরি উপগ্রহ তথ্য · নাসা জিপিএম + ওপেন-মেটিও'
     : `সংরক্ষিত তথ্য ব্যবহার হচ্ছে · আপডেট: ${new Date(gpm.updatedAt).toLocaleDateString('bn-BD', { day: '2-digit', month: 'short', year: 'numeric' })}`;
+
+  
+  if (sentinel1FloodPct !== undefined && sentinel1FloodPct !== null) {
+    evaluatedParams.push({
+      parameter: 'Cropland Flooding / Waterlogging (ESA Sentinel-1 SAR)',
+      source: 'ESA Sentinel-1',
+      observedValue: `${sentinel1FloodPct.toFixed(1)}% flooded`,
+      thresholdCondition: `flooded ${sentinel1FloodPct.toFixed(1)}% ${sentinel1FloodPct > 10 ? '>' : '≤'} waterlogThreshold 10.0%`,
+      satisfied: sentinel1FloodPct > 10,
+    });
+  }
 
   return {
     conditionType,
@@ -446,6 +462,9 @@ export async function getWeatherAdvisoryForLocation(
     thresholds?: Partial<AdvisoryThresholds>;
   },
 ): Promise<WeatherAdvisoryResult> {
+  const sat = getDistrictSatellite(districtId);
+  const sentinel1FloodedCroplandPct = sat?.sentinel1?.floodedCroplandPct ?? null;
+
   const [gpm, forecast] = await Promise.all([
     getGpmObservation(districtId, lat, lng),
     getWeatherForecast(districtId, lat, lng),
@@ -460,5 +479,6 @@ export async function getWeatherAdvisoryForLocation(
     season: options?.season,
     farmerPriority,
     thresholds: options?.thresholds,
+    sentinel1FloodedCroplandPct,
   });
 }

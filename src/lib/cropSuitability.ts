@@ -1,6 +1,30 @@
 import type { CropData, FarmerPriorityId, Language } from '../types';
 import { CROPS_DATABASE } from '../data/agriData';
 import { cropById } from '../data/crops';
+import { toBnDigits } from './bilingualEmailTemplate';
+export const WATERLOGGING_SENSITIVE_CROPS = new Set<string>([
+  'sesame',
+  'chili',
+  'brinjal',
+  'lentil',
+  'chickpea',
+  'sweet_potato',
+  'tomato',
+  'potato',
+  'mustard',
+  'blackgram',
+  'grass_pea',
+  'groundnut',
+  'garlic',
+  'ginger',
+  'turmeric',
+  'soybean',
+]);
+
+export function isWaterloggingSensitive(cropId: string): boolean {
+  return WATERLOGGING_SENSITIVE_CROPS.has(cropId);
+}
+
 
 export type SeasonFilter = 'All' | 'Rabi' | 'Kharif-1' | 'Kharif-2';
 
@@ -12,6 +36,7 @@ export interface TelemetryContext {
   soilMoisture?: number | null; // m³/m³
   maxTemp?: number; // °C
   waterBalance?: number; // rain30 - ET0 in mm
+  sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
 }
 
 export interface ScoreDeltas {
@@ -20,6 +45,7 @@ export interface ScoreDeltas {
   optimalSowingBonus: number;
   heatPenalty: number;
   waterDeficitPenalty: number;
+  sentinel1FloodPenalty: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;
@@ -48,6 +74,7 @@ function evaluateCropWithNasa(
     optimalSowingBonus: 0,
     heatPenalty: 0,
     waterDeficitPenalty: 0,
+    sentinel1FloodPenalty: 0,
     primaryPriorityDelta: 0,
     secondaryPriorityDelta: 0,
     finalScore: calibratedBase,
@@ -146,6 +173,45 @@ function evaluateCropWithNasa(
     }
   
     // ─────────────────────────────────────────────────────────────
+    
+    // ─────────────────────────────────────────────────────────────
+    // RULE SAR-01: ESA SENTINEL-1 SAR FLOOD & WATERLOGGING DETECTION
+    // ─────────────────────────────────────────────────────────────
+    const floodPct = telemetry?.sentinel1FloodedCroplandPct;
+    if (floodPct !== undefined && floodPct !== null && floodPct > 10) {
+      const cropDef = cropById(crop.id);
+      const isExplicitlyTolerant =
+        cropDef?.floodTolerant === true ||
+        crop.id === 'aman' ||
+        crop.id === 'boro' ||
+        crop.id === 'aus' ||
+        crop.id === 'jute';
+
+      const isSensitive =
+        !isExplicitlyTolerant &&
+        (WATERLOGGING_SENSITIVE_CROPS.has(crop.id) ||
+          cropDef?.key_risks_en?.some((r) => /waterlog|waterlogging|poor drainage/i.test(r)) ||
+          crop.shortWhyEn?.toLowerCase().includes('waterlog'));
+
+      if (isSensitive) {
+        const penalty = -15;
+        score += penalty;
+        deltas.sentinel1FloodPenalty = penalty;
+        dynamicObservationsEn.push(
+          `ESA Sentinel-1 SAR: ${floodPct.toFixed(1)}% of district cropland is flooded/waterlogged in the last 12 days.`
+        );
+        dynamicObservationsBn.push(
+          `ইএসএ সেন্টিনেল-১ রাডার: বিগত ১২ দিনে ফসলি জমির ${toBnDigits(floodPct.toFixed(1))}% এলাকায় জলাবদ্ধতা শনাক্ত হয়েছে।`
+        );
+        dynamicRulesEn.push(
+          `Rule SAR-01: Sentinel-1: ${floodPct.toFixed(1)}% of cropland flooded > 10% → waterlogging-sensitive crops -15.`
+        );
+        dynamicRulesBn.push(
+          `নিয়ম SAR-01: সেন্টিনেল-১: জমিতে ${toBnDigits(floodPct.toFixed(1))}% জলাবদ্ধতা (> ১০%) → পানি সংবেদনশীল ফসলে -১৫ নম্বর।`
+        );
+      }
+    }
+
     // RULE 4: EVAPOTRANSPIRATION DEFICIT (Rainfall - ET₀ < -50 mm)
     // ─────────────────────────────────────────────────────────────
     if (wBal < -50 && crop.waterRequirementEn === 'High') {

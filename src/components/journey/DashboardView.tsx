@@ -185,8 +185,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       soilMoisture: activeSoil,
       maxTemp: activeMaxTemp,
       waterBalance: activeWaterBalance,
+      sentinel1FloodedCroplandPct: districtSat?.sentinel1?.floodedCroplandPct ?? null,
     }),
-    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance]
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, districtSat?.sentinel1?.floodedCroplandPct]
   );
 
   // Pure mathematical rule engine execution

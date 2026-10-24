@@ -99,6 +99,7 @@ export interface ScoreDeltas {
   optimalSowingBonus: number;
   heatPenalty: number;
   waterDeficitPenalty: number;
+  sentinel1FloodPenalty?: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;
