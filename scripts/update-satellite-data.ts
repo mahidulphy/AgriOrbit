@@ -331,26 +331,32 @@ export async function downloadSmapResults(
  */
 
 export async function syncObservationsToSupabase(rows: SupabaseObservationRow[]): Promise<number> {
-  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://qxlaaqfogzxqxzktsxjy.supabase.co';
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!supabaseUrl || !serviceKey || supabaseUrl.includes('placeholder')) {
-    console.log('[Supabase] Credentials not provided or placeholder. Skipping database sync.');
+  if (!serviceKey || serviceKey.includes('placeholder')) {
+    console.log('[Supabase] SUPABASE_SERVICE_ROLE_KEY not provided. Skipping database sync.');
     return 0;
   }
 
-  const supabase = createClient(supabaseUrl, serviceKey);
-  const { data, error } = await supabase.from('satellite_observations').upsert(rows, {
-    onConflict: 'district,source,observed_date',
-  });
+  try {
+    const supabase = createClient(supabaseUrl, serviceKey);
+    const { data, error } = await supabase.from('satellite_observations').upsert(rows, {
+      onConflict: 'district,source,observed_date',
+    });
 
-  if (error) {
-    console.error('[Supabase] Upsert error:', error.message);
-    throw error;
+    if (error) {
+      console.warn('[Supabase] Upsert warning (check SUPABASE_SERVICE_ROLE_KEY in GitHub secrets):', error.message);
+      console.log('ℹ Continuing pipeline; observations will still be saved to src/data/satellite.json.');
+      return 0;
+    }
+
+    console.log(`[Supabase] Successfully upserted ${rows.length} observation rows.`);
+    return rows.length;
+  } catch (err: any) {
+    console.warn('[Supabase] Connection error during sync:', err?.message);
+    return 0;
   }
-
-  console.log(`[Supabase] Successfully upserted ${rows.length} observation rows.`);
-  return rows.length;
 }
 
 /**
@@ -487,7 +493,11 @@ export async function runSatelliteUpdate(options: {
 
   // 3. Write rows to Supabase
   if (!options.dryRun && supabaseRows.length > 0) {
-    await syncObservationsToSupabase(supabaseRows);
+    try {
+      await syncObservationsToSupabase(supabaseRows);
+    } catch (err: any) {
+      console.warn('[Supabase] Sync skipped due to error:', err?.message);
+    }
   }
 
   // 4. Save updated satellite.json
