@@ -47,9 +47,11 @@ jobs:
           EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
           EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
           EARTHDATA_TOKEN: ${{ secrets.EARTHDATA_TOKEN }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          CDSE_CLIENT_ID: ${{ secrets.CDSE_CLIENT_ID }}
+          CDSE_CLIENT_SECRET: ${{ secrets.CDSE_CLIENT_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://qxlaaqfogzxqxzktsxjy.supabase.co' }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://qxlaaqfogzxqxzktsxjy.supabase.co' }}
         run: |
           ARGS=""
           if [ -n "${{ github.event.inputs.district }}" ]; then
@@ -61,7 +63,16 @@ jobs:
           if [ "${{ github.event.inputs.skip_ndvi }}" = "true" ]; then
             ARGS="$ARGS --skip-ndvi"
           fi
+          
+          # 1. Ingest NASA SMAP & MODIS/VIIRS NDVI
           npx tsx scripts/update-satellite-data.ts $ARGS
+          
+          # 2. Ingest ESA Sentinel-1 (Radar Flood %) and Sentinel-2 (10m NDVI)
+          if [ -n "${{ secrets.CDSE_CLIENT_ID }}" ] && [ -n "${{ secrets.CDSE_CLIENT_SECRET }}" ]; then
+            echo "CDSE credentials detected. Ingesting ESA Sentinel-1 & Sentinel-2..."
+            npx tsx scripts/fetch-sentinel1.ts --all
+            npx tsx scripts/fetch-sentinel2.ts --all
+          fi
 
       - name: Commit and push updated satellite snapshot
         run: |
