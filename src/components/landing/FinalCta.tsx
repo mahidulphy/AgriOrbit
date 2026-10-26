@@ -50,7 +50,19 @@ export function Footer() {
           <p className="mt-2 text-[#A3A3A3] flex flex-wrap justify-center md:justify-end gap-x-2 gap-y-1 text-xs">
             {TEAM.map((member, i) => (
               <span key={member}>
-                {member}{i < TEAM.length - 1 && <span className="text-[#404040] ml-2">·</span>}
+                {member === 'Mahidul' ? (
+                  <a
+                    href="https://mahidulphy.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#22C55E] hover:text-[#16a34a] hover:underline font-medium transition-colors"
+                  >
+                    {member}
+                  </a>
+                ) : (
+                  <span>{member}</span>
+                )}
+                {i < TEAM.length - 1 && <span className="text-[#404040] ml-2">·</span>}
               </span>
             ))}
           </p>
