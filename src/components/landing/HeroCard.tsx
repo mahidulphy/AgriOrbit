@@ -30,7 +30,7 @@ export function HeroCard({
   ];
 
   return (
-    <div className="rounded-xl border border-[#262626] bg-[#141414] p-5 sm:p-6 shadow-none">
+    <div className="rounded-xl border border-[#262626] bg-[#141414]/95 backdrop-blur-sm p-5 sm:p-6 shadow-xl shadow-black/40">
       {/* Header: "রংপুর · নাসা পাওয়ার" and date range */}
       <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#262626]">
         <div className="flex items-center gap-2">
