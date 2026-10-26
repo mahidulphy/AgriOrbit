@@ -10,8 +10,8 @@ export interface PersonalInfoSectionProps {
   email: string;
   phone: string;
   onPhoneChange: (val: string) => void;
-  communicationMethod: 'in_app' | 'sms' | 'whatsapp' | 'voice';
-  onCommunicationMethodChange: (val: 'in_app' | 'sms' | 'whatsapp' | 'voice') => void;
+  communicationMethod: 'email' | 'in_app' | 'sms' | 'whatsapp' | 'voice';
+  onCommunicationMethodChange: (val: 'email' | 'in_app' | 'sms' | 'whatsapp' | 'voice') => void;
   emailAlerts?: boolean;
   onEmailAlertsChange?: (val: boolean) => void;
   smsAlerts?: boolean;
@@ -211,7 +211,12 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
               className="w-full min-h-[44px] pl-9 pr-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none cursor-pointer"
             >
               {COMMUNICATION_METHODS.map((method) => (
-                <option key={method.id} value={method.id} className="bg-[#141414] text-[#FAFAFA]">
+                <option
+                  key={method.id}
+                  value={method.id}
+                  disabled={'disabled' in method ? (method as any).disabled : false}
+                  className="bg-[#141414] text-[#FAFAFA] disabled:text-[#525252] disabled:bg-[#1a1a1a]"
+                >
                   {isBn ? method.bn : method.en}
                 </option>
               ))}
@@ -235,6 +240,15 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
             onChange={(val) => {
               onEmailAlertsChange?.(val);
               onSmsAlertsChange?.(val);
+              if (val) {
+                if (communicationMethod !== 'email') {
+                  onCommunicationMethodChange('email');
+                }
+              } else {
+                if (communicationMethod === 'email') {
+                  onCommunicationMethodChange('in_app');
+                }
+              }
             }}
             isBn={isBn}
           />

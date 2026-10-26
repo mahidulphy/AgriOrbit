@@ -40,14 +40,23 @@ export async function sendTestAlert(isBn: boolean, userEmail?: string | null): P
     const body = await res.json().catch(() => ({}));
 
     if (!res.ok || (!body.ok && !body.success)) {
-      const detailedError =
-        body.error ||
-        body.message ||
-        (isBn ? 'সতর্কতা তৈরিতে বা ইমেইল পাঠাতে ব্যর্থ হয়েছে।' : 'Failed to send alert.');
-      console.error('[testAlertClient] Alert API returned error status:', res.status, detailedError, body);
+      const rawError = body.error || body.message || '';
+      console.error('[testAlertClient] Alert API returned error status:', res.status, rawError, body);
+
+      let friendlyMessage = rawError;
+      // Sanitize raw database or postgres errors so raw SQL/Postgres errors are never shown to users
+      if (
+        !friendlyMessage ||
+        /supabase|postgres|duplicate key|unique constraint|violates|relation|syntax error|column|table|42501|23505/i.test(friendlyMessage)
+      ) {
+        friendlyMessage = isBn
+          ? 'একটু পরে আবার চেষ্টা করুন / Please wait a minute before sending another test.'
+          : 'Please wait a moment before sending another test.';
+      }
+
       return {
         ok: false,
-        message: detailedError,
+        message: friendlyMessage,
         testsRemainingToday: body.testsRemainingToday,
       };
     }

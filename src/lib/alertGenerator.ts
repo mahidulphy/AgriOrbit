@@ -375,21 +375,33 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
     }
   }
 
-  // 5. Database Insertion (Skipped if dryRun=true)
+  // 5. Database Insertion (Skipped if dryRun=true, duplicates skipped with ON CONFLICT DO NOTHING)
   let insertedRows: any[] = [];
   if (!dryRun && supabaseAdmin && generatedAlertRows.length > 0) {
-    const { data: inserted, error: insertErr } = await supabaseAdmin
-      .from('notifications')
-      .upsert(generatedAlertRows, {
-        onConflict: 'user_id,field_id,alert_type,data_date',
-        ignoreDuplicates: true,
-      })
-      .select();
+    try {
+      const { data: inserted, error: insertErr } = await supabaseAdmin
+        .from('notifications')
+        .upsert(generatedAlertRows, {
+          onConflict: 'user_id,field_id,alert_type,data_date',
+          ignoreDuplicates: true,
+        })
+        .select();
 
-    if (insertErr) {
-      console.error('Failed to insert notifications:', insertErr.message);
-    } else {
-      insertedRows = inserted || [];
+      if (insertErr) {
+        if (
+          insertErr.code === '23505' ||
+          insertErr.message?.includes('duplicate key') ||
+          insertErr.message?.includes('unique constraint')
+        ) {
+          console.log('[alertGenerator] Duplicate daily notifications skipped silently (ON CONFLICT DO NOTHING).');
+        } else {
+          console.warn('[alertGenerator] Notice inserting notifications:', insertErr.message);
+        }
+      } else {
+        insertedRows = inserted || [];
+      }
+    } catch (err: any) {
+      console.warn('[alertGenerator] Database upsert notice:', err?.message);
     }
   } else if (dryRun) {
     insertedRows = generatedAlertRows.map((r, i) => ({ ...r, id: `dryrun-id-${i + 1}`, created_at: new Date().toISOString() }));

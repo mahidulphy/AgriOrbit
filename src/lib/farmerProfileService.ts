@@ -37,7 +37,7 @@ export interface FarmerProfileData {
   phone: string;
   avatarUrl: string;
   preferredLanguage: 'bn' | 'en';
-  communicationMethod: 'in_app' | 'sms' | 'voice' | 'whatsapp';
+  communicationMethod: 'email' | 'in_app' | 'sms' | 'voice' | 'whatsapp';
   primaryPriority: FarmerPriorityId;
   priorities: FarmerPriorityId[];
   pastDamages: string[];
@@ -52,10 +52,11 @@ export interface FarmerProfileData {
 }
 
 export const COMMUNICATION_METHODS = [
-  { id: 'in_app', en: 'In-App Notifications', bn: 'অ্যাপ নোটিফিকেশন' },
-  { id: 'sms', en: 'SMS Mobile Alert', bn: 'এসএমএস বার্তা' },
-  { id: 'whatsapp', en: 'WhatsApp Alert', bn: 'হোয়াটসঅ্যাপ বার্তা' },
-  { id: 'voice', en: 'Automated Voice Call', bn: 'ভয়েস কল' },
+  { id: 'email', en: 'Email Alerts (Recommended)', bn: 'ইমেইল সতর্কতা (সুপারিশকৃত)', disabled: false },
+  { id: 'in_app', en: 'In-App Notifications', bn: 'অ্যাপ নোটিফিকেশন', disabled: false },
+  { id: 'sms', en: 'SMS Mobile Alert (Coming Soon)', bn: 'এসএমএস বার্তা (শীঘ্রই আসছে)', disabled: true },
+  { id: 'whatsapp', en: 'WhatsApp Alert (Coming Soon)', bn: 'হোয়াটসঅ্যাপ বার্তা (শীঘ্রই আসছে)', disabled: true },
+  { id: 'voice', en: 'Automated Voice Call (Coming Soon)', bn: 'ভয়েস কল (শীঘ্রই আসছে)', disabled: true },
 ] as const;
 
 export const DEFAULT_INITIAL_FIELD: FarmField = {
@@ -90,12 +91,12 @@ export const DEFAULT_FARMER_PROFILE_DATA: FarmerProfileData = {
   phone: '',
   avatarUrl: '',
   preferredLanguage: 'bn',
-  communicationMethod: 'in_app',
+  communicationMethod: 'email',
   primaryPriority: 'save_water',
   priorities: ['save_water', 'improve_soil'],
   pastDamages: ['drought'],
   pastDamageNotes: 'গত বছর খরার কারণে বোরো মৌসুমে সেচ খরচ বেড়েছিল।',
-  emailAlerts: false,
+  emailAlerts: true,
   smsAlerts: false,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
@@ -210,7 +211,7 @@ export async function loadFarmerProfile(
           phone: profileRow.phone || '',
           avatarUrl: profileRow.avatar_url || '',
           preferredLanguage: profileRow.preferred_language || 'bn',
-          communicationMethod: profileRow.communication_method || 'in_app',
+          communicationMethod: (profileRow.communication_method as any) || (profileRow.email_alerts !== false ? 'email' : 'in_app'),
           primaryPriority: (profileRow.primary_priority as FarmerPriorityId) || 'save_water',
           priorities: (profileRow.priorities as FarmerPriorityId[]) || ['save_water'],
           pastDamages: profileRow.past_damages || [],
@@ -356,22 +357,29 @@ export async function saveFarmerProfile(
         district_id: profile.districtId ?? existing.districtId ?? null,
       };
 
-      // 2. Upsert to public.profiles table (resilient to unmigrated upazila_id/district_id)
-      let { error: pErr } = await supabase.from('profiles').upsert(fullPayload);
-      if (pErr && (pErr.code === '42703' || pErr.message?.includes('upazila_id') || pErr.message?.includes('district_id') || pErr.message?.includes('schema cache'))) {
-        console.warn('AgriOrbit: Column upazila_id/district_id missing in profiles, retrying with base schema payload...');
-        const retryRes = await supabase.from('profiles').upsert(basePayload);
-        pErr = retryRes.error;
-      }
+      // 2. Upsert to public.profiles table (resilient to unmigrated upazila_id/district_id and legacy check constraints)
+      const safeUpsertProfile = async (tableName: string) => {
+        let res = await supabase.from(tableName).upsert(fullPayload);
+        if (res.error && (res.error.code === '42703' || res.error.message?.includes('upazila_id') || res.error.message?.includes('district_id') || res.error.message?.includes('schema cache'))) {
+          res = await supabase.from(tableName).upsert(basePayload);
+        }
+        if (res.error && (res.error.code === '23514' || res.error.message?.includes('communication_method'))) {
+          console.warn(`AgriOrbit: communication_method check constraint in ${tableName} lacks 'email', falling back to 'in_app' in DB...`);
+          const fallbackBase = { ...basePayload, communication_method: 'in_app' };
+          const fallbackFull = { ...fullPayload, communication_method: 'in_app' };
+          res = await supabase.from(tableName).upsert(fallbackFull);
+          if (res.error && (res.error.code === '42703' || res.error.message?.includes('upazila_id') || res.error.message?.includes('district_id') || res.error.message?.includes('schema cache'))) {
+            res = await supabase.from(tableName).upsert(fallbackBase);
+          }
+        }
+        return res;
+      };
 
+      let { error: pErr } = await safeUpsertProfile('profiles');
       if (pErr) {
         console.error('Failed to save profile to database:', pErr.message);
         // Try fallback table
-        let { error: fpErr } = await supabase.from('farmer_profiles').upsert(fullPayload);
-        if (fpErr && (fpErr.code === '42703' || fpErr.message?.includes('upazila_id') || fpErr.message?.includes('district_id') || fpErr.message?.includes('schema cache'))) {
-          const retryFp = await supabase.from('farmer_profiles').upsert(basePayload);
-          fpErr = retryFp.error;
-        }
+        let { error: fpErr } = await safeUpsertProfile('farmer_profiles');
         if (fpErr) {
           console.error('Failed to save profile to fallback database:', fpErr.message);
           return { success: false, error: pErr.message || fpErr.message };

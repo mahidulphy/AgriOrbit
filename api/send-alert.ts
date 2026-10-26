@@ -115,23 +115,22 @@ export default async function handler(req: any, res?: any) {
       });
     }
 
-    // 5. Rate Limiting: Max 3 test alerts per user per UTC day
-    const todayStart = new Date();
-    todayStart.setUTCHours(0, 0, 0, 0);
+    // 5. Rate Limiting: Max 1 test alert per minute per user
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
 
-    const { count } = await supabaseAdmin
+    const { data: recentTests } = await supabaseAdmin
       .from('notifications')
-      .select('id', { count: 'exact', head: true })
+      .select('id, created_at')
       .eq('user_id', user.id)
       .eq('alert_type', 'test')
-      .gte('created_at', todayStart.toISOString());
+      .gte('created_at', oneMinuteAgo)
+      .order('created_at', { ascending: false })
+      .limit(1);
 
-    const currentCount = count ?? 0;
-    if (currentCount >= 3) {
+    if (recentTests && recentTests.length > 0) {
       return sendJson(429, {
         ok: false,
-        error: 'Daily test limit reached (maximum 3 test alerts per day).',
-        testsRemainingToday: 0,
+        error: 'একটু পরে আবার চেষ্টা করুন / Please wait a minute before sending another test.',
       });
     }
 
@@ -175,24 +174,39 @@ export default async function handler(req: any, res?: any) {
       data_date: dataDate,
     };
 
-    // 9. Insert into public.notifications
-    const { data: inserted, error: insertErr } = await supabaseAdmin
-      .from('notifications')
-      .insert(notificationPayload)
-      .select()
-      .single();
+    // 9. Record test notification in public.notifications
+    let inserted: any = {
+      id: crypto.randomUUID(),
+      ...notificationPayload,
+      created_at: new Date().toISOString(),
+    };
 
-    if (insertErr) {
-      console.error('[send-alert] Supabase insert error on notifications:', insertErr.message);
-      return sendJson(500, {
-        ok: false,
-        error: `Supabase database error: ${insertErr.message}`,
-      });
+    try {
+      const { data: dbRecord, error: insertErr } = await supabaseAdmin
+        .from('notifications')
+        .insert(notificationPayload)
+        .select()
+        .single();
+
+      if (insertErr) {
+        // Log technical detail to console only; never expose raw postgres constraint to user
+        console.warn('[send-alert] Notifications insert notice (proceeding with email delivery):', insertErr.message);
+        const { data: upsertRecord } = await supabaseAdmin
+          .from('notifications')
+          .upsert(notificationPayload, { onConflict: 'user_id,field_id,alert_type,data_date' })
+          .select()
+          .single();
+        if (upsertRecord) inserted = upsertRecord;
+      } else if (dbRecord) {
+        inserted = dbRecord;
+      }
+    } catch (dbErr: any) {
+      console.warn('[send-alert] Database operation notice:', dbErr?.message);
     }
 
     // Optional sync to public.alerts if table exists
     try {
-      await supabaseAdmin.from('alerts').insert(notificationPayload);
+      await supabaseAdmin.from('alerts').upsert(notificationPayload, { onConflict: 'user_id,field_id,alert_type,data_date' });
     } catch {
       // Non-fatal
     }
@@ -210,7 +224,6 @@ export default async function handler(req: any, res?: any) {
         ok: false,
         error: missingSmtpErr,
         notification: inserted,
-        testsRemainingToday: Math.max(0, 2 - currentCount),
       });
     }
 
@@ -257,11 +270,17 @@ export default async function handler(req: any, res?: any) {
 
       console.log(`[send-alert] Bilingual email sent successfully to ${user.email}, messageId: ${info.messageId}`);
 
-      // 12. Mark emailed_at in database
-      await supabaseAdmin
-        .from('notifications')
-        .update({ emailed_at: new Date().toISOString() })
-        .eq('id', inserted.id);
+      // 12. Mark emailed_at in database if record has valid ID
+      if (inserted?.id) {
+        try {
+          await supabaseAdmin
+            .from('notifications')
+            .update({ emailed_at: new Date().toISOString() })
+            .eq('id', inserted.id);
+        } catch {
+          // Non-fatal
+        }
+      }
 
       return sendJson(200, {
         ok: true,
@@ -270,23 +289,20 @@ export default async function handler(req: any, res?: any) {
         recipientEmail: user.email,
         message: `Bilingual test alert created and email sent successfully to ${user.email}!`,
         notification: inserted,
-        testsRemainingToday: Math.max(0, 2 - currentCount),
       });
     } catch (mailErr: any) {
       console.error('[send-alert] Nodemailer SMTP sendMail error:', mailErr);
-      const mailErrMsg = mailErr?.message || String(mailErr);
       return sendJson(502, {
         ok: false,
-        error: `Gmail SMTP delivery failed: ${mailErrMsg}`,
+        error: 'ইমেইল পাঠাতে সাময়িক সমস্যা হয়েছে। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন। / Temporary email delivery issue. Please try again shortly.',
         notification: inserted,
-        testsRemainingToday: Math.max(0, 2 - currentCount),
       });
     }
   } catch (err: any) {
     console.error('[send-alert] Top-level handler exception:', err);
     return sendJson(500, {
       ok: false,
-      error: `Server handler exception: ${err?.message || String(err)}`,
+      error: 'সাময়িক ত্রুটি হয়েছে, অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন। / A temporary error occurred. Please try again shortly.',
     });
   }
 }

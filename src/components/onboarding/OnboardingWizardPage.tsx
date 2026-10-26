@@ -89,8 +89,8 @@ export const OnboardingWizardPage: React.FC = () => {
   // Form State matching Profile Data Model exactly
   const [fullName, setFullName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
-  const [communicationMethod, setCommunicationMethod] = useState<FarmerProfileData['communicationMethod']>('in_app');
-  const [emailAlerts, setEmailAlerts] = useState<boolean>(false);
+  const [communicationMethod, setCommunicationMethod] = useState<FarmerProfileData['communicationMethod']>('email');
+  const [emailAlerts, setEmailAlerts] = useState<boolean>(true);
   const [avatarUrl, setAvatarUrl] = useState<string>('');
 
   const [field, setField] = useState<FarmField>({
@@ -147,12 +147,13 @@ export const OnboardingWizardPage: React.FC = () => {
               '';
             setFullName(resolvedName);
             setPhone(profile.phone || '');
-            setCommunicationMethod(profile.communicationMethod || 'in_app');
-            if (profile.emailAlerts !== undefined) {
-              setEmailAlerts(Boolean(profile.emailAlerts));
-            } else if (profile.smsAlerts !== undefined) {
-              setEmailAlerts(Boolean(profile.smsAlerts));
-            }
+            const hasEmailAlerts = profile.emailAlerts !== undefined
+              ? Boolean(profile.emailAlerts)
+              : profile.smsAlerts !== undefined
+                ? Boolean(profile.smsAlerts)
+                : true;
+            setEmailAlerts(hasEmailAlerts);
+            setCommunicationMethod(profile.communicationMethod || (hasEmailAlerts ? 'email' : 'in_app'));
             setAvatarUrl(profile.avatarUrl || user.user_metadata?.avatar_url || '');
 
             if (profile.priorities && profile.priorities.length > 0) {
