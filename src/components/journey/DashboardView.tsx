@@ -116,9 +116,26 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const locationBreadcrumb = isDistrictWide ? districtName : `${districtName} › ${upazilaName}`;
 
   // NASA POWER & Open-Meteo 4-level safety net (Client 24h Cache -> Live -> Public Cache -> Bundled)
-  const [loaded, setLoaded] = useState<LoadedData>({
-    data: BUNDLED_RANGPUR,
-    mode: 'bundled',
+  const [loaded, setLoaded] = useState<LoadedData>(() => {
+    if (typeof window !== 'undefined') {
+      const hasSpecificUpazila = Boolean(selectedUpazila && selectedUpazila !== DISTRICT_WIDE_UPAZILA);
+      const cacheKey = hasSpecificUpazila
+        ? `agriorbit_cache_upz_${selectedDistrict}_${selectedUpazila}`
+        : `agriorbit_cache_dist_${selectedDistrict}`;
+      try {
+        const cachedStr = localStorage.getItem(cacheKey);
+        if (cachedStr) {
+          const cachedObj = JSON.parse(cachedStr);
+          if (cachedObj.data) {
+            return { data: cachedObj.data, mode: 'cache', sourceNote: cachedObj.cachedAt };
+          }
+        }
+      } catch {}
+    }
+    return {
+      data: (selectedDistrict === 'rangpur' ? BUNDLED_RANGPUR : null) as any,
+      mode: selectedDistrict === 'rangpur' ? 'bundled' : 'unavailable',
+    };
   });
   const [isLoadingData, setIsLoadingData] = useState(false);
 

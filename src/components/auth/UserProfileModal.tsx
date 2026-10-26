@@ -39,6 +39,10 @@ import {
   IRRIGATION_OPTIONS,
   FARMING_GOALS,
 } from '../../data/farmerProfile';
+import {
+  saveFarmField,
+  saveFarmerProfile as saveServiceProfile,
+} from '../../lib/farmerProfileService';
 
 interface UserProfileModalProps {
   isOpen: boolean;
@@ -115,19 +119,84 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
     saveFarmerProfile(profile, user?.id);
 
     if (user?.id && !isGuest) {
+      const updateData: any = {
+        full_name: profile.fullName || null,
+        phone: profile.phone || null,
+        district_id: profile.districtId || null,
+        upazila_id: profile.upazila || null,
+        email_alerts: Boolean(profile.emailAlerts),
+        sms_alerts: Boolean(profile.smsAlerts),
+        updated_at: new Date().toISOString(),
+      };
+
       const { error: sbErr } = await supabase
         .from('profiles')
-        .update({
-          full_name: profile.fullName || null,
-          phone: profile.phone || null,
-          email_alerts: Boolean(profile.emailAlerts),
-          sms_alerts: Boolean(profile.smsAlerts),
-          updated_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq('id', user.id);
 
       if (sbErr) {
         console.error('Failed to update profile alerts in Supabase:', sbErr.message);
+      }
+
+      // Also sync to farmerProfileService and fields table:
+      if (profile.districtId) {
+        const dAdmin = BD_DISTRICTS.find((d) => d.id === profile.districtId);
+        const upz = profile.upazila && profile.upazila !== DISTRICT_WIDE_UPAZILA
+          ? getUpazilasFor(profile.districtId as any).find((u) => u.id === profile.upazila)
+          : null;
+        const lat = upz?.lat || dAdmin?.lat || 23.685;
+        const lng = upz?.lng || dAdmin?.lng || 90.3563;
+
+        await saveFarmField(
+          {
+            id: 'field_primary_default',
+            name: `${dAdmin?.nameEn || 'Primary'} Plot 1`,
+            division: dAdmin?.division || '',
+            district: profile.districtId,
+            upazila: profile.upazila || DISTRICT_WIDE_UPAZILA,
+            village: '',
+            latitude: lat,
+            longitude: lng,
+            area: profile.landSize || 1.5,
+            unit: profile.landUnit || 'bigha',
+            elevation: profile.landElevation || 'medium_high',
+            soilType: profile.soilType || 'loam',
+            irrigation: profile.irrigation || 'deep_tubewell',
+            waterSource: 'groundwater',
+            currentCrop: 'aman',
+            previousCrop: 'jute',
+            plannedNextCrop: 'mustard',
+            growingSeason: 'rabi',
+            isPrimary: true,
+            notes: '',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          user.id
+        );
+
+        await saveServiceProfile(
+          {
+            fullName: profile.fullName,
+            phone: profile.phone,
+            districtId: profile.districtId,
+            upazilaId: profile.upazila || DISTRICT_WIDE_UPAZILA,
+            emailAlerts: Boolean(profile.emailAlerts),
+            smsAlerts: Boolean(profile.smsAlerts),
+          },
+          user.id
+        );
+
+        window.dispatchEvent(
+          new CustomEvent('agriorbit_location_changed', {
+            detail: {
+              district: profile.districtId,
+              upazila: profile.upazila,
+              latitude: lat,
+              longitude: lng,
+            },
+          })
+        );
       }
     }
 

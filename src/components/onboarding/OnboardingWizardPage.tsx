@@ -399,8 +399,17 @@ export const OnboardingWizardPage: React.FC = () => {
           if (user?.id) {
             const res = await saveFarmField(updatedField, user.id);
             if (res.error) throw new Error(res.error);
+            await saveFarmerProfile(
+              {
+                districtId: field.district,
+                upazilaId: field.upazila || DISTRICT_WIDE_UPAZILA,
+              },
+              user.id
+            );
+            setField(res.field);
+          } else {
+            setField(updatedField);
           }
-          setField(updatedField);
           sessionStorage.setItem(stepStorageKey, '3');
           localStorage.setItem(stepStorageKey, '3');
           setStep(3);
@@ -442,6 +451,8 @@ export const OnboardingWizardPage: React.FC = () => {
           if (user?.id) {
             const pRes = await saveFarmerProfile(
               {
+                districtId: field.district,
+                upazilaId: field.upazila || DISTRICT_WIDE_UPAZILA,
                 primaryPriority: primary,
                 priorities: selectedPriorities,
                 onboardingCompleted: true,
@@ -576,6 +587,8 @@ export const OnboardingWizardPage: React.FC = () => {
       if (user?.id) {
         const res = await saveFarmerProfile(
           {
+            districtId: field.district,
+            upazilaId: field.upazila || DISTRICT_WIDE_UPAZILA,
             pastDamages,
             pastDamageNotes,
             emailAlerts,
@@ -614,6 +627,8 @@ export const OnboardingWizardPage: React.FC = () => {
       if (user?.id) {
         await saveFarmerProfile(
           {
+            districtId: field.district,
+            upazilaId: field.upazila || DISTRICT_WIDE_UPAZILA,
             emailAlerts,
             smsAlerts: emailAlerts,
             onboardingCompleted: true,

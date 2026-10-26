@@ -9,6 +9,8 @@ import { FarmLocationStep } from '../journey/FarmLocationStep.tsx';
 import { FarmerPrioritySetup } from '../journey/FarmerPrioritySetup.tsx';
 import { DashboardView } from '../journey/DashboardView.tsx';
 import { loadFarmerProfile, getActiveField } from '../../lib/farmerProfileService.ts';
+import { getDistrictAdmin } from '../../data/bdAdmin.ts';
+import { getUpazila, DISTRICT_WIDE_UPAZILA } from '../../lib/location.ts';
 
 type AnalyzeStep = 'location' | 'priority' | 'dashboard';
 
@@ -84,9 +86,28 @@ export function AnalyzePage() {
         return;
       }
 
-      // Check whether user has at least one saved field with a district
+      // Check whether user has at least one saved field or profile district
       const active = fields && fields.length > 0 ? getActiveField(fields) : null;
-      if (!active || !active.district) {
+      let targetDistrict: DistrictId | null = null;
+      let targetUpazila: string = '';
+      let targetLat: number | undefined = undefined;
+      let targetLon: number | undefined = undefined;
+
+      if (active && active.district) {
+        targetDistrict = active.district as DistrictId;
+        targetUpazila = active.upazila || active.upazilaId || '';
+        targetLat = active.latitude;
+        targetLon = active.longitude;
+      } else if (profile && profile.districtId) {
+        targetDistrict = profile.districtId as DistrictId;
+        targetUpazila = profile.upazilaId || '';
+        const dAdmin = getDistrictAdmin(targetDistrict);
+        const upz = targetUpazila && targetUpazila !== DISTRICT_WIDE_UPAZILA ? getUpazila(targetDistrict, targetUpazila) : null;
+        targetLat = upz?.lat || dAdmin?.lat;
+        targetLon = upz?.lng || dAdmin?.lng;
+      }
+
+      if (!targetDistrict) {
         // Authenticated user with no saved field MUST complete onboarding
         window.location.hash = '#/onboarding';
         return;
@@ -101,12 +122,12 @@ export function AnalyzePage() {
         }
       }
 
-      if (active.previousCrop) setPreviousCrop(active.previousCrop);
+      if (active?.previousCrop) setPreviousCrop(active.previousCrop);
       setLocation({
-        district: active.district as DistrictId,
-        upazila: active.upazila || active.upazilaId || '',
-        latitude: active.latitude,
-        longitude: active.longitude,
+        district: targetDistrict,
+        upazila: targetUpazila,
+        latitude: targetLat ?? 23.685,
+        longitude: targetLon ?? 90.3563,
         source: 'preset',
       });
 
@@ -122,6 +143,14 @@ export function AnalyzePage() {
 
   useEffect(() => {
     syncFarmerContext();
+  }, [syncFarmerContext]);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      syncFarmerContext();
+    };
+    window.addEventListener('agriorbit_location_changed', handleLocationChange);
+    return () => window.removeEventListener('agriorbit_location_changed', handleLocationChange);
   }, [syncFarmerContext]);
 
   useEffect(() => {

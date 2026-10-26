@@ -1,6 +1,8 @@
 import { supabase, isSupabaseConfigured } from './supabase';
 import type { FarmerPriorityId } from '../types';
 import { BD_DISTRICTS } from '../data/districts';
+import { getDistrictAdmin, type DistrictId } from '../data/bdAdmin';
+import { getUpazila, DISTRICT_WIDE_UPAZILA } from './location';
 
 export interface FarmField {
   id: string;
@@ -125,6 +127,28 @@ export function calculateProfileCompletion(
   return Math.min(100, score);
 }
 
+const getStorage = () => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    return window.localStorage;
+  }
+  if (typeof globalThis !== 'undefined' && (globalThis as any)._agriorbit_mem_storage) {
+    return (globalThis as any)._agriorbit_mem_storage;
+  }
+  const store = new Map<string, string>();
+  const memStorage = {
+    getItem: (k: string) => store.get(k) ?? null,
+    setItem: (k: string, v: string) => store.set(k, String(v)),
+    removeItem: (k: string) => store.delete(k),
+    clear: () => store.clear(),
+    get length() { return store.size; },
+    key: (i: number) => Array.from(store.keys())[i] ?? null,
+  };
+  if (typeof globalThis !== 'undefined') {
+    (globalThis as any)._agriorbit_mem_storage = memStorage;
+  }
+  return memStorage;
+};
+
 /**
  * Loads the Farmer Profile and all associated Farm Fields
  */
@@ -135,12 +159,13 @@ export async function loadFarmerProfile(
   let cachedProfile: FarmerProfileData | null = null;
   let cachedFields: FarmField[] = [];
   let queryError: string | undefined = undefined;
+  const storage = getStorage();
 
   try {
-    const rawProfile = localStorage.getItem(`${PROFILE_CACHE_KEY}_${userId || 'default'}`);
+    const rawProfile = storage.getItem(`${PROFILE_CACHE_KEY}_${userId || 'default'}`);
     if (rawProfile) cachedProfile = JSON.parse(rawProfile);
 
-    const rawFields = localStorage.getItem(`${FIELDS_CACHE_KEY}_${userId || 'default'}`);
+    const rawFields = storage.getItem(`${FIELDS_CACHE_KEY}_${userId || 'default'}`);
     if (rawFields) cachedFields = JSON.parse(rawFields);
   } catch (err) {
     console.error('Local cache read error:', err);
@@ -182,7 +207,8 @@ export async function loadFarmerProfile(
         .from('fields')
         .select('*')
         .eq('user_id', userId)
-        .order('is_primary', { ascending: false });
+        .order('is_primary', { ascending: false })
+        .order('updated_at', { ascending: false });
 
       if (!fRes.error && fRes.data) {
         fieldsRows = fRes.data;
@@ -191,7 +217,8 @@ export async function loadFarmerProfile(
           .from('farmer_fields')
           .select('*')
           .eq('user_id', userId)
-          .order('is_primary', { ascending: false });
+          .order('is_primary', { ascending: false })
+          .order('updated_at', { ascending: false });
         if (!ffRes.error && ffRes.data) {
           fieldsRows = ffRes.data;
         } else {
@@ -255,6 +282,49 @@ export async function loadFarmerProfile(
         }));
       }
 
+      // Reconcile single source of truth between profiles and fields:
+      const resolvedDistrict = (cachedFields.length > 0 && cachedFields[0].district)
+        ? cachedFields[0].district
+        : profileRow?.district_id || cachedProfile?.districtId;
+
+      const resolvedUpazila = (cachedFields.length > 0 && cachedFields[0].upazila)
+        ? cachedFields[0].upazila
+        : profileRow?.upazila_id || cachedProfile?.upazilaId || DISTRICT_WIDE_UPAZILA;
+
+      if (resolvedDistrict && (cachedFields.length === 0 || !cachedFields[0].district)) {
+        const dAdmin = getDistrictAdmin(resolvedDistrict as DistrictId);
+        const upz = resolvedUpazila !== DISTRICT_WIDE_UPAZILA ? getUpazila(resolvedDistrict as DistrictId, resolvedUpazila) : null;
+        cachedFields = [{
+          id: crypto.randomUUID(),
+          name: `${dAdmin?.nameEn || 'Primary'} Plot 1`,
+          division: dAdmin?.division || '',
+          district: resolvedDistrict,
+          districtId: resolvedDistrict,
+          upazila: resolvedUpazila,
+          upazilaId: resolvedUpazila,
+          village: '',
+          latitude: upz?.lat || dAdmin?.lat || 23.685,
+          longitude: upz?.lng || dAdmin?.lng || 90.3563,
+          area: 1.5,
+          unit: 'bigha',
+          elevation: 'medium_high',
+          soilType: 'loam',
+          irrigation: 'deep_tubewell',
+          waterSource: 'groundwater',
+          currentCrop: 'aman',
+          previousCrop: 'jute',
+          plannedNextCrop: 'mustard',
+          growingSeason: 'rabi',
+          isPrimary: true,
+          notes: '',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }];
+      } else if (cachedFields.length > 0 && cachedFields[0].district && cachedProfile) {
+        cachedProfile.districtId = cachedFields[0].district;
+        cachedProfile.upazilaId = cachedFields[0].upazila;
+      }
+
       // Also check auth user metadata for fallback
       const { data: authData } = await supabase.auth.getUser();
       if (authData?.user) {
@@ -288,13 +358,18 @@ export async function loadFarmerProfile(
 
   const finalFields: FarmField[] = cachedFields.length > 0 ? cachedFields : [];
 
+  if (finalFields.length > 0 && finalFields[0].district) {
+    finalProfile.districtId = finalFields[0].district;
+    finalProfile.upazilaId = finalFields[0].upazila || DISTRICT_WIDE_UPAZILA;
+  }
+
   // Update local cache
   try {
-    localStorage.setItem(
+    storage.setItem(
       `${PROFILE_CACHE_KEY}_${userId || 'default'}`,
       JSON.stringify(finalProfile)
     );
-    localStorage.setItem(
+    storage.setItem(
       `${FIELDS_CACHE_KEY}_${userId || 'default'}`,
       JSON.stringify(finalFields)
     );
@@ -313,8 +388,9 @@ export async function saveFarmerProfile(
   userId?: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
+    const storage = getStorage();
     const key = `${PROFILE_CACHE_KEY}_${userId || 'default'}`;
-    const raw = localStorage.getItem(key);
+    const raw = storage.getItem(key);
     const existing = raw ? JSON.parse(raw) : DEFAULT_FARMER_PROFILE_DATA;
 
     // If Supabase is configured and user is authenticated (Supabase is source of truth)
@@ -394,10 +470,10 @@ export async function saveFarmerProfile(
       updatedAt: new Date().toISOString(),
     };
 
-    localStorage.setItem(key, JSON.stringify(updated));
+    storage.setItem(key, JSON.stringify(updated));
     try {
       if (userId && userId !== 'guest_user') {
-        localStorage.setItem(`agriorbit_farmer_profile_${userId}`, JSON.stringify({
+        storage.setItem(`agriorbit_farmer_profile_${userId}`, JSON.stringify({
           fullName: updated.fullName,
           phone: updated.phone,
           emailAlerts: updated.emailAlerts,
@@ -408,7 +484,80 @@ export async function saveFarmerProfile(
     } catch {}
 
     if (updated.primaryPriority) {
-      localStorage.setItem('agriorbit_selected_priority', updated.primaryPriority);
+      storage.setItem('agriorbit_selected_priority', updated.primaryPriority);
+    }
+
+    if (updated.districtId) {
+      // Keep local fields cache in sync with profile's updated district/upazila
+      try {
+        const rawFields = storage.getItem(`${FIELDS_CACHE_KEY}_${userId || 'default'}`);
+        if (rawFields) {
+          const cachedFieldsList: FarmField[] = JSON.parse(rawFields);
+          const dAdmin = getDistrictAdmin(updated.districtId as DistrictId);
+          const upz = updated.upazilaId && updated.upazilaId !== DISTRICT_WIDE_UPAZILA
+            ? getUpazila(updated.districtId as DistrictId, updated.upazilaId)
+            : null;
+          let touched = false;
+          for (const f of cachedFieldsList) {
+            if (f.isPrimary) {
+              f.district = updated.districtId;
+              f.districtId = updated.districtId;
+              f.upazila = updated.upazilaId || DISTRICT_WIDE_UPAZILA;
+              f.upazilaId = updated.upazilaId || DISTRICT_WIDE_UPAZILA;
+              if (dAdmin) f.division = dAdmin.division;
+              if (upz?.lat && upz?.lng) {
+                f.latitude = upz.lat;
+                f.longitude = upz.lng;
+              } else if (dAdmin?.lat && dAdmin?.lng) {
+                f.latitude = dAdmin.lat;
+                f.longitude = dAdmin.lng;
+              }
+              f.updatedAt = new Date().toISOString();
+              touched = true;
+            }
+          }
+          if (touched) {
+            storage.setItem(`${FIELDS_CACHE_KEY}_${userId || 'default'}`, JSON.stringify(cachedFieldsList));
+          }
+        }
+      } catch {}
+    }
+
+    if (updated.districtId && userId && userId !== 'guest_user') {
+      try {
+        const dAdmin = getDistrictAdmin(updated.districtId as DistrictId);
+        const upz = updated.upazilaId && updated.upazilaId !== DISTRICT_WIDE_UPAZILA
+          ? getUpazila(updated.districtId as DistrictId, updated.upazilaId)
+          : null;
+        const updatePayload: any = {
+          district: updated.districtId,
+          district_id: updated.districtId,
+          upazila: updated.upazilaId || DISTRICT_WIDE_UPAZILA,
+          upazila_id: updated.upazilaId || DISTRICT_WIDE_UPAZILA,
+          updated_at: new Date().toISOString(),
+        };
+        if (dAdmin) updatePayload.division = dAdmin.division;
+        if (upz?.lat && upz?.lng) {
+          updatePayload.latitude = upz.lat;
+          updatePayload.longitude = upz.lng;
+        } else if (dAdmin?.lat && dAdmin?.lng) {
+          updatePayload.latitude = dAdmin.lat;
+          updatePayload.longitude = dAdmin.lng;
+        }
+        await supabase.from('fields').update(updatePayload).eq('user_id', userId).eq('is_primary', true);
+        await supabase.from('farmer_fields').update(updatePayload).eq('user_id', userId).eq('is_primary', true);
+      } catch {}
+    }
+
+    if (typeof window !== 'undefined' && updated.districtId) {
+      window.dispatchEvent(
+        new CustomEvent('agriorbit_location_changed', {
+          detail: {
+            district: updated.districtId,
+            upazila: updated.upazilaId,
+          },
+        })
+      );
     }
 
     return { success: true };
@@ -426,85 +575,203 @@ export async function saveFarmField(
   userId?: string
 ): Promise<{ field: FarmField; error?: string }> {
   try {
-    const fieldToSave = { ...field, updatedAt: new Date().toISOString() };
+    let fieldToSave = { ...field, updatedAt: new Date().toISOString() };
+    fieldToSave.districtId = fieldToSave.districtId || fieldToSave.district;
+    fieldToSave.upazilaId = fieldToSave.upazilaId || fieldToSave.upazila || DISTRICT_WIDE_UPAZILA;
+    const storage = getStorage();
 
-    // Sync to Supabase if configured (Supabase is source of truth)
+    // 1. Coordinates and admin resolution
+    const dAdmin = fieldToSave.district ? getDistrictAdmin(fieldToSave.district as DistrictId) : null;
+    if (dAdmin) {
+      if (!fieldToSave.division) fieldToSave.division = dAdmin.division;
+      if (!fieldToSave.name) fieldToSave.name = `${dAdmin.nameEn} Plot 1`;
+
+      const hasSpecificUpazila = Boolean(fieldToSave.upazila && fieldToSave.upazila !== DISTRICT_WIDE_UPAZILA);
+      if (hasSpecificUpazila) {
+        const upz = getUpazila(fieldToSave.district as DistrictId, fieldToSave.upazila);
+        if (upz && upz.lat && upz.lng && (!fieldToSave.latitude || (fieldToSave.district !== 'rangpur' && fieldToSave.latitude === 25.7439))) {
+          fieldToSave.latitude = upz.lat;
+          fieldToSave.longitude = upz.lng;
+        }
+      } else if (!fieldToSave.latitude || (fieldToSave.district !== 'rangpur' && fieldToSave.latitude === 25.7439)) {
+        fieldToSave.latitude = dAdmin.lat;
+        fieldToSave.longitude = dAdmin.lng;
+      }
+    }
+
+    // 2. Sync to Supabase if configured (Supabase is single source of truth)
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
+      let resolvedId = fieldToSave.id;
+      if (!resolvedId || resolvedId.startsWith('field_')) {
+        // Query to check if the user already has an active primary field in Supabase
+        const { data: existingPrimary } = await supabase
+          .from('fields')
+          .select('id')
+          .eq('user_id', userId)
+          .eq('is_primary', true)
+          .order('updated_at', { ascending: false })
+          .limit(1);
+
+        if (existingPrimary && existingPrimary.length > 0 && existingPrimary[0].id) {
+          resolvedId = existingPrimary[0].id;
+        } else {
+          const { data: fbPrimary } = await supabase
+            .from('farmer_fields')
+            .select('id')
+            .eq('user_id', userId)
+            .eq('is_primary', true)
+            .order('updated_at', { ascending: false })
+            .limit(1);
+          if (fbPrimary && fbPrimary.length > 0 && fbPrimary[0].id) {
+            resolvedId = fbPrimary[0].id;
+          } else {
+            resolvedId = crypto.randomUUID();
+          }
+        }
+      }
+
+      fieldToSave.id = resolvedId;
+
       const baseFieldPayload: any = {
-        id: fieldToSave.id.startsWith('field_') ? undefined : fieldToSave.id,
+        id: resolvedId,
         user_id: userId,
         name: fieldToSave.name,
         division: fieldToSave.division,
         district: fieldToSave.district,
-        upazila: fieldToSave.upazila,
-        village: fieldToSave.village,
+        upazila: fieldToSave.upazila || DISTRICT_WIDE_UPAZILA,
+        village: fieldToSave.village || '',
         latitude: fieldToSave.latitude,
         longitude: fieldToSave.longitude,
-        area: fieldToSave.area,
-        unit: fieldToSave.unit,
-        elevation: fieldToSave.elevation,
-        soil_type: fieldToSave.soilType,
-        irrigation: fieldToSave.irrigation,
-        water_source: fieldToSave.waterSource,
-        current_crop: fieldToSave.currentCrop,
-        previous_crop: fieldToSave.previousCrop,
-        planned_next_crop: fieldToSave.plannedNextCrop,
-        growing_season: fieldToSave.growingSeason,
-        is_primary: fieldToSave.isPrimary,
+        area: fieldToSave.area || 1.0,
+        unit: fieldToSave.unit || 'bigha',
+        elevation: fieldToSave.elevation || 'medium_high',
+        soil_type: fieldToSave.soilType || 'loam',
+        irrigation: fieldToSave.irrigation || 'deep_tubewell',
+        water_source: fieldToSave.waterSource || 'groundwater',
+        current_crop: fieldToSave.currentCrop || 'aman',
+        previous_crop: fieldToSave.previousCrop || 'jute',
+        planned_next_crop: fieldToSave.plannedNextCrop || 'mustard',
+        growing_season: fieldToSave.growingSeason || 'rabi',
+        is_primary: fieldToSave.isPrimary ?? true,
         priority: fieldToSave.priority || 'save_water',
-        notes: fieldToSave.notes,
+        notes: fieldToSave.notes || '',
         updated_at: new Date().toISOString(),
       };
 
       const fullFieldPayload = {
         ...baseFieldPayload,
         district_id: fieldToSave.districtId || fieldToSave.district,
-        upazila_id: fieldToSave.upazilaId || fieldToSave.upazila,
+        upazila_id: fieldToSave.upazilaId || fieldToSave.upazila || DISTRICT_WIDE_UPAZILA,
       };
 
-      let { error: fErr } = await supabase.from('fields').upsert(fullFieldPayload);
+      // Ensure other fields are not primary if this is primary
+      if (fieldToSave.isPrimary) {
+        try {
+          await supabase.from('fields').update({ is_primary: false }).eq('user_id', userId).neq('id', resolvedId);
+          await supabase.from('farmer_fields').update({ is_primary: false }).eq('user_id', userId).neq('id', resolvedId);
+        } catch {}
+      }
+
+      let { data: savedRow, error: fErr } = await supabase
+        .from('fields')
+        .upsert(fullFieldPayload)
+        .select()
+        .maybeSingle();
+
       if (fErr && (fErr.code === '42703' || fErr.message?.includes('upazila_id') || fErr.message?.includes('district_id') || fErr.message?.includes('schema cache'))) {
-        console.warn('AgriOrbit: Column upazila_id/district_id missing in fields, retrying with base schema payload...');
-        const retryRes = await supabase.from('fields').upsert(baseFieldPayload);
+        const retryRes = await supabase
+          .from('fields')
+          .upsert(baseFieldPayload)
+          .select()
+          .maybeSingle();
         fErr = retryRes.error;
+        if (retryRes.data) savedRow = retryRes.data;
       }
 
       if (fErr) {
-        console.error('Failed to save field to database:', fErr.message);
-        let { error: ffErr } = await supabase.from('farmer_fields').upsert(fullFieldPayload);
+        console.warn('AgriOrbit: Falling back to farmer_fields table:', fErr.message);
+        let { data: fbSaved, error: ffErr } = await supabase
+          .from('farmer_fields')
+          .upsert(fullFieldPayload)
+          .select()
+          .maybeSingle();
         if (ffErr && (ffErr.code === '42703' || ffErr.message?.includes('upazila_id') || ffErr.message?.includes('district_id') || ffErr.message?.includes('schema cache'))) {
-          const retryFf = await supabase.from('farmer_fields').upsert(baseFieldPayload);
+          const retryFf = await supabase
+            .from('farmer_fields')
+            .upsert(baseFieldPayload)
+            .select()
+            .maybeSingle();
           ffErr = retryFf.error;
+          if (retryFf.data) fbSaved = retryFf.data;
         }
         if (ffErr) {
-          console.error('Failed to save field to fallback database:', ffErr.message);
-          return { field, error: fErr.message || ffErr.message };
+          console.error('Failed to save field to database:', fErr.message || ffErr.message);
+          return { field: fieldToSave, error: fErr.message || ffErr.message };
+        }
+        if (fbSaved?.id) fieldToSave.id = fbSaved.id;
+      } else if (savedRow?.id) {
+        fieldToSave.id = savedRow.id;
+      }
+
+      // CRITICAL SYNC TO PROFILES TABLE
+      if (fieldToSave.isPrimary && fieldToSave.district) {
+        try {
+          const profPayload: any = {
+            district_id: fieldToSave.districtId || fieldToSave.district,
+            upazila_id: fieldToSave.upazilaId || fieldToSave.upazila || null,
+            updated_at: new Date().toISOString(),
+          };
+          await supabase.from('profiles').update(profPayload).eq('id', userId);
+          await supabase.from('farmer_profiles').update(profPayload).eq('id', userId);
+        } catch (e) {
+          console.warn('Non-fatal: failed to sync field location to profiles table:', e);
         }
       }
     }
 
-    // Only update localStorage cache after Supabase save succeeds
+    // Only update localStorage cache after Supabase save succeeds (or guest)
     const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
-    const raw = localStorage.getItem(key);
+    const raw = storage.getItem(key);
     const existing: FarmField[] = raw ? JSON.parse(raw) : [];
 
-    const idx = existing.findIndex((f) => f.id === field.id);
+    const idx = existing.findIndex((f) => f.id === fieldToSave.id || (fieldToSave.isPrimary && f.isPrimary));
     let updatedList: FarmField[];
 
     if (idx >= 0) {
-      updatedList = existing.map((f) => (f.id === field.id ? fieldToSave : f));
+      updatedList = existing.map((f, i) => (i === idx ? fieldToSave : (fieldToSave.isPrimary ? { ...f, isPrimary: false } : f)));
     } else {
-      updatedList = [...existing, fieldToSave];
+      updatedList = fieldToSave.isPrimary
+        ? [...existing.map((f) => ({ ...f, isPrimary: false })), fieldToSave]
+        : [...existing, fieldToSave];
     }
 
-    if (fieldToSave.isPrimary) {
-      updatedList = updatedList.map((f) => ({
-        ...f,
-        isPrimary: f.id === fieldToSave.id,
-      }));
+    storage.setItem(key, JSON.stringify(updatedList));
+
+    // Also update profile cache
+    const pKey = `${PROFILE_CACHE_KEY}_${userId || 'default'}`;
+    const pRaw = storage.getItem(pKey);
+    if (pRaw) {
+      try {
+        const pObj = JSON.parse(pRaw);
+        pObj.districtId = fieldToSave.district;
+        pObj.upazilaId = fieldToSave.upazila;
+        storage.setItem(pKey, JSON.stringify(pObj));
+      } catch {}
     }
 
-    localStorage.setItem(key, JSON.stringify(updatedList));
+    // Broadcast location change to active React components
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('agriorbit_location_changed', {
+          detail: {
+            district: fieldToSave.district,
+            upazila: fieldToSave.upazila,
+            latitude: fieldToSave.latitude,
+            longitude: fieldToSave.longitude,
+          },
+        })
+      );
+    }
 
     return { field: fieldToSave };
   } catch (err: any) {
@@ -521,8 +788,9 @@ export async function deleteFarmField(
   userId?: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
+    const storage = getStorage();
     const key = `${FIELDS_CACHE_KEY}_${userId || 'default'}`;
-    const raw = localStorage.getItem(key);
+    const raw = storage.getItem(key);
     const existing: FarmField[] = raw ? JSON.parse(raw) : [];
 
     const updated = existing.filter((f) => f.id !== fieldId);
@@ -531,7 +799,7 @@ export async function deleteFarmField(
       updated[0].isPrimary = true;
     }
 
-    localStorage.setItem(key, JSON.stringify(updated));
+    storage.setItem(key, JSON.stringify(updated));
 
     if (isSupabaseConfigured() && userId && userId !== 'guest_user') {
       try {

@@ -418,6 +418,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setOnboardingCompleted(null);
     setIsGuest(false);
     if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('agriorbit_location_changed', {
+          detail: { district: 'rangpur' },
+        })
+      );
       window.location.hash = '';
     }
   };
