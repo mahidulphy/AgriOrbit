@@ -123,6 +123,7 @@ import {
   buildBilingualEmailHtml,
   buildBilingualEmailText,
   buildBilingualSubject,
+  buildBilingualAlertEmail,
   getDistrictNames,
   type AlertEmailItem,
 } from './bilingualEmailTemplate.ts';
@@ -164,14 +165,12 @@ export async function sendAlertEmailViaSmtp(params: {
 
     await transporter.sendMail({
       from: `"AgriOrbit" <${user}>`,
-      replyTo: user,
       to: params.to,
+      replyTo: user,
       subject: params.subject,
       text: params.text,
       html: params.html,
-      encoding: 'utf-8',
       headers: {
-        'Content-Type': 'text/html; charset=UTF-8',
         'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${user}?subject=unsubscribe>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
@@ -460,9 +459,13 @@ export async function processGenerateAlerts(options: AlertGeneratorOptions) {
     const userField = userFields.find((f) => f.id === firstAlert?.field_id);
     const dist = userField?.district || firstAlert?.district_en || 'Rangpur';
     const { nameEn, nameBn } = getDistrictNames(dist);
-    const subject = buildBilingualSubject(nameBn, nameEn, false);
-    const emailHtml = buildBilingualEmailHtml(alerts, appUrl, false);
-    const emailText = buildBilingualEmailText(alerts, appUrl, false);
+    const { subject, text: emailText, html: emailHtml } = buildBilingualAlertEmail(
+      alerts,
+      appUrl,
+      false,
+      nameBn,
+      nameEn
+    );
 
     const sendResult = await sendAlertEmailViaSmtp({
       to: userEmail,

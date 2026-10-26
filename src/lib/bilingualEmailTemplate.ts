@@ -270,8 +270,8 @@ export function buildBilingualEmailHtml(
                 <img
                   src="${appUrl}/logo.png"
                   alt="AgriOrbit"
-                  height="38"
-                  style="height: 38px; width: auto; max-height: 38px; display: block; border: 0;"
+                  width="120"
+                  style="display: block; width: 120px; max-width: 120px; height: auto; border: 0; outline: none; text-decoration: none;"
                 />
               </a>
               <p style="margin: 4px 0 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">
@@ -370,4 +370,23 @@ Your email is used solely for field alerts and can be turned off anytime in your
 
 AgriOrbit • Bangladesh Agriculture Telemetry
 `;
+}
+
+/**
+ * Returns clean, unencoded { subject, text, html } strings for nodemailer.
+ * Leaves all MIME boundary generation and quoted-printable encoding to nodemailer.
+ */
+export function buildBilingualAlertEmail(
+  alerts: AlertEmailItem[],
+  appUrl: string,
+  isTest = false,
+  districtBn?: string,
+  districtEn?: string
+): { subject: string; text: string; html: string } {
+  const distBn = districtBn || alerts[0]?.district_bn || 'বাংলাদেশ';
+  const distEn = districtEn || alerts[0]?.district_en || 'Bangladesh';
+  const subject = buildBilingualSubject(distBn, distEn, isTest);
+  const html = buildBilingualEmailHtml(alerts, appUrl, isTest);
+  const text = buildBilingualEmailText(alerts, appUrl, isTest);
+  return { subject, text, html };
 }

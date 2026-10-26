@@ -6,6 +6,7 @@ import {
   buildBilingualSubject,
   buildBilingualEmailHtml,
   buildBilingualEmailText,
+  buildBilingualAlertEmail,
   type AlertEmailItem,
 } from '../src/lib/bilingualEmailTemplate.ts';
 
@@ -215,7 +216,6 @@ export default async function handler(req: any, res?: any) {
 
     // 11. Build bilingual subject and multipart email (HTML + Plain-Text)
     const appUrl = process.env.VITE_APP_URL || process.env.APP_URL || 'https://agri-orbit.vercel.app';
-    const subject = buildBilingualSubject(distNameBn, distNameEn, true);
 
     const alertItem: AlertEmailItem = {
       ...inserted,
@@ -223,8 +223,13 @@ export default async function handler(req: any, res?: any) {
       action_en,
     };
 
-    const emailHtml = buildBilingualEmailHtml([alertItem], appUrl, true);
-    const emailText = buildBilingualEmailText([alertItem], appUrl, true);
+    const { subject, text: emailText, html: emailHtml } = buildBilingualAlertEmail(
+      [alertItem],
+      appUrl,
+      true,
+      distNameBn,
+      distNameEn
+    );
 
     try {
       const transporter = nodemailer.createTransport({
@@ -239,14 +244,12 @@ export default async function handler(req: any, res?: any) {
 
       const info = await transporter.sendMail({
         from: `"AgriOrbit" <${smtpUser}>`,
-        replyTo: smtpUser,
         to: user.email,
+        replyTo: smtpUser,
         subject,
         text: emailText,
         html: emailHtml,
-        encoding: 'utf-8',
         headers: {
-          'Content-Type': 'text/html; charset=UTF-8',
           'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${smtpUser}?subject=unsubscribe>`,
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
         },
