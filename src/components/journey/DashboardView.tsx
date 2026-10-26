@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   LayoutDashboard,
   Droplets,
@@ -34,7 +34,6 @@ import { getDistrictProfile, getUpazilaName, DISTRICT_WIDE_UPAZILA } from '../..
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
 import { ExplainWhyModal } from '../ExplainWhyModal';
-import { Header } from '../common/Header';
 import { BrandLogo } from '../common/BrandLogo';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { DataTileStatusBadge, formatBadgeDate } from '../common/DataTileStatusBadge';
@@ -300,36 +299,33 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     { id: 'explain' as const, en: 'Explain Why', bn: 'পরামর্শের কারণ', icon: HelpCircle },
   ];
 
+  const mainContentRef = useRef<HTMLDivElement>(null);
+
   const handleTabClick = (tabId: DashboardTab) => {
     setActiveTab(tabId);
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] flex flex-col font-editorial selection:bg-[#22C55E] selection:text-black">
-      {/* 0. Universal Unified Header across all pages */}
-      <Header />
-
-      <div className="flex-1 flex flex-col lg:flex-row min-h-[calc(100dvh-4rem)]">
-        {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP - 1024px+) */}
-        <aside className="hidden lg:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 sticky top-16 h-[calc(100dvh-4rem)] z-30 justify-between overflow-y-auto">
-          <div className="p-5 flex flex-col gap-6">
-            {/* App Brand Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#262626]">
-              <div className="flex items-center gap-2">
-                <LayoutDashboard className="w-4 h-4 text-[#22C55E]" />
-                <span className="font-display font-semibold text-sm text-[#FAFAFA]">
-                  {language === 'en' ? 'Field Advisory' : 'কৃষি উপদেষ্টা'}
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-[#FAFAFA] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-[#262626]">
-                {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-              </span>
-            </div>
+    <div className="h-screen w-full overflow-hidden flex bg-[#0A0A0A] text-[#FAFAFA] font-editorial selection:bg-[#22C55E] selection:text-black">
+      {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP - >=768px / md:flex) */}
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 h-screen sticky top-0 z-30 justify-between">
+        {/* Top Block: Brand & Field Context Card (Pinned at top) */}
+        <div className="p-4 lg:p-5 pb-3 shrink-0 flex flex-col gap-4 border-b border-[#262626]/50">
+          <div className="flex items-center justify-between">
+            <BrandLogo imgClassName="h-7 w-auto object-contain mix-blend-screen shrink-0" />
+            <span className="text-[10px] font-mono text-[#FAFAFA] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-[#262626]">
+              {language === 'en' ? 'Dashboard' : 'ড্যাশবোর্ড'}
+            </span>
+          </div>
 
           {/* Selected Field Context Card */}
-          <div className="p-3.5 rounded-2xl bg-[#141414] border border-[#262626] space-y-2">
+          <div className="p-3 rounded-2xl bg-[#141414] border border-[#262626] space-y-2">
             <div className="flex items-center justify-between text-[11px] font-mono text-[#A3A3A3]">
               <span className="uppercase">{language === 'en' ? 'Active Field' : 'আপনার জমি'}</span>
               <button
@@ -365,8 +361,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Navigation Links */}
+        {/* Middle Section: Navigation Links & Simulator (Scrolls internally if taller than screen) */}
+        <div className="flex-1 overflow-y-auto p-4 lg:p-5 space-y-4">
           <nav className="space-y-1">
             <span className="px-3 text-[10px] font-mono uppercase tracking-wider text-[#737373] font-semibold block mb-2">
               {language === 'en' ? 'Navigation' : 'মেনু'}
@@ -390,7 +388,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               );
             })}
 
-            {/* Direct Link to Farmer Profile & Fields */}
             <a
               href="#/profile"
               className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#FAFAFA] hover:text-white hover:bg-[#404040]/10 transition-all text-left cursor-pointer border border-[#262626] mt-2"
@@ -421,8 +418,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        {/* Sidebar Footer Utilities */}
-        <div className="p-4 border-t border-[#262626] bg-[#0A0A0A] flex flex-col gap-3">
+        {/* Sidebar Footer Utilities (Pinned at bottom) */}
+        <div className="p-4 border-t border-[#262626] bg-[#0A0A0A] shrink-0 flex flex-col gap-3">
           <div className="flex items-center justify-between gap-2">
             <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
             <button
@@ -437,42 +434,25 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </aside>
 
-      {/* 2. MOBILE DASHBOARD SUB-BAR (<1024px) */}
-      <div className="lg:hidden sticky top-16 z-30 bg-[#0A0A0A] border-b border-[#262626] px-4 py-2.5 flex items-center justify-between">
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-xs font-medium text-[#FAFAFA] flex items-center gap-2 cursor-pointer hover:border-[#404040]"
-          aria-label="Open field sections"
-        >
-          <Menu className="w-3.5 h-3.5 text-[#22C55E]" />
-          <span className="font-semibold">{DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}</span>
-          <ChevronDown className="w-3 h-3 text-[#737373]" />
-        </button>
-
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-[#A3A3A3] truncate max-w-[150px]">{locationBreadcrumb}</span>
-          <button
-            onClick={() => setWhatIfActive(!whatIfActive)}
-            className={`px-2.5 py-1 rounded-lg border text-xs font-mono cursor-pointer flex items-center gap-1 ${
-              whatIfActive ? 'bg-purple-950/60 text-[#22C55E] border-[#262626]' : 'bg-[#141414] text-[#A3A3A3] border-[#262626]'
-            }`}
-          >
-            <Sliders className="w-3 h-3 text-[#22C55E]" />
-            <span>{whatIfActive ? (language === 'en' ? 'Sim on' : 'সিম চালু') : (language === 'en' ? 'Sim' : 'সিম')}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Slide-Over Drawer */}
+      {/* 2. MOBILE SLIDE-OVER DRAWER (<768px / md:hidden) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="w-72 max-w-[85vw] bg-[#0A0A0A] h-full p-5 flex flex-col justify-between border-r border-[#262626] overflow-y-auto">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-[#262626]">
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          {/* Backdrop overlay (outside tap closes) */}
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+            aria-hidden="true"
+          />
+
+          {/* Drawer Panel */}
+          <div className="relative w-72 max-w-[85vw] bg-[#0A0A0A] h-full flex flex-col justify-between border-r border-[#262626] z-10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-200">
+            <div className="p-4 pb-3 border-b border-[#262626]/50 shrink-0 space-y-3">
+              <div className="flex items-center justify-between">
                 <BrandLogo imgClassName="h-7 w-auto object-contain mix-blend-screen shrink-0" />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-white/10 text-[#A3A3A3] hover:text-white"
+                  className="p-1.5 rounded-lg hover:bg-white/10 text-[#A3A3A3] hover:text-white cursor-pointer"
+                  aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -481,7 +461,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* Location Context */}
               <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] text-xs">
                 <span className="text-[10px] text-[#A3A3A3] font-mono uppercase block">{language === 'en' ? 'Active Field' : 'নির্বাচিত জমি'}</span>
-                <span className="font-bold text-white block mt-0.5">{locationBreadcrumb}</span>
+                <span className="font-bold text-white block mt-0.5 truncate">{locationBreadcrumb}</span>
                 <button
                   onClick={() => { setMobileMenuOpen(false); onChangeFieldLocation(); }}
                   className="text-[11px] text-[#FAFAFA] underline mt-1 block cursor-pointer"
@@ -489,47 +469,48 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   {language === 'en' ? 'Change Location' : 'এলাকা বদলান'}
                 </button>
               </div>
-
-              {/* Navigation items */}
-              <div className="space-y-1">
-                {DASHBOARD_NAV_ITEMS.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activeTab === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => handleTabClick(item.id)}
-                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                        isActive
-                          ? 'bg-[#22C55E] text-black font-bold'
-                          : 'text-[#A3A3A3] hover:text-white'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4 shrink-0" />
-                      <span>{language === 'en' ? item.en : item.bn}</span>
-                    </button>
-                  );
-                })}
-
-                <a
-                  href="#/profile"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-[#FAFAFA] hover:text-white hover:bg-[#404040]/10 transition-all text-left cursor-pointer border border-[#262626] mt-2"
-                >
-                  <User className="w-4 h-4 shrink-0 text-[#FAFAFA]" />
-                  <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'প্রোফাইল ও জমি'}</span>
-                </a>
-              </div>
             </div>
 
-            <div className="pt-2 border-t border-[#262626] flex flex-col gap-2">
-              <div className="flex justify-between items-center px-1">
-                <span className="text-xs font-mono text-slate-400">{language === 'en' ? 'Account:' : 'অ্যাকাউন্ট:'}</span>
-                <UserMenu />
+            {/* Menu Links */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-1">
+              {DASHBOARD_NAV_ITEMS.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleTabClick(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-[#22C55E] text-black font-bold'
+                        : 'text-[#A3A3A3] hover:text-white'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 shrink-0" />
+                    <span>{language === 'en' ? item.en : item.bn}</span>
+                  </button>
+                );
+              })}
+
+              <a
+                href="#/profile"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-[#FAFAFA] hover:text-white hover:bg-[#404040]/10 transition-all text-left cursor-pointer border border-[#262626] mt-2"
+              >
+                <User className="w-4 h-4 shrink-0 text-[#FAFAFA]" />
+                <span className="truncate">{language === 'en' ? 'Farmer Profile & Fields' : 'প্রোফাইল ও জমি'}</span>
+              </a>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="p-4 border-t border-[#262626] bg-[#0A0A0A] shrink-0 flex flex-col gap-3">
+              <div className="flex items-center justify-between gap-2">
+                <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
+                <UserMenu compact />
               </div>
               <button
                 onClick={() => { setMobileMenuOpen(false); onLogout(); }}
-                className="w-full py-2.5 rounded-xl bg-white/5 border border-[#262626] text-xs font-mono text-center text-[#FF5C5C] cursor-pointer"
+                className="w-full py-2.5 rounded-xl bg-white/5 border border-[#262626] text-xs font-mono text-center text-[#FF5C5C] hover:bg-[#FF5C5C]/10 cursor-pointer"
               >
                 {language === 'en' ? 'Exit to Website' : 'হোমে ফিরুন'}
               </button>
@@ -539,77 +520,86 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       )}
 
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Operational Sub-Bar (Desktop Sticky below Universal Header) */}
-        <div className="hidden lg:flex sticky top-16 z-20 h-14 border-b border-[#262626] bg-[#0A0A0A] px-6 items-center justify-between shrink-0">
-          {/* Breadcrumb & Field Identity */}
-          <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="text-[#A3A3A3]">{language === 'en' ? 'AgriOrbit' : 'এগ্রিঅরবিট'}</span>
-            <span className="text-white/30">/</span>
-            <span className="text-white font-bold">{locationBreadcrumb}</span>
-            <span className="text-white/30">/</span>
-            <span className="text-[#22C55E] capitalize">
-              {DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}
-            </span>
+      <div ref={mainContentRef} className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0 bg-[#0A0A0A]">
+        {/* Slim Dashboard Top Bar (~56px height, sticky top-0, bg #0A0A0A, border-b #262626) */}
+        <header className="sticky top-0 z-20 h-14 min-h-[56px] max-h-[56px] border-b border-[#262626] bg-[#0A0A0A] px-4 sm:px-6 flex items-center justify-between shrink-0">
+          {/* Left: Mobile hamburger + Page title / breadcrumb */}
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden p-2 rounded-lg bg-[#141414] border border-[#262626] text-[#A3A3A3] hover:text-white cursor-pointer shrink-0"
+              aria-label="Open sidebar menu"
+            >
+              <Menu className="w-4 h-4 text-[#22C55E]" />
+            </button>
+
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="font-display font-bold text-sm text-white shrink-0">
+                {language === 'en' ? 'Field Advisory' : 'কৃষি উপদেষ্টা'}
+              </span>
+              <span className="text-[#404040] hidden sm:inline">/</span>
+              <span className="text-xs text-[#A3A3A3] font-mono truncate hidden sm:inline" title={locationBreadcrumb}>
+                {locationBreadcrumb}
+              </span>
+              <span className="text-[#404040]">/</span>
+              <span className="text-xs font-semibold text-[#22C55E] truncate">
+                {DASHBOARD_NAV_ITEMS.find((t) => t.id === activeTab)?.[language === 'en' ? 'en' : 'bn']}
+              </span>
+            </div>
           </div>
 
-          {/* Quick Status Chips */}
-          <div className="flex items-center gap-3 text-xs">
+          {/* Right: Telemetry / Status Chips + Notification Bell + User Avatar */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Satellite Live Pulse Chip */}
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-mono text-slate-300">
-              <span className={`w-2 h-2 rounded-full ${whatIfActive ? 'bg-purple-400 ' : loaded.mode === 'live' ? 'bg-[#22C55E]' : 'bg-[#404040]'}`} />
+            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-mono text-slate-300">
+              <span className={`w-2 h-2 rounded-full ${whatIfActive ? 'bg-purple-400' : loaded.mode === 'live' ? 'bg-[#22C55E]' : 'bg-[#404040]'}`} />
               <span>
                 {whatIfActive
                   ? (language === 'en' ? 'Simulation Active' : 'সিমুলেশন চলছে')
                   : (() => {
                       if (loaded.mode === 'unavailable') {
-                        return language === 'en' ? `Data unavailable for ${districtName.split(' ')[0]}` : `${districtName.split(' ')[0]}-এর তথ্য পাওয়া যায়নি`;
+                        return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
                       }
                       const rawDate = loaded?.data?.fetchedAt || conditions?.to;
-                      if (!rawDate) {
-                        return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
-                      }
+                      if (!rawDate) return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
                       const dateObj = new Date(rawDate);
-                      if (isNaN(dateObj.getTime())) {
-                        return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
-                      }
+                      if (isNaN(dateObj.getTime())) return language === 'en' ? 'Data unavailable' : 'তথ্য পাওয়া যায়নি';
                       const dateStr = dateObj.toLocaleDateString(language === 'bn' ? 'bn-BD' : 'en-GB', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
                       });
                       if (loaded.mode === 'cache') {
-                        return language === 'en' ? `Cached NASA POWER data from ${dateStr}` : `সংরক্ষিত নাসা পাওয়ার তথ্য (${dateStr})`;
+                        return language === 'en' ? `Cached: ${dateStr}` : `সংরক্ষিত: ${dateStr}`;
                       }
-                      return language === 'en' ? `NASA data · ${dateStr}` : `নাসা তথ্য · ${dateStr}`;
+                      return language === 'en' ? `NASA: ${dateStr}` : `নাসা: ${dateStr}`;
                     })()}
               </span>
             </div>
 
-            {/* Coordinates */}
-            <span className="text-[#A3A3A3] font-mono text-[11px] hidden lg:inline">
-              {language === 'bn'
-                ? `${toBnDigits(fieldLat.toFixed(2))}° উ, ${toBnDigits(fieldLng.toFixed(2))}° পূ`
-                : `${fieldLat.toFixed(2)}°N, ${fieldLng.toFixed(2)}°E`}
-            </span>
-
             {/* Quick What-If Toggle */}
             <button
               onClick={() => setWhatIfActive(!whatIfActive)}
-              className={`px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                 whatIfActive
                   ? 'bg-purple-950/60 text-[#22C55E] border-[#262626] shadow-md shadow-purple-900/30'
-                  : 'bg-white/5 hover:bg-white/10 text-slate-200 border-[#262626]'
+                  : 'bg-[#141414] hover:bg-white/10 text-slate-200 border-[#262626]'
               }`}
             >
               <Sliders className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span>{language === 'en' ? 'Simulator' : 'সিমুলেটর'}</span>
+              <span className="hidden sm:inline">{language === 'en' ? 'Simulator' : 'সিমুলেটর'}</span>
               {whatIfActive && (
                 <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
               )}
             </button>
+
+            {/* Notification Bell */}
+            <NotificationBell />
+
+            {/* User Avatar */}
+            <UserMenu compact />
           </div>
-        </div>
+        </header>
 
         {/* Short Term Weather & Agronomic Risk Alert Banner */}
         <ShortTermRiskAlert
@@ -1809,7 +1799,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             selectedPriority={selectedPriority}
           />
         </main>
-      </div>
       </div>
 
       {/* 4. EXPLAIN WHY TRANSPARENCY MODAL */}
