@@ -34,11 +34,12 @@ export function HeroCard({
       {/* Header: "রংপুর · নাসা পাওয়ার" and date range */}
       <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#262626]">
         <div className="flex items-center gap-2">
-          {isLive ? (
-            <span className="h-2 w-2 rounded-full bg-[#22C55E] shrink-0" title="Live" />
-          ) : (
-            <span className="h-2 w-2 rounded-full bg-[#737373] shrink-0" />
-          )}
+          <span className="relative flex h-2 w-2 shrink-0" title={isLive ? 'Live' : 'Active'}>
+            {isLive && (
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22C55E] opacity-75" />
+            )}
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E] shadow-[0_0_6px_rgba(34,197,94,0.6)]" />
+          </span>
           <span className="font-display text-base sm:text-lg font-semibold text-[#FAFAFA]">
             {t.heroCard.place} · {lang === 'bn' ? 'নাসা পাওয়ার' : 'NASA POWER'}
           </span>
