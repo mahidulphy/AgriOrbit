@@ -132,7 +132,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       } catch {}
     }
     return {
-      data: (selectedDistrict === 'rangpur' ? BUNDLED_RANGPUR : null) as any,
+      data: BUNDLED_RANGPUR,
       mode: selectedDistrict === 'rangpur' ? 'bundled' : 'unavailable',
     };
   });
@@ -163,14 +163,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   }, [selectedDistrict, selectedUpazila, fieldLat, fieldLng]);
 
   // Derived baseline conditions & climate shift from real NASA POWER records
-  const hasData = loaded.mode !== 'unavailable' && !!loaded.data;
+  const hasData = (loaded.mode === 'live' || loaded.mode === 'cache' || (loaded.mode === 'bundled' && selectedDistrict === 'rangpur')) && !!loaded.data;
   const conditions = useMemo(
-    () => hasData ? computeConditions(loaded.data.daily, loaded.data.lat) : computeConditions(BUNDLED_RANGPUR.daily, BUNDLED_RANGPUR.lat),
-    [loaded.data.daily, loaded.data.lat]
+    () => (hasData && loaded.data) ? computeConditions(loaded.data.daily, loaded.data.lat) : computeConditions(BUNDLED_RANGPUR.daily, BUNDLED_RANGPUR.lat),
+    [hasData, loaded.data?.daily, loaded.data?.lat]
   );
 
   const fieldShift = useMemo(() => {
-    const dMonthly = hasData ? loaded.data.monthly : BUNDLED_RANGPUR.monthly;
+    const dMonthly = (hasData && loaded.data) ? loaded.data.monthly : BUNDLED_RANGPUR.monthly;
     const shiftCacheKey = selectedUpazila && selectedUpazila !== DISTRICT_WIDE_UPAZILA
       ? `agriorbit_field_shift_${selectedDistrict}_${selectedUpazila}`
       : `agriorbit_field_shift_${selectedDistrict}`;
@@ -267,7 +267,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         previousCrop: previousCrop,
         today: new Date(),
       }),
-    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data.forecast, selectedPriority, previousCrop]
+    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data?.forecast, selectedPriority, previousCrop]
   );
 
   // Ranked crops for Crop Plan & Advisory Card
@@ -314,7 +314,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   return (
     <div className="h-screen w-full overflow-hidden flex bg-[#0A0A0A] text-[#FAFAFA] font-editorial selection:bg-[#22C55E] selection:text-black">
       {/* 1. DEDICATED APPLICATION SIDEBAR (DESKTOP - >=768px / md:flex) */}
-      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 h-screen sticky top-0 z-30 justify-between">
+      <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-[#0A0A0A] border-r border-[#262626] shrink-0 h-full sticky top-0 z-30 justify-between">
         {/* Top Block: Brand & Field Context Card (Pinned at top) */}
         <div className="p-4 lg:p-5 pb-3 shrink-0 flex flex-col gap-4 border-b border-[#262626]/50">
           <div className="flex items-center justify-between">
@@ -520,7 +520,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       )}
 
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
-      <div ref={mainContentRef} className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0 bg-[#0A0A0A]">
+      <div ref={mainContentRef} className="flex-1 h-full min-h-0 overflow-y-auto flex flex-col min-w-0 bg-[#0A0A0A]">
         {/* Slim Dashboard Top Bar (~56px height, sticky top-0, bg #0A0A0A, border-b #262626) */}
         <header className="sticky top-0 z-20 h-14 min-h-[56px] max-h-[56px] border-b border-[#262626] bg-[#0A0A0A] px-4 sm:px-6 flex items-center justify-between shrink-0">
           {/* Left: Mobile hamburger + Page title / breadcrumb */}

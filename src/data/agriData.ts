@@ -3,8 +3,8 @@ import { CropData, DistrictId, DistrictInfo, FarmerPriorityId, ModisData, NasaPo
 export const DISTRICTS: Partial<Record<DistrictId, DistrictInfo>> = {
   rangpur: {
     id: 'rangpur',
-    nameEn: 'Rangpur (Demo Focus)',
-    nameBn: 'রংপুর (ডেমো ফোকাস)',
+    nameEn: 'Rangpur',
+    nameBn: 'রংপুর',
     division: 'Rangpur',
     divisionBn: 'রংপুর',
     lat: 25.7439,
@@ -24,8 +24,8 @@ export const DISTRICTS: Partial<Record<DistrictId, DistrictInfo>> = {
   },
   rajshahi: {
     id: 'rajshahi',
-    nameEn: 'Rajshahi (Barind Tract)',
-    nameBn: 'রাজশাহী (বরেন্দ্র অঞ্চল)',
+    nameEn: 'Rajshahi',
+    nameBn: 'রাজশাহী',
     division: 'Rajshahi',
     divisionBn: 'রাজশাহী',
     lat: 24.3745,
@@ -44,8 +44,8 @@ export const DISTRICTS: Partial<Record<DistrictId, DistrictInfo>> = {
   },
   khulna: {
     id: 'khulna',
-    nameEn: 'Khulna (Coastal Delta)',
-    nameBn: 'খুলনা (উপকূলীয় অঞ্চল)',
+    nameEn: 'Khulna',
+    nameBn: 'খুলনা',
     division: 'Khulna',
     divisionBn: 'খুলনা',
     lat: 22.8456,
@@ -64,8 +64,8 @@ export const DISTRICTS: Partial<Record<DistrictId, DistrictInfo>> = {
   },
   dhaka: {
     id: 'dhaka',
-    nameEn: 'Dhaka (Central Floodplain)',
-    nameBn: 'ঢাকা (কেন্দ্রীয় পললভূমি)',
+    nameEn: 'Dhaka',
+    nameBn: 'ঢাকা',
     division: 'Dhaka',
     divisionBn: 'ঢাকা',
     lat: 23.8103,

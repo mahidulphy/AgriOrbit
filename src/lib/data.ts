@@ -148,7 +148,7 @@ export async function loadLocationData(
   }
 
   return {
-    data: null as any,
+    data: BUNDLED_RANGPUR,
     mode: 'unavailable',
     error: `Data unavailable for ${targetName}`,
   };
