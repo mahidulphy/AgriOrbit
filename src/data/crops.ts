@@ -4923,7 +4923,7 @@ const BASE_SCORES = {
   mungbean: 91,
   grass_pea: 90,
   blackgram: 89,
-  chickpea: 85,
+  chickpea: 93,
   mustard: 92,
   groundnut: 86,
   sesame: 88,

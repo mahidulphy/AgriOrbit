@@ -30,6 +30,7 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../../types';
+import { CROPS_DATABASE } from '../../data/agriData';
 import { getDistrictProfile, getUpazilaName, DISTRICT_WIDE_UPAZILA } from '../../lib/location';
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
@@ -279,9 +280,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       const topKey = topPickId === 'boro' ? 'boro_rice' : topPickId === 'aus' ? 'aus_rice' : topPickId === 'aman' ? 't_aman_rice' : topPickId;
       const topIdx = list.findIndex((c) => c.id === topKey || c.id === topPickId);
       if (topIdx >= 0) {
-        const topCrop = { ...list[topIdx], suitabilityScore: engineResult.picks[0].score };
+        const topCrop = {
+          ...list[topIdx],
+          suitabilityScore: engineResult.picks[0].score,
+          suitabilityTier: engineResult.picks[0].score >= 85 ? ('high' as const) : ('moderate' as const),
+        };
         const remaining = list.filter((_, idx) => idx !== topIdx);
         return [topCrop, ...remaining];
+      }
+      const base = CROPS_DATABASE[topKey] || CROPS_DATABASE[topPickId];
+      if (base) {
+        const topCrop = {
+          ...base,
+          suitabilityScore: engineResult.picks[0].score,
+          suitabilityTier: engineResult.picks[0].score >= 85 ? ('high' as const) : ('moderate' as const),
+        };
+        return [topCrop, ...list];
       }
       return list;
     },
@@ -1649,6 +1663,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 language={language}
                 onExplainCrop={(crop) => setExplainCrop(crop)}
                 telemetry={telemetry}
+                engineResult={engineResult}
               />
 
               <SeasonRotation

@@ -11,6 +11,8 @@ import {
 import { CropData, FarmerPriorityId, Language } from '../types';
 import { getRankedCrops, SeasonFilter, type TelemetryContext } from '../lib/cropSuitability';
 import { cropById } from '../data/crops';
+import { CROPS_DATABASE } from '../data/agriData';
+import type { EngineResult } from '../lib/engine';
 import { toBnDigits } from '../lib/bilingualEmailTemplate';
 
 interface CropRecommendationProps {
@@ -19,6 +21,7 @@ interface CropRecommendationProps {
   language: Language;
   onExplainCrop: (crop: CropData) => void;
   telemetry?: TelemetryContext;
+  engineResult?: EngineResult;
 }
 
 export const CropRecommendation: React.FC<CropRecommendationProps> = ({
@@ -27,11 +30,57 @@ export const CropRecommendation: React.FC<CropRecommendationProps> = ({
   language,
   onExplainCrop,
   telemetry,
+  engineResult,
 }) => {
   const [filterSeason, setFilterSeason] = useState<SeasonFilter>('All');
   const [showAllCrops, setShowAllCrops] = useState(false);
 
-  const displayedCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason, telemetry);
+  const rawCrops = getRankedCrops(selectedPriority, secondaryPriority, filterSeason, telemetry);
+
+  const displayedCrops = React.useMemo(() => {
+    if (!engineResult || !engineResult.picks || engineResult.picks.length === 0) return rawCrops;
+    const topPick = engineResult.picks[0];
+    const topPickId = topPick.crop.id;
+    const topKey =
+      topPickId === 'boro'
+        ? 'boro_rice'
+        : topPickId === 'aus'
+        ? 'aus_rice'
+        : topPickId === 'aman'
+        ? 't_aman_rice'
+        : topPickId;
+
+    const matchesSeason =
+      filterSeason === 'All' ||
+      (topPick.season === 'rabi' && filterSeason === 'Rabi') ||
+      (topPick.season === 'kharif1' && filterSeason === 'Kharif-1') ||
+      (topPick.season === 'kharif2' && filterSeason === 'Kharif-2');
+
+    if (!matchesSeason) return rawCrops;
+
+    const topIdx = rawCrops.findIndex((c) => c.id === topKey || c.id === topPickId);
+    if (topIdx >= 0) {
+      const topCrop: CropData = {
+        ...rawCrops[topIdx],
+        suitabilityScore: topPick.score,
+        suitabilityTier: topPick.score >= 85 ? 'high' : 'moderate',
+      };
+      const remaining = rawCrops.filter((_, idx) => idx !== topIdx);
+      return [topCrop, ...remaining];
+    }
+
+    const base = CROPS_DATABASE[topKey] || CROPS_DATABASE[topPickId];
+    if (base) {
+      const topCrop: CropData = {
+        ...base,
+        suitabilityScore: topPick.score,
+        suitabilityTier: topPick.score >= 85 ? 'high' : 'moderate',
+      };
+      return [topCrop, ...rawCrops];
+    }
+
+    return rawCrops;
+  }, [rawCrops, engineResult, filterSeason]);
   const topThreeCrops = displayedCrops.slice(0, 3);
   const remainingCrops = displayedCrops.slice(3);
 
