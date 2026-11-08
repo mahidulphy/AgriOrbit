@@ -52,6 +52,7 @@ export interface StrategyCropSeason {
   agronomicRoleBn: string;
   soilHealthRoles: SoilHealthRole[];
   vulnerableSeasonRisk?: VulnerableSeasonRisk;
+  dataConfidence: 'research' | 'estimated';
 }
 
 export interface RotationStrategy {
@@ -473,6 +474,7 @@ function buildFallowSeason(seasonKey: 'rabi' | 'kharif1' | 'kharif2'): StrategyC
     agronomicRoleEn: 'Field remains unplanted; conserves zero pump costs but exposes topsoil to solar evaporation and monsoon weed growth without cover.',
     agronomicRoleBn: 'জমি অনাবাদী থাকে; কোনো সেচ খরচ হয় না তবে খোলা মাটি রোদে শুকিয়ে যায় ও বর্ষার আগাছা বাড়ে।',
     soilHealthRoles: [],
+    dataConfidence: 'research',
   };
 }
 
@@ -532,6 +534,7 @@ function buildCropSeason(
     agronomicRoleEn: roleEn,
     agronomicRoleBn: roleBn,
     soilHealthRoles: getSoilHealthRoles(crop),
+    dataConfidence: crop.data_confidence || 'research',
   };
 }
 
@@ -884,6 +887,7 @@ export function generateRotationComparison(input: ComparisonInput): {
     const hasLiveSmap = soil !== null || Boolean(distSat?.smap?.value);
     const hasKnownSoil = Boolean(input.soilType && input.soilType !== 'dont_know' && input.soilType !== 'unknown');
     const hasEstimatedCrop = crops.some((c) => {
+      if (c.dataConfidence) return c.dataConfidence === 'estimated';
       const cp = resolveCrop(c.id);
       return cp?.data_confidence === 'estimated';
     });

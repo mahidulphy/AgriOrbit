@@ -252,7 +252,7 @@ test('8. Tobacco is strictly non-recommendable and never appears in picks or rot
 });
 
 test('9. Estimated crops (Soybean, Jute, Sugarcane, Cotton) include transparent notice reason', () => {
-  const estimatedIds = ['soybean', 'jute', 'sugarcane', 'cotton'];
+  const estimatedIds = CROPS.filter((c) => c.data_confidence === 'estimated' && c.recommendable).map((c) => c.id);
   const input = {
     conditions: {
       rain30: 55,

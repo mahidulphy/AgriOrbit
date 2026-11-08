@@ -108,6 +108,22 @@ test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data 
   assert.equal(resHigh.strategies[1].confidence.reasonEn, 'NASA POWER and SMAP data available for this district, soil type known, crop values from BARI/BRRI guidance.');
   assert.equal(resHigh.strategies[1].confidence.reasonBn, 'এই জেলার NASA POWER ও SMAP তথ্য পাওয়া গেছে, মাটির ধরন জানা, ফসলের মান BARI/BRRI নির্দেশিকা থেকে।');
 
+  // Case B1: Rotation includes research-backed groundnut -> High confidence (never estimated)
+  const resGroundnut = generateRotationComparison({
+    conditions: completeConditions,
+    shift: null,
+    soil: 0.28,
+    forecast: [],
+    priority: 'save_water',
+    currentRotation: { rabi: 'groundnut', kharif1: 'fallow', kharif2: 'aman' },
+    soilType: 'clay_loam',
+    districtId: 'Rangpur',
+    districtNameEn: 'Rangpur',
+    districtNameBn: 'রংপুর',
+  });
+  assert.equal(resGroundnut.strategies[0].confidence.level, 'high', 'Groundnut must be research-backed high confidence');
+  assert.equal(resGroundnut.strategies[0].crops[0].dataConfidence, 'research');
+
   // Case B: Rotation includes estimated crop (e.g. soybean) -> Medium confidence
   const resEstimated = generateRotationComparison({
     conditions: completeConditions,
