@@ -23,6 +23,8 @@ export interface FarmField {
   currentRotationKharif1?: string;
   currentRotationKharif2?: string;
   irrigation: 'deep_tubewell' | 'shallow_tubewell' | 'canal_surface' | 'rainfed';
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
   waterSource: 'groundwater' | 'river' | 'pond' | 'rainwater';
   currentCrop: string;
   previousCrop: string;
@@ -78,6 +80,8 @@ export const DEFAULT_INITIAL_FIELD: FarmField = {
   elevation: 'medium_high',
   soilType: 'loam',
   irrigation: 'deep_tubewell',
+  irrigationAvailability: 'yes',
+  mainPurpose: 'both',
   waterSource: 'groundwater',
   currentCrop: 'aman',
   previousCrop: 'jute',

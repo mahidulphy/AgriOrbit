@@ -819,7 +819,7 @@ export const CROPS: Crop[] = [
     "category_id": "pulses",
     "parent_group": null,
     "name_en": "Lentil",
-    "name_bn": "মসুর ডাল",
+    "name_bn": "মসুর",
     "scientific_name": "Lens culinaris",
     "plant_family": "fabaceae",
     "is_legume": true,
@@ -900,10 +900,10 @@ export const CROPS: Crop[] = [
       "মার্চে তাপদাহ"
     ],
     "decision_rules_en": [
-      "মাটিতে নাইট্রোজেনের ঘাটতি থাকলে এবং রবি মৌসুমে বোরো ধানের জন্য পর্যাপ্ত সেচ না থাকলে অ্যালগরিদম মাটির স্বাস্থ্য ফিরিয়ে আনতে মসুর ডাল চাষের নির্দেশ দেবে।"
+      "মাটিতে নাইট্রোজেনের ঘাটতি থাকলে এবং রবি মৌসুমে বোরো ধানের জন্য পর্যাপ্ত সেচ না থাকলে অ্যালগরিদম মাটির স্বাস্থ্য ফিরিয়ে আনতে মসুর চাষের নির্দেশ দেবে।"
     ],
     "decision_rules_bn": [
-      "মাটিতে নাইট্রোজেনের ঘাটতি থাকলে এবং রবি মৌসুমে বোরো ধানের জন্য পর্যাপ্ত সেচ না থাকলে অ্যালগরিদম মাটির স্বাস্থ্য ফিরিয়ে আনতে মসুর ডাল চাষের নির্দেশ দেবে।"
+      "মাটিতে নাইট্রোজেনের ঘাটতি থাকলে এবং রবি মৌসুমে বোরো ধানের জন্য পর্যাপ্ত সেচ না থাকলে অ্যালগরিদম মাটির স্বাস্থ্য ফিরিয়ে আনতে মসুর চাষের নির্দেশ দেবে।"
     ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -916,18 +916,18 @@ export const CROPS: Crop[] = [
       {
         "field": "crop_characteristics",
         "file": "crop-list.txt",
-        "section": "### **মসুর ডাল (Lentil) — রবি মৌসুম (শীতকালীন)**",
+        "section": "### **মসুর (Lentil) — রবি মৌসুম (শীতকালীন)**",
         "confidence": "research"
       },
       {
         "field": "thresholds_and_rules",
         "file": "crop-rules.txt",
-        "section": "৭. মসুর ডাল",
+        "section": "৭. মসুর",
         "confidence": "research"
       }
     ],
     "nameEn": "Lentil",
-    "nameBn": "মসুর ডাল",
+    "nameBn": "মসুর",
     "family": "legume",
     "tempMin": 15,
     "tempMax": 25,
@@ -944,7 +944,7 @@ export const CROPS: Crop[] = [
     "category_id": "pulses",
     "parent_group": null,
     "name_en": "Mungbean",
-    "name_bn": "মুগডাল",
+    "name_bn": "মুগ",
     "scientific_name": "Vigna radiata",
     "plant_family": "fabaceae",
     "is_legume": true,
@@ -1026,10 +1026,10 @@ export const CROPS: Crop[] = [
       "খরিফ-১ এ দীর্ঘায়িত খরা"
     ],
     "decision_rules_en": [
-      "দক্ষিণাঞ্চলের উপকূলীয় এলাকায় আমন ধান কাটার পর মধ্যবর্তী ফাঁকা সময়ে মাটির লবণাক্ততা বৃদ্ধির ঝুঁকি থাকলে অ্যালগরিদম মুগডাল চাষের নির্দেশ দেবে।"
+      "দক্ষিণাঞ্চলের উপকূলীয় এলাকায় আমন ধান কাটার পর মধ্যবর্তী ফাঁকা সময়ে মাটির লবণাক্ততা বৃদ্ধির ঝুঁকি থাকলে অ্যালগরিদম মুগ চাষের নির্দেশ দেবে।"
     ],
     "decision_rules_bn": [
-      "দক্ষিণাঞ্চলের উপকূলীয় এলাকায় আমন ধান কাটার পর মধ্যবর্তী ফাঁকা সময়ে মাটির লবণাক্ততা বৃদ্ধির ঝুঁকি থাকলে অ্যালগরিদম মুগডাল চাষের নির্দেশ দেবে।"
+      "দক্ষিণাঞ্চলের উপকূলীয় এলাকায় আমন ধান কাটার পর মধ্যবর্তী ফাঁকা সময়ে মাটির লবণাক্ততা বৃদ্ধির ঝুঁকি থাকলে অ্যালগরিদম মুগ চাষের নির্দেশ দেবে।"
     ],
     "nasa_data_link_en": "NASA POWER agro-climatology (temperature, precipitation, solar radiation) & NASA SMAP surface soil moisture monitoring",
     "nasa_data_link_bn": "নাসা পাওয়ার কৃষি-আবহাওয়া (তাপমাত্রা, বৃষ্টিপাত, সৌর বিকিরণ) ও নাসা স্ম্যাপ মাটির আর্দ্রতা ডেটা",
@@ -1042,18 +1042,18 @@ export const CROPS: Crop[] = [
       {
         "field": "crop_characteristics",
         "file": "crop-list.txt",
-        "section": "### **মুগডাল (Mungbean) — খরিফ-১ (বসন্ত/গ্রীষ্ম) এবং খরিফ-২ (শরৎ)**",
+        "section": "### **মুগ (Mungbean) — খরিফ-১ (বসন্ত/গ্রীষ্ম) এবং খরিফ-২ (শরৎ)**",
         "confidence": "research"
       },
       {
         "field": "thresholds_and_rules",
         "file": "crop-rules.txt",
-        "section": "১০. মুগডাল",
+        "section": "১০. মুগ",
         "confidence": "research"
       }
     ],
     "nameEn": "Mungbean",
-    "nameBn": "মুগডাল",
+    "nameBn": "মুগ",
     "family": "legume",
     "tempMin": 25,
     "tempMax": 35,
@@ -1070,7 +1070,7 @@ export const CROPS: Crop[] = [
     "category_id": "pulses",
     "parent_group": null,
     "name_en": "Grass Pea",
-    "name_bn": "খেসারি ডাল",
+    "name_bn": "খেসারি",
     "scientific_name": "Lathyrus sativus",
     "plant_family": "fabaceae",
     "is_legume": true,
@@ -1167,18 +1167,18 @@ export const CROPS: Crop[] = [
       {
         "field": "crop_characteristics",
         "file": "crop-list.txt",
-        "section": "### **খেসারি ডাল (Grass Pea) — রবি মৌসুম (শীতকালীন)**",
+        "section": "### **খেসারি (Grass Pea) — রবি মৌসুম (শীতকালীন)**",
         "confidence": "research"
       },
       {
         "field": "thresholds_and_rules",
         "file": "crop-rules.txt",
-        "section": "৬. খেসারি ডাল",
+        "section": "৬. খেসারি",
         "confidence": "research"
       }
     ],
     "nameEn": "Grass Pea",
-    "nameBn": "খেসারি ডাল",
+    "nameBn": "খেসারি",
     "family": "legume",
     "tempMin": 15,
     "tempMax": 25,

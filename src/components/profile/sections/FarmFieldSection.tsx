@@ -366,7 +366,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
             {/* Irrigation Source */}
             <div>
               <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
-                {isBn ? 'সেচ সুবিধা ও ব্যবস্থা' : 'Irrigation Infrastructure'}
+                {isBn ? 'সেচ ব্যবস্থা' : 'Irrigation Infrastructure'}
               </label>
               <select
                 value={field.irrigation || 'shallow_tubewell'}
@@ -382,6 +382,54 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
                     {isBn ? opt.bn : opt.en}
                   </option>
                 ))}
+              </select>
+            </div>
+
+            {/* Irrigation Availability (Yes / Limited / No) */}
+            <div>
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+                {isBn ? 'সেচ পানির প্রাপ্যতা (ঐচ্ছিক)' : 'Irrigation Available? (Optional)'}
+              </label>
+              <select
+                value={field.irrigationAvailability || 'yes'}
+                onChange={(e) => {
+                  onChange({ irrigationAvailability: e.target.value as 'yes' | 'limited' | 'no' });
+                }}
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
+              >
+                <option value="yes" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'হ্যাঁ (পর্যাপ্ত সেচ ব্যবস্থা আছে)' : 'Yes (Adequate irrigation available)'}
+                </option>
+                <option value="limited" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'সীমিত (দূরবর্তী বা ব্যয়বহুল সেচ)' : 'Limited (Scarce / high pump cost)'}
+                </option>
+                <option value="no" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'না (সম্পূর্ণ বৃষ্টির ওপর নির্ভরশীল)' : 'No (Rainfed only / no pump access)'}
+                </option>
+              </select>
+            </div>
+
+            {/* Main Goal for Selling / Cultivation */}
+            <div>
+              <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+                {isBn ? 'ফসলের মূল উদ্দেশ্য (ঐচ্ছিক)' : 'Main Goal for Harvest? (Optional)'}
+              </label>
+              <select
+                value={field.mainPurpose || 'both'}
+                onChange={(e) => {
+                  onChange({ mainPurpose: e.target.value as 'home_food' | 'local_market' | 'both' });
+                }}
+                className="w-full min-h-[44px] px-3 py-2 bg-[#0A0A0A] border border-[#262626] rounded-lg text-[#FAFAFA] text-sm focus:outline-none focus:border-[#22C55E] cursor-pointer"
+              >
+                <option value="both" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'উভয়ই (পারিবারিক খাবার ও বাড়তি বিক্রি)' : 'Both (Household food & market surplus)'}
+                </option>
+                <option value="home_food" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'পারিবারিক খাবার (পুষ্টি ও খোরাকি)' : 'Home food (Family nutrition & storage)'}
+                </option>
+                <option value="local_market" className="bg-[#141414] text-[#FAFAFA]">
+                  {isBn ? 'স্থানীয় বাজারে বিক্রি (নগদ আয়)' : 'Local market (Commercial cash income)'}
+                </option>
               </select>
             </div>
           </div>

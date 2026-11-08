@@ -15,6 +15,8 @@ export interface FarmerProfile {
   currentRotationKharif1?: string;
   currentRotationKharif2?: string;
   irrigation: 'deep_tubewell' | 'shallow_tubewell' | 'canal_surface' | 'rainfed';
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
   previousCrops: string[];
   pastDamages: string[];
   pastDamageNotes: string;
@@ -80,6 +82,8 @@ export const DEFAULT_FARMER_PROFILE: FarmerProfile = {
   landElevation: 'medium_high',
   soilType: 'loam',
   irrigation: 'deep_tubewell',
+  irrigationAvailability: 'yes',
+  mainPurpose: 'both',
   previousCrops: [],
   currentRotationRabi: 'boro',
   currentRotationKharif1: 'fallow',

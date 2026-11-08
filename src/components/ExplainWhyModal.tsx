@@ -222,6 +222,30 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     </tr>
                   )}
 
+                  {/* Farmer Irrigation Constraint */}
+                  {deltas.irrigationConstraintPenalty !== undefined && deltas.irrigationConstraintPenalty !== 0 && (
+                    <tr>
+                      <td className="py-2.5 pr-3">
+                        <span className="text-[#FAFAFA] font-medium block">
+                          {language === 'en' ? 'Irrigation Availability Constraint' : 'সেচ সুবিধার সীমাবদ্ধতা'}
+                        </span>
+                        <span className="text-[11px] text-[#737373]">
+                          {deltas.irrigationConstraintPenalty < 0
+                            ? (language === 'en' ? 'High/moderate water demand penalized due to no or limited irrigation' : 'সেচ সুবিধা না থাকায় বা সীমিত থাকায় নম্বর কাটা হয়েছে')
+                            : (language === 'en' ? 'Drought-hardy low water crop bonus for rainfed field' : 'বৃষ্টি নির্ভর জমিতে মানানসই স্বল্প পানির ফসল হিসেবে বোনাস')}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">
+                        {language === 'en' ? 'Farmer Constraint' : 'চাষির সুবিধা'}
+                      </td>
+                      <td className={`py-2.5 px-3 text-right font-semibold ${
+                        deltas.irrigationConstraintPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'
+                      }`}>
+                        {fmtPt(deltas.irrigationConstraintPenalty)}
+                      </td>
+                    </tr>
+                  )}
+
 
 
                   {/* Farmer Priority Steering */}

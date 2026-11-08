@@ -73,6 +73,8 @@ interface DashboardViewProps {
     kharif2?: string;
   };
   soilType?: string;
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
   language: Language;
   onLanguageChange: (lang: Language) => void;
   onChangeFieldLocation: () => void;
@@ -109,6 +111,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   previousCrop,
   currentRotation = { rabi: 'boro', kharif1: 'fallow', kharif2: 'aman' },
   soilType = 'loam',
+  irrigationAvailability = 'yes',
+  mainPurpose = 'both',
   language,
   onLanguageChange,
   onChangeFieldLocation,
@@ -288,6 +292,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       soilMoisture: activeSoil,
       maxTemp: activeMaxTemp,
       waterBalance: conditions.rainUnavailable ? null : activeWaterBalance,
+      irrigationAvailability,
+      mainPurpose,
       sentinel1FloodedCroplandPct: districtSat?.sentinel1?.floodedCroplandPct ?? null,
       sentinel2Ndvi10m: sentinel2Data?.ndvi10m ?? null,
       sentinel2AnomalyPct: sentinel2Data?.anomalyPct ?? null,
@@ -298,7 +304,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       insatHeatConfirmed: insatData?.heatSpikeConfirmed ?? false,
       nisarSoilMoisture200m: nisarData?.soilMoisture200m ?? null,
     }),
-    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, conditions.rainUnavailable, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex, insatData?.lstC, insatData?.heatSpikeConfirmed, nisarData?.soilMoisture200m]
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, conditions.rainUnavailable, irrigationAvailability, mainPurpose, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex, insatData?.lstC, insatData?.heatSpikeConfirmed, nisarData?.soilMoisture200m]
   );
 
   // Active simulated/real conditions
@@ -323,8 +329,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         priority: mapPriority(selectedPriority),
         previousCrop: previousCrop,
         today: new Date(),
+        irrigationAvailability,
+        mainPurpose,
       }),
-    [simulatedConditions, activeSoil, fieldShift, loaded.data?.forecast, selectedPriority, previousCrop]
+    [simulatedConditions, activeSoil, fieldShift, loaded.data?.forecast, selectedPriority, previousCrop, irrigationAvailability, mainPurpose]
   );
 
   // Ranked crops for Crop Plan & Advisory Card
@@ -766,8 +774,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 {/* Main Action Headline */}
                 <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug">
                   {language === 'en'
-                    ? `Plant ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} (${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn}) as Primary Anchor Crop`
-                    : `আসন্ন রবি মৌসুমে প্রধান ফসল হিসেবে ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} (${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn}) চাষ করুন`}
+                    ? `Plant ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} (${(rankedCrops[0] ?? { nameBn: 'মসুর' }).nameBn}) as Primary Anchor Crop`
+                    : `আসন্ন রবি মৌসুমে প্রধান ফসল হিসেবে ${(rankedCrops[0] ?? { nameBn: 'মসুর' }).nameBn} (${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn}) চাষ করুন`}
                 </h2>
 
                 {/* Why It Matters & Next Step Grid */}
@@ -781,7 +789,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
                       {language === 'en'
                         ? `NASA SMAP satellite snapshot records topsoil moisture at ${(activeSoil !== null ? activeSoil.toFixed(2) : 'N/A')} m³/m³ ${conditions.rainUnavailable ? 'with 30-day precipitation data unavailable' : `with 30-day precipitation of ${Math.round(activeRain)} mm`}. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} requires significantly fewer supplemental irrigations than flood-irrigated winter Boro rice, reducing diesel pumping and conserving precious groundwater according to BARI guidelines.`
-                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil !== null ? `${toBnDigits(activeSoil.toFixed(2))} m³/m³` : 'তথ্য নেই'} ${conditions.rainUnavailable ? '(৩০ দিনের বৃষ্টিপাতের তথ্য সাময়িকভাবে অনুপলব্ধ)' : `এবং ৩০ দিনের মোট বৃষ্টিপাত ${toBnDigits(Math.round(activeRain))} মিমি`}। বারি নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে সেচের পানি অনেক কম লাগে, ফলে পাম্পের তেল খরচ বাঁচে এবং ভূগর্ভস্থ পানি সংরক্ষিত থাকে।`}
+                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil !== null ? `${toBnDigits(activeSoil.toFixed(2))} m³/m³` : 'তথ্য নেই'} ${conditions.rainUnavailable ? '(৩০ দিনের বৃষ্টিপাতের তথ্য সাময়িকভাবে অনুপলব্ধ)' : `এবং ৩০ দিনের মোট বৃষ্টিপাত ${toBnDigits(Math.round(activeRain))} মিমি`}। বারি নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর' }).nameBn} চাষে সেচের পানি অনেক কম লাগে, ফলে পাম্পের তেল খরচ বাঁচে এবং ভূগর্ভস্থ পানি সংরক্ষিত থাকে।`}
                     </p>
                   </div>
 
@@ -1780,6 +1788,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 forecast={loaded.data?.forecast ?? BUNDLED_RANGPUR.forecast}
                 currentRotation={currentRotation}
                 soilType={soilType}
+                irrigationAvailability={irrigationAvailability}
+                mainPurpose={mainPurpose}
                 isSimulating={whatIfActive}
               />
             </div>

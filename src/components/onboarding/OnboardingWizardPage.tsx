@@ -813,6 +813,10 @@ export const OnboardingWizardPage: React.FC = () => {
               onCurrentRotationKharif1Change={setCurrentRotationKharif1}
               currentRotationKharif2={currentRotationKharif2}
               onCurrentRotationKharif2Change={setCurrentRotationKharif2}
+              irrigationAvailability={field.irrigationAvailability || 'yes'}
+              onIrrigationAvailabilityChange={(val) => handleFieldChange({ irrigationAvailability: val })}
+              mainPurpose={field.mainPurpose || 'both'}
+              onMainPurposeChange={(val) => handleFieldChange({ mainPurpose: val })}
               isBn={isBn}
               showPlannedNext={false}
               errors={fieldErrors}

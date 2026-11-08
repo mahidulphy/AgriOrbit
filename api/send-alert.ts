@@ -122,7 +122,6 @@ export default async function handler(req: any, res?: any) {
     const now = Date.now();
     const cooldownMs = 5 * 60 * 1000;
 
-    // A. Check in-memory rate limit map first
     const lastMemorySent = testAlertRateLimit.get(user.id);
     if (lastMemorySent && now - lastMemorySent < cooldownMs) {
       const remainingMinutes = Math.ceil((cooldownMs - (now - lastMemorySent)) / 60000);
@@ -130,29 +129,6 @@ export default async function handler(req: any, res?: any) {
         ok: false,
         error: `একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait ${remainingMinutes} minute(s) before sending another test alert.`,
       });
-    }
-
-    // B. Check persistent profiles.last_test_alert_at if column exists
-    try {
-      const { data: profile } = await supabaseAdmin
-        .from('profiles')
-        .select('last_test_alert_at')
-        .eq('id', user.id)
-        .maybeSingle();
-
-      if (profile?.last_test_alert_at) {
-        const lastDbSent = new Date(profile.last_test_alert_at).getTime();
-        if (now - lastDbSent < cooldownMs) {
-          testAlertRateLimit.set(user.id, lastDbSent);
-          const remainingMinutes = Math.ceil((cooldownMs - (now - lastDbSent)) / 60000);
-          return sendJson(429, {
-            ok: false,
-            error: `একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait ${remainingMinutes} minute(s) before sending another test alert.`,
-          });
-        }
-      }
-    } catch {
-      // Column may not exist on remote DB; in-memory cooldown ensures safety
     }
 
     // 6. Resolve user's primary field or district
@@ -263,14 +239,6 @@ export default async function handler(req: any, res?: any) {
 
       // 12. Update rate-limit timestamps upon successful dispatch
       testAlertRateLimit.set(user.id, Date.now());
-      try {
-        await supabaseAdmin
-          .from('profiles')
-          .update({ last_test_alert_at: new Date().toISOString() })
-          .eq('id', user.id);
-      } catch {
-        // Non-fatal if column does not exist
-      }
 
       return sendJson(200, {
         ok: true,

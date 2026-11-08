@@ -21,7 +21,7 @@ export const RULES = {
 };
 
 export type Priority = 'water' | 'soil' | 'cost' | 'risk' | 'income' | 'harvest' | 'food';
-export type Source = 'BARI' | 'BRRI' | 'Research' | 'Estimated' | 'POWER' | 'SMAP' | 'OpenMeteo' | 'Priority';
+export type Source = 'BARI' | 'BRRI' | 'Research' | 'Estimated' | 'POWER' | 'SMAP' | 'OpenMeteo' | 'Priority' | 'Farmer';
 
 export type ReasonCode =
   | 'base'
@@ -43,6 +43,7 @@ export type ReasonCode =
   | 'priFlood'
   | 'priIncome'
   | 'priFood'
+  | 'irrigationConstraint'
   | 'estimatedNotice';
 
 export interface InactiveRule {
@@ -164,6 +165,8 @@ export interface EngineInput {
   priority: Priority;
   today?: Date;
   previousCrop?: string;
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
 }
 
 export interface EngineResult {
@@ -300,6 +303,23 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
     case 'food':
       if (crop.is_staple) add('priFood', 8, 'Priority', {});
       break;
+  }
+
+  // 8b. Farmer constraints: Irrigation Availability
+  if (inp.irrigationAvailability === 'no') {
+    if (crop.water === 'high' || crop.id === 'boro') {
+      add('irrigationConstraint', -25, 'Farmer', { level: 'no', water: crop.water });
+    } else if (crop.water === 'medium') {
+      add('irrigationConstraint', -10, 'Farmer', { level: 'no', water: crop.water });
+    } else if (crop.water === 'low') {
+      add('irrigationConstraint', 6, 'Farmer', { level: 'no', water: crop.water });
+    }
+  } else if (inp.irrigationAvailability === 'limited') {
+    if (crop.water === 'high' || crop.id === 'boro') {
+      add('irrigationConstraint', -15, 'Farmer', { level: 'limited', water: crop.water });
+    } else if (crop.water === 'low') {
+      add('irrigationConstraint', 4, 'Farmer', { level: 'limited', water: crop.water });
+    }
   }
 
   const score = clamp(r.reduce((a, x) => a + x.delta, 0), 0, 100);

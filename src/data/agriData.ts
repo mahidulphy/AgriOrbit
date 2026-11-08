@@ -525,7 +525,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   quick_harvest: {
     priority: 'quick_harvest',
     summaryEn: 'Fast-turnaround 3-crop sequence. Selects short-duration varieties (Mustard 80d, Mungbean 65d) to free up land quickly and avoid climatic hazards.',
-    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী চক্র। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ডাল ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
+    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী চক্র। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
     estimatedWaterSavingPct: 42,
     soilHealthGainPct: 40,
     seasons: [
@@ -581,7 +581,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
         monthsBn: 'মার্চ – জুন',
         crop: CROPS_DATABASE['mungbean'],
         agronomicRoleEn: 'Secondary protein staple and soil replenisher before main monsoon cereal.',
-        agronomicRoleBn: 'পুষ্টিকর মুগ ডাল পরিবারের প্রোটিনের চাহিদা মেটায় এবং মাটিকে সতেজ করে।',
+        agronomicRoleBn: 'পুষ্টিকর মুগ পরিবারের প্রোটিনের চাহিদা মেটায় এবং মাটিকে সতেজ করে।',
       },
       {
         seasonEn: 'Kharif-2 (Monsoon)',

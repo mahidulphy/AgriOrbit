@@ -55,6 +55,8 @@ interface SeasonRotationProps {
     kharif2?: string;
   };
   soilType?: string;
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
   isSimulating?: boolean;
 }
 
@@ -72,6 +74,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
   forecast,
   currentRotation,
   soilType,
+  irrigationAvailability = 'yes',
+  mainPurpose = 'both',
   isSimulating = false,
 }) => {
   const isBn = language === 'bn';
@@ -108,6 +112,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
       districtId: selectedDistrict,
       districtNameEn: district.nameEn,
       districtNameBn: district.nameBn,
+      irrigationAvailability,
+      mainPurpose,
     });
   }, [
     conditions,
@@ -121,6 +127,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
     selectedDistrict,
     district.nameEn,
     district.nameBn,
+    irrigationAvailability,
+    mainPurpose,
   ]);
 
   // Active strategy tab: 'recommended' by default, or 'current', or 'alternative'
@@ -381,6 +389,27 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                           {isBn ? strategy.summary.riskLevelBn : strategy.summary.riskLevelEn}
                         </span>
                       </div>
+
+                      {/* Confidence Level & Reason */}
+                      <div className="pt-2 border-t border-[#262626]/80 flex flex-col gap-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[#737373]">{isBn ? 'নির্ভরযোগ্যতা:' : 'Confidence:'}</span>
+                          <span
+                            className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
+                              strategy.confidence.level === 'high'
+                                ? 'bg-[#22C55E]/15 text-[#22C55E]'
+                                : strategy.confidence.level === 'medium'
+                                ? 'bg-amber-500/15 text-amber-400'
+                                : 'bg-rose-500/15 text-rose-400'
+                            }`}
+                          >
+                            {isBn ? strategy.confidence.levelBn : strategy.confidence.levelEn}
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-[#A3A3A3] font-sans line-clamp-2" title={isBn ? strategy.confidence.reasonBn : strategy.confidence.reasonEn}>
+                          {isBn ? strategy.confidence.reasonBn : strategy.confidence.reasonEn}
+                        </p>
+                      </div>
                     </div>
                   </div>
 
@@ -450,6 +479,31 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             </div>
           </div>
 
+          {/* Strategy Confidence Banner */}
+          <div className="p-3.5 rounded-xl bg-[#0A0A0A] border border-[#262626] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
+              <span className="font-mono text-xs uppercase font-bold text-[#FAFAFA]">
+                {isBn ? 'নির্ভরযোগ্যতা:' : 'Confidence Level:'}
+              </span>
+              <span
+                className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase tracking-wider ${
+                  activeStrategy.confidence.level === 'high'
+                    ? 'bg-[#22C55E]/15 text-[#22C55E] border border-[#22C55E]/30'
+                    : activeStrategy.confidence.level === 'medium'
+                    ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
+                    : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
+                }`}
+              >
+                {isBn ? activeStrategy.confidence.levelBn : activeStrategy.confidence.levelEn}
+              </span>
+            </div>
+            <div className="text-xs text-[#A3A3A3] font-sans">
+              <span className="font-semibold text-[#FAFAFA] font-mono">{isBn ? 'কেন এই নির্ভরযোগ্যতা? ' : 'Why this confidence? '}</span>
+              {isBn ? activeStrategy.confidence.reasonBn : activeStrategy.confidence.reasonEn}
+            </div>
+          </div>
+
           {/* 3-Season Journey Sequence Cards */}
           <div>
             <h4 className="font-mono text-xs uppercase tracking-wider text-[#A3A3A3] mb-4 flex items-center gap-2">
@@ -490,6 +544,54 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                           </span>
                         )}
                       </div>
+
+                      {/* Soil-Health Roles Badges */}
+                      {cropSeason.soilHealthRoles && cropSeason.soilHealthRoles.length > 0 && (
+                        <div className="space-y-1 mb-2.5">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {cropSeason.soilHealthRoles.map((role) => (
+                              <span
+                                key={role.id}
+                                title={isBn ? role.descBn : role.descEn}
+                                className={`text-[10px] font-mono px-2 py-0.5 rounded border font-semibold ${role.badgeClass}`}
+                              >
+                                {isBn ? role.labelBn : role.labelEn}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="text-[11px] text-[#A3A3A3] font-sans leading-tight">
+                            {isBn ? cropSeason.soilHealthRoles[0].descBn : cropSeason.soilHealthRoles[0].descEn}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Vulnerable Season Risk Flag (Strategy A) */}
+                      {cropSeason.vulnerableSeasonRisk && (
+                        <div
+                          className={`p-3 rounded-lg border text-xs mb-3 space-y-1.5 ${
+                            cropSeason.vulnerableSeasonRisk.severity === 'high'
+                              ? 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                              : cropSeason.vulnerableSeasonRisk.severity === 'medium'
+                              ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
+                              : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
+                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                            <span>
+                              {isBn ? 'ঝুঁকি সতর্কতা:' : 'Risk Flag:'}{' '}
+                              {isBn ? cropSeason.vulnerableSeasonRisk.titleBn : cropSeason.vulnerableSeasonRisk.titleEn}
+                            </span>
+                          </div>
+                          <p className="text-[11px] leading-relaxed text-[#FAFAFA]/90 font-sans">
+                            {isBn ? cropSeason.vulnerableSeasonRisk.reasonBn : cropSeason.vulnerableSeasonRisk.reasonEn}
+                          </p>
+                          <div className="pt-1 border-t border-white/10 text-[10px] font-mono text-[#A3A3A3]">
+                            <span className="text-[#FAFAFA] font-semibold">{isBn ? 'নাসার উপাত্ত প্রমাণ:' : 'NASA Telemetry:'} </span>
+                            {isBn ? cropSeason.vulnerableSeasonRisk.evidenceBn : cropSeason.vulnerableSeasonRisk.evidenceEn}
+                          </div>
+                        </div>
+                      )}
 
                       {/* Crop Name & Score */}
                       <div className="flex items-baseline justify-between gap-2 mb-1">

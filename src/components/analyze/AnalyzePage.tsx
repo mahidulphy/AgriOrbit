@@ -36,6 +36,8 @@ export function AnalyzePage() {
     kharif2: 'aman',
   });
   const [soilType, setSoilType] = useState<string>('loam');
+  const [irrigationAvailability, setIrrigationAvailability] = useState<'yes' | 'limited' | 'no'>('yes');
+  const [mainPurpose, setMainPurpose] = useState<'home_food' | 'local_market' | 'both'>('both');
   const [farmerName, setFarmerName] = useState<string>('');
 
   // Authentication & profile loading states
@@ -68,6 +70,8 @@ export function AnalyzePage() {
             });
           }
           if (gf.soilType) setSoilType(gf.soilType);
+          if (gf.irrigationAvailability) setIrrigationAvailability(gf.irrigationAvailability);
+          if (gf.mainPurpose) setMainPurpose(gf.mainPurpose);
           if (gf.district) {
             setLocation({
               district: gf.district as DistrictId,
@@ -146,6 +150,8 @@ export function AnalyzePage() {
           });
         }
         if (active.soilType) setSoilType(active.soilType);
+        if (active.irrigationAvailability) setIrrigationAvailability(active.irrigationAvailability);
+        if (active.mainPurpose) setMainPurpose(active.mainPurpose);
       }
       setLocation({
         district: targetDistrict,
@@ -294,6 +300,8 @@ export function AnalyzePage() {
       previousCrop={previousCrop}
       currentRotation={currentRotation}
       soilType={soilType}
+      irrigationAvailability={irrigationAvailability}
+      mainPurpose={mainPurpose}
       language={lang}
       onLanguageChange={handleLanguageChange}
       onChangeFieldLocation={() => {

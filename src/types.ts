@@ -103,6 +103,7 @@ export interface ScoreDeltas {
   optimalSowingBonus: number;
   heatPenalty: number;
   waterDeficitPenalty: number;
+  irrigationConstraintPenalty?: number;
   sentinel1FloodPenalty?: number;
   sentinel2StressPenalty?: number;
   jaxaDroughtPenalty?: number;

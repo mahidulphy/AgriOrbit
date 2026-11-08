@@ -17,6 +17,10 @@ export interface CropHistorySectionProps {
   onCurrentRotationKharif1Change?: (val: string) => void;
   currentRotationKharif2?: string;
   onCurrentRotationKharif2Change?: (val: string) => void;
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  onIrrigationAvailabilityChange?: (val: 'yes' | 'limited' | 'no') => void;
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
+  onMainPurposeChange?: (val: 'home_food' | 'local_market' | 'both') => void;
   isBn: boolean;
   showPlannedNext?: boolean;
   errors?: { currentCrop?: string; previousCrop?: string };
@@ -46,6 +50,10 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
   onCurrentRotationKharif1Change,
   currentRotationKharif2 = 'aman',
   onCurrentRotationKharif2Change,
+  irrigationAvailability = 'yes',
+  onIrrigationAvailabilityChange,
+  mainPurpose = 'both',
+  onMainPurposeChange,
   isBn,
   showPlannedNext = false,
   errors,
@@ -289,6 +297,61 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
           {errors?.previousCrop && (
             <p className="text-xs text-[#EF4444] mt-1 font-mono">{errors.previousCrop}</p>
           )}
+        </div>
+      </div>
+
+      {/* Optional Farmer Constraints: Irrigation & Selling Purpose */}
+      <div className="pt-4 mt-2 border-t border-[#262626]/70 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+            {isBn ? 'সেচ পানির প্রাপ্যতা (ঐচ্ছিক)' : 'Irrigation Available? (Optional)'}
+          </label>
+          <select
+            value={irrigationAvailability}
+            onChange={(e) => onIrrigationAvailabilityChange?.(e.target.value as 'yes' | 'limited' | 'no')}
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none cursor-pointer"
+          >
+            <option value="yes" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'হ্যাঁ (পর্যাপ্ত সেচ সুবিধা আছে)' : 'Yes (Adequate irrigation available)'}
+            </option>
+            <option value="limited" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'সীমিত (দূরবর্তী বা ব্যয়বহুল সেচ)' : 'Limited (Scarce / high pump cost)'}
+            </option>
+            <option value="no" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'না (সম্পূর্ণ বৃষ্টির ওপর নির্ভরশীল)' : 'No (Rainfed only / no pump access)'}
+            </option>
+          </select>
+          <p className="text-[11px] font-mono text-[#737373] mt-1">
+            {isBn
+              ? 'সেচ না থাকলে বোরো ইত্যাদি অতিরিক্ত পানি চাওয়া ফসলে নম্বর কমবে।'
+              : 'Penalises high-water crops (Boro etc.) if irrigation is limited or absent.'}
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
+            {isBn ? 'উৎপাদনের মূল উদ্দেশ্য (ঐচ্ছিক)' : 'Main Goal for Harvest? (Optional)'}
+          </label>
+          <select
+            value={mainPurpose}
+            onChange={(e) => onMainPurposeChange?.(e.target.value as 'home_food' | 'local_market' | 'both')}
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-lg bg-[#0A0A0A] border border-[#262626] text-[#FAFAFA] text-sm focus:border-[#22C55E] focus:outline-none cursor-pointer"
+          >
+            <option value="both" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'উভয়ই (পারিবারিক খাদ্য ও বিক্রি)' : 'Both (Home food & local market)'}
+            </option>
+            <option value="home_food" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'পারিবারিক খাবার (পুষ্টি ও খোরাকি)' : 'Home food (Family nutrition)'}
+            </option>
+            <option value="local_market" className="bg-[#141414] text-[#FAFAFA]">
+              {isBn ? 'স্থানীয় বাজারে বিক্রি (নগদ আয়)' : 'Local market (Cash income)'}
+            </option>
+          </select>
+          <p className="text-[11px] font-mono text-[#737373] mt-1">
+            {isBn
+              ? 'পরামর্শের ব্যাখ্যায় প্রাসঙ্গিক প্রেক্ষাপট হিসেবে ব্যবহৃত হয়।'
+              : 'Used as agronomic advisory context without fake market pricing.'}
+          </p>
         </div>
       </div>
 

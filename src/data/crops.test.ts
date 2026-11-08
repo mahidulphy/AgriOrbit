@@ -101,6 +101,7 @@ test('Crop Knowledge Base: Backward compatibility and ID resolution', () => {
   assert.equal(resolveCropId('বোরো ধান'), 'boro');
   assert.equal(resolveCropId('রোপা আমন'), 'aman');
   assert.equal(resolveCropId('গম'), 'wheat');
+  assert.equal(resolveCropId('মসুর'), 'lentil');
   assert.equal(resolveCropId('মসুর ডাল'), 'lentil');
   assert.equal(resolveCropId('পাট'), 'jute');
 

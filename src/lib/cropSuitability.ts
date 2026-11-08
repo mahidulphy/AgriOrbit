@@ -36,6 +36,8 @@ export interface TelemetryContext {
   soilMoisture?: number | null; // m³/m³
   maxTemp?: number; // °C
   waterBalance?: number | null; // rain30 - ET0 in mm
+  irrigationAvailability?: 'yes' | 'limited' | 'no';
+  mainPurpose?: 'home_food' | 'local_market' | 'both';
   sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
   sentinel2Ndvi10m?: number | null; // 10m field NDVI (ESA Sentinel-2 MSI)
   sentinel2AnomalyPct?: number | null; // % deviation from baseline NDVI
@@ -53,6 +55,7 @@ export interface ScoreDeltas {
   optimalSowingBonus: number;
   heatPenalty: number;
   waterDeficitPenalty: number;
+  irrigationConstraintPenalty?: number;
   sentinel1FloodPenalty: number;
   sentinel2StressPenalty: number;
   jaxaDroughtPenalty: number;
@@ -384,8 +387,56 @@ function evaluateCropWithNasa(
         `নিয়ম ET-04: বেশি বাষ্পীভবনের (${wBal.toFixed(0)} মিমি) কারণে সেচনির্ভর ফসলে ৫ নম্বর কাটা হয়েছে।`,
       );
     }
-  
-    
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // RULE 4B: FARMER CONSTRAINTS (Irrigation Availability & Goal)
+  // ─────────────────────────────────────────────────────────────
+  if (telemetry?.irrigationAvailability === 'no') {
+    if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice' || crop.id === 'boro') {
+      const penalty = -25;
+      score += penalty;
+      deltas.irrigationConstraintPenalty = penalty;
+      dynamicRulesEn.push('Rule IRR-01: No irrigation infrastructure reported; high-water crop heavily penalized (-25 pts) to prevent crop failure.');
+      dynamicRulesBn.push('নিয়ম IRR-01: সেচ সুবিধা না থাকায় অতিরিক্ত সেচ নির্ভর ফসলে ২৫ নম্বর কাটা হয়েছে।');
+    } else if (crop.waterRequirementEn === 'Moderate') {
+      const penalty = -10;
+      score += penalty;
+      deltas.irrigationConstraintPenalty = penalty;
+      dynamicRulesEn.push('Rule IRR-02: Rainfed constraint applies moderate penalty (-10 pts) for moderate-water crops.');
+      dynamicRulesBn.push('নিয়ম IRR-02: সম্পূর্ণ বৃষ্টি নির্ভর জমিতে মাঝারি সেচ নির্ভর ফসলে ১০ নম্বর কমানো হয়েছে।');
+    } else if (crop.waterRequirementEn === 'Low') {
+      const bonus = 6;
+      score += bonus;
+      deltas.irrigationConstraintPenalty = bonus;
+      dynamicRulesEn.push('Rule IRR-03: Low-water drought-hardy crop awarded +6 bonus for rainfed field fit.');
+      dynamicRulesBn.push('নিয়ম IRR-03: সেচবিহীন জমিতে মানানসই স্বল্প পানির খরা-সহনশীল ফসল হিসেবে +৬ নম্বর যোগ হয়েছে।');
+    }
+  } else if (telemetry?.irrigationAvailability === 'limited') {
+    if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice' || crop.id === 'boro') {
+      const penalty = -15;
+      score += penalty;
+      deltas.irrigationConstraintPenalty = penalty;
+      dynamicRulesEn.push('Rule IRR-01: Limited/costly irrigation reported; high-water crop penalized (-15 pts).');
+      dynamicRulesBn.push('নিয়ম IRR-01: সীমিত/ব্যয়বহুল সেচ সুবিধার কারণে উচ্চ সেচ নির্ভর ফসলে ১৫ নম্বর কাটা হয়েছে।');
+    } else if (crop.waterRequirementEn === 'Low') {
+      const bonus = 4;
+      score += bonus;
+      deltas.irrigationConstraintPenalty = bonus;
+      dynamicRulesEn.push('Rule IRR-03: Low-water crop awarded +4 bonus for limited irrigation fit.');
+      dynamicRulesBn.push('নিয়ম IRR-03: সীমিত সেচে মানানসই স্বল্প পানির ফসল হিসেবে +৪ নম্বর যোগ হয়েছে।');
+    }
+  }
+
+  if (telemetry?.mainPurpose === 'home_food') {
+    dynamicObservationsEn.push('Farmer production goal: Household food & nutritional security.');
+    dynamicObservationsBn.push('চাষির মূল লক্ষ্য: পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা।');
+  } else if (telemetry?.mainPurpose === 'local_market') {
+    dynamicObservationsEn.push('Farmer production goal: Local market cash sale & commercial income.');
+    dynamicObservationsBn.push('চাষির মূল লক্ষ্য: স্থানীয় হাটে-বাজারে বিক্রি ও নগদ আয়।');
+  } else if (telemetry?.mainPurpose === 'both') {
+    dynamicObservationsEn.push('Farmer production goal: Balanced household consumption and market surplus.');
+    dynamicObservationsBn.push('চাষির মূল লক্ষ্য: পারিবারিক খাবারের পাশাপাশি বাড়তি ফসল বিক্রি।');
   }
 
 // ─────────────────────────────────────────────────────────────
@@ -578,7 +629,7 @@ export const PRIORITY_INFLUENCE: Record<FarmerPriorityId, { en: string; bn: stri
   },
   quick_harvest: {
     en: 'Quick Harvest boost: ultra-fast turnaround crops (<=75 days like Mungbean, Mustard) gain up to +6 to free land rapidly.',
-    bn: 'দ্রুত ফসল তোলার প্রভাব: খুব কম সময়ে ওঠা ফসল (মুগ ডাল, সরিষা) জমি তাড়াতাড়ি খালি করার জন্য সর্বোচ্চ +৬ নম্বর পায়।',
+    bn: 'দ্রুত ফসল তোলার প্রভাব: খুব কম সময়ে ওঠা ফসল (মুগ, সরিষা) জমি তাড়াতাড়ি খালি করার জন্য সর্বোচ্চ +৬ নম্বর পায়।',
   },
   family_food: {
     en: 'Food Security boost: daily household staples (rice, wheat, pulses) gain +5 points for securing family nutrition.',
