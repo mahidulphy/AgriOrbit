@@ -27,7 +27,7 @@ export const ShortTermRiskAlert: React.FC<ShortTermRiskAlertProps> = ({
   upazilaName = 'Mithapukur',
   lat = 25.58,
   lng = 89.27,
-  soilMoisture = 0.22,
+  soilMoisture = null,
   priority = 'save_water',
   onDismiss,
   className = '',

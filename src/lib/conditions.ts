@@ -39,31 +39,62 @@ export function hargreavesEt0(tMax: number, tMin: number, latDeg: number, date: 
 }
 
 export function computeConditions(daily: DailyData, lat: number, days = 30): Conditions {
-  // Only use days where every variable exists.
-  const keys = Object.keys(daily.T2M_MAX)
-    .filter((k) => daily.T2M_MIN[k] !== undefined && daily.PRECTOTCORR[k] !== undefined && daily.RH2M[k] !== undefined)
-    .sort()
-    .slice(-days);
+  const now = new Date();
+  const currentYear = now.getFullYear();
+
+  // Guard against NASA sentinel values (-999, negative precipitation, or out-of-range values)
+  // and ensure dates are within the recent observation window (current year or immediately preceding year within 60 days)
+  const allValidKeys = Object.keys(daily?.T2M_MAX ?? {})
+    .filter((k) => {
+      const year = parseInt(k.slice(0, 4), 10);
+      if (isNaN(year) || year < currentYear - 1 || year > currentYear + 1) return false;
+      const tMax = daily.T2M_MAX[k];
+      const tMin = daily.T2M_MIN?.[k];
+      const rain = daily.PRECTOTCORR?.[k];
+      const rh = daily.RH2M?.[k];
+      return (
+        tMax !== undefined && tMax > -900 &&
+        tMin !== undefined && tMin > -900 &&
+        rain !== undefined && rain >= 0 && rain < 500 &&
+        rh !== undefined && rh >= 0 && rh <= 100
+      );
+    })
+    .sort();
+
+  const keys = allValidKeys.slice(-days);
+
+  if (keys.length === 0) {
+    return {
+      rain30: 0,
+      rainUnavailable: true,
+      tMax30: 0,
+      tMaxAvg: 0,
+      rh: 0,
+      et0: 0,
+      et0Total: 0,
+      waterBalance: 0,
+      from: 'N/A',
+      to: 'N/A',
+    };
+  }
 
   const et0s = keys.map((k) => hargreavesEt0(daily.T2M_MAX[k], daily.T2M_MIN[k], lat, new Date(iso(k))));
   
-  // Guard against NASA sentinel values (-999, negative precipitation)
   const validRainValues = keys.map((k) => {
     const val = daily.PRECTOTCORR[k];
-    return val !== undefined && val >= 0 ? val : 0;
+    return val !== undefined && val >= 0 && val < 500 ? val : 0;
   });
 
-  let rawRain = sum(validRainValues);
+  const rawRain = sum(validRainValues);
   let isRainUnavailable = false;
 
-  // Sanity check: If 30-day rain > 1200 mm, flag as data unavailable or log error
-  if (rawRain > 2500) {
-    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 2500 mm physical ceiling for period. Using district baseline.`);
+  // Sanity check: If 30-day rain > 1200 mm, flag as data anomaly or unavailable
+  if (rawRain > 1200) {
+    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 1200 mm physical ceiling for period.`);
     isRainUnavailable = true;
-    rawRain = 35; // typical winter baseline
   }
 
-  const rain30 = rawRain;
+  const rain30 = isRainUnavailable ? 0 : rawRain;
   const et0Total = sum(et0s);
   // Net water balance = (Rainfall - ET0). If Rainfall < ET0, it is strictly negative (deficit).
   const waterBalance = rain30 - et0Total;

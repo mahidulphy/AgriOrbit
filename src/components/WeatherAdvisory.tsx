@@ -63,7 +63,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   upazilaName = 'Mithapukur',
   lat = 25.58,
   lng = 89.27,
-  soilMoisture = 0.22,
+  soilMoisture = null,
   priority = 'save_water',
   language = 'en',
   onDismiss,
@@ -81,7 +81,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   const smapRecord = districtSat?.smap ?? null;
   const sentinel1Record = districtSat?.sentinel1 ?? null;
   const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination';
-  const effectiveSoilMoisture = (soilMoisture !== undefined && soilMoisture !== null) ? soilMoisture : (smapRecord?.value ?? 0.22);
+  const effectiveSoilMoisture = (soilMoisture !== undefined) ? soilMoisture : (smapRecord && !isSoilFlaggedWater ? smapRecord.value : null);
 
   // Instant deterministic initial advisory from bundled snapshot to guarantee zero blank screens
   const defaultInitialAdvisory = useMemo(() => {
@@ -301,8 +301,8 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                   </span>
                 </div>
               </div>
-            )}
-
+            )}
+
             {/* 3 SCIENTIFIC TILES */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
               {/* TILE 1: NASA POWER (precipitation) Observation */}
@@ -392,13 +392,13 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                   <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
                     <DataTileStatusBadge
                       sourceName="NASA SMAP"
-                      status={smapRecord ? (isSmapFresh ? 'daily' : 'snapshot') : 'unavailable'}
+                      status={smapRecord && !isSoilFlaggedWater ? (isSmapFresh ? 'daily' : 'snapshot') : 'unavailable'}
                       customLabel={
-                        smapRecord
+                        smapRecord && !isSoilFlaggedWater
                           ? (isEn
                               ? `NASA SMAP · observed ${formatBadgeDate(smapRecord.date, 'en')} (${smapRecord.pass})`
                               : `নাসা স্ম্যাপ · পর্যবেক্ষণ ${formatBadgeDate(smapRecord.date, 'bn')} (${smapRecord.pass})`)
-                          : (isEn ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')
+                          : (isEn ? 'NASA SMAP · Data unavailable' : 'নাসা স্ম্যাপ · তথ্য নেই')
                       }
                       language={language}
                     />
@@ -411,10 +411,10 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
 
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="font-mono text-2xl font-bold text-white">
-                      {smapRecord ? (
+                      {smapRecord && !isSoilFlaggedWater ? (
                         `${smapRecord.value.toFixed(2)} m³/m³`
                       ) : (
-                        <span className="text-base text-slate-400 font-normal">{isEn ? 'No data' : 'তথ্য নেই'}</span>
+                        <span className="text-base text-slate-400 font-normal">{isEn ? 'Data unavailable' : 'তথ্য নেই'}</span>
                       )}
                     </span>
                     {isSoilFlaggedWater && (
@@ -440,10 +440,8 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
                 <div className="pt-2.5 mt-3 border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#A3A3A3]">
                   <span>{isEn ? 'Status' : 'অবস্থা'}</span>
                   <span className={isSoilFlaggedWater ? 'text-amber-400 font-semibold' : 'text-white'}>
-                    {!smapRecord
-                      ? (isEn ? 'No data' : 'তথ্য নেই')
-                      : isSoilFlaggedWater
-                      ? (isEn ? 'Uncertain' : 'অনিশ্চিত')
+                    {!smapRecord || isSoilFlaggedWater
+                      ? (isEn ? 'Data unavailable' : 'তথ্য নেই')
                       : (isEn ? activeAdvisory.fieldCondition.smapStatusLabelEn : activeAdvisory.fieldCondition.smapStatusLabelBn)}
                   </span>
                 </div>

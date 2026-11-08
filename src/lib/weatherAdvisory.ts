@@ -101,9 +101,9 @@ export interface WeatherAdvisoryResult {
 
   // Field Condition
   fieldCondition: {
-    soilMoistureStatus: 'High' | 'Moderate' | 'Low';
-    soilMoistureStatusBn: 'উচ্চ' | 'মাঝারি' | 'কম';
-    soilMoistureValue: number;
+    soilMoistureStatus: 'High' | 'Moderate' | 'Low' | 'Unobserved';
+    soilMoistureStatusBn: 'উচ্চ' | 'মাঝারি' | 'কম' | 'অনুপলব্ধ';
+    soilMoistureValue: number | null;
     smapStatusLabelEn: string;
     smapStatusLabelBn: string;
     rootZoneInsightEn: string;
@@ -140,7 +140,7 @@ export interface WeatherAdvisoryResult {
 export interface AdvisoryRuleContext {
   gpm: GpmObservationResult;
   forecast: WeatherForecastResult;
-  soilMoisture: number; // SMAP m³/m³ (e.g. 0.18, 0.26, 0.32)
+  soilMoisture: number | null; // SMAP m³/m³ (or null if unobserved / flagged)
   sentinel1FloodedCroplandPct?: number | null;
   sentinel2Ndvi10m?: number | null;
   sentinel2AnomalyPct?: number | null;
@@ -186,14 +186,21 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const upazila = context.upazilaName ?? 'Selected Field';
 
   // Determine Soil Moisture Tier
-  let soilMoistureStatus: 'High' | 'Moderate' | 'Low' = 'Moderate';
-  let soilMoistureStatusBn: 'উচ্চ' | 'মাঝারি' | 'কম' = 'মাঝারি';
+  let soilMoistureStatus: 'High' | 'Moderate' | 'Low' | 'Unobserved' = 'Moderate';
+  let soilMoistureStatusBn: 'উচ্চ' | 'মাঝারি' | 'কম' | 'অনুপলব্ধ' = 'মাঝারি';
   let smapLabelEn = 'Optimal Range (0.20–0.28 m³/m³)';
   let smapLabelBn = 'অনুকূল মাত্রা (০.২০–০.২৮ m³/m³)';
   let rootZoneInsightEn = 'Root-zone moisture is sufficient for moderate-demand vegetation.';
   let rootZoneInsightBn = 'মাটির মূলস্তরে উদ্ভিদের জন্য পর্যাপ্ত আর্দ্রতা রয়েছে।';
 
-  if (soilMoisture >= thresholds.soilMoistureHigh) {
+  if (soilMoisture === null || soilMoisture === undefined) {
+    soilMoistureStatus = 'Unobserved';
+    soilMoistureStatusBn = 'অনুপলব্ধ';
+    smapLabelEn = 'Data unavailable for this location (SMAP retrieval flagged or unobserved)';
+    smapLabelBn = 'এই এলাকার জন্য তথ্য অপ্রাপ্য (এসএমএপি উপাত্ত অমিল)';
+    rootZoneInsightEn = 'Root-zone moisture is currently unobserved by satellite pass.';
+    rootZoneInsightBn = 'উপগ্রহ থেকে মাটির মূলস্তরের আর্দ্রতার তথ্য পাওয়া যায়নি।';
+  } else if (soilMoisture >= thresholds.soilMoistureHigh) {
     soilMoistureStatus = 'High';
     soilMoistureStatusBn = 'উচ্চ';
     smapLabelEn = 'High / Near-Saturation (> 0.28 m³/m³)';
@@ -208,6 +215,9 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     rootZoneInsightEn = 'Root-zone moisture is depleted; un-irrigated topsoil dries out rapidly.';
     rootZoneInsightBn = 'মাটির মূলস্তরে রস কম; সেচবিহীন জমি দ্রুত শুকিয়ে যায়।';
   }
+
+  const soilMoistureStr = soilMoisture !== null && soilMoisture !== undefined ? soilMoisture.toFixed(2) : 'N/A';
+  const soilMoistureBnStr = soilMoisture !== null && soilMoisture !== undefined ? toBnDigits(soilMoisture.toFixed(2)) : 'তথ্য অপ্রাপ্য';
 
   // Evaluate Rule Conditions
   const isForecastHeavyRain =
@@ -237,8 +247,12 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
   let recommendedActionEn = STRINGS.en.weatherAdvisory.actions.proceedRoutineOperations;
   let recommendedActionBn = STRINGS.bn.weatherAdvisory.actions.proceedRoutineOperations;
-  let agronomicRationaleEn = STRINGS.en.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoisture.toFixed(2));
-  let agronomicRationaleBn = STRINGS.bn.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoisture.toFixed(2));
+  let agronomicRationaleEn = soilMoisture !== null && soilMoisture !== undefined
+    ? STRINGS.en.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoistureStr)
+    : `Precipitation forecast (~${forecast.totalRain7dMm} mm) is within safe agronomic parameters for routine operations.`;
+  let agronomicRationaleBn = soilMoisture !== null && soilMoisture !== undefined
+    ? STRINGS.bn.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoistureBnStr)
+    : `বৃষ্টিপাতের পূর্বাভাস (~${toBnDigits(forecast.totalRain7dMm)} মিমি) স্বাভাবিক কৃষি কাজের জন্য অনুকূল রয়েছে।`;
   let cropSpecificNoteEn: string | undefined;
   let cropSpecificNoteBn: string | undefined;
 
@@ -260,8 +274,10 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     {
       parameter: 'Root-Zone Soil Moisture (NASA SMAP)',
       source: 'NASA SMAP',
-      observedValue: `${soilMoisture.toFixed(2)} m³/m³ (${soilMoistureStatus})`,
-      thresholdCondition: `soilMoisture ${soilMoisture.toFixed(2)} ${soilMoisture >= thresholds.soilMoistureHigh ? '>' : '≤'} soilMoistureHigh ${thresholds.soilMoistureHigh}`,
+      observedValue: soilMoisture !== null && soilMoisture !== undefined ? `${soilMoisture.toFixed(2)} m³/m³ (${soilMoistureStatus})` : 'Data unavailable',
+      thresholdCondition: soilMoisture !== null && soilMoisture !== undefined
+        ? `soilMoisture ${soilMoisture.toFixed(2)} ${soilMoisture >= thresholds.soilMoistureHigh ? '>' : '≤'} soilMoistureHigh ${thresholds.soilMoistureHigh}`
+        : 'Unobserved',
       satisfied: soilMoistureStatus === 'High',
     },
     {
@@ -289,8 +305,12 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
     recommendedActionEn = STRINGS.en.weatherAdvisory.actions.avoidIrrigationDrainage;
     recommendedActionBn = STRINGS.bn.weatherAdvisory.actions.avoidIrrigationDrainage;
-    agronomicRationaleEn = STRINGS.en.weatherAdvisory.rationales.saturatedRisk(forecast.totalRain7dMm, soilMoisture.toFixed(2));
-    agronomicRationaleBn = STRINGS.bn.weatherAdvisory.rationales.saturatedRisk(forecast.totalRain7dMm, soilMoisture.toFixed(2));
+    agronomicRationaleEn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.en.weatherAdvisory.rationales.saturatedRisk(forecast.totalRain7dMm, soilMoistureStr)
+      : `Open-Meteo forecasts ~${forecast.totalRain7dMm} mm of rain. Any supplemental water risks standing waterlogging.`;
+    agronomicRationaleBn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.bn.weatherAdvisory.rationales.saturatedRisk(forecast.totalRain7dMm, soilMoistureBnStr)
+      : `ওপেন-মেটিও পূর্বাভাস দিচ্ছে আগামী ৭ দিনে প্রায় ${forecast.totalRain7dMm} মিমি বৃষ্টি হতে পারে। বাড়তি পানি দিলে জলাবদ্ধতার ঝুঁকি থাকে।`;
 
     if (season === 'Kharif-2') {
       cropSpecificNoteEn = STRINGS.en.weatherAdvisory.cropNotes.amanDelaySeedbeds;
@@ -316,8 +336,12 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
     recommendedActionEn = STRINGS.en.weatherAdvisory.actions.delayPlannedIrrigation;
     recommendedActionBn = STRINGS.bn.weatherAdvisory.actions.delayPlannedIrrigation;
-    agronomicRationaleEn = STRINGS.en.weatherAdvisory.rationales.naturalRecharge(forecast.totalRain7dMm, soilMoisture.toFixed(2));
-    agronomicRationaleBn = STRINGS.bn.weatherAdvisory.rationales.naturalRecharge(forecast.totalRain7dMm, soilMoisture.toFixed(2));
+    agronomicRationaleEn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.en.weatherAdvisory.rationales.naturalRecharge(forecast.totalRain7dMm, soilMoistureStr)
+      : `Incoming ${forecast.totalRain7dMm} mm forecast will replenish root-zone moisture naturally.`;
+    agronomicRationaleBn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.bn.weatherAdvisory.rationales.naturalRecharge(forecast.totalRain7dMm, soilMoistureBnStr)
+      : `আসন্ন ${toBnDigits(forecast.totalRain7dMm)} মিমি বৃষ্টি মাটির আর্দ্রতা প্রাকৃতিকভাবে পূরণ করবে।`;
 
     cropSpecificNoteEn = STRINGS.en.weatherAdvisory.cropNotes.naturalRechargeTilling;
     cropSpecificNoteBn = STRINGS.bn.weatherAdvisory.cropNotes.naturalRechargeTilling;
@@ -359,8 +383,12 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
     recommendedActionEn = STRINGS.en.weatherAdvisory.actions.scheduleLightIrrigationMulch;
     recommendedActionBn = STRINGS.bn.weatherAdvisory.actions.scheduleLightIrrigationMulch;
-    agronomicRationaleEn = STRINGS.en.weatherAdvisory.rationales.drySpellDeficit(forecast.totalRain7dMm, gpm.recentRain7dMm, soilMoisture.toFixed(2));
-    agronomicRationaleBn = STRINGS.bn.weatherAdvisory.rationales.drySpellDeficit(forecast.totalRain7dMm, gpm.recentRain7dMm, soilMoisture.toFixed(2));
+    agronomicRationaleEn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.en.weatherAdvisory.rationales.drySpellDeficit(forecast.totalRain7dMm, gpm.recentRain7dMm, soilMoistureStr)
+      : `Forecast indicates only ~${forecast.totalRain7dMm} mm over 7 days with recent rainfall deficit (${gpm.recentRain7dMm} mm).`;
+    agronomicRationaleBn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.bn.weatherAdvisory.rationales.drySpellDeficit(forecast.totalRain7dMm, gpm.recentRain7dMm, soilMoistureBnStr)
+      : `সামনের ৭ দিনে মাত্র ~${toBnDigits(forecast.totalRain7dMm)} মিমি বৃষ্টির সম্ভাবনা আর সম্প্রতি বৃষ্টিও কম হয়েছে (${toBnDigits(gpm.recentRain7dMm)} মিমি)।`;
 
     cropSpecificNoteEn = STRINGS.en.weatherAdvisory.cropNotes.droughtSensitiveMicroIrrigation;
     cropSpecificNoteBn = STRINGS.bn.weatherAdvisory.cropNotes.droughtSensitiveMicroIrrigation;
@@ -378,8 +406,12 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
     recommendedActionEn = STRINGS.en.weatherAdvisory.actions.proceedRoutineOperations;
     recommendedActionBn = STRINGS.bn.weatherAdvisory.actions.proceedRoutineOperations;
-    agronomicRationaleEn = STRINGS.en.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoisture.toFixed(2));
-    agronomicRationaleBn = STRINGS.bn.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoisture.toFixed(2));
+    agronomicRationaleEn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.en.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoistureStr)
+      : `Precipitation forecast (~${forecast.totalRain7dMm} mm) is within safe agronomic parameters for routine operations.`;
+    agronomicRationaleBn = soilMoisture !== null && soilMoisture !== undefined
+      ? STRINGS.bn.weatherAdvisory.rationales.favorableBalance(forecast.totalRain7dMm, soilMoistureBnStr)
+      : `বৃষ্টিপাতের পূর্বাভাস (~${toBnDigits(forecast.totalRain7dMm)} মিমি) স্বাভাবিক কৃষি কাজের জন্য অনুকূল রয়েছে।`;
   }
 
   // Rule transparency triggers list
@@ -387,7 +419,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`Rule SAR-01: Sentinel-1 SAR detected ${sentinel1FloodPct.toFixed(1)}% cropland flooded (>10% threshold).`] : []),
     `${ruleId}: ${titleEn}`,
     `Precipitation Condition: Forecast ${forecast.totalRain7dMm} mm (Threshold: ${isForecastHeavyRain ? '≥ ' + thresholds.heavyRain7dMm : 'Normal'} mm)`,
-    `Field Moisture Condition: SMAP ${soilMoisture.toFixed(2)} m³/m³ classified as ${soilMoistureStatus}`,
+    `Field Moisture Condition: ${soilMoisture !== null && soilMoisture !== undefined ? `SMAP ${soilMoisture.toFixed(2)} m³/m³ classified as ${soilMoistureStatus}` : 'SMAP satellite observation unavailable'}`,
     `Cropping Season Context: ${season} in ${upazila}`,
   ];
 
@@ -395,7 +427,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`নিয়ম SAR-01: সেন্টিনেল-১ রাডারে ${sentinel1FloodPct.toFixed(1)}% জমিতে জলাবদ্ধতা শনাক্ত হয়েছে (>১০% সীমা)।`] : []),
     `${ruleId}: ${titleBn}`,
     `বৃষ্টিপাত পরিস্থিতি: পূর্বাভাস ${forecast.totalRain7dMm} মিমি`,
-    `মাটির আর্দ্রতা পরিস্থিতি: এসএমএপি ${soilMoisture.toFixed(2)} m³/m³ (${soilMoistureStatusBn})`,
+    `মাটির আর্দ্রতা পরিস্থিতি: ${soilMoisture !== null && soilMoisture !== undefined ? `এসএমএপি ${toBnDigits(soilMoisture.toFixed(2))} m³/m³ (${soilMoistureStatusBn})` : 'এসএমএপি উপগ্রহ তথ্য অপ্রাপ্য'}`,
     `মৌসুমী প্রেক্ষাপট: ${season} (${upazila})`,
   ];
 
@@ -539,7 +571,7 @@ export async function getWeatherAdvisoryForLocation(
   districtId: DistrictId | string,
   lat?: number,
   lng?: number,
-  soilMoisture = 0.22,
+  soilMoisture: number | null = null,
   farmerPriority?: FarmerPriorityId,
   options?: {
     upazilaName?: string;

@@ -48,6 +48,7 @@ import {
 import { UserMenu } from '../auth/UserMenu';
 import { NotificationBell } from '../notifications/NotificationBell';
 import { loadLocationData, loadDistrict, BUNDLED_RANGPUR, type LoadedData } from '../../lib/data';
+import type { LocationCache } from '../../lib/power';
 import { computeConditions } from '../../lib/conditions';
 import { computeFieldShift } from '../../lib/fieldShift';
 import { runEngine, type Priority } from '../../lib/engine';
@@ -134,14 +135,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         const cachedStr = localStorage.getItem(cacheKey);
         if (cachedStr) {
           const cachedObj = JSON.parse(cachedStr);
-          if (cachedObj.data) {
-            return { data: cachedObj.data, mode: 'cache', sourceNote: cachedObj.cachedAt };
+          const dataObj = (cachedObj?.daily ? cachedObj : cachedObj?.data) as LocationCache;
+          if (dataObj && dataObj.daily) {
+            return {
+              data: dataObj,
+              mode: 'cache',
+              sourceNote: `Cached · ${formatBadgeDate(dataObj.fetchedAt, 'en')}`,
+            };
           }
         }
       } catch {}
     }
     return {
-      data: BUNDLED_RANGPUR,
+      data: selectedDistrict === 'rangpur' ? BUNDLED_RANGPUR : null,
       mode: selectedDistrict === 'rangpur' ? 'bundled' : 'unavailable',
     };
   });
@@ -158,10 +164,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       })
       .catch((err) => {
         if (!active) return;
-        console.warn('Dashboard data fetch failed, falling back to bundled dataset:', err);
+        console.warn('Dashboard data fetch failed, no substitute district data is used:', err);
         setLoaded({
-          data: BUNDLED_RANGPUR,
-          mode: 'bundled',
+          data: selectedDistrict === 'rangpur' ? BUNDLED_RANGPUR : null,
+          mode: selectedDistrict === 'rangpur' ? 'bundled' : 'unavailable',
+          error: `Live data temporarily unavailable for ${upazilaName || districtName}`,
         });
         setIsLoadingData(false);
       });
@@ -169,14 +176,48 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     return () => {
       active = false;
     };
-  }, [selectedDistrict, selectedUpazila, fieldLat, fieldLng]);
+  }, [selectedDistrict, selectedUpazila, fieldLat, fieldLng, upazilaName, districtName]);
+
+  const handleRetryFetch = () => {
+    setIsLoadingData(true);
+    loadLocationData(selectedDistrict, selectedUpazila, fieldLat, fieldLng, false)
+      .then((res) => {
+        setLoaded(res);
+        setIsLoadingData(false);
+      })
+      .catch((err) => {
+        console.warn('Retry fetch failed:', err);
+        setLoaded({
+          data: selectedDistrict === 'rangpur' ? BUNDLED_RANGPUR : null,
+          mode: selectedDistrict === 'rangpur' ? 'bundled' : 'unavailable',
+          error: `Live data temporarily unavailable for ${upazilaName || districtName}`,
+        });
+        setIsLoadingData(false);
+      });
+  };
 
   // Derived baseline conditions & climate shift from real NASA POWER records
   const hasData = (loaded.mode === 'live' || loaded.mode === 'cache' || (loaded.mode === 'bundled' && selectedDistrict === 'rangpur')) && !!loaded.data;
-  const conditions = useMemo(
-    () => (hasData && loaded.data) ? computeConditions(loaded.data.daily, loaded.data.lat) : computeConditions(BUNDLED_RANGPUR.daily, BUNDLED_RANGPUR.lat),
-    [hasData, loaded.data?.daily, loaded.data?.lat]
-  );
+  const conditions = useMemo(() => {
+    if (hasData && loaded.data) {
+      return computeConditions(loaded.data.daily, loaded.data.lat);
+    }
+    if (selectedDistrict === 'rangpur') {
+      return computeConditions(BUNDLED_RANGPUR.daily, BUNDLED_RANGPUR.lat);
+    }
+    return {
+      rain30: 0,
+      rainUnavailable: true,
+      tMax30: 0,
+      tMaxAvg: 0,
+      rh: 0,
+      et0: 0,
+      et0Total: 0,
+      waterBalance: 0,
+      from: 'N/A',
+      to: 'N/A',
+    };
+  }, [hasData, loaded.data?.daily, loaded.data?.lat, selectedDistrict]);
 
   const fieldShift = useMemo(() => {
     const dMonthly = (hasData && loaded.data) ? loaded.data.monthly : BUNDLED_RANGPUR.monthly;
@@ -777,6 +818,36 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 </div>
               </div>
 
+              {/* Live Data Temporarily Unavailable Banner */}
+              {loaded.mode === 'unavailable' && (
+                <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-800/60 text-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
+                    <div>
+                      <p className="font-semibold text-sm">
+                        {language === 'en'
+                          ? `Live data temporarily unavailable for ${locationBreadcrumb}`
+                          : `${locationBreadcrumb}-এর জন্য সরাসরি উপগ্রহ তথ্য সাময়িকভাবে অনুপলব্ধ`}
+                      </p>
+                      <p className="text-xs text-amber-300/80">
+                        {language === 'en'
+                          ? 'NASA servers timed out or returned no data for this coordinate. No substitute district data is shown.'
+                          : 'নাসার সার্ভার থেকে এই স্থানাঙ্কের তথ্য পাওয়া যায়নি। অন্য কোনো জেলার তথ্য বিকল্প হিসেবে দেখানো হচ্ছে না।'}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleRetryFetch}
+                    disabled={isLoadingData}
+                    className="px-3.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-100 text-xs font-medium cursor-pointer shrink-0 disabled:opacity-50"
+                  >
+                    {isLoadingData
+                      ? (language === 'en' ? 'Retrying...' : 'পুনরায় চেষ্টা করা হচ্ছে...')
+                      : (language === 'en' ? 'Retry Live Fetch' : 'পুনরায় চেষ্টা করুন')}
+                  </button>
+                </div>
+              )}
+
               {/* 3. Field Condition Cards (5-KPI Grid: Rainfall, Soil Moisture, Max Temp, Relative Humidity, ET0) */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
                 {/* 1. 30-Day Rainfall */}
@@ -803,6 +874,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         </>
                       )}
                     </div>
+                    <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>
+                        {whatIfActive
+                          ? (language === 'en' ? 'Simulated' : 'সিমুলেশন')
+                          : loaded.mode === 'cache'
+                          ? (language === 'en' ? `Cached · ${formatBadgeDate(loaded.data?.fetchedAt, 'en')}` : `সংরক্ষিত · ${formatBadgeDate(loaded.data?.fetchedAt, 'bn')}`)
+                          : loaded.mode === 'live'
+                          ? (language === 'en' ? 'Live' : 'সরাসরি')
+                          : (language === 'en' ? 'Snapshot' : 'স্ন্যাপশট')}
+                      </span>
+                      <span>
+                        {conditions.from !== 'N/A' && conditions.to !== 'N/A'
+                          ? `${conditions.from.slice(5)} to ${conditions.to.slice(5)}`
+                          : ''}
+                      </span>
+                    </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
@@ -827,9 +914,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <span className="text-[#22C55E] font-semibold text-[11px]" title="NASA SMAP L3 Soil Moisture">
                         {whatIfActive
                           ? (language === 'en' ? 'NASA SMAP · Simulated' : 'নাসা স্ম্যাপ · সিমুলেশন')
-                          : smapData
+                          : (smapData && !isSoilFlaggedWater)
                           ? `NASA SMAP · ${smapData.date} (${smapData.pass})`
-                          : (language === 'en' ? 'NASA SMAP · No data' : 'নাসা স্ম্যাপ · তথ্য নেই')}
+                          : (language === 'en' ? 'NASA SMAP · Data unavailable' : 'নাসা স্ম্যাপ · তথ্য নেই')}
                       </span>
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display flex items-baseline gap-2">
@@ -840,7 +927,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             ({language === 'bn' ? toBnDigits(simSoil.toFixed(2)) : simSoil.toFixed(2)} m³/m³)
                           </span>
                         </>
-                      ) : smapData ? (
+                      ) : (smapData && !isSoilFlaggedWater) ? (
                         <>
                           {language === 'bn' ? toBnDigits(Math.round(smapData.value * 100)) : Math.round(smapData.value * 100)}%{' '}
                           <span className="text-xs text-slate-400 font-normal font-mono">
@@ -849,23 +936,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         </>
                       ) : (
                         <span className="text-lg text-slate-400 font-normal font-mono">
-                          {language === 'en' ? 'No data' : 'তথ্য নেই'}
+                          {language === 'en' ? 'Data unavailable' : 'তথ্য নেই'}
                         </span>
                       )}
                     </div>
                     {!whatIfActive && isSoilFlaggedWater && (
                       <div className="mt-1 text-[11px] text-amber-400 font-medium">
-                        {language === 'en' ? '⚠ may include open water' : '⚠ উন্মুক্ত জলাশয় অন্তর্ভুক্ত থাকতে পারে'}
+                        {language === 'en' ? '⚠ may include open water (retrieval unobserved)' : '⚠ উন্মুক্ত জলাশয় অন্তর্ভুক্ত থাকতে পারে'}
                       </div>
                     )}
                     {/* Gauge bar */}
-                    {(whatIfActive || smapData) && (
+                    {(whatIfActive || (smapData && !isSoilFlaggedWater)) && (
                       <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
                         <div
                           className={`h-full rounded-full ${
-                            !whatIfActive && isSoilFlaggedWater
-                              ? 'bg-amber-400'
-                              : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                            (whatIfActive ? simSoil : smapData!.value) < 0.15
                               ? 'bg-[#FF5C5C]'
                               : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
                               ? 'bg-[#22C55E]'
@@ -885,10 +970,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </span>
                     <span
                       className={`font-semibold ${
-                        !whatIfActive && !smapData
+                        !whatIfActive && (!smapData || isSoilFlaggedWater)
                           ? 'text-slate-400'
-                          : !whatIfActive && isSoilFlaggedWater
-                          ? 'text-amber-400'
                           : (whatIfActive ? simSoil : smapData!.value) < 0.15
                           ? 'text-[#FF5C5C]'
                           : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -896,10 +979,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           : 'text-[#FAFAFA]'
                       }`}
                     >
-                      {!whatIfActive && !smapData
-                        ? (language === 'en' ? 'No data' : 'তথ্য নেই')
-                        : !whatIfActive && isSoilFlaggedWater
-                        ? (language === 'en' ? 'Uncertain' : 'অনিশ্চিত')
+                      {!whatIfActive && (!smapData || isSoilFlaggedWater)
+                        ? (language === 'en' ? 'Data unavailable' : 'তথ্য নেই')
                         : (whatIfActive ? simSoil : smapData!.value) < 0.15
                         ? (language === 'en' ? 'Deficit' : 'ঘাটতি')
                         : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
@@ -924,6 +1005,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {language === 'bn' ? toBnDigits(activeMaxTemp.toFixed(1)) : activeMaxTemp.toFixed(1)}{' '}
                       <span className="text-sm text-slate-400 font-normal">{language === 'bn' ? '° সে.' : '°C'}</span>
+                    </div>
+                    <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>
+                        {whatIfActive
+                          ? (language === 'en' ? 'Simulated' : 'সিমুলেশন')
+                          : loaded.mode === 'cache'
+                          ? (language === 'en' ? `Cached · ${formatBadgeDate(loaded.data?.fetchedAt, 'en')}` : `সংরক্ষিত · ${formatBadgeDate(loaded.data?.fetchedAt, 'bn')}`)
+                          : (language === 'en' ? 'Observed' : 'পর্যবেক্ষণ')}
+                      </span>
+                      <span>
+                        {conditions.to !== 'N/A' ? formatBadgeDate(conditions.to, language) : ''}
+                      </span>
                     </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
@@ -952,6 +1045,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       {language === 'bn' ? toBnDigits(Math.round(conditions.rh)) : Math.round(conditions.rh)}{' '}
                       <span className="text-sm text-slate-400 font-normal">%</span>
                     </div>
+                    <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>
+                        {loaded.mode === 'cache'
+                          ? (language === 'en' ? `Cached · ${formatBadgeDate(loaded.data?.fetchedAt, 'en')}` : `সংরক্ষিত · ${formatBadgeDate(loaded.data?.fetchedAt, 'bn')}`)
+                          : (language === 'en' ? 'Observed' : 'পর্যবেক্ষণ')}
+                      </span>
+                      <span>
+                        {conditions.to !== 'N/A' ? formatBadgeDate(conditions.to, language) : ''}
+                      </span>
+                    </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">
                     <div className="flex justify-between items-center">
@@ -971,6 +1074,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display">
                       {language === 'bn' ? toBnDigits(conditions.et0.toFixed(1)) : conditions.et0.toFixed(1)}{' '}
                       <span className="text-sm text-slate-400 font-normal">{language === 'bn' ? 'মিমি/দিন' : 'mm/d'}</span>
+                    </div>
+                    <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>{language === 'en' ? 'Method: Hargreaves' : 'পদ্ধতি: হারগ্রিভস'}</span>
+                      <span>
+                        {conditions.from !== 'N/A' && conditions.to !== 'N/A'
+                          ? `${conditions.from.slice(5)} – ${conditions.to.slice(5)}`
+                          : ''}
+                      </span>
                     </div>
                   </div>
                   <div className="mt-3 pt-2.5 border-t border-[#262626] text-xs text-slate-400">

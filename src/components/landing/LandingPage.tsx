@@ -23,7 +23,7 @@ export function LandingPage() {
     let active = true;
     loadDistrict('rangpur')
       .then((res) => {
-        if (active && res.mode === 'live') {
+        if (active && res.mode === 'live' && res.data) {
           setLocationData(res.data);
           setIsLive(true);
         }

@@ -2,18 +2,23 @@
 //   1. CLIENT 24H CACHE — localStorage cache per upazila / district
 //   2. LIVE — NASA POWER + Open-Meteo at upazila centroid, straight from the internet
 //   3. PUBLIC CACHE — public/cache/<district>.json
-//   4. BUNDLED — Rangpur snapshot compiled into the app (only used for Rangpur)
+//   4. BUNDLED — Rangpur snapshot compiled into the app (strictly used for Rangpur only)
+//
+// HONESTY PRINCIPLE:
+// Never substitute Rangpur data for any other district. If live API fails and no cache exists,
+// return mode: 'unavailable' and data: null with an informative error message.
 
 import { fetchAll, type LocationCache } from './power.ts';
 import { getDistrictAdmin } from '../data/districts.ts';
 import { getUpazila, DISTRICT_WIDE_UPAZILA } from './location.ts';
 import type { DistrictId } from '../data/bdAdmin.ts';
 import fallbackRangpur from '../data/fallback-rangpur.json';
+import { formatBadgeDate } from '../components/common/DataTileStatusBadge.tsx';
 
 export type DataMode = 'live' | 'cache' | 'bundled' | 'unavailable';
 
 export interface LoadedData {
-  data: LocationCache;
+  data: LocationCache | null;
   mode: DataMode;
   error?: string;
   sourceNote?: string;
@@ -67,15 +72,18 @@ export async function loadLocationData(
     try {
       const cachedStr = localStorage.getItem(cacheKey);
       if (cachedStr) {
-        const cachedObj = JSON.parse(cachedStr) as LocationCache;
-        const fetchedTime = new Date(cachedObj.fetchedAt).getTime();
-        const ageMs = Date.now() - fetchedTime;
-        if (!isNaN(fetchedTime) && ageMs < TWENTY_FOUR_HOURS_MS) {
-          return {
-            data: cachedObj,
-            mode: 'cache',
-            sourceNote: `Cached on-demand upazila observation (${Math.round(ageMs / 3600000)}h ago)`,
-          };
+        const parsed = JSON.parse(cachedStr);
+        const cachedObj = (parsed?.daily ? parsed : parsed?.data) as LocationCache;
+        if (cachedObj && cachedObj.daily) {
+          const fetchedTime = new Date(cachedObj.fetchedAt).getTime();
+          const ageMs = Date.now() - fetchedTime;
+          if (!isNaN(fetchedTime) && ageMs < TWENTY_FOUR_HOURS_MS) {
+            return {
+              data: cachedObj,
+              mode: 'cache',
+              sourceNote: `Cached · ${formatBadgeDate(cachedObj.fetchedAt, 'en')}`,
+            };
+          }
         }
       }
     } catch {
@@ -109,12 +117,15 @@ export async function loadLocationData(
     try {
       const cachedStr = localStorage.getItem(cacheKey);
       if (cachedStr) {
-        const cachedObj = JSON.parse(cachedStr) as LocationCache;
-        return {
-          data: cachedObj,
-          mode: 'cache',
-          sourceNote: 'Stale offline upazila cache',
-        };
+        const parsed = JSON.parse(cachedStr);
+        const cachedObj = (parsed?.daily ? parsed : parsed?.data) as LocationCache;
+        if (cachedObj && cachedObj.daily) {
+          return {
+            data: cachedObj,
+            mode: 'cache',
+            sourceNote: `Cached · ${formatBadgeDate(cachedObj.fetchedAt, 'en')}`,
+          };
+        }
       }
     } catch {
       // ignore
@@ -126,12 +137,14 @@ export async function loadLocationData(
     try {
       const res = await fetch(`/cache/${d.id}.json`);
       if (res.ok) {
-        const distCache = await res.json();
-        return {
-          data: distCache,
-          mode: 'cache',
-          sourceNote: hasSpecificUpazila ? 'District baseline fallback for upazila' : 'District pre-built cache',
-        };
+        const distCache = (await res.json()) as LocationCache;
+        if (distCache && distCache.daily) {
+          return {
+            data: distCache,
+            mode: 'cache',
+            sourceNote: `Cached · ${formatBadgeDate(distCache.fetchedAt, 'en')}`,
+          };
+        }
       }
     } catch {
       // fall through
@@ -147,10 +160,11 @@ export async function loadLocationData(
     };
   }
 
+  // 7. Data unavailable for this specific location (NEVER substitute another district's data!)
   return {
-    data: BUNDLED_RANGPUR,
+    data: null,
     mode: 'unavailable',
-    error: `Data unavailable for ${targetName}`,
+    error: `Live data temporarily unavailable for ${targetName}`,
   };
 }
 
