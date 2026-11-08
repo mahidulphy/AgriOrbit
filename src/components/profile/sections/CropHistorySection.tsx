@@ -107,11 +107,11 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
       <div className="border-b border-[#262626] pb-4">
         <h2 className="font-display text-lg font-semibold text-[#FAFAFA] flex items-center gap-2">
           <Sprout className="w-5 h-5 text-[#22C55E]" />
-          <span>{isBn ? 'ফসলের ইতিহাস ও বর্তমান আবর্তন চক্র' : 'Crop History & Current Rotation'}</span>
+          <span>{isBn ? 'ফসলের ইতিহাস ও বর্তমান ফসল পরিক্রমা' : 'Crop History & Current Rotation'}</span>
         </h2>
         <p className="text-xs text-[#737373] mt-1 leading-relaxed">
           {isBn
-            ? 'নাসা ও বারি আবর্তন বিশ্লেষণের জন্য আপনার বর্তমান ৩-মৌসুমের শস্য চক্র এবং সাম্প্রতিক ফসলের তথ্য দিন।'
+            ? 'NASA ও BARI পরিক্রমা বিশ্লেষণের জন্য আপনার বর্তমান ৩-মৌসুমের ফসল পরিক্রমা এবং সাম্প্রতিক ফসলের তথ্য দিন।'
             : 'Enter your typical 3-season crop cycle and recent field history for NASA Field Shift evaluation.'}
         </p>
       </div>
@@ -122,7 +122,7 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#22C55E]" />
             <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#FAFAFA]">
-              {isBn ? 'আপনার বর্তমান বার্ষিক ফসল চক্র (৩ মৌসুম)' : 'Your Current Annual Crop Rotation (3 Seasons)'}
+              {isBn ? 'আপনার বর্তমান বার্ষিক ফসল পরিক্রমা (৩ মৌসুম)' : 'Your Current Annual Crop Rotation (3 Seasons)'}
             </h3>
           </div>
           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-[#22C55E] border border-emerald-500/20">
@@ -289,7 +289,7 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
           </div>
           {prevCropData?.plant_family && (
             <p className="text-[11px] font-mono text-[#737373] mt-1 flex items-center gap-1">
-              <span>{isBn ? 'আবর্তনে গোত্র ফিল্টার হবে:' : 'Rotation will filter family:'}</span>
+              <span>{isBn ? 'পরিক্রমায় পরিবার ফিল্টার হবে:' : 'Rotation will filter family:'}</span>
               <span className="font-medium text-[#22C55E]">{prevCropData.plant_family}</span>
               <span>({isBn ? FAMILY_LABEL[prevCropData.plant_family]?.bn : FAMILY_LABEL[prevCropData.plant_family]?.en})</span>
             </p>

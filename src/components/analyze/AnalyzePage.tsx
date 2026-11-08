@@ -203,7 +203,7 @@ export function AnalyzePage() {
           <Loader2 className="w-6 h-6 animate-spin" />
         </div>
         <p className="font-mono text-xs text-[#737373]">
-          {lang === 'en' ? 'Loading your field observations...' : 'আপনার জমির উপাত্ত লোড হচ্ছে...'}
+          {lang === 'en' ? 'Loading your field observations...' : 'আপনার জমির তথ্য লোড হচ্ছে...'}
         </p>
       </div>
     );

@@ -91,7 +91,7 @@ export const DEFAULT_INITIAL_FIELD: FarmField = {
   currentRotationKharif2: 'aman',
   growingSeason: 'rabi',
   isPrimary: true,
-  notes: 'উর্বর পলি দোআঁশ মাটি, রবি মৌসুমে সরিষা ও বোরো আবর্তনের জন্য উপযুক্ত।',
+  notes: 'উর্বর পলি দোআঁশ মাটি, রবি মৌসুমে সরিষা ও বোরো পরিক্রমার জন্য উপযুক্ত।',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 };

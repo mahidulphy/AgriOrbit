@@ -1194,7 +1194,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4 text-[#FAFAFA]" />
                       <h3 className="font-display font-bold text-lg text-white">
-                        {language === 'en' ? 'Annual Rotation Sequence' : 'বার্ষিক আবর্তন পরিক্রমা'}
+                        {language === 'en' ? 'Annual Rotation Sequence' : 'বার্ষিক ফসল পরিক্রমা'}
                       </h3>
                     </div>
                     <button

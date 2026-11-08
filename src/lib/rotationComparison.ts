@@ -19,7 +19,7 @@ export interface VulnerableSeasonRisk {
 }
 
 export interface SoilHealthRole {
-  id: 'nitrogen_fixer' | 'deep_roots' | 'drought_tolerant' | 'ground_cover';
+  id: 'nitrogen_fixer' | 'deep_roots' | 'drought_tolerant' | 'ground_cover' | 'green_manure';
   labelEn: string;
   labelBn: string;
   descEn: string;
@@ -220,15 +220,26 @@ export function getSoilHealthRoles(crop: Crop | null): SoilHealthRole[] {
     });
   }
 
-  // 4. Ground cover / green manure (only crops in our 37-crop list; jute removed, dhaincha not in crop list)
-  const coverCrops = ['mungbean', 'sweet_potato', 'blackgram'];
-  if (coverCrops.includes(cid)) {
+  // 4. Green manure (mungbean, blackgram)
+  if (cid === 'mungbean' || cid === 'blackgram') {
+    roles.push({
+      id: 'green_manure',
+      labelEn: 'Green Manure',
+      labelBn: 'সবুজ সার',
+      descEn: 'Ploughed-under biomass enriches topsoil with quick-decomposing organic matter, stimulating soil biological activity.',
+      descBn: 'জমিতে মিশে গিয়ে দ্রুত পচনশীল জৈব পদার্থ যোগ করে এবং মাটির অনুজীবের কার্যকারিতা বাড়ায়।',
+      badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    });
+  }
+
+  // 5. Ground cover (sweet potato only)
+  if (cid === 'sweet_potato') {
     roles.push({
       id: 'ground_cover',
-      labelEn: 'Green Manure / Cover',
-      labelBn: 'সবুজ সার ও মাটির আচ্ছাদন',
-      descEn: 'Dense canopy shields topsoil from solar baking and heavy monsoon rain erosion while adding rich organic biomass.',
-      descBn: 'মাটিকে প্রখর রোদ ও বৃষ্টির ক্ষয়রোধ থেকে রক্ষা করে এবং জমিতে প্রচুর জৈব পদার্থ (হিউমাস) যোগ করে।',
+      labelEn: 'Ground Cover',
+      labelBn: 'মাটির আচ্ছাদন',
+      descEn: 'Dense creeping foliage shields topsoil from solar baking and heavy monsoon rain erosion while suppressing weed growth.',
+      descBn: 'ঘন পাতা মাটিকে ঢেকে রেখে প্রখর রোদে রস শুকিয়ে যাওয়া রোধ করে এবং আগাছা জন্মাতে দেয় না।',
       badgeClass: 'bg-teal-500/10 text-teal-400 border-teal-500/30',
     });
   }
@@ -253,18 +264,35 @@ export function getVulnerableSeasonRisk(
       const dHeat = shiftSeason?.dHeat;
       const dTemp = shiftSeason?.dTemp;
       const hasNumbers = hasShift && typeof dHeat === 'number' && typeof dTemp === 'number';
+      const isRising = hasNumbers && dHeat > 0;
+
+      let reasonEn = 'Wheat in Rabi: wheat can face heat in March during grain filling; sow on time. Temperatures >30°C can affect pollen and grain development.';
+      let reasonBn = 'রবি মৌসুমে গম: মার্চে দানা বাঁধার সময় গরমে পড়ার ঝুঁকি থাকে; সময়মতো বীজ বপন করুন। ৩০°সে-এর বেশি তাপমাত্রা পরাগায়ন ব্যাহত ও দানা চিটা করতে পারে।';
+      let evidenceEn = 'NASA POWER seasonal baseline: temperatures >30°C during late-winter grain filling reduce yield potential.';
+      let evidenceBn = 'NASA POWER মৌসুমী তথ্য: শীতের শেষ ভাগে গম পরিপক্ব হওয়ার সময় উচ্চ তাপমাত্রা ফলন কমিয়ে দিতে পারে।';
+
+      if (hasNumbers) {
+        if (isRising) {
+          reasonEn = 'Wheat in Rabi: late-season heat is rising during grain filling (late Feb–Mar). Temperatures >30°C can affect pollen and grain development.';
+          reasonBn = 'রবি মৌসুমে গম: দানা বাঁধার সময় (ফেব্রুয়ারির শেষ–মার্চ) গরমের প্রকোপ বাড়ছে। ৩০°সে-এর বেশি তাপমাত্রা পরাগায়ন ব্যাহত ও দানা চিটা করতে পারে।';
+          evidenceEn = `NASA POWER decadal shift: Rabi daily high temperature change is +${dHeat.toFixed(1)}°C (mean temperature change ${dTemp > 0 ? '+' : ''}${dTemp.toFixed(1)}°C) comparing ${thenYears} vs ${nowYears}. Late-winter heat spikes shorten grain filling.`;
+          evidenceBn = `NASA POWER দশকভিত্তিক পরিবর্তন: রবি মৌসুমে সর্বোচ্চ তাপমাত্রা পরিবর্তন +${toBnDigits(dHeat.toFixed(1))}°সে (গড় তাপমাত্রা পরিবর্তন ${dTemp > 0 ? '+' : ''}${toBnDigits(dTemp.toFixed(1))}°সে), ভিত্তি দশক ${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)}। শীতের শেষের তাপদাহে ফলন কমে।`;
+        } else {
+          reasonEn = 'Wheat in Rabi: wheat can still face heat in March; sow on time. Temperatures >30°C can affect pollen and grain development.';
+          reasonBn = 'রবি মৌসুমে গম: মার্চে গম এখনও গরমে পড়ার ঝুঁকিতে থাকে; সময়মতো বীজ বপন করুন। ৩০°সে-এর বেশি তাপমাত্রা পরাগায়ন ব্যাহত ও দানা চিটা করতে পারে।';
+          evidenceEn = `NASA POWER decadal shift: Rabi daily high temperature change is ${dHeat.toFixed(1)}°C (mean temperature change ${dTemp > 0 ? '+' : ''}${dTemp.toFixed(1)}°C) comparing ${thenYears} vs ${nowYears}. Even without upward warming, late-winter heat in March remains a seasonal constraint.`;
+          evidenceBn = `NASA POWER দশকভিত্তিক পরিবর্তন: রবি মৌসুমে সর্বোচ্চ তাপমাত্রা পরিবর্তন ${toBnDigits(dHeat.toFixed(1))}°সে (গড় তাপমাত্রা পরিবর্তন ${dTemp > 0 ? '+' : ''}${toBnDigits(dTemp.toFixed(1))}°সে), ভিত্তি দশক ${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)}। তাপমাত্রা না বাড়লেও মার্চের স্বাভাবিক গরম গম চাষে একটি মৌসুমী সীমাবদ্ধতা।`;
+        }
+      }
+
       return {
         severity: 'high',
         titleEn: 'Watch out: late-season heat',
         titleBn: 'সতর্কতা: মৌসুমের শেষে গরমের ঝুঁকি',
-        reasonEn: 'Wheat in Rabi: late-season heat can rise during grain filling (late Feb–Mar). Temperatures >30°C can affect pollen and grain development.',
-        reasonBn: 'রবি মৌসুমে গম: দানা বাঁধার সময় (ফেব্রুয়ারির শেষ–মার্চ) গরম বাড়লে পরাগায়ন ব্যাহত হতে পারে ও দানা চিটা হতে পারে।',
-        evidenceEn: hasNumbers
-          ? `NASA POWER decadal shift: Rabi daily high temperature change is ${dHeat > 0 ? '+' : ''}${dHeat.toFixed(1)}°C (mean temperature change ${dTemp > 0 ? '+' : ''}${dTemp.toFixed(1)}°C) comparing ${thenYears} vs ${nowYears}. Late-winter heat spikes shorten grain filling.`
-          : 'NASA POWER decadal observations indicate late-winter maximum temperatures during grain filling reduce yield potential.',
-        evidenceBn: hasNumbers
-          ? `নাসা পাওয়ার দশকভিত্তিক পরিবর্তন: রবি মৌসুমে সর্বোচ্চ তাপমাত্রা পরিবর্তন ${dHeat > 0 ? '+' : ''}${toBnDigits(dHeat.toFixed(1))}°সে (গড় তাপমাত্রা পরিবর্তন ${dTemp > 0 ? '+' : ''}${toBnDigits(dTemp.toFixed(1))}°সে), ভিত্তি দশক ${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)}। শীতের শেষের তাপদাহে ফলন কমে।`
-          : 'নাসা পাওয়ার দশকভিত্তিক উপাত্ত অনুযায়ী শীতের শেষ ভাগে গম পরিপক্ব হওয়ার সময় উচ্চ তাপমাত্রা ফলন কমিয়ে দেয়।',
+        reasonEn,
+        reasonBn,
+        evidenceEn,
+        evidenceBn,
       };
     }
     if (cleanId === 'boro') {
@@ -282,7 +310,7 @@ export function getVulnerableSeasonRisk(
           : 'NASA POWER decadal records show negligible rainfall in Rabi, requiring heavy groundwater pumping.',
         evidenceBn: hasNumbers
           ? `নাসা পাওয়ার: রবি মৌসুমে বার্ষিক বৃষ্টির মাত্র ${toBnDigits(nowShare)}% হয় (${toBnDigits(thenYears)}-এর তুলনায় পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}%)। পানির চাহিদা পূরণে ভূগর্ভস্থ সেচের প্রয়োজন হয়।`
-          : 'নাসা পাওয়ার উপাত্ত অনুযায়ী রবি মৌসুমে বৃষ্টিপাত অত্যন্ত কম থাকায় ভূগর্ভস্থ সেচের ওপর বেশি নির্ভর করতে হয়।',
+          : 'NASA POWER তথ্য অনুযায়ী রবি মৌসুমে বৃষ্টিপাত অত্যন্ত কম থাকায় ভূগর্ভস্থ সেচের ওপর বেশি নির্ভর করতে হয়।',
       };
     }
     if (cleanId === 'potato') {
@@ -306,11 +334,11 @@ export function getVulnerableSeasonRisk(
       return {
         severity: 'medium',
         titleEn: 'Notice: unused soil moisture',
-        titleBn: 'দৃষ্টি আকর্ষণ: মাটির অবশিষ্ট আর্দ্রতা অপচয়',
+        titleBn: 'খেয়াল করুন: মাটির জমা আর্দ্রতা কাজে লাগছে না',
         reasonEn: 'Leaving the field fallow in Rabi leaves post-monsoon soil moisture unused without providing crop cover.',
         reasonBn: 'রবিতে জমি খালি রাখলে মাটির অবশিষ্ট রস কাজে লাগানো যায় না এবং জমি অনাবাদী থাকে।',
         evidenceEn: 'NASA SMAP: Post-monsoon rootzone soil moisture evaporates rapidly without vegetative crop cover.',
-        evidenceBn: 'নাসা এসএমএপি: কোনো আচ্ছাদন ফসল না থাকলে বর্ষা-পরবর্তী মাটির রস রোদে দ্রুত শুকিয়ে অপচয় হয়।',
+        evidenceBn: 'NASA SMAP: কোনো আচ্ছাদন ফসল না থাকলে বর্ষা-পরবর্তী মাটির জমা আর্দ্রতা রোদে দ্রুত শুকিয়ে অপচয় হয়।',
       };
     }
     return {
@@ -320,7 +348,7 @@ export function getVulnerableSeasonRisk(
       reasonEn: 'Crop is well-adapted to seasonal climate conditions with modest management risk.',
       reasonBn: 'ফসলটি এই মৌসুমের সাধারণ আবহাওয়ার সাথে মানানসই এবং ঝুঁকি তুলনামূলক কম।',
       evidenceEn: 'BARI agricultural guidance & NASA POWER seasonal baseline.',
-      evidenceBn: 'বারি কৃষি নির্দেশিকা ও নাসা পাওয়ার মৌসুমী আবহাওয়া উপাত্ত।',
+      evidenceBn: 'BARI কৃষি নির্দেশিকা ও NASA POWER মৌসুমী আবহাওয়া তথ্য।',
     };
   }
 
@@ -331,7 +359,7 @@ export function getVulnerableSeasonRisk(
       return {
         severity: 'high',
         titleEn: 'Caution: soil baking & storm erosion',
-        titleBn: 'সতর্কতা: প্রখর রোদ ও ঝড়ে মাটির ক্ষয়রোধ',
+        titleBn: 'সতর্কতা: প্রখর রোদ ও ঝড়ে মাটির ক্ষয়',
         reasonEn: 'Leaving the field bare in Kharif-1 exposes topsoil to intense pre-monsoon heat and storm runoff.',
         reasonBn: 'খরিফ-১ মৌসুমে জমি খালি রাখলে প্রখর রোদে মাটি শুকিয়ে যায় এবং কালবৈশাখী ঝড়ে উর্বর মাটি ধুয়ে যেতে পারে।',
         evidenceEn: hasNumbers
@@ -594,7 +622,7 @@ export function generateRotationComparison(input: ComparisonInput): {
     altPriority = 'water';
     altPriorityId = 'save_water';
     altTitleEn = 'Maximum Water Conservation';
-    altTitleBn = 'সর্বোচ্চ পানি সাশ্রয়ী চক্র';
+    altTitleBn = 'সর্বোচ্চ পানি সাশ্রয়ী পরিক্রমা';
   } else if (priority === 'lower_cost') {
     altPriority = 'risk';
     altPriorityId = 'reduce_risk';
@@ -779,7 +807,7 @@ export function generateRotationComparison(input: ComparisonInput): {
         : `Consumes ~${totalWaterNeedMm} mm/yr with heavy reliance on dry-season groundwater pumping.`;
     const waterSavingsTextBn =
       waterSavedPctVsBaseline > 0
-        ? `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানি লাগে; প্রচলিত বোরো-পতিত-আমন চক্রের চেয়ে প্রায় ${toBnDigits(waterSavedPctVsBaseline)}% পানি সাশ্রয় করে।`
+        ? `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানি লাগে; প্রচলিত বোরো-পতিত-আমন পরিক্রমার চেয়ে প্রায় ${toBnDigits(waterSavedPctVsBaseline)}% পানি সাশ্রয় করে।`
         : `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানির প্রয়োজন হয় এবং ভূগর্ভস্থ পানির ওপর ব্যাপক চাপ সৃষ্টি করে।`;
 
     const nitrogenTextEn =
@@ -851,24 +879,24 @@ export function generateRotationComparison(input: ComparisonInput): {
     let confBn = '';
     if (!hasLivePower) {
       confLevel = 'low';
-      confEn = 'Live NASA satellite telemetry is temporarily unavailable; relying on fallback climatology. Verify with local SAAO.';
-      confBn = 'নাসার সরাসরি উপগ্রহ তথ্য সাময়িকভাবে অপ্রাপ্য; জলবায়ু অনুমানের ওপর নির্ভরশীল। স্থানীয় উপসহকারী কৃষি কর্মকর্তার (SAAO) সাথে যাচাই করুন।';
+      confEn = 'NASA satellite data is temporarily unavailable for this district; relying on fallback climatology. Verify with local SAAO.';
+      confBn = 'এই জেলার নাসার উপগ্রহ তথ্য সাময়িকভাবে অপ্রাপ্য; অনুমানের ওপর নির্ভরশীল। স্থানীয় উপসহকারী কৃষি কর্মকর্তার (SAAO) সাথে যাচাই করুন।';
     } else if (hasEstimatedCrop) {
       confLevel = 'medium';
-      confEn = 'NASA weather and soil telemetry complete; rotation includes estimated values for some crops.';
-      confBn = 'নাসার আবহাওয়া ও মাটির উপাত্ত সম্পূর্ণ; পরিক্রমায় কিছু ফসলের জন্য আনুমানিক মান ব্যবহার করা হয়েছে।';
+      confEn = 'NASA POWER and SMAP data available for this district, soil type known; some crops use estimated values.';
+      confBn = 'এই জেলার NASA POWER ও SMAP তথ্য পাওয়া গেছে, মাটির ধরন জানা; কিছু ফসলের জন্য আনুমানিক মান ব্যবহার করা হয়েছে।';
     } else if (!hasKnownSoil) {
       confLevel = 'medium';
-      confEn = 'NASA POWER & SMAP observations complete, but field soil texture is unspecified ("Don\'t know").';
-      confBn = 'নাসার POWER ও SMAP উপগ্রহ তথ্য সম্পূর্ণ, তবে নির্দিষ্ট জমির মাটির ধরন জানা নেই ("জানা নেই" নির্বাচিত)।';
+      confEn = 'NASA POWER and SMAP data available for this district, but field soil texture is unspecified ("Don\'t know").';
+      confBn = 'এই জেলার NASA POWER ও SMAP তথ্য পাওয়া গেছে, তবে নির্দিষ্ট জমির মাটির ধরন জানা নেই ("জানা নেই" নির্বাচিত)।';
     } else if (!hasLiveSmap) {
       confLevel = 'medium';
-      confEn = 'NASA POWER observations active; soil moisture based on regional interpolation.';
-      confBn = 'নাসার আবহাওয়া উপাত্ত সক্রিয়; মাটির আর্দ্রতা আঞ্চলিক অনুমানের ওপর ভিত্তি করে তৈরি।';
+      confEn = 'NASA POWER data available; soil moisture based on regional estimate; some crops use estimated values.';
+      confBn = 'NASA POWER তথ্য পাওয়া গেছে; মাটির আর্দ্রতা আঞ্চলিক অনুমানের ওপর ভিত্তি করে তৈরি।';
     } else {
       confLevel = 'high';
-      confEn = 'Live NASA POWER & SMAP telemetry verified, soil texture known, and crop values from BARI/BRRI guidance.';
-      confBn = 'নাসার সরাসরি POWER ও SMAP উপাত্ত নিশ্চিত, মাটির ধরন জানা এবং ফসলের মান বারি/ব্রি নির্দেশিকা থেকে সংগৃহীত।';
+      confEn = 'NASA POWER and SMAP data available for this district, soil type known, crop values from BARI/BRRI guidance.';
+      confBn = 'এই জেলার NASA POWER ও SMAP তথ্য পাওয়া গেছে, মাটির ধরন জানা, ফসলের মান BARI/BRRI নির্দেশিকা থেকে।';
     }
 
     return {

@@ -197,7 +197,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     soilMoistureStatus = 'Unobserved';
     soilMoistureStatusBn = 'অনুপলব্ধ';
     smapLabelEn = 'Data unavailable for this location (SMAP retrieval flagged or unobserved)';
-    smapLabelBn = 'এই এলাকার জন্য তথ্য অপ্রাপ্য (এসএমএপি উপাত্ত অমিল)';
+    smapLabelBn = 'এই এলাকার জন্য তথ্য অপ্রাপ্য (SMAP তথ্য অমিল)';
     rootZoneInsightEn = 'Root-zone moisture is currently unobserved by satellite pass.';
     rootZoneInsightBn = 'উপগ্রহ থেকে মাটির মূলস্তরের আর্দ্রতার তথ্য পাওয়া যায়নি।';
   } else if (soilMoisture >= thresholds.soilMoistureHigh) {

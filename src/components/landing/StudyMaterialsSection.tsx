@@ -39,7 +39,7 @@ export function StudyMaterialsSection() {
         return isBn ? 'সিমুলেটর' : 'Simulator';
       case 'data-sources':
       case 'obs-vs-forecast':
-        return isBn ? 'স্যাটেলাইট উপাত্ত' : 'Satellite Telemetry';
+        return isBn ? 'স্যাটেলাইট তথ্য' : 'Satellite Telemetry';
       case 'nasa-recommend':
       case 'expert-replacement':
         return isBn ? 'কৃষি নীতি' : 'Policy & Ethics';
@@ -81,7 +81,7 @@ export function StudyMaterialsSection() {
           title={lang === 'bn' ? 'বিজ্ঞানসম্মত কৃষি সহায়িকা ও প্রশ্নোত্তর' : 'Scientific Agronomy Guide & FAQ'}
           sub={
             lang === 'bn'
-              ? 'নাসার উপগ্রহ উপাত্তের মূল পরিভাষা এবং কৃষকদের জন্য স্বচ্ছ নির্দেশিকা।'
+              ? 'নাসার উপগ্রহ তথ্যের মূল পরিভাষা এবং কৃষকদের জন্য স্বচ্ছ নির্দেশিকা।'
               : 'Clear, farmer-friendly explanations of satellite telemetry metrics and platform principles.'
           }
           center

@@ -34,19 +34,25 @@ test('Phase 9: 1. Vulnerable Seasons Risk Flags use calm wording and district-sp
   assert.equal(cRabi.nowShare, 5);
   assert.equal(cRabi.dShare, 2);
 
-  // 1. Wheat in Rabi: Rangpur shows +0.4°C high, +0.5°C mean temp
+  // 1. Wheat in Rabi: Rangpur shows +0.4°C high (>0, so says rising)
   const rWheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', rangpurShift);
   assert.equal(rWheatRisk.severity, 'high');
   assert.equal(rWheatRisk.titleEn, 'Watch out: late-season heat');
   assert.equal(rWheatRisk.titleBn, 'সতর্কতা: মৌসুমের শেষে গরমের ঝুঁকি');
+  assert.match(rWheatRisk.reasonEn, /late-season heat is rising/i);
+  assert.match(rWheatRisk.reasonBn, /গরমের প্রকোপ বাড়ছে/);
   assert.match(rWheatRisk.evidenceEn, /\+0\.4°C/);
   assert.match(rWheatRisk.evidenceEn, /\+0\.5°C/);
   assert.match(rWheatRisk.evidenceBn, /\+০\.৪°সে/);
   assert.match(rWheatRisk.evidenceBn, /\+০\.৫°সে/);
 
-  // 2. Wheat in Rabi: Chandpur shows -0.2°C high, 0.0°C mean temp (DIFFERENT from Rangpur)
+  // 2. Wheat in Rabi: Chandpur shows -0.2°C high (<= 0, so NEVER says rising/trending)
   const cWheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', chandpurShift);
   assert.equal(cWheatRisk.titleEn, 'Watch out: late-season heat');
+  assert.doesNotMatch(cWheatRisk.reasonEn, /rising|trending/i);
+  assert.match(cWheatRisk.reasonEn, /wheat can still face heat in March/i);
+  assert.doesNotMatch(cWheatRisk.reasonBn, /বাড়ছে/);
+  assert.match(cWheatRisk.reasonBn, /মার্চে গম এখনও গরমে পড়ার ঝুঁকিতে থাকে/);
   assert.match(cWheatRisk.evidenceEn, /-0\.2°C/);
   assert.match(cWheatRisk.evidenceEn, /0\.0°C/);
 
@@ -97,7 +103,9 @@ test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data 
   });
   assert.equal(resHigh.strategies[1].confidence.level, 'high');
   assert.match(resHigh.strategies[1].confidence.reasonEn, /crop values from BARI\/BRRI guidance/i);
-  assert.match(resHigh.strategies[1].confidence.reasonBn, /বারি\/ব্রি নির্দেশিকা থেকে সংগৃহীত/i);
+  assert.match(resHigh.strategies[1].confidence.reasonBn, /BARI\/BRRI নির্দেশিকা থেকে/i);
+  assert.equal(resHigh.strategies[1].confidence.reasonEn, 'NASA POWER and SMAP data available for this district, soil type known, crop values from BARI/BRRI guidance.');
+  assert.equal(resHigh.strategies[1].confidence.reasonBn, 'এই জেলার NASA POWER ও SMAP তথ্য পাওয়া গেছে, মাটির ধরন জানা, ফসলের মান BARI/BRRI নির্দেশিকা থেকে।');
 
   // Case B: Rotation includes estimated crop (e.g. soybean) -> Medium confidence
   const resEstimated = generateRotationComparison({
@@ -113,7 +121,7 @@ test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data 
     districtNameBn: 'রংপুর',
   });
   assert.equal(resEstimated.strategies[0].confidence.level, 'medium');
-  assert.match(resEstimated.strategies[0].confidence.reasonEn, /rotation includes estimated values/i);
+  assert.match(resEstimated.strategies[0].confidence.reasonEn, /some crops use estimated values/i);
   assert.match(resEstimated.strategies[0].confidence.reasonBn, /আনুমানিক মান/i);
 
   // Case C: Soil type unspecified ("dont_know") -> Medium confidence
@@ -223,14 +231,23 @@ test('Phase 9: 4. Soil-Health Roles attach correct badges and explanations', () 
   const chickpeaRoles = getSoilHealthRoles(chickpea);
   assert.ok(chickpeaRoles.some((r) => r.id === 'drought_tolerant'));
 
+  // Mungbean & blackgram are Green Manure
   const mungRoles = getSoilHealthRoles(mungbean);
-  assert.ok(mungRoles.some((r) => r.id === 'ground_cover'));
-  assert.match(mungRoles.find((r) => r.id === 'ground_cover')!.descEn, /Dense canopy shields topsoil/i);
+  assert.ok(mungRoles.some((r) => r.id === 'green_manure'));
+  assert.equal(mungRoles.some((r) => r.id === 'ground_cover'), false);
+  assert.match(mungRoles.find((r) => r.id === 'green_manure')!.descEn, /organic matter/i);
 
-  // Jute is a fibre crop and must NOT be tagged as green manure / ground cover
+  // Sweet potato is Ground Cover only
+  const sweetPotato = CROPS.find((c) => c.id === 'sweet_potato')!;
+  const sweetRoles = getSoilHealthRoles(sweetPotato);
+  assert.ok(sweetRoles.some((r) => r.id === 'ground_cover'));
+  assert.equal(sweetRoles.some((r) => r.id === 'green_manure'), false);
+  assert.match(sweetRoles.find((r) => r.id === 'ground_cover')!.descEn, /foliage shields topsoil/i);
+
+  // Jute is a fibre crop and must NOT be tagged as green manure or ground cover
   const jute = CROPS.find((c) => c.id === 'jute')!;
   const juteRoles = getSoilHealthRoles(jute);
-  assert.equal(juteRoles.some((r) => r.id === 'ground_cover'), false, 'Jute is a fibre crop; must NOT have ground_cover badge');
+  assert.equal(juteRoles.some((r) => r.id === 'ground_cover' || r.id === 'green_manure'), false);
 });
 
 test('Phase 9: 5. Farmer Science Glossary covers all 6 required scientific terms in English & Bangla', () => {

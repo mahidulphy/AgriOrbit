@@ -262,7 +262,7 @@ export const DISTRICT_NASA_DATA: Partial<Record<DistrictId, {
       },
     ],
     climateShiftInsightEn: 'Dhaka floodplains face erratic monsoon rainfall distribution. Crop rotation incorporating deep-rooting mustard and pulses maintains soil organic structure.',
-    climateShiftInsightBn: 'বৃষ্টির সময়কাল কিছুটা পরিবর্তিত হয়েছে। বহুমুখী ফসল আবর্তন মাটির স্বাস্থ্য ধরে রাখে।',
+    climateShiftInsightBn: 'বৃষ্টির সময়কাল কিছুটা পরিবর্তিত হয়েছে। বহুমুখী ফসল পরিক্রমা মাটির স্বাস্থ্য ধরে রাখে।',
   },
 };
 
@@ -273,7 +273,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   save_water: {
     priority: 'save_water',
     summaryEn: 'Low-water pulse rotation. Replaces continuous groundwater pumping with drought-hardy legumes, then captures natural monsoon rainfall for rice.',
-    summaryBn: 'স্বল্প-পানির ডাল আবর্তন। গভীর সেচের পরিবর্তে কম পানির ডাল চাষ এবং বর্ষার বৃষ্টির পানিতে মূল ধান উৎপাদন।',
+    summaryBn: 'স্বল্প-পানির ডাল পরিক্রমা। গভীর সেচের পরিবর্তে কম পানির ডাল চাষ এবং বর্ষার বৃষ্টির পানিতে মূল ধান উৎপাদন।',
     estimatedWaterSavingPct: 44,
     soilHealthGainPct: 35,
     seasons: [
@@ -453,7 +453,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   reduce_risk: {
     priority: 'reduce_risk',
     summaryEn: 'Climate-resilient sequence. Defers vulnerable crops, avoids peak dry-spells and flood windows with diversified, hardy species.',
-    summaryBn: 'জলবায়ু ঝুঁকি প্রতিরোধী চক্র। খরা ও আকস্মিক বন্যার সময় এড়িয়ে সুরক্ষিত ও সহনশীল ফসল নিশ্চিত করে।',
+    summaryBn: 'জলবায়ু ঝুঁকি প্রতিরোধী পরিক্রমা। খরা ও আকস্মিক বন্যার সময় এড়িয়ে সুরক্ষিত ও সহনশীল ফসল নিশ্চিত করে।',
     estimatedWaterSavingPct: 32,
     soilHealthGainPct: 38,
     seasons: [
@@ -525,7 +525,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   quick_harvest: {
     priority: 'quick_harvest',
     summaryEn: 'Fast-turnaround 3-crop sequence. Selects short-duration varieties (Mustard 80d, Mungbean 65d) to free up land quickly and avoid climatic hazards.',
-    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী চক্র। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
+    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী পরিক্রমা। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
     estimatedWaterSavingPct: 42,
     soilHealthGainPct: 40,
     seasons: [
@@ -561,7 +561,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   family_food: {
     priority: 'family_food',
     summaryEn: 'Year-round household dietary staple sequence. Ensures family carbohydrate (rice, wheat) and protein (pulses) self-sufficiency.',
-    summaryBn: 'পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা চক্র। পরিবারের সারা বছরের ভাত, আটা ও ডালের চাহিদা স্বয়ংসম্পূর্ণভাবে পূরণ করে।',
+    summaryBn: 'পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা পরিক্রমা। পরিবারের সারা বছরের ভাত, আটা ও ডালের চাহিদা স্বয়ংসম্পূর্ণভাবে পূরণ করে।',
     estimatedWaterSavingPct: 35,
     soilHealthGainPct: 36,
     seasons: [

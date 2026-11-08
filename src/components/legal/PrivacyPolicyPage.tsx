@@ -24,7 +24,7 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
         <p>
           {isBn
-            ? 'এগ্রিঅরবিট (AgriOrbit) একটি মুক্ত ও স্বাধীন কৃষি সিদ্ধান্ত-সহায়তা প্ল্যাটফর্ম, যা নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর জন্য টিম "বে অব অরবিটস" (Team Bay of Orbits) দ্বারা উদ্ভাবিত। আমাদের মূল লক্ষ্য হলো বাংলাদেশের কৃষকদের নাসা আর্থ অবজারভেশন এবং স্থানীয় কৃষি তথ্যের সমন্বয়ে নির্ভরযোগ্য ফসল আবর্তন পরিকল্পনা প্রদান করা।'
+            ? 'এগ্রিঅরবিট (AgriOrbit) একটি মুক্ত ও স্বাধীন কৃষি সিদ্ধান্ত-সহায়তা প্ল্যাটফর্ম, যা নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর জন্য টিম "বে অব অরবিটস" (Team Bay of Orbits) দ্বারা উদ্ভাবিত। আমাদের মূল লক্ষ্য হলো বাংলাদেশের কৃষকদের নাসা আর্থ অবজারভেশন এবং স্থানীয় কৃষি তথ্যের সমন্বয়ে নির্ভরযোগ্য ফসল পরিক্রমা পরিকল্পনা প্রদান করা।'
             : 'AgriOrbit is an independent agricultural decision-support platform created by Team Bay of Orbits for the NASA Space Apps Challenge 2026. Our mission is to empower Bangladeshi farmers by synthesizing NASA Earth observations, local agronomic research, and farmer priorities to plan resilient 3-season crop rotations.'}
         </p>
         <p>
