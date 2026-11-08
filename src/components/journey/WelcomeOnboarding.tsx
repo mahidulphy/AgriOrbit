@@ -35,7 +35,7 @@ export const WelcomeOnboarding: React.FC<WelcomeOnboardingProps> = ({
       titleEn: 'Field Advisory',
       titleBn: 'শস্য উপদেষ্টা',
       descEn: 'Deterministic 3-Season Strategy',
-      descBn: '৩-মৌসুমী পূর্ণাঙ্গ শস্য পরিক্রমা',
+      descBn: '৩-মৌসুমী পূর্ণাঙ্গ ফসল চক্র',
       icon: <LineChart className="w-5 h-5 text-[#22C55E]" />,
     },
   ];

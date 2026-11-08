@@ -818,7 +818,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     onClick={() => handleTabClick('crops')}
                     className="px-5 py-2.5 rounded-xl bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-sm cursor-pointer flex items-center gap-2 transition-all hover:scale-[1.01]"
                   >
-                    <span>{language === 'en' ? 'View 3-Season Rotation Plan' : '৩-মৌসুমী পরিক্রমা দেখুন'}</span>
+                    <span>{language === 'en' ? 'View 3-Season Rotation Plan' : '৩-মৌসুমী ফসল চক্র দেখুন'}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
@@ -1194,7 +1194,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4 text-[#FAFAFA]" />
                       <h3 className="font-display font-bold text-lg text-white">
-                        {language === 'en' ? 'Annual Rotation Sequence' : 'বার্ষিক ফসল পরিক্রমা'}
+                        {language === 'en' ? 'Annual Rotation Sequence' : 'বার্ষিক ফসল চক্র'}
                       </h3>
                     </div>
                     <button
@@ -1318,7 +1318,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <p className="text-xs text-slate-300">
                           {language === 'en'
                             ? 'Adjust environmental variables below to test how different drought or heatwave conditions impact crop suitability scores and rotation plans in real time.'
-                            : 'নিচের স্লাইডারগুলো পরিবর্তন করে দেখুন কীভাবে খরা বা অতিরিক্ত তাপমাত্রা ফসলের সম্ভাবনা এবং ৩-মৌসুমের শস্য পর্যায় বদলে দেয়।'} 
+                            : 'নিচের স্লাইডারগুলো পরিবর্তন করে দেখুন কীভাবে খরা বা অতিরিক্ত তাপমাত্রা ফসলের সম্ভাবনা এবং ৩-মৌসুমের ফসল চক্র বদলে দেয়।'} 
                         </p>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
@@ -1753,7 +1753,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="space-y-8 animate-fadeIn scroll-mt-20">
               <div className="pb-4 border-b border-[#262626]">
                 <span className="text-xs font-mono uppercase text-[#FAFAFA] tracking-wider font-bold block mb-1">
-                  {language === 'en' ? 'Cropping Strategy & Rotation' : 'ফসলের পরিকল্পনা ও পরিক্রমা'}
+                  {language === 'en' ? 'Cropping Strategy & Rotation' : 'ফসলের পরিকল্পনা ও ফসল চক্র'}
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
                   {language === 'en' ? `Seasonal Plan for ${upazilaName}` : `${upazilaName}-এর জন্য শস্য পরিকল্পনা`}
@@ -1761,7 +1761,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="text-xs sm:text-sm text-slate-300 mt-1">
                   {language === 'en'
                     ? 'Individual crop suitability scores and balanced 3-season crop cycle avoiding continuous high-irrigation cereals.'
-                    : 'নাসার স্যাটেলাইট তথ্য ও বারি নির্দেশিকা অনুযায়ী ফসলের মূল্যায়ন ও ৩-মৌসুমী পরিক্রমা।'} 
+                    : 'নাসার স্যাটেলাইট তথ্য ও বারি নির্দেশিকা অনুযায়ী ফসলের মূল্যায়ন ও ৩-মৌসুমী ফসল চক্র।'} 
                 </p>
               </div>
 
@@ -1884,10 +1884,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                 <div className="p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-2">
                   <span className="font-mono text-xs text-[#22C55E] font-bold block uppercase">
-                    {language === 'en' ? 'Rule 4 · Botanical Alternation & Nitrogen Triggers' : 'নিয়ম ৪ · পর্যায়ক্রম ও নাইট্রোজেন বৃদ্ধি'}
+                    {language === 'en' ? 'Rule 4 · Botanical Alternation & Nitrogen Triggers' : 'নিয়ম ৪ · ফসল চক্র ও নাইট্রোজেন বৃদ্ধি'}
                   </span>
                   <h4 className="text-sm font-bold text-white">
-                    {language === 'en' ? 'Rotation Rule A & Rule B' : 'শস্য পর্যায় নীতি ১ ও ২'}
+                    {language === 'en' ? 'Rotation Rule A & Rule B' : 'ফসল চক্র নীতি ১ ও ২'}
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     {language === 'en'

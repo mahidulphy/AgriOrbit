@@ -220,14 +220,14 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#22C55E] font-mono font-semibold mb-2">
               <span>04</span>
               <span aria-hidden="true">·</span>
-              <span>{isBn ? 'নাসা ফিল্ড শিফট · ৩টি শস্য পর্যায় তুলনা' : 'NASA FIELD SHIFT · 3 ROTATION STRATEGIES'}</span>
+              <span>{isBn ? 'নাসা ফিল্ড শিফট · ৩টি ফসল চক্র তুলনা' : 'NASA FIELD SHIFT · 3 ROTATION STRATEGIES'}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {isBn ? '৩টি শস্য পর্যায় পাশাপাশি তুলনা করুন' : 'Compare 3 Rotation Strategies'}
+              {isBn ? '৩টি ফসল চক্র পাশাপাশি তুলনা করুন' : 'Compare 3 Rotation Strategies'}
             </h2>
             <p className="text-xs sm:text-sm text-[#A3A3A3] mt-1 max-w-2xl leading-relaxed">
               {isBn
-                ? 'আপনার বর্তমান চাষের সাথে নাসার স্যাটেলাইট পর্যবেক্ষণ ও বারি/ব্রি নির্দেশিত টেকসই শস্য পর্যায় পাশাপাশি তুলনা করুন।'
+                ? 'আপনার বর্তমান চাষের সাথে নাসার স্যাটেলাইট পর্যবেক্ষণ ও বারি/ব্রি নির্দেশিত টেকসই ফসল চক্র পাশাপাশি তুলনা করুন।'
                 : 'Compare your existing rotation side-by-side with NASA Earth observation-aligned and alternative agro-ecological pathways.'}
             </p>
           </div>
@@ -508,7 +508,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           <div>
             <h4 className="font-mono text-xs uppercase tracking-wider text-[#A3A3A3] mb-4 flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span>{isBn ? 'বার্ষিক ৩টি মৌসুমের শস্য পর্যায়' : 'Annual 3-Season Sequence'}</span>
+              <span>{isBn ? 'বার্ষিক ৩টি মৌসুমের ফসল চক্র' : 'Annual 3-Season Sequence'}</span>
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -618,7 +618,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                       {/* Agronomic Function */}
                       <div className="p-3.5 rounded-lg bg-[#141414] border border-[#262626] text-xs text-[#A3A3A3] leading-relaxed mb-4">
                         <span className="text-[10px] uppercase font-mono text-[#FAFAFA] block mb-1">
-                          {isBn ? 'পরিক্রমায় ভূমিকা' : 'Agronomic Role'}:
+                          {isBn ? 'ফসল চক্রে ভূমিকা' : 'Agronomic Role'}:
                         </span>
                         {isBn ? cropSeason.agronomicRoleBn : cropSeason.agronomicRoleEn}
                       </div>

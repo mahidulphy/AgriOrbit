@@ -531,7 +531,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 </div>
                 <p className="text-xs text-slate-400 mb-3">
                   {isBn
-                    ? 'আপনার পূর্ববর্তী ফসল নির্বাচন করুন। এটি পরবর্তী ৩-মৌসুমী পরিক্রমা তৈরিতে সাহায্য করবে:'
+                    ? 'আপনার পূর্ববর্তী ফসল নির্বাচন করুন। এটি পরবর্তী ৩-মৌসুমী ফসল চক্র তৈরিতে সাহায্য করবে:'
                     : 'Select previously cultivated crops. This helps AgriOrbit prevent soil nutrient exhaustion:'}
                 </p>
 

@@ -609,9 +609,9 @@ export function generateRotationComparison(input: ComparisonInput): {
   let altPriority: Priority = 'soil';
   let altPriorityId: FarmerPriorityId = 'improve_soil';
   let altTitleEn = 'Soil Health & Organic Fertility';
-  let altTitleBn = 'মাটির স্বাস্থ্য ও জৈব পুষ্টি পরিক্রমা';
+  let altTitleBn = 'মাটির স্বাস্থ্য ও জৈব পুষ্টি ফসল চক্র';
   let altTagEn = 'Alternative Strategy';
-  let altTagBn = 'বিকল্প পরিক্রমা';
+  let altTagBn = 'বিকল্প ফসল চক্র';
 
   if (priority === 'save_water') {
     altPriority = 'soil';
@@ -622,7 +622,7 @@ export function generateRotationComparison(input: ComparisonInput): {
     altPriority = 'water';
     altPriorityId = 'save_water';
     altTitleEn = 'Maximum Water Conservation';
-    altTitleBn = 'সর্বোচ্চ পানি সাশ্রয়ী পরিক্রমা';
+    altTitleBn = 'সর্বোচ্চ পানি সাশ্রয়ী ফসল চক্র';
   } else if (priority === 'lower_cost') {
     altPriority = 'risk';
     altPriorityId = 'reduce_risk';
@@ -632,7 +632,7 @@ export function generateRotationComparison(input: ComparisonInput): {
     altPriority = 'water';
     altPriorityId = 'save_water';
     altTitleEn = 'Low Groundwater Depletion Strategy';
-    altTitleBn = 'স্বল্প ভূগর্ভস্থ পানি নির্ভর পরিক্রমা';
+    altTitleBn = 'স্বল্প ভূগর্ভস্থ পানি নির্ভর ফসল চক্র';
   }
 
   const engineResultC = runEngine({
@@ -807,7 +807,7 @@ export function generateRotationComparison(input: ComparisonInput): {
         : `Consumes ~${totalWaterNeedMm} mm/yr with heavy reliance on dry-season groundwater pumping.`;
     const waterSavingsTextBn =
       waterSavedPctVsBaseline > 0
-        ? `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানি লাগে; প্রচলিত বোরো-পতিত-আমন পরিক্রমার চেয়ে প্রায় ${toBnDigits(waterSavedPctVsBaseline)}% পানি সাশ্রয় করে।`
+        ? `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানি লাগে; প্রচলিত বোরো-পতিত-আমন ফসল চক্রের চেয়ে প্রায় ${toBnDigits(waterSavedPctVsBaseline)}% পানি সাশ্রয় করে।`
         : `বছরে মোট প্রায় ${toBnDigits(totalWaterNeedMm)} মিমি পানির প্রয়োজন হয় এবং ভূগর্ভস্থ পানির ওপর ব্যাপক চাপ সৃষ্টি করে।`;
 
     const nitrogenTextEn =
@@ -982,9 +982,9 @@ export function generateRotationComparison(input: ComparisonInput): {
     'current',
     cropsA,
     'Current Practice',
-    'বর্তমান চাষ',
+    'বর্তমান ফসল চক্র',
     'Farmer’s Current Rotation',
-    'কৃষকের বর্তমান ফসল পর্যায়',
+    'কৃষকের বর্তমান ফসল চক্র',
     'current',
     'Current Farmer Baseline',
     'বর্তমান ভিত্তি'
@@ -994,9 +994,9 @@ export function generateRotationComparison(input: ComparisonInput): {
     'recommended',
     cropsB,
     'Recommended Strategy',
-    'সেরা সুপারিশকৃত',
+    'প্রস্তাবিত ফসল চক্র',
     `Priority-Optimized (${cropsB.map((c) => c.nameEn.split(' ')[0]).join(' → ')})`,
-    `লক্ষ্যভিত্তিক সেরা পরিক্রমা (${cropsB.map((c) => c.nameBn).join(' → ')})`,
+    `প্রস্তাবিত ফসল চক্র (${cropsB.map((c) => c.nameBn).join(' → ')})`,
     priority,
     priority === 'save_water' ? 'Save Water' : priority === 'improve_soil' ? 'Improve Soil' : priority === 'lower_cost' ? 'Lower Cost' : 'Reduce Risk',
     priority === 'save_water' ? 'পানি বাঁচানো' : priority === 'improve_soil' ? 'মাটির শক্তি' : priority === 'lower_cost' ? 'কম খরচ' : 'ঝুঁকি হ্রাস'

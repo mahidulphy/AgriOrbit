@@ -79,7 +79,7 @@ export const HowItWorksModal: React.FC<HowItWorksModalProps> = ({
               <p className="leading-relaxed text-xs text-[#737373]">
                 {language === 'en'
                   ? 'Actionable advisory with seasonal 3-crop rotations and alerts delivered directly to farmers with complete transparency.'
-                  : 'সম্পূর্ণ স্বচ্ছ হিসাব ও ৩ মৌসুমের ফসল পরিক্রমার পরামর্শ দেখে শেষ পর্যন্ত সিদ্ধান্ত নেন কৃষক নিজে।'}
+                  : 'সম্পূর্ণ স্বচ্ছ হিসাব ও ৩ মৌসুমের ফসল চক্রের পরামর্শ দেখে শেষ পর্যন্ত সিদ্ধান্ত নেন কৃষক নিজে।'}
               </p>
             </div>
           </div>

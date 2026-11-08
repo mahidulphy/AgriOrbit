@@ -5010,7 +5010,7 @@ export function toCropData(crop: Crop): CropData {
         : 'Aligned with field conditions and seasonal crop rotation guidelines.',
       priorityAlignmentBn: isEstimated
         ? 'এই ফসলের তথ্য এখনো যাচাই করা হয়নি; স্থানীয় কৃষি অফিসে নিশ্চিত হোন।'
-        : 'জমির আবহাওয়া ও মৌসুমী ফসল পরিক্রমার সাথে সামঞ্জস্যপূর্ণ।',
+        : 'জমির আবহাওয়া ও মৌসুমী ফসল চক্রের সাথে সামঞ্জস্যপূর্ণ।',
       rulesSatisfied: crop.decision_rules_en && crop.decision_rules_en.length > 0
         ? crop.decision_rules_en
         : [`Rule: Season match for ${crop.name_en}`],

@@ -262,7 +262,7 @@ export const DISTRICT_NASA_DATA: Partial<Record<DistrictId, {
       },
     ],
     climateShiftInsightEn: 'Dhaka floodplains face erratic monsoon rainfall distribution. Crop rotation incorporating deep-rooting mustard and pulses maintains soil organic structure.',
-    climateShiftInsightBn: 'বৃষ্টির সময়কাল কিছুটা পরিবর্তিত হয়েছে। বহুমুখী ফসল পরিক্রমা মাটির স্বাস্থ্য ধরে রাখে।',
+    climateShiftInsightBn: 'বৃষ্টির সময়কাল কিছুটা পরিবর্তিত হয়েছে। বহুমুখী ফসল চক্র মাটির স্বাস্থ্য ধরে রাখে।',
   },
 };
 
@@ -273,7 +273,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   save_water: {
     priority: 'save_water',
     summaryEn: 'Low-water pulse rotation. Replaces continuous groundwater pumping with drought-hardy legumes, then captures natural monsoon rainfall for rice.',
-    summaryBn: 'স্বল্প-পানির ডাল পরিক্রমা। গভীর সেচের পরিবর্তে কম পানির ডাল চাষ এবং বর্ষার বৃষ্টির পানিতে মূল ধান উৎপাদন।',
+    summaryBn: 'স্বল্প-পানির ডাল ফসল চক্র। গভীর সেচের পরিবর্তে কম পানির ডাল চাষ এবং বর্ষার বৃষ্টির পানিতে মূল ধান উৎপাদন।',
     estimatedWaterSavingPct: 44,
     soilHealthGainPct: 35,
     seasons: [
@@ -309,7 +309,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   improve_soil: {
     priority: 'improve_soil',
     summaryEn: 'Nitrogen-restoring and biomass rotation. Two complementary legumes/fiber crops enrich organic matter and loosen plow-pan compaction.',
-    summaryBn: 'জৈব পদার্থ ও নাইট্রোজেন বৃদ্ধিকারী শস্য পরিক্রমা। মাটির গঠন উন্নত করে এবং রাসায়নিক সারের খরচ কমায়।',
+    summaryBn: 'জৈব পদার্থ ও নাইট্রোজেন বৃদ্ধিকারী ফসল চক্র। মাটির গঠন উন্নত করে এবং রাসায়নিক সারের খরচ কমায়।',
     estimatedWaterSavingPct: 36,
     soilHealthGainPct: 52,
     seasons: [
@@ -345,7 +345,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   lower_cost: {
     priority: 'lower_cost',
     summaryEn: 'Cost-minimizing crop sequence. Replaces diesel fuel pumping and heavy chemical fertilizers with low-input crops and rainfed staples.',
-    summaryBn: 'কম খরচের শস্য পরিক্রমা। সেচের ডিজেল/বিদ্যুৎ ও বাড়তি রাসায়নিক সারের খরচ বাঁচিয়ে সর্বোচ্চ লাভ নিশ্চিত করে।',
+    summaryBn: 'কম খরচের ফসল চক্র। সেচের ডিজেল/বিদ্যুৎ ও বাড়তি রাসায়নিক সারের খরচ বাঁচিয়ে সর্বোচ্চ লাভ নিশ্চিত করে।',
     estimatedWaterSavingPct: 40,
     soilHealthGainPct: 30,
     seasons: [
@@ -381,7 +381,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   maximize_profit: {
     priority: 'maximize_profit',
     summaryEn: 'Profit-oriented sequence (indicative): pairs short-duration cash crops with strong local suitability and modest input cost, anchored by rainfed monsoon rice. Not a price forecast.',
-    summaryBn: 'লাভ-ভিত্তিক পরিক্রমা (নির্দেশক): কম খরচে ভালো উপযোগী অর্থকরী ফসল ও বৃষ্টিনির্ভর আমন ধানের সমন্বয়। এটি বাজারদরের পূর্বাভাস নয়।',
+    summaryBn: 'লাভ-ভিত্তিক ফসল চক্র (নির্দেশক): কম খরচে ভালো উপযোগী অর্থকরী ফসল ও বৃষ্টিনির্ভর আমন ধানের সমন্বয়। এটি বাজারদরের পূর্বাভাস নয়।',
     estimatedWaterSavingPct: 38,
     soilHealthGainPct: 30,
     seasons: [
@@ -417,7 +417,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   maximize_yield: {
     priority: 'maximize_yield',
     summaryEn: 'Yield-oriented sequence: proven high-performing crops matched to the field climate window. Expects assured irrigation where noted; reflects suitability, not guaranteed harvest.',
-    summaryBn: 'ফলন-ভিত্তিক পরিক্রমা: মাঠের উপযোগী প্রমাণিত উচ্চফলনশীল ফসলের সমন্বয়। যেখানে সেচ নিশ্চিত প্রয়োজন তা উল্লেখ করা হয়েছে; এটি সম্ভাব্য উপযোগিতা, নিশ্চিত ফলন নয়।',
+    summaryBn: 'ফলন-ভিত্তিক ফসল চক্র: মাঠের উপযোগী প্রমাণিত উচ্চফলনশীল ফসলের সমন্বয়। যেখানে সেচ নিশ্চিত প্রয়োজন তা উল্লেখ করা হয়েছে; এটি সম্ভাব্য উপযোগিতা, নিশ্চিত ফলন নয়।',
     estimatedWaterSavingPct: 24,
     soilHealthGainPct: 28,
     seasons: [
@@ -453,7 +453,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   reduce_risk: {
     priority: 'reduce_risk',
     summaryEn: 'Climate-resilient sequence. Defers vulnerable crops, avoids peak dry-spells and flood windows with diversified, hardy species.',
-    summaryBn: 'জলবায়ু ঝুঁকি প্রতিরোধী পরিক্রমা। খরা ও আকস্মিক বন্যার সময় এড়িয়ে সুরক্ষিত ও সহনশীল ফসল নিশ্চিত করে।',
+    summaryBn: 'জলবায়ু ঝুঁকি প্রতিরোধী ফসল চক্র। খরা ও আকস্মিক বন্যার সময় এড়িয়ে সুরক্ষিত ও সহনশীল ফসল নিশ্চিত করে।',
     estimatedWaterSavingPct: 32,
     soilHealthGainPct: 38,
     seasons: [
@@ -489,7 +489,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   higher_income: {
     priority: 'higher_income',
     summaryEn: 'High commercial return sequence (approximate): pairs proven cash crops (Mustard, Jute) with rainfed monsoon staple rice to maximize earnings without excessive risk.',
-    summaryBn: 'উচ্চ আয়ের শস্য পরিক্রমা (আনুমানিক): ভালো বাজারদরের অর্থকরী ফসল (সরিষা, পাট) ও বৃষ্টিনির্ভর আমন ধানের সমন্বয়। এটি আনুমানিক সম্ভাবনা, তাৎক্ষণিক বাজারদর নয়।',
+    summaryBn: 'উচ্চ আয়ের ফসল চক্র (আনুমানিক): ভালো বাজারদরের অর্থকরী ফসল (সরিষা, পাট) ও বৃষ্টিনির্ভর আমন ধানের সমন্বয়। এটি আনুমানিক সম্ভাবনা, তাৎক্ষণিক বাজারদর নয়।',
     estimatedWaterSavingPct: 38,
     soilHealthGainPct: 30,
     seasons: [
@@ -525,7 +525,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   quick_harvest: {
     priority: 'quick_harvest',
     summaryEn: 'Fast-turnaround 3-crop sequence. Selects short-duration varieties (Mustard 80d, Mungbean 65d) to free up land quickly and avoid climatic hazards.',
-    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী পরিক্রমা। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
+    summaryBn: 'দ্রুত ফসল তোলার ৩-ফসলী ফসল চক্র। স্বল্পমেয়াদী ফসল (সরিষা ৮০ দিন, মুগ ৬৫ দিন) জমি দ্রুত খালি করে এবং আবহাওয়ার ঝুঁকি কমায়।',
     estimatedWaterSavingPct: 42,
     soilHealthGainPct: 40,
     seasons: [
@@ -561,7 +561,7 @@ export const ROTATION_PLANS: Record<FarmerPriorityId, RotationPlan> = {
   family_food: {
     priority: 'family_food',
     summaryEn: 'Year-round household dietary staple sequence. Ensures family carbohydrate (rice, wheat) and protein (pulses) self-sufficiency.',
-    summaryBn: 'পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা পরিক্রমা। পরিবারের সারা বছরের ভাত, আটা ও ডালের চাহিদা স্বয়ংসম্পূর্ণভাবে পূরণ করে।',
+    summaryBn: 'পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা ফসল চক্র। পরিবারের সারা বছরের ভাত, আটা ও ডালের চাহিদা স্বয়ংসম্পূর্ণভাবে পূরণ করে।',
     estimatedWaterSavingPct: 35,
     soilHealthGainPct: 36,
     seasons: [

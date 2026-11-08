@@ -69,7 +69,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
       : `${locationLabel}-এর এগ্রিঅরবিট কৃষি পরামর্শ`;
     const shareText = isEn
       ? `AgriOrbit Advisory: Recommended 3-Season Rotation: ${rotationSequenceEn}. Data: NASA POWER, SMAP & BARI.`
-      : `এগ্রিঅরবিট কৃষি পরামর্শ: প্রস্তাবিত ৩-মৌসুমী পরিক্রমা: ${rotationSequenceBn}। তথ্যসূত্র: নাসা ও বারি।`;
+      : `এগ্রিঅরবিট কৃষি পরামর্শ: প্রস্তাবিত ৩-মৌসুমী ফসল চক্র: ${rotationSequenceBn}। তথ্যসূত্র: নাসা ও বারি।`;
 
     if (navigator.share) {
       navigator.share({
@@ -181,7 +181,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
         {/* Pillar 2: Recommended 3-Season Rotation */}
         <div className="p-5 rounded-xl bg-[#0A0A0A] print:bg-gray-50 border border-[#262626] print:border-gray-200">
           <span className="text-xs font-mono uppercase text-[#22C55E] print:text-emerald-700 font-bold block mb-3">
-            02 · {isEn ? 'Recommended 3-Season Cycle' : '৩-মৌসুমের শস্য পর্যায়'}
+            02 · {isEn ? 'Recommended 3-Season Cycle' : '৩-মৌসুমের ফসল চক্র'}
           </span>
           <div className="space-y-2 text-xs">
             {engineResult.picks.map((pick, i) => {
