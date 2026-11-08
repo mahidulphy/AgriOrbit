@@ -102,6 +102,9 @@ export const OnboardingWizardPage: React.FC = () => {
 
   const [currentCrop, setCurrentCrop] = useState<string>('aman');
   const [previousCrop, setPreviousCrop] = useState<string>('jute');
+  const [currentRotationRabi, setCurrentRotationRabi] = useState<string>('boro');
+  const [currentRotationKharif1, setCurrentRotationKharif1] = useState<string>('fallow');
+  const [currentRotationKharif2, setCurrentRotationKharif2] = useState<string>('aman');
 
   const [selectedPriorities, setSelectedPriorities] = useState<FarmerPriorityId[]>([]);
   const [pastDamages, setPastDamages] = useState<string[]>([]);
@@ -174,6 +177,9 @@ export const OnboardingWizardPage: React.FC = () => {
               setField({ ...primary });
               if (primary.currentCrop) setCurrentCrop(primary.currentCrop);
               if (primary.previousCrop) setPreviousCrop(primary.previousCrop);
+              if (primary.currentRotationRabi) setCurrentRotationRabi(primary.currentRotationRabi);
+              if (primary.currentRotationKharif1) setCurrentRotationKharif1(primary.currentRotationKharif1);
+              if (primary.currentRotationKharif2) setCurrentRotationKharif2(primary.currentRotationKharif2);
             } else {
               const dAdmin = getDistrictAdmin('rangpur');
               setField((prev) => ({
@@ -208,6 +214,9 @@ export const OnboardingWizardPage: React.FC = () => {
                 setField((prev) => ({ ...prev, ...gf }));
                 if (gf.currentCrop) setCurrentCrop(gf.currentCrop);
                 if (gf.previousCrop) setPreviousCrop(gf.previousCrop);
+                if (gf.currentRotationRabi) setCurrentRotationRabi(gf.currentRotationRabi);
+                if (gf.currentRotationKharif1) setCurrentRotationKharif1(gf.currentRotationKharif1);
+                if (gf.currentRotationKharif2) setCurrentRotationKharif2(gf.currentRotationKharif2);
               } catch {}
             }
 
@@ -392,6 +401,9 @@ export const OnboardingWizardPage: React.FC = () => {
             waterSource: field.waterSource || (field.irrigation === 'canal_surface' ? 'river' : field.irrigation === 'rainfed' ? 'rainwater' : 'groundwater'),
             currentCrop,
             previousCrop,
+            currentRotationRabi,
+            currentRotationKharif1,
+            currentRotationKharif2,
             isPrimary: true,
             updatedAt: new Date().toISOString(),
           };
@@ -426,6 +438,9 @@ export const OnboardingWizardPage: React.FC = () => {
             ...field,
             currentCrop,
             previousCrop,
+            currentRotationRabi,
+            currentRotationKharif1,
+            currentRotationKharif2,
             updatedAt: new Date().toISOString(),
           };
 
@@ -502,6 +517,9 @@ export const OnboardingWizardPage: React.FC = () => {
             waterSource: field.waterSource || (field.irrigation === 'canal_surface' ? 'river' : field.irrigation === 'rainfed' ? 'rainwater' : 'groundwater'),
             currentCrop,
             previousCrop,
+            currentRotationRabi,
+            currentRotationKharif1,
+            currentRotationKharif2,
             isPrimary: true,
             updatedAt: new Date().toISOString(),
           };
@@ -525,6 +543,9 @@ export const OnboardingWizardPage: React.FC = () => {
             ...field,
             currentCrop,
             previousCrop,
+            currentRotationRabi,
+            currentRotationKharif1,
+            currentRotationKharif2,
             updatedAt: new Date().toISOString(),
           };
           sessionStorage.setItem('agriorbit_guest_field', JSON.stringify(updatedField));
@@ -786,6 +807,12 @@ export const OnboardingWizardPage: React.FC = () => {
               onCurrentCropChange={setCurrentCrop}
               previousCrop={previousCrop}
               onPreviousCropChange={setPreviousCrop}
+              currentRotationRabi={currentRotationRabi}
+              onCurrentRotationRabiChange={setCurrentRotationRabi}
+              currentRotationKharif1={currentRotationKharif1}
+              onCurrentRotationKharif1Change={setCurrentRotationKharif1}
+              currentRotationKharif2={currentRotationKharif2}
+              onCurrentRotationKharif2Change={setCurrentRotationKharif2}
               isBn={isBn}
               showPlannedNext={false}
               errors={fieldErrors}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sprout, RefreshCw } from 'lucide-react';
+import { Sprout, RefreshCw, Calendar, Sparkles } from 'lucide-react';
 import { CROPS, FAMILY_LABEL, resolveCropId as canonicalResolveCropId } from '../../../data/crops';
 import { CROP_CATEGORIES } from '../../../data/cropCategories';
 
@@ -10,6 +10,13 @@ export interface CropHistorySectionProps {
   onPreviousCropChange: (val: string) => void;
   plannedNextCrop?: string;
   onPlannedNextCropChange?: (val: string) => void;
+  // Current 3-season rotation baseline for NASA Field Shift comparison
+  currentRotationRabi?: string;
+  onCurrentRotationRabiChange?: (val: string) => void;
+  currentRotationKharif1?: string;
+  onCurrentRotationKharif1Change?: (val: string) => void;
+  currentRotationKharif2?: string;
+  onCurrentRotationKharif2Change?: (val: string) => void;
   isBn: boolean;
   showPlannedNext?: boolean;
   errors?: { currentCrop?: string; previousCrop?: string };
@@ -18,8 +25,11 @@ export interface CropHistorySectionProps {
 export function resolveCropId(val: string): string {
   if (!val) return 'fallow';
   const lower = val.toLowerCase().trim();
-  if (lower === 'fallow' || lower.includes('খালি') || lower.includes('পতিত') || lower.includes('preparing')) return 'fallow';
+  if (lower === 'fallow' || lower.includes('খালি') || lower.includes('পতিত') || lower.includes('preparing') || lower.includes('bare')) return 'fallow';
   if (lower === 'other' || lower.includes('অন্য')) return 'other';
+  if (lower === 'boro_rice') return 'boro';
+  if (lower === 'aus_rice') return 'aus';
+  if (lower === 'aman_rice' || lower === 't_aman_rice') return 'aman';
   return canonicalResolveCropId(val) || val;
 }
 
@@ -30,29 +40,51 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
   onPreviousCropChange,
   plannedNextCrop,
   onPlannedNextCropChange,
+  currentRotationRabi = 'boro',
+  onCurrentRotationRabiChange,
+  currentRotationKharif1 = 'fallow',
+  onCurrentRotationKharif1Change,
+  currentRotationKharif2 = 'aman',
+  onCurrentRotationKharif2Change,
   isBn,
   showPlannedNext = false,
   errors,
 }) => {
   const normalizedCurrent = resolveCropId(currentCrop);
   const normalizedPrevious = resolveCropId(previousCrop);
+  const normalizedRabi = resolveCropId(currentRotationRabi);
+  const normalizedKharif1 = resolveCropId(currentRotationKharif1);
+  const normalizedKharif2 = resolveCropId(currentRotationKharif2);
 
   const prevCropData = CROPS.find((c) => c.id === normalizedPrevious);
   const currCropData = CROPS.find((c) => c.id === normalizedCurrent);
+  const rabiCropData = CROPS.find((c) => c.id === normalizedRabi);
+  const kharif1CropData = CROPS.find((c) => c.id === normalizedKharif1);
+  const kharif2CropData = CROPS.find((c) => c.id === normalizedKharif2);
 
-  const renderGroupedOptions = () => (
+  const renderGroupedOptions = (seasonFilter?: 'rabi' | 'kharif1' | 'kharif2') => (
     <>
-      <optgroup label={isBn ? '── সাধারণ অবস্থা ──' : '── Field Status ──'} className="bg-[#141414] text-[#A3A3A3]">
-        <option value="fallow" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'জমি খালি ছিল (পতিত)' : 'Field was empty / Fallow'}</option>
-        <option value="other" className="bg-[#141414] text-[#FAFAFA]">{isBn ? 'অন্য ফসল (তালিকাবহির্ভূত)' : 'Other crop'}</option>
+      <optgroup label={isBn ? '── জমি অবস্থা ──' : '── Field Status ──'} className="bg-[#141414] text-[#A3A3A3]">
+        <option value="fallow" className="bg-[#141414] text-[#FAFAFA]">
+          {isBn ? 'পতিত / খালি জমি (Fallow / Bare)' : 'Field Empty / Fallow'}
+        </option>
+        <option value="other" className="bg-[#141414] text-[#FAFAFA]">
+          {isBn ? 'অন্যান্য ফসল (Other)' : 'Other crop'}
+        </option>
       </optgroup>
       {CROP_CATEGORIES.map((cat) => {
-        const catCrops = CROPS.filter((c) => c.category_id === cat.id);
+        let catCrops = CROPS.filter((c) => c.category_id === cat.id);
+        if (seasonFilter) {
+          catCrops = catCrops.filter(
+            (c) => !c.seasons || c.seasons.length === 0 || c.seasons.includes(seasonFilter)
+          );
+        }
+        if (catCrops.length === 0) return null;
         return (
           <optgroup key={cat.id} label={isBn ? cat.name_bn : cat.name_en} className="bg-[#141414] text-[#A3A3A3]">
             {catCrops.map((c) => (
               <option key={c.id} value={c.id} className="bg-[#141414] text-[#FAFAFA]">
-                {isBn ? c.name_bn : c.name_en}
+                {isBn ? c.name_bn : c.name_en} {c.is_legume ? (isBn ? ' [ডাল/নাইট্রোজেন]' : ' [Legume]') : ''}
               </option>
             ))}
           </optgroup>
@@ -67,13 +99,125 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
       <div className="border-b border-[#262626] pb-4">
         <h2 className="font-display text-lg font-semibold text-[#FAFAFA] flex items-center gap-2">
           <Sprout className="w-5 h-5 text-[#22C55E]" />
-          <span>{isBn ? 'ফসলের ইতিহাস ও আবর্তন তথ্য' : 'Crop History & Rotation Sequence'}</span>
+          <span>{isBn ? 'ফসলের ইতিহাস ও বর্তমান আবর্তন চক্র' : 'Crop History & Current Rotation'}</span>
         </h2>
-        <p className="text-xs text-[#737373] mt-1">
+        <p className="text-xs text-[#737373] mt-1 leading-relaxed">
           {isBn
-            ? 'বর্তমানে এবং পূর্বে চাষকৃত ফসলের তথ্য দিন। আমাদের আবর্তন অ্যালগরিদম একই গোত্রের ফসল পরপর চাষ রোধ করে মাটির উর্বরতা রক্ষা করবে।'
-            : 'Tell us what is currently growing and what you grew last season. AgriOrbit rotation logic uses this to prevent soil depletion.'}
+            ? 'নাসা ও বারি আবর্তন বিশ্লেষণের জন্য আপনার বর্তমান ৩-মৌসুমের শস্য চক্র এবং সাম্প্রতিক ফসলের তথ্য দিন।'
+            : 'Enter your typical 3-season crop cycle and recent field history for NASA Field Shift evaluation.'}
         </p>
+      </div>
+
+      {/* NASA Field Shift Baseline: Current 3-Season Rotation */}
+      <div className="p-4 sm:p-5 rounded-xl bg-[#141414] border border-[#262626] space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-[#22C55E]" />
+            <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#FAFAFA]">
+              {isBn ? 'আপনার বর্তমান বার্ষিক ফসল চক্র (৩ মৌসুম)' : 'Your Current Annual Crop Rotation (3 Seasons)'}
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-[#22C55E] border border-emerald-500/20">
+            {isBn ? 'ফিল্ড শিফট বেসলাইন' : 'Field Shift Baseline'}
+          </span>
+        </div>
+        <p className="text-xs text-[#A3A3A3] leading-relaxed">
+          {isBn
+            ? 'জমিতে সাধারণত প্রতি বছর কোন মৌসুমে কী চাষ করেন? (যদি কোনো মৌসুমে জমি খালি থাকে তবে "পতিত জমি" নির্বাচন করুন):'
+            : 'What do you typically cultivate in your field each season? Select "Fallow" if left bare:'}
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
+          {/* Rabi Season */}
+          <div className="p-3 rounded-lg bg-[#0A0A0A] border border-[#262626] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[11px] font-mono font-bold text-[#22C55E] uppercase">
+                  {isBn ? '১. রবি (শীতকাল)' : '1. Rabi (Winter)'}
+                </span>
+                <span className="text-[10px] text-[#737373] font-mono">
+                  {isBn ? 'নভেম্বর – ফেব্রু' : 'Nov – Feb'}
+                </span>
+              </div>
+              <select
+                value={normalizedRabi}
+                onChange={(e) => onCurrentRotationRabiChange && onCurrentRotationRabiChange(e.target.value)}
+                className="w-full min-h-[40px] px-2.5 py-1.5 rounded bg-[#141414] border border-[#262626] text-[#FAFAFA] text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
+              >
+                {renderGroupedOptions('rabi')}
+              </select>
+            </div>
+            <div className="mt-2 text-[10px] font-mono text-[#737373]">
+              {rabiCropData ? (
+                <span className="text-[#A3A3A3]">
+                  {isBn ? 'গোত্র:' : 'Family:'} {FAMILY_LABEL[rabiCropData.family]?.en || rabiCropData.family}
+                </span>
+              ) : (
+                <span className="text-amber-500/80">{isBn ? 'পতিত / অনাবাদী' : 'Fallow / Rest'}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Kharif-1 Season */}
+          <div className="p-3 rounded-lg bg-[#0A0A0A] border border-[#262626] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[11px] font-mono font-bold text-[#22C55E] uppercase">
+                  {isBn ? '২. খরিফ-১ (গ্রীষ্ম)' : '2. Kharif-1 (Summer)'}
+                </span>
+                <span className="text-[10px] text-[#737373] font-mono">
+                  {isBn ? 'মার্চ – জুন' : 'Mar – Jun'}
+                </span>
+              </div>
+              <select
+                value={normalizedKharif1}
+                onChange={(e) => onCurrentRotationKharif1Change && onCurrentRotationKharif1Change(e.target.value)}
+                className="w-full min-h-[40px] px-2.5 py-1.5 rounded bg-[#141414] border border-[#262626] text-[#FAFAFA] text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
+              >
+                {renderGroupedOptions('kharif1')}
+              </select>
+            </div>
+            <div className="mt-2 text-[10px] font-mono text-[#737373]">
+              {kharif1CropData ? (
+                <span className="text-[#A3A3A3]">
+                  {isBn ? 'গোত্র:' : 'Family:'} {FAMILY_LABEL[kharif1CropData.family]?.en || kharif1CropData.family}
+                </span>
+              ) : (
+                <span className="text-amber-500/80">{isBn ? 'পতিত / অনাবাদী' : 'Fallow / Rest'}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Kharif-2 Season */}
+          <div className="p-3 rounded-lg bg-[#0A0A0A] border border-[#262626] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[11px] font-mono font-bold text-[#22C55E] uppercase">
+                  {isBn ? '৩. খরিফ-২ (বর্ষা)' : '3. Kharif-2 (Monsoon)'}
+                </span>
+                <span className="text-[10px] text-[#737373] font-mono">
+                  {isBn ? 'জুলাই – অক্টো' : 'Jul – Oct'}
+                </span>
+              </div>
+              <select
+                value={normalizedKharif2}
+                onChange={(e) => onCurrentRotationKharif2Change && onCurrentRotationKharif2Change(e.target.value)}
+                className="w-full min-h-[40px] px-2.5 py-1.5 rounded bg-[#141414] border border-[#262626] text-[#FAFAFA] text-xs focus:border-[#22C55E] focus:outline-none cursor-pointer"
+              >
+                {renderGroupedOptions('kharif2')}
+              </select>
+            </div>
+            <div className="mt-2 text-[10px] font-mono text-[#737373]">
+              {kharif2CropData ? (
+                <span className="text-[#A3A3A3]">
+                  {isBn ? 'গোত্র:' : 'Family:'} {FAMILY_LABEL[kharif2CropData.family]?.en || kharif2CropData.family}
+                </span>
+              ) : (
+                <span className="text-amber-500/80">{isBn ? 'পতিত / অনাবাদী' : 'Fallow / Rest'}</span>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Rotation Rule A Educational Banner */}
@@ -91,6 +235,7 @@ export const CropHistorySection: React.FC<CropHistorySectionProps> = ({
         </div>
       </div>
 
+      {/* Current and Previous Crop Inputs */}
       <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
         {/* Current Crop */}
         <div>

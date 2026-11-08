@@ -30,6 +30,12 @@ export function AnalyzePage() {
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
   const [secondaryPriority, setSecondaryPriority] = useState<FarmerPriorityId | null>(null);
   const [previousCrop, setPreviousCrop] = useState<string>('jute');
+  const [currentRotation, setCurrentRotation] = useState<{ rabi?: string; kharif1?: string; kharif2?: string }>({
+    rabi: 'boro',
+    kharif1: 'fallow',
+    kharif2: 'aman',
+  });
+  const [soilType, setSoilType] = useState<string>('loam');
   const [farmerName, setFarmerName] = useState<string>('');
 
   // Authentication & profile loading states
@@ -54,6 +60,14 @@ export function AnalyzePage() {
         if (guestFieldRaw) {
           const gf = JSON.parse(guestFieldRaw);
           if (gf.previousCrop) setPreviousCrop(gf.previousCrop);
+          if (gf.currentRotationRabi || gf.currentRotationKharif1 || gf.currentRotationKharif2) {
+            setCurrentRotation({
+              rabi: gf.currentRotationRabi || 'boro',
+              kharif1: gf.currentRotationKharif1 || 'fallow',
+              kharif2: gf.currentRotationKharif2 || 'aman',
+            });
+          }
+          if (gf.soilType) setSoilType(gf.soilType);
           if (gf.district) {
             setLocation({
               district: gf.district as DistrictId,
@@ -123,6 +137,16 @@ export function AnalyzePage() {
       }
 
       if (active?.previousCrop) setPreviousCrop(active.previousCrop);
+      if (active) {
+        if (active.currentRotationRabi || active.currentRotationKharif1 || active.currentRotationKharif2) {
+          setCurrentRotation({
+            rabi: active.currentRotationRabi || 'boro',
+            kharif1: active.currentRotationKharif1 || 'fallow',
+            kharif2: active.currentRotationKharif2 || 'aman',
+          });
+        }
+        if (active.soilType) setSoilType(active.soilType);
+      }
       setLocation({
         district: targetDistrict,
         upazila: targetUpazila,
@@ -268,6 +292,8 @@ export function AnalyzePage() {
       selectedPriority={primaryPriority}
       secondaryPriority={secondaryPriority}
       previousCrop={previousCrop}
+      currentRotation={currentRotation}
+      soilType={soilType}
       language={lang}
       onLanguageChange={handleLanguageChange}
       onChangeFieldLocation={() => {

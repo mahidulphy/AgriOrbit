@@ -10,7 +10,10 @@ export interface FarmerProfile {
   landSize: number;
   landUnit: 'bigha' | 'acre' | 'decimal';
   landElevation: 'high' | 'medium_high' | 'medium_low' | 'low';
-  soilType: 'loam' | 'clay_loam' | 'sandy_loam' | 'clay' | 'silt_loam';
+  soilType: 'sandy' | 'loam' | 'clay_loam' | 'clay' | 'sandy_loam' | 'silt_loam' | 'dont_know';
+  currentRotationRabi?: string;
+  currentRotationKharif1?: string;
+  currentRotationKharif2?: string;
   irrigation: 'deep_tubewell' | 'shallow_tubewell' | 'canal_surface' | 'rainfed';
   previousCrops: string[];
   pastDamages: string[];
@@ -47,7 +50,9 @@ export const SOIL_TYPE_OPTIONS = [
   { id: 'clay_loam', en: 'Clay Loam (Water-retentive)', bn: 'এঁটেল দোআঁশ' },
   { id: 'sandy_loam', en: 'Sandy Loam (Quick draining)', bn: 'বেলে দোআঁশ' },
   { id: 'silt_loam', en: 'Silt Alluvium (River basin)', bn: 'পলি দোআঁশ (নদী অববাহিকা)' },
-  { id: 'clay', en: 'Heavy Clay (Dense soil)', bn: 'ভারী এঁটেল মাটি' },
+  { id: 'clay', en: 'Clay (Heavy & dense)', bn: 'এঁটেল মাটি (ভারী ও আঠালো)' },
+  { id: 'sandy', en: 'Sandy (Light & quick-draining)', bn: 'বেলে মাটি (হালকা ও দ্রুত পানি নামে)' },
+  { id: 'dont_know', en: "Don't know / Soil test pending", bn: 'জানা নেই / পরীক্ষা করা হয়নি' },
 ] as const;
 
 export const IRRIGATION_OPTIONS = [
@@ -76,6 +81,9 @@ export const DEFAULT_FARMER_PROFILE: FarmerProfile = {
   soilType: 'loam',
   irrigation: 'deep_tubewell',
   previousCrops: [],
+  currentRotationRabi: 'boro',
+  currentRotationKharif1: 'fallow',
+  currentRotationKharif2: 'aman',
   pastDamages: [],
   pastDamageNotes: '',
   primaryGoal: 'soil_health',

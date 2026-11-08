@@ -18,7 +18,10 @@ export interface FarmField {
   area: number;
   unit: 'bigha' | 'acre' | 'decimal' | 'hectare';
   elevation: 'high' | 'medium_high' | 'medium_low' | 'low';
-  soilType: 'loam' | 'clay_loam' | 'sandy_loam' | 'clay' | 'silt_loam';
+  soilType: 'sandy' | 'loam' | 'clay_loam' | 'clay' | 'sandy_loam' | 'silt_loam' | 'dont_know';
+  currentRotationRabi?: string;
+  currentRotationKharif1?: string;
+  currentRotationKharif2?: string;
   irrigation: 'deep_tubewell' | 'shallow_tubewell' | 'canal_surface' | 'rainfed';
   waterSource: 'groundwater' | 'river' | 'pond' | 'rainwater';
   currentCrop: string;
@@ -79,6 +82,9 @@ export const DEFAULT_INITIAL_FIELD: FarmField = {
   currentCrop: 'aman',
   previousCrop: 'jute',
   plannedNextCrop: 'mustard',
+  currentRotationRabi: 'boro',
+  currentRotationKharif1: 'fallow',
+  currentRotationKharif2: 'aman',
   growingSeason: 'rabi',
   isPrimary: true,
   notes: 'উর্বর পলি দোআঁশ মাটি, রবি মৌসুমে সরিষা ও বোরো আবর্তনের জন্য উপযুক্ত।',
@@ -274,6 +280,9 @@ export async function loadFarmerProfile(
           currentCrop: f.current_crop,
           previousCrop: f.previous_crop,
           plannedNextCrop: f.planned_next_crop,
+          currentRotationRabi: f.current_rotation_rabi || (f.notes && f.notes.includes('rotation_rabi:') ? f.notes.split('rotation_rabi:')[1]?.split(';')[0] : (f.current_crop === 'boro' || f.current_crop === 'potato' || f.current_crop === 'mustard' ? f.current_crop : 'boro')),
+          currentRotationKharif1: f.current_rotation_kharif1 || (f.notes && f.notes.includes('rotation_kharif1:') ? f.notes.split('rotation_kharif1:')[1]?.split(';')[0] : 'fallow'),
+          currentRotationKharif2: f.current_rotation_kharif2 || (f.notes && f.notes.includes('rotation_kharif2:') ? f.notes.split('rotation_kharif2:')[1]?.split(';')[0] : 'aman'),
           growingSeason: f.growing_season,
           isPrimary: f.is_primary,
           notes: f.notes || '',
@@ -314,6 +323,9 @@ export async function loadFarmerProfile(
           currentCrop: 'aman',
           previousCrop: 'jute',
           plannedNextCrop: 'mustard',
+  currentRotationRabi: 'boro',
+  currentRotationKharif1: 'fallow',
+  currentRotationKharif2: 'aman',
           growingSeason: 'rabi',
           isPrimary: true,
           notes: '',
@@ -654,7 +666,7 @@ export async function saveFarmField(
         growing_season: fieldToSave.growingSeason || 'rabi',
         is_primary: fieldToSave.isPrimary ?? true,
         priority: fieldToSave.priority || 'save_water',
-        notes: fieldToSave.notes || '',
+        notes: `${(fieldToSave.notes || '').replace(/\s*\[rotation_[^\]]+\]/g, '')} [rotation_rabi:${fieldToSave.currentRotationRabi || 'boro'};rotation_kharif1:${fieldToSave.currentRotationKharif1 || 'fallow'};rotation_kharif2:${fieldToSave.currentRotationKharif2 || 'aman'};]`,
         updated_at: new Date().toISOString(),
       };
 

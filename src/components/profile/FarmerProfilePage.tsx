@@ -848,6 +848,12 @@ export const FarmerProfilePage: React.FC = () => {
                 onPreviousCropChange={(val) => setEditingField({ ...editingField, previousCrop: val })}
                 plannedNextCrop={editingField.plannedNextCrop}
                 onPlannedNextCropChange={(val) => setEditingField({ ...editingField, plannedNextCrop: val })}
+                currentRotationRabi={editingField.currentRotationRabi || 'boro'}
+                onCurrentRotationRabiChange={(val) => setEditingField({ ...editingField, currentRotationRabi: val })}
+                currentRotationKharif1={editingField.currentRotationKharif1 || 'fallow'}
+                onCurrentRotationKharif1Change={(val) => setEditingField({ ...editingField, currentRotationKharif1: val })}
+                currentRotationKharif2={editingField.currentRotationKharif2 || 'aman'}
+                onCurrentRotationKharif2Change={(val) => setEditingField({ ...editingField, currentRotationKharif2: val })}
                 isBn={isBn}
                 showPlannedNext={true}
               />

@@ -520,7 +520,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
       rulesTriggeredBn,
       thresholdsEvaluated: evaluatedParams,
       scientificNotesEn:
-        'NASA GPM observes recent cumulative rainfall over a ~10 km grid. Open-Meteo provides the 7-day numerical forecast. AgriOrbit combines these physical inputs with local soil characteristics and cropping calendars using deterministic agronomic rules. NASA does not issue agricultural advisories.',
+        'NASA POWER observes recent cumulative rainfall over a ~10 km grid. Open-Meteo provides the 7-day numerical forecast. AgriOrbit combines these physical inputs with local soil characteristics and cropping calendars using deterministic agronomic rules. NASA does not issue agricultural advisories.',
       scientificNotesBn:
         'নাসা জিপিএম ১০ কিমি গ্রিডে সাম্প্রতিক বৃষ্টিপাত পর্যবেক্ষণ করে। ওপেন-মেটিও আগামী ৭ দিনের পূর্বাভাস দেয়। এগ্রিঅরবিট এই তথ্যগুলো স্থানীয় মাটির চরিত্র ও কৃষি ক্যালেন্ডারের সাথে মিলিয়ে সুনির্দিষ্ট নিয়মের ভিত্তিতে পরামর্শ তৈরি করে। নাসা সরাসরি কৃষকদের কোন পরামর্শ জারি করে না।',
     },

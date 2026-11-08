@@ -85,7 +85,7 @@ const en = {
     eyebrow: 'Why AgriOrbit',
     title: 'Satellites observe. Rules explain. You decide.',
     cards: [
-      { n: '01', t: 'NASA observes', d: 'NASA POWER gives rain, temperature and humidity today; soil moisture and vegetation (SMAP/MODIS) are being added.' },
+      { n: '01', t: 'NASA observes', d: 'NASA POWER gives rain, temperature and humidity today; NASA SMAP and MODIS provide satellite soil moisture and vegetation health.' },
       { n: '02', t: 'AgriOrbit explains', d: 'Every score comes from a written rule you can read. No machine learning, no black box. For example:' },
       { n: '03', t: 'The farmer decides', d: 'We show options and reasons, not orders. Your knowledge of your own land has the final say.' },
     ],
@@ -157,7 +157,7 @@ const en = {
 
   weatherAdvisory: {
     badges: {
-      nasa: 'NASA GPM',
+      nasa: 'NASA POWER (rain)',
       forecast: 'Open-Meteo',
       agriorbit: 'AgriOrbit',
       live: 'LIVE',
@@ -179,7 +179,7 @@ const en = {
       heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
         `Open-Meteo forecasts ${forecastMm} mm over the next 7 days (peak ${peakMm} mm on ${peakDate}). Field conditions can quickly become saturated.`,
       drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>
-        `Forecast indicates only ~${forecastMm} mm over 7 days, compounded by NASA GPM observed deficit (${gpmRecentMm} mm recent). Root-zone soil moisture is ${soilMoisture} m³/m³.`,
+        `Forecast indicates only ~${forecastMm} mm over 7 days, compounded by NASA POWER observed precipitation deficit (${gpmRecentMm} mm recent). Root-zone soil moisture is ${soilMoisture} m³/m³.`,
       favorableBalance: (forecastMm: number, soilMoisture: string) =>
         `Precipitation forecast (~${forecastMm} mm) and NASA SMAP root-zone moisture (${soilMoisture} m³/m³) are within safe agronomic parameters.`,
     },
@@ -345,7 +345,7 @@ const bn: Dict = {
     eyebrow: 'কেন অ্যাগ্রিঅরবিট',
     title: 'স্যাটেলাইট দেখে, নিয়ম বুঝিয়ে দেয়, সিদ্ধান্ত নেন আপনি।',
     cards: [
-      { n: '০১', t: 'নাসা নজর রাখে', d: 'নাসা পাওয়ার দেয় আজকের বৃষ্টি, তাপমাত্রা ও বাতাসের আর্দ্রতা; এর সাথে মাটির রস আর ফসলের হালও (স্ম্যাপ/মোডিস) যুক্ত হচ্ছে।' },
+      { n: '০১', t: 'নাসা নজর রাখে', d: 'নাসা পাওয়ার দেয় আজকের বৃষ্টি, তাপমাত্রা ও বাতাসের আর্দ্রতা; নাসা স্ম্যাপ ও মোডিস সরবরাহ করে মাটির রস ও ফসলের সবুজ আচ্ছাদন।' },
       { n: '০২', t: 'অ্যাগ্রিঅরবিট বুঝিয়ে বলে', d: 'প্রতিটি নম্বর বা পরামর্শের পেছনে স্পষ্ট নিয়ম আছে, যা আপনি নিজেই পড়তে পারবেন। কোনো জটিল বা অজানা হিসাব নেই। যেমন:' },
       { n: '০৩', t: 'শেষ সিদ্ধান্ত কৃষকের', d: 'আমরা শুধু পথ আর কারণ দেখাই, হুকুম দিই না। নিজের জমি আপনিই সবচেয়ে ভালো চেনেন।' },
     ],
@@ -439,7 +439,7 @@ const bn: Dict = {
       heavyRainModerate: (forecastMm: number, peakMm: number, peakDate: string) =>
         `ওপেন-মেটিও পূর্বাভাস অনুযায়ী আগামী ৭ দিনে ${forecastMm} মিমি বৃষ্টি হতে পারে (সবচেয়ে বেশি ${peakMm} মিমি ${peakDate} তারিখে)। জমিতে পানি জমতে পারে, সতর্ক থাকুন।`,
       drySpellDeficit: (forecastMm: number, gpmRecentMm: number, soilMoisture: string) =>
-        `সামনের ৭ দিনে মাত্র ~${forecastMm} মিমি বৃষ্টির সম্ভাবনা আর নাসা জিপিএম-এ দেখা যাচ্ছে সম্প্রতি বৃষ্টিও কম হয়েছে (${gpmRecentMm} মিমি)। মাটির রস ${soilMoisture} m³/m³।`,
+        `সামনের ৭ দিনে মাত্র ~${forecastMm} মিমি বৃষ্টির সম্ভাবনা আর নাসা পাওয়ার বৃষ্টিপাত পর্যবেক্ষণে দেখা যাচ্ছে সম্প্রতি বৃষ্টিও কম হয়েছে (${gpmRecentMm} মিমি)। মাটির রস ${soilMoisture} m³/m³।`,
       favorableBalance: (forecastMm: number, soilMoisture: string) =>
         `বৃষ্টির সম্ভাবনা (~${forecastMm} মিমি) এবং মাটির রস (${soilMoisture} m³/m³) দুটোই এখন চাষের জন্য একদম অনুকূল।`,
     },

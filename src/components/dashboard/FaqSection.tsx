@@ -160,8 +160,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ language, className = ''
           <MessageSquareQuote className="w-4 h-4 text-[#FAFAFA]" />
           <span>
             {language === 'en'
-              ? 'Have questions? Connect with your Upazila Agriculture Officer (DAE).'
-              : 'আরও জানতে যোগাযোগ করুন আপনার উপজেলা কৃষি কর্মকর্তা (ডিএই)।'}
+              ? 'Have questions? Consult your local Sub-Assistant Agriculture Officer (SAAO) or Upazila Agriculture Office.'
+              : 'আরও জানতে আপনার এলাকার উপ-সহকারী কৃষি কর্মকর্তা (SAAO) বা উপজেলা কৃষি অফিসের সাথে কথা বলুন।'}
           </span>
         </div>
       </div>

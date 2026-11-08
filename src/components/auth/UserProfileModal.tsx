@@ -464,7 +464,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 {/* Land Elevation */}
                 <div>
                   <label className="block text-xs font-mono text-slate-300 mb-1.5">
-                    {isBn ? 'জমির উচ্চতা ও প্লাবন ধরন' : 'Land Elevation / Inundation'}
+                    {isBn ? 'জমির ধরন (উঁচু/মাঝারি/নিচু): বিএআরআই কৃষি পরিবেশ অঞ্চল (AEZ)' : 'Land type (high/medium/low): BARI agro-ecological zones'}
                   </label>
                   <select
                     value={profile.landElevation}

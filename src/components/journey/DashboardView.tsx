@@ -65,6 +65,12 @@ interface DashboardViewProps {
   selectedPriority: FarmerPriorityId;
   secondaryPriority?: FarmerPriorityId | null;
   previousCrop?: string;
+  currentRotation?: {
+    rabi?: string;
+    kharif1?: string;
+    kharif2?: string;
+  };
+  soilType?: string;
   language: Language;
   onLanguageChange: (lang: Language) => void;
   onChangeFieldLocation: () => void;
@@ -99,6 +105,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   selectedPriority,
   secondaryPriority,
   previousCrop,
+  currentRotation = { rabi: 'boro', kharif1: 'fallow', kharif2: 'aman' },
+  soilType = 'loam',
   language,
   onLanguageChange,
   onChangeFieldLocation,
@@ -251,16 +259,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, conditions.rainUnavailable, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex, insatData?.lstC, insatData?.heatSpikeConfirmed, nisarData?.soilMoisture200m]
   );
 
+  // Active simulated/real conditions
+  const simulatedConditions = useMemo(
+    () => ({
+      ...conditions,
+      rain30: activeRain,
+      tMax30: activeMaxTemp,
+      waterBalance: activeWaterBalance,
+    }),
+    [conditions, activeRain, activeMaxTemp, activeWaterBalance]
+  );
+
   // Pure mathematical rule engine execution
   const engineResult = useMemo(
     () =>
       runEngine({
-        conditions: {
-          ...conditions,
-          rain30: activeRain,
-          tMax30: activeMaxTemp,
-          waterBalance: activeWaterBalance,
-        },
+        conditions: simulatedConditions,
         soil: activeSoil,
         shift: fieldShift,
         forecast: loaded.data?.forecast ?? BUNDLED_RANGPUR.forecast,
@@ -268,7 +282,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         previousCrop: previousCrop,
         today: new Date(),
       }),
-    [conditions, activeRain, activeMaxTemp, activeWaterBalance, activeSoil, fieldShift, loaded.data?.forecast, selectedPriority, previousCrop]
+    [simulatedConditions, activeSoil, fieldShift, loaded.data?.forecast, selectedPriority, previousCrop]
   );
 
   // Ranked crops for Crop Plan & Advisory Card
@@ -1631,7 +1645,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <Info className="w-4 h-4 text-[#FAFAFA] shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
                   {language === 'en'
-                    ? `Spatial resolution note: NASA SMAP (9 km), GPM/POWER (10 km to 0.5°), and MODIS (250m–1km) observations represent regional agro-climatic conditions across ${upazilaName}, providing broad environmental indicators rather than direct in-situ sensor probes buried in this specific field.`
+                    ? `Spatial resolution note: NASA SMAP (9 km), NASA POWER (10 km to 0.5°), and MODIS (250m–1km) observations represent regional agro-climatic conditions across ${upazilaName}, providing broad environmental indicators rather than direct in-situ sensor probes buried in this specific field.`
                     : `তথ্যের পরিধি: নাসা স্ম্যাপ (৯ কিমি), জিপিএম/পাওয়ার (১০ কিমি) ও মডিস (২৫০মি–১কিমি)-এর তথ্য পুরো ${upazilaName} এলাকার সাধারণ অবস্থা দেখায়, কোনো একক জমিতে বসানো মিটারের মাপ নয়।`}
                 </p>
               </div>
@@ -1669,10 +1683,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <SeasonRotation
                 selectedDistrict={selectedDistrict}
                 selectedPriority={selectedPriority}
+                secondaryPriority={secondaryPriority}
                 language={language}
                 onExplainCrop={(crop) => setExplainCrop(crop)}
                 engineResult={engineResult}
                 telemetry={telemetry}
+                conditions={simulatedConditions}
+                shift={fieldShift}
+                soil={activeSoil}
+                forecast={loaded.data?.forecast ?? BUNDLED_RANGPUR.forecast}
+                currentRotation={currentRotation}
+                soilType={soilType}
+                isSimulating={whatIfActive}
               />
             </div>
           )}
