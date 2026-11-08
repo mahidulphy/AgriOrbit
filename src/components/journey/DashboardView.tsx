@@ -874,6 +874,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         </>
                       )}
                     </div>
+                    {conditions.unusuallyHighRain && (
+                      <div className="mt-1 text-[10px] text-amber-400 font-medium">
+                        {language === 'en' ? '⚠ Unusually high, verify locally' : '⚠ অস্বাভাবিক বেশি, স্থানীয়ভাবে যাচাই করুন'}
+                      </div>
+                    )}
                     <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-slate-400">
                       <span>
                         {whatIfActive
@@ -1494,6 +1499,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         </>
                       )}
                     </div>
+                    {conditions.unusuallyHighRain && (
+                      <div className="mt-1 text-xs text-amber-400 font-medium">
+                        {language === 'en' ? '⚠ Unusually high, verify locally' : '⚠ অস্বাভাবিক বেশি, স্থানীয়ভাবে যাচাই করুন'}
+                      </div>
+                    )}
                     <p className="text-xs text-slate-300 mt-3 leading-relaxed">
                       {conditions.rainUnavailable
                         ? (language === 'en'
@@ -1637,22 +1647,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         {language === 'bn' ? `${toBnDigits(Math.round(conditions.rh))}% RH` : `${Math.round(conditions.rh)}% RH`}
                       </span>
                     </div>
-                    {jaxaData && (
-                      <div className="flex justify-between">
-                        <span>{language === 'en' ? 'Cross-Check: JAXA AMSR2' : 'যাচাই: জাক্সা এএমএসআর২'}</span>
-                        <span className="text-white font-semibold">
-                          {language === 'bn' ? `${toBnDigits(jaxaData.amsr2SoilMoisture.toFixed(2))} m³/m³` : `${jaxaData.amsr2SoilMoisture.toFixed(2)} m³/m³`}
-                        </span>
-                      </div>
-                    )}
-                    {nisarData && (
-                      <div className="flex justify-between">
-                        <span>{language === 'en' ? 'NASA-ISRO NISAR (200m SAR)' : 'নাসা-ইসরো নিসার (২০০মি)'}</span>
-                        <span className="text-white font-semibold">
-                          {language === 'bn' ? `${toBnDigits(nisarData.soilMoisture200m.toFixed(2))} m³/m³` : `${nisarData.soilMoisture200m.toFixed(2)} m³/m³`}
-                        </span>
-                      </div>
-                    )}
+
                   </div>
                 </div>
 
@@ -1685,16 +1680,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           }
                           language={language}
                         />
-                        <DataTileStatusBadge
-                          sourceName="ISRO INSAT"
-                          status={insatData ? 'snapshot' : 'unavailable'}
-                          customLabel={
-                            insatData
-                              ? (language === 'bn' ? `ইসরো ইনস্যাট-৩ডিআর · ${toBnDigits(insatData.lstC)}° সে.` : `ISRO INSAT-3DR · ${insatData.lstC}°C`)
-                              : (language === 'en' ? 'ISRO INSAT · No data' : 'ইসরো ইনস্যাট · তথ্য নেই')
-                          }
-                          language={language}
-                        />
+
                       </div>
                       <span className={`font-mono text-xs font-semibold ${activeMaxTemp > 35 ? 'text-[#FF5C5C]' : 'text-[#22C55E]'}`}>
                         {activeMaxTemp > 35
@@ -1723,24 +1709,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </p>
                   </div>
                   <div className="pt-4 mt-6 border-t border-[#262626] space-y-1.5 text-xs font-mono text-slate-400">
-                    <div className="flex justify-between">
-                      <span>{language === 'en' ? 'Cross-Check: ISRO INSAT-3DR LST' : 'যাচাই: ইসরো ইনস্যাট-৩ডিআর LST'}</span>
-                      <span className="text-white font-semibold">
-                        {insatData ? (language === 'bn' ? `${toBnDigits(insatData.lstC)}° সে.` : `${insatData.lstC}°C`) : 'N/A'}
-                      </span>
-                    </div>
-                    {insatData && insatData.heatSpikeConfirmed && (
-                      <div className="text-[11px] text-amber-300 font-sans leading-tight">
-                        {language === 'en'
-                          ? '✓ Heat stress confirmed by 2 space agencies (NASA + ISRO INSAT-3DR).'
-                          : '✓ দুই মহাকাশ সংস্থা (নাসা ও ইসরো) দ্বারা তাপপ্রবাহ নিশ্চিত।'}
-                      </div>
-                    )}
-                    {insatData && insatData.divergenceNoticeEn && (
-                      <div className="text-[11px] text-[#A3A3A3] font-sans leading-tight">
-                        {language === 'en' ? insatData.divergenceNoticeEn : insatData.divergenceNoticeBn}
-                      </div>
-                    )}
+
                     <div className="flex justify-between pt-1 border-t border-[#262626]/60">
                       <span>MODIS Surface Temp (Day / Night)</span>
                       <span className="text-white font-semibold">

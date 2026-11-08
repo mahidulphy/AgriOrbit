@@ -59,7 +59,7 @@ export const AnalyzeMyFieldTransition: React.FC<AnalyzeMyFieldTransitionProps> =
         </div>
 
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
-          {language === 'en' ? 'Calibrating Observations' : 'স্যাটেলাইটের তথ্য যাচাই করা হচ্ছে'}
+          {language === 'en' ? 'Processing Field Observations' : 'জমির উপগ্রহ তথ্য বিশ্লেষণ করা হচ্ছে'}
         </h2>
 
         <p className="text-xs sm:text-sm text-[#A3A3A3] max-w-md mx-auto mb-8 leading-relaxed">

@@ -52,7 +52,7 @@ export function nasaSourceLabel(
 ): string {
   if (!context.isApproximate) {
     return language === 'en'
-      ? `Calibrated for ${currentDistrictName}`
+      ? `Tailored for ${currentDistrictName}`
       : `${currentDistrictName}-এর জন্য বিন্যস্ত`;
   }
   const sourceAdmin = getDistrictAdmin(context.sourceDistrict);

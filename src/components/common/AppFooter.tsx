@@ -31,7 +31,7 @@ export const AppFooter: React.FC<AppFooterProps> = ({
         </a>
         <span className="text-[#404040] hidden sm:inline">|</span>
         <span className="text-[11px] font-mono text-[#737373]">
-          NASA & Space Apps Partners (ESA Copernicus, ESA CCI, JAXA, ISRO MOSDAC) for Bangladesh Agriculture
+          NASA Earth Observations (NASA POWER, SMAP, MODIS) & BARI Agro-Ecological Data for Bangladesh Agriculture
         </span>
         <span className="text-[#404040] hidden sm:inline">|</span>
         <span className="text-[11px] text-[#737373]">Team: Bay of Orbits</span>

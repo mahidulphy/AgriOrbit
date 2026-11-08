@@ -6,7 +6,8 @@ import type { DailyData } from './power.ts';
 
 export interface Conditions {
   rain30: number; // mm, sum of last 30 available days
-  rainUnavailable?: boolean; // true if NASA anomaly detected (> 1200mm or missing)
+  rainUnavailable?: boolean; // true if no valid precipitation observations exist
+  unusuallyHighRain?: boolean; // true if 30-day rain > 1200 mm or daily peak > 350 mm
   tMax30: number; // °C, hottest day in the window
   tMaxAvg: number; // °C, mean daily high
   rh: number; // %, mean humidity
@@ -39,31 +40,7 @@ export function hargreavesEt0(tMax: number, tMin: number, latDeg: number, date: 
 }
 
 export function computeConditions(daily: DailyData, lat: number, days = 30): Conditions {
-  const now = new Date();
-  const currentYear = now.getFullYear();
-
-  // Guard against NASA sentinel values (-999, negative precipitation, or out-of-range values)
-  // and ensure dates are within the recent observation window (current year or immediately preceding year within 60 days)
-  const allValidKeys = Object.keys(daily?.T2M_MAX ?? {})
-    .filter((k) => {
-      const year = parseInt(k.slice(0, 4), 10);
-      if (isNaN(year) || year < currentYear - 1 || year > currentYear + 1) return false;
-      const tMax = daily.T2M_MAX[k];
-      const tMin = daily.T2M_MIN?.[k];
-      const rain = daily.PRECTOTCORR?.[k];
-      const rh = daily.RH2M?.[k];
-      return (
-        tMax !== undefined && tMax > -900 &&
-        tMin !== undefined && tMin > -900 &&
-        rain !== undefined && rain >= 0 && rain < 500 &&
-        rh !== undefined && rh >= 0 && rh <= 100
-      );
-    })
-    .sort();
-
-  const keys = allValidKeys.slice(-days);
-
-  if (keys.length === 0) {
+  if (!daily || !daily.T2M_MAX) {
     return {
       rain30: 0,
       rainUnavailable: true,
@@ -78,30 +55,63 @@ export function computeConditions(daily: DailyData, lat: number, days = 30): Con
     };
   }
 
+  // Guard against NASA sentinel values (-999, negative precipitation, or out-of-range values)
+  // Only remove -999 fill values and negative numbers; do NOT filter by calendar year (works across New Year in Jan).
+  const allValidKeys = Object.keys(daily.T2M_MAX)
+    .filter((k) => {
+      const tMax = daily.T2M_MAX[k];
+      const tMin = daily.T2M_MIN?.[k];
+      const rain = daily.PRECTOTCORR?.[k];
+      const rh = daily.RH2M?.[k];
+      return (
+        tMax !== undefined && tMax > -900 &&
+        tMin !== undefined && tMin > -900 &&
+        rain !== undefined && rain >= 0 &&
+        rh !== undefined && rh >= 0 && rh <= 100
+      );
+    })
+    .sort();
+
+  if (allValidKeys.length === 0) {
+    return {
+      rain30: 0,
+      rainUnavailable: true,
+      tMax30: 0,
+      tMaxAvg: 0,
+      rh: 0,
+      et0: 0,
+      et0Total: 0,
+      waterBalance: 0,
+      from: 'N/A',
+      to: 'N/A',
+    };
+  }
+
+  // Take the last `days` available days ending at the latest valid date
+  const keys = allValidKeys.slice(-days);
+
   const et0s = keys.map((k) => hargreavesEt0(daily.T2M_MAX[k], daily.T2M_MIN[k], lat, new Date(iso(k))));
   
   const validRainValues = keys.map((k) => {
     const val = daily.PRECTOTCORR[k];
-    return val !== undefined && val >= 0 && val < 500 ? val : 0;
+    return val !== undefined && val >= 0 ? val : 0;
   });
 
   const rawRain = sum(validRainValues);
-  let isRainUnavailable = false;
+  const maxDailyRain = Math.max(...validRainValues, 0);
 
-  // Sanity check: If 30-day rain > 1200 mm, flag as data anomaly or unavailable
-  if (rawRain > 1200) {
-    console.error(`NASA POWER data anomaly: 30-day rain ${rawRain.toFixed(1)} mm exceeds 1200 mm physical ceiling for period.`);
-    isRainUnavailable = true;
-  }
+  // Heavy monsoon totals in Sylhet/Sunamganj can be real. If unusually high, flag for UI note without dropping data.
+  const isUnusuallyHigh = rawRain > 1200 || maxDailyRain > 350;
 
-  const rain30 = isRainUnavailable ? 0 : rawRain;
+  const rain30 = rawRain;
   const et0Total = sum(et0s);
   // Net water balance = (Rainfall - ET0). If Rainfall < ET0, it is strictly negative (deficit).
   const waterBalance = rain30 - et0Total;
 
   return {
     rain30,
-    rainUnavailable: isRainUnavailable,
+    rainUnavailable: false,
+    unusuallyHighRain: isUnusuallyHigh,
     tMax30: Math.max(...keys.map((k) => daily.T2M_MAX[k])),
     tMaxAvg: sum(keys.map((k) => daily.T2M_MAX[k])) / keys.length,
     rh: sum(keys.map((k) => daily.RH2M[k])) / keys.length,

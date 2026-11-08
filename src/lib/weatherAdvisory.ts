@@ -433,7 +433,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
   const isLive = gpm.dataStatus === 'live' || forecast.dataStatus === 'live';
   const provenanceLabelEn = isLive
-    ? 'Live Observation · NASA GPM + Open-Meteo'
+    ? 'Live Observation · NASA POWER + Open-Meteo'
     : `Using cached observation · Updated ${new Date(gpm.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}`;
 
   const provenanceLabelBn = isLive

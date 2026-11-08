@@ -200,9 +200,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                         </span>
                       </td>
                       <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">
-                        {crop.explanation?.rulesSatisfied?.some((r) => r.includes('ISRO'))
-                          ? 'NASA + ISRO INSAT'
-                          : 'NASA POWER'}
+                        'NASA POWER (Temperature)'
                       </td>
                       <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{fmtPt(deltas.heatPenalty)}</td>
                     </tr>
@@ -224,73 +222,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                     </tr>
                   )}
 
-                  {/* JAXA AMSR2 / SPI Drought Confirmation */}
-                  {deltas.jaxaDroughtPenalty !== undefined && deltas.jaxaDroughtPenalty !== 0 && (
-                    <tr>
-                      <td className="py-2.5 pr-3">
-                        <span className="text-[#FAFAFA] font-medium block">
-                          {language === 'en' ? 'Dual-Satellite Drought Index (JAXA-01)' : 'যৌথ উপগ্রহ খরা সূচক (JAXA-01)'}
-                        </span>
-                        <span className="text-[11px] text-[#737373]">
-                          {deltas.jaxaDroughtPenalty < 0
-                            ? (language === 'en'
-                              ? 'JAXA AMSR2 + SPI and NASA SMAP confirm severe topsoil drought (-15 pts)'
-                              : 'জাক্সা এএমএসআর২ ও নাসা স্ম্যাপ উভয়েই তীব্র খরা নিশ্চিত করেছে (-১৫)')
-                            : (language === 'en'
-                              ? 'Drought-hardy crop bonus under low moisture (+5 pts)'
-                              : 'শুষ্ক পরিস্থিতিতে খরা-সহনশীল ফসলে বাড়তি নম্বর (+৫)')
-                          }
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">JAXA Earth API</td>
-                      <td className={`py-2.5 px-3 text-right font-semibold ${deltas.jaxaDroughtPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
-                        {fmtPt(deltas.jaxaDroughtPenalty)}
-                      </td>
-                    </tr>
-                  )}
 
-                  {/* Sentinel-2 10m Vegetation Health / Crop Stress */}
-                  {deltas.sentinel2StressPenalty !== undefined && deltas.sentinel2StressPenalty !== 0 && (
-                    <tr>
-                      <td className="py-2.5 pr-3">
-                        <span className="text-[#FAFAFA] font-medium block">
-                          {language === 'en' ? 'Vegetation Health & Canopy Stress (VEG-02)' : 'সবুজায়ন ও বৃদ্ধি পরিস্থিতি (VEG-02)'}
-                        </span>
-                        <span className="text-[11px] text-[#737373]">
-                          {deltas.sentinel2StressPenalty < 0
-                            ? (language === 'en'
-                              ? 'ESA Sentinel-2 10m NDVI detected delayed canopy / crop stress (-10 pts)'
-                              : 'সেন্টিনেল-২ ১০মি উপগ্রহে ফসলের বৃদ্ধি ঘাটতি শনাক্ত (-১০)')
-                            : (language === 'en'
-                              ? 'Compensatory fast-maturing catch crop bonus (+5 pts)'
-                              : 'স্বল্পমেয়াদী ক্ষতিপূরণমূলক ফসলে বাড়তি নম্বর (+৫)')
-                          }
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">ESA Sentinel-2</td>
-                      <td className={`py-2.5 px-3 text-right font-semibold ${deltas.sentinel2StressPenalty > 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
-                        {fmtPt(deltas.sentinel2StressPenalty)}
-                      </td>
-                    </tr>
-                  )}
-
-                  {/* Sentinel-1 SAR Flooding / Waterlogging */}
-                  {deltas.sentinel1FloodPenalty !== undefined && deltas.sentinel1FloodPenalty !== 0 && (
-                    <tr>
-                      <td className="py-2.5 pr-3">
-                        <span className="text-[#FAFAFA] font-medium block">
-                          {language === 'en' ? 'Cropland Flooding / Waterlogging (SAR-01)' : 'জলাবদ্ধতা ঝুঁকি (SAR-01)'}
-                        </span>
-                        <span className="text-[11px] text-[#737373]">
-                          {language === 'en'
-                            ? 'ESA Sentinel-1 SAR radar detected standing water in cropland (>10%)'
-                            : 'সেন্টিনেল-১ রাডার চিত্রে ফসলি জমিতে অতিরিক্ত পানি ও জলাবদ্ধতা শনাক্ত (>১০%)'}
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">ESA Sentinel-1</td>
-                      <td className="py-2.5 px-3 text-right font-semibold text-[#EF4444]">{fmtPt(deltas.sentinel1FloodPenalty)}</td>
-                    </tr>
-                  )}
 
                   {/* Farmer Priority Steering */}
                   <tr>

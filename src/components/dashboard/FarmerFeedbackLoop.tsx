@@ -86,7 +86,7 @@ export const FarmerFeedbackLoop: React.FC<FarmerFeedbackLoopProps> = ({
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#A3A3A3] font-mono font-semibold mb-2">
               
-              <span>{isEn ? 'COMMUNITY CALIBRATION · FARMER DATA LOOP' : 'মাঠ পর্যায়ের মতামত সংগ্রহ'}</span>
+              <span>{isEn ? 'COMMUNITY VALIDATION · FARMER FEEDBACK LOOP' : 'মাঠ পর্যায়ের মতামত সংগ্রহ'}</span>
             </div>
 
             <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
