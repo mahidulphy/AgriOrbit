@@ -38,15 +38,6 @@ export interface TelemetryContext {
   waterBalance?: number | null; // rain30 - ET0 in mm
   irrigationAvailability?: 'yes' | 'limited' | 'no';
   mainPurpose?: 'home_food' | 'local_market' | 'both';
-  sentinel1FloodedCroplandPct?: number | null; // % cropland inundated (ESA Sentinel-1 SAR)
-  sentinel2Ndvi10m?: number | null; // 10m field NDVI (ESA Sentinel-2 MSI)
-  sentinel2AnomalyPct?: number | null; // % deviation from baseline NDVI
-  jaxaRain30dMm?: number | null; // 30-day rain from JAXA GSMaP v8
-  jaxaSoilMoisture?: number | null; // soil moisture m³/m³ from JAXA AMSR2
-  jaxaSpi30dIndex?: number | null; // JAXA 30-day Standardized Precipitation Index
-  insatLstC?: number | null; // ISRO INSAT-3DR geostationary LST (°C)
-  insatHeatConfirmed?: boolean | null; // true if both NASA & ISRO confirm >35°C
-  nisarSoilMoisture200m?: number | null; // NASA-ISRO NISAR 200m soil moisture (m³/m³)
 }
 
 export interface ScoreDeltas {
@@ -56,9 +47,6 @@ export interface ScoreDeltas {
   heatPenalty: number;
   waterDeficitPenalty: number;
   irrigationConstraintPenalty?: number;
-  sentinel1FloodPenalty: number;
-  sentinel2StressPenalty: number;
-  jaxaDroughtPenalty: number;
   primaryPriorityDelta: number;
   secondaryPriorityDelta: number;
   finalScore: number;
@@ -87,9 +75,6 @@ function evaluateCropWithNasa(
     optimalSowingBonus: 0,
     heatPenalty: 0,
     waterDeficitPenalty: 0,
-    sentinel1FloodPenalty: 0,
-    sentinel2StressPenalty: 0,
-    jaxaDroughtPenalty: 0,
     primaryPriorityDelta: 0,
     secondaryPriorityDelta: 0,
     finalScore: calibratedBase,
@@ -169,211 +154,25 @@ function evaluateCropWithNasa(
     }
   
     // ─────────────────────────────────────────────────────────────
-    // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C) & ISRO INSAT-3DR CROSS-CHECK
+    // RULE 3: HEAT-STRESS ALERT / AVOIDANCE (Max Temp > 35°C)
     // ─────────────────────────────────────────────────────────────
-    const insatLst = telemetry?.insatLstC;
-    const isInsatHeat = insatLst !== undefined && insatLst !== null && insatLst > 35;
-    const isNasaHeat = maxT > 35;
-
-    if (isNasaHeat || isInsatHeat) {
+    if (maxT > 35) {
       if (crop.id === 'wheat' || crop.id === 'potato') {
         const penalty = -10;
         score += penalty;
         deltas.heatPenalty = penalty;
-
-        if (isNasaHeat && isInsatHeat) {
-          dynamicObservationsEn.push(
-            `Extreme heat alert: NASA POWER (${maxT.toFixed(1)}°C) and ISRO INSAT-3DR (${insatLst.toFixed(1)}°C) both confirm canopy heat (>35°C).`,
-          );
-          dynamicObservationsBn.push(
-            `তীব্র তাপদাহ সতর্কতা: নাসা (${maxT.toFixed(1)}° সে.) এবং ইসরো ইনস্যাট-৩ডিআর (${toBnDigits(insatLst.toFixed(1))}° সে.) উভয়েই ৩৫° সে.-এর বেশি তাপপ্রবাহ নিশ্চিত করেছে।`,
-          );
-          dynamicRulesEn.push(
-            'Rule HEAT-ISRO-01: Heat stress confirmed by 2 space agencies (NASA + ISRO INSAT-3DR) → -10 penalty on heat-vulnerable crops.',
-          );
-          dynamicRulesBn.push(
-            'নিয়ম HEAT-ISRO-01: দুই মহাকাশ সংস্থা (নাসা ও ইসরো ইনস্যাট-৩ডিআর) দ্বারা তাপপ্রবাহ নিশ্চিত → সংবেদনশীল ফসলে ১০ নম্বর কাটা হয়েছে।',
-          );
-        } else if (isNasaHeat && !isInsatHeat && insatLst !== undefined && insatLst !== null) {
-          dynamicObservationsEn.push(
-            `Heat divergence: NASA flags ${maxT.toFixed(1)}°C, but ISRO INSAT-3DR geostationary LST is ${insatLst.toFixed(1)}°C (moderated by river breeze or passing cloud).`,
-          );
-          dynamicObservationsBn.push(
-            `তাপমাত্রার অমিল: নাসার তথ্যে ${maxT.toFixed(1)}° সে. দেখালেও ইসরো ইনস্যাট-৩ডিআর ভূ-পৃষ্ঠের তাপমাত্রা ${toBnDigits(insatLst.toFixed(1))}° সে. নির্দেশ করছে।`,
-          );
-          dynamicRulesEn.push(
-            `Rule HEAT-ISRO-01: Heat flagged by NASA but tempered in ISRO geostationary soundings (${insatLst.toFixed(1)}°C) → -10 penalty retained with divergence notice.`,
-          );
-          dynamicRulesBn.push(
-            `নিয়ম HEAT-ISRO-01: নাসার তাপপ্রবাহ ইসরো ইনস্যাটে কম দেখালেও সতর্কতামূলকভাবে নম্বর কাটা হয়েছে।`,
-          );
-        } else {
-          dynamicObservationsEn.push(
-            `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
-          );
-          dynamicObservationsBn.push(
-            `সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}°সে (> ৩৫°সে), অতিরিক্ত গরমে ফসল নষ্ট হওয়ার ঝুঁকি।`,
-          );
-          dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
-          dynamicRulesBn.push(`নিয়ম HEAT-02: গরম সহ্য করতে না পারা ফসলে ১০ নম্বর কাটা হয়েছে।`);
-        }
+        dynamicObservationsEn.push(
+          `NASA POWER max temperature reached ${maxT.toFixed(1)}°C (> 35°C threshold), risking heat-induced terminal sterility.`,
+        );
+        dynamicObservationsBn.push(
+          `সর্বোচ্চ তাপমাত্রা ${maxT.toFixed(1)}°সে (> ৩৫°সে), অতিরিক্ত গরমে ফসল নষ্ট হওয়ার ঝুঁকি।`,
+        );
+        dynamicRulesEn.push(`Rule HEAT-02: Thermal avoidance penalty (-10 pts) triggered for heat-vulnerable crops.`);
+        dynamicRulesBn.push(`নিয়ম HEAT-02: গরম সহ্য করতে না পারা ফসলে ১০ নম্বর কাটা হয়েছে।`);
       }
     }
 
-    // NASA-ISRO NISAR 200m SAR Radar Soil Moisture Cross-Check
-    const nisarSm = telemetry?.nisarSoilMoisture200m;
-    if (nisarSm !== undefined && nisarSm !== null && soil !== null && soil !== undefined) {
-      if (soil < 0.20 && nisarSm < 0.20) {
-        dynamicObservationsEn.push(
-          `High-resolution radar cross-check: NASA-ISRO NISAR 200m SAR (${nisarSm.toFixed(2)} m³/m³) confirms SMAP root-zone moisture deficit.`,
-        );
-        dynamicObservationsBn.push(
-          `উচ্চ রেজ্যুলুশন রাডার নিশ্চিতকরণ: নাসা-ইসরো নিসার ২০০মি রাডার (${toBnDigits(nisarSm.toFixed(2))} m³/m³) মাটিতে রসের ঘাটতি নিশ্চিত করেছে।`,
-        );
-      }
-    }
-  
     // ─────────────────────────────────────────────────────────────
-    
-    // ─────────────────────────────────────────────────────────────
-    // RULE SAR-01: ESA SENTINEL-1 SAR FLOOD & WATERLOGGING DETECTION
-    // ─────────────────────────────────────────────────────────────
-    const floodPct = telemetry?.sentinel1FloodedCroplandPct;
-    if (floodPct !== undefined && floodPct !== null && floodPct > 10) {
-      const cropDef = cropById(crop.id);
-      const isExplicitlyTolerant =
-        cropDef?.floodTolerant === true ||
-        crop.id === 'aman' ||
-        crop.id === 'boro' ||
-        crop.id === 'aus' ||
-        crop.id === 'jute';
-
-      const isSensitive =
-        !isExplicitlyTolerant &&
-        (WATERLOGGING_SENSITIVE_CROPS.has(crop.id) ||
-          cropDef?.key_risks_en?.some((r) => /waterlog|waterlogging|poor drainage/i.test(r)) ||
-          crop.shortWhyEn?.toLowerCase().includes('waterlog'));
-
-      if (isSensitive) {
-        const penalty = -15;
-        score += penalty;
-        deltas.sentinel1FloodPenalty = penalty;
-        dynamicObservationsEn.push(
-          `ESA Sentinel-1 SAR: ${floodPct.toFixed(1)}% of district cropland is flooded/waterlogged in the last 12 days.`
-        );
-        dynamicObservationsBn.push(
-          `ইএসএ সেন্টিনেল-১ রাডার: বিগত ১২ দিনে ফসলি জমির ${toBnDigits(floodPct.toFixed(1))}% এলাকায় জলাবদ্ধতা শনাক্ত হয়েছে।`
-        );
-        dynamicRulesEn.push(
-          `Rule SAR-01: Sentinel-1: ${floodPct.toFixed(1)}% of cropland flooded > 10% → waterlogging-sensitive crops -15.`
-        );
-        dynamicRulesBn.push(
-          `নিয়ম SAR-01: সেন্টিনেল-১: জমিতে ${toBnDigits(floodPct.toFixed(1))}% জলাবদ্ধতা (> ১০%) → পানি সংবেদনশীল ফসলে -১৫ নম্বর।`
-        );
-      }
-    }
-
-
-    // RULE VEG-02: ESA SENTINEL-2 10M VEGETATION HEALTH & CROP STRESS
-    // ─────────────────────────────────────────────────────────────
-    const s2Anomaly = telemetry?.sentinel2AnomalyPct;
-    const s2Ndvi = telemetry?.sentinel2Ndvi10m;
-    if (s2Anomaly !== undefined && s2Anomaly !== null && s2Anomaly < -15) {
-      const isSlowOrDemanding = (crop.durationDays ?? 100) >= 120 || crop.waterRequirementEn === 'High';
-      const isFastOrResilient = (crop.durationDays ?? 100) <= 85 || ['mungbean', 'mustard', 'radish', 'blackgram', 'sesame'].includes(crop.id);
-
-      if (isSlowOrDemanding) {
-        const penalty = -10;
-        score += penalty;
-        deltas.sentinel2StressPenalty = penalty;
-        dynamicObservationsEn.push(
-          `ESA Sentinel-2: 10m NDVI is ${s2Ndvi !== null && s2Ndvi !== undefined ? s2Ndvi.toFixed(2) : 'depressed'} (${s2Anomaly.toFixed(1)}% vs baseline) indicates field canopy stress.`
-        );
-        dynamicObservationsBn.push(
-          `ইএসএ সেন্টিনেল-২: ১০মি NDVI ${s2Ndvi !== null && s2Ndvi !== undefined ? s2Ndvi.toFixed(2) : ''} (স্বাভাবিকের চেয়ে ${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% কম) জমিতে বৃদ্ধির ঘাটতি নির্দেশ করে।`
-        );
-        dynamicRulesEn.push(
-          `Rule VEG-02: Sentinel-2 10m NDVI anomaly (${s2Anomaly.toFixed(1)}% < -15%) → long-duration/demanding crops penalized -10.`
-        );
-        dynamicRulesBn.push(
-          `নিয়ম VEG-02: সেন্টিনেল-২ ১০মি NDVI ঘাটতি (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% < -১৫%) → দীর্ঘমেয়াদী ফসলে -১০ নম্বর।`
-        );
-      } else if (isFastOrResilient) {
-        const bonus = 5;
-        score += bonus;
-        deltas.sentinel2StressPenalty = bonus;
-        dynamicObservationsEn.push(
-          `ESA Sentinel-2: 10m NDVI indicates canopy lag (${s2Anomaly.toFixed(1)}%); favoring short-duration catch crop.`
-        );
-        dynamicObservationsBn.push(
-          `ইএসএ সেন্টিনেল-২: ১০মি চিত্রে ফসলে বৃদ্ধির ধকল (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}%), তাই দ্রুত সংগ্রহযোগ্য ফসল অগ্রাধিকার দেওয়া হয়েছে।`
-        );
-        dynamicRulesEn.push(
-          `Rule VEG-02: Sentinel-2 10m NDVI anomaly (${s2Anomaly.toFixed(1)}% < -15%) → short-duration catch crop +5 bonus.`
-        );
-        dynamicRulesBn.push(
-          `নিয়ম VEG-02: সেন্টিনেল-২ ১০মি NDVI ঘাটতি (${toBnDigits(Math.abs(s2Anomaly).toFixed(1))}% < -১৫%) → স্বল্পমেয়াদী বিকল্প ফসলে +৫ বোনাস।`
-        );
-      }
-    }
-
-
-    // RULE JAXA-01: DUAL-SATELLITE DROUGHT CONFIRMATION (JAXA AMSR2 + SPI & SMAP)
-    // ─────────────────────────────────────────────────────────────
-    const amsr2 = telemetry?.jaxaSoilMoisture;
-    const spi = telemetry?.jaxaSpi30dIndex;
-    const isDualDrought =
-      (amsr2 !== undefined && amsr2 !== null && amsr2 < 0.16 && soil !== null && soil !== undefined && soil < 0.18) ||
-      (spi !== undefined && spi !== null && spi < -1.2);
-
-    if (isDualDrought) {
-      if (crop.waterRequirementEn === 'High' || crop.id === 'boro_rice') {
-        const penalty = -15;
-        score += penalty;
-        deltas.jaxaDroughtPenalty = penalty;
-        dynamicObservationsEn.push(
-          `JAXA AMSR2 (${amsr2 !== null && amsr2 !== undefined ? amsr2.toFixed(2) : 'N/A'} m³/m³) & SPI drought index (${spi !== null && spi !== undefined ? spi.toFixed(2) : 'N/A'}) confirm severe moisture depletion.`
-        );
-        dynamicObservationsBn.push(
-          `জাক্সা এএমএসআর২ (${amsr2 !== null && amsr2 !== undefined ? amsr2.toFixed(2) : ''} m³/m³) ও খরা সূচক SPI (${spi !== null && spi !== undefined ? spi.toFixed(2) : ''}) মাটিতে তীব্র পানিশূন্যতা নিশ্চিত করেছে।`
-        );
-        dynamicRulesEn.push(
-          `Rule JAXA-01: Dual-agency satellite drought verified (AMSR2 + SMAP + SPI < -1.2) → high-water crop penalized -15.`
-        );
-        dynamicRulesBn.push(
-          `নিয়ম JAXA-01: যৌথ উপগ্রহ পর্যবেক্ষণ দ্বারা খরা নিশ্চিত (AMSR2 + SMAP + SPI < -১.২) → সেচনির্ভর ফসলে -১৫ নম্বর।`
-        );
-      } else if (crop.waterRequirementEn === 'Low' || ['sesame', 'chickpea', 'mustard', 'grass_pea'].includes(crop.id)) {
-        const bonus = 5;
-        score += bonus;
-        deltas.jaxaDroughtPenalty = bonus;
-        dynamicObservationsEn.push(
-          `JAXA SPI (${spi !== null && spi !== undefined ? spi.toFixed(2) : 'N/A'}) confirms dry spell; drought-hardy crop promoted.`
-        );
-        dynamicObservationsBn.push(
-          `জাক্সা খরা সূচক অনুযায়ী শুষ্ক পরিস্থিতি বিরাজ করায় খরা-সহনশীল ফসল অগ্রাধিকার পেয়েছে।`
-        );
-        dynamicRulesEn.push(
-          `Rule JAXA-01: Dual-agency satellite drought verified → drought-hardy crop +5 bonus.`
-        );
-        dynamicRulesBn.push(
-          `নিয়ম JAXA-01: যৌথ উপগ্রহ তথ্যে খরা পরিস্থিতিতে খরা-সহনশীল ফসলে +৫ বোনাস।`
-        );
-      }
-    }
-
-
-    // RULE CCI-01: ESA CCI DECADAL TOPSOIL DRYING IMPACT
-    // ─────────────────────────────────────────────────────────────
-    if (crop.id === 'wheat' || crop.id === 'potato') {
-      dynamicRulesEn.push(
-        'Rule CCI-01: ESA CCI: Rabi soil moisture −13.6% vs 2001–10 baseline → supplemental irrigation plan required for wheat and potato.'
-      );
-      dynamicRulesBn.push(
-        'নিয়ম CCI-01: ইএসএ সিসিআই: ২০০১–১০ এর চেয়ে রবি মৌসুমে মাটির রস ১৩.৬% কমেছে → গম ও আলুর জন্য সময়মতো সেচ পরিকল্পনা নিশ্চিত করুন।'
-      );
-    }
-
     // RULE 4: EVAPOTRANSPIRATION DEFICIT (Rainfall - ET₀ < -50 mm)
     // ─────────────────────────────────────────────────────────────
     if (wBal < -50 && crop.waterRequirementEn === 'High') {
@@ -431,12 +230,27 @@ function evaluateCropWithNasa(
   if (telemetry?.mainPurpose === 'home_food') {
     dynamicObservationsEn.push('Farmer production goal: Household food & nutritional security.');
     dynamicObservationsBn.push('চাষির মূল লক্ষ্য: পারিবারিক খাদ্য ও পুষ্টি নিরাপত্তা।');
+    if (crop.isStaple || ['aman', 'boro', 'boro_rice', 'wheat', 'lentil'].includes(crop.id)) {
+      score += 8;
+      dynamicRulesEn.push('Rule GOAL-01: Household subsistence staple food prioritized (+8 pts).');
+      dynamicRulesBn.push('নিয়ম GOAL-01: পারিবারিক খাদ্য নিরাপত্তার প্রধান ফসল হিসেবে ৮ নম্বর যোগ হয়েছে।');
+    }
   } else if (telemetry?.mainPurpose === 'local_market') {
     dynamicObservationsEn.push('Farmer production goal: Local market cash sale & commercial income.');
     dynamicObservationsBn.push('চাষির মূল লক্ষ্য: স্থানীয় হাটে-বাজারে বিক্রি ও নগদ আয়।');
+    if (crop.valueCategory === 'high' || ['mustard', 'sesame', 'chickpea', 'jute'].includes(crop.id)) {
+      score += 6;
+      dynamicRulesEn.push('Rule GOAL-02: Commercial market cash crop rewarded (+6 pts).');
+      dynamicRulesBn.push('নিয়ম GOAL-02: বাজারে ভালো চাহিদাসম্পন্ন অর্থকরী ফসল হিসেবে ৬ নম্বর যোগ হয়েছে।');
+    }
   } else if (telemetry?.mainPurpose === 'both') {
     dynamicObservationsEn.push('Farmer production goal: Balanced household consumption and market surplus.');
     dynamicObservationsBn.push('চাষির মূল লক্ষ্য: পারিবারিক খাবারের পাশাপাশি বাড়তি ফসল বিক্রি।');
+    if (crop.isStaple || ['aman', 'wheat'].includes(crop.id)) {
+      score += 6;
+      dynamicRulesEn.push('Rule GOAL-01: Balanced subsistence staple food prioritized (+6 pts).');
+      dynamicRulesBn.push('নিয়ম GOAL-01: খাবার ও বিক্রির সমন্বয়ে প্রধান খাদ্য ফসল হিসেবে ৬ নম্বর যোগ হয়েছে।');
+    }
   }
 
 // ─────────────────────────────────────────────────────────────

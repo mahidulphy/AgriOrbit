@@ -253,27 +253,23 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     isNdviFresh,
     isLstFresh,
   } = useDistrictSatellite(district.id);
-  const sentinel2Data = districtSat?.sentinel2 ?? null;
-  const jaxaData = districtSat?.jaxa ?? null;
-  const insatData = districtSat?.insat ?? null;
-  const nisarData = districtSat?.nisar ?? null;
   const smapData = districtSat?.smap ?? null;
   const ndviData = districtSat?.ndvi ?? null;
   const lstDayData = districtSat?.lstDay ?? null;
   const lstNightData = districtSat?.lstNight ?? null;
-  const isSoilFlaggedWater = smapData?.flag === 'possible_water_contamination';
+  const isSoilFlaggedWater = smapData?.flag === 'possible_water_contamination' || (smapData?.value !== undefined && smapData.value > 0.5);
   const realSoilMoisture = (smapData && !isSoilFlaggedWater) ? smapData.value : null;
 
   // What-If Environmental Simulator Controls
   const [whatIfActive, setWhatIfActive] = useState(false);
-  const [simSoil, setSimSoil] = useState<number>(smapData?.value ?? 0.22);
+  const [simSoil, setSimSoil] = useState<number>(realSoilMoisture ?? 0.20);
   const [simRain, setSimRain] = useState<number>(Math.round(conditions.rain30));
   const [simMaxTemp, setSimMaxTemp] = useState<number>(Math.round(conditions.tMax30));
 
   // Sync simulation sliders when base district data updates (if not actively simulating)
   useEffect(() => {
     if (!whatIfActive) {
-      setSimSoil(smapData?.value ?? 0.22);
+      setSimSoil(realSoilMoisture ?? 0.20);
       setSimRain(Math.round(conditions.rain30));
       setSimMaxTemp(Math.round(conditions.tMax30));
     }
@@ -294,17 +290,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       waterBalance: conditions.rainUnavailable ? null : activeWaterBalance,
       irrigationAvailability,
       mainPurpose,
-      sentinel1FloodedCroplandPct: districtSat?.sentinel1?.floodedCroplandPct ?? null,
-      sentinel2Ndvi10m: sentinel2Data?.ndvi10m ?? null,
-      sentinel2AnomalyPct: sentinel2Data?.anomalyPct ?? null,
-      jaxaRain30dMm: jaxaData?.gsmapRain30dMm ?? null,
-      jaxaSoilMoisture: jaxaData?.amsr2SoilMoisture ?? null,
-      jaxaSpi30dIndex: jaxaData?.spi30dIndex ?? null,
-      insatLstC: insatData?.lstC ?? null,
-      insatHeatConfirmed: insatData?.heatSpikeConfirmed ?? false,
-      nisarSoilMoisture200m: nisarData?.soilMoisture200m ?? null,
     }),
-    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, conditions.rainUnavailable, irrigationAvailability, mainPurpose, districtSat?.sentinel1?.floodedCroplandPct, sentinel2Data?.ndvi10m, sentinel2Data?.anomalyPct, jaxaData?.gsmapRain30dMm, jaxaData?.amsr2SoilMoisture, jaxaData?.spi30dIndex, insatData?.lstC, insatData?.heatSpikeConfirmed, nisarData?.soilMoisture200m]
+    [activeRain, activeSoil, activeMaxTemp, activeWaterBalance, conditions.rainUnavailable, irrigationAvailability, mainPurpose]
   );
 
   // Active simulated/real conditions

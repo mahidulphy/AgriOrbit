@@ -44,78 +44,11 @@ export interface LstRecord {
   periodStart: string;
 }
 
-export interface Sentinel1Record {
-  floodedCroplandPct: number;
-  observationWindow: {
-    startDate: string;
-    endDate: string;
-    daysCount: number;
-  };
-  polarization: 'VV' | 'VV+VH';
-  resolutionMeters: number;
-  status: 'normal' | 'moderate_waterlogging' | 'severe_inundation' | 'unavailable';
-  statusEn: string;
-  statusBn: string;
-  observedAt: string;
-  source: 'ESA Sentinel-1 C-SAR';
-}
-
-export interface Sentinel2Record {
-  ndvi10m: number;
-  periodStart: string;
-  cloudCoverPct: number;
-  resolutionMeters: 10;
-  status: 'optimal' | 'moderate' | 'vegetation_stress' | 'bare_soil';
-  statusEn: string;
-  statusBn: string;
-  observedAt: string;
-  source: 'ESA Sentinel-2 MSI';
-  baselineNdvi: number;
-  anomalyPct: number;
-}
-
-export interface JaxaRecord {
-  gsmapRain30dMm: number;
-  amsr2SoilMoisture: number;
-  spi30dIndex: number;
-  status: 'favorable' | 'moderate' | 'drought_alert' | 'discrepancy';
-  statusEn: string;
-  statusBn: string;
-  observedAt: string;
-  source: 'JAXA Earth API (GSMaP v8 / AMSR2)';
-  rainDiscrepancyMm?: number;
-  rainDiscrepancyPct?: number;
-}
-
-export interface InsatRecord {
-  lstC: number;
-  rain24hMm: number;
-  heatSpikeConfirmed: boolean;
-  divergenceNoticeEn?: string;
-  divergenceNoticeBn?: string;
-  observedAt: string;
-  source: 'ISRO MOSDAC (INSAT-3DR)';
-}
-
-export interface NisarRecord {
-  soilMoisture200m: number;
-  observationDate: string;
-  pass: 'Ascending' | 'Descending';
-  resolutionMeters: 200;
-  status: 'provisional_release';
-  source: 'NASA-ISRO NISAR (L3 Provisional)';
-}
-
 export interface DistrictSatelliteRecord {
   smap: SmapRecord | null;
   ndvi: NdviRecord | null;
   lstDay: LstRecord | null;
   lstNight: LstRecord | null;
-  sentinel1?: Sentinel1Record | null;
-  sentinel2?: Sentinel2Record | null;
-  jaxa?: JaxaRecord | null;
-  insat?: InsatRecord | null;
-  nisar?: NisarRecord | null;
 }
 
 export interface SatelliteDatasetMeta {
@@ -126,11 +59,6 @@ export interface SatelliteDatasetMeta {
     smap: string;
     ndvi: string;
     lst: string;
-    sentinel1?: string;
-    sentinel2?: string;
-    jaxa?: string;
-    insat?: string;
-    nisar?: string;
   };
   generatedAt: string;
 }

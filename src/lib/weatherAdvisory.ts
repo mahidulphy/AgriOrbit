@@ -78,7 +78,7 @@ export type AdvisorySeverity = 'danger' | 'warning' | 'info' | 'success';
 
 export interface EvaluatedParameter {
   parameter: string;
-  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'ESA Sentinel-1' | 'ESA Sentinel-2' | 'JAXA Earth API' | 'ISRO MOSDAC' | 'NASA-ISRO NISAR' | 'Season Calendar';
+  source: 'NASA POWER' | 'NASA GPM' | 'Open-Meteo' | 'NASA SMAP' | 'Season Calendar';
   observedValue: string | number;
   thresholdCondition: string;
   satisfied: boolean;
@@ -141,15 +141,7 @@ export interface AdvisoryRuleContext {
   gpm: GpmObservationResult;
   forecast: WeatherForecastResult;
   soilMoisture: number | null; // SMAP m³/m³ (or null if unobserved / flagged)
-  sentinel1FloodedCroplandPct?: number | null;
-  sentinel2Ndvi10m?: number | null;
-  sentinel2AnomalyPct?: number | null;
-  jaxaRain30dMm?: number | null;
-  jaxaSoilMoisture?: number | null;
-  jaxaSpi30dIndex?: number | null;
-  insatLstC?: number | null;
-  insatHeatConfirmed?: boolean | null;
-  nisarSoilMoisture200m?: number | null;
+
   districtId: DistrictId | string;
   upazilaName?: string;
   season?: 'Rabi' | 'Kharif-1' | 'Kharif-2';
@@ -227,15 +219,7 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   const isForecastDry = forecast.totalRain7dMm <= thresholds.drySpell7dMm;
   const isGpmElevated = gpm.recentRain7dMm >= thresholds.gpmElevatedRainMm || gpm.baselineComparison === 'Elevated';
   const isGpmDeficit = gpm.recentRain7dMm <= thresholds.gpmDeficitRainMm || gpm.baselineComparison === 'Deficit';
-  const sentinel1FloodPct = context.sentinel1FloodedCroplandPct;
-  const sentinel2Ndvi = context.sentinel2Ndvi10m;
-  const sentinel2Anomaly = context.sentinel2AnomalyPct;
-  const jaxaRain = context.jaxaRain30dMm;
-  const jaxaSoil = context.jaxaSoilMoisture;
-  const jaxaSpi = context.jaxaSpi30dIndex;
-  const insatLst = context.insatLstC;
-  const insatHeat = context.insatHeatConfirmed;
-  const nisarSoil = context.nisarSoilMoisture200m;
+
 
   let conditionType: ConditionType = 'favorable';
   let severity: AdvisorySeverity = 'success';
@@ -416,7 +400,6 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
 
   // Rule transparency triggers list
   const rulesTriggered = [
-    ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`Rule SAR-01: Sentinel-1 SAR detected ${sentinel1FloodPct.toFixed(1)}% cropland flooded (>10% threshold).`] : []),
     `${ruleId}: ${titleEn}`,
     `Precipitation Condition: Forecast ${forecast.totalRain7dMm} mm (Threshold: ${isForecastHeavyRain ? '≥ ' + thresholds.heavyRain7dMm : 'Normal'} mm)`,
     `Field Moisture Condition: ${soilMoisture !== null && soilMoisture !== undefined ? `SMAP ${soilMoisture.toFixed(2)} m³/m³ classified as ${soilMoistureStatus}` : 'SMAP satellite observation unavailable'}`,
@@ -424,7 +407,6 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
   ];
 
   const rulesTriggeredBn = [
-    ...(sentinel1FloodPct && sentinel1FloodPct > 10 ? [`নিয়ম SAR-01: সেন্টিনেল-১ রাডারে ${sentinel1FloodPct.toFixed(1)}% জমিতে জলাবদ্ধতা শনাক্ত হয়েছে (>১০% সীমা)।`] : []),
     `${ruleId}: ${titleBn}`,
     `বৃষ্টিপাত পরিস্থিতি: পূর্বাভাস ${forecast.totalRain7dMm} মিমি`,
     `মাটির আর্দ্রতা পরিস্থিতি: ${soilMoisture !== null && soilMoisture !== undefined ? `এসএমএপি ${toBnDigits(soilMoisture.toFixed(2))} m³/m³ (${soilMoistureStatusBn})` : 'এসএমএপি উপগ্রহ তথ্য অপ্রাপ্য'}`,
@@ -441,84 +423,6 @@ export function evaluateWeatherAdvisory(context: AdvisoryRuleContext): WeatherAd
     : `সংরক্ষিত তথ্য ব্যবহার হচ্ছে · আপডেট: ${new Date(gpm.updatedAt).toLocaleDateString('bn-BD', { day: '2-digit', month: 'short', year: 'numeric' })}`;
 
   
-  if (sentinel2Anomaly !== undefined && sentinel2Anomaly !== null) {
-    evaluatedParams.push({
-      parameter: 'Field Vegetation Canopy Health (ESA Sentinel-2 10m NDVI)',
-      source: 'ESA Sentinel-2',
-      observedValue: `${sentinel2Ndvi !== undefined && sentinel2Ndvi !== null ? sentinel2Ndvi.toFixed(2) : 'N/A'} (${sentinel2Anomaly > 0 ? '+' : ''}${sentinel2Anomaly.toFixed(1)}% vs baseline)`,
-      thresholdCondition: `anomaly ${sentinel2Anomaly.toFixed(1)}% ${sentinel2Anomaly < -15 ? '<' : '≥'} stressThreshold -15.0%`,
-      satisfied: sentinel2Anomaly < -15,
-    });
-  }
-
-  const maxForecastTemp = forecast.forecastDays && forecast.forecastDays.length > 0
-    ? Math.max(...forecast.forecastDays.map((d) => d.tMax))
-    : 32;
-
-  if (insatLst !== undefined && insatLst !== null) {
-    evaluatedParams.push({
-      parameter: 'Canopy Heat & Land Surface Temp (ISRO INSAT-3DR vs Numerical Forecast)',
-      source: 'ISRO MOSDAC',
-      observedValue: `Forecast Tmax: ${maxForecastTemp.toFixed(1)}°C · ISRO INSAT: ${insatLst.toFixed(1)}°C (${insatHeat ? 'Confirmed by 2 agencies' : maxForecastTemp > 35 && insatLst <= 33 ? 'Divergence noted' : 'Safe range'})`,
-      thresholdCondition: 'Forecast > 35°C AND ISRO > 35°C',
-      satisfied: !!insatHeat,
-    });
-    if (insatHeat) {
-      rulesTriggered.push(`Rule HEAT-ISRO-01: Heat stress confirmed by 2 space agencies (Open-Meteo/NASA: ${maxForecastTemp.toFixed(1)}°C, ISRO INSAT-3DR: ${insatLst.toFixed(1)}°C).`);
-      rulesTriggeredBn.push(`নিয়ম HEAT-ISRO-01: দুই মহাকাশ সংস্থা (পূর্বাভাস: ${maxForecastTemp.toFixed(1)}° সে., ইসরো ইনস্যাট: ${toBnDigits(insatLst.toFixed(1))}° সে.) দ্বারা তাপদাহ নিশ্চিত।`);
-    }
-  }
-
-  if (nisarSoil !== undefined && nisarSoil !== null) {
-    evaluatedParams.push({
-      parameter: 'High-Resolution Field Moisture (NASA-ISRO NISAR 200m SAR)',
-      source: 'NASA-ISRO NISAR',
-      observedValue: `${nisarSoil.toFixed(2)} m³/m³ (200m radar)`,
-      thresholdCondition: 'Cross-verifies SMAP 9km profile at 200m resolution',
-      satisfied: true,
-    });
-  }
-
-  if (jaxaRain !== undefined && jaxaRain !== null) {
-    const nasa30dEst = gpm.recentRain7dMm * (30 / 7);
-    const rainDiffMm = Math.abs(nasa30dEst - jaxaRain);
-    const rainDiffPct = (rainDiffMm / Math.max(nasa30dEst, jaxaRain, 1)) * 100;
-    const isDiscrepancy = rainDiffMm > 25 && rainDiffPct > 30;
-
-    evaluatedParams.push({
-      parameter: 'Cross-Agency Rainfall Agreement (NASA POWER vs JAXA GSMaP v8)',
-      source: 'JAXA Earth API',
-      observedValue: `NASA ~30d: ${nasa30dEst.toFixed(0)}mm vs JAXA GSMaP: ${jaxaRain.toFixed(0)}mm (${isDiscrepancy ? 'Δ ' + rainDiffMm.toFixed(0) + 'mm Discrepancy' : 'Aligned'})`,
-      thresholdCondition: 'diff > 25mm AND diffPct > 30%',
-      satisfied: isDiscrepancy,
-    });
-
-    if (isDiscrepancy) {
-      rulesTriggered.push(`Rule RAIN-DISCREPANCY-01: NASA POWER (${nasa30dEst.toFixed(0)}mm) and JAXA GSMaP (${jaxaRain.toFixed(0)}mm) disagree by ${rainDiffMm.toFixed(0)}mm (${rainDiffPct.toFixed(0)}%). Verify local gauge.`);
-      rulesTriggeredBn.push(`নিয়ম RAIN-DISCREPANCY-01: নাসা ও জাক্সার বৃষ্টিপাত পরিমাপে ${rainDiffMm.toFixed(0)}মিমি (${rainDiffPct.toFixed(0)}%) অমিল ধরা পড়েছে। স্থানীয় রেইনগেজে নিশ্চিত করুন।`);
-    }
-  }
-
-  if (jaxaSoil !== undefined && jaxaSoil !== null) {
-    evaluatedParams.push({
-      parameter: 'Topsoil Moisture & SPI Drought Index (JAXA AMSR2 on GCOM-W)',
-      source: 'JAXA Earth API',
-      observedValue: `${jaxaSoil.toFixed(2)} m³/m³ (SPI: ${jaxaSpi !== undefined && jaxaSpi !== null ? jaxaSpi.toFixed(2) : 'N/A'})`,
-      thresholdCondition: 'AMSR2 < 0.16 m³/m³ OR SPI < -1.2',
-      satisfied: jaxaSoil < 0.16 || (jaxaSpi !== undefined && jaxaSpi !== null && jaxaSpi < -1.2),
-    });
-  }
-
-  if (sentinel1FloodPct !== undefined && sentinel1FloodPct !== null) {
-    evaluatedParams.push({
-      parameter: 'Cropland Flooding / Waterlogging (ESA Sentinel-1 SAR)',
-      source: 'ESA Sentinel-1',
-      observedValue: `${sentinel1FloodPct.toFixed(1)}% flooded`,
-      thresholdCondition: `flooded ${sentinel1FloodPct.toFixed(1)}% ${sentinel1FloodPct > 10 ? '>' : '≤'} waterlogThreshold 10.0%`,
-      satisfied: sentinel1FloodPct > 10,
-    });
-  }
-
   return {
     conditionType,
     severity,
@@ -580,15 +484,7 @@ export async function getWeatherAdvisoryForLocation(
   },
 ): Promise<WeatherAdvisoryResult> {
   const sat = getDistrictSatellite(districtId);
-  const sentinel1FloodedCroplandPct = sat?.sentinel1?.floodedCroplandPct ?? null;
-  const sentinel2Ndvi10m = sat?.sentinel2?.ndvi10m ?? null;
-  const sentinel2AnomalyPct = sat?.sentinel2?.anomalyPct ?? null;
-  const jaxaRain30dMm = sat?.jaxa?.gsmapRain30dMm ?? null;
-  const jaxaSoilMoisture = sat?.jaxa?.amsr2SoilMoisture ?? null;
-  const jaxaSpi30dIndex = sat?.jaxa?.spi30dIndex ?? null;
-  const insatLstC = sat?.insat?.lstC ?? null;
-  const insatHeatConfirmed = sat?.insat?.heatSpikeConfirmed ?? false;
-  const nisarSoilMoisture200m = sat?.nisar?.soilMoisture200m ?? null;
+
 
   const [gpm, forecast] = await Promise.all([
     getGpmObservation(districtId, lat, lng),
@@ -604,14 +500,6 @@ export async function getWeatherAdvisoryForLocation(
     season: options?.season,
     farmerPriority,
     thresholds: options?.thresholds,
-    sentinel1FloodedCroplandPct,
-    sentinel2Ndvi10m,
-    sentinel2AnomalyPct,
-    jaxaRain30dMm,
-    jaxaSoilMoisture,
-    jaxaSpi30dIndex,
-    insatLstC,
-    insatHeatConfirmed,
-    nisarSoilMoisture200m,
+
   });
 }

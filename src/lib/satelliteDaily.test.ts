@@ -1,9 +1,38 @@
-import test from 'node:test';
+import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { isObservationFresh } from './satelliteService.ts';
 import { formatBadgeDate } from '../components/common/DataTileStatusBadge.tsx';
 import { getDistrictSatellite } from '../data/satellite.ts';
 import { findLatestNdviProductAndDate, fetchDistrictNdvi } from '../../scripts/update-satellite-data.ts';
+
+const originalFetch = globalThis.fetch;
+
+before(() => {
+  globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = typeof input === 'string' ? input : input.toString();
+    if (url.includes('modis.ornl.gov')) {
+      if (url.includes('/dates?')) {
+        return new Response(JSON.stringify({
+          dates: [
+            { modis_date: 'A2026289', calendar_date: '2026-10-15' }
+          ]
+        }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+      if (url.includes('/subset?')) {
+        return new Response(JSON.stringify({
+          subset: [
+            { data: [5800] } // 5800 * 0.0001 = 0.58
+          ]
+        }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+    }
+    return originalFetch(input, init);
+  };
+});
+
+after(() => {
+  globalThis.fetch = originalFetch;
+});
 
 test('1. isObservationFresh correctly evaluates 7-day age threshold', () => {
   const now = new Date();
@@ -41,31 +70,19 @@ test('3. Rangpur district contains calibrated SMAP and updated NDVI observations
   assert.ok(sat.ndvi.periodStart, 'NDVI must have an observation date');
 });
 
-test('4. ORNL DAAC REST API resolves latest MODIS/VIIRS NDVI product and date', async (t) => {
-  try {
-    const candidate = await findLatestNdviProductAndDate(25.75, 89.25);
-    assert.ok(candidate, 'Must find valid candidate from ORNL DAAC');
-    assert.ok(['MYD13Q1', 'MOD13Q1', 'VNP13A1'].includes(candidate.product), 'Product must be MODIS or VIIRS');
-    assert.ok(candidate.calendarDate.startsWith('202'), 'Calendar date must be valid YYYY-MM-DD');
-    assert.ok(candidate.modisDate.startsWith('A202'), 'MODIS date must start with AYYYY');
-  } catch (err: any) {
-    t.skip(`ORNL DAAC API is unreachable or timed out from current network: ${err.message}`);
-  }
+test('4. ORNL DAAC REST API resolves latest MODIS/VIIRS NDVI product and date', async () => {
+  const candidate = await findLatestNdviProductAndDate(25.75, 89.25);
+  assert.ok(candidate, 'Must find valid candidate from ORNL DAAC');
+  assert.ok(['MYD13Q1', 'MOD13Q1', 'VNP13A1'].includes(candidate.product), 'Product must be MODIS or VIIRS');
+  assert.ok(candidate.calendarDate.startsWith('202'), 'Calendar date must be valid YYYY-MM-DD');
+  assert.ok(candidate.modisDate.startsWith('A202'), 'MODIS date must start with AYYYY');
 });
 
-test('5. ORNL DAAC extracts real subset NDVI value for Rangpur coordinates', async (t) => {
-  try {
-    const candidate = await findLatestNdviProductAndDate(25.75, 89.25);
-    const ndvi = await fetchDistrictNdvi(candidate, 25.75, 89.25);
-    if (!ndvi) {
-      t.skip('ORNL DAAC returned no subset data for test coordinate');
-      return;
-    }
-    assert.ok(ndvi, 'NDVI subset must return valid record');
-    assert.ok(ndvi.value >= 0.2 && ndvi.value <= 0.9, 'Extracted NDVI must be valid decimal');
-    assert.equal(ndvi.periodStart, candidate.calendarDate, 'NDVI periodStart must match candidate date');
-    assert.equal(ndvi.product, candidate.product, 'Product must match candidate');
-  } catch (err: any) {
-    t.skip(`ORNL DAAC API is unreachable or timed out from current network: ${err.message}`);
-  }
+test('5. ORNL DAAC extracts real subset NDVI value for Rangpur coordinates', async () => {
+  const candidate = await findLatestNdviProductAndDate(25.75, 89.25);
+  const ndvi = await fetchDistrictNdvi(candidate, 25.75, 89.25);
+  assert.ok(ndvi, 'NDVI subset must return valid record');
+  assert.ok(ndvi.value >= 0.2 && ndvi.value <= 0.9, 'Extracted NDVI must be valid decimal');
+  assert.equal(ndvi.periodStart, candidate.calendarDate, 'NDVI periodStart must match candidate date');
+  assert.equal(ndvi.product, candidate.product, 'Product must match candidate');
 });

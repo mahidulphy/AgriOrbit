@@ -79,8 +79,7 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
   const admin = getDistrictAdmin(districtId);
   const { satellite: districtSat, isSmapFresh } = useDistrictSatellite(districtId);
   const smapRecord = districtSat?.smap ?? null;
-  const sentinel1Record = districtSat?.sentinel1 ?? null;
-  const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination';
+  const isSoilFlaggedWater = smapRecord?.flag === 'possible_water_contamination' || (smapRecord?.value !== undefined && smapRecord.value > 0.5);
   const effectiveSoilMoisture = (soilMoisture !== undefined) ? soilMoisture : (smapRecord && !isSoilFlaggedWater ? smapRecord.value : null);
 
   // Instant deterministic initial advisory from bundled snapshot to guarantee zero blank screens
@@ -128,9 +127,8 @@ export const WeatherAdvisory: React.FC<WeatherAdvisoryProps> = ({
       districtId,
       upazilaName,
       farmerPriority: priority,
-      sentinel1FloodedCroplandPct: sentinel1Record?.floodedCroplandPct ?? null,
     });
-  }, [districtId, upazilaName, soilMoisture, priority, sentinel1Record?.floodedCroplandPct]);
+  }, [districtId, upazilaName, soilMoisture, priority]);
 
   // Dynamic field-specific update whenever district, upazila, coordinates, or soil moisture changes
   useEffect(() => {

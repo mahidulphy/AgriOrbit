@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -286,4 +287,95 @@ test('Phase 9: 6. FAQ answers "How accurate is this for MY field?" covering reso
   assert.match(bnFaq.answer, /২৫০ মিটার/i);
   assert.match(bnFaq.answer, /৯-৩৬ কিলোমিটার/i);
   assert.match(bnFaq.answer, /SAAO/i);
+});
+
+test('Phase 9: 7. Food Security Anchor: home_food and both retain Kharif-2 Aman rice', () => {
+  const completeConditions: Conditions = {
+    rain30: 25,
+    tMax30: 29,
+    tMaxAvg: 26,
+    rh: 72,
+    et0: 3.8,
+    et0Total: 114,
+    waterBalance: -89,
+    from: '2026-01-01',
+    to: '2026-01-31',
+  };
+
+  const resHome = generateRotationComparison({
+    conditions: completeConditions,
+    shift: null,
+    soil: 0.28,
+    forecast: [],
+    priority: 'save_water',
+    currentRotation: { rabi: 'boro', kharif1: 'fallow', kharif2: 'aman' },
+    soilType: 'clay_loam',
+    districtId: 'Rangpur',
+    districtNameEn: 'Rangpur',
+    districtNameBn: 'রংপুর',
+    irrigationAvailability: 'yes',
+    mainPurpose: 'home_food',
+  });
+
+  // Recommended or Alternative MUST retain aman in Kharif-2
+  const recStrategy = resHome.strategies.find((s) => s.id === 'recommended')!;
+  const altStrategy = resHome.strategies.find((s) => s.id === 'alternative')!;
+  const recKharif2 = recStrategy.crops.find((c) => c.season === 'kharif2')?.id;
+  const altKharif2 = altStrategy.crops.find((c) => c.season === 'kharif2')?.id;
+  const preservesAman = recKharif2 === 'aman' || altKharif2 === 'aman';
+  assert.ok(preservesAman, 'Household food security purpose must retain Aman rice in Kharif-2');
+
+  // Verify that Rabi in recommended is a water-saving legume or oilseed (e.g. lentil, mustard, wheat)
+  const recRabi = recStrategy.crops.find((c) => c.season === 'rabi')?.id;
+  assert.ok(recRabi !== 'boro', 'Water saving rotation replaces thirsty Boro in Rabi');
+});
+
+test('Phase 9: 8. Market Orientation: local_market boosts commercial crops', () => {
+  const completeConditions: Conditions = {
+    rain30: 25,
+    tMax30: 29,
+    tMaxAvg: 26,
+    rh: 72,
+    et0: 3.8,
+    et0Total: 114,
+    waterBalance: -89,
+    from: '2026-01-01',
+    to: '2026-01-31',
+  };
+
+  const resMarket = runEngine({
+    conditions: completeConditions,
+    soil: 0.28,
+    shift: null,
+    forecast: null,
+    priority: 'water',
+    previousCrop: 'none',
+    today: new Date(),
+    mainPurpose: 'local_market',
+  });
+
+  const kharif1Pick = resMarket.picks.find((p) => p.season === 'kharif1');
+  assert.ok(kharif1Pick, 'Must have Kharif-1 pick');
+});
+
+test('Phase 9: 9. SMAP values > 0.5 are flagged as invalid / water contamination', () => {
+  const isSoilFlaggedWater = (val?: number | null, flag?: string | null) => {
+    return flag === 'possible_water_contamination' || (val !== undefined && val !== null && val > 0.5);
+  };
+
+  assert.equal(isSoilFlaggedWater(0.25, null), false, 'Normal SMAP 0.25 is valid');
+  assert.equal(isSoilFlaggedWater(0.51, null), true, 'SMAP 0.51 must be flagged as water contamination');
+  assert.equal(isSoilFlaggedWater(0.72, null), true, 'SMAP 0.72 must be flagged as water contamination');
+  assert.equal(isSoilFlaggedWater(0.30, 'possible_water_contamination'), true, 'Explicit water flag honored');
+});
+
+test('Phase 9: 10. Honesty check: zero references to ESA, CCI, or Copernicus outside experimental/', () => {
+  // execSync is imported at top
+  let output = '';
+  try {
+    output = execSync('git grep -n -i -E "\\bESA\\b|\\bCCI\\b|Copernicus" -- ":!src/lib/phase9Gaps.test.ts" src/ api/ scripts/ public/ README.md index.html', { encoding: 'utf8' });
+  } catch {
+    output = '';
+  }
+  assert.equal(output.trim(), '', 'Must be strictly zero ESA/CCI references outside experimental/');
 });

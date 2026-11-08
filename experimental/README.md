@@ -26,6 +26,10 @@
    - NISAR is not yet operationally streaming daily 200m agricultural SAR over Bangladesh, and MOSDAC requires IMD meteorological access.
    - **Status**: Not connected to live production data; excluded from active AgriOrbit scoring.
 
+5. **ESA CCI Soil Moisture (`scripts/prepare-esa-cci-soil-moisture.ts`, `data/esa-cci-soil-moisture.json`)**:
+   - Synthetic zonal estimate based on agro-ecological regional heuristics, not sampled from a real ESA download.
+   - **Status**: Synthetic zonal estimate, not real ESA data. Not used in production.
+
 ---
 
 ## Production Data Pipeline
@@ -33,6 +37,5 @@ Production AgriOrbit relies strictly on verified, accessible Earth observation s
 - **NASA POWER**: Real-time daily agrometeorology point API (`https://power.larc.nasa.gov/api/temporal/daily/point`).
 - **NASA SMAP L3**: AppEEARS 9 km passive microwave soil moisture (`SPL3SMP_E.006`).
 - **NASA MODIS**: ORNL DAAC & AppEEARS 250m NDVI (`MOD13Q1.061`) and 1 km LST (`MOD11A2.061`).
-- **ESA CCI**: 30-year Climate Change Initiative combined soil moisture data record v09.1.
 - **Open-Meteo**: High-resolution 7-day weather forecast API.
 - **BARI / BRRI**: Agro-ecological crop suitability and fertilizer management guidelines.

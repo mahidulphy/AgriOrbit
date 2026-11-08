@@ -28,48 +28,26 @@ function MetricRow({
   lang,
   num,
   biggestTag,
-  pct,
-  isNotEnoughData,
 }: {
   label: string;
   thenVal: number;
   nowVal: number;
   delta: number;
-  type: 'temp' | 'heat' | 'share' | 'soil';
+  type: 'temp' | 'heat' | 'share';
   isBiggest: boolean;
   lang: 'en' | 'bn';
   num: (val: number, d?: number, signed?: boolean) => string;
   biggestTag: string;
-  pct?: number;
-  isNotEnoughData?: boolean;
 }) {
   const isBn = lang === 'bn';
-
-  if (isNotEnoughData) {
-    return (
-      <div className="py-2.5 first:pt-0 last:pb-0 border-b border-[#262626] last:border-b-0">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-medium text-[#737373] truncate">{label}</span>
-        </div>
-        <div className="flex items-center justify-between gap-2 mt-1">
-          <span className="text-xs text-[#737373] font-mono">{isBn ? 'পর্যাপ্ত তথ্য নেই' : 'Not enough data'}</span>
-          <span className="text-xs font-mono text-[#737373]">N/A</span>
-        </div>
-      </div>
-    );
-  }
 
   const thenFormatted =
     type === 'share'
       ? `${num(thenVal, 0)}%`
-      : type === 'soil'
-      ? `${num(thenVal, 2)}`
       : `${num(thenVal, 1)}°`;
   const nowFormatted =
     type === 'share'
       ? `${num(nowVal, 0)}%`
-      : type === 'soil'
-      ? `${num(nowVal, 2)}`
       : `${num(nowVal, 1)}°`;
 
   let pillColor = '';
@@ -85,18 +63,6 @@ function MetricRow({
     } else {
       pillColor = 'text-[#737373]';
       pillText = `0 ${isBn ? 'পয়েন্ট' : 'pt'}`;
-    }
-  } else if (type === 'soil') {
-    const pctStr = pct !== undefined ? ` (${num(Math.abs(pct), 1)}%)` : '';
-    if (delta < 0) {
-      pillColor = 'text-[#F59E0B]';
-      pillText = `${num(delta, 2)}${pctStr}`;
-    } else if (delta > 0) {
-      pillColor = 'text-[#38BDF8]';
-      pillText = `+${num(delta, 2)}${pctStr}`;
-    } else {
-      pillColor = 'text-[#737373]';
-      pillText = `0.00`;
     }
   } else {
     if (delta > 0) {
@@ -183,7 +149,7 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
           </div>
         </div>
 
-        {/* Rain Timing Shift Insight */}
+        {/* Rain Timing Insight */}
         <div className="rounded-xl border border-[#262626] bg-[#141414] p-5 sm:p-6 transition-colors duration-150 hover:border-[#404040]">
           <div className="flex items-start gap-3.5">
             <div className="w-9 h-9 rounded-lg shrink-0 flex items-center justify-center bg-[#0A0A0A] text-[#38BDF8] border border-[#262626]">
@@ -191,46 +157,23 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
             </div>
             <div className="min-w-0 flex-1">
               <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#737373] block mb-1">
-                {isBn ? 'বৃষ্টিপাতের সময়ের পরিবর্তন' : 'PRECIPITATION TIMING SHIFT'}
+                {isBn ? 'বৃষ্টির সময়ের পরিবর্তন' : 'BIGGEST RAIN SHARE SHIFT'}
               </span>
               <h3 className="font-display text-base font-semibold text-[#FAFAFA]">
                 {t.fs.headlineRain(t.season[rain.season], num(rain.nowShare, 0), num(rain.thenShare, 0))}
               </h3>
               <p className="mt-1 text-xs text-[#737373] font-mono">
                 {isBn
-                  ? `আগের দশক (${range(shift.thenRange)}) বনাম বর্তমান দশক (${range(shift.nowRange)})`
-                  : `${range(shift.thenRange)} baseline vs ${range(shift.nowRange)} latest NASA observations`}
+                  ? `বছরের মোট বৃষ্টির কত শতাংশ এই মৌসুমে পড়ে`
+                  : `Season's share of total annual precipitation`}
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. Calm Legend Row */}
-      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2 text-xs font-mono text-[#737373]">
-        <span className="text-[#A3A3A3] uppercase tracking-wider text-[10px] font-semibold">
-          {t.fs.legendTitle}:
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="text-[#F59E0B] font-bold">▲</span>
-          <span>{t.fs.legendTempUp}</span>
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="text-[#38BDF8] font-bold">▼</span>
-          <span>{t.fs.legendTempDown}</span>
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="text-[#38BDF8] font-bold">▲</span>
-          <span>{t.fs.legendRainUp}</span>
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="text-[#F59E0B] font-bold">▼</span>
-          <span>{t.fs.legendRainDown}</span>
-        </span>
-      </div>
-
-      {/* 3. The 3 Season Cards (Rabi, Kharif-1, Kharif-2) */}
-      <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {/* 2. Decadal Comparison Cards (1 per season) */}
+      <div className="grid gap-6 md:grid-cols-3 items-stretch">
         {shift.seasons.map((s) => {
           const Icon = SEASON_ICONS[s.season];
           const biggest = getBiggestMetric(s);
@@ -304,21 +247,6 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                     num={num}
                     biggestTag={t.fs.biggestChange}
                   />
-
-                  {/* 4th Metric Row: ESA CCI Soil Moisture */}
-                  <MetricRow
-                    label={isBn ? 'মাটির আর্দ্রতা (m³/m³)' : 'Soil moisture (m³/m³)'}
-                    thenVal={s.soil?.thenSoil ?? 0}
-                    nowVal={s.soil?.nowSoil ?? 0}
-                    delta={s.soil?.dSoil ?? 0}
-                    type="soil"
-                    isBiggest={false}
-                    lang={lang}
-                    num={num}
-                    biggestTag={t.fs.biggestChange}
-                    pct={s.soil?.dSoilPct ?? 0}
-                    isNotEnoughData={!s.soil || s.soil.status === 'not_enough_data'}
-                  />
                 </div>
               </div>
 
@@ -329,12 +257,6 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
                   <p className="text-[#A3A3A3]">
                     {t.fs.takeaways[s.season]}
                   </p>
-                  {s.soil && s.soil.status === 'valid' && (
-                    <p className="text-[#D4D4D4] border-t border-[#262626] pt-1.5 font-sans text-[11px] leading-relaxed">
-                      <span className="font-mono text-[#22C55E] font-semibold">ESA CCI: </span>
-                      {isBn ? s.soil.takeawayBn : s.soil.takeawayEn}
-                    </p>
-                  )}
                 </div>
               </div>
             </article>
@@ -364,36 +286,14 @@ export function FieldShiftPanel({ shift }: { shift: FieldShift }) {
             shares={Object.fromEntries(shift.seasons.map((s) => [s.season, s.nowShare])) as Record<SeasonId, number>}
           />
         </div>
-
-        <div className="mt-4 pt-3 border-t border-[#262626] flex flex-wrap gap-4 text-xs text-[#A3A3A3]">
-          {shift.seasons.map((s) => (
-            <span key={s.season} className="flex items-center gap-2 font-mono">
-              <span className="h-2 w-2 rounded-full" style={{ background: SEASON_COLOR[s.season] }} />
-              <span className="font-medium text-[#FAFAFA]">{t.season[s.season]}</span>
-              <span className="text-[#737373]">({t.seasonMonths[s.season]})</span>
-            </span>
-          ))}
-        </div>
       </div>
 
-      {/* 5. Honest data notes */}
+      {/* 5. Provenance Notes */}
       <div className="space-y-3">
         <div className="flex gap-3 rounded-xl border border-[#262626] bg-[#141414] p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#A3A3A3]">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#22C55E]" />
           <p>
             <strong className="text-[#FAFAFA] font-medium">{t.fs.noteTitle}</strong> {t.fs.note}
-          </p>
-        </div>
-
-        <div className="flex gap-3 rounded-xl border border-[#262626] bg-[#141414] p-4 sm:p-5 text-xs sm:text-sm leading-relaxed text-[#A3A3A3]">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#38BDF8]" />
-          <p>
-            <strong className="text-[#FAFAFA] font-medium">
-              {isBn ? 'ইএসএ সিসিআই মাটির আর্দ্রতা প্রসঙ্গে:' : 'About ESA CCI Soil Moisture:'}
-            </strong>{' '}
-            {isBn
-              ? 'ইএসএ সিসিআই কম্বাইন্ড ডেটাসেট (v09.1) একাধিক সক্রিয় ও নিষ্ক্রিয় মাইক্রোওয়েভ উপগ্রহের (MetOp, SMOS, SMAP, AMSR) সমন্বয়ে তৈরি। উপগ্রহ সেন্সরগুলো ২০+ বছরে পরিবর্তিত হওয়ায় আমরা প্রতিদিনের একক সংখ্যার চেয়ে দশকভিত্তিক গড় মৌসুমি পরিবর্তন ও শুষ্ক দিনের অনুপাতকে গুরুত্ব দিই। যেসব এলাকায় উপকূলীয় জলভাগ বা মেঘের কারণে পর্যাপ্ত নির্ভরযোগ্য ডেটা নেই, সেখানে কোনো অনুমান না করে "পর্যাপ্ত তথ্য নেই" দেখানো হয়।'
-              : 'The ESA CCI Soil Moisture record (v09.1 Combined) harmonizes multiple active and passive microwave sensors (MetOp, SMOS, SMAP, AMSR). Because sensor technology evolved over 20+ years, we evaluate decade-wide seasonal averages and dry-day shares rather than day-to-day exact figures. Where coastal open water or cloud contamination limits valid soundings, we display "not enough data" instead of an unverified estimate.'}
           </p>
         </div>
       </div>

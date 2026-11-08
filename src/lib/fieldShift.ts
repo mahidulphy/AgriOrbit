@@ -11,7 +11,6 @@
 
 import type { MonthlyData } from './power.ts';
 import { largestRemainderRound, calcRoundedDelta } from '../utils/rounding.ts';
-import { getSeasonEsaCci, type EsaCciSeasonStats } from '../data/esaCciSoilMoisture.ts';
 
 export type SeasonId = 'rabi' | 'kharif1' | 'kharif2';
 
@@ -38,7 +37,6 @@ export interface SeasonShift {
   thenShare: number; // % of the year's rain that falls in this season (integers summing to 100)
   nowShare: number;
   dShare: number; // percentage points (strictly nowShare - thenShare)
-  soil?: EsaCciSeasonStats;
 }
 
 export interface FieldShift {
@@ -97,7 +95,6 @@ export function computeFieldShift(m: MonthlyData, districtId = "rangpur"): Field
     const nowShare = nowRoundedShares[i];
     const dShare = nowShare - thenShare;
 
-    const cci = getSeasonEsaCci(districtId, season);
     return {
       season,
       thenTemp: tStats.roundedThen,
@@ -109,7 +106,6 @@ export function computeFieldShift(m: MonthlyData, districtId = "rangpur"): Field
       thenShare,
       nowShare,
       dShare,
-      soil: cci ?? undefined,
     };
   });
 

@@ -2,7 +2,7 @@
 
 **NASA observes. AgriOrbit explains. Farmers decide.**
 
-Explainable agricultural decision-support for Bangladesh, powered by NASA Earth observations (NASA POWER, SMAP, MODIS), ESA CCI Soil Moisture, and local agronomy (BARI/BRRI).
+Explainable agricultural decision-support for Bangladesh, powered by NASA Earth observations (NASA POWER, SMAP, MODIS), and local agronomy (BARI/BRRI).
 
 Team: Bay of Orbits
 

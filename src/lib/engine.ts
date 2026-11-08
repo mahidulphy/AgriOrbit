@@ -160,8 +160,8 @@ export interface Alert {
 export interface EngineInput {
   conditions: Conditions;
   soil: number | null; // SMAP (or what-if) soil moisture, m³/m³; null if unavailable or water-flagged
-  shift: FieldShift;
-  forecast: ForecastDay[];
+  shift?: FieldShift | null;
+  forecast?: ForecastDay[] | null;
   priority: Priority;
   today?: Date;
   previousCrop?: string;
@@ -195,17 +195,18 @@ export function planSeasons(today = new Date()): SeasonId[] {
 }
 
 export function computeAlerts(inp: EngineInput): Alert[] {
-  const { conditions: c, soil, forecast } = inp;
+  const { conditions: c, soil, forecast = [] } = inp;
   const alerts: Alert[] = [];
+  const fList = forecast || [];
 
-  const fMax = Math.max(...forecast.map((d) => d.tMax));
+  const fMax = fList.length > 0 ? Math.max(...fList.map((d) => d.tMax)) : -99;
   if (c.tMax30 > RULES.heatC) alerts.push({ code: 'heat', source: 'POWER', v: { t: round1(c.tMax30) } });
   else if (fMax > RULES.heatC) alerts.push({ code: 'heat', source: 'OpenMeteo', v: { t: round1(fMax) } });
 
   if (soil !== null && c.rain30 < RULES.dryRainMm && soil < RULES.drySoil)
     alerts.push({ code: 'lowWater', source: 'SMAP', v: { rain: Math.round(c.rain30), soil } });
 
-  const rain7 = forecast.reduce((a, d) => a + d.rain, 0);
+  const rain7 = fList.reduce((a, d) => a + d.rain, 0);
   if (rain7 > RULES.floodRain7d) alerts.push({ code: 'flood', source: 'OpenMeteo', v: { rain: Math.round(rain7) } });
 
   return alerts;
@@ -239,16 +240,18 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
   add('base', RULES.base, crop.source, { season });
 
   // 2. Temperature fit, using the season's average over the latest 10 years.
-  const s = inp.shift.seasons.find((x) => x.season === season)!;
-  const t = round1(s.nowTemp);
-  if (t >= crop.tempMin && t <= crop.tempMax) add('tempOk', 15, 'POWER', { t, min: crop.tempMin, max: crop.tempMax });
-  else {
-    const off = t < crop.tempMin ? crop.tempMin - t : t - crop.tempMax;
-    add('tempOff', -Math.min(20, Math.round(off * 4)), 'POWER', { t, min: crop.tempMin, max: crop.tempMax });
-  }
+  const s = inp.shift?.seasons?.find((x) => x.season === season);
+  if (s) {
+    const t = round1(s.nowTemp);
+    if (t >= crop.tempMin && t <= crop.tempMax) add('tempOk', 15, 'POWER', { t, min: crop.tempMin, max: crop.tempMax });
+    else {
+      const off = t < crop.tempMin ? crop.tempMin - t : t - crop.tempMax;
+      add('tempOff', -Math.min(20, Math.round(off * 4)), 'POWER', { t, min: crop.tempMin, max: crop.tempMax });
+    }
 
-  // 3. Seasonal heat: hot-season daily highs above 35°C hurt heat-sensitive crops.
-  if (s.nowHeat > RULES.heatC && crop.tempMax < RULES.heatC) add('heatSeason', -8, 'POWER', { heat: round1(s.nowHeat) });
+    // 3. Seasonal heat: hot-season daily highs above 35°C hurt heat-sensitive crops.
+    if (s.nowHeat > RULES.heatC && crop.tempMax < RULES.heatC) add('heatSeason', -8, 'POWER', { heat: round1(s.nowHeat) });
+  }
 
   if (isFirst) {
     const { rain30, waterBalance } = inp.conditions;
@@ -319,6 +322,21 @@ export function scoreCrop(crop: Crop, season: SeasonId, isFirst: boolean, inp: E
       add('irrigationConstraint', -15, 'Farmer', { level: 'limited', water: crop.water });
     } else if (crop.water === 'low') {
       add('irrigationConstraint', 4, 'Farmer', { level: 'limited', water: crop.water });
+    }
+  }
+
+  // 8c. Farmer production goal (Home / Market / Both)
+  if (inp.mainPurpose === 'home_food') {
+    if (crop.is_staple || crop.id === 'aman' || crop.id === 'boro' || crop.id === 'wheat') {
+      add('priFood', 8, 'Farmer', { goal: 'home_food' });
+    }
+  } else if (inp.mainPurpose === 'local_market') {
+    if (crop.value_category === 'high' || ['mustard', 'sesame', 'chickpea', 'jute'].includes(crop.id)) {
+      add('priIncome', 6, 'Farmer', { goal: 'local_market' });
+    }
+  } else if (inp.mainPurpose === 'both') {
+    if (crop.id === 'aman' || crop.id === 'wheat') {
+      add('priFood', 6, 'Farmer', { goal: 'both' });
     }
   }
 
@@ -402,6 +420,16 @@ export function runEngine(inp: EngineInput): EngineResult {
           }
           balance += seq[i].crop.nutrient;
         }
+
+        // Food Security Rule: When farmer's goal is Home or Both, ensure at least one rice/staple season is kept (prioritizing rainfed T. Aman in Kharif-2)
+        if (ok && (inp.mainPurpose === 'home_food' || inp.mainPurpose === 'both')) {
+          const kharif2Idx = seasons.indexOf('kharif2');
+          const hasRiceInRotation = seq.some((s) => s.crop.id === 'aman' || s.crop.id === 'boro' || s.crop.id === 'aus');
+          if (kharif2Idx !== -1 && !hasRiceInRotation) {
+            ok = false;
+          }
+        }
+
         const total = a.score + b.score + c.score;
         if (ok && total > bestTotal) {
           bestTotal = total;
