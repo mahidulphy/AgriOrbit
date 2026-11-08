@@ -10,6 +10,9 @@ import {
   type AlertEmailItem,
 } from '../src/lib/bilingualEmailTemplate.ts';
 
+// In-memory rate limiting map for test alerts (persists across warm serverless lambdas)
+const testAlertRateLimit = new Map<string, number>();
+
 // Fetch live NASA POWER daily max temperature with 6s timeout
 async function getLiveNasaObservation(lat: number, lon: number): Promise<{ maxTemp: number; dataDate: string }> {
   try {
@@ -116,22 +119,40 @@ export default async function handler(req: any, res?: any) {
     }
 
     // 5. Rate Limiting: Max 1 test alert per 5 minutes per user
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    const now = Date.now();
+    const cooldownMs = 5 * 60 * 1000;
 
-    const { data: recentTests } = await supabaseAdmin
-      .from('notifications')
-      .select('id, created_at')
-      .eq('user_id', user.id)
-      .eq('alert_type', 'test')
-      .gte('created_at', fiveMinutesAgo)
-      .order('created_at', { ascending: false })
-      .limit(1);
-
-    if (recentTests && recentTests.length > 0) {
+    // A. Check in-memory rate limit map first
+    const lastMemorySent = testAlertRateLimit.get(user.id);
+    if (lastMemorySent && now - lastMemorySent < cooldownMs) {
+      const remainingMinutes = Math.ceil((cooldownMs - (now - lastMemorySent)) / 60000);
       return sendJson(429, {
         ok: false,
-        error: 'একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait 5 minutes before sending another test alert.',
+        error: `একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait ${remainingMinutes} minute(s) before sending another test alert.`,
       });
+    }
+
+    // B. Check persistent profiles.last_test_alert_at if column exists
+    try {
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('last_test_alert_at')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (profile?.last_test_alert_at) {
+        const lastDbSent = new Date(profile.last_test_alert_at).getTime();
+        if (now - lastDbSent < cooldownMs) {
+          testAlertRateLimit.set(user.id, lastDbSent);
+          const remainingMinutes = Math.ceil((cooldownMs - (now - lastDbSent)) / 60000);
+          return sendJson(429, {
+            ok: false,
+            error: `একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait ${remainingMinutes} minute(s) before sending another test alert.`,
+          });
+        }
+      }
+    } catch {
+      // Column may not exist on remote DB; in-memory cooldown ensures safety
     }
 
     // 6. Resolve user's primary field or district
@@ -174,35 +195,13 @@ export default async function handler(req: any, res?: any) {
       data_date: dataDate,
     };
 
-    // 9. Record test notification in public.notifications (non-fatal, never block email send)
-    let inserted: any = {
+    // 9. Test alerts are ephemeral on-demand dispatches and must NOT be inserted into public.notifications
+    // (which maintains strict uq_notifications_user_field_alert_date constraints for operational daily alerts).
+    const inserted: any = {
       id: crypto.randomUUID(),
       ...notificationPayload,
       created_at: new Date().toISOString(),
     };
-
-    try {
-      const { data: dbRecord, error: insertErr } = await supabaseAdmin
-        .from('notifications')
-        .insert(notificationPayload)
-        .select()
-        .single();
-
-      if (!insertErr && dbRecord) {
-        inserted = dbRecord;
-      } else if (insertErr) {
-        console.warn('[send-alert] Notifications insert notice (proceeding with email delivery):', insertErr.message);
-      }
-    } catch (dbErr: any) {
-      console.warn('[send-alert] Database operation notice:', dbErr?.message);
-    }
-
-    // Optional sync to public.alerts if table exists
-    try {
-      await supabaseAdmin.from('alerts').upsert(notificationPayload, { onConflict: 'user_id,field_id,alert_type,data_date' });
-    } catch {
-      // Non-fatal
-    }
 
     // 10. Check SMTP credentials from environment
     const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
@@ -262,16 +261,15 @@ export default async function handler(req: any, res?: any) {
 
       console.log(`[send-alert] Bilingual email sent successfully to ${user.email}, messageId: ${info.messageId}`);
 
-      // 12. Mark emailed_at in database if record has valid ID
-      if (inserted?.id) {
-        try {
-          await supabaseAdmin
-            .from('notifications')
-            .update({ emailed_at: new Date().toISOString() })
-            .eq('id', inserted.id);
-        } catch {
-          // Non-fatal
-        }
+      // 12. Update rate-limit timestamps upon successful dispatch
+      testAlertRateLimit.set(user.id, Date.now());
+      try {
+        await supabaseAdmin
+          .from('profiles')
+          .update({ last_test_alert_at: new Date().toISOString() })
+          .eq('id', user.id);
+      } catch {
+        // Non-fatal if column does not exist
       }
 
       return sendJson(200, {

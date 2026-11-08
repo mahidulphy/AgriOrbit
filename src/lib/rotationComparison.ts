@@ -450,10 +450,10 @@ export function generateRotationComparison(input: ComparisonInput): {
       whyEn = `Represents your field's current rotation sequence. Evaluated against real-time NASA POWER climate observations for ${districtNameEn}.`;
       whyBn = `আপনার জমিতে বর্তমানে যা চাষ করছেন। ${districtNameBn} এলাকার নাসার বাস্তব আবহাওয়ার সাথে মিলিয়ে এটি যাচাই করা হয়েছে।`;
       rulesTriggeredEn.push('Baseline agronomic audit: assesses groundwater draft and botanical continuity.');
-      rulesTriggeredBn.push('বর্তমান অবস্থা যাচাই: ভূগর্ভস্থ পানির ব্যবহার ও পরপর একই ফসলের জাত হচ্ছে কি না তা দেখা হয়েছে।');
+      rulesTriggeredBn.push('বর্তমান অবস্থা যাচাই: ভূগর্ভস্থ পানির ব্যবহার ও পরপর একই পরিবারের ফসল হচ্ছে কি না তা দেখা হয়েছে।');
       if (!pestCycleBroken) {
         rulesTriggeredEn.push('Notice: Same plant family repeats, increasing potential soil pathogen carryover.');
-        rulesTriggeredBn.push('সতর্কতা: পরপর একই জাতের ফসল থাকায় মাটিতে রোগবালাই ও পোকা বাসা বাঁধতে পারে।');
+        rulesTriggeredBn.push('সতর্কতা: পরপর একই পরিবারের ফসল থাকায় মাটিতে রোগবালাই ও পোকা বাসা বাঁধতে পারে।');
       }
       if (legumeCount === 0) {
         rulesTriggeredEn.push('Notice: Zero legume seasons requires 100% synthetic chemical nitrogen application.');
@@ -461,9 +461,9 @@ export function generateRotationComparison(input: ComparisonInput): {
       }
     } else if (id === 'recommended') {
       whyEn = `Computed by AgriOrbit mathematical rules to strictly optimize your priority (${pLabelEn}). Enforces Rule A (botanical family alternation) and Rule B (biological nitrogen balance).`;
-      whyBn = `আপনার অগ্রাধিকার (${pLabelBn}) সফল করতে স্পষ্ট নিয়মের ভিত্তিতে এই ফসলগুলো বেছে নেওয়া হয়েছে। এতে নিয়ম-১ (ফসলের জাত বদল) ও নিয়ম-২ (মাটিতে নাইট্রোজেন ফেরানো) নিশ্চিত করা হয়েছে।`;
+      whyBn = `আপনার অগ্রাধিকার (${pLabelBn}) সফল করতে স্পষ্ট নিয়মের ভিত্তিতে এই ফসলগুলো বেছে নেওয়া হয়েছে। এতে নিয়ম-১ (ভিন্ন পরিবারের ফসল) ও নিয়ম-২ (মাটিতে নাইট্রোজেন ফেরানো) নিশ্চিত করা হয়েছে।`;
       rulesTriggeredEn.push('Rule A Verified: No botanical family repeats consecutively, breaking stem-borer and root-knot nematode cycles.');
-      rulesTriggeredBn.push('নিয়ম-১ মানা হয়েছে: পরপর দুই মৌসুমে একই জাতের ফসল না লাগিয়ে রোগবালাই ও পোকামাকড়ের উপদ্রব কমানো হয়েছে।');
+      rulesTriggeredBn.push('নিয়ম-১ মানা হয়েছে: পরপর দুই মৌসুমে একই পরিবারের ফসল (যেমন ধানের পর ধান) না লাগিয়ে রোগবালাই ও পোকামাকড়ের উপদ্রব কমানো হয়েছে।');
       rulesTriggeredEn.push(`Rule B Verified: Incorporates ${legumeCount} pulse season(s) to fix atmospheric nitrogen.`);
       rulesTriggeredBn.push(`নিয়ম-২ মানা হয়েছে: ${toBnDigits(legumeCount)}টি ডাল জাতীয় ফসল রেখে মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন সার যোগ করা হয়েছে।`);
     } else {

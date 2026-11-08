@@ -227,7 +227,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <div className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-[11px] font-mono text-[#FAFAFA] flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span>{isBn ? 'নিয়ম-১: ফসলের জাত বদল' : 'Rule A: Family Alternation'}</span>
+              <span>{isBn ? 'নিয়ম-১: ভিন্ন পরিবারের ফসল' : 'Rule A: Family Alternation'}</span>
             </div>
             <div className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-[11px] font-mono text-[#FAFAFA] flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E]" />
@@ -358,10 +358,10 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                         >
                           {strategy.summary.pestCycleBroken
                             ? isBn
-                              ? 'জাত বদল হয়েছে'
+                              ? 'ফসলের পরিবার বদলেছে'
                               : 'Broken'
                             : isBn
-                            ? 'একই জাতের ঝুঁকি'
+                            ? 'একই পরিবারের ঝুঁকি'
                             : 'Unbroken'}
                         </span>
                       </div>

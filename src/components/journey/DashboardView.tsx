@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { CropData, DistrictId, FarmerPriorityId, Language } from '../../types';
 import { CROPS_DATABASE } from '../../data/agriData';
+import { cropById } from '../../data/crops';
 import { getDistrictProfile, getUpazilaName, DISTRICT_WIDE_UPAZILA } from '../../lib/location';
 import { CropRecommendation } from '../CropRecommendation';
 import { SeasonRotation } from '../SeasonRotation';
@@ -604,7 +605,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
             <div className="flex items-center gap-2 min-w-0">
               <span className="font-display font-bold text-sm text-white shrink-0">
-                {language === 'en' ? 'Field Advisory' : 'কৃষি উপদেষ্টা'}
+                {language === 'en' ? 'Field Advisory' : 'কৃষি পরামর্শ'}
               </span>
               <span className="text-[#404040] hidden sm:inline">/</span>
               <span className="text-xs text-[#A3A3A3] font-mono truncate hidden sm:inline" title={locationBreadcrumb}>
@@ -791,9 +792,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <span>{language === 'en' ? 'Practical Next Step' : 'পরবর্তী বাস্তব পদক্ষেপ'}</span>
                     </div>
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
-                      {language === 'en'
-                        ? `Prepare land with shallow tillage to retain residual soil moisture. Procure certified BARI seeds and complete sowing between November 1 and 20 before terminal winter heat sets in.`
-                        : `মাটির জো বা রস ধরে রাখতে হালকা চাষ দিয়ে জমি তৈরি করুন। বারি অনুমোদিত ভালো বীজ সংগ্রহ করে শীতের শেষভাগের গরম এড়াতে ১ থেকে ২০ নভেম্বরের মধ্যেই বীজ বুনে ফেলুন।`}
+                      {(() => {
+                        const topAnchorCrop = rankedCrops[0] ? cropById(rankedCrops[0].id) : null;
+                        const topSowingEn = topAnchorCrop?.sowing_window?.months_en || 'during the recommended seasonal window';
+                        const topSowingBn = topAnchorCrop?.sowing_window?.months_bn || 'অনুমোদিত বপন সময়ে';
+                        return language === 'en'
+                          ? `Prepare land with shallow tillage to retain residual soil moisture. Procure certified BARI/BRRI seeds and complete sowing during ${topSowingEn} before terminal seasonal stress sets in.`
+                          : `মাটির জো বা রস ধরে রাখতে হালকা চাষ দিয়ে জমি তৈরি করুন। বারি/ব্রি অনুমোদিত ভালো জাতের বীজ সংগ্রহ করে ${topSowingBn}-এর মধ্যেই বীজ বুনে ফেলুন।`;
+                      })()}
                     </p>
                   </div>
                 </div>
@@ -1876,7 +1882,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   <p className="text-xs text-slate-300 leading-relaxed">
                     {language === 'en'
                       ? 'Rule A prevents repeating identical plant families consecutively. Rule B forces a legume (Mungbean/Lentil) when the soil nutrient trail drops below zero.'
-                      : 'পরপর দুই মৌসুমে একই জাতের ফসল না লাগিয়ে রোগবালাই কমানো হয়, আর মাটিতে নাইট্রোজেন কমলে ডাল জাতীয় ফসল বেছে নেওয়া হয়।'}
+                      : 'পরপর দুই মৌসুমে একই পরিবারের ফসল (যেমন ধানের পর ধান) না লাগিয়ে রোগবালাই কমানো হয়, আর মাটিতে নাইট্রোজেন কমলে ডাল জাতীয় ফসল বেছে নেওয়া হয়।'}
                   </p>
                 </div>
               </div>
