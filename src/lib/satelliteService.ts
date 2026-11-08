@@ -6,7 +6,7 @@
  * Responsibilities:
  * 1. Synchronously provides baseline satellite observations from bundled `satellite.json` (instant, zero-layout-shift).
  * 2. Asynchronously queries Supabase table `satellite_observations` for the active district if Supabase is configured.
- * 3. Gracefully merges fresh daily SMAP, MODIS/VIIRS NDVI, and LST observations over baseline data.
+ * 3. Gracefully merges fresh daily SMAP, MODIS NDVI, and LST observations over baseline data.
  * 4. Accurately determines observation age and freshness (threshold: 7 days).
  * 5. If network or Supabase queries fail, reliably retains the last good observation with its real date. Never fakes values or dates.
  */
@@ -88,7 +88,7 @@ export async function fetchDistrictSatelliteFromSupabase(
       };
     }
 
-    // 2. Find latest NDVI row (MODIS or VIIRS)
+    // 2. Find latest NDVI row (MODIS)
     const ndviRow = data.find((r) => r.source.includes('NDVI'));
     if (ndviRow && (!merged.ndvi || ndviRow.observed_date >= merged.ndvi.periodStart)) {
       merged.ndvi = {

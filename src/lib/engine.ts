@@ -421,11 +421,10 @@ export function runEngine(inp: EngineInput): EngineResult {
           balance += seq[i].crop.nutrient;
         }
 
-        // Food Security Rule: When farmer's goal is Home or Both, ensure at least one rice/staple season is kept (prioritizing rainfed T. Aman in Kharif-2)
+        // Food Security Rule: When farmer's goal is Home or Both, ensure Kharif-2 retains rainfed T. Aman rice
         if (ok && (inp.mainPurpose === 'home_food' || inp.mainPurpose === 'both')) {
           const kharif2Idx = seasons.indexOf('kharif2');
-          const hasRiceInRotation = seq.some((s) => s.crop.id === 'aman' || s.crop.id === 'boro' || s.crop.id === 'aus');
-          if (kharif2Idx !== -1 && !hasRiceInRotation) {
+          if (kharif2Idx !== -1 && seq[kharif2Idx].crop.id !== 'aman') {
             ok = false;
           }
         }

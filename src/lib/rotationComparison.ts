@@ -656,23 +656,17 @@ export function generateRotationComparison(input: ComparisonInput): {
     return buildCropSeason(defCrop, sKey, 80);
   });
 
-  // Food Security Anchor: When farmer's purpose is Home Food or Both, ensure Recommended or Alternative
-  // retains rainfed T. Aman rice in Kharif-2, paired with water-saving pulses or oilseeds in Rabi.
+  // Food Security Anchor: When farmer's purpose is Home Food or Both, ensure Recommended and Alternative
+  // retain rainfed T. Aman rice in Kharif-2, paired with water-saving pulses or oilseeds in Rabi.
   if (input.mainPurpose === 'home_food' || input.mainPurpose === 'both') {
-    const hasAmanB = cropsB.some((c) => c.season === 'kharif2' && (c.id === 'aman' || c.id === 'aman_rice'));
-    const hasAmanC = cropsC.some((c) => c.season === 'kharif2' && (c.id === 'aman' || c.id === 'aman_rice'));
-
-    if (!hasAmanB && !hasAmanC) {
-      const amanCrop = resolveCrop('aman')!;
-      const k2Idx = cropsB.findIndex((c) => c.season === 'kharif2');
-      if (k2Idx !== -1) {
-        cropsB[k2Idx] = buildCropSeason(amanCrop, 'kharif2', 88);
-      } else {
-        const k2IdxC = cropsC.findIndex((c) => c.season === 'kharif2');
-        if (k2IdxC !== -1) {
-          cropsC[k2IdxC] = buildCropSeason(amanCrop, 'kharif2', 85);
-        }
-      }
+    const amanCrop = resolveCrop('aman')!;
+    const k2IdxB = cropsB.findIndex((c) => c.season === 'kharif2');
+    if (k2IdxB !== -1) {
+      cropsB[k2IdxB] = buildCropSeason(amanCrop, 'kharif2', 88);
+    }
+    const k2IdxC = cropsC.findIndex((c) => c.season === 'kharif2');
+    if (k2IdxC !== -1) {
+      cropsC[k2IdxC] = buildCropSeason(amanCrop, 'kharif2', 85);
     }
   }
 
@@ -959,7 +953,7 @@ export function generateRotationComparison(input: ComparisonInput): {
         smapSoilMoisture: smapMoistureVal || 'No data',
         modisNdvi: modisNdviVal ? `${modisNdviVal}` : 'No data',
         bariGuidance: {
-          en: `Cardinal temperatures and duration benchmarks compiled from BARI Krishi Projukti Hatboi & BRRI Modern Rice Cultivation.`,
+          en: `Cardinal temperatures and duration benchmarks compiled from BARI & BRRI published guidance.`,
           bn: `বারি 'কৃষি প্রযুক্তি হাতবই' এবং ব্রি 'আধুনিক ধানের চাষ' নির্দেশিকা থেকে সংকলিত।`,
         },
       },

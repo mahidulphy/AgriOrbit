@@ -262,22 +262,28 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   // What-If Environmental Simulator Controls
   const [whatIfActive, setWhatIfActive] = useState(false);
-  const [simSoil, setSimSoil] = useState<number>(realSoilMoisture ?? 0.20);
+  const [simSoil, setSimSoil] = useState<number | null>(realSoilMoisture);
+  const [soilTouchedManually, setSoilTouchedManually] = useState(false);
   const [simRain, setSimRain] = useState<number>(Math.round(conditions.rain30));
   const [simMaxTemp, setSimMaxTemp] = useState<number>(Math.round(conditions.tMax30));
 
   // Sync simulation sliders when base district data updates (if not actively simulating)
   useEffect(() => {
     if (!whatIfActive) {
-      setSimSoil(realSoilMoisture ?? 0.20);
+      setSimSoil(realSoilMoisture);
+      setSoilTouchedManually(false);
       setSimRain(Math.round(conditions.rain30));
       setSimMaxTemp(Math.round(conditions.tMax30));
     }
-  }, [smapData?.value, conditions.rain30, conditions.tMax30, whatIfActive]);
+  }, [realSoilMoisture, conditions.rain30, conditions.tMax30, whatIfActive]);
 
   // Active telemetry driving the scoring engine:
-  // If soil is null or flagged as possible water contamination, engine receives null to skip soil rules
-  const activeSoil: number | null = whatIfActive ? simSoil : realSoilMoisture;
+  // If soil is null or flagged as possible water contamination, engine receives null to skip soil rules.
+  // In simulator mode, use soil moisture ONLY if real SMAP data was present OR user explicitly moved the slider.
+  const activeSoil: number | null = whatIfActive
+    ? (soilTouchedManually || realSoilMoisture !== null ? simSoil : null)
+    : realSoilMoisture;
+  const displayedSoil: number | null = whatIfActive ? simSoil : realSoilMoisture;
   const activeRain = whatIfActive ? simRain : conditions.rain30;
   const activeMaxTemp = whatIfActive ? simMaxTemp : conditions.tMax30;
   const activeWaterBalance = activeRain - conditions.et0Total;
@@ -927,12 +933,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1 font-display flex items-baseline gap-2">
                       {whatIfActive ? (
-                        <>
-                          {language === 'bn' ? toBnDigits(Math.round(simSoil * 100)) : Math.round(simSoil * 100)}%{' '}
-                          <span className="text-xs text-slate-400 font-normal font-mono">
-                            ({language === 'bn' ? toBnDigits(simSoil.toFixed(2)) : simSoil.toFixed(2)} m³/m³)
+                        simSoil !== null ? (
+                          <>
+                            {language === 'bn' ? toBnDigits(Math.round(simSoil * 100)) : Math.round(simSoil * 100)}%{' '}
+                            <span className="text-xs text-slate-400 font-normal font-mono">
+                              ({language === 'bn' ? toBnDigits(simSoil.toFixed(2)) : simSoil.toFixed(2)} m³/m³)
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-sm font-sans text-amber-400 font-normal">
+                            {language === 'en' ? 'No SMAP data. Set manually' : 'SMAP তথ্য নেই, নিজে সেট করুন'}
                           </span>
-                        </>
+                        )
                       ) : (smapData && !isSoilFlaggedWater) ? (
                         <>
                           {language === 'bn' ? toBnDigits(Math.round(smapData.value * 100)) : Math.round(smapData.value * 100)}%{' '}
@@ -952,17 +964,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       </div>
                     )}
                     {/* Gauge bar */}
-                    {(whatIfActive || (smapData && !isSoilFlaggedWater)) && (
+                    {((whatIfActive && simSoil !== null) || (!whatIfActive && smapData && !isSoilFlaggedWater)) && (
                       <div className="w-full bg-white/10 h-1.5 rounded-full mt-2.5 overflow-hidden">
                         <div
                           className={`h-full rounded-full ${
-                            (whatIfActive ? simSoil : smapData!.value) < 0.15
+                            ((whatIfActive ? simSoil : smapData!.value) ?? 0) < 0.15
                               ? 'bg-[#FF5C5C]'
-                              : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                              : ((whatIfActive ? simSoil : smapData!.value) ?? 0) >= 0.25 && ((whatIfActive ? simSoil : smapData!.value) ?? 0) <= 0.30
                               ? 'bg-[#22C55E]'
                               : 'bg-[#404040]'
                           }`}
-                          style={{ width: `${Math.min(100, Math.max(10, ((whatIfActive ? simSoil : smapData!.value) / 0.40) * 100))}%` }}
+                          style={{ width: `${Math.min(100, Math.max(10, (((whatIfActive ? simSoil : smapData!.value) ?? 0) / 0.40) * 100))}%` }}
                         />
                       </div>
                     )}
@@ -976,20 +988,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     </span>
                     <span
                       className={`font-semibold ${
-                        !whatIfActive && (!smapData || isSoilFlaggedWater)
+                        displayedSoil === null
                           ? 'text-slate-400'
-                          : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                          : displayedSoil < 0.15
                           ? 'text-[#FF5C5C]'
-                          : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                          : displayedSoil >= 0.25 && displayedSoil <= 0.30
                           ? 'text-[#22C55E]'
                           : 'text-[#FAFAFA]'
                       }`}
                     >
-                      {!whatIfActive && (!smapData || isSoilFlaggedWater)
-                        ? (language === 'en' ? 'Data unavailable' : 'তথ্য নেই')
-                        : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                      {displayedSoil === null
+                        ? (language === 'en' ? (whatIfActive ? 'Manual setup needed' : 'Data unavailable') : (whatIfActive ? 'নিজে সেট করুন' : 'তথ্য নেই'))
+                        : displayedSoil < 0.15
                         ? (language === 'en' ? 'Deficit' : 'ঘাটতি')
-                        : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                        : displayedSoil >= 0.25 && displayedSoil <= 0.30
                         ? (language === 'en' ? 'Optimal' : 'বপন উপযোগী')
                         : (language === 'en' ? 'Adequate' : 'পর্যাপ্ত')}
                     </span>
@@ -1312,7 +1324,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <button
                           type="button"
                           onClick={() => {
-                            setSimSoil(smapData?.value ?? 0.22);
+                            setSimSoil(realSoilMoisture);
+                            setSoilTouchedManually(false);
                             setSimRain(Math.round(conditions.rain30));
                             setSimMaxTemp(Math.round(conditions.tMax30));
                           }}
@@ -1333,6 +1346,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         type="button"
                         onClick={() => {
                           setSimSoil(0.12);
+                          setSoilTouchedManually(true);
                           setSimRain(15);
                           setSimMaxTemp(36);
                         }}
@@ -1344,6 +1358,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         type="button"
                         onClick={() => {
                           setSimSoil(0.28);
+                          setSoilTouchedManually(true);
                           setSimRain(85);
                           setSimMaxTemp(28);
                         }}
@@ -1355,6 +1370,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         type="button"
                         onClick={() => {
                           setSimSoil(0.18);
+                          setSoilTouchedManually(true);
                           setSimRain(35);
                           setSimMaxTemp(38);
                         }}
@@ -1373,9 +1389,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                             {language === 'en' ? 'SMAP Soil Moisture' : 'মাটির আর্দ্রতা'}
                           </span>
                           <span className="font-mono text-sm font-bold text-[#FAFAFA]">
-                            {language === 'bn'
-                              ? `${toBnDigits(Math.round(simSoil * 100))}% (${toBnDigits(simSoil.toFixed(2))} m³/m³)`
-                              : `${Math.round(simSoil * 100)}% (${simSoil.toFixed(2)} m³/m³)`}
+                            {simSoil === null ? (
+                              <span className="text-amber-400 font-sans text-xs font-normal">
+                                {language === 'en' ? 'No SMAP data. Set manually' : 'SMAP তথ্য নেই, নিজে সেট করুন'}
+                              </span>
+                            ) : language === 'bn' ? (
+                              `${toBnDigits(Math.round(simSoil * 100))}% (${toBnDigits(simSoil.toFixed(2))} m³/m³)`
+                            ) : (
+                              `${Math.round(simSoil * 100)}% (${simSoil.toFixed(2)} m³/m³)`
+                            )}
                           </span>
                         </div>
                         <input
@@ -1383,13 +1405,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           min="0.10"
                           max="0.40"
                           step="0.01"
-                          value={simSoil}
-                          onChange={(e) => setSimSoil(parseFloat(e.target.value))}
+                          value={simSoil ?? 0.20}
+                          onChange={(e) => {
+                            setSimSoil(parseFloat(e.target.value));
+                            setSoilTouchedManually(true);
+                          }}
                           className="w-full accent-[#22C55E] cursor-pointer"
                         />
                         <div className="flex justify-between text-[11px] font-mono text-slate-400">
-                          <span className={simSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
-                          <span className={simSoil >= 0.25 && simSoil <= 0.30 ? 'text-[#22C55E] font-bold' : ''}>Target (0.25–0.30)</span>
+                          <span className={simSoil !== null && simSoil < 0.15 ? 'text-[#FF5C5C] font-bold' : ''}>Deficit (&lt;0.15)</span>
+                          <span className={simSoil !== null && simSoil >= 0.25 && simSoil <= 0.30 ? 'text-[#22C55E] font-bold' : ''}>Target (0.25–0.30)</span>
                         </div>
                       </div>
 
@@ -1545,24 +1570,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       />
                       <span
                         className={`font-mono text-xs font-semibold ${
-                          !whatIfActive && !smapData
+                          displayedSoil === null
                             ? 'text-slate-400'
-                            : !whatIfActive && isSoilFlaggedWater
-                            ? 'text-amber-400'
-                            : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                            : displayedSoil < 0.15
                             ? 'text-[#FF5C5C]'
-                            : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                            : displayedSoil >= 0.25 && displayedSoil <= 0.30
                             ? 'text-[#22C55E]'
                             : 'text-[#FAFAFA]'
                         }`}
                       >
-                        {!whatIfActive && !smapData
-                          ? (language === 'en' ? 'No data' : 'তথ্য নেই')
-                          : !whatIfActive && isSoilFlaggedWater
-                          ? (language === 'en' ? 'Uncertain' : 'অনিশ্চিত')
-                          : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                        {displayedSoil === null
+                          ? (language === 'en' ? (whatIfActive ? 'Manual setup needed' : 'No data') : (whatIfActive ? 'নিজে সেট করুন' : 'তথ্য নেই'))
+                          : displayedSoil < 0.15
                           ? (language === 'en' ? 'Moisture Deficit' : 'আর্দ্রতা ঘাটতি')
-                          : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                          : displayedSoil >= 0.25 && displayedSoil <= 0.30
                           ? (language === 'en' ? 'Optimal Sowing' : 'বপন উপযোগী')
                           : (language === 'en' ? 'Adequate' : 'পর্যাপ্ত')}
                       </span>
@@ -1570,12 +1591,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                     <div className="font-mono text-4xl font-bold text-white mb-1 flex items-baseline gap-2">
                       {whatIfActive ? (
-                        <>
-                          {language === 'bn' ? toBnDigits(Math.round(simSoil * 100)) : Math.round(simSoil * 100)}%{' '}
-                          <span className="text-xs text-slate-400 font-normal font-mono">
-                            ({language === 'bn' ? toBnDigits(simSoil.toFixed(2)) : simSoil.toFixed(2)} m³/m³)
+                        simSoil !== null ? (
+                          <>
+                            {language === 'bn' ? toBnDigits(Math.round(simSoil * 100)) : Math.round(simSoil * 100)}%{' '}
+                            <span className="text-xs text-slate-400 font-normal font-mono">
+                              ({language === 'bn' ? toBnDigits(simSoil.toFixed(2)) : simSoil.toFixed(2)} m³/m³)
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-xl font-sans text-amber-400 font-normal">
+                            {language === 'en' ? 'No SMAP data. Set manually' : 'SMAP তথ্য নেই, নিজে সেট করুন'}
                           </span>
-                        </>
+                        )
                       ) : smapData ? (
                         <>
                           {language === 'bn' ? toBnDigits(Math.round(smapData.value * 100)) : Math.round(smapData.value * 100)}%{' '}
@@ -1596,16 +1623,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       </div>
                     )}
 
-                    {(whatIfActive || smapData) && (
+                    {displayedSoil !== null && (
                       <>
                         <div className="w-full bg-white/10 h-2 rounded-full mt-3 overflow-hidden">
                           <div
                             className={`h-full rounded-full ${
                               !whatIfActive && isSoilFlaggedWater
                                 ? 'bg-amber-400'
-                                : (whatIfActive ? simSoil : smapData!.value) < 0.15
+                                : displayedSoil < 0.15
                                 ? 'bg-[#FF5C5C]'
-                                : (whatIfActive ? simSoil : smapData!.value) >= 0.25 && (whatIfActive ? simSoil : smapData!.value) <= 0.30
+                                : displayedSoil >= 0.25 && displayedSoil <= 0.30
                                 ? 'bg-[#22C55E]'
                                 : 'bg-[#404040]'
                             }`}
@@ -1614,7 +1641,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                                 100,
                                 Math.max(
                                   10,
-                                  (((whatIfActive ? simSoil : smapData!.value) / 0.4) * 100)
+                                  ((displayedSoil / 0.4) * 100)
                                 )
                               )}%`,
                             }}

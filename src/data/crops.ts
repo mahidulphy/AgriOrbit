@@ -264,8 +264,8 @@ export const CROPS: Crop[] = [
     "id": "aman",
     "category_id": "cereal",
     "parent_group": "rice",
-    "name_en": "Aman Rice (T. Aman)",
-    "name_bn": "আমন ধান (রোপা আমন)",
+    "name_en": "T. Aman Rice",
+    "name_bn": "আমন ধান",
     "scientific_name": "Oryza sativa",
     "plant_family": "poaceae",
     "is_legume": false,
@@ -387,8 +387,8 @@ export const CROPS: Crop[] = [
         "confidence": "research"
       }
     ],
-    "nameEn": "Aman Rice (T. Aman)",
-    "nameBn": "আমন ধান (রোপা আমন)",
+    "nameEn": "T. Aman Rice",
+    "nameBn": "আমন ধান",
     "family": "grass",
     "tempMin": 25,
     "tempMax": 33,
@@ -949,8 +949,7 @@ export const CROPS: Crop[] = [
     "plant_family": "fabaceae",
     "is_legume": true,
     "seasons": [
-      "kharif1",
-      "kharif2"
+      "kharif1"
     ],
     "sowing_window": {
       "months_en": "Kharif-1: late-Feb – March; Kharif-2: Aug – mid-Sep",

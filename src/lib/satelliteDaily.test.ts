@@ -70,10 +70,10 @@ test('3. Rangpur district contains calibrated SMAP and updated NDVI observations
   assert.ok(sat.ndvi.periodStart, 'NDVI must have an observation date');
 });
 
-test('4. ORNL DAAC REST API resolves latest MODIS/VIIRS NDVI product and date', async () => {
+test('4. ORNL DAAC REST API resolves latest MODIS NDVI product and date', async () => {
   const candidate = await findLatestNdviProductAndDate(25.75, 89.25);
   assert.ok(candidate, 'Must find valid candidate from ORNL DAAC');
-  assert.ok(['MYD13Q1', 'MOD13Q1', 'VNP13A1'].includes(candidate.product), 'Product must be MODIS or VIIRS');
+  assert.ok(['MYD13Q1', 'MOD13Q1'].includes(candidate.product), 'Product must be MODIS');
   assert.ok(candidate.calendarDate.startsWith('202'), 'Calendar date must be valid YYYY-MM-DD');
   assert.ok(candidate.modisDate.startsWith('A202'), 'MODIS date must start with AYYYY');
 });

@@ -163,9 +163,9 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
                   : (isEn ? 'Data unavailable' : 'তথ্য নেই')}
               </span>
             </div>
-            <div className="flex justify-between items-center" title={`Net Water Balance = Rain (${Math.round(telemetry.rainfall30d ?? 0)} mm) - ET0. Deficit if negative.`}>
+            <div className="flex justify-between items-center" title={telemetry.rainfall30d != null ? `Net Water Balance = Rain (${Math.round(telemetry.rainfall30d)} mm) - ET0. Deficit if negative.` : "Net Water Balance: Rainfall data unavailable"}>
               <span className="text-[#A3A3A3] print:text-gray-600">{isEn ? 'Net Water Balance' : 'নিট পানি অবস্থা'}:</span>
-              <span className={`font-mono font-bold ${(telemetry.waterBalance ?? 0) < -50 ? 'text-[#FF5C5C] print:text-red-600' : 'text-[#22C55E] print:text-emerald-600'}`}>
+              <span className={`font-mono font-bold ${telemetry.waterBalance != null && telemetry.waterBalance < -50 ? 'text-[#FF5C5C] print:text-red-600' : 'text-[#22C55E] print:text-emerald-600'}`}>
                 {telemetry.waterBalance != null ? (
                   isEn
                     ? (telemetry.waterBalance < 0 ? `${Math.round(telemetry.waterBalance)} mm` : `+${Math.round(telemetry.waterBalance)} mm`)

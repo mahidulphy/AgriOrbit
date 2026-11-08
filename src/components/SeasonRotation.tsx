@@ -255,8 +255,8 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                 </span>
                 <span className="text-purple-300">
                   {isBn
-                    ? `মাটির রস ${toBnDigits((soil ?? 0.2).toFixed(2))} m³/m³, বৃষ্টি ${toBnDigits(Math.round(conditions?.rain30 ?? 0))} মিমি, সর্বোচ্চ তাপমাত্রা ${toBnDigits(Math.round(conditions?.tMax30 ?? 0))}°সে`
-                    : `Soil Moisture ${(soil ?? 0.2).toFixed(2)} m³/m³, Rain ${Math.round(conditions?.rain30 ?? 0)} mm, Max Temp ${Math.round(conditions?.tMax30 ?? 0)}°C`}
+                    ? `মাটির রস: ${soil !== null && soil !== undefined ? `${toBnDigits(soil.toFixed(2))} m³/m` : 'নির্ধারিত নেই'}, বৃষ্টি: ${conditions && !conditions.rainUnavailable ? `${toBnDigits(Math.round(conditions.rain30))} মিমি` : 'তথ্য অপ্রাপ্য'}, সর্বোচ্চ তাপমাত্রা: ${conditions ? `${toBnDigits(Math.round(conditions.tMax30))}°সে` : 'তথ্য অপ্রাপ্য'}`
+                    : `Soil Moisture: ${soil !== null && soil !== undefined ? `${soil.toFixed(2)} m³/m³` : 'Not set'}, Rain: ${conditions && !conditions.rainUnavailable ? `${Math.round(conditions.rain30)} mm` : 'Unavailable'}, Max Temp: ${conditions ? `${Math.round(conditions.tMax30)}°C` : 'Unavailable'}`}
                 </span>
               </div>
             </div>

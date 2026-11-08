@@ -325,6 +325,14 @@ test('Phase 9: 7. Food Security Anchor: home_food and both retain Kharif-2 Aman 
   const preservesAman = recKharif2 === 'aman' || altKharif2 === 'aman';
   assert.ok(preservesAman, 'Household food security purpose must retain Aman rice in Kharif-2');
 
+  const kharif2Crop = recStrategy.crops.find((c) => c.season === 'kharif2')!;
+  assert.equal(kharif2Crop.nameEn, 'T. Aman Rice');
+  assert.equal(kharif2Crop.nameBn, 'আমন ধান');
+
+  // Mungbean belongs to Kharif-1 / late Rabi, never Kharif-2
+  const mung = CROPS.find((c) => c.id === 'mungbean')!;
+  assert.equal(mung.seasons.includes('kharif2'), false, 'Mungbean must not be a Kharif-2 crop');
+
   // Verify that Rabi in recommended is a water-saving legume or oilseed (e.g. lentil, mustard, wheat)
   const recRabi = recStrategy.crops.find((c) => c.season === 'rabi')?.id;
   assert.ok(recRabi !== 'boro', 'Water saving rotation replaces thirsty Boro in Rabi');

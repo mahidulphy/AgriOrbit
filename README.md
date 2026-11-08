@@ -53,6 +53,14 @@ Prerequisites: Node.js 18+
 
 Background `#050B14` • Surface `#0B1626` • Electric Cyan `#00E5FF` (NASA / satellite / data) • Electric Lime `#B8FF3D` (agriculture / positive / primary CTA) • Text `#FFFFFF` / `#8FA3B8` • Danger `#FF5C5C` (warnings only)
 
+## Data Sources & Provenance
+
+- **Weather & Agrometeorology**: NASA POWER Point API (daily precipitation, T2M, T2M_MAX, RH2M, surface solar radiation) with Open-Meteo 7-day numerical weather forecasts.
+- **Soil Moisture**: NASA SMAP Enhanced L3 Daily 9km (SPL3SMP_E.006) via NSIDC/AppEEARS. Values > 0.50 m³/m³ are treated as open-water / invalid.
+- **Vegetation Canopy & Surface Temperature**: NASA MODIS 250m NDVI (MOD13Q1 / MYD13Q1) and MODIS 1km Day/Night LST (MOD11A2) via NASA ORNL DAAC REST API. (MODIS only; VIIRS is not used in production).
+- **Agronomic Guidance & Crop Benchmarks**: Compiled from BARI & BRRI published guidance across 37 Bangladesh crops (32 research-backed; 5 estimated: Soybean, Jute, Sugarcane, Cotton, and Tobacco).
+- **Administrative Boundaries & Coordinates**: 64 district coordinates and 495 upazila boundary polygons are compiled from public sources (Bangladesh Bureau of Statistics administrative tables & UN OCHA COD-AB Bangladesh boundary datasets).
+
 ## Notes
 
 - Data loads with a 3-level safety net: live NASA POWER + Open-Meteo, then `public/cache/<district>.json`, then the bundled Rangpur snapshot — the demo never shows a blank screen.
