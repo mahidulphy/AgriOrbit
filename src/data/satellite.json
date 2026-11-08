@@ -6,15 +6,9 @@
     "products": {
       "smap": "SPL3SMP_E.006",
       "ndvi": "MOD13Q1.061",
-      "lst": "MOD11A2.061",
-      "sentinel1": "ESA Sentinel-1 C-SAR IW GRD (10m)",
-      "sentinel2": "ESA Sentinel-2 MSI L2A (10m NDVI)",
-      "jaxa": "JAXA Earth API (GSMaP v8, AMSR2)",
-      "insat": "ISRO MOSDAC INSAT-3DR (Imager LST & HE Rain)",
-      "nisar": "NASA-ISRO NISAR L3 Provisional Soil Moisture (200m)"
+      "lst": "MOD11A2.061"
     },
-    "generatedAt": "2026-11-07T06:58:43.499Z",
-    "lastSentinel1Sync": "2026-11-07T06:55:30.514Z"
+    "generatedAt": "2026-11-07T06:58:43.499Z"
   },
   "dhaka": {
     "smap": null,
@@ -31,61 +25,6 @@
     "lstNight": {
       "value": 28.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 2.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "2.3% normal cropland drainage",
-      "statusBn": "2.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.34,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.34 10m NDVI (-12.8% vs baseline · vegetation stress)",
-      "statusBn": "0.34 ১০মি NDVI (স্বাভাবিকের চেয়ে 12.8% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.39,
-      "anomalyPct": -12.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 32,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gazipur": {
@@ -103,61 +42,6 @@
     "lstNight": {
       "value": 26.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 2.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "2.7% normal cropland drainage",
-      "statusBn": "2.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.56 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.56 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.5,
-      "anomalyPct": 12
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narayanganj": {
@@ -175,61 +59,6 @@
     "lstNight": {
       "value": 28.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 5.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "5.3% normal cropland drainage",
-      "statusBn": "5.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.4,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.4 10m NDVI (-31% vs baseline · vegetation stress)",
-      "statusBn": "0.4 ১০মি NDVI (স্বাভাবিকের চেয়ে 31% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.58,
-      "anomalyPct": -31
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 32.2,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "munshiganj": {
@@ -247,61 +76,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 8.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "8.8% normal cropland drainage",
-      "statusBn": "8.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.4,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.4 10m NDVI (-7% vs baseline · vegetation stress)",
-      "statusBn": "0.4 ১০মি NDVI (স্বাভাবিকের চেয়ে 7% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.43,
-      "anomalyPct": -7
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 27.6,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narsingdi": {
@@ -324,61 +98,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 4.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "4.3% normal cropland drainage",
-      "statusBn": "4.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.57 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.57 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.55,
-      "anomalyPct": 3.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.38,
-      "spi30dIndex": 0.8,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.38 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31.3,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.4,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "manikganj": {
@@ -401,61 +120,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 3.9,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "3.9% normal cropland drainage",
-      "statusBn": "3.9% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.57 10m NDVI (-19.7% vs baseline · vegetation stress)",
-      "statusBn": "0.57 ১০মি NDVI (স্বাভাবিকের চেয়ে 19.7% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.71,
-      "anomalyPct": -19.7
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.31,
-      "spi30dIndex": 0.45,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.31 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.31 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.5,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.32,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "tangail": {
@@ -478,61 +142,6 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 5.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "5.7% normal cropland drainage",
-      "statusBn": "5.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.61,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.61 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.61 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.38,
-      "anomalyPct": 60.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.33,
-      "spi30dIndex": 0.55,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.33 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.33 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.6,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.34,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kishoreganj": {
@@ -550,61 +159,6 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 1.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "1.1% normal cropland drainage",
-      "statusBn": "1.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.66,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.66 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.66 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.73,
-      "anomalyPct": -9.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "faridpur": {
@@ -622,61 +176,6 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 9.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.4% normal cropland drainage",
-      "statusBn": "9.4% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.54,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.54 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.54 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.61,
-      "anomalyPct": -11.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.2,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rajbari": {
@@ -694,61 +193,6 @@
     "lstNight": {
       "value": 25.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 9.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.8% normal cropland drainage",
-      "statusBn": "9.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.57 10m NDVI (-26.9% vs baseline · vegetation stress)",
-      "statusBn": "0.57 ১০মি NDVI (স্বাভাবিকের চেয়ে 26.9% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.78,
-      "anomalyPct": -26.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "shariatpur": {
@@ -766,61 +210,6 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 10.6,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "10.6% cropland waterlogged / flooded",
-      "statusBn": "10.6% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.5,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.5 10m NDVI (-34.2% vs baseline · vegetation stress)",
-      "statusBn": "0.5 ১০মি NDVI (স্বাভাবিকের চেয়ে 34.2% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.76,
-      "anomalyPct": -34.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 27.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "madaripur": {
@@ -843,61 +232,6 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 1.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "1.7% normal cropland drainage",
-      "statusBn": "1.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.59,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.59 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.59 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.54,
-      "anomalyPct": 9.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.35,
-      "spi30dIndex": 0.65,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.35 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.35 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 27.8,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.35,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gopalganj": {
@@ -921,61 +255,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 4.2,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "4.2% normal cropland drainage",
-      "statusBn": "4.2% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.58,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.58 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.58 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.54,
-      "anomalyPct": 7.4
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.38,
-      "spi30dIndex": 0.8,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.38 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.8,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.4,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chattogram": {
@@ -993,61 +272,6 @@
     "lstNight": {
       "value": 27,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 35.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "severe_inundation",
-      "statusEn": "35.1% cropland waterlogged / flooded",
-      "statusBn": "35.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.26,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.26 10m NDVI (-36.6% vs baseline · vegetation stress)",
-      "statusBn": "0.26 ১০মি NDVI (স্বাভাবিকের চেয়ে 36.6% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.41,
-      "anomalyPct": -36.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "coxsbazar": {
@@ -1065,63 +289,6 @@
     "lstNight": {
       "value": 25.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 23.9,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "severe_inundation",
-      "statusEn": "23.9% cropland waterlogged / flooded",
-      "statusBn": "23.9% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.28,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.28 10m NDVI (-61.1% vs baseline · vegetation stress)",
-      "statusBn": "0.28 ১০মি NDVI (স্বাভাবিকের চেয়ে 61.1% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.72,
-      "anomalyPct": -61.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31.4,
-      "rain24hMm": 4.5,
-      "heatSpikeConfirmed": false,
-      "divergenceNoticeEn": "Coastal sea breeze tempers land thermal soundings.",
-      "divergenceNoticeBn": "উপকূলীয় সামুদ্রিক বাতাসের কারণে উপগ্রহ তাপমাত্রা কিছুটা সহনীয়।",
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.26,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "cumilla": {
@@ -1144,61 +311,6 @@
     "lstNight": {
       "value": 27.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.2,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.2% normal cropland drainage",
-      "statusBn": "0.2% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.58,
-      "anomalyPct": 12.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.32,
-      "spi30dIndex": 0.5,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.32 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.32 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31.4,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.33,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chandpur": {
@@ -1216,61 +328,6 @@
     "lstNight": {
       "value": 25,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 17.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "17.1% cropland waterlogged / flooded",
-      "statusBn": "17.1% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.34,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.34 10m NDVI (-34.6% vs baseline · vegetation stress)",
-      "statusBn": "0.34 ১০মি NDVI (স্বাভাবিকের চেয়ে 34.6% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.52,
-      "anomalyPct": -34.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "noakhali": {
@@ -1293,61 +350,6 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0% normal cropland drainage",
-      "statusBn": "0% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.62,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.62 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.62 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.64,
-      "anomalyPct": -3.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.32,
-      "spi30dIndex": 0.5,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.32 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.32 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.33,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "feni": {
@@ -1370,61 +372,6 @@
     "lstNight": {
       "value": 26.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.8% normal cropland drainage",
-      "statusBn": "0.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.48,
-      "anomalyPct": 50
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.29,
-      "spi30dIndex": 0.35,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.29 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.29 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31.3,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.29,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "lakshmipur": {
@@ -1442,61 +389,6 @@
     "lstNight": {
       "value": 25.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.69,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.69 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.69 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.55,
-      "anomalyPct": 25.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.4,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "brahmanbaria": {
@@ -1514,61 +406,6 @@
     "lstNight": {
       "value": 26.9,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "5% normal cropland drainage",
-      "statusBn": "5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.47,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.47 10m NDVI (-23% vs baseline · vegetation stress)",
-      "statusBn": "0.47 ১০মি NDVI (স্বাভাবিকের চেয়ে 23% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.61,
-      "anomalyPct": -23
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rangamati": {
@@ -1586,61 +423,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 18.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "18.4% cropland waterlogged / flooded",
-      "statusBn": "18.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.52,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.52 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.52 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.36,
-      "anomalyPct": 44.4
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.6,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "khagrachari": {
@@ -1663,61 +445,6 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.1% normal cropland drainage",
-      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.75,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.75 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.75 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.8,
-      "anomalyPct": -6.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.22,
-      "spi30dIndex": 0,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.22 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.22 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bandarban": {
@@ -1735,61 +462,6 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.3% normal cropland drainage",
-      "statusBn": "0.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.67,
-      "anomalyPct": 7.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.5,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rajshahi": {
@@ -1807,61 +479,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 9.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.1% normal cropland drainage",
-      "statusBn": "9.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.44,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.44 10m NDVI (-38% vs baseline · vegetation stress)",
-      "statusBn": "0.44 ১০মি NDVI (স্বাভাবিকের চেয়ে 38% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.71,
-      "anomalyPct": -38
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 36.5,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": true,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.17,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bogura": {
@@ -1884,61 +501,6 @@
     "lstNight": {
       "value": 26.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.1% normal cropland drainage",
-      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.64 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.64 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.4,
-      "anomalyPct": 60
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.2,
-      "spi30dIndex": -0.1,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.2 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.2 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.21,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "pabna": {
@@ -1956,61 +518,6 @@
     "lstNight": {
       "value": 25.9,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 8.2,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "8.2% normal cropland drainage",
-      "statusBn": "8.2% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.54,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.54 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.54 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.63,
-      "anomalyPct": -14.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sirajganj": {
@@ -2028,61 +535,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 11.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "11.3% cropland waterlogged / flooded",
-      "statusBn": "11.3% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.39,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.39 10m NDVI (-33.9% vs baseline · vegetation stress)",
-      "statusBn": "0.39 ১০মি NDVI (স্বাভাবিকের চেয়ে 33.9% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.59,
-      "anomalyPct": -33.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.1,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "natore": {
@@ -2105,61 +557,6 @@
     "lstNight": {
       "value": 25.2,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 3.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "3.3% normal cropland drainage",
-      "statusBn": "3.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.64 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.64 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.58,
-      "anomalyPct": 10.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.3,
-      "spi30dIndex": 0.4,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.3 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.3 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.7,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.31,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "naogaon": {
@@ -2182,61 +579,6 @@
     "lstNight": {
       "value": 25.2,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.8% normal cropland drainage",
-      "statusBn": "0.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.55,
-      "anomalyPct": 30.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.24,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chapainawabganj": {
@@ -2254,61 +596,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 8.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "8.4% normal cropland drainage",
-      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.57,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.57 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.57 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.59,
-      "anomalyPct": -3.4
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.3,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "joypurhat": {
@@ -2326,61 +613,6 @@
     "lstNight": {
       "value": 24.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.1% normal cropland drainage",
-      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.58,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.58 10m NDVI (-25.6% vs baseline · vegetation stress)",
-      "statusBn": "0.58 ১০মি NDVI (স্বাভাবিকের চেয়ে 25.6% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.78,
-      "anomalyPct": -25.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.1,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "khulna": {
@@ -2398,61 +630,6 @@
     "lstNight": {
       "value": 27.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 3.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "3.3% normal cropland drainage",
-      "statusBn": "3.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.49,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.49 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.49 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.54,
-      "anomalyPct": -9.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.7,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jashore": {
@@ -2475,61 +652,6 @@
     "lstNight": {
       "value": 25.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 1.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "1.3% normal cropland drainage",
-      "statusBn": "1.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.63,
-      "anomalyPct": 3.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.3,
-      "spi30dIndex": 0.4,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.3 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.3 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.31,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "satkhira": {
@@ -2547,61 +669,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 16.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.7% cropland waterlogged / flooded",
-      "statusBn": "16.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.38,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.38 10m NDVI (-44.1% vs baseline · vegetation stress)",
-      "statusBn": "0.38 ১০মি NDVI (স্বাভাবিকের চেয়ে 44.1% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.68,
-      "anomalyPct": -44.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.7,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bagerhat": {
@@ -2619,61 +686,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 9.6,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.6% normal cropland drainage",
-      "statusBn": "9.6% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.46,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.46 10m NDVI (-37.8% vs baseline · vegetation stress)",
-      "statusBn": "0.46 ১০মি NDVI (স্বাভাবিকের চেয়ে 37.8% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.74,
-      "anomalyPct": -37.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 27.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kushtia": {
@@ -2691,61 +703,6 @@
     "lstNight": {
       "value": 25.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 7.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7.3% normal cropland drainage",
-      "statusBn": "7.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.5,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.5 10m NDVI (-27.5% vs baseline · vegetation stress)",
-      "statusBn": "0.5 ১০মি NDVI (স্বাভাবিকের চেয়ে 27.5% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.69,
-      "anomalyPct": -27.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jhenaidah": {
@@ -2768,61 +725,6 @@
     "lstNight": {
       "value": 25.4,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.3% normal cropland drainage",
-      "statusBn": "0.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.62,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.62 10m NDVI (-19.5% vs baseline · vegetation stress)",
-      "statusBn": "0.62 ১০মি NDVI (স্বাভাবিকের চেয়ে 19.5% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.77,
-      "anomalyPct": -19.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.24,
-      "spi30dIndex": 0.1,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.24 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.24 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.7,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.25,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "magura": {
@@ -2845,61 +747,6 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 1.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "1.3% normal cropland drainage",
-      "statusBn": "1.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.61,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.61 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.61 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.54,
-      "anomalyPct": 13
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.31,
-      "spi30dIndex": 0.45,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.31 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.31 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.2,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.31,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "narail": {
@@ -2922,61 +769,6 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "3% normal cropland drainage",
-      "statusBn": "3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.55,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.55 10m NDVI (-17.9% vs baseline · vegetation stress)",
-      "statusBn": "0.55 ১০মি NDVI (স্বাভাবিকের চেয়ে 17.9% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.67,
-      "anomalyPct": -17.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.38,
-      "spi30dIndex": 0.8,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.38 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.38 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.6,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.4,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "meherpur": {
@@ -2999,61 +791,6 @@
     "lstNight": {
       "value": 25.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.5% normal cropland drainage",
-      "statusBn": "0.5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.62,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.62 10m NDVI (-22.5% vs baseline · vegetation stress)",
-      "statusBn": "0.62 ১০মি NDVI (স্বাভাবিকের চেয়ে 22.5% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.8,
-      "anomalyPct": -22.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.28,
-      "spi30dIndex": 0.3,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.28 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.28 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.9,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.28,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "chuadanga": {
@@ -3076,61 +813,6 @@
     "lstNight": {
       "value": 25.9,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.6,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.6% normal cropland drainage",
-      "statusBn": "0.6% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.55,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.55 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.55 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.56,
-      "anomalyPct": -1.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.27,
-      "spi30dIndex": 0.25,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.27 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.27 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.6,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.27,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "barishal": {
@@ -3148,61 +830,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 8.5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "8.5% normal cropland drainage",
-      "statusBn": "8.5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.74,
-      "anomalyPct": -12.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.6,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "patuakhali": {
@@ -3220,61 +847,6 @@
     "lstNight": {
       "value": 27.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7% normal cropland drainage",
-      "statusBn": "7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.64 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.64 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.62,
-      "anomalyPct": 3.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "bhola": {
@@ -3292,63 +864,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 16.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "16.4% cropland waterlogged / flooded",
-      "statusBn": "16.4% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.71,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.83,
-      "anomalyPct": -14.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 31.4,
-      "rain24hMm": 4.5,
-      "heatSpikeConfirmed": false,
-      "divergenceNoticeEn": "Coastal sea breeze tempers land thermal soundings.",
-      "divergenceNoticeBn": "উপকূলীয় সামুদ্রিক বাতাসের কারণে উপগ্রহ তাপমাত্রা কিছুটা সহনীয়।",
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.26,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "pirojpur": {
@@ -3366,61 +881,6 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 4.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "4.3% normal cropland drainage",
-      "statusBn": "4.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.64,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.64 10m NDVI (-22.9% vs baseline · vegetation stress)",
-      "statusBn": "0.64 ১০মি NDVI (স্বাভাবিকের চেয়ে 22.9% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.83,
-      "anomalyPct": -22.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.3,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jhalokati": {
@@ -3443,61 +903,6 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 3.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "3.4% normal cropland drainage",
-      "statusBn": "3.4% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.7,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.7 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.7 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.63,
-      "anomalyPct": 11.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.36,
-      "spi30dIndex": 0.7,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.36 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.36 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.9,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.37,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "barguna": {
@@ -3515,61 +920,6 @@
     "lstNight": {
       "value": 26.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 12,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "12% cropland waterlogged / flooded",
-      "statusBn": "12% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.66,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.66 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.66 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.7,
-      "anomalyPct": -5.7
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sylhet": {
@@ -3587,61 +937,6 @@
     "lstNight": {
       "value": 27.8,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 2.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "2.4% normal cropland drainage",
-      "statusBn": "2.4% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.54,
-      "anomalyPct": 20.4
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 112.5,
-      "amsr2SoilMoisture": 0.28,
-      "spi30dIndex": 0.45,
-      "status": "discrepancy",
-      "statusEn": "GSMaP: 112.5mm vs NASA POWER: 68mm (sources disagree by 44.5mm · check local gauge)",
-      "statusBn": "জিএসএমএপি: 112.5মিমি বনাম নাসা পাওয়ার: ৬৮মিমি (তথ্যে 44.5মিমি অমিল · স্থানীয় রেইনগেজ যাচাই করুন)",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 44.5,
-      "rainDiscrepancyPct": 39.6
-    },
-    "insat": {
-      "lstC": 31.6,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "moulvibazar": {
@@ -3664,61 +959,6 @@
     "lstNight": {
       "value": 26.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 8.4,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "8.4% normal cropland drainage",
-      "statusBn": "8.4% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.68,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.68 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.68 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.74,
-      "anomalyPct": -8.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.28,
-      "spi30dIndex": 0.3,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.28 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.28 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.4,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.28,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "habiganj": {
@@ -3741,61 +981,6 @@
     "lstNight": {
       "value": 26.8,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 2.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "2.3% normal cropland drainage",
-      "statusBn": "2.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.53,
-      "periodStart": "2026-10-22",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.53 10m NDVI (-19.7% vs baseline · vegetation stress)",
-      "statusBn": "0.53 ১০মি NDVI (স্বাভাবিকের চেয়ে 19.7% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-06",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.66,
-      "anomalyPct": -19.7
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.22,
-      "spi30dIndex": 0,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.22 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.22 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.2,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.22,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sunamganj": {
@@ -3813,61 +998,6 @@
     "lstNight": {
       "value": 26.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 12.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "moderate_waterlogging",
-      "statusEn": "12.7% cropland waterlogged / flooded",
-      "statusBn": "12.7% ফসলি জমিতে জলাবদ্ধতা শনাক্ত",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.43,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.43 10m NDVI (-14% vs baseline · vegetation stress)",
-      "statusBn": "0.43 ১০মি NDVI (স্বাভাবিকের চেয়ে 14% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.5,
-      "anomalyPct": -14
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.6,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "rangpur": {
@@ -3890,61 +1020,6 @@
     "lstNight": {
       "value": 23.8,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 1.5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "1.5% normal cropland drainage",
-      "statusBn": "1.5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.65,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.65 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.65 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.69,
-      "anomalyPct": -5.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 32.4,
-      "amsr2SoilMoisture": 0.22,
-      "spi30dIndex": -0.15,
-      "status": "favorable",
-      "statusEn": "GSMaP: 32.4mm · AMSR2: 0.22 m³/m³ (aligned with NASA POWER)",
-      "statusBn": "জিএসএমএপি: 32.4মিমি · এএমএসআর২: 0.22 m³/m³ (নাসার তথ্যের সাথে সামঞ্জস্যপূর্ণ)",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4.4,
-      "rainDiscrepancyPct": 13.6
-    },
-    "insat": {
-      "lstC": 28.2,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "dinajpur": {
@@ -3962,61 +1037,6 @@
     "lstNight": {
       "value": 24.8,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.7% normal cropland drainage",
-      "statusBn": "0.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.6,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.6 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.6 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.62,
-      "anomalyPct": -3.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.7,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "kurigram": {
@@ -4034,61 +1054,6 @@
     "lstNight": {
       "value": 23.9,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 9.9,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "9.9% normal cropland drainage",
-      "statusBn": "9.9% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.63,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.63 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.63 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.62,
-      "anomalyPct": 1.6
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.1,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "gaibandha": {
@@ -4106,61 +1071,6 @@
     "lstNight": {
       "value": 25.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 7.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "7.3% normal cropland drainage",
-      "statusBn": "7.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.72,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.72 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.72 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.65,
-      "anomalyPct": 10.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "lalmonirhat": {
@@ -4178,61 +1088,6 @@
     "lstNight": {
       "value": 23.7,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 2.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "2.7% normal cropland drainage",
-      "statusBn": "2.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.69,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.69 10m NDVI (-16.9% vs baseline · vegetation stress)",
-      "statusBn": "0.69 ১০মি NDVI (স্বাভাবিকের চেয়ে 16.9% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.83,
-      "anomalyPct": -16.9
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 35.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 35.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 35.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 26.8,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "nilphamari": {
@@ -4250,61 +1105,6 @@
     "lstNight": {
       "value": 24.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.8% normal cropland drainage",
-      "statusBn": "0.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.56 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.56 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.62,
-      "anomalyPct": -9.7
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "panchagarh": {
@@ -4327,61 +1127,6 @@
     "lstNight": {
       "value": 24.5,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.3,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.3% normal cropland drainage",
-      "statusBn": "0.3% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.58,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "moderate",
-      "statusEn": "0.58 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.58 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.66,
-      "anomalyPct": -12.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.18,
-      "spi30dIndex": -0.2,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.18 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.18 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28.2,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.18,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "thakurgaon": {
@@ -4399,61 +1144,6 @@
     "lstNight": {
       "value": 24.3,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.1,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.1% normal cropland drainage",
-      "statusBn": "0.1% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.56,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "vegetation_stress",
-      "statusEn": "0.56 10m NDVI (-22.2% vs baseline · vegetation stress)",
-      "statusBn": "0.56 ১০মি NDVI (স্বাভাবিকের চেয়ে 22.2% কম · ফসলে ধকল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.72,
-      "anomalyPct": -22.2
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 28,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "mymensingh": {
@@ -4476,61 +1166,6 @@
     "lstNight": {
       "value": 26.9,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.7,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.7% normal cropland drainage",
-      "statusBn": "0.7% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.63,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.63 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.63 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.39,
-      "anomalyPct": 61.5
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 28.2,
-      "amsr2SoilMoisture": 0.27,
-      "spi30dIndex": 0.25,
-      "status": "favorable",
-      "statusEn": "GSMaP: 28.2mm rain · AMSR2: 0.27 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 28.2মিমি বৃষ্টি · এএমএসআর২: 0.27 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30.5,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.27,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "jamalpur": {
@@ -4553,61 +1188,6 @@
     "lstNight": {
       "value": 26.1,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.5% normal cropland drainage",
-      "statusBn": "0.5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.67,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.67 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.67 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.7,
-      "anomalyPct": -4.3
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 49.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 49.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 49.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "netrokona": {
@@ -4630,61 +1210,6 @@
     "lstNight": {
       "value": 26.2,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.8,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.8% normal cropland drainage",
-      "statusBn": "0.8% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.7,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.7 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.7 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.61,
-      "anomalyPct": 14.8
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 56.2,
-      "amsr2SoilMoisture": 0.26,
-      "spi30dIndex": 0.2,
-      "status": "favorable",
-      "statusEn": "GSMaP: 56.2mm rain · AMSR2: 0.26 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 56.2মিমি বৃষ্টি · এএমএসআর২: 0.26 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 30,
-      "rain24hMm": 2.5,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.27,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   },
   "sherpur": {
@@ -4707,61 +1232,6 @@
     "lstNight": {
       "value": 25.6,
       "periodStart": "2026-10-08"
-    },
-    "sentinel1": {
-      "floodedCroplandPct": 0.5,
-      "observationWindow": {
-        "startDate": "2026-10-26",
-        "endDate": "2026-11-07",
-        "daysCount": 12
-      },
-      "polarization": "VV",
-      "resolutionMeters": 10,
-      "status": "normal",
-      "statusEn": "0.5% normal cropland drainage",
-      "statusBn": "0.5% স্বাভাবিক নিষ্কাশন অবস্থা",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-1 C-SAR"
-    },
-    "sentinel2": {
-      "ndvi10m": 0.71,
-      "periodStart": "2026-10-23",
-      "cloudCoverPct": 2.1,
-      "resolutionMeters": 10,
-      "status": "optimal",
-      "statusEn": "0.71 10m NDVI (healthy vegetative canopy)",
-      "statusBn": "0.71 ১০মি NDVI (সুস্থ ও ঘন সবুজ ফসল)",
-      "observedAt": "2026-11-07",
-      "source": "ESA Sentinel-2 MSI",
-      "baselineNdvi": 0.55,
-      "anomalyPct": 29.1
-    },
-    "jaxa": {
-      "gsmapRain30dMm": 42.2,
-      "amsr2SoilMoisture": 0.23,
-      "spi30dIndex": 0.05,
-      "status": "favorable",
-      "statusEn": "GSMaP: 42.2mm rain · AMSR2: 0.23 m³/m³ soil",
-      "statusBn": "জিএসএমএপি: 42.2মিমি বৃষ্টি · এএমএসআর২: 0.23 m³/m³ আর্দ্রতা",
-      "observedAt": "2026-10-24",
-      "source": "JAXA Earth API (GSMaP v8 / AMSR2)",
-      "rainDiscrepancyMm": 4,
-      "rainDiscrepancyPct": 10
-    },
-    "insat": {
-      "lstC": 29.7,
-      "rain24hMm": 0,
-      "heatSpikeConfirmed": false,
-      "observedAt": "2026-10-24",
-      "source": "ISRO MOSDAC (INSAT-3DR)"
-    },
-    "nisar": {
-      "soilMoisture200m": 0.23,
-      "observationDate": "2026-10-18",
-      "pass": "Descending",
-      "resolutionMeters": 200,
-      "status": "provisional_release",
-      "source": "NASA-ISRO NISAR (L3 Provisional)"
     }
   }
 }

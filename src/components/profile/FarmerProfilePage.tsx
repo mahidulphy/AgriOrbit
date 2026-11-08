@@ -549,7 +549,7 @@ export const FarmerProfilePage: React.FC = () => {
                 communicationMethod={profile.communicationMethod}
                 onCommunicationMethodChange={(val) => setProfile({ ...profile, communicationMethod: val })}
                 emailAlerts={Boolean(profile.emailAlerts)}
-                onEmailAlertsChange={(val) => setProfile({ ...profile, emailAlerts: val })}
+                onEmailAlertsChange={(val) => setProfile({ ...profile, emailAlerts: val, communicationMethod: val ? 'email' : profile.communicationMethod })}
                 smsAlerts={Boolean(profile.smsAlerts)}
                 onSmsAlertsChange={(val) => setProfile({ ...profile, smsAlerts: val })}
                 avatarUrl={profile.avatarUrl}

@@ -164,7 +164,7 @@ export async function sendAlertEmailViaSmtp(params: {
     });
 
     await transporter.sendMail({
-      from: `"AgriOrbit" <${user}>`,
+      from: `"AgriOrbit Alerts" <${user}>`,
       to: params.to,
       replyTo: user,
       subject: params.subject,

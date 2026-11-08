@@ -115,22 +115,22 @@ export default async function handler(req: any, res?: any) {
       });
     }
 
-    // 5. Rate Limiting: Max 1 test alert per minute per user
-    const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
+    // 5. Rate Limiting: Max 1 test alert per 5 minutes per user
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
 
     const { data: recentTests } = await supabaseAdmin
       .from('notifications')
       .select('id, created_at')
       .eq('user_id', user.id)
       .eq('alert_type', 'test')
-      .gte('created_at', oneMinuteAgo)
+      .gte('created_at', fiveMinutesAgo)
       .order('created_at', { ascending: false })
       .limit(1);
 
     if (recentTests && recentTests.length > 0) {
       return sendJson(429, {
         ok: false,
-        error: 'একটু পরে আবার চেষ্টা করুন / Please wait a minute before sending another test.',
+        error: 'একটু পর আবার চেষ্টা করুন (প্রতি ৫ মিনিটে সর্বোচ্চ ১টি টেস্ট পাঠানো যায়) / Please wait 5 minutes before sending another test alert.',
       });
     }
 
@@ -174,7 +174,7 @@ export default async function handler(req: any, res?: any) {
       data_date: dataDate,
     };
 
-    // 9. Record test notification in public.notifications
+    // 9. Record test notification in public.notifications (non-fatal, never block email send)
     let inserted: any = {
       id: crypto.randomUUID(),
       ...notificationPayload,
@@ -188,17 +188,10 @@ export default async function handler(req: any, res?: any) {
         .select()
         .single();
 
-      if (insertErr) {
-        // Log technical detail to console only; never expose raw postgres constraint to user
-        console.warn('[send-alert] Notifications insert notice (proceeding with email delivery):', insertErr.message);
-        const { data: upsertRecord } = await supabaseAdmin
-          .from('notifications')
-          .upsert(notificationPayload, { onConflict: 'user_id,field_id,alert_type,data_date' })
-          .select()
-          .single();
-        if (upsertRecord) inserted = upsertRecord;
-      } else if (dbRecord) {
+      if (!insertErr && dbRecord) {
         inserted = dbRecord;
+      } else if (insertErr) {
+        console.warn('[send-alert] Notifications insert notice (proceeding with email delivery):', insertErr.message);
       }
     } catch (dbErr: any) {
       console.warn('[send-alert] Database operation notice:', dbErr?.message);
@@ -256,7 +249,7 @@ export default async function handler(req: any, res?: any) {
       });
 
       const info = await transporter.sendMail({
-        from: `"AgriOrbit" <${smtpUser}>`,
+        from: `"AgriOrbit Alerts" <${smtpUser}>`,
         to: user.email,
         replyTo: smtpUser,
         subject,

@@ -64,42 +64,22 @@ jobs:
           fi
           npx tsx scripts/update-satellite-data.ts $ARGS
 
-      - name: 2. Ingest ESA Sentinel-1 (Radar Flood %)
+      - name: 2. Refresh 64-District NASA POWER Cache
         continue-on-error: true
-        env:
-          CDSE_CLIENT_ID: ${{ secrets.CDSE_CLIENT_ID }}
-          CDSE_CLIENT_SECRET: ${{ secrets.CDSE_CLIENT_SECRET }}
         run: |
-          if [ -n "$CDSE_CLIENT_ID" ] && [ -n "$CDSE_CLIENT_SECRET" ]; then
-            echo "CDSE credentials detected. Ingesting ESA Sentinel-1 Radar data..."
-            npx tsx scripts/fetch-sentinel1.ts --all
-          else
-            echo "CDSE credentials not set. Skipping Sentinel-1 ingestion."
-          fi
+          echo "Refreshing 64-district NASA POWER agrometeorology cache..."
+          npx tsx scripts/fetch-cache.ts --all
 
-      - name: 3. Ingest ESA Sentinel-2 (10m NDVI)
-        continue-on-error: true
-        env:
-          CDSE_CLIENT_ID: ${{ secrets.CDSE_CLIENT_ID }}
-          CDSE_CLIENT_SECRET: ${{ secrets.CDSE_CLIENT_SECRET }}
-        run: |
-          if [ -n "$CDSE_CLIENT_ID" ] && [ -n "$CDSE_CLIENT_SECRET" ]; then
-            echo "CDSE credentials detected. Ingesting ESA Sentinel-2 10m NDVI data..."
-            npx tsx scripts/fetch-sentinel2.ts --all
-          else
-            echo "CDSE credentials not set. Skipping Sentinel-2 ingestion."
-          fi
-
-      - name: 4. Commit and push updated satellite snapshot
+      - name: 3. Commit and push updated satellite snapshot & NASA POWER cache
         if: always()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain src/data/satellite.json)" ]; then
-            git add src/data/satellite.json
-            git commit -m "chore(satellite): automated daily satellite observations update [skip ci]"
+          git add src/data/satellite.json src/data/fallback-rangpur.json public/cache/*.json
+          if [ -n "$(git status --porcelain src/data/ public/cache/)" ]; then
+            git commit -m "chore(satellite): automated daily NASA observations & POWER cache update [skip ci]"
             git push
-            echo "Committed and pushed updated satellite snapshot."
+            echo "Committed and pushed updated satellite snapshot & POWER cache."
           else
-            echo "No changes to src/data/satellite.json."
+            echo "No changes to src/data/ or public/cache/."
           fi

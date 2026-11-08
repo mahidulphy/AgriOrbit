@@ -778,7 +778,7 @@ export const OnboardingWizardPage: React.FC = () => {
               communicationMethod={communicationMethod}
               onCommunicationMethodChange={setCommunicationMethod}
               emailAlerts={emailAlerts}
-              onEmailAlertsChange={setEmailAlerts}
+              onEmailAlertsChange={(val) => { setEmailAlerts(val); if (val) setCommunicationMethod('email'); }}
               smsAlerts={emailAlerts}
               onSmsAlertsChange={setEmailAlerts}
               avatarUrl={avatarUrl}
