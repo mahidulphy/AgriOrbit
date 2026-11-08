@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -8,44 +9,64 @@ import {
 import { runEngine, scoreCrop, type EngineInput } from './engine';
 import { CROPS } from '../data/crops';
 import { STRINGS } from '../i18n';
-import type { FieldShift } from './fieldShift';
+import { computeFieldShift, type FieldShift } from './fieldShift';
 import type { Conditions } from './conditions';
 import { getRankedCrops } from './cropSuitability';
 
-test('Phase 9: 1. Vulnerable Seasons Risk Flags use NASA POWER climate observations', () => {
-  const shift: FieldShift = {
-    thenRange: [2001, 2010],
-    nowRange: [2016, 2025],
-    seasons: [
-      { season: 'rabi', thenTemp: 19.5, nowTemp: 20.8, dTemp: 1.3, thenHeat: 26.2, nowHeat: 27.6, dHeat: 1.4, thenShare: 5.2, nowShare: 4.1, dShare: -1.1 },
-      { season: 'kharif1', thenTemp: 27.8, nowTemp: 28.9, dTemp: 1.1, thenHeat: 34.0, nowHeat: 35.2, dHeat: 1.2, thenShare: 29.5, nowShare: 27.8, dShare: -1.7 },
-      { season: 'kharif2', thenTemp: 28.6, nowTemp: 29.4, dTemp: 0.8, thenHeat: 32.5, nowHeat: 33.3, dHeat: 0.8, thenShare: 65.3, nowShare: 68.1, dShare: 2.8 },
-    ],
-    yearly: [],
-  };
+test('Phase 9: 1. Vulnerable Seasons Risk Flags use calm wording and district-specific data matching Field Shift', () => {
+  const rCache = JSON.parse(fs.readFileSync('public/cache/rangpur.json', 'utf8'));
+  const cCache = JSON.parse(fs.readFileSync('public/cache/chandpur.json', 'utf8'));
 
-  // Wheat in Rabi: Terminal heat risk rising
-  const wheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', shift);
-  assert.equal(wheatRisk.severity, 'high');
-  assert.match(wheatRisk.titleEn, /Terminal Heat Risk/i);
-  assert.match(wheatRisk.evidenceEn, /NASA POWER decadal shift/i);
-  assert.match(wheatRisk.evidenceBn, /নাসা পাওয়ার পরিবর্তন/i);
+  const rangpurShift = computeFieldShift(rCache.monthly, 'rangpur');
+  const chandpurShift = computeFieldShift(cCache.monthly, 'chandpur');
 
-  // Boro in Rabi: High groundwater depletion
-  const boroRisk = getVulnerableSeasonRisk('rabi', 'boro', shift);
-  assert.equal(boroRisk.severity, 'high');
-  assert.match(boroRisk.titleEn, /Groundwater Demand/i);
-  assert.match(boroRisk.evidenceEn, /NASA POWER/i);
+  // Verify Rangpur Field Shift deltas match its card
+  const rRabi = rangpurShift.seasons.find((s) => s.season === 'rabi')!;
+  assert.equal(rRabi.dTemp, 0.5);
+  assert.equal(rRabi.dHeat, 0.4);
+  assert.equal(rRabi.nowShare, 1);
+  assert.equal(rRabi.dShare, -1);
 
-  // Fallow in Kharif-1: Topsoil baking & erosion
-  const kharif1FallowRisk = getVulnerableSeasonRisk('kharif1', 'fallow', shift);
-  assert.equal(kharif1FallowRisk.severity, 'high');
-  assert.match(kharif1FallowRisk.titleEn, /Solar Baking & Sheet Erosion/i);
+  // Verify Chandpur Field Shift deltas match its card
+  const cRabi = chandpurShift.seasons.find((s) => s.season === 'rabi')!;
+  assert.equal(cRabi.dTemp, 0.0);
+  assert.equal(cRabi.dHeat, -0.2);
+  assert.equal(cRabi.nowShare, 5);
+  assert.equal(cRabi.dShare, 2);
 
-  // Aman in Kharif-2: Monsoon dry spell risk
-  const amanRisk = getVulnerableSeasonRisk('kharif2', 'aman', shift);
-  assert.equal(amanRisk.severity, 'medium');
-  assert.match(amanRisk.titleEn, /Late-Monsoon Dry Spell/i);
+  // 1. Wheat in Rabi: Rangpur shows +0.4°C high, +0.5°C mean temp
+  const rWheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', rangpurShift);
+  assert.equal(rWheatRisk.severity, 'high');
+  assert.equal(rWheatRisk.titleEn, 'Watch out: late-season heat');
+  assert.equal(rWheatRisk.titleBn, 'সতর্কতা: মৌসুমের শেষে গরমের ঝুঁকি');
+  assert.match(rWheatRisk.evidenceEn, /\+0\.4°C/);
+  assert.match(rWheatRisk.evidenceEn, /\+0\.5°C/);
+  assert.match(rWheatRisk.evidenceBn, /\+০\.৪°সে/);
+  assert.match(rWheatRisk.evidenceBn, /\+০\.৫°সে/);
+
+  // 2. Wheat in Rabi: Chandpur shows -0.2°C high, 0.0°C mean temp (DIFFERENT from Rangpur)
+  const cWheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', chandpurShift);
+  assert.equal(cWheatRisk.titleEn, 'Watch out: late-season heat');
+  assert.match(cWheatRisk.evidenceEn, /-0\.2°C/);
+  assert.match(cWheatRisk.evidenceEn, /0\.0°C/);
+
+  // 3. Boro in Rabi: Rangpur shows 1% share, -1% delta
+  const rBoroRisk = getVulnerableSeasonRisk('rabi', 'boro', rangpurShift);
+  assert.equal(rBoroRisk.titleEn, 'Watch out: high winter groundwater use');
+  assert.equal(rBoroRisk.titleBn, 'সতর্কতা: শুষ্ক মৌসুমে অতিরিক্ত সেচ নির্ভরতা');
+  assert.match(rBoroRisk.evidenceEn, /1% of annual precipitation/);
+  assert.match(rBoroRisk.evidenceEn, /-1% shift/);
+
+  // 4. Boro in Rabi: Chandpur shows 5% share, +2% delta (DIFFERENT from Rangpur)
+  const cBoroRisk = getVulnerableSeasonRisk('rabi', 'boro', chandpurShift);
+  assert.match(cBoroRisk.evidenceEn, /5% of annual precipitation/);
+  assert.match(cBoroRisk.evidenceEn, /\+2% shift/);
+
+  // 5. When shift data is missing/null, describe risk without numbers
+  const noDataWheatRisk = getVulnerableSeasonRisk('rabi', 'wheat', null);
+  assert.equal(noDataWheatRisk.titleEn, 'Watch out: late-season heat');
+  assert.doesNotMatch(noDataWheatRisk.evidenceEn, /[0-9]+\.[0-9]+°C/);
+  assert.doesNotMatch(noDataWheatRisk.evidenceBn, /[০-৯]+\.[০-৯]+°সে/);
 });
 
 test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data completeness', () => {
@@ -75,10 +96,27 @@ test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data 
     districtNameBn: 'রংপুর',
   });
   assert.equal(resHigh.strategies[1].confidence.level, 'high');
-  assert.match(resHigh.strategies[1].confidence.reasonEn, /Live NASA POWER & SMAP/i);
-  assert.match(resHigh.strategies[1].confidence.reasonBn, /নাসার সরাসরি POWER ও SMAP/i);
+  assert.match(resHigh.strategies[1].confidence.reasonEn, /crop values from BARI\/BRRI guidance/i);
+  assert.match(resHigh.strategies[1].confidence.reasonBn, /বারি\/ব্রি নির্দেশিকা থেকে সংগৃহীত/i);
 
-  // Case B: Soil type unspecified ("dont_know") -> Medium confidence
+  // Case B: Rotation includes estimated crop (e.g. soybean) -> Medium confidence
+  const resEstimated = generateRotationComparison({
+    conditions: completeConditions,
+    shift: null,
+    soil: 0.28,
+    forecast: [],
+    priority: 'save_water',
+    currentRotation: { rabi: 'soybean', kharif1: 'fallow', kharif2: 'aman' },
+    soilType: 'clay_loam',
+    districtId: 'Rangpur',
+    districtNameEn: 'Rangpur',
+    districtNameBn: 'রংপুর',
+  });
+  assert.equal(resEstimated.strategies[0].confidence.level, 'medium');
+  assert.match(resEstimated.strategies[0].confidence.reasonEn, /rotation includes estimated values/i);
+  assert.match(resEstimated.strategies[0].confidence.reasonBn, /আনুমানিক মান/i);
+
+  // Case C: Soil type unspecified ("dont_know") -> Medium confidence
   const resUnknownSoil = generateRotationComparison({
     conditions: completeConditions,
     shift: null,
@@ -94,7 +132,7 @@ test('Phase 9: 2. Confidence scoring assigns High, Medium, or Low based on data 
   assert.equal(resUnknownSoil.strategies[1].confidence.level, 'medium');
   assert.match(resUnknownSoil.strategies[1].confidence.reasonEn, /soil texture is unspecified/i);
 
-  // Case C: Live NASA rain telemetry unavailable -> Low confidence
+  // Case D: Live NASA rain telemetry unavailable -> Low confidence
   const resNoLive = generateRotationComparison({
     conditions: { ...completeConditions, rainUnavailable: true },
     shift: null,
@@ -188,6 +226,11 @@ test('Phase 9: 4. Soil-Health Roles attach correct badges and explanations', () 
   const mungRoles = getSoilHealthRoles(mungbean);
   assert.ok(mungRoles.some((r) => r.id === 'ground_cover'));
   assert.match(mungRoles.find((r) => r.id === 'ground_cover')!.descEn, /Dense canopy shields topsoil/i);
+
+  // Jute is a fibre crop and must NOT be tagged as green manure / ground cover
+  const jute = CROPS.find((c) => c.id === 'jute')!;
+  const juteRoles = getSoilHealthRoles(jute);
+  assert.equal(juteRoles.some((r) => r.id === 'ground_cover'), false, 'Jute is a fibre crop; must NOT have ground_cover badge');
 });
 
 test('Phase 9: 5. Farmer Science Glossary covers all 6 required scientific terms in English & Bangla', () => {

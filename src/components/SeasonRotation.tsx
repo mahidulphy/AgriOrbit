@@ -576,10 +576,9 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                               : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
                           }`}
                         >
-                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider">
+                          <div className="flex items-center gap-1.5 font-sans text-xs font-semibold">
                             <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                             <span>
-                              {isBn ? 'ঝুঁকি সতর্কতা:' : 'Risk Flag:'}{' '}
                               {isBn ? cropSeason.vulnerableSeasonRisk.titleBn : cropSeason.vulnerableSeasonRisk.titleEn}
                             </span>
                           </div>
@@ -587,7 +586,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                             {isBn ? cropSeason.vulnerableSeasonRisk.reasonBn : cropSeason.vulnerableSeasonRisk.reasonEn}
                           </p>
                           <div className="pt-1 border-t border-white/10 text-[10px] font-mono text-[#A3A3A3]">
-                            <span className="text-[#FAFAFA] font-semibold">{isBn ? 'নাসার উপাত্ত প্রমাণ:' : 'NASA Telemetry:'} </span>
+                            <span className="text-[#FAFAFA] font-medium">{isBn ? 'নাসা পর্যবেক্ষণ:' : 'NASA observation:'} </span>
                             {isBn ? cropSeason.vulnerableSeasonRisk.evidenceBn : cropSeason.vulnerableSeasonRisk.evidenceEn}
                           </div>
                         </div>

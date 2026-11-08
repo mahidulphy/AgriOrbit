@@ -194,8 +194,8 @@ export function getSoilHealthRoles(crop: Crop | null): SoilHealthRole[] {
     });
   }
 
-  // 2. Deep roots
-  const deepRootCrops = ['sunflower', 'mustard', 'maize', 'pigeon_pea', 'cotton', 'sorghum'];
+  // 2. Deep roots (only crops in our 37-crop list)
+  const deepRootCrops = ['sunflower', 'mustard', 'maize', 'cotton'];
   if (deepRootCrops.includes(cid) || crop.family === 'mustard' || crop.plant_family === 'brassicaceae') {
     roles.push({
       id: 'deep_roots',
@@ -207,8 +207,8 @@ export function getSoilHealthRoles(crop: Crop | null): SoilHealthRole[] {
     });
   }
 
-  // 3. Drought tolerant
-  const droughtCrops = ['chickpea', 'grasspea', 'millet', 'kaon', 'sesame', 'barley', 'sorghum'];
+  // 3. Drought tolerant (only crops in our 37-crop list)
+  const droughtCrops = ['chickpea', 'grass_pea', 'sesame'];
   if (droughtCrops.includes(cid) || (crop.water === 'low' && !isLegume)) {
     roles.push({
       id: 'drought_tolerant',
@@ -220,8 +220,8 @@ export function getSoilHealthRoles(crop: Crop | null): SoilHealthRole[] {
     });
   }
 
-  // 4. Ground cover / green manure
-  const coverCrops = ['dhaincha', 'cowpea', 'mungbean', 'sweet_potato', 'blackgram', 'jute'];
+  // 4. Ground cover / green manure (only crops in our 37-crop list; jute removed, dhaincha not in crop list)
+  const coverCrops = ['mungbean', 'sweet_potato', 'blackgram'];
   if (coverCrops.includes(cid)) {
     roles.push({
       id: 'ground_cover',
@@ -239,133 +239,179 @@ export function getSoilHealthRoles(crop: Crop | null): SoilHealthRole[] {
 export function getVulnerableSeasonRisk(
   seasonKey: 'rabi' | 'kharif1' | 'kharif2',
   cropId: string,
-  shift: FieldShift | null
+  shift: FieldShift | null,
+  conditions?: Conditions | null
 ): VulnerableSeasonRisk {
   const cleanId = cropId.toLowerCase().trim();
   const shiftSeason = shift?.seasons.find((s) => s.season === seasonKey);
-  const dHeat = shiftSeason ? shiftSeason.dHeat : (seasonKey === 'rabi' ? 1.2 : 0.8);
-  const nowShare = shiftSeason ? shiftSeason.nowShare : (seasonKey === 'rabi' ? 4 : seasonKey === 'kharif1' ? 28 : 68);
-  const dShare = shiftSeason ? shiftSeason.dShare : (seasonKey === 'rabi' ? -1 : seasonKey === 'kharif1' ? -2 : 3);
+  const hasShift = Boolean(shiftSeason && typeof shiftSeason.dHeat === 'number');
   const thenYears = shift ? `${shift.thenRange[0]}–${shift.thenRange[1]}` : '2001–2010';
   const nowYears = shift ? `${shift.nowRange[0]}–${shift.nowRange[1]}` : '2016–2025';
 
   if (seasonKey === 'rabi') {
     if (cleanId === 'wheat') {
+      const dHeat = shiftSeason?.dHeat;
+      const dTemp = shiftSeason?.dTemp;
+      const hasNumbers = hasShift && typeof dHeat === 'number' && typeof dTemp === 'number';
       return {
         severity: 'high',
-        titleEn: 'Terminal Heat Risk Rising',
-        titleBn: 'দেরিতে অতিরিক্ত গরমের ঝুঁকি (Terminal Heat)',
-        reasonEn: 'Wheat in Rabi: late-season heat risk is rising during grain filling (late Feb–Mar). Temperatures >30°C cause pollen sterility and shriveled grains.',
-        reasonBn: 'রবি মৌসুমে গম: দানা বাঁধার সময় (ফেব্রুয়ারির শেষ–মার্চ) তাপদাহ বাড়ছে। ৩০°সে-এর বেশি তাপমাত্রায় পরাগায়ন ব্যাহত হয় ও দানা চিটা হয়ে যায়।',
-        evidenceEn: `NASA POWER decadal shift: Rabi maximum temperatures +${dHeat > 0 ? '+' : ''}${dHeat}°C (${thenYears} vs ${nowYears}). Late-winter heat spikes shorten grain filling.`,
-        evidenceBn: `নাসা পাওয়ার পরিবর্তন: রবি মৌসুমে সর্বোচ্চ তাপমাত্রা ${dHeat > 0 ? '+' : ''}${toBnDigits(dHeat)}°সে বৃদ্ধি (${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)})। শীতের শেষের তাপদাহে ফলন কমে।`,
+        titleEn: 'Watch out: late-season heat',
+        titleBn: 'সতর্কতা: মৌসুমের শেষে গরমের ঝুঁকি',
+        reasonEn: 'Wheat in Rabi: late-season heat can rise during grain filling (late Feb–Mar). Temperatures >30°C can affect pollen and grain development.',
+        reasonBn: 'রবি মৌসুমে গম: দানা বাঁধার সময় (ফেব্রুয়ারির শেষ–মার্চ) গরম বাড়লে পরাগায়ন ব্যাহত হতে পারে ও দানা চিটা হতে পারে।',
+        evidenceEn: hasNumbers
+          ? `NASA POWER decadal shift: Rabi daily high temperature change is ${dHeat > 0 ? '+' : ''}${dHeat.toFixed(1)}°C (mean temperature change ${dTemp > 0 ? '+' : ''}${dTemp.toFixed(1)}°C) comparing ${thenYears} vs ${nowYears}. Late-winter heat spikes shorten grain filling.`
+          : 'NASA POWER decadal observations indicate late-winter maximum temperatures during grain filling reduce yield potential.',
+        evidenceBn: hasNumbers
+          ? `নাসা পাওয়ার দশকভিত্তিক পরিবর্তন: রবি মৌসুমে সর্বোচ্চ তাপমাত্রা পরিবর্তন ${dHeat > 0 ? '+' : ''}${toBnDigits(dHeat.toFixed(1))}°সে (গড় তাপমাত্রা পরিবর্তন ${dTemp > 0 ? '+' : ''}${toBnDigits(dTemp.toFixed(1))}°সে), ভিত্তি দশক ${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)}। শীতের শেষের তাপদাহে ফলন কমে।`
+          : 'নাসা পাওয়ার দশকভিত্তিক উপাত্ত অনুযায়ী শীতের শেষ ভাগে গম পরিপক্ব হওয়ার সময় উচ্চ তাপমাত্রা ফলন কমিয়ে দেয়।',
       };
     }
     if (cleanId === 'boro') {
+      const nowShare = shiftSeason?.nowShare;
+      const dShare = shiftSeason?.dShare;
+      const hasNumbers = hasShift && typeof nowShare === 'number' && typeof dShare === 'number';
       return {
         severity: 'high',
-        titleEn: 'Critical Dry-Season Groundwater Demand',
-        titleBn: 'শীতকালীন উচ্চ ভূগর্ভস্থ পানি নির্ভরতা ও ব্যয়',
-        reasonEn: 'Boro rice demands 1,200–1,400 mm of irrigation in dry winter, depleting local groundwater aquifers when rainfall is negligible.',
-        reasonBn: 'বোরো ধানে শুষ্ক শীতকালে ১২০০-১৪০০ মিমি সেচের প্রয়োজন হয়; বৃষ্টি না থাকায় ভূগর্ভস্থ পানির ওপর তীব্র চাপ ও সেচ খরচ বাড়ে।',
-        evidenceEn: `NASA POWER: Rabi rain contributes only ~${nowShare}% of annual precipitation (${dShare > 0 ? '+' : ''}${dShare}% shift vs baseline). Water balance deficit exceeds 800 mm.`,
-        evidenceBn: `নাসা পাওয়ার: রবি মৌসুমে বার্ষিক বৃষ্টির মাত্র ~${toBnDigits(nowShare)}% হয় (পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}%)। পানির প্রাকৃতিক ঘাটতি ৮০০ মিমি ছাড়ায়।`,
+        titleEn: 'Watch out: high winter groundwater use',
+        titleBn: 'সতর্কতা: শুষ্ক মৌসুমে অতিরিক্ত সেচ নির্ভরতা',
+        reasonEn: 'Boro rice requires intensive winter irrigation, drawing heavily on local groundwater when seasonal rainfall is low.',
+        reasonBn: 'বোরো ধানে শুষ্ক শীতকালে প্রচুর সেচের প্রয়োজন হয়; বৃষ্টি কম থাকায় ভূগর্ভস্থ পানির ওপর চাপ বাড়ে।',
+        evidenceEn: hasNumbers
+          ? `NASA POWER: Rabi rain contributes only ${nowShare}% of annual precipitation (${dShare > 0 ? '+' : ''}${dShare}% shift vs ${thenYears}). High irrigation demand requires extensive groundwater extraction.`
+          : 'NASA POWER decadal records show negligible rainfall in Rabi, requiring heavy groundwater pumping.',
+        evidenceBn: hasNumbers
+          ? `নাসা পাওয়ার: রবি মৌসুমে বার্ষিক বৃষ্টির মাত্র ${toBnDigits(nowShare)}% হয় (${toBnDigits(thenYears)}-এর তুলনায় পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}%)। পানির চাহিদা পূরণে ভূগর্ভস্থ সেচের প্রয়োজন হয়।`
+          : 'নাসা পাওয়ার উপাত্ত অনুযায়ী রবি মৌসুমে বৃষ্টিপাত অত্যন্ত কম থাকায় ভূগর্ভস্থ সেচের ওপর বেশি নির্ভর করতে হয়।',
       };
     }
     if (cleanId === 'potato') {
+      const rh = conditions?.rh;
+      const hasRh = typeof rh === 'number' && Number.isFinite(rh);
       return {
         severity: 'medium',
-        titleEn: 'Late Blight & Temperature Fluctuation',
-        titleBn: 'নাবি ধসা রোগ ও রাতের তাপমাত্রা বৃদ্ধির ঝুঁকি',
-        reasonEn: 'Potato is vulnerable to Late Blight fungal outbreaks during winter fog and warm night spells, requiring heavy protective fungicides.',
-        reasonBn: 'ঘন কুয়াশা ও রাতের আকস্মিক গরমে আলুর জমিতে লেইট ব্লাইট (নাবি ধসা) রোগের বিস্তার ঘটে এবং ছত্রাকনাশকের খরচ বাড়ে।',
-        evidenceEn: 'NASA POWER: Winter minimum temperatures and relative humidity (>80%) favor rapid spore germination.',
-        evidenceBn: 'নাসা পাওয়ার: শীতের রাতের তাপমাত্রা ও উচ্চ আপেক্ষিক আর্দ্রতা (>৮০%) ছত্রাকের বংশবৃদ্ধির অনুকূল।',
+        titleEn: 'Watch out: fog & late blight risk',
+        titleBn: 'সতর্কতা: কুয়াশা ও নাবি ধসা রোগের ঝুঁকি',
+        reasonEn: 'Potato can be vulnerable to late blight during humid, foggy winter periods with fluctuating temperatures.',
+        reasonBn: 'শীতের ঘন কুয়াশা ও আর্দ্র আবহাওয়ায় আলুর জমিতে নাবি ধসা (লেট ব্লাইট) রোগের ঝুঁকি বাড়তে পারে।',
+        evidenceEn: hasRh
+          ? `NASA POWER: Winter relative humidity (~${Math.round(rh)}%) and cool temperatures favor late blight spore germination.`
+          : 'NASA POWER: Winter relative humidity and fluctuating temperatures favor late blight spore germination.',
+        evidenceBn: hasRh
+          ? `নাসা পাওয়ার: শীতকালীন আপেক্ষিক আর্দ্রতা (~${toBnDigits(Math.round(rh))}%) ও ঠান্ডা আবহাওয়া নাবি ধসা রোগের জন্য অনুকূল।`
+          : 'নাসা পাওয়ার: শীতকালীন আপেক্ষিক আর্দ্রতা ও তাপমাত্রার ওঠানামা নাবি ধসা রোগের জন্য অনুকূল।',
       };
     }
     if (cleanId === 'fallow') {
       return {
         severity: 'medium',
-        titleEn: 'Unproductive Residual Moisture Evaporation',
-        titleBn: 'মাটির অবশিষ্ট আর্দ্রতা অপচয়ের ঝুঁকি',
-        reasonEn: 'Leaving the field empty in Rabi wastes valuable post-Aman residual soil moisture without generating economic return.',
-        reasonBn: 'আমন কাটার পর রবিতে জমি পতিত রাখলে মাটির অবশিষ্ট রস রোদে শুকিয়ে নষ্ট হয় এবং কোনো আয় আসে না।',
-        evidenceEn: 'NASA SMAP: Post-monsoon rootzone moisture declines steadily from December without vegetative ground cover.',
-        evidenceBn: 'নাসা এসএমএপি: কোনো ফসল না থাকলে ডিসেম্বর থেকে মাটির মূল স্তরের আর্দ্রতা দ্রুত রোদে উবে যায়।',
+        titleEn: 'Notice: unused soil moisture',
+        titleBn: 'দৃষ্টি আকর্ষণ: মাটির অবশিষ্ট আর্দ্রতা অপচয়',
+        reasonEn: 'Leaving the field fallow in Rabi leaves post-monsoon soil moisture unused without providing crop cover.',
+        reasonBn: 'রবিতে জমি খালি রাখলে মাটির অবশিষ্ট রস কাজে লাগানো যায় না এবং জমি অনাবাদী থাকে।',
+        evidenceEn: 'NASA SMAP: Post-monsoon rootzone soil moisture evaporates rapidly without vegetative crop cover.',
+        evidenceBn: 'নাসা এসএমএপি: কোনো আচ্ছাদন ফসল না থাকলে বর্ষা-পরবর্তী মাটির রস রোদে দ্রুত শুকিয়ে অপচয় হয়।',
       };
     }
     return {
       severity: 'low',
-      titleEn: 'Low Climate Risk in Rabi',
-      titleBn: 'রবিতে স্বল্প জলবায়ু ঝুঁকি',
-      reasonEn: 'Crop is well-adapted to Rabi residual soil moisture and cooler winter conditions with low pumping costs.',
-      reasonBn: 'ফসলটি শীতকালীন আবহাওয়া ও মাটির অবশিষ্ট রসের সাথে মানানসই; সেচ খরচ তুলনামূলক কম।',
-      evidenceEn: 'BARI agricultural guidelines & NASA POWER seasonal baseline.',
+      titleEn: 'Favorable: climate well-suited',
+      titleBn: 'অনুকূল: জলবায়ুর সাথে মানানসই',
+      reasonEn: 'Crop is well-adapted to seasonal climate conditions with modest management risk.',
+      reasonBn: 'ফসলটি এই মৌসুমের সাধারণ আবহাওয়ার সাথে মানানসই এবং ঝুঁকি তুলনামূলক কম।',
+      evidenceEn: 'BARI agricultural guidance & NASA POWER seasonal baseline.',
       evidenceBn: 'বারি কৃষি নির্দেশিকা ও নাসা পাওয়ার মৌসুমী আবহাওয়া উপাত্ত।',
     };
   }
 
   if (seasonKey === 'kharif1') {
     if (cleanId === 'fallow') {
+      const dHeat = shiftSeason?.dHeat;
+      const hasNumbers = hasShift && typeof dHeat === 'number';
       return {
         severity: 'high',
-        titleEn: 'Severe Solar Baking & Sheet Erosion',
-        titleBn: 'প্রখর রোদে মাটির ক্ষতি ও বৈশাখী ঝড়ে ক্ষয়ের ঝুঁকি',
-        reasonEn: 'Leaving field fallow in Kharif-1 exposes topsoil to 35°C+ solar heat, killing beneficial microbes, while pre-monsoon storms cause sheet erosion.',
-        reasonBn: 'খরিফ-১ মৌসুমে জমি খালি রাখলে ৩৫°সে+ গরমে মাটির উপকারী অনুজীব নষ্ট হয় এবং কালবৈশাখীর প্রবল বর্ষণে উর্বর মাটি ধুয়ে যায়।',
-        evidenceEn: `NASA POWER: Kharif-1 solar radiation and convection storms peak before monsoon onset (${dHeat > 0 ? '+' : ''}${dHeat}°C heat shift).`,
-        evidenceBn: `নাসা পাওয়ার: বর্ষার আগে সৌর বিকিরণ ও কালবৈশাখী ঝড়ের তীব্রতা বেশি থাকে (তাপমাত্রার বৃদ্ধি ${dHeat > 0 ? '+' : ''}${toBnDigits(dHeat)}°সে)।`,
+        titleEn: 'Caution: soil baking & storm erosion',
+        titleBn: 'সতর্কতা: প্রখর রোদ ও ঝড়ে মাটির ক্ষয়রোধ',
+        reasonEn: 'Leaving the field bare in Kharif-1 exposes topsoil to intense pre-monsoon heat and storm runoff.',
+        reasonBn: 'খরিফ-১ মৌসুমে জমি খালি রাখলে প্রখর রোদে মাটি শুকিয়ে যায় এবং কালবৈশাখী ঝড়ে উর্বর মাটি ধুয়ে যেতে পারে।',
+        evidenceEn: hasNumbers
+          ? `NASA POWER: Kharif-1 daily high temperature shift is ${dHeat > 0 ? '+' : ''}${dHeat.toFixed(1)}°C (${thenYears} vs ${nowYears}). Intense pre-monsoon heat bakes unshaded topsoil.`
+          : 'NASA POWER: Pre-monsoon solar radiation and convection storms peak before monsoon onset.',
+        evidenceBn: hasNumbers
+          ? `নাসা পাওয়ার: খরিফ-১ মৌসুমে সর্বোচ্চ তাপমাত্রা পরিবর্তন ${dHeat > 0 ? '+' : ''}${toBnDigits(dHeat.toFixed(1))}°সে (${toBnDigits(thenYears)} বনাম ${toBnDigits(nowYears)})। প্রখর রোদে খোলা মাটি শুকিয়ে উর্বরতা হারায়।`
+          : 'নাসা পাওয়ার: বর্ষার আগে সৌর বিকিরণ ও কালবৈশাখী ঝড়ের তীব্রতা বেশি থাকে।',
       };
     }
     if (cleanId === 'aus') {
+      const nowShare = shiftSeason?.nowShare;
+      const dShare = shiftSeason?.dShare;
+      const hasNumbers = hasShift && typeof nowShare === 'number' && typeof dShare === 'number';
       return {
         severity: 'medium',
-        titleEn: 'Pre-Monsoon Drought & Harvest Sprouting',
-        titleBn: 'চারা অবস্থায় খরা ও কাটার সময় আগাম বৃষ্টির ঝুঁকি',
-        reasonEn: 'Aus rice risks germination failure during erratic April dry spells, while early monsoon flash rains can cause harvest grain sprouting.',
-        reasonBn: 'এপ্রিলের অনাবৃষ্টিতে আউশের চারা শুকিয়ে যেতে পারে এবং কাটার সময় আগাম বর্ষার অতিবৃষ্টিতে পাকা ধান ক্ষতিগ্রস্ত হয়।',
-        evidenceEn: 'NASA SMAP & POWER: April soil moisture anomalies show high inter-annual volatility.',
-        evidenceBn: 'নাসা এসএমএপি ও পাওয়ার: এপ্রিল মাসে মাটির আর্দ্রতার তীব্র ওঠানামা ও অনাবৃষ্টির রেকর্ড।',
+        titleEn: 'Watch out: dry spells & harvest rain',
+        titleBn: 'সতর্কতা: আগাম খরা ও কাটার সময় বৃষ্টি',
+        reasonEn: 'Aus rice can face dry spells during April germination, while early monsoon rains may coincide with harvest.',
+        reasonBn: 'এপ্রিলের খরায় আউশের চারা গজানো ব্যাহত হতে পারে এবং কাটার সময় আগাম বর্ষায় পাকা ধান ক্ষতিগ্রস্ত হতে পারে।',
+        evidenceEn: hasNumbers
+          ? `NASA POWER: Pre-monsoon rainfall accounts for ${nowShare}% of annual rain (${dShare > 0 ? '+' : ''}${dShare}% shift vs ${thenYears}), with high inter-annual volatility during germination.`
+          : 'NASA POWER & SMAP: Pre-monsoon rainfall and soil moisture show high inter-annual volatility during germination.',
+        evidenceBn: hasNumbers
+          ? `নাসা পাওয়ার: বর্ষা শুরুর আগে বার্ষিক বৃষ্টির ${toBnDigits(nowShare)}% হয় (${toBnDigits(thenYears)}-এর তুলনায় পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}%), যা চারা গজানোর সময় অনিশ্চয়তা তৈরি করে।`
+          : 'নাসা পাওয়ার ও এসএমএপি: বর্ষার আগে বৃষ্টি ও মাটির রসে তীব্র অনিশ্চয়তা থাকায় চারা গজানো ঝুঁকিপূর্ণ হতে পারে।',
       };
     }
     return {
       severity: 'low',
-      titleEn: 'Adapted Pre-Monsoon Cover',
-      titleBn: 'গ্রীষ্মের সাথে খাপ খাইয়ে নেওয়া ফসল',
+      titleEn: 'Favorable: climate well-suited',
+      titleBn: 'অনুকূল: জলবায়ুর সাথে মানানসই',
       reasonEn: 'Crop handles pre-monsoon temperatures and protects topsoil with vegetative biomass ahead of Aman.',
       reasonBn: 'গ্রীষ্মের তাপ সহ্য করতে পারে এবং আমন রোপণের আগে জমিকে সবুজ আচ্ছাদনে ঢেকে রাখে।',
-      evidenceEn: 'NASA POWER Kharif-1 heat resilience & BARI trial data.',
-      evidenceBn: 'নাসা পাওয়ার খরিফ-১ তাপ সহনশীলতা ও বারি গবেষণা উপাত্ত।',
+      evidenceEn: 'NASA POWER Kharif-1 heat observations & BARI guidance.',
+      evidenceBn: 'নাসা পাওয়ার খরিফ-১ পর্যবেক্ষণ ও বারি নির্দেশিকা।',
     };
   }
 
   // kharif2
   if (cleanId === 'fallow') {
+    const nowShare = shiftSeason?.nowShare;
+    const dShare = shiftSeason?.dShare;
+    const hasNumbers = hasShift && typeof nowShare === 'number' && typeof dShare === 'number';
     return {
       severity: 'high',
-      titleEn: 'Disastrous Monsoon Nutrient Runoff',
-      titleBn: 'বর্ষায় উর্বর মাটি ও সার ধুয়ে যাওয়ার মারাত্মক ঝুঁকি',
-      reasonEn: 'Leaving land unplanted during the monsoon risks severe sheet erosion, nutrient leaching, and uncontrollable weed proliferation.',
-      reasonBn: 'বর্ষার ভরা মৌসুমে জমি খালি ফেলে রাখলে প্রবল বর্ষণে উর্বর মাটি ও সার ধুয়ে যায় এবং আগাছায় জমি ভরে যায়।',
-      evidenceEn: `NASA POWER: Monsoon delivers ~${nowShare}% of total annual rainfall. Uncovered soil suffers maximum erosion.`,
-      evidenceBn: `নাসা পাওয়ার: বর্ষাকালেই মোট বার্ষিক বৃষ্টির প্রায় ~${toBnDigits(nowShare)}% হয়। আচ্ছাদনহীন জমি সবচেয়ে বেশি ক্ষয়ের শিকার হয়।`,
+      titleEn: 'Caution: monsoon soil & nutrient runoff',
+      titleBn: 'সতর্কতা: বর্ষার বৃষ্টিতে উর্বর মাটি ধুয়ে যাওয়া',
+      reasonEn: 'Leaving land unplanted during peak monsoon risks topsoil erosion and nutrient leaching.',
+      reasonBn: 'বর্ষার ভরা মৌসুমে জমি খালি ফেলে রাখলে ভারী বৃষ্টিতে উর্বর মাটি ও পুষ্টি উপাদান ধুয়ে যায়।',
+      evidenceEn: hasNumbers
+        ? `NASA POWER: Monsoon delivers ${nowShare}% of total annual rainfall (${dShare > 0 ? '+' : ''}${dShare}% shift vs ${thenYears}). Uncovered topsoil suffers severe runoff and nutrient leaching.`
+        : 'NASA POWER: Heavy monsoon rainfall causes severe soil erosion and nutrient leaching on unplanted fields.',
+      evidenceBn: hasNumbers
+        ? `নাসা পাওয়ার: বর্ষাকালেই মোট বার্ষিক বৃষ্টির ${toBnDigits(nowShare)}% হয় (${toBnDigits(thenYears)}-এর তুলনায় পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}%)। খালি জমি বৃষ্টির পানিতে উর্বর মাটি ও পুষ্টি উপাদান হারায়।`
+        : 'নাসা পাওয়ার: বর্ষার প্রবল বৃষ্টিতে খালি জমির উর্বর মাটি ও সার ধুয়ে নষ্ট হয়।',
     };
   }
   if (cleanId === 'aman') {
+    const dShare = shiftSeason?.dShare;
+    const nowShare = shiftSeason?.nowShare;
+    const hasNumbers = hasShift && typeof dShare === 'number' && typeof nowShare === 'number';
     return {
       severity: 'medium',
-      titleEn: 'Late-Monsoon Dry Spell Risk',
-      titleBn: 'বর্ষার অনিশ্চয়তা ও ফুল ফোটার সময় খরার ঝুঁকি',
-      reasonEn: 'T. Aman relies on monsoon rainfall; sudden early cessation in late October during flowering or grain-fill forces expensive supplemental pumping.',
-      reasonBn: 'রোপা আমন বৃষ্টির ওপর নির্ভরশীল; অক্টোবরের শেষে ফুল ফোটা বা দানা বাঁধার সময় বৃষ্টি বন্ধ হলে সম্পূরক সেচ না দিলে ফলন মারাত্মক কমে।',
-      evidenceEn: `NASA POWER: Monsoon rain share has shifted by ${dShare > 0 ? '+' : ''}${dShare}%, with increasing dry gaps between rain events.`,
-      evidenceBn: `নাসা পাওয়ার: বর্ষার বৃষ্টিপাতের ধরনে ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}% পরিবর্তন ও মাঝে মাঝে দীর্ঘ অনাবৃষ্টির রেকর্ড।`,
+      titleEn: 'Watch out: late-season rain deficit',
+      titleBn: 'সতর্কতা: মৌসুমের শেষে অনাবৃষ্টির ঝুঁকি',
+      reasonEn: 'T. Aman depends on monsoon rain; early rain cessation in October during flowering can require supplemental irrigation.',
+      reasonBn: 'রোপা আমন বৃষ্টির ওপর নির্ভরশীল; অক্টোবরের শেষে ফুল ফোটার সময় বৃষ্টি কমে গেলে সম্পূরক সেচের প্রয়োজন হতে পারে।',
+      evidenceEn: hasNumbers
+        ? `NASA POWER: Kharif-2 rainfall share shift is ${dShare > 0 ? '+' : ''}${dShare}% (${nowShare}% of annual rain in ${nowYears}), with dry spells during grain filling.`
+        : 'NASA POWER: Early withdrawal of late-monsoon rainfall creates dry spells during rice flowering and grain filling.',
+      evidenceBn: hasNumbers
+        ? `নাসা পাওয়ার: খরিফ-২ বৃষ্টিপাতের অংশে পরিবর্তন ${dShare > 0 ? '+' : ''}${toBnDigits(dShare)}% (${toBnDigits(nowYears)}-এ বার্ষিক বৃষ্টির ${toBnDigits(nowShare)}%), যাতে ফুল ফোটার সময় অনাবৃষ্টির ঝুঁকি বাড়ে।`
+        : 'নাসা পাওয়ার: বর্ষার শেষে অনাবৃষ্টির কারণে ফুল ফোটা বা দানা বাঁধার সময় সম্পূরক সেচের প্রয়োজন হতে পারে।',
     };
   }
   return {
     severity: 'low',
-    titleEn: 'Low Climate Risk in Kharif-2',
-    titleBn: 'খরিফ-২ এ স্বল্প ঝুঁকি',
+    titleEn: 'Favorable: climate well-suited',
+    titleBn: 'অনুকূল: জলবায়ুর সাথে মানানসই',
     reasonEn: 'Crop utilizes plentiful monsoon rainfall effectively with minimal supplemental irrigation needed.',
     reasonBn: 'প্রাকৃতিক বৃষ্টির পানির পূর্ণ সদ্ব্যবহার করে এবং বাড়তি সেচ ছাড়াই বেড়ে ওঠে।',
     evidenceEn: 'NASA POWER precipitation records & BARI/BRRI agronomy.',
@@ -605,29 +651,29 @@ export function generateRotationComparison(input: ComparisonInput): {
     rabiCropInput
       ? {
           ...buildCropSeason(rabiCropInput, 'rabi', scoreCrop(rabiCropInput, 'rabi', true, engineInputA, []).score),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('rabi', rabiCropInput.id, effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('rabi', rabiCropInput.id, shift, conditions),
         }
       : {
           ...buildFallowSeason('rabi'),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('rabi', 'fallow', effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('rabi', 'fallow', shift, conditions),
         },
     kharif1CropInput
       ? {
           ...buildCropSeason(kharif1CropInput, 'kharif1', scoreCrop(kharif1CropInput, 'kharif1', false, engineInputA, []).score),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif1', kharif1CropInput.id, effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif1', kharif1CropInput.id, shift, conditions),
         }
       : {
           ...buildFallowSeason('kharif1'),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif1', 'fallow', effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif1', 'fallow', shift, conditions),
         },
     kharif2CropInput
       ? {
           ...buildCropSeason(kharif2CropInput, 'kharif2', scoreCrop(kharif2CropInput, 'kharif2', false, engineInputA, []).score),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif2', kharif2CropInput.id, effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif2', kharif2CropInput.id, shift, conditions),
         }
       : {
           ...buildFallowSeason('kharif2'),
-          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif2', 'fallow', effectiveShift),
+          vulnerableSeasonRisk: getVulnerableSeasonRisk('kharif2', 'fallow', shift, conditions),
         },
   ];
 
@@ -809,8 +855,8 @@ export function generateRotationComparison(input: ComparisonInput): {
       confBn = 'নাসার সরাসরি উপগ্রহ তথ্য সাময়িকভাবে অপ্রাপ্য; জলবায়ু অনুমানের ওপর নির্ভরশীল। স্থানীয় উপসহকারী কৃষি কর্মকর্তার (SAAO) সাথে যাচাই করুন।';
     } else if (hasEstimatedCrop) {
       confLevel = 'medium';
-      confEn = 'NASA weather and soil telemetry complete, but rotation incorporates estimated crop benchmarks awaiting multi-year field validation.';
-      confBn = 'নাসার আবহাওয়া ও মাটির উপাত্ত সম্পূর্ণ, তবে পরিক্রমায় অন্তর্ভুক্ত কিছু ফসলের তথ্য এখনো গবেষণা পর্যায়ে যাচাইাধীন।';
+      confEn = 'NASA weather and soil telemetry complete; rotation includes estimated values for some crops.';
+      confBn = 'নাসার আবহাওয়া ও মাটির উপাত্ত সম্পূর্ণ; পরিক্রমায় কিছু ফসলের জন্য আনুমানিক মান ব্যবহার করা হয়েছে।';
     } else if (!hasKnownSoil) {
       confLevel = 'medium';
       confEn = 'NASA POWER & SMAP observations complete, but field soil texture is unspecified ("Don\'t know").';
@@ -821,8 +867,8 @@ export function generateRotationComparison(input: ComparisonInput): {
       confBn = 'নাসার আবহাওয়া উপাত্ত সক্রিয়; মাটির আর্দ্রতা আঞ্চলিক অনুমানের ওপর ভিত্তি করে তৈরি।';
     } else {
       confLevel = 'high';
-      confEn = 'Live NASA POWER & SMAP telemetry verified, soil texture known, and all crops backed by BARI/BRRI research trials.';
-      confBn = 'নাসার সরাসরি POWER ও SMAP উপাত্ত নিশ্চিত, মাটির ধরন জানা এবং সকল ফসল বারি/ব্রি গবেষণা দ্বারা সমর্থিত।';
+      confEn = 'Live NASA POWER & SMAP telemetry verified, soil texture known, and crop values from BARI/BRRI guidance.';
+      confBn = 'নাসার সরাসরি POWER ও SMAP উপাত্ত নিশ্চিত, মাটির ধরন জানা এবং ফসলের মান বারি/ব্রি নির্দেশিকা থেকে সংগৃহীত।';
     }
 
     return {
