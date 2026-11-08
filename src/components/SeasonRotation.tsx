@@ -212,14 +212,14 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#22C55E] font-mono font-semibold mb-2">
               <span>04</span>
               <span aria-hidden="true">·</span>
-              <span>{isBn ? 'নাসা ফিল্ড শিফট শস্য আবর্তন তুলনা' : 'NASA FIELD SHIFT · 3 ROTATION STRATEGIES'}</span>
+              <span>{isBn ? 'নাসা ফিল্ড শিফট · ৩টি শস্য পর্যায় তুলনা' : 'NASA FIELD SHIFT · 3 ROTATION STRATEGIES'}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              {isBn ? '৩টি শস্য আবর্তন কৌশলের তুলনামূলক বিশ্লেষণ' : 'Compare 3 Rotation Strategies'}
+              {isBn ? '৩টি শস্য পর্যায় পাশাপাশি তুলনা করুন' : 'Compare 3 Rotation Strategies'}
             </h2>
             <p className="text-xs sm:text-sm text-[#A3A3A3] mt-1 max-w-2xl leading-relaxed">
               {isBn
-                ? 'আপনার বর্তমান চাষ পদ্ধতির সাথে নাসা কৃত্রিম উপগ্রহ উপাত্ত ও বারি/বিআরআরআই নির্দেশিত সেরা ও বিকল্প টেকসই শস্য পর্যায় পাশাপাশি তুলনা করুন।'
+                ? 'আপনার বর্তমান চাষের সাথে নাসার স্যাটেলাইট পর্যবেক্ষণ ও বারি/ব্রি নির্দেশিত টেকসই শস্য পর্যায় পাশাপাশি তুলনা করুন।'
                 : 'Compare your existing rotation side-by-side with NASA Earth observation-aligned and alternative agro-ecological pathways.'}
             </p>
           </div>
@@ -227,11 +227,11 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <div className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-[11px] font-mono text-[#FAFAFA] flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span>{isBn ? 'রুল-এ: গোত্র পরিবর্তন' : 'Rule A: Family Alternation'}</span>
+              <span>{isBn ? 'নিয়ম-১: ফসলের জাত বদল' : 'Rule A: Family Alternation'}</span>
             </div>
             <div className="px-3 py-1.5 rounded-lg bg-[#141414] border border-[#262626] text-[11px] font-mono text-[#FAFAFA] flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#22C55E]" />
-              <span>{isBn ? 'রুল-বি: ডাল নাইট্রোজেন' : 'Rule B: Legume N Recharge'}</span>
+              <span>{isBn ? 'নিয়ম-২: ডালে মাটির উর্বরতা' : 'Rule B: Legume N Recharge'}</span>
             </div>
           </div>
         </div>
@@ -266,11 +266,11 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#22C55E]" />
               <h3 className="font-mono text-xs uppercase tracking-wider font-semibold text-[#FAFAFA]">
-                {isBn ? 'কৌশলসমূহের সরাসরি তুলনামূলক চিত্র' : 'High-Level Comparison Matrix'}
+                {isBn ? '৩টি কৌশলের সংক্ষিপ্ত তুলনা' : 'High-Level Comparison Matrix'}
               </h3>
             </div>
             <span className="text-[11px] font-mono text-[#737373]">
-              {isBn ? 'এক নজরে পানি, ডাল, ঝুঁকি ও মূল্যায়ন স্কোর' : 'Summary of Water, Legumes, Climate Risk & Score'}
+              {isBn ? 'এক নজরে পানি সাশ্রয়, ডাল ফসল, ঝুঁকি ও উপযোগিতা' : 'Summary of Water, Legumes, Climate Risk & Score'}
             </span>
           </div>
 
@@ -358,10 +358,10 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
                         >
                           {strategy.summary.pestCycleBroken
                             ? isBn
-                              ? 'চক্র ভঙ্গ'
+                              ? 'জাত বদল হয়েছে'
                               : 'Broken'
                             : isBn
-                            ? 'একই গোত্র ঝুঁকি'
+                            ? 'একই জাতের ঝুঁকি'
                             : 'Unbroken'}
                         </span>
                       </div>
@@ -386,7 +386,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
 
                   <button
                     type="button"
-                    className={`w-full mt-3 py-1.5 px-3 rounded-lg text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`w-full mt-3 min-h-[44px] py-1.5 px-3 rounded-lg text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                       isSelected
                         ? 'bg-[#22C55E] text-black font-bold'
                         : 'bg-white/5 hover:bg-white/10 text-[#FAFAFA]'
@@ -589,11 +589,11 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <div className="flex items-center gap-2">
                 <Satellite className="w-4 h-4 text-[#22C55E]" />
                 <h4 className="font-mono text-xs uppercase tracking-wider font-semibold text-white">
-                  {isBn ? 'বাস্তব প্রমাণ ও উপাত্ত (Evidence & Satellite Observations)' : 'Supporting Evidence & Satellite Observations'}
+                  {isBn ? 'বাস্তব পর্যবেক্ষণ ও প্রমাণ (নাসা স্যাটেলাইট)' : 'Supporting Evidence & Satellite Observations'}
                 </h4>
               </div>
               <span className="text-[10px] font-mono text-[#737373]">
-                {isBn ? 'শুধুমাত্র আসল উপাত্ত — অনুপস্থিত থাকলে "উপাত্ত নেই"' : 'Real observations only — "No data" if unobserved'}
+                {isBn ? 'শুধুমাত্র বাস্তব পর্যবেক্ষণ — না থাকলে "তথ্য নেই"' : 'Real observations only — "No data" if unobserved'}
               </span>
             </div>
 
@@ -723,12 +723,12 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <div className="flex items-center gap-2">
                 <FileQuestion className="w-4 h-4 text-amber-400" />
                 <h4 className="font-mono text-xs uppercase tracking-wider font-semibold text-white">
-                  {isBn ? 'উপাত্তের সীমাবদ্ধতা (Information Gaps)' : 'Information Gaps (Unseen from Space)'}
+                  {isBn ? 'স্যাটেলাইটের সীমাবদ্ধতা (যা মহাকাশ থেকে দেখা যায় না)' : 'Information Gaps (Unseen from Space)'}
                 </h4>
               </div>
               <p className="text-[11px] text-[#737373] leading-relaxed">
                 {isBn
-                  ? 'নাসা স্যাটেলাইট উপগ্রহ থেকে সবকিছু পর্যবেক্ষণ করতে পারে না। নিম্নলিখিত বিষয়গুলো স্থানীয়ভাবে প্রযোজ্য:'
+                  ? 'নাসা স্যাটেলাইট অনেক কিছু পর্যবেক্ষণ করলেও কিছু বিষয় সরাসরি দেখতে পারে না। এগুলো মাঠ পর্যায়ে যাচাই করুন:'
                   : 'NASA satellites provide regional observations. The following field conditions cannot be observed remotely:'}
               </p>
               <ul className="space-y-2 text-xs text-[#A3A3A3]">
@@ -773,7 +773,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-amber-400" />
                 <h4 className="font-mono text-xs uppercase tracking-wider font-semibold text-white">
-                  {isBn ? 'অনাবাদী / পতিত সময়কাল ও মাটি সুরক্ষা' : 'Bare-Field Periods & Ground Cover Advisory'}
+                  {isBn ? 'পতিত সময় ও মাটির উর্বরতা রক্ষা' : 'Bare-Field Periods & Ground Cover Advisory'}
                 </h4>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
@@ -796,7 +796,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
               <span>
                 {isBn
-                  ? 'এগ্রিঅরবিট তথ্যভিত্তিক সিদ্ধান্ত সহায়তা দেয়। জমির চূড়ান্ত সিদ্ধান্ত কৃষকের নিজের।'
+                  ? 'এগ্রিঅরবিট পরিষ্কার তথ্যের ভিত্তিতে পরামর্শ দেয়। জমির চূড়ান্ত সিদ্ধান্ত কৃষকের নিজের।'
                   : 'AgriOrbit provides explainable decision support. Farmers make the final decision.'}
               </span>
             </div>
@@ -809,7 +809,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <button
                 type="button"
                 onClick={handlePrint}
-                className="px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
+                className="min-h-[44px] px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-[#262626] text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>{isBn ? 'প্রিন্ট' : 'Print Advisory'}</span>
@@ -817,7 +817,7 @@ export const SeasonRotation: React.FC<SeasonRotationProps> = ({
               <button
                 type="button"
                 onClick={handleShare}
-                className="px-5 py-2.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none shadow-none"
+                className="min-h-[44px] px-5 py-2.5 rounded-lg bg-[#22C55E] hover:bg-[#16a34a] text-black font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none shadow-none"
               >
                 <Share2 className="w-3.5 h-3.5" />
                 <span>{isBn ? 'শেয়ার' : 'Share Plan'}</span>

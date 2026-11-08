@@ -73,7 +73,7 @@ export const SmsAdvisoryButton: React.FC<SmsAdvisoryButtonProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="px-4 py-2.5 rounded-lg bg-[#0A0A0A] hover:bg-[#141414] border border-[#262626] text-[#FAFAFA] font-medium text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer group whitespace-nowrap"
+        className="min-h-[44px] px-4 py-2.5 rounded-lg bg-[#0A0A0A] hover:bg-[#141414] border border-[#262626] text-[#FAFAFA] font-medium text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer group whitespace-nowrap"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >

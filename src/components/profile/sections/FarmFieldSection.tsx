@@ -330,7 +330,7 @@ export const FarmFieldSection: React.FC<FarmFieldSectionProps> = ({
             {/* Elevation */}
             <div>
               <label className="block text-xs font-mono font-medium text-[#A3A3A3] mb-1.5 uppercase tracking-wider">
-                {isBn ? 'জমির ধরন (উঁচু/মাঝারি/নিচু): বিএআরআই কৃষি পরিবেশ অঞ্চল (AEZ)' : 'Land type (high/medium/low): BARI agro-ecological zones'}
+                {isBn ? 'জমির ধরন (উঁচু/মাঝারি/নিচু): বারি কৃষি পরিবেশ অঞ্চল (AEZ)' : 'Land type (high/medium/low): BARI agro-ecological zones'}
               </label>
               <select
                 value={field.elevation || 'medium_high'}

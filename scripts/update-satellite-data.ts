@@ -70,7 +70,7 @@ export async function findLatestNdviProductAndDate(
   for (const c of candidates) {
     try {
       const url = `${ORNL_BASE}/${c.product}/dates?latitude=${sampleLat}&longitude=${sampleLng}`;
-      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) });
       if (!res.ok) continue;
       const data = (await res.json()) as { dates?: { modis_date: string; calendar_date: string }[] };
       const dates = data?.dates;
@@ -104,7 +104,7 @@ export async function fetchDistrictNdvi(
 ): Promise<{ value: number; periodStart: string; product: string; reliability: number } | null> {
   const url = `${ORNL_BASE}/${candidate.product}/subset?latitude=${lat}&longitude=${lng}&band=${candidate.band}&startDate=${candidate.modisDate}&endDate=${candidate.modisDate}&kmAboveBelow=0&kmLeftRight=0`;
 
-  const res = await fetch(url, { headers: { Accept: 'application/json' } });
+  const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) });
   if (!res.ok) {
     console.warn(`[ORNL] Subset error ${res.status} for coord (${lat}, ${lng})`);
     return null;

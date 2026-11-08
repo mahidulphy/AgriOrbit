@@ -257,7 +257,6 @@ export default async function handler(req: any, res?: any) {
         html: emailHtml,
         headers: {
           'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${smtpUser}?subject=unsubscribe>`,
-          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
         },
       });
 

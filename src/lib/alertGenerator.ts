@@ -172,7 +172,6 @@ export async function sendAlertEmailViaSmtp(params: {
       html: params.html,
       headers: {
         'List-Unsubscribe': `<${appUrl}/#/profile>, <mailto:${user}?subject=unsubscribe>`,
-        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
     });
 

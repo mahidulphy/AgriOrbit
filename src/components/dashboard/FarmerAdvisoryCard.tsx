@@ -69,7 +69,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
       : `${locationLabel}-এর এগ্রিঅরবিট কৃষি পরামর্শ`;
     const shareText = isEn
       ? `AgriOrbit Advisory: Recommended 3-Season Rotation: ${rotationSequenceEn}. Data: NASA POWER, SMAP & BARI.`
-      : `এগ্রিঅরবিট কৃষি পরামর্শ: প্রস্তাবিত ৩-মৌসুমী পরিক্রমা: ${rotationSequenceBn}। তথ্যসূত্র: নাসা ও বিএআরআই।`;
+      : `এগ্রিঅরবিট কৃষি পরামর্শ: প্রস্তাবিত ৩-মৌসুমী পরিক্রমা: ${rotationSequenceBn}। তথ্যসূত্র: নাসা ও বারি।`;
 
     if (navigator.share) {
       navigator.share({
@@ -266,7 +266,7 @@ export const FarmerAdvisoryCard: React.FC<FarmerAdvisoryCardProps> = ({
           <span>
             {isEn
               ? 'Data: NASA POWER (Daily) · SMAP (Snapshot) · MODIS (Snapshot) · Open-Meteo · BARI Guidelines'
-              : 'তথ্যসূত্র: নাসা পাওয়ার (দৈনিক) · স্ম্যাপ (স্ন্যাপশট) · মডিস (স্ন্যাপশট) · ওপেন-মেটিও · বিএআরআই'}
+              : 'তথ্যসূত্র: নাসা পাওয়ার (দৈনিক) · স্ম্যাপ (স্ন্যাপশট) · মোডিস (স্ন্যাপশট) · ওপেন-মেটিও · বারি'}
           </span>
         </div>
 

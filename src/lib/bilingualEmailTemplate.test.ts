@@ -180,7 +180,6 @@ test('7. nodemailer integration: compiles clean multipart/alternative without du
     html,
     headers: {
       'List-Unsubscribe': '<https://agri-orbit.vercel.app/#/profile>',
-      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
     },
   });
 

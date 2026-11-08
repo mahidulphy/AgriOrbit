@@ -143,7 +143,7 @@ export const ExplainWhyModal: React.FC<ExplainWhyModalProps> = ({
                         {language === 'en' ? 'Baseline Agronomic Potential' : 'ফসলের ভিত্তি নম্বর'}
                       </span>
                       <span className="text-[11px] text-[#737373]">
-                        {language === 'en' ? 'Published BARI/BRRI seasonal crop guidelines' : 'বিএআরআই/বিআরআরআই মৌসুমী নির্দেশিকা'}
+                        {language === 'en' ? 'Published BARI/BRRI seasonal crop guidelines' : 'বারি ও ব্রি মৌসুমী নির্দেশিকা'}
                       </span>
                     </td>
                     <td className="py-2.5 px-3 whitespace-nowrap text-[#737373]">BARI/BRRI</td>

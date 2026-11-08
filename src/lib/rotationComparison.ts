@@ -438,7 +438,7 @@ export function generateRotationComparison(input: ComparisonInput): {
 
     const hasBarePeriods = daysEmptyTotal >= 30;
     const monthsEn = bareMonthsListEn.length > 0 ? bareMonthsListEn.join('; ') : daysEmptyTotal > 0 ? `~${daysEmptyTotal} days across transition periods` : 'Field continuously occupied';
-    const monthsBn = bareMonthsListBn.length > 0 ? bareMonthsListBn.join('; ') : daysEmptyTotal > 0 ? `মৌসুম পরিবর্তনের মাঝে প্রায় ${toBnDigits(daysEmptyTotal)} দিন` : 'জমি সারা বছর ফসল দিয়ে আবৃত';
+    const monthsBn = bareMonthsListBn.length > 0 ? bareMonthsListBn.join('; ') : daysEmptyTotal > 0 ? `মৌসুম পরিবর্তনের মাঝে প্রায় ${toBnDigits(daysEmptyTotal)} দিন` : 'জমি সারা বছর ফসলে ঢাকা থাকে';
 
     // Why Suggested text
     let whyEn = '';
@@ -448,29 +448,29 @@ export function generateRotationComparison(input: ComparisonInput): {
 
     if (id === 'current') {
       whyEn = `Represents your field's current rotation sequence. Evaluated against real-time NASA POWER climate observations for ${districtNameEn}.`;
-      whyBn = `আপনার জমিতে বর্তমানে অনুসৃত ফসল চক্র। ${districtNameBn} এলাকার নাসার বাস্তব আবহাওয়া তথ্যের সাথে এটি মূল্যায়ন করা হয়েছে।`;
+      whyBn = `আপনার জমিতে বর্তমানে যা চাষ করছেন। ${districtNameBn} এলাকার নাসার বাস্তব আবহাওয়ার সাথে মিলিয়ে এটি যাচাই করা হয়েছে।`;
       rulesTriggeredEn.push('Baseline agronomic audit: assesses groundwater draft and botanical continuity.');
-      rulesTriggeredBn.push('ভিত্তি মূল্যায়ন: ভূগর্ভস্থ পানির ওপর চাপ এবং গোত্র ধারাবাহিকতা পরীক্ষা করে।');
+      rulesTriggeredBn.push('বর্তমান অবস্থা যাচাই: ভূগর্ভস্থ পানির ব্যবহার ও পরপর একই ফসলের জাত হচ্ছে কি না তা দেখা হয়েছে।');
       if (!pestCycleBroken) {
         rulesTriggeredEn.push('Notice: Same plant family repeats, increasing potential soil pathogen carryover.');
-        rulesTriggeredBn.push('সতর্কতা: পরপর একই গোত্রের ফসল থাকায় মাটিতে বালাইয়ের স্থায়ী বিস্তার ঘটতে পারে।');
+        rulesTriggeredBn.push('সতর্কতা: পরপর একই জাতের ফসল থাকায় মাটিতে রোগবালাই ও পোকা বাসা বাঁধতে পারে।');
       }
       if (legumeCount === 0) {
         rulesTriggeredEn.push('Notice: Zero legume seasons requires 100% synthetic chemical nitrogen application.');
-        rulesTriggeredBn.push('সতর্কতা: ডাল ফসল না থাকায় মাটির সমস্ত নাইট্রোজেন রাসায়নিক ইউরিয়া থেকে দিতে হয়।');
+        rulesTriggeredBn.push('সতর্কতা: কোনো ডাল ফসল না থাকায় মাটির নাইট্রোজেন ঘাটতি মেটাতে পুরোপুরি ইউরিয়া সারের ওপর নির্ভর করতে হবে।');
       }
     } else if (id === 'recommended') {
       whyEn = `Computed by AgriOrbit mathematical rules to strictly optimize your priority (${pLabelEn}). Enforces Rule A (botanical family alternation) and Rule B (biological nitrogen balance).`;
-      whyBn = `আপনার পছন্দের লক্ষ্য (${pLabelBn}) সফল করতে এগ্রিঅরবিটের গাণিতিক নিয়মের মাধ্যমে নির্বাচিত। এতে নিয়ম-১ (গোত্র পরিক্রমা) ও নিয়ম-২ (প্রাকৃতিক নাইট্রোজেন যোগ) বজায় রাখা হয়েছে।`;
+      whyBn = `আপনার অগ্রাধিকার (${pLabelBn}) সফল করতে স্পষ্ট নিয়মের ভিত্তিতে এই ফসলগুলো বেছে নেওয়া হয়েছে। এতে নিয়ম-১ (ফসলের জাত বদল) ও নিয়ম-২ (মাটিতে নাইট্রোজেন ফেরানো) নিশ্চিত করা হয়েছে।`;
       rulesTriggeredEn.push('Rule A Verified: No botanical family repeats consecutively, breaking stem-borer and root-knot nematode cycles.');
-      rulesTriggeredBn.push('নিয়ম-১ পরীক্ষিত: পরপর দুই মৌসুমে একই গোত্রের ফসল চাষ পরিহার করে পোকামাকড়ের বিস্তার রোধ করা হয়েছে।');
+      rulesTriggeredBn.push('নিয়ম-১ মানা হয়েছে: পরপর দুই মৌসুমে একই জাতের ফসল না লাগিয়ে রোগবালাই ও পোকামাকড়ের উপদ্রব কমানো হয়েছে।');
       rulesTriggeredEn.push(`Rule B Verified: Incorporates ${legumeCount} pulse season(s) to fix atmospheric nitrogen.`);
-      rulesTriggeredBn.push(`নিয়ম-২ পরীক্ষিত: ${toBnDigits(legumeCount)}টি ডাল ফসল অন্তর্ভুক্ত করে মাটিতে প্রাকৃতিক নাইট্রোজেন সংবন্ধন নিশ্চিত করা হয়েছে।`);
+      rulesTriggeredBn.push(`নিয়ম-২ মানা হয়েছে: ${toBnDigits(legumeCount)}টি ডাল জাতীয় ফসল রেখে মাটিতে প্রাকৃতিকভাবে নাইট্রোজেন সার যোগ করা হয়েছে।`);
     } else {
       whyEn = `Alternative diversification strategy focusing on ${titleEn}. Provides a robust second option if market seed availability or canal schedules differ.`;
-      whyBn = `বিকল্প বহুমুখী পরিক্রমা যা ${titleBn} নিশ্চিত করে। স্থানীয় বীজ বা সেচের সময়সূচি ভিন্ন হলে এটি একটি সুষম দ্বিতীয় পথ তৈরি করে।`;
+      whyBn = `আরেকটি বিকল্প উপায়, যা ${titleBn} বজায় রাখে। বাজারে বীজ বা সেচের সুবিধায় হেরফের হলে এটি একটি ভালো দ্বিতীয় পছন্দ।`;
       rulesTriggeredEn.push(`Balanced sustainability focus: emphasizes ${pLabelEn}.`);
-      rulesTriggeredBn.push(`সুষম স্থায়িত্ব: ${pLabelBn}-এর ওপর সর্বাধিক গুরুত্ব দেয়া হয়েছে।`);
+      rulesTriggeredBn.push(`ভারসাম্যপূর্ণ চাষাবাদ: এখানে ${pLabelBn}-কে বিশেষ গুরুত্ব দেওয়া হয়েছে।`);
     }
 
     // Benefits text
@@ -520,10 +520,10 @@ export function generateRotationComparison(input: ComparisonInput): {
       'Sub-plot Micro-topography: Elevation differences within individual bunded plots are below satellite 10m/250m resolution.',
     ];
     const gapsBn = [
-      'মাটির পুষ্টি ও পিএইচ পরীক্ষা: নাসা স্যাটেলাইট আর্দ্রতা পর্যবেক্ষণ করে, তবে মাটির আসল এন-পি-কে বা অম্লতার পরিমাণ ল্যাব টেস্ট ছাড়া জানা যায় না।',
-      'জমির সেচ অবকাঠামো: নিজস্ব পাম্পের সুবিধা, বিদ্যুতের সংযোগ বা ডিজেলের প্রকৃত খরচ মহাকাশ থেকে সরাসরি পর্যবেক্ষণ করা যায় না।',
+      'মাটির সার ও অম্লতা পরীক্ষা: স্যাটেলাইট মাটির রস দেখতে পেলেও মাটিতে কী পরিমাণ সার বা অম্লতা আছে তা ল্যাব পরীক্ষা ছাড়া নিশ্চিত হওয়া যায় না।',
+      'সেচ সুবিধা: জমিতে নিজের পাম্প আছে কি না, বিদ্যুতের লাইন নাকি ডিজেলচালিত মেশিন—তা ওপর থেকে দেখার উপায় নেই।',
       'স্থানীয় বাজারের দৈনিক দর: স্থানীয় হাটে ফসলের পাইকারি দাম প্রতিদিন ওঠানামা করে; চূড়ান্ত সিদ্ধান্তের আগে বীজ ও বিক্রয়মূল্য যাচাই করুন।',
-      'প্লটের অভ্যন্তরীণ ঢাল: জমির আইল বা ভেতরের ক্ষুদ্র উঁচু-নিচু তারতম্য উপগ্রহ চিত্রে শতভাগ স্পষ্ট নয়।',
+      'জমির উঁচু-নিচু অবস্থা: জমির ভেতরের আইল বা ছোটখাটো উঁচু-নিচু জায়গা স্যাটেলাইটে পরিষ্কার দেখা যায় না।',
     ];
 
     // Risks Needing Local Review
@@ -533,9 +533,9 @@ export function generateRotationComparison(input: ComparisonInput): {
       'Ensure verified drainage outlets in medium-lowland plots prior to pre-monsoon summer pulse sowing.',
     ];
     const risksBn = [
-      `${districtNameBn} এলাকায় আপনার উপ-সহকারী কৃষি কর্মকর্তা (SAAO) বা উপজেলা কৃষি অফিসের সাথে কথা বলে আপনার মাটির উপযোগী অনুমোদিত বিএআরআই/বিআরআরআই জাত নির্বাচন নিশ্চিত করুন।`,
+      `${districtNameBn} এলাকায় আপনার উপ-সহকারী কৃষি কর্মকর্তা (SAAO) বা উপজেলা কৃষি অফিসের সাথে কথা বলে মাটির উপযোগী অনুমোদিত বারি বা ব্রি জাত বেছে নিন।`,
       'চারা গজানোর সময় অতিরিক্ত ঠান্ডা বা আগাম বৃষ্টির ক্ষতি এড়াতে ৭ দিনের স্থানীয় আবহাওয়া পূর্বাভাসের সাথে মিলিয়ে বীজ বপনের সঠিক দিন নির্ধারণ করুন।',
-      'গ্রীষ্মকালীন ডাল চাষের ক্ষেত্রে হঠাৎ অতিবৃষ্টিতে পানি জমে যাওয়া রোধ করতে পানি নিষ্কাশনের উপযুক্ত নালা ব্যবস্থাপনা নিশ্চিত করুন।',
+      'গ্রীষ্মে ডাল চাষে হঠাৎ বেশি বৃষ্টিতে যেন পানি না জমে, সেজন্য জমির পানি বের হওয়ার নালা কেটে রাখুন।',
     ];
 
     return {
@@ -572,7 +572,7 @@ export function generateRotationComparison(input: ComparisonInput): {
         modisNdvi: modisNdviVal ? `${modisNdviVal}` : 'No data',
         bariGuidance: {
           en: `Cardinal temperatures and duration benchmarks compiled from BARI Krishi Projukti Hatboi & BRRI Modern Rice Cultivation.`,
-          bn: `বিএআরআই 'কৃষি প্রযুক্তি হাতবই' এবং বিআরআরআই 'আধুনিক ধানের চাষ' নির্দেশিকা থেকে সংকলিত।`,
+          bn: `বারি 'কৃষি প্রযুক্তি হাতবই' এবং ব্রি 'আধুনিক ধানের চাষ' নির্দেশিকা থেকে সংকলিত।`,
         },
       },
       benefits: {
@@ -604,7 +604,7 @@ export function generateRotationComparison(input: ComparisonInput): {
             : 'Continuous vegetative ground cover protects topsoil from solar baking and wind erosion.',
         recommendationBn:
           hasBarePeriods
-            ? `জমি ${monthsBn} খালি থাকে (প্রায় ${toBnDigits(daysEmptyTotal)} দিন)। মাটি ঢেকে রাখতে ও উর্বরতা বাড়াতে ধইঞ্চা সবুজ সার বা ৬০ দিনের মুগ ডাল চাষ করার পরামর্শ দেয়া হচ্ছে।`
+            ? `জমি ${monthsBn} খালি থাকে (প্রায় ${toBnDigits(daysEmptyTotal)} দিন)। মাটি ভালো রাখতে ও উর্বরতা বাড়াতে এ সময়ে ধইঞ্চার মতো সবুজ সার বা স্বল্পমেয়াদী মুগ ডাল চাষ করতে পারেন।`
             : 'সারা বছর ফসলের আচ্ছাদন থাকায় প্রখর রোদ ও বাতাস থেকে মাটির উপরিভাগের উর্বরতা সুরক্ষিত থাকে।',
       },
     };

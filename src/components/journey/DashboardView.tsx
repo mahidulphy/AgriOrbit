@@ -780,7 +780,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
                       {language === 'en'
                         ? `NASA SMAP satellite snapshot records topsoil moisture at ${(activeSoil !== null ? activeSoil.toFixed(2) : 'N/A')} m³/m³ ${conditions.rainUnavailable ? 'with 30-day precipitation data unavailable' : `with 30-day precipitation of ${Math.round(activeRain)} mm`}. ${(rankedCrops[0] ?? { nameEn: 'Lentil' }).nameEn} requires significantly fewer supplemental irrigations than flood-irrigated winter Boro rice, reducing diesel pumping and conserving precious groundwater according to BARI guidelines.`
-                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil !== null ? `${toBnDigits(activeSoil.toFixed(2))} m³/m³` : 'তথ্য নেই'} ${conditions.rainUnavailable ? '(৩০ দিনের বৃষ্টিপাতের তথ্য সাময়িকভাবে অনুপলব্ধ)' : `এবং ৩০ দিনের মোট বৃষ্টিপাত ${toBnDigits(Math.round(activeRain))} মিমি`}। বিএআরআই নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে অনেক কম সেচ লাগে, যা ডিজেল পাম্পিং কমায় এবং ভূগর্ভস্থ পানি সংরক্ষণ করে।`}
+                        : `নাসার স্ম্যাপ উপগ্রহের স্ন্যাপশট অনুযায়ী মাটির আর্দ্রতা ${activeSoil !== null ? `${toBnDigits(activeSoil.toFixed(2))} m³/m³` : 'তথ্য নেই'} ${conditions.rainUnavailable ? '(৩০ দিনের বৃষ্টিপাতের তথ্য সাময়িকভাবে অনুপলব্ধ)' : `এবং ৩০ দিনের মোট বৃষ্টিপাত ${toBnDigits(Math.round(activeRain))} মিমি`}। বারি নির্দেশনা অনুযায়ী বোরো ধানের তুলনায় ${(rankedCrops[0] ?? { nameBn: 'মসুর ডাল' }).nameBn} চাষে সেচের পানি অনেক কম লাগে, ফলে পাম্পের তেল খরচ বাঁচে এবং ভূগর্ভস্থ পানি সংরক্ষিত থাকে।`}
                     </p>
                   </div>
 
@@ -793,7 +793,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     <p className="text-sm text-slate-200 leading-relaxed font-normal">
                       {language === 'en'
                         ? `Prepare land with shallow tillage to retain residual soil moisture. Procure certified BARI seeds and complete sowing between November 1 and 20 before terminal winter heat sets in.`
-                        : `মাটির রস ধরে রাখতে হালকা চাষ দিয়ে জমি প্রস্তুত করুন। বিএআরআই অনুমোদিত প্রত্যয়িত বীজ সংগ্রহ করুন এবং শীতের আগাম গরমের ঝুঁকি এড়াতে ১ থেকে ২০ নভেম্বরের মধ্যে বীজ বপন সম্পন্ন করুন।`}
+                        : `মাটির জো বা রস ধরে রাখতে হালকা চাষ দিয়ে জমি তৈরি করুন। বারি অনুমোদিত ভালো বীজ সংগ্রহ করে শীতের শেষভাগের গরম এড়াতে ১ থেকে ২০ নভেম্বরের মধ্যেই বীজ বুনে ফেলুন।`}
                     </p>
                   </div>
                 </div>
@@ -1726,7 +1726,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="leading-relaxed">
                   {language === 'en'
                     ? `Spatial resolution note: NASA SMAP (9 km), NASA POWER (10 km to 0.5°), and MODIS (250m–1km) observations represent regional agro-climatic conditions across ${upazilaName}, providing broad environmental indicators rather than direct in-situ sensor probes buried in this specific field.`
-                    : `তথ্যের পরিধি: নাসা স্ম্যাপ (৯ কিমি), জিপিএম/পাওয়ার (১০ কিমি) ও মডিস (২৫০মি–১কিমি)-এর তথ্য পুরো ${upazilaName} এলাকার সাধারণ অবস্থা দেখায়, কোনো একক জমিতে বসানো মিটারের মাপ নয়।`}
+                    : `তথ্যের পরিধি: নাসা স্ম্যাপ (৯ কিমি), পাওয়ার (১০ কিমি) ও মোডিস (২৫০মি–১কিমি)-এর তথ্য পুরো ${upazilaName} এলাকার সাধারণ অবস্থা দেখায়, কোনো একক জমিতে বসানো মিটারের মাপ নয়।`}
                 </p>
               </div>
             </div>
@@ -1747,7 +1747,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="text-xs sm:text-sm text-slate-300 mt-1">
                   {language === 'en'
                     ? 'Individual crop suitability scores and balanced 3-season crop cycle avoiding continuous high-irrigation cereals.'
-                    : 'নাসার স্যাটেলাইট তথ্য ও বিএআরআই নির্দেশিকা অনুযায়ী ফসলের স্কোর ও ৩-মৌসুমী পরিক্রমা।'} 
+                    : 'নাসার স্যাটেলাইট তথ্য ও বারি নির্দেশিকা অনুযায়ী ফসলের মূল্যায়ন ও ৩-মৌসুমী পরিক্রমা।'} 
                 </p>
               </div>
 
@@ -1818,7 +1818,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {language === 'en'
                     ? 'AgriOrbit relies on deterministic agronomic rules. Every recommendation stems from transparent criteria based on BARI/BRRI guidance, published agro-ecological research, and NASA Earth observations.'
-                    : 'এগ্রিঅরবিট স্পষ্ট কৃষি নিয়মের ভিত্তিতে পরিচালিত হয়। প্রতিটি সুপারিশ নাসা উপগ্রহ পর্যবেক্ষণ, বিএআরআই/বিআরআরআই কৃষি গবেষণা নির্দেশিকা এবং কৃষকের নিজস্ব লক্ষ্যের ভিত্তিতে তৈরি।'}
+                    : 'এগ্রিঅরবিট স্পষ্ট নিয়মের ভিত্তিতে চলে। প্রতিটি পরামর্শ নাসার স্যাটেলাইট পর্যবেক্ষণ, বারি ও ব্রি-এর কৃষি গবেষণা এবং আপনার নিজস্ব চাহিদার সাথে মিলিয়ে তৈরি।'}
                 </p>
               </div>
 
