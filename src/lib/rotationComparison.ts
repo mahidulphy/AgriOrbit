@@ -6,7 +6,7 @@ import type { FieldShift } from './fieldShift';
 import type { ForecastDay } from './power';
 import type { FarmerPriorityId } from '../types';
 import { toBnDigits } from './bilingualEmailTemplate';
-import satelliteData from '../data/satellite.json';
+import { getDistrictSatellite } from '../data/satellite';
 
 export interface StrategyCropSeason {
   season: 'rabi' | 'kharif1' | 'kharif2';
@@ -249,8 +249,8 @@ export function generateRotationComparison(input: ComparisonInput): {
   } = input;
 
   // Retrieve satellite telemetry if available
-  const distSat = (satelliteData as any)[districtId?.toLowerCase()] || null;
-  const modisNdviVal = distSat?.modis?.ndvi ? distSat.modis.ndvi.toFixed(2) : null;
+  const distSat = getDistrictSatellite(districtId);
+  const modisNdviVal = distSat?.ndvi?.value ? distSat.ndvi.value.toFixed(2) : null;
   const smapMoistureVal = soil !== null ? `${soil.toFixed(2)} m³/m³` : (distSat?.smap?.value ? `${distSat.smap.value.toFixed(2)} m³/m³` : null);
 
   // Decadal shift metrics
