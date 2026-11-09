@@ -1,4 +1,4 @@
-// AgriOrbit rule engine — 100% rule-based, no machine learning.
+// AgriOrbit rule engine — 100% explainable SI, no black box.
 //
 // Every point added or removed is recorded as a Reason, so "Explain Why"
 // can show the farmer exactly which data + which rule produced each score.

@@ -1,4 +1,4 @@
-name: Update Daily Satellite Observations
+name: Update Satellite Data Cache
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       district:
-        description: 'District to update (leave empty for all 64 districts)'
+        description: 'District to update for the legacy satellite snapshot (leave empty for all 64)'
         required: false
         default: ''
       skip_smap:
@@ -18,6 +18,18 @@ on:
         description: 'Skip MODIS/VIIRS NDVI extraction'
         type: boolean
         default: false
+      skip_grace:
+        description: 'Skip GRACE mascon refresh (normally refreshed when cache is older than 20 days)'
+        type: boolean
+        default: false
+      skip_appeears:
+        description: 'Skip AppEEARS bundle download and ECOSTRESS/MODIS processing'
+        type: boolean
+        default: false
+      run_nasadem:
+        description: 'Rebuild NASADEM elevation/slope cache from LP DAAC tiles (slow, ~700 MB)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -25,7 +37,7 @@ permissions:
 jobs:
   update-satellite:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -39,10 +51,20 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      - name: Install Node dependencies
         run: npm ci
 
-      - name: 1. Ingest NASA Observations (MODIS/VIIRS & SMAP)
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: 1. Legacy satellite snapshot (MODIS/VIIRS & SMAP)
         continue-on-error: true
         env:
           EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
@@ -64,22 +86,71 @@ jobs:
           fi
           npx tsx scripts/update-satellite-data.ts $ARGS
 
-      - name: 2. Refresh 64-District NASA POWER Cache
+      - name: 2. Refresh 64-District NASA POWER cache
         continue-on-error: true
         run: |
           echo "Refreshing 64-district NASA POWER agrometeorology cache..."
           npx tsx scripts/fetch-cache.ts --all
 
-      - name: 3. Commit and push updated satellite snapshot & NASA POWER cache
-        if: always()
+      - name: 3. Ingest GPM IMERG daily precipitation (last 30 days)
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: python scripts/ingest_gpm.py
+
+      - name: 4. Ingest GRACE mascon total water storage (monthly cadence)
+        if: github.event.inputs.skip_grace != 'true'
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          if [ ! -f public/cache/grace/grace_summary.json ] || [ -n "$(find public/cache/grace/grace_summary.json -mtime +20)" ]; then
+            echo "GRACE cache missing or older than 20 days; refreshing."
+            python scripts/ingest_grace.py
+          else
+            echo "GRACE cache is fresh (<20 days); skipping."
+          fi
+
+      - name: 5. Download completed AppEEARS bundles
+        if: github.event.inputs.skip_appeears != 'true'
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: python scripts/download_appeears.py ecostress mod13q1 myd13q1
+
+      - name: 6. Process ECOSTRESS and MODIS NDVI bundles
+        if: github.event.inputs.skip_appeears != 'true'
+        run: python scripts/process_appeears.py
+
+      - name: 7. Rebuild NASADEM elevation/slope cache (manual only)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.run_nasadem == 'true'
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          python scripts/fetch_nasadem.py
+          python scripts/process_nasadem.py
+
+      - name: 8. Summarize cache outputs
+        if: success()
+        run: |
+          echo "Cache file counts:"
+          for dir in gpm grace nasadem ecostress modis_ndvi; do
+            if [ -d "public/cache/$dir" ]; then
+              echo "  public/cache/$dir: $(find public/cache/$dir -type f | wc -l) files"
+            fi
+          done
+
+      - name: 9. Commit and push updated satellite caches
+        if: success()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/satellite.json src/data/fallback-rangpur.json public/cache/*.json
+          git add src/data/satellite.json src/data/fallback-rangpur.json public/cache
           if [ -n "$(git status --porcelain src/data/ public/cache/)" ]; then
-            git commit -m "chore(satellite): automated daily NASA observations & POWER cache update [skip ci]"
+            git commit -m "chore(satellite): refresh GPM/GRACE/ECOSTRESS/MODIS caches [skip ci]"
             git push
-            echo "Committed and pushed updated satellite snapshot & POWER cache."
+            echo "Committed and pushed updated satellite caches."
           else
-            echo "No changes to src/data/ or public/cache/."
+            echo "No changes in src/data/ or public/cache/."
           fi

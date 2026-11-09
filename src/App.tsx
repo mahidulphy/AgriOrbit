@@ -16,6 +16,9 @@ const ForgotPasswordPage = lazy(() => import('./components/auth').then((m) => ({
 const AuthCallbackPage = lazy(() => import('./components/auth').then((m) => ({ default: m.AuthCallbackPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/legal').then((m) => ({ default: m.PrivacyPolicyPage })));
 const TermsPage = lazy(() => import('./components/legal').then((m) => ({ default: m.TermsPage })));
+const MapPage = lazy(() =>
+  import('./components/map/interactive/MapPage.tsx').then((m) => ({ default: m.MapPage }))
+);
 
 function RouteLoading() {
   return (
@@ -30,6 +33,7 @@ function RouteLoading() {
 
 export type AppRoute =
   | 'landing'
+  | 'map'
   | 'dashboard'
   | 'onboarding'
   | 'login'
@@ -75,6 +79,11 @@ export function resolveCurrentRoute(): AppRoute {
   // Onboarding route
   if (hash.startsWith('#/onboarding') || path === '/onboarding' || path.startsWith('/onboarding')) {
     return 'onboarding';
+  }
+
+  // Public interactive map route (#/map)
+  if (hash.startsWith('#/map') || path === '/map' || path.startsWith('/map')) {
+    return 'map';
   }
 
   // Dashboard & Workspace routes (#/dashboard, #/analyze, /dashboard, /analyze)
@@ -213,6 +222,15 @@ export default function App() {
     return (
       <Suspense fallback={<RouteLoading />}>
         <OnboardingWizardPage />
+      </Suspense>
+    );
+  }
+
+  // Public interactive map route
+  if (route === 'map') {
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <MapPage />
       </Suspense>
     );
   }

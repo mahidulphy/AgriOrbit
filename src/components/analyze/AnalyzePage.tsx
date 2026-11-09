@@ -14,6 +14,43 @@ import { getUpazila, DISTRICT_WIDE_UPAZILA } from '../../lib/location.ts';
 
 type AnalyzeStep = 'location' | 'priority' | 'dashboard';
 
+interface MapDistrictOverride {
+  district: DistrictId;
+  upazila: string;
+  latitude: number;
+  longitude: number;
+}
+
+/**
+ * The interactive map opens the workspace with
+ * `#/dashboard?mapDistrict=<id>&mapUpazila=district-wide&mapLat=..&mapLng=..`.
+ * Only accept a district id that exists in the canonical admin table; all other
+ * parameters fall back to that district's recorded headquarters coordinates.
+ */
+function parseMapOverride(): MapDistrictOverride | null {
+  if (typeof window === 'undefined') return null;
+  const hash = window.location.hash;
+  const queryIndex = hash.indexOf('?');
+  if (queryIndex < 0) return null;
+  const params = new URLSearchParams(hash.slice(queryIndex + 1));
+  const rawDistrict = params.get('mapDistrict');
+  if (!rawDistrict) return null;
+  const admin = getDistrictAdmin(rawDistrict);
+  if (!admin) return null;
+
+  const latParam = params.get('mapLat');
+  const lngParam = params.get('mapLng');
+  const latValue = latParam === null ? NaN : Number(latParam);
+  const lngValue = lngParam === null ? NaN : Number(lngParam);
+
+  return {
+    district: admin.id as DistrictId,
+    upazila: params.get('mapUpazila') || DISTRICT_WIDE_UPAZILA,
+    latitude: Number.isFinite(latValue) ? latValue : admin.lat,
+    longitude: Number.isFinite(lngValue) ? lngValue : admin.lng,
+  };
+}
+
 function initialStep(): AnalyzeStep {
   if (typeof window !== 'undefined') {
     if (window.location.hash.includes('priority')) return 'priority';
@@ -26,7 +63,18 @@ export function AnalyzePage() {
   const { lang, setLang } = useLang();
   const { user, isGuest, displayName, signOut } = useAuth();
   const [step, setStepState] = useState<AnalyzeStep>(initialStep);
-  const [location, setLocation] = useState<SelectedLocation>(DEMO_LOCATION);
+  const [mapOverride] = useState<MapDistrictOverride | null>(() => parseMapOverride());
+  const [location, setLocation] = useState<SelectedLocation>(() =>
+    mapOverride
+      ? {
+          district: mapOverride.district,
+          upazila: mapOverride.upazila,
+          latitude: mapOverride.latitude,
+          longitude: mapOverride.longitude,
+          source: 'map-click',
+        }
+      : DEMO_LOCATION
+  );
   const [primaryPriority, setPrimaryPriority] = useState<FarmerPriorityId>('save_water');
   const [secondaryPriority, setSecondaryPriority] = useState<FarmerPriorityId | null>(null);
   const [previousCrop, setPreviousCrop] = useState<string>('jute');
@@ -88,6 +136,15 @@ export function AnalyzePage() {
       } catch {
         // ignore
       }
+      if (mapOverride) {
+        setLocation({
+          district: mapOverride.district,
+          upazila: mapOverride.upazila,
+          latitude: mapOverride.latitude,
+          longitude: mapOverride.longitude,
+          source: 'map-click',
+        });
+      }
       return;
     }
 
@@ -123,6 +180,15 @@ export function AnalyzePage() {
         const upz = targetUpazila && targetUpazila !== DISTRICT_WIDE_UPAZILA ? getUpazila(targetDistrict, targetUpazila) : null;
         targetLat = upz?.lat || dAdmin?.lat;
         targetLon = upz?.lng || dAdmin?.lng;
+      }
+
+      // A district chosen on the public map takes precedence over the saved
+      // profile field for this session, so the dashboard opens on that district.
+      if (mapOverride) {
+        targetDistrict = mapOverride.district;
+        targetUpazila = mapOverride.upazila;
+        targetLat = mapOverride.latitude;
+        targetLon = mapOverride.longitude;
       }
 
       if (!targetDistrict) {
@@ -169,7 +235,7 @@ export function AnalyzePage() {
     } finally {
       setLoadingProfile(false);
     }
-  }, [user, isGuest]);
+  }, [user, isGuest, mapOverride]);
 
   useEffect(() => {
     syncFarmerContext();

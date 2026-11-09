@@ -21,12 +21,13 @@ export function Header({ className = '' }: HeaderProps) {
   const isAuthenticated = Boolean(user || isGuest);
 
   const links = [
-    { id: 'field-shift', href: '#field-shift', label: t.nav.fieldShift },
-    { id: 'crops', href: '#crops', label: t.nav.crops },
-    { id: 'how', href: '#how', label: t.nav.how },
-    { id: 'data', href: '#data', label: t.nav.data },
-    { id: 'rotation', href: '#rotation', label: t.nav.rotation },
-    { id: 'materials', href: '#materials', label: t.nav.materials },
+    { id: 'field-shift', href: '#field-shift', label: t.nav.fieldShift, route: false },
+    { id: 'map', href: '#/map', label: t.nav.map, route: true },
+    { id: 'crops', href: '#crops', label: t.nav.crops, route: false },
+    { id: 'how', href: '#how', label: t.nav.how, route: false },
+    { id: 'data', href: '#data', label: t.nav.data, route: false },
+    { id: 'rotation', href: '#rotation', label: t.nav.rotation, route: false },
+    { id: 'materials', href: '#materials', label: t.nav.materials, route: false },
   ];
 
   // Primary links for intermediate desktop (1024px-1279px) to prevent wrapping in Bengali
@@ -40,6 +41,10 @@ export function Header({ className = '' }: HeaderProps) {
     const handleScroll = () => {
       // Only track section headers when on the landing view
       const hash = window.location.hash;
+      if (hash.startsWith('#/map')) {
+        setActiveId('map');
+        return;
+      }
       if (hash && (hash.startsWith('#/dashboard') || hash.startsWith('#/analyze') || hash.startsWith('#/onboarding') || hash.startsWith('#/profile'))) {
         setActiveId('');
         return;
@@ -49,6 +54,7 @@ export function Header({ className = '' }: HeaderProps) {
       let current = '';
 
       for (const link of links) {
+        if (link.route) continue;
         const el = document.getElementById(link.id);
         if (el) {
           const top = el.offsetTop;
@@ -110,8 +116,13 @@ export function Header({ className = '' }: HeaderProps) {
 
     if (typeof window === 'undefined') return;
 
+    if (href.startsWith('#/')) {
+      window.location.hash = href;
+      return;
+    }
+
     const hash = window.location.hash;
-    const isAppRoute = hash.startsWith('#/dashboard') || hash.startsWith('#/analyze') || hash.startsWith('#/profile') || hash.startsWith('#/onboarding') || hash.startsWith('#/login');
+    const isAppRoute = hash.startsWith('#/dashboard') || hash.startsWith('#/analyze') || hash.startsWith('#/profile') || hash.startsWith('#/onboarding') || hash.startsWith('#/login') || hash.startsWith('#/map');
 
     if (isAppRoute) {
       // Navigate to landing page anchor
@@ -145,7 +156,7 @@ export function Header({ className = '' }: HeaderProps) {
 
         {/* Center: Navigation Links (Desktop 1024px+) */}
         {/* At xl (>=1280px): Show all 6 links */}
-        <ul className="hidden xl:flex items-center gap-6 2xl:gap-8 text-sm font-medium text-[#A3A3A3]">
+        <ul className="hidden xl:flex items-center gap-4 2xl:gap-7 text-[13px] font-medium text-[#A3A3A3]">
           {links.map((l) => {
             const isActive = activeId === l.id;
             return (

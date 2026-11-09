@@ -1,0 +1,1110 @@
+{
+  "_metadata": {
+    "product": "MOD13Q1",
+    "product_long_name": "MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061",
+    "collection": "061",
+    "source": "NASA LP DAAC via AppEEARS",
+    "source_url": "https://appeears.earthdatacloud.nasa.gov/api/task/681b0ec9-0e86-4f27-8f5e-39d38ce2c014",
+    "spatial_resolution": "250 m",
+    "temporal_resolution": "16-day composite",
+    "period_requested": "2001-01-01 to 2026-11-08",
+    "sampling": "Point extraction at each district headquarters coordinate; native 250 m MODIS pixel.",
+    "date_label_note": "Dates are MODIS 16-day composite start dates as delivered by AppEEARS. The first and last composites can extend beyond the requested start/end because composites overlap those boundaries.",
+    "qa_rule": "pixel_reliability 0 (good) and 1 (marginal) are marked valid; 2 (snow/ice) and 3 (cloudy) are retained in the series with valid=false and excluded from latest_valid. Composite dates with no usable source value are listed as missing, never filled.",
+    "units": "NDVI, dimensionless (MODIS scale factor 0.0001 already applied by AppEEARS)",
+    "downloaded_at": "2026-11-09T06:18:37.236884+00:00",
+    "processed_at": "2026-11-09T07:39:27.239935+00:00"
+  },
+  "districts": {
+    "bagerhat": {
+      "districtId": "bagerhat",
+      "districtName": "Bagerhat",
+      "coordinates": {
+        "latitude": 22.6516,
+        "longitude": 89.7856
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 396,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.64
+    },
+    "bandarban": {
+      "districtId": "bandarban",
+      "districtName": "Bandarban",
+      "coordinates": {
+        "latitude": 22.1951,
+        "longitude": 92.2184
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 421,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5691
+    },
+    "barguna": {
+      "districtId": "barguna",
+      "districtName": "Barguna",
+      "coordinates": {
+        "latitude": 22.159,
+        "longitude": 90.1278
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 397,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7519
+    },
+    "barishal": {
+      "districtId": "barishal",
+      "districtName": "Barishal",
+      "coordinates": {
+        "latitude": 22.7029,
+        "longitude": 90.3466
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 406,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5688
+    },
+    "bhola": {
+      "districtId": "bhola",
+      "districtName": "Bhola",
+      "coordinates": {
+        "latitude": 22.1785,
+        "longitude": 90.71
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 412,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.8926
+    },
+    "bogura": {
+      "districtId": "bogura",
+      "districtName": "Bogura",
+      "coordinates": {
+        "latitude": 24.851,
+        "longitude": 89.3711
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 397,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.3841
+    },
+    "brahmanbaria": {
+      "districtId": "brahmanbaria",
+      "districtName": "Brahmanbaria",
+      "coordinates": {
+        "latitude": 23.9575,
+        "longitude": 91.1119
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 375,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5438
+    },
+    "chandpur": {
+      "districtId": "chandpur",
+      "districtName": "Chandpur",
+      "coordinates": {
+        "latitude": 23.2333,
+        "longitude": 90.671
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 377,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.446
+    },
+    "chapainawabganj": {
+      "districtId": "chapainawabganj",
+      "districtName": "Chapai Nawabganj",
+      "coordinates": {
+        "latitude": 24.5962,
+        "longitude": 88.277
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 450,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5226
+    },
+    "chattogram": {
+      "districtId": "chattogram",
+      "districtName": "Chattogram",
+      "coordinates": {
+        "latitude": 22.3569,
+        "longitude": 91.7832
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 397,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.3877
+    },
+    "chuadanga": {
+      "districtId": "chuadanga",
+      "districtName": "Chuadanga",
+      "coordinates": {
+        "latitude": 23.6407,
+        "longitude": 88.8417
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 416,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5382
+    },
+    "coxsbazar": {
+      "districtId": "coxsbazar",
+      "districtName": "Cox's Bazar",
+      "coordinates": {
+        "latitude": 21.4272,
+        "longitude": 92.0058
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 425,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6399
+    },
+    "cumilla": {
+      "districtId": "cumilla",
+      "districtName": "Cumilla",
+      "coordinates": {
+        "latitude": 23.4683,
+        "longitude": 91.1788
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 372,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.506
+    },
+    "dhaka": {
+      "districtId": "dhaka",
+      "districtName": "Dhaka",
+      "coordinates": {
+        "latitude": 23.8103,
+        "longitude": 90.4125
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 393,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.595
+    },
+    "dinajpur": {
+      "districtId": "dinajpur",
+      "districtName": "Dinajpur",
+      "coordinates": {
+        "latitude": 25.6217,
+        "longitude": 88.6355
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 406,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6337
+    },
+    "faridpur": {
+      "districtId": "faridpur",
+      "districtName": "Faridpur",
+      "coordinates": {
+        "latitude": 23.6071,
+        "longitude": 89.8426
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 381,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5891
+    },
+    "feni": {
+      "districtId": "feni",
+      "districtName": "Feni",
+      "coordinates": {
+        "latitude": 23.0159,
+        "longitude": 91.3976
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 378,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5015
+    },
+    "gaibandha": {
+      "districtId": "gaibandha",
+      "districtName": "Gaibandha",
+      "coordinates": {
+        "latitude": 25.3288,
+        "longitude": 89.5281
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 434,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.579
+    },
+    "gazipur": {
+      "districtId": "gazipur",
+      "districtName": "Gazipur",
+      "coordinates": {
+        "latitude": 24.0023,
+        "longitude": 90.4266
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 403,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5406
+    },
+    "gopalganj": {
+      "districtId": "gopalganj",
+      "districtName": "Gopalganj",
+      "coordinates": {
+        "latitude": 23.0055,
+        "longitude": 89.8266
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 443,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5087
+    },
+    "habiganj": {
+      "districtId": "habiganj",
+      "districtName": "Habiganj",
+      "coordinates": {
+        "latitude": 24.3749,
+        "longitude": 91.4152
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 405,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6376
+    },
+    "jamalpur": {
+      "districtId": "jamalpur",
+      "districtName": "Jamalpur",
+      "coordinates": {
+        "latitude": 24.9376,
+        "longitude": 89.9371
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 448,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6733
+    },
+    "jashore": {
+      "districtId": "jashore",
+      "districtName": "Jashore",
+      "coordinates": {
+        "latitude": 23.1697,
+        "longitude": 89.2148
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 389,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6579
+    },
+    "jhalokati": {
+      "districtId": "jhalokati",
+      "districtName": "Jhalokati",
+      "coordinates": {
+        "latitude": 22.6417,
+        "longitude": 90.1987
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 373,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.51
+    },
+    "jhenaidah": {
+      "districtId": "jhenaidah",
+      "districtName": "Jhenaidah",
+      "coordinates": {
+        "latitude": 23.5454,
+        "longitude": 89.153
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 423,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6789
+    },
+    "joypurhat": {
+      "districtId": "joypurhat",
+      "districtName": "Joypurhat",
+      "coordinates": {
+        "latitude": 25.0947,
+        "longitude": 89.0945
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 436,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7203
+    },
+    "khagrachari": {
+      "districtId": "khagrachari",
+      "districtName": "Khagrachari",
+      "coordinates": {
+        "latitude": 23.1193,
+        "longitude": 91.9847
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 429,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.8311
+    },
+    "khulna": {
+      "districtId": "khulna",
+      "districtName": "Khulna",
+      "coordinates": {
+        "latitude": 22.8456,
+        "longitude": 89.5403
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 369,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-09-14",
+      "latest_valid_ndvi": 0.53
+    },
+    "kishoreganj": {
+      "districtId": "kishoreganj",
+      "districtName": "Kishoreganj",
+      "coordinates": {
+        "latitude": 24.4447,
+        "longitude": 90.7763
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 397,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7253
+    },
+    "kurigram": {
+      "districtId": "kurigram",
+      "districtName": "Kurigram",
+      "coordinates": {
+        "latitude": 25.8072,
+        "longitude": 89.6292
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 432,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6826
+    },
+    "kushtia": {
+      "districtId": "kushtia",
+      "districtName": "Kushtia",
+      "coordinates": {
+        "latitude": 23.8907,
+        "longitude": 89.1301
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 412,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6494
+    },
+    "lakshmipur": {
+      "districtId": "lakshmipur",
+      "districtName": "Lakshmipur",
+      "coordinates": {
+        "latitude": 22.9444,
+        "longitude": 90.8282
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 377,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5457
+    },
+    "lalmonirhat": {
+      "districtId": "lalmonirhat",
+      "districtName": "Lalmonirhat",
+      "coordinates": {
+        "latitude": 25.9923,
+        "longitude": 89.2847
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 455,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.8085
+    },
+    "madaripur": {
+      "districtId": "madaripur",
+      "districtName": "Madaripur",
+      "coordinates": {
+        "latitude": 23.1641,
+        "longitude": 90.1894
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 429,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4301
+    },
+    "magura": {
+      "districtId": "magura",
+      "districtName": "Magura",
+      "coordinates": {
+        "latitude": 23.4859,
+        "longitude": 89.4194
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 407,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5661
+    },
+    "manikganj": {
+      "districtId": "manikganj",
+      "districtName": "Manikganj",
+      "coordinates": {
+        "latitude": 23.8617,
+        "longitude": 90.0003
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 406,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6703
+    },
+    "meherpur": {
+      "districtId": "meherpur",
+      "districtName": "Meherpur",
+      "coordinates": {
+        "latitude": 23.7623,
+        "longitude": 88.6318
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 428,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7807
+    },
+    "moulvibazar": {
+      "districtId": "moulvibazar",
+      "districtName": "Moulvibazar",
+      "coordinates": {
+        "latitude": 24.4829,
+        "longitude": 91.764
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 399,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6706
+    },
+    "munshiganj": {
+      "districtId": "munshiganj",
+      "districtName": "Munshiganj",
+      "coordinates": {
+        "latitude": 23.5529,
+        "longitude": 90.5337
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 390,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4726
+    },
+    "mymensingh": {
+      "districtId": "mymensingh",
+      "districtName": "Mymensingh",
+      "coordinates": {
+        "latitude": 24.7471,
+        "longitude": 90.4203
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 406,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.3725
+    },
+    "naogaon": {
+      "districtId": "naogaon",
+      "districtName": "Naogaon",
+      "coordinates": {
+        "latitude": 24.9132,
+        "longitude": 88.7531
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 424,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4684
+    },
+    "narail": {
+      "districtId": "narail",
+      "districtName": "Narail",
+      "coordinates": {
+        "latitude": 23.1725,
+        "longitude": 89.5126
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 412,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5837
+    },
+    "narayanganj": {
+      "districtId": "narayanganj",
+      "districtName": "Narayanganj",
+      "coordinates": {
+        "latitude": 23.6239,
+        "longitude": 90.4997
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 267,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-03-06",
+      "latest_valid_ndvi": 0.2968
+    },
+    "narsingdi": {
+      "districtId": "narsingdi",
+      "districtName": "Narsingdi",
+      "coordinates": {
+        "latitude": 23.9227,
+        "longitude": 90.7172
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 406,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4036
+    },
+    "natore": {
+      "districtId": "natore",
+      "districtName": "Natore",
+      "coordinates": {
+        "latitude": 24.4102,
+        "longitude": 89.0076
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 418,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4894
+    },
+    "netrokona": {
+      "districtId": "netrokona",
+      "districtName": "Netrokona",
+      "coordinates": {
+        "latitude": 24.8831,
+        "longitude": 90.7297
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 403,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6327
+    },
+    "nilphamari": {
+      "districtId": "nilphamari",
+      "districtName": "Nilphamari",
+      "coordinates": {
+        "latitude": 25.931,
+        "longitude": 88.8562
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 417,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6124
+    },
+    "noakhali": {
+      "districtId": "noakhali",
+      "districtName": "Noakhali",
+      "coordinates": {
+        "latitude": 22.8698,
+        "longitude": 91.0995
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 367,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5503
+    },
+    "pabna": {
+      "districtId": "pabna",
+      "districtName": "Pabna",
+      "coordinates": {
+        "latitude": 24.0129,
+        "longitude": 89.2598
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 411,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6192
+    },
+    "panchagarh": {
+      "districtId": "panchagarh",
+      "districtName": "Panchagarh",
+      "coordinates": {
+        "latitude": 26.3411,
+        "longitude": 88.5542
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 436,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6391
+    },
+    "patuakhali": {
+      "districtId": "patuakhali",
+      "districtName": "Patuakhali",
+      "coordinates": {
+        "latitude": 22.3596,
+        "longitude": 90.3299
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 377,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5641
+    },
+    "pirojpur": {
+      "districtId": "pirojpur",
+      "districtName": "Pirojpur",
+      "coordinates": {
+        "latitude": 22.584,
+        "longitude": 89.9723
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 402,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7645
+    },
+    "rajbari": {
+      "districtId": "rajbari",
+      "districtName": "Rajbari",
+      "coordinates": {
+        "latitude": 23.7132,
+        "longitude": 89.6482
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 421,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7548
+    },
+    "rajshahi": {
+      "districtId": "rajshahi",
+      "districtName": "Rajshahi",
+      "coordinates": {
+        "latitude": 24.3745,
+        "longitude": 88.6042
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 396,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.3443
+    },
+    "rangamati": {
+      "districtId": "rangamati",
+      "districtName": "Rangamati",
+      "coordinates": {
+        "latitude": 22.7324,
+        "longitude": 92.2985
+      },
+      "total_steps": 594,
+      "expected_steps": 595,
+      "missing_dates_count": 1,
+      "missing_dates": [
+        "2025-09-14"
+      ],
+      "valid_steps": 491,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.6285
+    },
+    "rangpur": {
+      "districtId": "rangpur",
+      "districtName": "Rangpur",
+      "coordinates": {
+        "latitude": 25.7439,
+        "longitude": 89.2752
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 419,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7467
+    },
+    "satkhira": {
+      "districtId": "satkhira",
+      "districtName": "Satkhira",
+      "coordinates": {
+        "latitude": 22.7185,
+        "longitude": 89.0707
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 425,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5737
+    },
+    "shariatpur": {
+      "districtId": "shariatpur",
+      "districtName": "Shariatpur",
+      "coordinates": {
+        "latitude": 23.2423,
+        "longitude": 90.4348
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 428,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.7144
+    },
+    "sherpur": {
+      "districtId": "sherpur",
+      "districtName": "Sherpur",
+      "coordinates": {
+        "latitude": 25.0203,
+        "longitude": 90.0156
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 394,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5208
+    },
+    "sirajganj": {
+      "districtId": "sirajganj",
+      "districtName": "Sirajganj",
+      "coordinates": {
+        "latitude": 24.4534,
+        "longitude": 89.6991
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 384,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5651
+    },
+    "sunamganj": {
+      "districtId": "sunamganj",
+      "districtName": "Sunamganj",
+      "coordinates": {
+        "latitude": 25.0711,
+        "longitude": 91.3994
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 442,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.4305
+    },
+    "sylhet": {
+      "districtId": "sylhet",
+      "districtName": "Sylhet",
+      "coordinates": {
+        "latitude": 24.8999,
+        "longitude": 91.8721
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 426,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5991
+    },
+    "tangail": {
+      "districtId": "tangail",
+      "districtName": "Tangail",
+      "coordinates": {
+        "latitude": 24.2499,
+        "longitude": 89.9167
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 385,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.3395
+    },
+    "thakurgaon": {
+      "districtId": "thakurgaon",
+      "districtName": "Thakurgaon",
+      "coordinates": {
+        "latitude": 26.0418,
+        "longitude": 88.4285
+      },
+      "total_steps": 595,
+      "expected_steps": 595,
+      "missing_dates_count": 0,
+      "missing_dates": [],
+      "valid_steps": 420,
+      "first_date": "2000-12-18",
+      "latest_date": "2026-10-16",
+      "latest_valid_date": "2026-10-16",
+      "latest_valid_ndvi": 0.5372
+    }
+  }
+}

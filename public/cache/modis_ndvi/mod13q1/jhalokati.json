@@ -1,0 +1,3600 @@
+{
+  "_metadata": {
+    "product": "MOD13Q1",
+    "product_long_name": "MODIS/Terra Vegetation Indices 16-Day L3 Global 250m SIN Grid V061",
+    "collection": "061",
+    "source": "NASA LP DAAC via AppEEARS",
+    "source_url": "https://appeears.earthdatacloud.nasa.gov/api/task/681b0ec9-0e86-4f27-8f5e-39d38ce2c014",
+    "spatial_resolution": "250 m",
+    "temporal_resolution": "16-day composite",
+    "period_requested": "2001-01-01 to 2026-11-08",
+    "sampling": "Point extraction at each district headquarters coordinate; native 250 m MODIS pixel.",
+    "date_label_note": "Dates are MODIS 16-day composite start dates as delivered by AppEEARS. The first and last composites can extend beyond the requested start/end because composites overlap those boundaries.",
+    "qa_rule": "pixel_reliability 0 (good) and 1 (marginal) are marked valid; 2 (snow/ice) and 3 (cloudy) are retained in the series with valid=false and excluded from latest_valid. Composite dates with no usable source value are listed as missing, never filled.",
+    "units": "NDVI, dimensionless (MODIS scale factor 0.0001 already applied by AppEEARS)",
+    "downloaded_at": "2026-11-09T06:18:37.236884+00:00",
+    "processed_at": "2026-11-09T07:39:27.239935+00:00"
+  },
+  "districtId": "jhalokati",
+  "districtName": "Jhalokati",
+  "coordinates": {
+    "latitude": 22.6417,
+    "longitude": 90.1987
+  },
+  "series_length": 595,
+  "expected_series_length": 595,
+  "missing_composite_dates": [],
+  "valid_series_length": 373,
+  "time_series": [
+    {
+      "date": "2000-12-18",
+      "ndvi": 0.4903,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-01-01",
+      "ndvi": 0.4501,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-01-17",
+      "ndvi": 0.4429,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-02-02",
+      "ndvi": 0.4256,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-02-18",
+      "ndvi": 0.4562,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-03-06",
+      "ndvi": 0.4929,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-03-22",
+      "ndvi": 0.5298,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-04-07",
+      "ndvi": 0.5742,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-04-23",
+      "ndvi": 0.4985,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-05-09",
+      "ndvi": 0.4745,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-05-25",
+      "ndvi": 0.3852,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-06-10",
+      "ndvi": 0.1479,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-06-26",
+      "ndvi": 0.2555,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-07-12",
+      "ndvi": 0.5306,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-07-28",
+      "ndvi": 0.4855,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-08-13",
+      "ndvi": 0.2267,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-08-29",
+      "ndvi": 0.3096,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-09-14",
+      "ndvi": 0.451,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-09-30",
+      "ndvi": 0.6401,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2001-10-16",
+      "ndvi": 0.5942,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-11-01",
+      "ndvi": 0.6469,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-11-17",
+      "ndvi": 0.531,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-12-03",
+      "ndvi": 0.5148,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2001-12-19",
+      "ndvi": 0.5201,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-01-01",
+      "ndvi": 0.5025,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-01-17",
+      "ndvi": 0.4177,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-02-02",
+      "ndvi": 0.4695,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-02-18",
+      "ndvi": 0.4481,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-03-06",
+      "ndvi": 0.4353,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-03-22",
+      "ndvi": 0.5439,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2002-04-07",
+      "ndvi": 0.5268,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-04-23",
+      "ndvi": 0.4006,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-05-09",
+      "ndvi": 0.5393,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-05-25",
+      "ndvi": 0.4653,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2002-06-10",
+      "ndvi": 0.4168,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-06-26",
+      "ndvi": 0.1907,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-07-12",
+      "ndvi": 0.3653,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-07-28",
+      "ndvi": 0.4723,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-08-13",
+      "ndvi": 0.2365,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-08-29",
+      "ndvi": 0.5212,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-09-14",
+      "ndvi": 0.5924,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2002-09-30",
+      "ndvi": 0.6572,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2002-10-16",
+      "ndvi": 0.6134,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-11-01",
+      "ndvi": 0.6501,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-11-17",
+      "ndvi": 0.5388,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-12-03",
+      "ndvi": 0.5231,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2002-12-19",
+      "ndvi": 0.5404,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-01-01",
+      "ndvi": 0.5404,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-01-17",
+      "ndvi": 0.4871,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-02-02",
+      "ndvi": 0.41,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-02-18",
+      "ndvi": 0.4722,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-03-06",
+      "ndvi": 0.4499,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-03-22",
+      "ndvi": 0.4564,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-04-07",
+      "ndvi": 0.4512,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-04-23",
+      "ndvi": 0.582,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-05-09",
+      "ndvi": 0.5501,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-05-25",
+      "ndvi": 0.3479,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-06-10",
+      "ndvi": 0.4399,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-06-26",
+      "ndvi": 0.3267,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-07-12",
+      "ndvi": 0.1523,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-07-28",
+      "ndvi": 0.7041,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2003-08-13",
+      "ndvi": 0.498,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-08-29",
+      "ndvi": 0.2702,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-09-14",
+      "ndvi": 0.5242,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2003-09-30",
+      "ndvi": 0.6278,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-10-16",
+      "ndvi": 0.5974,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2003-11-01",
+      "ndvi": 0.6559,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-11-17",
+      "ndvi": 0.5961,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-12-03",
+      "ndvi": 0.5542,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2003-12-19",
+      "ndvi": 0.4962,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-01-01",
+      "ndvi": 0.4611,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-01-17",
+      "ndvi": 0.4369,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-02-02",
+      "ndvi": 0.4501,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-02-18",
+      "ndvi": 0.4683,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-03-05",
+      "ndvi": 0.467,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-03-21",
+      "ndvi": 0.5144,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-04-06",
+      "ndvi": 0.4126,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2004-04-22",
+      "ndvi": 0.4641,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-05-08",
+      "ndvi": 0.452,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-05-24",
+      "ndvi": 0.5614,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2004-06-09",
+      "ndvi": 0.6228,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-06-25",
+      "ndvi": 0.3968,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-07-11",
+      "ndvi": 0.4676,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-07-27",
+      "ndvi": 0.5038,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-08-12",
+      "ndvi": 0.5381,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-08-28",
+      "ndvi": 0.4661,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-09-13",
+      "ndvi": 0.5838,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-09-29",
+      "ndvi": 0.5628,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2004-10-15",
+      "ndvi": 0.6417,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-10-31",
+      "ndvi": 0.5642,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-11-16",
+      "ndvi": 0.547,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-12-02",
+      "ndvi": 0.5022,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2004-12-18",
+      "ndvi": 0.4434,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-01-01",
+      "ndvi": 0.4883,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-01-17",
+      "ndvi": 0.4532,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-02-02",
+      "ndvi": 0.3966,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-02-18",
+      "ndvi": 0.4149,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-03-06",
+      "ndvi": 0.486,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-03-22",
+      "ndvi": 0.5937,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-04-07",
+      "ndvi": 0.5219,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2005-04-23",
+      "ndvi": 0.4775,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2005-05-09",
+      "ndvi": 0.3544,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-05-25",
+      "ndvi": 0.5151,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2005-06-10",
+      "ndvi": 0.5993,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2005-06-26",
+      "ndvi": 0.4244,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-07-12",
+      "ndvi": 0.5523,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-07-28",
+      "ndvi": 0.4659,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-08-13",
+      "ndvi": 0.2767,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-08-29",
+      "ndvi": 0.5662,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-09-14",
+      "ndvi": 0.4937,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2005-09-30",
+      "ndvi": 0.5835,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-10-16",
+      "ndvi": 0.5221,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-11-01",
+      "ndvi": 0.6637,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-11-17",
+      "ndvi": 0.5309,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-12-03",
+      "ndvi": 0.5525,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2005-12-19",
+      "ndvi": 0.419,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-01-01",
+      "ndvi": 0.4463,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-01-17",
+      "ndvi": 0.4568,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-02-02",
+      "ndvi": 0.427,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-02-18",
+      "ndvi": 0.4172,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-03-06",
+      "ndvi": 0.5571,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-03-22",
+      "ndvi": 0.5021,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-04-07",
+      "ndvi": 0.4964,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2006-04-23",
+      "ndvi": 0.5691,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-05-09",
+      "ndvi": 0.2737,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-05-25",
+      "ndvi": 0.2766,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-06-10",
+      "ndvi": 0.3858,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-06-26",
+      "ndvi": 0.4493,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-07-12",
+      "ndvi": 0.3857,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-07-28",
+      "ndvi": 0.5534,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-08-13",
+      "ndvi": 0.4959,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-08-29",
+      "ndvi": 0.5671,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-09-14",
+      "ndvi": 0.4676,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-09-30",
+      "ndvi": 0.4657,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2006-10-16",
+      "ndvi": 0.6212,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-11-01",
+      "ndvi": 0.6212,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-11-17",
+      "ndvi": 0.5842,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-12-03",
+      "ndvi": 0.4858,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2006-12-19",
+      "ndvi": 0.4846,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-01-01",
+      "ndvi": 0.3723,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-01-17",
+      "ndvi": 0.4111,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-02-02",
+      "ndvi": 0.5067,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-02-18",
+      "ndvi": 0.4817,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-03-06",
+      "ndvi": 0.4752,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-03-22",
+      "ndvi": 0.4982,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-04-07",
+      "ndvi": 0.4711,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-04-23",
+      "ndvi": 0.4414,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-05-09",
+      "ndvi": 0.4715,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-05-25",
+      "ndvi": 0.3682,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-06-10",
+      "ndvi": 0.5681,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-06-26",
+      "ndvi": 0.31,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-07-12",
+      "ndvi": 0.399,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-07-28",
+      "ndvi": 0.4919,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-08-13",
+      "ndvi": 0.2643,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-08-29",
+      "ndvi": 0.5829,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-09-14",
+      "ndvi": 0.4114,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2007-09-30",
+      "ndvi": 0.6424,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2007-10-16",
+      "ndvi": 0.6535,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-11-01",
+      "ndvi": 0.6166,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-11-17",
+      "ndvi": 0.3987,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-12-03",
+      "ndvi": 0.4678,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2007-12-19",
+      "ndvi": 0.3673,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-01-01",
+      "ndvi": 0.3482,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-01-17",
+      "ndvi": 0.4367,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-02-02",
+      "ndvi": 0.4252,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-02-18",
+      "ndvi": 0.4252,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-03-05",
+      "ndvi": 0.4492,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-03-21",
+      "ndvi": 0.5038,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-04-06",
+      "ndvi": 0.4932,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-04-22",
+      "ndvi": 0.4301,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-05-08",
+      "ndvi": 0.4211,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2008-05-24",
+      "ndvi": 0.4587,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-06-09",
+      "ndvi": 0.1075,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-06-25",
+      "ndvi": 0.4876,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-07-11",
+      "ndvi": 0.2242,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-07-27",
+      "ndvi": 0.4154,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-08-12",
+      "ndvi": 0.2007,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-08-28",
+      "ndvi": 0.3166,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-09-13",
+      "ndvi": 0.5026,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2008-09-29",
+      "ndvi": 0.603,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2008-10-15",
+      "ndvi": 0.6151,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-10-31",
+      "ndvi": 0.4798,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-11-16",
+      "ndvi": 0.5009,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-12-02",
+      "ndvi": 0.5071,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2008-12-18",
+      "ndvi": 0.3301,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-01-01",
+      "ndvi": 0.4392,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-01-17",
+      "ndvi": 0.4875,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-02-02",
+      "ndvi": 0.4335,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-02-18",
+      "ndvi": 0.3865,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-03-06",
+      "ndvi": 0.4161,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-03-22",
+      "ndvi": 0.4478,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-04-07",
+      "ndvi": 0.3994,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-04-23",
+      "ndvi": 0.3847,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-05-09",
+      "ndvi": 0.545,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-05-25",
+      "ndvi": 0.3401,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-06-10",
+      "ndvi": 0.5147,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-06-26",
+      "ndvi": 0.4301,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-07-12",
+      "ndvi": 0.447,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-07-28",
+      "ndvi": 0.4566,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-08-13",
+      "ndvi": 0.1715,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-08-29",
+      "ndvi": 0.3065,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-09-14",
+      "ndvi": 0.5367,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2009-09-30",
+      "ndvi": 0.5213,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-10-16",
+      "ndvi": 0.5412,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-11-01",
+      "ndvi": 0.5738,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-11-17",
+      "ndvi": 0.583,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-12-03",
+      "ndvi": 0.3969,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2009-12-19",
+      "ndvi": 0.431,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-01-01",
+      "ndvi": 0.3797,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-01-17",
+      "ndvi": 0.4179,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-02-02",
+      "ndvi": 0.3724,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-02-18",
+      "ndvi": 0.4043,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-03-06",
+      "ndvi": 0.4417,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-03-22",
+      "ndvi": 0.3994,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-04-07",
+      "ndvi": 0.4239,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-04-23",
+      "ndvi": 0.4849,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-05-09",
+      "ndvi": 0.377,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-05-25",
+      "ndvi": 0.2502,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-06-10",
+      "ndvi": 0.5023,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2010-06-26",
+      "ndvi": 0.5365,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2010-07-12",
+      "ndvi": 0.5147,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-07-28",
+      "ndvi": 0.4518,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-08-13",
+      "ndvi": 0.396,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-08-29",
+      "ndvi": 0.42,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-09-14",
+      "ndvi": 0.6999,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2010-09-30",
+      "ndvi": 0.3986,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2010-10-16",
+      "ndvi": 0.5216,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-11-01",
+      "ndvi": 0.5469,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-11-17",
+      "ndvi": 0.4451,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-12-03",
+      "ndvi": 0.4872,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2010-12-19",
+      "ndvi": 0.3798,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-01-01",
+      "ndvi": 0.42,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-01-17",
+      "ndvi": 0.4201,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-02-02",
+      "ndvi": 0.3929,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-02-18",
+      "ndvi": 0.4505,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-03-06",
+      "ndvi": 0.4056,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-03-22",
+      "ndvi": 0.3933,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-04-07",
+      "ndvi": 0.5238,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-04-23",
+      "ndvi": 0.4883,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-05-09",
+      "ndvi": 0.4694,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2011-05-25",
+      "ndvi": 0.5195,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2011-06-10",
+      "ndvi": 0.2153,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-06-26",
+      "ndvi": 0.4236,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-07-12",
+      "ndvi": 0.344,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-07-28",
+      "ndvi": 0.2898,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-08-13",
+      "ndvi": 0.5913,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-08-29",
+      "ndvi": 0.495,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2011-09-14",
+      "ndvi": 0.4475,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2011-09-30",
+      "ndvi": 0.5563,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-10-16",
+      "ndvi": 0.5449,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-11-01",
+      "ndvi": 0.5847,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-11-17",
+      "ndvi": 0.5178,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-12-03",
+      "ndvi": 0.5366,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2011-12-19",
+      "ndvi": 0.4699,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-01-01",
+      "ndvi": 0.4436,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-01-17",
+      "ndvi": 0.4172,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-02-02",
+      "ndvi": 0.4262,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-02-18",
+      "ndvi": 0.3724,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-03-05",
+      "ndvi": 0.4667,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-03-21",
+      "ndvi": 0.4157,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-04-06",
+      "ndvi": 0.5359,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2012-04-22",
+      "ndvi": 0.4732,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-05-08",
+      "ndvi": 0.5144,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-05-24",
+      "ndvi": 0.2712,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-06-09",
+      "ndvi": 0.552,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-06-25",
+      "ndvi": 0.43,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-07-11",
+      "ndvi": 0.1613,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-07-27",
+      "ndvi": 0.3813,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-08-12",
+      "ndvi": 0.4954,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-08-28",
+      "ndvi": 0.1622,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-09-13",
+      "ndvi": 0.5896,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-09-29",
+      "ndvi": 0.3297,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2012-10-15",
+      "ndvi": 0.6134,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-10-31",
+      "ndvi": 0.5315,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-11-16",
+      "ndvi": 0.5574,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-12-02",
+      "ndvi": 0.5087,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2012-12-18",
+      "ndvi": 0.5013,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-01-01",
+      "ndvi": 0.3909,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-01-17",
+      "ndvi": 0.4218,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-02-02",
+      "ndvi": 0.3551,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-02-18",
+      "ndvi": 0.4222,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-03-06",
+      "ndvi": 0.4443,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-03-22",
+      "ndvi": 0.4372,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-04-07",
+      "ndvi": 0.5171,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-04-23",
+      "ndvi": 0.4926,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2013-05-09",
+      "ndvi": 0.531,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2013-05-25",
+      "ndvi": 0.1769,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-06-10",
+      "ndvi": 0.4654,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-06-26",
+      "ndvi": 0.4426,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-07-12",
+      "ndvi": 0.3368,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-07-28",
+      "ndvi": 0.4127,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-08-13",
+      "ndvi": 0.5965,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-08-29",
+      "ndvi": 0.5457,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2013-09-14",
+      "ndvi": 0.5635,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2013-09-30",
+      "ndvi": 0.6286,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-10-16",
+      "ndvi": 0.5987,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-11-01",
+      "ndvi": 0.5373,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-11-17",
+      "ndvi": 0.5568,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-12-03",
+      "ndvi": 0.4698,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2013-12-19",
+      "ndvi": 0.4111,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-01-01",
+      "ndvi": 0.4111,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-01-17",
+      "ndvi": 0.3871,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-02-02",
+      "ndvi": 0.4366,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-02-18",
+      "ndvi": 0.4474,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-03-06",
+      "ndvi": 0.4663,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-03-22",
+      "ndvi": 0.4288,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-04-07",
+      "ndvi": 0.4298,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-04-23",
+      "ndvi": 0.4639,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-05-09",
+      "ndvi": 0.4508,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-05-25",
+      "ndvi": 0.5336,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-06-10",
+      "ndvi": 0.4946,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2014-06-26",
+      "ndvi": 0.3627,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2014-07-12",
+      "ndvi": 0.1585,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2014-07-28",
+      "ndvi": 0.2932,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2014-08-13",
+      "ndvi": 0.5198,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2014-08-29",
+      "ndvi": 0.5114,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2014-09-14",
+      "ndvi": 0.581,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-09-30",
+      "ndvi": 0.5736,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-10-16",
+      "ndvi": 0.5722,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-11-01",
+      "ndvi": 0.6067,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-11-17",
+      "ndvi": 0.4957,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-12-03",
+      "ndvi": 0.4586,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2014-12-19",
+      "ndvi": 0.3441,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-01-01",
+      "ndvi": 0.4251,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-01-17",
+      "ndvi": 0.4428,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-02-02",
+      "ndvi": 0.3905,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-02-18",
+      "ndvi": 0.4753,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-03-06",
+      "ndvi": 0.382,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-03-22",
+      "ndvi": 0.4444,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-04-07",
+      "ndvi": 0.5038,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-04-23",
+      "ndvi": 0.5022,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-05-09",
+      "ndvi": 0.3648,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-05-25",
+      "ndvi": 0.4815,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-06-10",
+      "ndvi": 0.316,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-06-26",
+      "ndvi": 0.3445,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-07-12",
+      "ndvi": 0.4003,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-07-28",
+      "ndvi": 0.4479,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-08-13",
+      "ndvi": 0.5251,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-08-29",
+      "ndvi": 0.4601,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-09-14",
+      "ndvi": 0.509,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-09-30",
+      "ndvi": 0.5988,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-10-16",
+      "ndvi": 0.5309,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-11-01",
+      "ndvi": 0.4958,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-11-17",
+      "ndvi": 0.4563,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2015-12-03",
+      "ndvi": 0.5557,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2015-12-19",
+      "ndvi": 0.4262,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-01-01",
+      "ndvi": 0.4362,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-01-17",
+      "ndvi": 0.3639,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-02-02",
+      "ndvi": 0.4455,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-02-18",
+      "ndvi": 0.5073,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-03-05",
+      "ndvi": 0.3875,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-03-21",
+      "ndvi": 0.476,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-04-06",
+      "ndvi": 0.4061,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2016-04-22",
+      "ndvi": 0.4072,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-05-08",
+      "ndvi": 0.4368,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-05-24",
+      "ndvi": 0.468,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2016-06-09",
+      "ndvi": 0.3769,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-06-25",
+      "ndvi": 0.4596,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-07-11",
+      "ndvi": 0.0961,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-07-27",
+      "ndvi": 0.2426,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-08-12",
+      "ndvi": 0.3978,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-08-28",
+      "ndvi": 0.4349,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-09-13",
+      "ndvi": 0.3351,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-09-29",
+      "ndvi": 0.3869,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2016-10-15",
+      "ndvi": 0.5941,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-10-31",
+      "ndvi": 0.4861,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-11-16",
+      "ndvi": 0.5394,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-12-02",
+      "ndvi": 0.4765,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2016-12-18",
+      "ndvi": 0.4307,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-01-01",
+      "ndvi": 0.4391,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-01-17",
+      "ndvi": 0.4439,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-02-02",
+      "ndvi": 0.344,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-02-18",
+      "ndvi": 0.3237,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-03-06",
+      "ndvi": 0.4081,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-03-22",
+      "ndvi": 0.4823,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-04-07",
+      "ndvi": 0.4853,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-04-23",
+      "ndvi": 0.455,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-05-09",
+      "ndvi": 0.5045,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-05-25",
+      "ndvi": 0.592,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2017-06-10",
+      "ndvi": 0.4713,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-06-26",
+      "ndvi": 0.3243,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-07-12",
+      "ndvi": 0.5274,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-07-28",
+      "ndvi": 0.2309,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-08-13",
+      "ndvi": 0.5179,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-08-29",
+      "ndvi": 0.4398,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-09-14",
+      "ndvi": 0.0867,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-09-30",
+      "ndvi": 0.3776,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2017-10-16",
+      "ndvi": 0.5454,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-11-01",
+      "ndvi": 0.53,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-11-17",
+      "ndvi": 0.475,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-12-03",
+      "ndvi": 0.4975,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2017-12-19",
+      "ndvi": 0.4411,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-01-01",
+      "ndvi": 0.4411,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-01-17",
+      "ndvi": 0.4052,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-02-02",
+      "ndvi": 0.4303,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-02-18",
+      "ndvi": 0.3426,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-03-06",
+      "ndvi": 0.4692,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-03-22",
+      "ndvi": 0.4737,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-04-07",
+      "ndvi": 0.4798,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-04-23",
+      "ndvi": 0.3814,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-05-09",
+      "ndvi": 0.4516,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-05-25",
+      "ndvi": 0.3293,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-06-10",
+      "ndvi": 0.3209,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-06-26",
+      "ndvi": 0.396,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-07-12",
+      "ndvi": 0.6233,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-07-28",
+      "ndvi": 0.472,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-08-13",
+      "ndvi": 0.0842,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-08-29",
+      "ndvi": 0.408,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-09-14",
+      "ndvi": 0.3734,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2018-09-30",
+      "ndvi": 0.5379,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-10-16",
+      "ndvi": 0.4761,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-11-01",
+      "ndvi": 0.5229,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-11-17",
+      "ndvi": 0.4822,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-12-03",
+      "ndvi": 0.4624,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2018-12-19",
+      "ndvi": 0.3865,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-01-01",
+      "ndvi": 0.3846,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-01-17",
+      "ndvi": 0.4369,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-02-02",
+      "ndvi": 0.3453,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-02-18",
+      "ndvi": 0.474,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2019-03-06",
+      "ndvi": 0.4556,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-03-22",
+      "ndvi": 0.468,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-04-07",
+      "ndvi": 0.4325,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-04-23",
+      "ndvi": 0.496,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-05-09",
+      "ndvi": 0.516,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-05-25",
+      "ndvi": 0.4592,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-06-10",
+      "ndvi": 0.4315,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-06-26",
+      "ndvi": 0.3637,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-07-12",
+      "ndvi": 0.4585,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-07-28",
+      "ndvi": 0.2795,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-08-13",
+      "ndvi": 0.5015,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-08-29",
+      "ndvi": 0.2086,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-09-14",
+      "ndvi": 0.5105,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2019-09-30",
+      "ndvi": 0.5848,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-10-16",
+      "ndvi": 0.5664,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-11-01",
+      "ndvi": 0.4601,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-11-17",
+      "ndvi": 0.5233,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-12-03",
+      "ndvi": 0.4792,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2019-12-19",
+      "ndvi": 0.3482,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-01-01",
+      "ndvi": 0.4161,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-01-17",
+      "ndvi": 0.4433,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-02-02",
+      "ndvi": 0.3606,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-02-18",
+      "ndvi": 0.389,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-03-05",
+      "ndvi": 0.4451,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-03-21",
+      "ndvi": 0.5025,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-04-06",
+      "ndvi": 0.5075,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-04-22",
+      "ndvi": 0.2755,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-05-08",
+      "ndvi": 0.4275,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2020-05-24",
+      "ndvi": 0.5055,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-06-09",
+      "ndvi": 0.627,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-06-25",
+      "ndvi": 0.3304,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-07-11",
+      "ndvi": 0.4012,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-07-27",
+      "ndvi": 0.4005,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-08-12",
+      "ndvi": 0.4274,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-08-28",
+      "ndvi": 0.4495,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-09-13",
+      "ndvi": 0.3253,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-09-29",
+      "ndvi": 0.5686,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2020-10-15",
+      "ndvi": 0.5585,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2020-10-31",
+      "ndvi": 0.5381,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-11-16",
+      "ndvi": 0.4759,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2020-12-02",
+      "ndvi": 0.4642,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2020-12-18",
+      "ndvi": 0.3903,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-01-01",
+      "ndvi": 0.3917,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-01-17",
+      "ndvi": 0.41,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-02-02",
+      "ndvi": 0.3385,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-02-18",
+      "ndvi": 0.4259,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-03-06",
+      "ndvi": 0.4532,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-03-22",
+      "ndvi": 0.4473,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-04-07",
+      "ndvi": 0.4305,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-04-23",
+      "ndvi": 0.456,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-05-09",
+      "ndvi": 0.4514,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2021-05-25",
+      "ndvi": 0.378,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-06-10",
+      "ndvi": 0.3159,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-06-26",
+      "ndvi": 0.3744,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-07-12",
+      "ndvi": 0.3043,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-07-28",
+      "ndvi": 0.1514,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-08-13",
+      "ndvi": 0.3641,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-08-29",
+      "ndvi": 0.4003,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-09-14",
+      "ndvi": 0.2583,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-09-30",
+      "ndvi": 0.626,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2021-10-16",
+      "ndvi": 0.522,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-11-01",
+      "ndvi": 0.5052,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-11-17",
+      "ndvi": 0.4644,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2021-12-03",
+      "ndvi": 0.4313,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2021-12-19",
+      "ndvi": 0.4127,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-01-01",
+      "ndvi": 0.3453,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-01-17",
+      "ndvi": 0.3601,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-02-02",
+      "ndvi": 0.3738,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-02-18",
+      "ndvi": 0.4468,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-03-06",
+      "ndvi": 0.431,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-03-22",
+      "ndvi": 0.4504,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-04-07",
+      "ndvi": 0.3623,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2022-04-23",
+      "ndvi": 0.4546,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-05-09",
+      "ndvi": 0.4072,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-05-25",
+      "ndvi": 0.3086,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-06-10",
+      "ndvi": 0.4604,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-06-26",
+      "ndvi": 0.494,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-07-12",
+      "ndvi": 0.412,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-07-28",
+      "ndvi": 0.5429,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-08-13",
+      "ndvi": 0.3005,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-08-29",
+      "ndvi": 0.5483,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2022-09-14",
+      "ndvi": 0.3793,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-09-30",
+      "ndvi": 0.2627,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2022-10-16",
+      "ndvi": 0.4515,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2022-11-01",
+      "ndvi": 0.4853,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-11-17",
+      "ndvi": 0.5221,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-12-03",
+      "ndvi": 0.4593,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2022-12-19",
+      "ndvi": 0.3413,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-01-01",
+      "ndvi": 0.3864,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2023-01-17",
+      "ndvi": 0.3166,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-02-02",
+      "ndvi": 0.3444,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-02-18",
+      "ndvi": 0.3191,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-03-06",
+      "ndvi": 0.4578,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-03-22",
+      "ndvi": 0.4841,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2023-04-07",
+      "ndvi": 0.484,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-04-23",
+      "ndvi": 0.4938,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-05-09",
+      "ndvi": 0.4798,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2023-05-25",
+      "ndvi": 0.3788,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2023-06-10",
+      "ndvi": 0.3259,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-06-26",
+      "ndvi": 0.2493,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-07-12",
+      "ndvi": 0.3558,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-07-28",
+      "ndvi": 0.3668,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-08-13",
+      "ndvi": 0.3782,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-08-29",
+      "ndvi": 0.3063,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-09-14",
+      "ndvi": 0.5519,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-09-30",
+      "ndvi": 0.5671,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2023-10-16",
+      "ndvi": 0.5159,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-11-01",
+      "ndvi": 0.421,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-11-17",
+      "ndvi": 0.4636,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2023-12-03",
+      "ndvi": 0.341,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2023-12-19",
+      "ndvi": 0.3513,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-01-01",
+      "ndvi": 0.3328,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-01-17",
+      "ndvi": 0.3469,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-02-02",
+      "ndvi": 0.3812,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-02-18",
+      "ndvi": 0.322,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-03-05",
+      "ndvi": 0.3608,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-03-21",
+      "ndvi": 0.4592,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-04-06",
+      "ndvi": 0.3934,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-04-22",
+      "ndvi": 0.3847,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-05-08",
+      "ndvi": 0.4052,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-05-24",
+      "ndvi": 0.5124,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2024-06-09",
+      "ndvi": 0.3238,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-06-25",
+      "ndvi": 0.2053,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-07-11",
+      "ndvi": 0.2547,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-07-27",
+      "ndvi": 0.2517,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-08-12",
+      "ndvi": 0.2194,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-08-28",
+      "ndvi": 0.4411,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-09-13",
+      "ndvi": 0.3062,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2024-09-29",
+      "ndvi": 0.6138,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2024-10-15",
+      "ndvi": 0.544,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2024-10-31",
+      "ndvi": 0.4922,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-11-16",
+      "ndvi": 0.4854,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-12-02",
+      "ndvi": 0.3937,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2024-12-18",
+      "ndvi": 0.3696,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-01-01",
+      "ndvi": 0.3543,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-01-17",
+      "ndvi": 0.3743,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-02-02",
+      "ndvi": 0.3251,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-02-18",
+      "ndvi": 0.3996,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-03-06",
+      "ndvi": 0.4092,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-03-22",
+      "ndvi": 0.4741,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-04-07",
+      "ndvi": 0.4775,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-04-23",
+      "ndvi": 0.3761,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-05-09",
+      "ndvi": 0.468,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-05-25",
+      "ndvi": 0.4448,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-06-10",
+      "ndvi": 0.3616,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-06-26",
+      "ndvi": 0.3307,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-07-12",
+      "ndvi": 0.4217,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-07-28",
+      "ndvi": 0.493,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-08-13",
+      "ndvi": 0.34,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-08-29",
+      "ndvi": 0.2578,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-09-14",
+      "ndvi": 0.4353,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2025-09-30",
+      "ndvi": 0.4946,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2025-10-16",
+      "ndvi": 0.5118,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-11-01",
+      "ndvi": 0.5267,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-11-17",
+      "ndvi": 0.4928,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-12-03",
+      "ndvi": 0.3963,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2025-12-19",
+      "ndvi": 0.4451,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-01-01",
+      "ndvi": 0.3205,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-01-17",
+      "ndvi": 0.2637,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-02-02",
+      "ndvi": 0.3306,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-02-18",
+      "ndvi": 0.2816,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-03-06",
+      "ndvi": 0.4448,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2026-03-22",
+      "ndvi": 0.5536,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-04-07",
+      "ndvi": 0.517,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-04-23",
+      "ndvi": 0.4878,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2026-05-09",
+      "ndvi": 0.347,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-05-25",
+      "ndvi": 0.4932,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-06-10",
+      "ndvi": 0.3317,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-06-26",
+      "ndvi": 0.0682,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-07-12",
+      "ndvi": 0.3781,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-07-28",
+      "ndvi": 0.3455,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-08-13",
+      "ndvi": 0.5813,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-08-29",
+      "ndvi": 0.5282,
+      "pixel_reliability": 3,
+      "valid": false
+    },
+    {
+      "date": "2026-09-14",
+      "ndvi": 0.6011,
+      "pixel_reliability": 1,
+      "valid": true
+    },
+    {
+      "date": "2026-09-30",
+      "ndvi": 0.5866,
+      "pixel_reliability": 0,
+      "valid": true
+    },
+    {
+      "date": "2026-10-16",
+      "ndvi": 0.51,
+      "pixel_reliability": 0,
+      "valid": true
+    }
+  ]
+}

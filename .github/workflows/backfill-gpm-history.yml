@@ -1,0 +1,79 @@
+name: Backfill GPM IMERG History
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: 'Start date (YYYY-MM-DD)'
+        required: true
+        default: '2001-01-01'
+      end:
+        description: 'End date (YYYY-MM-DD); leave empty for today UTC minus 2 days'
+        required: false
+        default: ''
+      workers:
+        description: 'Parallel requests (default 4)'
+        required: false
+        default: '4'
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Restore GPM checkpoint
+        uses: actions/cache/restore@v4
+        with:
+          path: data/raw/gpm/history
+          key: gpm-history-checkpoint-v1
+          restore-keys: gpm-history-checkpoint-v1
+
+      - name: Backfill GPM IMERG daily history
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          ARGS="--start ${{ github.event.inputs.start }} --workers ${{ github.event.inputs.workers }}"
+          if [ -n "${{ github.event.inputs.end }}" ]; then
+            ARGS="$ARGS --end ${{ github.event.inputs.end }}"
+          fi
+          python scripts/backfill_gpm_history.py $ARGS
+
+      - name: Save GPM checkpoint
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/raw/gpm/history
+          key: gpm-history-checkpoint-v1-${{ github.run_id }}
+
+      - name: Commit and push GPM history cache
+        if: success()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/cache/gpm/history public/cache/gpm/gpm_history_summary.json
+          if [ -n "$(git status --porcelain public/cache/gpm/)" ]; then
+            git commit -m "chore(gpm): backfill IMERG daily history [skip ci]"
+            git push
+          else
+            echo "No changes in public/cache/gpm/."
+          fi

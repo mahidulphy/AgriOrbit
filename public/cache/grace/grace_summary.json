@@ -1,0 +1,987 @@
+{
+  "_metadata": {
+    "product": "TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4",
+    "granule": "GRCTellus.JPL.200204_202608.GLO.RL06.3M.MSCNv04CRI.nc",
+    "source": "NASA PO.DAAC / JPL",
+    "source_url": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4/GRCTellus.JPL.200204_202608.GLO.RL06.3M.MSCNv04CRI.nc",
+    "variable": "lwe_thickness: terrestrial total water storage (TWS) anomaly in cm of liquid water equivalent relative to the 2004-2009 mean. TWS includes groundwater, soil moisture, surface water, snow/ice and vegetation water; it is NOT groundwater alone.",
+    "effective_spatial_resolution": "Regional (~300 km)",
+    "native_resolution": "3-degree equal-area JPL mascons",
+    "grid_sampling": "Native JPL mascon_ID mapped on the 0.5-degree CRI grid; districts grouped by mascon_ID",
+    "grid_sampling_note": "The 0.5-degree CRI grid is a display/interpolation grid. The product attributes state the native resolution is 3-degree equal-area mascons; the uncertainty field is per mascon, not per 0.5-degree cell. All 0.5-degree cells inside one mascon carry the same TWS value.",
+    "area_pct_method": "ADM0 subpixel intersection (10x10 subpixels per 0.5-degree cell, cos-lat area weights)",
+    "area_pct_note": "Percentage of each mascon total 0.5-degree cell area inside the HDX/OCHA COD-AB ADM0 Bangladesh polygon. A 0.5-degree cell is counted by 10x10 subpixel intersection; areas are weighted by cos(latitude).",
+    "baseline": "2004-2009 mean",
+    "downloaded_at": "2026-11-08T16:05:18.440159+00:00",
+    "processed_at": "2026-11-09T07:36:07.071675+00:00",
+    "period_start": "2002-04-17",
+    "period_end": "2026-08-16",
+    "districts_count": 64,
+    "regions_count": 5,
+    "mascon_ids_at_district_hqs": [
+      1213,
+      1214,
+      1320,
+      1321,
+      1431
+    ],
+    "adjacent_mascons": [
+      {
+        "mascon_id": 1322,
+        "area_pct_inside_bangladesh": 0.1,
+        "districts_count": 0
+      },
+      {
+        "mascon_id": 1430,
+        "area_pct_inside_bangladesh": 8.22,
+        "districts_count": 0
+      }
+    ],
+    "gap": {
+      "start": "2017-07",
+      "end": "2018-05",
+      "status": "missing",
+      "note": "GRACE ended in 2017 and GRACE-FO science data resume in 2018; no values are interpolated."
+    },
+    "deseasonalization": "Mean seasonal cycle removed before trend fitting: for each calendar month the long-term mean TWS anomaly is subtracted across all valid years.",
+    "trend_method": "Ordinary least squares on monthly deseasonalised TWS anomaly versus decimal year; slope in cm/year with standard error. Raw (seasonal) slopes are also stored for reference.",
+    "spatial_note": "Regional basin-scale total water storage change, not field-level groundwater. Neighbouring districts in the same mascon share one observation; district-level trends would be statistically false and are not reported."
+  },
+  "regions": {
+    "mascon_1213": {
+      "regionName": "JPL mascon 1213",
+      "mascon_id": 1213,
+      "representative_cell_lat": 26.25,
+      "representative_cell_lon": 88.25,
+      "area_pct_inside_bangladesh": 2.02,
+      "districts_count": 1,
+      "districts": [
+        {
+          "id": "thakurgaon",
+          "name": "Thakurgaon"
+        }
+      ],
+      "latest_observation": {
+        "month": "2026-08",
+        "date": "2026-08-16",
+        "lwe_cm": -32.48
+      },
+      "trend_2002_2010": {
+        "slope_cm_per_year": -3.48,
+        "standard_error_cm_per_year": 0.27,
+        "months_used": 102,
+        "first_month": "2002-04",
+        "last_month": "2010-12",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "trend_2016_present": {
+        "slope_cm_per_year": -2.14,
+        "standard_error_cm_per_year": 0.28,
+        "months_used": 111,
+        "first_month": "2016-01",
+        "last_month": "2026-08",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "observations_count": 258,
+      "gap_months_missing": 11
+    },
+    "mascon_1214": {
+      "regionName": "JPL mascon 1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 89.25,
+      "area_pct_inside_bangladesh": 10.94,
+      "districts_count": 6,
+      "districts": [
+        {
+          "id": "dinajpur",
+          "name": "Dinajpur"
+        },
+        {
+          "id": "kurigram",
+          "name": "Kurigram"
+        },
+        {
+          "id": "lalmonirhat",
+          "name": "Lalmonirhat"
+        },
+        {
+          "id": "nilphamari",
+          "name": "Nilphamari"
+        },
+        {
+          "id": "panchagarh",
+          "name": "Panchagarh"
+        },
+        {
+          "id": "rangpur",
+          "name": "Rangpur"
+        }
+      ],
+      "latest_observation": {
+        "month": "2026-08",
+        "date": "2026-08-16",
+        "lwe_cm": -29.25
+      },
+      "trend_2002_2010": {
+        "slope_cm_per_year": -2.9,
+        "standard_error_cm_per_year": 0.24,
+        "months_used": 102,
+        "first_month": "2002-04",
+        "last_month": "2010-12",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "trend_2016_present": {
+        "slope_cm_per_year": -3.68,
+        "standard_error_cm_per_year": 0.28,
+        "months_used": 111,
+        "first_month": "2016-01",
+        "last_month": "2026-08",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "observations_count": 258,
+      "gap_months_missing": 11
+    },
+    "mascon_1320": {
+      "regionName": "JPL mascon 1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 88.75,
+      "area_pct_inside_bangladesh": 12.27,
+      "districts_count": 5,
+      "districts": [
+        {
+          "id": "chapainawabganj",
+          "name": "Chapai Nawabganj"
+        },
+        {
+          "id": "chuadanga",
+          "name": "Chuadanga"
+        },
+        {
+          "id": "meherpur",
+          "name": "Meherpur"
+        },
+        {
+          "id": "naogaon",
+          "name": "Naogaon"
+        },
+        {
+          "id": "rajshahi",
+          "name": "Rajshahi"
+        }
+      ],
+      "latest_observation": {
+        "month": "2026-08",
+        "date": "2026-08-16",
+        "lwe_cm": 15.44
+      },
+      "trend_2002_2010": {
+        "slope_cm_per_year": -2.36,
+        "standard_error_cm_per_year": 0.23,
+        "months_used": 102,
+        "first_month": "2002-04",
+        "last_month": "2010-12",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "trend_2016_present": {
+        "slope_cm_per_year": 0.14,
+        "standard_error_cm_per_year": 0.25,
+        "months_used": 111,
+        "first_month": "2016-01",
+        "last_month": "2026-08",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "observations_count": 258,
+      "gap_months_missing": 11
+    },
+    "mascon_1321": {
+      "regionName": "JPL mascon 1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.25,
+      "area_pct_inside_bangladesh": 79.27,
+      "districts_count": 46,
+      "districts": [
+        {
+          "id": "bagerhat",
+          "name": "Bagerhat"
+        },
+        {
+          "id": "barishal",
+          "name": "Barishal"
+        },
+        {
+          "id": "bogura",
+          "name": "Bogura"
+        },
+        {
+          "id": "brahmanbaria",
+          "name": "Brahmanbaria"
+        },
+        {
+          "id": "chandpur",
+          "name": "Chandpur"
+        },
+        {
+          "id": "cumilla",
+          "name": "Cumilla"
+        },
+        {
+          "id": "dhaka",
+          "name": "Dhaka"
+        },
+        {
+          "id": "faridpur",
+          "name": "Faridpur"
+        },
+        {
+          "id": "feni",
+          "name": "Feni"
+        },
+        {
+          "id": "gaibandha",
+          "name": "Gaibandha"
+        },
+        {
+          "id": "gazipur",
+          "name": "Gazipur"
+        },
+        {
+          "id": "gopalganj",
+          "name": "Gopalganj"
+        },
+        {
+          "id": "habiganj",
+          "name": "Habiganj"
+        },
+        {
+          "id": "jamalpur",
+          "name": "Jamalpur"
+        },
+        {
+          "id": "jashore",
+          "name": "Jashore"
+        },
+        {
+          "id": "jhalokati",
+          "name": "Jhalokati"
+        },
+        {
+          "id": "jhenaidah",
+          "name": "Jhenaidah"
+        },
+        {
+          "id": "joypurhat",
+          "name": "Joypurhat"
+        },
+        {
+          "id": "khagrachari",
+          "name": "Khagrachari"
+        },
+        {
+          "id": "khulna",
+          "name": "Khulna"
+        },
+        {
+          "id": "kishoreganj",
+          "name": "Kishoreganj"
+        },
+        {
+          "id": "kushtia",
+          "name": "Kushtia"
+        },
+        {
+          "id": "lakshmipur",
+          "name": "Lakshmipur"
+        },
+        {
+          "id": "madaripur",
+          "name": "Madaripur"
+        },
+        {
+          "id": "magura",
+          "name": "Magura"
+        },
+        {
+          "id": "manikganj",
+          "name": "Manikganj"
+        },
+        {
+          "id": "moulvibazar",
+          "name": "Moulvibazar"
+        },
+        {
+          "id": "munshiganj",
+          "name": "Munshiganj"
+        },
+        {
+          "id": "mymensingh",
+          "name": "Mymensingh"
+        },
+        {
+          "id": "narail",
+          "name": "Narail"
+        },
+        {
+          "id": "narayanganj",
+          "name": "Narayanganj"
+        },
+        {
+          "id": "narsingdi",
+          "name": "Narsingdi"
+        },
+        {
+          "id": "natore",
+          "name": "Natore"
+        },
+        {
+          "id": "netrokona",
+          "name": "Netrokona"
+        },
+        {
+          "id": "noakhali",
+          "name": "Noakhali"
+        },
+        {
+          "id": "pabna",
+          "name": "Pabna"
+        },
+        {
+          "id": "pirojpur",
+          "name": "Pirojpur"
+        },
+        {
+          "id": "rajbari",
+          "name": "Rajbari"
+        },
+        {
+          "id": "rangamati",
+          "name": "Rangamati"
+        },
+        {
+          "id": "satkhira",
+          "name": "Satkhira"
+        },
+        {
+          "id": "shariatpur",
+          "name": "Shariatpur"
+        },
+        {
+          "id": "sherpur",
+          "name": "Sherpur"
+        },
+        {
+          "id": "sirajganj",
+          "name": "Sirajganj"
+        },
+        {
+          "id": "sunamganj",
+          "name": "Sunamganj"
+        },
+        {
+          "id": "sylhet",
+          "name": "Sylhet"
+        },
+        {
+          "id": "tangail",
+          "name": "Tangail"
+        }
+      ],
+      "latest_observation": {
+        "month": "2026-08",
+        "date": "2026-08-16",
+        "lwe_cm": 36.28
+      },
+      "trend_2002_2010": {
+        "slope_cm_per_year": -0.19,
+        "standard_error_cm_per_year": 0.28,
+        "months_used": 102,
+        "first_month": "2002-04",
+        "last_month": "2010-12",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "trend_2016_present": {
+        "slope_cm_per_year": 1.29,
+        "standard_error_cm_per_year": 0.22,
+        "months_used": 111,
+        "first_month": "2016-01",
+        "last_month": "2026-08",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "observations_count": 258,
+      "gap_months_missing": 11
+    },
+    "mascon_1431": {
+      "regionName": "JPL mascon 1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 91.75,
+      "area_pct_inside_bangladesh": 18.43,
+      "districts_count": 6,
+      "districts": [
+        {
+          "id": "bandarban",
+          "name": "Bandarban"
+        },
+        {
+          "id": "barguna",
+          "name": "Barguna"
+        },
+        {
+          "id": "bhola",
+          "name": "Bhola"
+        },
+        {
+          "id": "chattogram",
+          "name": "Chattogram"
+        },
+        {
+          "id": "coxsbazar",
+          "name": "Cox's Bazar"
+        },
+        {
+          "id": "patuakhali",
+          "name": "Patuakhali"
+        }
+      ],
+      "latest_observation": {
+        "month": "2026-08",
+        "date": "2026-08-16",
+        "lwe_cm": -15.72
+      },
+      "trend_2002_2010": {
+        "slope_cm_per_year": 0.31,
+        "standard_error_cm_per_year": 0.17,
+        "months_used": 102,
+        "first_month": "2002-04",
+        "last_month": "2010-12",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "trend_2016_present": {
+        "slope_cm_per_year": -1.33,
+        "standard_error_cm_per_year": 0.16,
+        "months_used": 111,
+        "first_month": "2016-01",
+        "last_month": "2026-08",
+        "gap_note": "2017-07..2018-05 is missing (GRACE ended / GRACE-FO gap); not interpolated."
+      },
+      "observations_count": 258,
+      "gap_months_missing": 11
+    }
+  },
+  "district_region_map": {
+    "dhaka": {
+      "districtId": "dhaka",
+      "districtName": "Dhaka",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.25
+    },
+    "gazipur": {
+      "districtId": "gazipur",
+      "districtName": "Gazipur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 90.25
+    },
+    "narayanganj": {
+      "districtId": "narayanganj",
+      "districtName": "Narayanganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.25
+    },
+    "munshiganj": {
+      "districtId": "munshiganj",
+      "districtName": "Munshiganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.75
+    },
+    "narsingdi": {
+      "districtId": "narsingdi",
+      "districtName": "Narsingdi",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.75
+    },
+    "manikganj": {
+      "districtId": "manikganj",
+      "districtName": "Manikganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 90.25
+    },
+    "tangail": {
+      "districtId": "tangail",
+      "districtName": "Tangail",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 89.75
+    },
+    "kishoreganj": {
+      "districtId": "kishoreganj",
+      "districtName": "Kishoreganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 90.75
+    },
+    "faridpur": {
+      "districtId": "faridpur",
+      "districtName": "Faridpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 89.75
+    },
+    "rajbari": {
+      "districtId": "rajbari",
+      "districtName": "Rajbari",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 89.75
+    },
+    "shariatpur": {
+      "districtId": "shariatpur",
+      "districtName": "Shariatpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 90.25
+    },
+    "madaripur": {
+      "districtId": "madaripur",
+      "districtName": "Madaripur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 90.25
+    },
+    "gopalganj": {
+      "districtId": "gopalganj",
+      "districtName": "Gopalganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 89.75
+    },
+    "chattogram": {
+      "districtId": "chattogram",
+      "districtName": "Chattogram",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 91.75
+    },
+    "coxsbazar": {
+      "districtId": "coxsbazar",
+      "districtName": "Cox's Bazar",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 21.25,
+      "representative_cell_lon": 92.25
+    },
+    "cumilla": {
+      "districtId": "cumilla",
+      "districtName": "Cumilla",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 91.25
+    },
+    "chandpur": {
+      "districtId": "chandpur",
+      "districtName": "Chandpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 90.75
+    },
+    "noakhali": {
+      "districtId": "noakhali",
+      "districtName": "Noakhali",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 91.25
+    },
+    "feni": {
+      "districtId": "feni",
+      "districtName": "Feni",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 91.25
+    },
+    "lakshmipur": {
+      "districtId": "lakshmipur",
+      "districtName": "Lakshmipur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 90.75
+    },
+    "brahmanbaria": {
+      "districtId": "brahmanbaria",
+      "districtName": "Brahmanbaria",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 91.25
+    },
+    "rangamati": {
+      "districtId": "rangamati",
+      "districtName": "Rangamati",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 92.25
+    },
+    "khagrachari": {
+      "districtId": "khagrachari",
+      "districtName": "Khagrachari",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 91.75
+    },
+    "bandarban": {
+      "districtId": "bandarban",
+      "districtName": "Bandarban",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 92.25
+    },
+    "rajshahi": {
+      "districtId": "rajshahi",
+      "districtName": "Rajshahi",
+      "regionId": "mascon_1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 88.75
+    },
+    "bogura": {
+      "districtId": "bogura",
+      "districtName": "Bogura",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 89.25
+    },
+    "pabna": {
+      "districtId": "pabna",
+      "districtName": "Pabna",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 89.25
+    },
+    "sirajganj": {
+      "districtId": "sirajganj",
+      "districtName": "Sirajganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 89.75
+    },
+    "natore": {
+      "districtId": "natore",
+      "districtName": "Natore",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 89.25
+    },
+    "naogaon": {
+      "districtId": "naogaon",
+      "districtName": "Naogaon",
+      "regionId": "mascon_1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 88.75
+    },
+    "chapainawabganj": {
+      "districtId": "chapainawabganj",
+      "districtName": "Chapai Nawabganj",
+      "regionId": "mascon_1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 88.25
+    },
+    "joypurhat": {
+      "districtId": "joypurhat",
+      "districtName": "Joypurhat",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 25.25,
+      "representative_cell_lon": 89.25
+    },
+    "khulna": {
+      "districtId": "khulna",
+      "districtName": "Khulna",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 89.75
+    },
+    "jashore": {
+      "districtId": "jashore",
+      "districtName": "Jashore",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 89.25
+    },
+    "satkhira": {
+      "districtId": "satkhira",
+      "districtName": "Satkhira",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 89.25
+    },
+    "bagerhat": {
+      "districtId": "bagerhat",
+      "districtName": "Bagerhat",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 89.75
+    },
+    "kushtia": {
+      "districtId": "kushtia",
+      "districtName": "Kushtia",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 89.25
+    },
+    "jhenaidah": {
+      "districtId": "jhenaidah",
+      "districtName": "Jhenaidah",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 89.25
+    },
+    "magura": {
+      "districtId": "magura",
+      "districtName": "Magura",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 89.25
+    },
+    "narail": {
+      "districtId": "narail",
+      "districtName": "Narail",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 23.25,
+      "representative_cell_lon": 89.75
+    },
+    "meherpur": {
+      "districtId": "meherpur",
+      "districtName": "Meherpur",
+      "regionId": "mascon_1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 88.75
+    },
+    "chuadanga": {
+      "districtId": "chuadanga",
+      "districtName": "Chuadanga",
+      "regionId": "mascon_1320",
+      "mascon_id": 1320,
+      "representative_cell_lat": 23.75,
+      "representative_cell_lon": 88.75
+    },
+    "barishal": {
+      "districtId": "barishal",
+      "districtName": "Barishal",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 90.25
+    },
+    "patuakhali": {
+      "districtId": "patuakhali",
+      "districtName": "Patuakhali",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 90.25
+    },
+    "bhola": {
+      "districtId": "bhola",
+      "districtName": "Bhola",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 90.75
+    },
+    "pirojpur": {
+      "districtId": "pirojpur",
+      "districtName": "Pirojpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 89.75
+    },
+    "jhalokati": {
+      "districtId": "jhalokati",
+      "districtName": "Jhalokati",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 22.75,
+      "representative_cell_lon": 90.25
+    },
+    "barguna": {
+      "districtId": "barguna",
+      "districtName": "Barguna",
+      "regionId": "mascon_1431",
+      "mascon_id": 1431,
+      "representative_cell_lat": 22.25,
+      "representative_cell_lon": 90.25
+    },
+    "sylhet": {
+      "districtId": "sylhet",
+      "districtName": "Sylhet",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 91.75
+    },
+    "moulvibazar": {
+      "districtId": "moulvibazar",
+      "districtName": "Moulvibazar",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 91.75
+    },
+    "habiganj": {
+      "districtId": "habiganj",
+      "districtName": "Habiganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.25,
+      "representative_cell_lon": 91.25
+    },
+    "sunamganj": {
+      "districtId": "sunamganj",
+      "districtName": "Sunamganj",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 25.25,
+      "representative_cell_lon": 91.25
+    },
+    "rangpur": {
+      "districtId": "rangpur",
+      "districtName": "Rangpur",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 89.25
+    },
+    "dinajpur": {
+      "districtId": "dinajpur",
+      "districtName": "Dinajpur",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 88.75
+    },
+    "kurigram": {
+      "districtId": "kurigram",
+      "districtName": "Kurigram",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 89.75
+    },
+    "gaibandha": {
+      "districtId": "gaibandha",
+      "districtName": "Gaibandha",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 25.25,
+      "representative_cell_lon": 89.75
+    },
+    "lalmonirhat": {
+      "districtId": "lalmonirhat",
+      "districtName": "Lalmonirhat",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 89.25
+    },
+    "nilphamari": {
+      "districtId": "nilphamari",
+      "districtName": "Nilphamari",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 25.75,
+      "representative_cell_lon": 88.75
+    },
+    "panchagarh": {
+      "districtId": "panchagarh",
+      "districtName": "Panchagarh",
+      "regionId": "mascon_1214",
+      "mascon_id": 1214,
+      "representative_cell_lat": 26.25,
+      "representative_cell_lon": 88.75
+    },
+    "thakurgaon": {
+      "districtId": "thakurgaon",
+      "districtName": "Thakurgaon",
+      "regionId": "mascon_1213",
+      "mascon_id": 1213,
+      "representative_cell_lat": 26.25,
+      "representative_cell_lon": 88.25
+    },
+    "mymensingh": {
+      "districtId": "mymensingh",
+      "districtName": "Mymensingh",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 90.25
+    },
+    "jamalpur": {
+      "districtId": "jamalpur",
+      "districtName": "Jamalpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 89.75
+    },
+    "netrokona": {
+      "districtId": "netrokona",
+      "districtName": "Netrokona",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 24.75,
+      "representative_cell_lon": 90.75
+    },
+    "sherpur": {
+      "districtId": "sherpur",
+      "districtName": "Sherpur",
+      "regionId": "mascon_1321",
+      "mascon_id": 1321,
+      "representative_cell_lat": 25.25,
+      "representative_cell_lon": 90.25
+    }
+  }
+}

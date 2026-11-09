@@ -67,4 +67,4 @@ Background `#050B14` • Surface `#0B1626` • Electric Cyan `#00E5FF` (NASA / s
 - Map clicks reverse-geocode via OSM Nominatim with a local geometric fallback.
 - Curated agronomy profiles cover Rangpur, Rajshahi, Khulna, and Dhaka;
   other districts use labeled regional approximations until curated.
-- Rule-based only: no machine learning, no black box — every score has a written reason.
+- Explainable SI only: every score comes from a rule you can read. No black box.
