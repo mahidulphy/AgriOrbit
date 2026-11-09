@@ -1,0 +1,177 @@
+{
+  "_metadata": {
+    "product": "GPM_3IMERGDL.07",
+    "product_long_name": "GPM IMERG Late Precipitation L3 1 day 0.1 degree x 0.1 degree V07",
+    "version": "V07 (GPM_3IMERGDL.07, 3B-DAY-L.MS.MRG.3IMERG.*.V07C)",
+    "source": "NASA GES DISC",
+    "source_url": "https://gpm1.gesdisc.eosdis.nasa.gov/opendap/GPM_L3/GPM_3IMERGDL.07/",
+    "variable": "precipitation (daily accumulated liquid-equivalent precipitation in mm)",
+    "spatial_resolution": "0.1\u00b0 x 0.1\u00b0 (~10 km)",
+    "run_type": "Late Run (calibrated microwave + IR multi-satellite, ~14-hour latency)",
+    "final_run_note": "Final Run is not available for the rolling-window dates (latest Final granule found: 2025-09-30); the rolling window therefore uses the Late Run. A separate full-history backfill would use Final through 2025-09-30 and Late thereafter.",
+    "sampling": "Nearest 0.1\u00b0 IMERG grid cell to each district headquarters coordinate (docs/data/district_points.csv); no area aggregation.",
+    "window_start": "2026-10-09",
+    "window_end": "2026-11-07",
+    "ingested_at": "2026-11-09T06:43:17.483546+00:00",
+    "districts_count": 64,
+    "grid_dimensions": "precipitation(time, lon, lat)",
+    "dimension_order": "time, lon, lat",
+    "dimension_order_note": "OPeNDAP request is precipitation[time][lon][lat]; the parser receives one row per longitude (48 rows) and 63 latitude values per row. District selection is arr[lon_index, lat_index], not arr[lat_index, lon_index].",
+    "grid_slice": {
+      "lon_start_index": 2680,
+      "lon_end_index": 2727,
+      "lat_start_index": 1105,
+      "lat_end_index": 1167,
+      "lon_start_degrees": 88.05,
+      "lon_end_degrees": 92.75,
+      "lat_start_degrees": 20.55,
+      "lat_end_degrees": 26.75
+    }
+  },
+  "districtId": "satkhira",
+  "districtName": "Satkhira",
+  "latitude": 22.7185,
+  "longitude": 89.0707,
+  "gpm_30d_total_mm": 42.9,
+  "power_30d_total_mm": 53.2,
+  "power_30d_window": [
+    "2026-10-07",
+    "2026-11-05"
+  ],
+  "difference_mm": -10.3,
+  "power_same_window_total_mm": 49.8,
+  "power_same_window_days": 28,
+  "gpm_same_window_total_mm": 43.0,
+  "difference_same_window_mm": -6.8,
+  "extreme_rain_days_count": 0,
+  "extreme_rain_threshold_mm": 50.0,
+  "days_count": 30,
+  "valid_days_count": 30,
+  "daily_series": [
+    {
+      "date": "2026-10-09",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-10",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-11",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-12",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-13",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-14",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-15",
+      "precip_mm": 7.38
+    },
+    {
+      "date": "2026-10-16",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-17",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-18",
+      "precip_mm": 1.39
+    },
+    {
+      "date": "2026-10-19",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-20",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-21",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-22",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-23",
+      "precip_mm": 1.14
+    },
+    {
+      "date": "2026-10-24",
+      "precip_mm": 0.93
+    },
+    {
+      "date": "2026-10-25",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-26",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-10-27",
+      "precip_mm": 8.27
+    },
+    {
+      "date": "2026-10-28",
+      "precip_mm": 4.0
+    },
+    {
+      "date": "2026-10-29",
+      "precip_mm": 4.45
+    },
+    {
+      "date": "2026-10-30",
+      "precip_mm": 12.64
+    },
+    {
+      "date": "2026-10-31",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-01",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-02",
+      "precip_mm": 1.83
+    },
+    {
+      "date": "2026-11-03",
+      "precip_mm": 0.23
+    },
+    {
+      "date": "2026-11-04",
+      "precip_mm": 0.69
+    },
+    {
+      "date": "2026-11-05",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-06",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-07",
+      "precip_mm": 0.0
+    }
+  ],
+  "grid_cell_lat": 22.75,
+  "grid_cell_lon": 89.05,
+  "grid_lon_index": 2690,
+  "grid_lat_index": 1127,
+  "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation."
+}

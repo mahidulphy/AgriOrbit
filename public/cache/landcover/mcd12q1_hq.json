@@ -1,0 +1,136 @@
+{
+  "_metadata": {
+    "product": "MCD12Q1.061",
+    "product_long_name": "MODIS/Terra Land Cover Type Yearly L3 Global 500 m SIN Grid V061",
+    "collection": "061",
+    "source": "NASA LP DAAC",
+    "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MCD12Q1.061/MCD12Q1.A2023001.h26v06.061.2024252132255/MCD12Q1.A2023001.h26v06.061.2024252132255.hdf",
+    "granule": "MCD12Q1.A2023001.h26v06.061.2024252132255.hdf",
+    "layer": "LC_Type1 (IGBP classification)",
+    "acquisition_year": 2023,
+    "acquisition_date": "2023-01-01",
+    "spatial_resolution": "500 m x 500 m",
+    "temporal_resolution": "annual",
+    "tile": "h26v06",
+    "sampling": "Nearest 500 m MCD12Q1 pixel at each district headquarters coordinate and its 5x5 pixel neighbourhood (2.5 km x 2.5 km). No district-wide area fraction is computed from this point sample.",
+    "class_legend": {
+      "1": "Evergreen Needleleaf Forests",
+      "2": "Evergreen Broadleaf Forests",
+      "3": "Deciduous Needleleaf Forests",
+      "4": "Deciduous Broadleaf Forests",
+      "5": "Mixed Forests",
+      "6": "Closed Shrublands",
+      "7": "Open Shrublands",
+      "8": "Woody Savannas",
+      "9": "Savannas",
+      "10": "Grasslands",
+      "11": "Permanent Wetlands",
+      "12": "Croplands",
+      "13": "Urban and Built-up Lands",
+      "14": "Cropland/Natural Vegetation Mosaics",
+      "15": "Permanent Snow and Ice",
+      "16": "Barren",
+      "17": "Water Bodies",
+      "255": "Unclassified"
+    },
+    "caveat": "A 500 m land-cover class can mix urban, cropland and water within one pixel. The HQ point class describes that pixel, not the whole district. MCD12Q1 is not used to mask NDVI, LST or ET in this report.",
+    "cropland_mask_classes": [
+      12,
+      14
+    ],
+    "cropland_sampling_proposal": "If a cropland-only series is required, exclude classes 13 and 17, retain classes 12 and 14, and sample 5-10 separated 500 m cropland pixels per district or compute a cropland-area-weighted district mean. This would be a new extraction, not a correction to the current HQ point series.",
+    "downloaded_at": "2026-11-09T07:21:25.855907+00:00",
+    "processed_at": "2026-11-09T07:40:51.612414+00:00",
+    "python": "3.12 (pyhdf 0.11.7)"
+  },
+  "hq_points": {
+    "rangpur": {
+      "districtId": "rangpur",
+      "districtName": "Rangpur",
+      "latitude": 25.7439,
+      "longitude": 89.2752,
+      "tile": "h26v06",
+      "row": 1021,
+      "col": 99,
+      "center_class_code": 13,
+      "center_class_name": "Urban and Built-up Lands",
+      "center_is_urban": true,
+      "center_is_water": false,
+      "neighborhood_5x5_counts": {
+        "9": 1,
+        "12": 6,
+        "13": 10,
+        "14": 8
+      },
+      "neighborhood_5x5_named_counts": {
+        "Savannas": 1,
+        "Croplands": 6,
+        "Urban and Built-up Lands": 10,
+        "Cropland/Natural Vegetation Mosaics": 8
+      },
+      "neighborhood_5x5_urban_fraction": 0.4
+    },
+    "rajshahi": {
+      "districtId": "rajshahi",
+      "districtName": "Rajshahi",
+      "latitude": 24.3745,
+      "longitude": 88.6042,
+      "tile": "h26v06",
+      "row": 1350,
+      "col": 169,
+      "center_class_code": 13,
+      "center_class_name": "Urban and Built-up Lands",
+      "center_is_urban": true,
+      "center_is_water": false,
+      "neighborhood_5x5_counts": {
+        "9": 1,
+        "13": 24
+      },
+      "neighborhood_5x5_named_counts": {
+        "Savannas": 1,
+        "Urban and Built-up Lands": 24
+      },
+      "neighborhood_5x5_urban_fraction": 0.96
+    },
+    "sylhet": {
+      "districtId": "sylhet",
+      "districtName": "Sylhet",
+      "latitude": 24.8999,
+      "longitude": 91.8721,
+      "tile": "h26v06",
+      "row": 1224,
+      "col": 799,
+      "center_class_code": 13,
+      "center_class_name": "Urban and Built-up Lands",
+      "center_is_urban": true,
+      "center_is_water": false,
+      "neighborhood_5x5_counts": {
+        "9": 1,
+        "13": 24
+      },
+      "neighborhood_5x5_named_counts": {
+        "Savannas": 1,
+        "Urban and Built-up Lands": 24
+      },
+      "neighborhood_5x5_urban_fraction": 0.96
+    }
+  },
+  "checks": {
+    "dhaka": {
+      "latitude": 23.8103,
+      "longitude": 90.4125,
+      "row": 1485,
+      "col": 652,
+      "class_code": 13,
+      "class_name": "Urban and Built-up Lands"
+    },
+    "bay_of_bengal": {
+      "latitude": 21.5,
+      "longitude": 90.5,
+      "row": 2040,
+      "col": 1008,
+      "class_code": 17,
+      "class_name": "Water Bodies"
+    }
+  }
+}

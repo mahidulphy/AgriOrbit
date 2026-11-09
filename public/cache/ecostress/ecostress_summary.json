@@ -1,0 +1,2984 @@
+{
+  "_metadata": {
+    "source": "NASA LP DAAC via AppEEARS",
+    "source_url": "https://appeears.earthdatacloud.nasa.gov/api/task/eb4fcd8a-53bd-4707-b8ba-7991d7e78960",
+    "et_product": "ECO_L3T_JET.002",
+    "et_product_long_name": "ECOSTRESS Tiled Evapotranspiration Instantaneous and Daytime L3 Global 70 m v002",
+    "et_collection": "002",
+    "et_doi": "https://doi.org/10.5067/ECOSTRESS/ECO_L3T_JET.002",
+    "lst_product": "ECO_L2T_LSTE.002",
+    "lst_product_long_name": "ECOSTRESS Tiled Land Surface Temperature and Emissivity Instantaneous L2 Global 70 m v002",
+    "lst_collection": "002",
+    "lst_doi": "https://doi.org/10.5067/ECOSTRESS/ECO_L2T_LSTE.002",
+    "platform": "International Space Station (ISS)",
+    "spatial_resolution": "70 m x 70 m",
+    "period": "2019-01-01 to 2026-11-08",
+    "sampling": "Point extraction at each district headquarters coordinate; one 70 m pixel per overpass.",
+    "temporal_note": "ECOSTRESS has a non-sun-synchronous, precessing ISS orbit; revisit times are irregular and vary from hours to days. Discrete observations are kept as-is; no temporal interpolation.",
+    "timezone": "Asia/Dhaka (UTC+06:00; Bangladesh has no daylight saving)",
+    "solar_elevation_method": "NOAA approximate solar position from UTC timestamp and overpass latitude/longitude; used only for the day/night flag.",
+    "day_night_rule": "solar_elevation_deg > 0 = day; solar_elevation_deg <= 0 = night.",
+    "lst_daytime_series_note": "lst_series_daytime contains only LST observations with solar elevation > 0. The full lst_series retains both day and night overpasses; no interpolation.",
+    "et_day_night_note": "ETdaily is a daylight-integrated daily product; the day/night flag describes the overpass timestamp, not the ET integration window.",
+    "units": {
+      "et_daily_mm_per_day": "mm/day (native ECO_L3T_JET.002 ETdaily; LP DAAC ECO_L2-4 Grid Tile User Guide V2 section 5.4 defines ETdaily as the daily integrated ET in millimeters per day)",
+      "ptjplsm_instantaneous_w_m2": "W/m2 (native instantaneous PT-JPL-SM ET)",
+      "lst_celsius": "degrees C (converted from native Kelvin)"
+    },
+    "unit_note": "The Earthdata catalog table labels ETdaily as W/m2, but the LP DAAC User Guide V2 section 5.4 defines ETdaily as the daily ET integrated over daylight hours in mm/day. The downloaded values (0-5.93, median 1.86) are consistent with mm/day. Native values are reported as mm/day without rescaling.",
+    "qc_rules": {
+      "et": "ETdaily retained when 0 <= ETdaily <= 100 mm/day; no QC layer exists in ECO_L3T_JET.002.",
+      "lst": "LST retained only when cloud mask is Clear, L1B data quality is Good, the mandatory QA flag confirms the pixel was produced by TES, LST accuracy is not \">2 K (poor)\", and 250 K < LST < 350 K.",
+      "et_rows_rejected": 0,
+      "lst_rows_rejected": 39779
+    },
+    "downloaded_at": "2026-11-09T06:17:56.106072+00:00",
+    "processed_at": "2026-11-09T07:39:24.840267+00:00"
+  },
+  "districts": {
+    "bagerhat": {
+      "districtId": "bagerhat",
+      "districtName": "Bagerhat",
+      "coordinates": {
+        "latitude": 22.6516,
+        "longitude": 89.7856
+      },
+      "et_observations_count": 76,
+      "lst_observations_count": 116,
+      "et_observations_daytime_count": 76,
+      "lst_observations_daytime_count": 59,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.701,
+        "ptjplsm_instantaneous_w_m2": 46.7
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.9,
+        "day_night": "night",
+        "lst_celsius": 25.73,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.3,
+        "day_night": "day",
+        "lst_celsius": 30.01,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "bandarban": {
+      "districtId": "bandarban",
+      "districtName": "Bandarban",
+      "coordinates": {
+        "latitude": 22.1951,
+        "longitude": 92.2184
+      },
+      "et_observations_count": 91,
+      "lst_observations_count": 173,
+      "et_observations_daytime_count": 89,
+      "lst_observations_daytime_count": 77,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 40.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.058,
+        "ptjplsm_instantaneous_w_m2": 175.36
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -1.5,
+        "day_night": "night",
+        "lst_celsius": 24.35,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-04-06T01:46:58+00:00",
+        "date": "2026-04-06",
+        "datetime_local": "2026-04-06T07:46:58+06:00",
+        "local_time": "07:46",
+        "solar_elevation_deg": 28.6,
+        "day_night": "day",
+        "lst_celsius": 29.57,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "barguna": {
+      "districtId": "barguna",
+      "districtName": "Barguna",
+      "coordinates": {
+        "latitude": 22.159,
+        "longitude": 90.1278
+      },
+      "et_observations_count": 151,
+      "lst_observations_count": 227,
+      "et_observations_daytime_count": 149,
+      "lst_observations_daytime_count": 121,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.602,
+        "ptjplsm_instantaneous_w_m2": 40.03
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.6,
+        "day_night": "night",
+        "lst_celsius": 25.31,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.7,
+        "day_night": "day",
+        "lst_celsius": 28.75,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "barishal": {
+      "districtId": "barishal",
+      "districtName": "Barishal",
+      "coordinates": {
+        "latitude": 22.7029,
+        "longitude": 90.3466
+      },
+      "et_observations_count": 159,
+      "lst_observations_count": 211,
+      "et_observations_daytime_count": 157,
+      "lst_observations_daytime_count": 115,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.358,
+        "ptjplsm_instantaneous_w_m2": 250.56
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.4,
+        "day_night": "night",
+        "lst_celsius": 24.99,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-22T07:24:07+00:00",
+        "date": "2026-01-22",
+        "datetime_local": "2026-01-22T13:24:07+06:00",
+        "local_time": "13:24",
+        "solar_elevation_deg": 44.0,
+        "day_night": "day",
+        "lst_celsius": 27.23,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "bhola": {
+      "districtId": "bhola",
+      "districtName": "Bhola",
+      "coordinates": {
+        "latitude": 22.1785,
+        "longitude": 90.71
+      },
+      "et_observations_count": 163,
+      "lst_observations_count": 214,
+      "et_observations_daytime_count": 161,
+      "lst_observations_daytime_count": 123,
+      "latest_et": {
+        "datetime_utc": "2026-09-29T04:18:11+00:00",
+        "date": "2026-09-29",
+        "datetime_local": "2026-09-29T10:18:11+06:00",
+        "local_time": "10:18",
+        "solar_elevation_deg": 57.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 4.262,
+        "ptjplsm_instantaneous_w_m2": 454.33
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.0,
+        "day_night": "night",
+        "lst_celsius": 24.91,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-15T09:45:54+00:00",
+        "date": "2026-01-15",
+        "datetime_local": "2026-01-15T15:45:54+06:00",
+        "local_time": "15:45",
+        "solar_elevation_deg": 21.2,
+        "day_night": "day",
+        "lst_celsius": 23.17,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "bogura": {
+      "districtId": "bogura",
+      "districtName": "Bogura",
+      "coordinates": {
+        "latitude": 24.851,
+        "longitude": 89.3711
+      },
+      "et_observations_count": 61,
+      "lst_observations_count": 126,
+      "et_observations_daytime_count": 61,
+      "lst_observations_daytime_count": 42,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.9,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.126,
+        "ptjplsm_instantaneous_w_m2": 98.91
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-04-24T18:52:09+00:00",
+        "date": "2026-04-24",
+        "datetime_local": "2026-04-25T00:52:09+06:00",
+        "local_time": "00:52",
+        "solar_elevation_deg": -50.1,
+        "day_night": "night",
+        "lst_celsius": 29.11,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 46.1,
+        "day_night": "day",
+        "lst_celsius": 29.35,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "brahmanbaria": {
+      "districtId": "brahmanbaria",
+      "districtName": "Brahmanbaria",
+      "coordinates": {
+        "latitude": 23.9575,
+        "longitude": 91.1119
+      },
+      "et_observations_count": 163,
+      "lst_observations_count": 305,
+      "et_observations_daytime_count": 161,
+      "lst_observations_daytime_count": 127,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.6,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.587,
+        "ptjplsm_instantaneous_w_m2": 144.78
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.1,
+        "day_night": "night",
+        "lst_celsius": 28.03,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.3,
+        "day_night": "day",
+        "lst_celsius": 25.25,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "chandpur": {
+      "districtId": "chandpur",
+      "districtName": "Chandpur",
+      "coordinates": {
+        "latitude": 23.2333,
+        "longitude": 90.671
+      },
+      "et_observations_count": 188,
+      "lst_observations_count": 297,
+      "et_observations_daytime_count": 186,
+      "lst_observations_daytime_count": 144,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.928,
+        "ptjplsm_instantaneous_w_m2": 185.04
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -3.0,
+        "day_night": "night",
+        "lst_celsius": 26.33,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.5,
+        "day_night": "day",
+        "lst_celsius": 17.85,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "chapainawabganj": {
+      "districtId": "chapainawabganj",
+      "districtName": "Chapai Nawabganj",
+      "coordinates": {
+        "latitude": 24.5962,
+        "longitude": 88.277
+      },
+      "et_observations_count": 64,
+      "lst_observations_count": 129,
+      "et_observations_daytime_count": 63,
+      "lst_observations_daytime_count": 52,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.672,
+        "ptjplsm_instantaneous_w_m2": 81.99
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:51:47+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:51:47+06:00",
+        "local_time": "01:51",
+        "solar_elevation_deg": -58.4,
+        "day_night": "night",
+        "lst_celsius": 24.81,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.1,
+        "day_night": "day",
+        "lst_celsius": 29.05,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "chattogram": {
+      "districtId": "chattogram",
+      "districtName": "Chattogram",
+      "coordinates": {
+        "latitude": 22.3569,
+        "longitude": 91.7832
+      },
+      "et_observations_count": 93,
+      "lst_observations_count": 155,
+      "et_observations_daytime_count": 91,
+      "lst_observations_daytime_count": 76,
+      "latest_et": {
+        "datetime_utc": "2026-09-29T04:18:11+00:00",
+        "date": "2026-09-29",
+        "datetime_local": "2026-09-29T10:18:11+06:00",
+        "local_time": "10:18",
+        "solar_elevation_deg": 57.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.654,
+        "ptjplsm_instantaneous_w_m2": 246.06
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -2.1,
+        "day_night": "night",
+        "lst_celsius": 26.29,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 35.9,
+        "day_night": "day",
+        "lst_celsius": 28.29,
+        "lst_accuracy": "<1 K (Excellent performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "chuadanga": {
+      "districtId": "chuadanga",
+      "districtName": "Chuadanga",
+      "coordinates": {
+        "latitude": 23.6407,
+        "longitude": 88.8417
+      },
+      "et_observations_count": 67,
+      "lst_observations_count": 108,
+      "et_observations_daytime_count": 67,
+      "lst_observations_daytime_count": 51,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.9,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.515,
+        "ptjplsm_instantaneous_w_m2": 96.56
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -68.2,
+        "day_night": "night",
+        "lst_celsius": 24.47,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.9,
+        "day_night": "day",
+        "lst_celsius": 28.85,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "coxsbazar": {
+      "districtId": "coxsbazar",
+      "districtName": "Cox's Bazar",
+      "coordinates": {
+        "latitude": 21.4272,
+        "longitude": 92.0058
+      },
+      "et_observations_count": 93,
+      "lst_observations_count": 143,
+      "et_observations_daytime_count": 91,
+      "lst_observations_daytime_count": 73,
+      "latest_et": {
+        "datetime_utc": "2026-09-21T07:24:15+00:00",
+        "date": "2026-09-21",
+        "datetime_local": "2026-09-21T13:24:15+06:00",
+        "local_time": "13:24",
+        "solar_elevation_deg": 58.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.472,
+        "ptjplsm_instantaneous_w_m2": 312.42
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -1.8,
+        "day_night": "night",
+        "lst_celsius": 25.71,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-03-16T10:10:05+00:00",
+        "date": "2026-03-16",
+        "datetime_local": "2026-03-16T16:10:05+06:00",
+        "local_time": "16:10",
+        "solar_elevation_deg": 24.9,
+        "day_night": "day",
+        "lst_celsius": 29.05,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "cumilla": {
+      "districtId": "cumilla",
+      "districtName": "Cumilla",
+      "coordinates": {
+        "latitude": 23.4683,
+        "longitude": 91.1788
+      },
+      "et_observations_count": 170,
+      "lst_observations_count": 322,
+      "et_observations_daytime_count": 168,
+      "lst_observations_daytime_count": 146,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.8,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.145,
+        "ptjplsm_instantaneous_w_m2": 237.15
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -2.6,
+        "day_night": "night",
+        "lst_celsius": 24.69,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.7,
+        "day_night": "day",
+        "lst_celsius": 17.07,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "dhaka": {
+      "districtId": "dhaka",
+      "districtName": "Dhaka",
+      "coordinates": {
+        "latitude": 23.8103,
+        "longitude": 90.4125
+      },
+      "et_observations_count": 138,
+      "lst_observations_count": 301,
+      "et_observations_daytime_count": 138,
+      "lst_observations_daytime_count": 112,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.413,
+        "ptjplsm_instantaneous_w_m2": 178.59
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.7,
+        "day_night": "night",
+        "lst_celsius": 27.39,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.3,
+        "day_night": "day",
+        "lst_celsius": 27.71,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "dinajpur": {
+      "districtId": "dinajpur",
+      "districtName": "Dinajpur",
+      "coordinates": {
+        "latitude": 25.6217,
+        "longitude": 88.6355
+      },
+      "et_observations_count": 63,
+      "lst_observations_count": 131,
+      "et_observations_daytime_count": 63,
+      "lst_observations_daytime_count": 49,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.446,
+        "ptjplsm_instantaneous_w_m2": 97.99
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:52:39+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:52:39+06:00",
+        "local_time": "01:52",
+        "solar_elevation_deg": -57.5,
+        "day_night": "night",
+        "lst_celsius": 25.23,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-03-19T09:26:27+00:00",
+        "date": "2026-03-19",
+        "datetime_local": "2026-03-19T15:26:27+06:00",
+        "local_time": "15:26",
+        "solar_elevation_deg": 36.6,
+        "day_night": "day",
+        "lst_celsius": 33.07,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "faridpur": {
+      "districtId": "faridpur",
+      "districtName": "Faridpur",
+      "coordinates": {
+        "latitude": 23.6071,
+        "longitude": 89.8426
+      },
+      "et_observations_count": 66,
+      "lst_observations_count": 112,
+      "et_observations_daytime_count": 66,
+      "lst_observations_daytime_count": 48,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 37.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.199,
+        "ptjplsm_instantaneous_w_m2": 228.85
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.4,
+        "day_night": "night",
+        "lst_celsius": 25.69,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 37.7,
+        "day_night": "day",
+        "lst_celsius": 32.13,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "feni": {
+      "districtId": "feni",
+      "districtName": "Feni",
+      "coordinates": {
+        "latitude": 23.0159,
+        "longitude": 91.3976
+      },
+      "et_observations_count": 94,
+      "lst_observations_count": 163,
+      "et_observations_daytime_count": 91,
+      "lst_observations_daytime_count": 73,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 39.2,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.82,
+        "ptjplsm_instantaneous_w_m2": 166.91
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -2.3,
+        "day_night": "night",
+        "lst_celsius": 24.67,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 35.1,
+        "day_night": "day",
+        "lst_celsius": 20.33,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "gaibandha": {
+      "districtId": "gaibandha",
+      "districtName": "Gaibandha",
+      "coordinates": {
+        "latitude": 25.3288,
+        "longitude": 89.5281
+      },
+      "et_observations_count": 55,
+      "lst_observations_count": 129,
+      "et_observations_daytime_count": 55,
+      "lst_observations_daytime_count": 44,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:06:16+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:06:16+06:00",
+        "local_time": "11:06",
+        "solar_elevation_deg": 60.4,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.273,
+        "ptjplsm_instantaneous_w_m2": 304.83
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.7,
+        "day_night": "night",
+        "lst_celsius": 23.69,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-03-19T09:26:27+00:00",
+        "date": "2026-03-19",
+        "datetime_local": "2026-03-19T15:26:27+06:00",
+        "local_time": "15:26",
+        "solar_elevation_deg": 35.9,
+        "day_night": "day",
+        "lst_celsius": 33.93,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "gazipur": {
+      "districtId": "gazipur",
+      "districtName": "Gazipur",
+      "coordinates": {
+        "latitude": 24.0023,
+        "longitude": 90.4266
+      },
+      "et_observations_count": 148,
+      "lst_observations_count": 264,
+      "et_observations_daytime_count": 148,
+      "lst_observations_daytime_count": 110,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.316,
+        "ptjplsm_instantaneous_w_m2": 175.17
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.6,
+        "day_night": "night",
+        "lst_celsius": 25.81,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.0,
+        "day_night": "day",
+        "lst_celsius": 36.75,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "gopalganj": {
+      "districtId": "gopalganj",
+      "districtName": "Gopalganj",
+      "coordinates": {
+        "latitude": 23.0055,
+        "longitude": 89.8266
+      },
+      "et_observations_count": 67,
+      "lst_observations_count": 116,
+      "et_observations_daytime_count": 67,
+      "lst_observations_daytime_count": 50,
+      "latest_et": {
+        "datetime_utc": "2026-09-21T07:24:15+00:00",
+        "date": "2026-09-21",
+        "datetime_local": "2026-09-21T13:24:15+06:00",
+        "local_time": "13:24",
+        "solar_elevation_deg": 58.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.63,
+        "ptjplsm_instantaneous_w_m2": 266.38
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.9,
+        "day_night": "night",
+        "lst_celsius": 25.91,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 48.0,
+        "day_night": "day",
+        "lst_celsius": 26.91,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "habiganj": {
+      "districtId": "habiganj",
+      "districtName": "Habiganj",
+      "coordinates": {
+        "latitude": 24.3749,
+        "longitude": 91.4152
+      },
+      "et_observations_count": 157,
+      "lst_observations_count": 300,
+      "et_observations_daytime_count": 157,
+      "lst_observations_daytime_count": 121,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.6,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.266,
+        "ptjplsm_instantaneous_w_m2": 249.0
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -65.6,
+        "day_night": "night",
+        "lst_celsius": 26.29,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 46.8,
+        "day_night": "day",
+        "lst_celsius": 27.49,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "jamalpur": {
+      "districtId": "jamalpur",
+      "districtName": "Jamalpur",
+      "coordinates": {
+        "latitude": 24.9376,
+        "longitude": 89.9371
+      },
+      "et_observations_count": 59,
+      "lst_observations_count": 120,
+      "et_observations_daytime_count": 59,
+      "lst_observations_daytime_count": 41,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.4,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.803,
+        "ptjplsm_instantaneous_w_m2": 149.76
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.5,
+        "day_night": "night",
+        "lst_celsius": 27.23,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 46.1,
+        "day_night": "day",
+        "lst_celsius": 27.69,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "jashore": {
+      "districtId": "jashore",
+      "districtName": "Jashore",
+      "coordinates": {
+        "latitude": 23.1697,
+        "longitude": 89.2148
+      },
+      "et_observations_count": 71,
+      "lst_observations_count": 111,
+      "et_observations_daytime_count": 71,
+      "lst_observations_daytime_count": 51,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 16.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.753,
+        "ptjplsm_instantaneous_w_m2": 47.05
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -68.2,
+        "day_night": "night",
+        "lst_celsius": 25.49,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 16.7,
+        "day_night": "day",
+        "lst_celsius": 26.07,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "jhalokati": {
+      "districtId": "jhalokati",
+      "districtName": "Jhalokati",
+      "coordinates": {
+        "latitude": 22.6417,
+        "longitude": 90.1987
+      },
+      "et_observations_count": 175,
+      "lst_observations_count": 259,
+      "et_observations_daytime_count": 173,
+      "lst_observations_daytime_count": 134,
+      "latest_et": {
+        "datetime_utc": "2026-09-29T04:18:11+00:00",
+        "date": "2026-09-29",
+        "datetime_local": "2026-09-29T10:18:11+06:00",
+        "local_time": "10:18",
+        "solar_elevation_deg": 56.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.861,
+        "ptjplsm_instantaneous_w_m2": 228.85
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.6,
+        "day_night": "night",
+        "lst_celsius": 25.43,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.6,
+        "day_night": "day",
+        "lst_celsius": 17.27,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "jhenaidah": {
+      "districtId": "jhenaidah",
+      "districtName": "Jhenaidah",
+      "coordinates": {
+        "latitude": 23.5454,
+        "longitude": 89.153
+      },
+      "et_observations_count": 63,
+      "lst_observations_count": 101,
+      "et_observations_daytime_count": 63,
+      "lst_observations_daytime_count": 49,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:05:24+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:05:24+06:00",
+        "local_time": "11:05",
+        "solar_elevation_deg": 61.8,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.88,
+        "ptjplsm_instantaneous_w_m2": 302.66
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -68.0,
+        "day_night": "night",
+        "lst_celsius": 24.67,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.4,
+        "day_night": "day",
+        "lst_celsius": 26.91,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "joypurhat": {
+      "districtId": "joypurhat",
+      "districtName": "Joypurhat",
+      "coordinates": {
+        "latitude": 25.0947,
+        "longitude": 89.0945
+      },
+      "et_observations_count": 57,
+      "lst_observations_count": 107,
+      "et_observations_daytime_count": 57,
+      "lst_observations_daytime_count": 44,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.6,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.595,
+        "ptjplsm_instantaneous_w_m2": 136.68
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:52:39+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:52:39+06:00",
+        "local_time": "01:52",
+        "solar_elevation_deg": -57.3,
+        "day_night": "night",
+        "lst_celsius": 23.09,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.6,
+        "day_night": "day",
+        "lst_celsius": 28.15,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "khagrachari": {
+      "districtId": "khagrachari",
+      "districtName": "Khagrachari",
+      "coordinates": {
+        "latitude": 23.1193,
+        "longitude": 91.9847
+      },
+      "et_observations_count": 86,
+      "lst_observations_count": 158,
+      "et_observations_daytime_count": 84,
+      "lst_observations_daytime_count": 76,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 39.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.079,
+        "ptjplsm_instantaneous_w_m2": 248.62
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -1.8,
+        "day_night": "night",
+        "lst_celsius": 23.37,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 35.5,
+        "day_night": "day",
+        "lst_celsius": 16.17,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "khulna": {
+      "districtId": "khulna",
+      "districtName": "Khulna",
+      "coordinates": {
+        "latitude": 22.8456,
+        "longitude": 89.5403
+      },
+      "et_observations_count": 72,
+      "lst_observations_count": 113,
+      "et_observations_daytime_count": 72,
+      "lst_observations_daytime_count": 52,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.76,
+        "ptjplsm_instantaneous_w_m2": 42.36
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -4.2,
+        "day_night": "night",
+        "lst_celsius": 26.83,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.0,
+        "day_night": "day",
+        "lst_celsius": 27.01,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "kishoreganj": {
+      "districtId": "kishoreganj",
+      "districtName": "Kishoreganj",
+      "coordinates": {
+        "latitude": 24.4447,
+        "longitude": 90.7763
+      },
+      "et_observations_count": 135,
+      "lst_observations_count": 254,
+      "et_observations_daytime_count": 135,
+      "lst_observations_daytime_count": 103,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.925,
+        "ptjplsm_instantaneous_w_m2": 119.42
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.1,
+        "day_night": "night",
+        "lst_celsius": 24.35,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.1,
+        "day_night": "day",
+        "lst_celsius": 37.85,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "kurigram": {
+      "districtId": "kurigram",
+      "districtName": "Kurigram",
+      "coordinates": {
+        "latitude": 25.8072,
+        "longitude": 89.6292
+      },
+      "et_observations_count": 55,
+      "lst_observations_count": 125,
+      "et_observations_daytime_count": 54,
+      "lst_observations_daytime_count": 40,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.8,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.926,
+        "ptjplsm_instantaneous_w_m2": 102.76
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:52:39+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:52:39+06:00",
+        "local_time": "01:52",
+        "solar_elevation_deg": -56.6,
+        "day_night": "night",
+        "lst_celsius": 23.19,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.8,
+        "day_night": "day",
+        "lst_celsius": 27.23,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "kushtia": {
+      "districtId": "kushtia",
+      "districtName": "Kushtia",
+      "coordinates": {
+        "latitude": 23.8907,
+        "longitude": 89.1301
+      },
+      "et_observations_count": 59,
+      "lst_observations_count": 119,
+      "et_observations_daytime_count": 59,
+      "lst_observations_daytime_count": 53,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.052,
+        "ptjplsm_instantaneous_w_m2": 83.52
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.9,
+        "day_night": "night",
+        "lst_celsius": 25.87,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.0,
+        "day_night": "day",
+        "lst_celsius": 29.39,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "lakshmipur": {
+      "districtId": "lakshmipur",
+      "districtName": "Lakshmipur",
+      "coordinates": {
+        "latitude": 22.9444,
+        "longitude": 90.8282
+      },
+      "et_observations_count": 169,
+      "lst_observations_count": 262,
+      "et_observations_daytime_count": 167,
+      "lst_observations_daytime_count": 131,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.8,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.438,
+        "ptjplsm_instantaneous_w_m2": 258.87
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.0,
+        "day_night": "night",
+        "lst_celsius": 25.03,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.8,
+        "day_night": "day",
+        "lst_celsius": 22.57,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "lalmonirhat": {
+      "districtId": "lalmonirhat",
+      "districtName": "Lalmonirhat",
+      "coordinates": {
+        "latitude": 25.9923,
+        "longitude": 89.2847
+      },
+      "et_observations_count": 55,
+      "lst_observations_count": 111,
+      "et_observations_daytime_count": 54,
+      "lst_observations_daytime_count": 38,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.377,
+        "ptjplsm_instantaneous_w_m2": 149.49
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.3,
+        "day_night": "night",
+        "lst_celsius": 22.43,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 45.0,
+        "day_night": "day",
+        "lst_celsius": 28.31,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "madaripur": {
+      "districtId": "madaripur",
+      "districtName": "Madaripur",
+      "coordinates": {
+        "latitude": 23.1641,
+        "longitude": 90.1894
+      },
+      "et_observations_count": 157,
+      "lst_observations_count": 206,
+      "et_observations_daytime_count": 157,
+      "lst_observations_daytime_count": 110,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.2,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.361,
+        "ptjplsm_instantaneous_w_m2": 140.07
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.6,
+        "day_night": "night",
+        "lst_celsius": 26.39,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.9,
+        "day_night": "day",
+        "lst_celsius": 27.65,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "magura": {
+      "districtId": "magura",
+      "districtName": "Magura",
+      "coordinates": {
+        "latitude": 23.4859,
+        "longitude": 89.4194
+      },
+      "et_observations_count": 133,
+      "lst_observations_count": 205,
+      "et_observations_daytime_count": 133,
+      "lst_observations_daytime_count": 96,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:05:24+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:05:24+06:00",
+        "local_time": "11:05",
+        "solar_elevation_deg": 62.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.627,
+        "ptjplsm_instantaneous_w_m2": 278.1
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.8,
+        "day_night": "night",
+        "lst_celsius": 26.47,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.5,
+        "day_night": "day",
+        "lst_celsius": 28.31,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "manikganj": {
+      "districtId": "manikganj",
+      "districtName": "Manikganj",
+      "coordinates": {
+        "latitude": 23.8617,
+        "longitude": 90.0003
+      },
+      "et_observations_count": 139,
+      "lst_observations_count": 250,
+      "et_observations_daytime_count": 139,
+      "lst_observations_daytime_count": 109,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 37.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.83,
+        "ptjplsm_instantaneous_w_m2": 196.47
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.2,
+        "day_night": "night",
+        "lst_celsius": 24.71,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 37.7,
+        "day_night": "day",
+        "lst_celsius": 35.53,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "meherpur": {
+      "districtId": "meherpur",
+      "districtName": "Meherpur",
+      "coordinates": {
+        "latitude": 23.7623,
+        "longitude": 88.6318
+      },
+      "et_observations_count": 56,
+      "lst_observations_count": 108,
+      "et_observations_daytime_count": 56,
+      "lst_observations_daytime_count": 52,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.456,
+        "ptjplsm_instantaneous_w_m2": 78.18
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.7,
+        "day_night": "day",
+        "lst_celsius": 28.65,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.7,
+        "day_night": "day",
+        "lst_celsius": 28.65,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "moulvibazar": {
+      "districtId": "moulvibazar",
+      "districtName": "Moulvibazar",
+      "coordinates": {
+        "latitude": 24.4829,
+        "longitude": 91.764
+      },
+      "et_observations_count": 75,
+      "lst_observations_count": 142,
+      "et_observations_daytime_count": 73,
+      "lst_observations_daytime_count": 60,
+      "latest_et": {
+        "datetime_utc": "2026-09-29T04:19:03+00:00",
+        "date": "2026-09-29",
+        "datetime_local": "2026-09-29T10:19:03+06:00",
+        "local_time": "10:19",
+        "solar_elevation_deg": 56.2,
+        "day_night": "day",
+        "et_daily_mm_per_day": 4.262,
+        "ptjplsm_instantaneous_w_m2": 456.51
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -65.3,
+        "day_night": "night",
+        "lst_celsius": 24.51,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:36:47+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:36:47+06:00",
+        "local_time": "09:36",
+        "solar_elevation_deg": 34.5,
+        "day_night": "day",
+        "lst_celsius": 24.21,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "munshiganj": {
+      "districtId": "munshiganj",
+      "districtName": "Munshiganj",
+      "coordinates": {
+        "latitude": 23.5529,
+        "longitude": 90.5337
+      },
+      "et_observations_count": 154,
+      "lst_observations_count": 259,
+      "et_observations_daytime_count": 154,
+      "lst_observations_daytime_count": 121,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.636,
+        "ptjplsm_instantaneous_w_m2": 172.02
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -3.2,
+        "day_night": "night",
+        "lst_celsius": 25.35,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.5,
+        "day_night": "day",
+        "lst_celsius": 26.17,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "mymensingh": {
+      "districtId": "mymensingh",
+      "districtName": "Mymensingh",
+      "coordinates": {
+        "latitude": 24.7471,
+        "longitude": 90.4203
+      },
+      "et_observations_count": 122,
+      "lst_observations_count": 262,
+      "et_observations_daytime_count": 122,
+      "lst_observations_daytime_count": 93,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:06:16+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:06:16+06:00",
+        "local_time": "11:06",
+        "solar_elevation_deg": 61.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.753,
+        "ptjplsm_instantaneous_w_m2": 228.51
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.2,
+        "day_night": "night",
+        "lst_celsius": 25.37,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 46.3,
+        "day_night": "day",
+        "lst_celsius": 29.67,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "naogaon": {
+      "districtId": "naogaon",
+      "districtName": "Naogaon",
+      "coordinates": {
+        "latitude": 24.9132,
+        "longitude": 88.7531
+      },
+      "et_observations_count": 61,
+      "lst_observations_count": 134,
+      "et_observations_daytime_count": 60,
+      "lst_observations_daytime_count": 53,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.4,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.384,
+        "ptjplsm_instantaneous_w_m2": 112.93
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:51:47+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:51:47+06:00",
+        "local_time": "01:51",
+        "solar_elevation_deg": -57.8,
+        "day_night": "night",
+        "lst_celsius": 24.47,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.4,
+        "day_night": "day",
+        "lst_celsius": 28.79,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "narail": {
+      "districtId": "narail",
+      "districtName": "Narail",
+      "coordinates": {
+        "latitude": 23.1725,
+        "longitude": 89.5126
+      },
+      "et_observations_count": 67,
+      "lst_observations_count": 118,
+      "et_observations_daytime_count": 67,
+      "lst_observations_daytime_count": 51,
+      "latest_et": {
+        "datetime_utc": "2026-06-03T03:13:35+00:00",
+        "date": "2026-06-03",
+        "datetime_local": "2026-06-03T09:13:35+06:00",
+        "local_time": "09:13",
+        "solar_elevation_deg": 51.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 4.659,
+        "ptjplsm_instantaneous_w_m2": 370.87
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.9,
+        "day_night": "night",
+        "lst_celsius": 26.49,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.8,
+        "day_night": "day",
+        "lst_celsius": 24.83,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "narayanganj": {
+      "districtId": "narayanganj",
+      "districtName": "Narayanganj",
+      "coordinates": {
+        "latitude": 23.6239,
+        "longitude": 90.4997
+      },
+      "et_observations_count": 167,
+      "lst_observations_count": 283,
+      "et_observations_daytime_count": 167,
+      "lst_observations_daytime_count": 119,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.2,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.356,
+        "ptjplsm_instantaneous_w_m2": 161.96
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -66.9,
+        "day_night": "night",
+        "lst_celsius": 27.37,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-03-16T10:10:05+00:00",
+        "date": "2026-03-16",
+        "datetime_local": "2026-03-16T16:10:05+06:00",
+        "local_time": "16:10",
+        "solar_elevation_deg": 25.7,
+        "day_night": "day",
+        "lst_celsius": 33.37,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "narsingdi": {
+      "districtId": "narsingdi",
+      "districtName": "Narsingdi",
+      "coordinates": {
+        "latitude": 23.9227,
+        "longitude": 90.7172
+      },
+      "et_observations_count": 165,
+      "lst_observations_count": 271,
+      "et_observations_daytime_count": 165,
+      "lst_observations_daytime_count": 110,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.761,
+        "ptjplsm_instantaneous_w_m2": 198.18
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.4,
+        "day_night": "night",
+        "lst_celsius": 26.55,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.2,
+        "day_night": "day",
+        "lst_celsius": 28.49,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "natore": {
+      "districtId": "natore",
+      "districtName": "Natore",
+      "coordinates": {
+        "latitude": 24.4102,
+        "longitude": 89.0076
+      },
+      "et_observations_count": 115,
+      "lst_observations_count": 242,
+      "et_observations_daytime_count": 115,
+      "lst_observations_daytime_count": 93,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.8,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.06,
+        "ptjplsm_instantaneous_w_m2": 122.04
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-13T22:57:25+00:00",
+        "date": "2026-10-13",
+        "datetime_local": "2026-10-14T04:57:25+06:00",
+        "local_time": "04:57",
+        "solar_elevation_deg": -15.3,
+        "day_night": "night",
+        "lst_celsius": 25.97,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.8,
+        "day_night": "day",
+        "lst_celsius": 20.25,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "netrokona": {
+      "districtId": "netrokona",
+      "districtName": "Netrokona",
+      "coordinates": {
+        "latitude": 24.8831,
+        "longitude": 90.7297
+      },
+      "et_observations_count": 122,
+      "lst_observations_count": 244,
+      "et_observations_daytime_count": 122,
+      "lst_observations_daytime_count": 90,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:06:16+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:06:16+06:00",
+        "local_time": "11:06",
+        "solar_elevation_deg": 61.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.725,
+        "ptjplsm_instantaneous_w_m2": 442.12
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -65.9,
+        "day_night": "night",
+        "lst_celsius": 24.17,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 46.2,
+        "day_night": "day",
+        "lst_celsius": 28.05,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "nilphamari": {
+      "districtId": "nilphamari",
+      "districtName": "Nilphamari",
+      "coordinates": {
+        "latitude": 25.931,
+        "longitude": 88.8562
+      },
+      "et_observations_count": 54,
+      "lst_observations_count": 119,
+      "et_observations_daytime_count": 54,
+      "lst_observations_daytime_count": 40,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.199,
+        "ptjplsm_instantaneous_w_m2": 169.55
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.5,
+        "day_night": "night",
+        "lst_celsius": 23.49,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 45.0,
+        "day_night": "day",
+        "lst_celsius": 26.61,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "noakhali": {
+      "districtId": "noakhali",
+      "districtName": "Noakhali",
+      "coordinates": {
+        "latitude": 22.8698,
+        "longitude": 91.0995
+      },
+      "et_observations_count": 183,
+      "lst_observations_count": 312,
+      "et_observations_daytime_count": 179,
+      "lst_observations_daytime_count": 145,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 39.0,
+        "day_night": "day",
+        "et_daily_mm_per_day": 3.183,
+        "ptjplsm_instantaneous_w_m2": 232.45
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -2.8,
+        "day_night": "night",
+        "lst_celsius": 27.01,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-27T05:06:26+00:00",
+        "date": "2026-01-27",
+        "datetime_local": "2026-01-27T11:06:26+06:00",
+        "local_time": "11:06",
+        "solar_elevation_deg": 46.0,
+        "day_night": "day",
+        "lst_celsius": 27.13,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "pabna": {
+      "districtId": "pabna",
+      "districtName": "Pabna",
+      "coordinates": {
+        "latitude": 24.0129,
+        "longitude": 89.2598
+      },
+      "et_observations_count": 61,
+      "lst_observations_count": 120,
+      "et_observations_daytime_count": 61,
+      "lst_observations_daytime_count": 52,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.027,
+        "ptjplsm_instantaneous_w_m2": 117.42
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.7,
+        "day_night": "night",
+        "lst_celsius": 25.63,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 46.9,
+        "day_night": "day",
+        "lst_celsius": 26.81,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "panchagarh": {
+      "districtId": "panchagarh",
+      "districtName": "Panchagarh",
+      "coordinates": {
+        "latitude": 26.3411,
+        "longitude": 88.5542
+      },
+      "et_observations_count": 51,
+      "lst_observations_count": 105,
+      "et_observations_daytime_count": 50,
+      "lst_observations_daytime_count": 35,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 25.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.706,
+        "ptjplsm_instantaneous_w_m2": 74.97
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.3,
+        "day_night": "night",
+        "lst_celsius": 21.89,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 44.6,
+        "day_night": "day",
+        "lst_celsius": 28.53,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "patuakhali": {
+      "districtId": "patuakhali",
+      "districtName": "Patuakhali",
+      "coordinates": {
+        "latitude": 22.3596,
+        "longitude": 90.3299
+      },
+      "et_observations_count": 163,
+      "lst_observations_count": 243,
+      "et_observations_daytime_count": 161,
+      "lst_observations_daytime_count": 132,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.9,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.686,
+        "ptjplsm_instantaneous_w_m2": 48.48
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.4,
+        "day_night": "night",
+        "lst_celsius": 26.59,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.9,
+        "day_night": "day",
+        "lst_celsius": 28.21,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "pirojpur": {
+      "districtId": "pirojpur",
+      "districtName": "Pirojpur",
+      "coordinates": {
+        "latitude": 22.584,
+        "longitude": 89.9723
+      },
+      "et_observations_count": 139,
+      "lst_observations_count": 216,
+      "et_observations_daytime_count": 137,
+      "lst_observations_daytime_count": 102,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.002,
+        "ptjplsm_instantaneous_w_m2": 64.38
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.8,
+        "day_night": "night",
+        "lst_celsius": 24.91,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 17.5,
+        "day_night": "day",
+        "lst_celsius": 29.55,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "rajbari": {
+      "districtId": "rajbari",
+      "districtName": "Rajbari",
+      "coordinates": {
+        "latitude": 23.7132,
+        "longitude": 89.6482
+      },
+      "et_observations_count": 62,
+      "lst_observations_count": 99,
+      "et_observations_daytime_count": 62,
+      "lst_observations_daytime_count": 46,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:05:24+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:05:24+06:00",
+        "local_time": "11:05",
+        "solar_elevation_deg": 61.9,
+        "day_night": "day",
+        "et_daily_mm_per_day": 4.023,
+        "ptjplsm_instantaneous_w_m2": 457.96
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -67.5,
+        "day_night": "night",
+        "lst_celsius": 25.19,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 47.3,
+        "day_night": "day",
+        "lst_celsius": 25.73,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "rajshahi": {
+      "districtId": "rajshahi",
+      "districtName": "Rajshahi",
+      "coordinates": {
+        "latitude": 24.3745,
+        "longitude": 88.6042
+      },
+      "et_observations_count": 125,
+      "lst_observations_count": 265,
+      "et_observations_daytime_count": 125,
+      "lst_observations_daytime_count": 104,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.4,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.996,
+        "ptjplsm_instantaneous_w_m2": 93.59
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-21T19:51:47+00:00",
+        "date": "2026-10-21",
+        "datetime_local": "2026-10-22T01:51:47+06:00",
+        "local_time": "01:51",
+        "solar_elevation_deg": -58.2,
+        "day_night": "night",
+        "lst_celsius": 25.67,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.4,
+        "day_night": "day",
+        "lst_celsius": 28.99,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "rangamati": {
+      "districtId": "rangamati",
+      "districtName": "Rangamati",
+      "coordinates": {
+        "latitude": 22.7324,
+        "longitude": 92.2985
+      },
+      "et_observations_count": 89,
+      "lst_observations_count": 170,
+      "et_observations_daytime_count": 87,
+      "lst_observations_daytime_count": 71,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 40.1,
+        "day_night": "day",
+        "et_daily_mm_per_day": 4.171,
+        "ptjplsm_instantaneous_w_m2": 342.19
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:43:00+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:43:00+06:00",
+        "local_time": "05:43",
+        "solar_elevation_deg": -1.5,
+        "day_night": "night",
+        "lst_celsius": 29.49,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-04-10T00:14:16+00:00",
+        "date": "2026-04-10",
+        "datetime_local": "2026-04-10T06:14:16+06:00",
+        "local_time": "06:14",
+        "solar_elevation_deg": 8.1,
+        "day_night": "day",
+        "lst_celsius": 23.23,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "rangpur": {
+      "districtId": "rangpur",
+      "districtName": "Rangpur",
+      "coordinates": {
+        "latitude": 25.7439,
+        "longitude": 89.2752
+      },
+      "et_observations_count": 55,
+      "lst_observations_count": 125,
+      "et_observations_daytime_count": 54,
+      "lst_observations_daytime_count": 43,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.252,
+        "ptjplsm_instantaneous_w_m2": 109.5
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.5,
+        "day_night": "night",
+        "lst_celsius": 24.15,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 26.5,
+        "day_night": "day",
+        "lst_celsius": 27.27,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "satkhira": {
+      "districtId": "satkhira",
+      "districtName": "Satkhira",
+      "coordinates": {
+        "latitude": 22.7185,
+        "longitude": 89.0707
+      },
+      "et_observations_count": 66,
+      "lst_observations_count": 109,
+      "et_observations_daytime_count": 66,
+      "lst_observations_daytime_count": 50,
+      "latest_et": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 16.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.101,
+        "ptjplsm_instantaneous_w_m2": 44.14
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:04:25+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:04:25+06:00",
+        "local_time": "01:04",
+        "solar_elevation_deg": -68.5,
+        "day_night": "night",
+        "lst_celsius": 26.79,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-10-07T01:14:05+00:00",
+        "date": "2026-10-07",
+        "datetime_local": "2026-10-07T07:14:05+06:00",
+        "local_time": "07:14",
+        "solar_elevation_deg": 16.7,
+        "day_night": "day",
+        "lst_celsius": 27.35,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "shariatpur": {
+      "districtId": "shariatpur",
+      "districtName": "Shariatpur",
+      "coordinates": {
+        "latitude": 23.2423,
+        "longitude": 90.4348
+      },
+      "et_observations_count": 151,
+      "lst_observations_count": 264,
+      "et_observations_daytime_count": 149,
+      "lst_observations_daytime_count": 114,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.63,
+        "ptjplsm_instantaneous_w_m2": 141.86
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-10T23:42:08+00:00",
+        "date": "2026-10-10",
+        "datetime_local": "2026-10-11T05:42:08+06:00",
+        "local_time": "05:42",
+        "solar_elevation_deg": -3.4,
+        "day_night": "night",
+        "lst_celsius": 25.65,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-31T03:35:55+00:00",
+        "date": "2026-01-31",
+        "datetime_local": "2026-01-31T09:35:55+06:00",
+        "local_time": "09:35",
+        "solar_elevation_deg": 34.3,
+        "day_night": "day",
+        "lst_celsius": 18.43,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "sherpur": {
+      "districtId": "sherpur",
+      "districtName": "Sherpur",
+      "coordinates": {
+        "latitude": 25.0203,
+        "longitude": 90.0156
+      },
+      "et_observations_count": 128,
+      "lst_observations_count": 267,
+      "et_observations_daytime_count": 128,
+      "lst_observations_daytime_count": 86,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.4,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.926,
+        "ptjplsm_instantaneous_w_m2": 154.76
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.4,
+        "day_night": "night",
+        "lst_celsius": 28.21,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-22T07:24:59+00:00",
+        "date": "2026-01-22",
+        "datetime_local": "2026-01-22T13:24:59+06:00",
+        "local_time": "13:24",
+        "solar_elevation_deg": 41.9,
+        "day_night": "day",
+        "lst_celsius": 28.55,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "sirajganj": {
+      "districtId": "sirajganj",
+      "districtName": "Sirajganj",
+      "coordinates": {
+        "latitude": 24.4534,
+        "longitude": 89.6991
+      },
+      "et_observations_count": 66,
+      "lst_observations_count": 116,
+      "et_observations_daytime_count": 66,
+      "lst_observations_daytime_count": 51,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 27.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 1.763,
+        "ptjplsm_instantaneous_w_m2": 74.64
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -67.0,
+        "day_night": "night",
+        "lst_celsius": 26.69,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 46.5,
+        "day_night": "day",
+        "lst_celsius": 27.21,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "sunamganj": {
+      "districtId": "sunamganj",
+      "districtName": "Sunamganj",
+      "coordinates": {
+        "latitude": 25.0711,
+        "longitude": 91.3994
+      },
+      "et_observations_count": 72,
+      "lst_observations_count": 159,
+      "et_observations_daytime_count": 71,
+      "lst_observations_daytime_count": 60,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.3,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.315,
+        "ptjplsm_instantaneous_w_m2": 151.19
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -65.3,
+        "day_night": "night",
+        "lst_celsius": 25.11,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:53:27+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:53:27+06:00",
+        "local_time": "11:53",
+        "solar_elevation_deg": 46.1,
+        "day_night": "day",
+        "lst_celsius": 29.63,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "sylhet": {
+      "districtId": "sylhet",
+      "districtName": "Sylhet",
+      "coordinates": {
+        "latitude": 24.8999,
+        "longitude": 91.8721
+      },
+      "et_observations_count": 68,
+      "lst_observations_count": 146,
+      "et_observations_daytime_count": 67,
+      "lst_observations_daytime_count": 58,
+      "latest_et": {
+        "datetime_utc": "2026-10-03T02:47:01+00:00",
+        "date": "2026-10-03",
+        "datetime_local": "2026-10-03T08:47:01+06:00",
+        "local_time": "08:47",
+        "solar_elevation_deg": 38.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.699,
+        "ptjplsm_instantaneous_w_m2": 168.7
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -65.0,
+        "day_night": "night",
+        "lst_celsius": 26.63,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-03-12T11:41:44+00:00",
+        "date": "2026-03-12",
+        "datetime_local": "2026-03-12T17:41:44+06:00",
+        "local_time": "17:41",
+        "solar_elevation_deg": 3.3,
+        "day_night": "day",
+        "lst_celsius": 29.41,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "tangail": {
+      "districtId": "tangail",
+      "districtName": "Tangail",
+      "coordinates": {
+        "latitude": 24.2499,
+        "longitude": 89.9167
+      },
+      "et_observations_count": 65,
+      "lst_observations_count": 138,
+      "et_observations_daytime_count": 65,
+      "lst_observations_daytime_count": 53,
+      "latest_et": {
+        "datetime_utc": "2026-09-28T05:05:24+00:00",
+        "date": "2026-09-28",
+        "datetime_local": "2026-09-28T11:05:24+06:00",
+        "local_time": "11:05",
+        "solar_elevation_deg": 61.5,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.205,
+        "ptjplsm_instantaneous_w_m2": 235.73
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-22T19:05:17+00:00",
+        "date": "2026-10-22",
+        "datetime_local": "2026-10-23T01:05:17+06:00",
+        "local_time": "01:05",
+        "solar_elevation_deg": -66.9,
+        "day_night": "night",
+        "lst_celsius": 25.43,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 46.8,
+        "day_night": "day",
+        "lst_celsius": 27.47,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    },
+    "thakurgaon": {
+      "districtId": "thakurgaon",
+      "districtName": "Thakurgaon",
+      "coordinates": {
+        "latitude": 26.0418,
+        "longitude": 88.4285
+      },
+      "et_observations_count": 55,
+      "lst_observations_count": 115,
+      "et_observations_daytime_count": 55,
+      "lst_observations_daytime_count": 42,
+      "latest_et": {
+        "datetime_utc": "2026-10-06T02:02:04+00:00",
+        "date": "2026-10-06",
+        "datetime_local": "2026-10-06T08:02:04+06:00",
+        "local_time": "08:02",
+        "solar_elevation_deg": 25.7,
+        "day_night": "day",
+        "et_daily_mm_per_day": 2.632,
+        "ptjplsm_instantaneous_w_m2": 131.42
+      },
+      "latest_lst": {
+        "datetime_utc": "2026-10-25T18:19:44+00:00",
+        "date": "2026-10-25",
+        "datetime_local": "2026-10-26T00:19:44+06:00",
+        "local_time": "00:19",
+        "solar_elevation_deg": -74.6,
+        "day_night": "night",
+        "lst_celsius": 21.03,
+        "lst_accuracy": "1.5 - 2 K (Marginal performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      },
+      "latest_daytime_lst": {
+        "datetime_utc": "2026-01-26T05:52:35+00:00",
+        "date": "2026-01-26",
+        "datetime_local": "2026-01-26T11:52:35+06:00",
+        "local_time": "11:52",
+        "solar_elevation_deg": 44.8,
+        "day_night": "day",
+        "lst_celsius": 27.13,
+        "lst_accuracy": "1 - 1.5 K (Good performance)",
+        "l1b_quality": "Good quality L1B data",
+        "cloud_mask": "Clear"
+      }
+    }
+  }
+}

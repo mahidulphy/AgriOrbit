@@ -9,3 +9,5 @@ coverage/
 
 *.zip
 docs/data/appeears/*.zip
+__pycache__/
+data/raw/
