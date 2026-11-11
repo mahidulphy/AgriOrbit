@@ -23,9 +23,9 @@
       "lat_start_degrees": 20.55,
       "lat_end_degrees": 26.75
     },
-    "window_start": "2026-10-10",
-    "window_end": "2026-11-08",
-    "ingested_at": "2026-11-10T08:07:01.630672+00:00",
+    "window_start": "2026-10-11",
+    "window_end": "2026-11-09",
+    "ingested_at": "2026-11-11T07:38:38.347272+00:00",
     "districts_count": 64
   },
   "districtId": "natore",
@@ -38,25 +38,21 @@
   "grid_lat_index": 1144,
   "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation.",
   "gpm_30d_total_mm": 39.2,
-  "power_30d_total_mm": 17.5,
+  "power_30d_total_mm": 12.5,
   "power_30d_window": [
-    "2026-10-09",
-    "2026-11-07"
+    "2026-10-10",
+    "2026-11-08"
   ],
-  "difference_mm": 21.7,
-  "power_same_window_total_mm": 12.3,
+  "difference_mm": 26.7,
+  "power_same_window_total_mm": 10.2,
   "power_same_window_days": 29,
   "gpm_same_window_total_mm": 39.2,
-  "difference_same_window_mm": 26.9,
+  "difference_same_window_mm": 29.0,
   "extreme_rain_days_count": 0,
   "extreme_rain_threshold_mm": 50.0,
   "days_count": 30,
   "valid_days_count": 30,
   "daily_series": [
-    {
-      "date": "2026-10-10",
-      "precip_mm": 0.0
-    },
     {
       "date": "2026-10-11",
       "precip_mm": 0.0
@@ -171,6 +167,10 @@
     },
     {
       "date": "2026-11-08",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-09",
       "precip_mm": 0.0
     }
   ]

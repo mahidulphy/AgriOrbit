@@ -12,8 +12,8 @@
     "date_label_note": "Dates are MODIS 16-day composite start dates as delivered by AppEEARS. The first and last composites can extend beyond the requested start/end because composites overlap those boundaries.",
     "qa_rule": "pixel_reliability 0 (good) and 1 (marginal) are marked valid; 2 (snow/ice) and 3 (cloudy) are retained in the series with valid=false and excluded from latest_valid. Composite dates with no usable source value are listed as missing, never filled.",
     "units": "NDVI, dimensionless (MODIS scale factor 0.0001 already applied by AppEEARS)",
-    "downloaded_at": "2026-11-10T08:07:32.476676+00:00",
-    "processed_at": "2026-11-10T08:07:41.705895+00:00"
+    "downloaded_at": "2026-11-11T07:38:59.285087+00:00",
+    "processed_at": "2026-11-11T07:39:06.329857+00:00"
   },
   "districtId": "kishoreganj",
   "districtName": "Kishoreganj",
