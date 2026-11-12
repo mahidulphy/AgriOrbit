@@ -12,8 +12,8 @@
     "date_label_note": "Dates are MODIS 16-day composite start dates as delivered by AppEEARS. The first and last composites can extend beyond the requested start/end because composites overlap those boundaries.",
     "qa_rule": "pixel_reliability 0 (good) and 1 (marginal) are marked valid; 2 (snow/ice) and 3 (cloudy) are retained in the series with valid=false and excluded from latest_valid. Composite dates with no usable source value are listed as missing, never filled.",
     "units": "NDVI, dimensionless (MODIS scale factor 0.0001 already applied by AppEEARS)",
-    "downloaded_at": "2026-11-11T07:38:51.532099+00:00",
-    "processed_at": "2026-11-11T07:39:05.735578+00:00"
+    "downloaded_at": "2026-11-12T08:03:40.041369+00:00",
+    "processed_at": "2026-11-12T08:03:53.972881+00:00"
   },
   "districtId": "sunamganj",
   "districtName": "Sunamganj",
