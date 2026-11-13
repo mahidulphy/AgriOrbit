@@ -23,9 +23,9 @@
       "lat_start_degrees": 20.55,
       "lat_end_degrees": 26.75
     },
-    "window_start": "2026-10-12",
-    "window_end": "2026-11-10",
-    "ingested_at": "2026-11-12T08:03:27.277151+00:00",
+    "window_start": "2026-10-13",
+    "window_end": "2026-11-11",
+    "ingested_at": "2026-11-13T03:04:21.530504+00:00",
     "districts_count": 64
   },
   "districtId": "barishal",
@@ -37,26 +37,22 @@
   "grid_lon_index": 2703,
   "grid_lat_index": 1127,
   "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation.",
-  "gpm_30d_total_mm": 17.6,
+  "gpm_30d_total_mm": 19.7,
   "power_30d_total_mm": 33.1,
   "power_30d_window": [
     "2026-10-11",
     "2026-11-09"
   ],
-  "difference_mm": -15.5,
-  "power_same_window_total_mm": 32.8,
-  "power_same_window_days": 29,
+  "difference_mm": -13.4,
+  "power_same_window_total_mm": 32.3,
+  "power_same_window_days": 28,
   "gpm_same_window_total_mm": 17.6,
-  "difference_same_window_mm": -15.2,
+  "difference_same_window_mm": -14.7,
   "extreme_rain_days_count": 0,
   "extreme_rain_threshold_mm": 50.0,
   "days_count": 30,
   "valid_days_count": 30,
   "daily_series": [
-    {
-      "date": "2026-10-12",
-      "precip_mm": 0.0
-    },
     {
       "date": "2026-10-13",
       "precip_mm": 0.18
@@ -172,6 +168,10 @@
     {
       "date": "2026-11-10",
       "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-11",
+      "precip_mm": 2.07
     }
   ]
 }
