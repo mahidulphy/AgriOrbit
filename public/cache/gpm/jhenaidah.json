@@ -25,7 +25,7 @@
     },
     "window_start": "2026-10-13",
     "window_end": "2026-11-11",
-    "ingested_at": "2026-11-13T03:04:21.530504+00:00",
+    "ingested_at": "2026-11-13T07:43:09.556968+00:00",
     "districts_count": 64
   },
   "districtId": "jhenaidah",
@@ -38,16 +38,16 @@
   "grid_lat_index": 1135,
   "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation.",
   "gpm_30d_total_mm": 20.9,
-  "power_30d_total_mm": 27.4,
+  "power_30d_total_mm": 29.3,
   "power_30d_window": [
-    "2026-10-11",
-    "2026-11-09"
+    "2026-10-12",
+    "2026-11-10"
   ],
-  "difference_mm": -6.5,
-  "power_same_window_total_mm": 27.4,
-  "power_same_window_days": 28,
-  "gpm_same_window_total_mm": 7.8,
-  "difference_same_window_mm": -19.6,
+  "difference_mm": -8.4,
+  "power_same_window_total_mm": 29.3,
+  "power_same_window_days": 29,
+  "gpm_same_window_total_mm": 10.6,
+  "difference_same_window_mm": -18.7,
   "extreme_rain_days_count": 0,
   "extreme_rain_threshold_mm": 50.0,
   "days_count": 30,

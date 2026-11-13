@@ -25,7 +25,7 @@
     },
     "window_start": "2026-10-13",
     "window_end": "2026-11-11",
-    "ingested_at": "2026-11-13T03:04:21.530504+00:00",
+    "ingested_at": "2026-11-13T07:43:09.556968+00:00",
     "districts_count": 64
   },
   "districtId": "noakhali",
@@ -38,16 +38,16 @@
   "grid_lat_index": 1128,
   "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation.",
   "gpm_30d_total_mm": 20.6,
-  "power_30d_total_mm": 25.9,
+  "power_30d_total_mm": 28.7,
   "power_30d_window": [
-    "2026-10-11",
-    "2026-11-09"
+    "2026-10-12",
+    "2026-11-10"
   ],
-  "difference_mm": -5.3,
-  "power_same_window_total_mm": 25.8,
-  "power_same_window_days": 28,
+  "difference_mm": -8.1,
+  "power_same_window_total_mm": 28.6,
+  "power_same_window_days": 29,
   "gpm_same_window_total_mm": 20.3,
-  "difference_same_window_mm": -5.5,
+  "difference_same_window_mm": -8.3,
   "extreme_rain_days_count": 0,
   "extreme_rain_threshold_mm": 50.0,
   "days_count": 30,
