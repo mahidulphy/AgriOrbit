@@ -12,8 +12,8 @@
     "date_label_note": "Dates are MODIS 16-day composite start dates as delivered by AppEEARS. The first and last composites can extend beyond the requested start/end because composites overlap those boundaries.",
     "qa_rule": "pixel_reliability 0 (good) and 1 (marginal) are marked valid; 2 (snow/ice) and 3 (cloudy) are retained in the series with valid=false and excluded from latest_valid. Composite dates with no usable source value are listed as missing, never filled.",
     "units": "NDVI, dimensionless (MODIS scale factor 0.0001 already applied by AppEEARS)",
-    "downloaded_at": "2026-11-13T07:43:39.429209+00:00",
-    "processed_at": "2026-11-13T07:43:48.988029+00:00"
+    "downloaded_at": "2026-11-14T07:30:21.243287+00:00",
+    "processed_at": "2026-11-14T07:30:28.151321+00:00"
   },
   "districtId": "sirajganj",
   "districtName": "Sirajganj",

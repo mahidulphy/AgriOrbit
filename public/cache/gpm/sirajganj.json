@@ -23,9 +23,9 @@
       "lat_start_degrees": 20.55,
       "lat_end_degrees": 26.75
     },
-    "window_start": "2026-10-13",
-    "window_end": "2026-11-11",
-    "ingested_at": "2026-11-13T07:43:09.556968+00:00",
+    "window_start": "2026-10-14",
+    "window_end": "2026-11-12",
+    "ingested_at": "2026-11-14T07:30:00.900794+00:00",
     "districts_count": 64
   },
   "districtId": "sirajganj",
@@ -38,25 +38,21 @@
   "grid_lat_index": 1144,
   "grid_selection": "Nearest 0.1-degree IMERG cell centre; no area aggregation.",
   "gpm_30d_total_mm": 56.7,
-  "power_30d_total_mm": 20.5,
+  "power_30d_total_mm": 25.9,
   "power_30d_window": [
-    "2026-10-12",
-    "2026-11-10"
+    "2026-10-13",
+    "2026-11-11"
   ],
-  "difference_mm": 36.2,
-  "power_same_window_total_mm": 20.5,
+  "difference_mm": 30.8,
+  "power_same_window_total_mm": 25.9,
   "power_same_window_days": 29,
   "gpm_same_window_total_mm": 56.7,
-  "difference_same_window_mm": 36.2,
+  "difference_same_window_mm": 30.8,
   "extreme_rain_days_count": 0,
   "extreme_rain_threshold_mm": 50.0,
   "days_count": 30,
   "valid_days_count": 30,
   "daily_series": [
-    {
-      "date": "2026-10-13",
-      "precip_mm": 0.0
-    },
     {
       "date": "2026-10-14",
       "precip_mm": 0.0
@@ -171,6 +167,10 @@
     },
     {
       "date": "2026-11-11",
+      "precip_mm": 0.0
+    },
+    {
+      "date": "2026-11-12",
       "precip_mm": 0.0
     }
   ]
