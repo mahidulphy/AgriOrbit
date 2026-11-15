@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+*.zip
+docs/data/appeears/*.zip
