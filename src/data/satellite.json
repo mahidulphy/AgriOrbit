@@ -8,13 +8,13 @@
       "ndvi": "MOD13Q1.061",
       "lst": "MOD11A2.061"
     },
-    "generatedAt": "2026-11-22T07:50:58.890Z"
+    "generatedAt": "2026-11-23T08:40:50.978Z"
   },
   "dhaka": {
     "smap": null,
     "ndvi": {
-      "value": 0.59,
-      "periodStart": "2026-10-16",
+      "value": 0.58,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -30,8 +30,8 @@
   "gazipur": {
     "smap": null,
     "ndvi": {
-      "value": 0.54,
-      "periodStart": "2026-10-16",
+      "value": 0.51,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -47,8 +47,8 @@
   "narayanganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.32,
-      "periodStart": "2026-10-16",
+      "value": 0.52,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -64,8 +64,8 @@
   "munshiganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.47,
-      "periodStart": "2026-10-16",
+      "value": 0.44,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -86,8 +86,8 @@
       "recentCount": 10
     },
     "ndvi": {
-      "value": 0.4,
-      "periodStart": "2026-10-16",
+      "value": 0.45,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -108,8 +108,8 @@
       "recentCount": 11
     },
     "ndvi": {
-      "value": 0.67,
-      "periodStart": "2026-10-16",
+      "value": 0.63,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -130,8 +130,8 @@
       "recentCount": 13
     },
     "ndvi": {
-      "value": 0.34,
-      "periodStart": "2026-10-16",
+      "value": 0.31,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -147,8 +147,8 @@
   "kishoreganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.73,
-      "periodStart": "2026-10-16",
+      "value": 0.7,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -164,8 +164,8 @@
   "faridpur": {
     "smap": null,
     "ndvi": {
-      "value": 0.59,
-      "periodStart": "2026-10-16",
+      "value": 0.57,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -181,8 +181,8 @@
   "rajbari": {
     "smap": null,
     "ndvi": {
-      "value": 0.75,
-      "periodStart": "2026-10-16",
+      "value": 0.66,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -198,8 +198,8 @@
   "shariatpur": {
     "smap": null,
     "ndvi": {
-      "value": 0.71,
-      "periodStart": "2026-10-16",
+      "value": 0.7,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -220,8 +220,8 @@
       "recentCount": 11
     },
     "ndvi": {
-      "value": 0.43,
-      "periodStart": "2026-10-16",
+      "value": 0.57,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -243,8 +243,8 @@
       "flag": "possible_water_contamination"
     },
     "ndvi": {
-      "value": 0.51,
-      "periodStart": "2026-10-16",
+      "value": 0.57,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -260,8 +260,8 @@
   "chattogram": {
     "smap": null,
     "ndvi": {
-      "value": 0.39,
-      "periodStart": "2026-10-16",
+      "value": 0.37,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -277,8 +277,8 @@
   "coxsbazar": {
     "smap": null,
     "ndvi": {
-      "value": 0.64,
-      "periodStart": "2026-10-16",
+      "value": 0.57,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -299,8 +299,8 @@
       "recentCount": 10
     },
     "ndvi": {
-      "value": 0.51,
-      "periodStart": "2026-10-16",
+      "value": 0.53,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -316,8 +316,8 @@
   "chandpur": {
     "smap": null,
     "ndvi": {
-      "value": 0.45,
-      "periodStart": "2026-10-16",
+      "value": 0.44,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -338,8 +338,8 @@
       "recentCount": 10
     },
     "ndvi": {
-      "value": 0.55,
-      "periodStart": "2026-10-16",
+      "value": 0.49,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -360,8 +360,8 @@
       "recentCount": 8
     },
     "ndvi": {
-      "value": 0.5,
-      "periodStart": "2026-10-16",
+      "value": 0.4,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -377,8 +377,8 @@
   "lakshmipur": {
     "smap": null,
     "ndvi": {
-      "value": 0.55,
-      "periodStart": "2026-10-16",
+      "value": 0.43,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -394,8 +394,8 @@
   "brahmanbaria": {
     "smap": null,
     "ndvi": {
-      "value": 0.54,
-      "periodStart": "2026-10-16",
+      "value": 0.47,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -411,8 +411,8 @@
   "rangamati": {
     "smap": null,
     "ndvi": {
-      "value": 0.63,
-      "periodStart": "2026-10-16",
+      "value": 0.08,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -433,8 +433,8 @@
       "recentCount": 12
     },
     "ndvi": {
-      "value": 0.83,
-      "periodStart": "2026-10-16",
+      "value": 0.76,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -450,8 +450,8 @@
   "bandarban": {
     "smap": null,
     "ndvi": {
-      "value": 0.57,
-      "periodStart": "2026-10-16",
+      "value": 0.49,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -467,8 +467,8 @@
   "rajshahi": {
     "smap": null,
     "ndvi": {
-      "value": 0.34,
-      "periodStart": "2026-10-16",
+      "value": 0.48,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -489,8 +489,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.38,
-      "periodStart": "2026-10-16",
+      "value": 0.39,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -506,8 +506,8 @@
   "pabna": {
     "smap": null,
     "ndvi": {
-      "value": 0.62,
-      "periodStart": "2026-10-16",
+      "value": 0.6,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -523,8 +523,8 @@
   "sirajganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.57,
-      "periodStart": "2026-10-16",
+      "value": 0.59,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -545,8 +545,8 @@
       "recentCount": 6
     },
     "ndvi": {
-      "value": 0.49,
-      "periodStart": "2026-10-16",
+      "value": 0.47,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -567,8 +567,8 @@
       "recentCount": 3
     },
     "ndvi": {
-      "value": 0.47,
-      "periodStart": "2026-10-16",
+      "value": 0.5,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -584,8 +584,8 @@
   "chapainawabganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.52,
-      "periodStart": "2026-10-16",
+      "value": 0.58,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -601,8 +601,8 @@
   "joypurhat": {
     "smap": null,
     "ndvi": {
-      "value": 0.72,
-      "periodStart": "2026-10-16",
+      "value": 0.57,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -618,8 +618,8 @@
   "khulna": {
     "smap": null,
     "ndvi": {
-      "value": 0.59,
-      "periodStart": "2026-10-16",
+      "value": 0.53,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -640,8 +640,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.66,
-      "periodStart": "2026-10-16",
+      "value": 0.75,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -657,8 +657,8 @@
   "satkhira": {
     "smap": null,
     "ndvi": {
-      "value": 0.57,
-      "periodStart": "2026-10-16",
+      "value": 0.53,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -674,8 +674,8 @@
   "bagerhat": {
     "smap": null,
     "ndvi": {
-      "value": 0.64,
-      "periodStart": "2026-10-16",
+      "value": 0.71,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -691,8 +691,8 @@
   "kushtia": {
     "smap": null,
     "ndvi": {
-      "value": 0.65,
-      "periodStart": "2026-10-16",
+      "value": 0.68,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -713,8 +713,8 @@
       "recentCount": 10
     },
     "ndvi": {
-      "value": 0.68,
-      "periodStart": "2026-10-16",
+      "value": 0.72,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -735,8 +735,8 @@
       "recentCount": 11
     },
     "ndvi": {
-      "value": 0.57,
-      "periodStart": "2026-10-16",
+      "value": 0.54,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -757,8 +757,8 @@
       "recentCount": 11
     },
     "ndvi": {
-      "value": 0.58,
-      "periodStart": "2026-10-16",
+      "value": 0.56,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -779,8 +779,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.78,
-      "periodStart": "2026-10-16",
+      "value": 0.75,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -801,8 +801,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.54,
-      "periodStart": "2026-10-16",
+      "value": 0.58,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -818,8 +818,8 @@
   "barishal": {
     "smap": null,
     "ndvi": {
-      "value": 0.57,
-      "periodStart": "2026-10-16",
+      "value": 0.65,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -835,8 +835,8 @@
   "patuakhali": {
     "smap": null,
     "ndvi": {
-      "value": 0.56,
-      "periodStart": "2026-10-16",
+      "value": 0.5,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -852,8 +852,8 @@
   "bhola": {
     "smap": null,
     "ndvi": {
-      "value": 0.89,
-      "periodStart": "2026-10-16",
+      "value": 0.83,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -869,8 +869,8 @@
   "pirojpur": {
     "smap": null,
     "ndvi": {
-      "value": 0.76,
-      "periodStart": "2026-10-16",
+      "value": 0.72,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -891,8 +891,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.51,
-      "periodStart": "2026-10-16",
+      "value": 0.47,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -908,8 +908,8 @@
   "barguna": {
     "smap": null,
     "ndvi": {
-      "value": 0.75,
-      "periodStart": "2026-10-16",
+      "value": 0.63,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -925,8 +925,8 @@
   "sylhet": {
     "smap": null,
     "ndvi": {
-      "value": 0.6,
-      "periodStart": "2026-10-16",
+      "value": 0.49,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -947,8 +947,8 @@
       "recentCount": 9
     },
     "ndvi": {
-      "value": 0.67,
-      "periodStart": "2026-10-16",
+      "value": 0.66,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -969,8 +969,8 @@
       "recentCount": 10
     },
     "ndvi": {
-      "value": 0.64,
-      "periodStart": "2026-10-16",
+      "value": 0.6,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -986,8 +986,8 @@
   "sunamganj": {
     "smap": null,
     "ndvi": {
-      "value": 0.43,
-      "periodStart": "2026-10-16",
+      "value": 0.3,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1008,8 +1008,8 @@
       "recentCount": 3
     },
     "ndvi": {
-      "value": 0.75,
-      "periodStart": "2026-10-16",
+      "value": 0.62,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1025,8 +1025,8 @@
   "dinajpur": {
     "smap": null,
     "ndvi": {
-      "value": 0.63,
-      "periodStart": "2026-10-16",
+      "value": 0.55,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1042,8 +1042,8 @@
   "kurigram": {
     "smap": null,
     "ndvi": {
-      "value": 0.68,
-      "periodStart": "2026-10-16",
+      "value": 0.67,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1059,8 +1059,8 @@
   "gaibandha": {
     "smap": null,
     "ndvi": {
-      "value": 0.58,
-      "periodStart": "2026-10-16",
+      "value": 0.59,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1076,8 +1076,8 @@
   "lalmonirhat": {
     "smap": null,
     "ndvi": {
-      "value": 0.81,
-      "periodStart": "2026-10-16",
+      "value": 0.55,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1093,8 +1093,8 @@
   "nilphamari": {
     "smap": null,
     "ndvi": {
-      "value": 0.61,
-      "periodStart": "2026-10-16",
+      "value": 0.59,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1116,7 +1116,7 @@
     },
     "ndvi": {
       "value": 0.64,
-      "periodStart": "2026-10-16",
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1132,8 +1132,8 @@
   "thakurgaon": {
     "smap": null,
     "ndvi": {
-      "value": 0.54,
-      "periodStart": "2026-10-16",
+      "value": 0.73,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1155,7 +1155,7 @@
     },
     "ndvi": {
       "value": 0.37,
-      "periodStart": "2026-10-16",
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1176,8 +1176,8 @@
       "recentCount": 7
     },
     "ndvi": {
-      "value": 0.67,
-      "periodStart": "2026-10-16",
+      "value": 0.66,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1199,7 +1199,7 @@
     },
     "ndvi": {
       "value": 0.63,
-      "periodStart": "2026-10-16",
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
@@ -1220,8 +1220,8 @@
       "recentCount": 7
     },
     "ndvi": {
-      "value": 0.52,
-      "periodStart": "2026-10-16",
+      "value": 0.47,
+      "periodStart": "2026-11-01",
       "reliability": 0,
       "source": "MOD13Q1"
     },
